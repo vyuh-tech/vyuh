@@ -1,0 +1,27 @@
+name: feature_sample
+description: Sample feature for Vyuh
+version: 1.0.0
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh
+publish_to: none
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: '>=3.16.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^13.0.1
+  json_annotation: ^4.8.1
+  mobx: ^2.3.0+1
+  flutter_mobx: ^2.2.0+2
+  vyuh_core: ^1.0.0
+  vyuh_extension_content: ^1.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1

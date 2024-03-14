@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "800323613818",
+    "project_id": "vyuh-demo",
+    "storage_bucket": "vyuh-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:800323613818:android:97ab2a0b6022531dd777c3",
+        "android_client_info": {
+          "package_name": "run.vyuh.vyuh_demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBijPVlfl9AU5oN2d468p309s4qK4U2_2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

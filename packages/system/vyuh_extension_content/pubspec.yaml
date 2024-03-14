@@ -1,0 +1,25 @@
+name: vyuh_extension_content
+description: "A new Flutter package project."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.16.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  collection: ^1.18.0
+  flutter_mobx: ^2.2.0+2
+  mobx: ^2.3.0+1
+  json_annotation: ^4.8.1
+  vyuh_core: ^1.0.0
+  flutter_sanity_portable_text: ^1.0.0-beta.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6

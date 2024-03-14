@@ -1,0 +1,803 @@
+{
+  "query": "*[_type == \"route\" \u0026\u0026 (_id == $routeId) || _id == (\"drafts.\" + $routeId)]{\n  ...,\n  \"category\": category-\u003etitle,\n  \"regions\": regions[]{\n    \"identifier\": region-\u003eidentifier, \n    \"title\": region-\u003etitle,\n    \"items\": items\n  },\n}[0]\n  ",
+  "result": {
+    "_createdAt": "2023-09-06T07:58:42Z",
+    "_type": "route",
+    "routeType": "page",
+    "analytics": {
+      "identifier": "4",
+      "_type": "analytics"
+    },
+    "regions": [
+      {
+        "identifier": "header",
+        "title": "Header",
+        "items": [
+          {
+            "_type": "sample.chip",
+            "_key": "12c9b394c58f",
+            "title": "Hello World",
+            "analytics": {
+              "_type": "analytics",
+              "identifier": "4"
+            }
+          },
+          {
+            "analytics": {
+              "identifier": "4",
+              "_type": "analytics"
+            },
+            "condition": {
+              "configuration": [
+                {
+                  "_type": "condition.boolean",
+                  "_key": "52e92d6cc685",
+                  "value": true
+                }
+              ],
+              "_type": "condition"
+            },
+            "cases": [
+              {
+                "item": [
+                  {
+                    "_key": "6aca3fcdd25c",
+                    "title": "True Card",
+                    "analytics": {
+                      "identifier": "4",
+                      "_type": "analytics"
+                    },
+                    "_type": "card",
+                    "action": {
+                      "configuration": [
+                        {
+                          "_type": "action.navigation",
+                          "_key": "45ab3647880f",
+                          "title": "Tab",
+                          "url": "/tab2"
+                        }
+                      ],
+                      "_type": "action"
+                    }
+                  }
+                ],
+                "_key": "e681cacbc410",
+                "value": "true"
+              },
+              {
+                "value": "false",
+                "item": [
+                  {
+                    "analytics": {
+                      "identifier": "4",
+                      "_type": "analytics"
+                    },
+                    "_type": "card",
+                    "_key": "6aca3fcdd25c",
+                    "title": "False Card"
+                  }
+                ],
+                "_key": "d69dfc043e63a33c98630f419eb827d8"
+              }
+            ],
+            "_type": "conditional",
+            "_key": "c7907e621ce2",
+            "defaultCase": "true"
+          },
+          {
+            "items": [
+              {
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                    "_type": "reference"
+                  }
+                },
+                "_type": "card",
+                "description": "Some description",
+                "_key": "b63fce867f57",
+                "title": "Some title",
+                "content": {
+                  "analytics": {
+                    "identifier": "6",
+                    "_type": "analytics"
+                  },
+                  "blocks": [
+                    {
+                      "_key": "27a88a812f3f",
+                      "markDefs": [],
+                      "children": [
+                        {
+                          "_type": "span",
+                          "marks": [],
+                          "text": "Some ",
+                          "_key": "7b04d42d12f8"
+                        },
+                        {
+                          "_type": "span",
+                          "marks": ["strong"],
+                          "text": "content ",
+                          "_key": "e4c985a1d356"
+                        }
+                      ],
+                      "_type": "block",
+                      "style": "normal"
+                    },
+                    {
+                      "style": "normal",
+                      "_key": "122f67af42ea",
+                      "markDefs": [],
+                      "children": [
+                        {
+                          "_type": "span",
+                          "marks": [],
+                          "text": "Some more content",
+                          "_key": "7e5537059e5f"
+                        }
+                      ],
+                      "_type": "block"
+                    },
+                    {
+                      "_key": "3dc4e833d349",
+                      "markDefs": [],
+                      "children": [
+                        {
+                          "_type": "span",
+                          "marks": [],
+                          "text": "this is bound to overflow",
+                          "_key": "a8fc6374dd59"
+                        }
+                      ],
+                      "_type": "block",
+                      "style": "normal"
+                    }
+                  ],
+                  "_type": "richText"
+                },
+                "analytics": {
+                  "identifier": "5",
+                  "_type": "analytics"
+                }
+              },
+              {
+                "analytics": {
+                  "_type": "analytics",
+                  "identifier": "5"
+                },
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_type": "reference",
+                    "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png"
+                  }
+                },
+                "_type": "card",
+                "_key": "74aeb9e68e718e019b3687215b8e3b28",
+                "content": {
+                  "analytics": {
+                    "identifier": "6",
+                    "_type": "analytics"
+                  },
+                  "_type": "richText"
+                }
+              },
+              {
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                    "_type": "reference"
+                  }
+                },
+                "_type": "card",
+                "_key": "5d064a1e08100d6f50f835397228a6dd",
+                "content": {
+                  "analytics": {
+                    "_type": "analytics",
+                    "identifier": "6"
+                  },
+                  "_type": "richText"
+                },
+                "analytics": {
+                  "_type": "analytics",
+                  "identifier": "5"
+                }
+              },
+              {
+                "_key": "9a245dddbc5b752b1364377c899f1e86",
+                "content": {
+                  "analytics": {
+                    "identifier": "6",
+                    "_type": "analytics"
+                  },
+                  "_type": "richText"
+                },
+                "analytics": {
+                  "identifier": "5",
+                  "_type": "analytics"
+                },
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                    "_type": "reference"
+                  }
+                },
+                "_type": "card"
+              },
+              {
+                "image": {
+                  "_type": "image",
+                  "asset": {
+                    "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                    "_type": "reference"
+                  }
+                },
+                "_type": "card",
+                "_key": "600d3a3cf6fe0b9ef918671e5546fc02",
+                "content": {
+                  "analytics": {
+                    "identifier": "6",
+                    "_type": "analytics"
+                  },
+                  "_type": "richText"
+                },
+                "analytics": {
+                  "identifier": "5",
+                  "_type": "analytics"
+                }
+              }
+            ],
+            "analytics": {
+              "identifier": "4",
+              "_type": "analytics"
+            },
+            "_type": "group",
+            "description": "Some Group description",
+            "_key": "21add5b5c17b",
+            "title": "Test Group"
+          },
+          {
+            "analytics": {
+              "identifier": "5",
+              "_type": "analytics"
+            },
+            "image": {
+              "_type": "image",
+              "asset": {
+                "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                "_type": "reference"
+              }
+            },
+            "_type": "card",
+            "action": {
+              "configuration": [
+                {
+                  "title": "Second",
+                  "url": "/second",
+                  "_type": "action.navigation",
+                  "_key": "c9d9d2bc19c4"
+                }
+              ],
+              "_type": "action"
+            },
+            "description": "Card description",
+            "_key": "38826f841ea5",
+            "title": "First Card",
+            "content": {
+              "blocks": [
+                {
+                  "_key": "7a22d2cbd275",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "text": "Rich ",
+                      "_key": "eae69a2905f3",
+                      "_type": "span",
+                      "marks": []
+                    },
+                    {
+                      "_type": "span",
+                      "marks": ["strong", "em", "underline"],
+                      "text": "Content",
+                      "_key": "238569c3e459"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "normal"
+                },
+                {
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "H1",
+                      "_key": "acd2bc74d26e"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "h1",
+                  "_key": "9a394378a52f"
+                },
+                {
+                  "style": "h2",
+                  "_key": "016d07c24901",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "H2",
+                      "_key": "4eac6c34dc47"
+                    }
+                  ],
+                  "_type": "block"
+                },
+                {
+                  "children": [
+                    {
+                      "marks": [],
+                      "text": "H3",
+                      "_key": "d08d4e13838c",
+                      "_type": "span"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "h3",
+                  "_key": "d591f7e598de",
+                  "markDefs": []
+                },
+                {
+                  "children": [
+                    {
+                      "_key": "be88adb1a3d0",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "H4"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "h4",
+                  "_key": "e267e43a9d20",
+                  "markDefs": []
+                },
+                {
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "marks": [],
+                      "text": "H5",
+                      "_key": "23e80620d128",
+                      "_type": "span"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "h5",
+                  "_key": "f8dc1ad3ba55"
+                },
+                {
+                  "_type": "block",
+                  "style": "h6",
+                  "_key": "235cbd7cdfa2",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_key": "40d6bbec7f67",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "H6"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Normal",
+                      "_key": "3a1ad98c2b8a"
+                    }
+                  ],
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "6bc6a74bc00c",
+                  "markDefs": []
+                },
+                {
+                  "_type": "block",
+                  "style": "blockquote",
+                  "_key": "37fc1b097e99",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Quoted Text",
+                      "_key": "bcedab50ec57"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "list",
+                      "_key": "bc3b020dc06f"
+                    }
+                  ],
+                  "level": 1,
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "3e9e04a8354f",
+                  "listItem": "number",
+                  "markDefs": []
+                },
+                {
+                  "level": 1,
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "b8334ffb334e",
+                  "listItem": "number",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_key": "a2e4601c0dde",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "of"
+                    }
+                  ]
+                },
+                {
+                  "children": [
+                    {
+                      "_type": "span",
+                      "marks": [],
+                      "text": "text",
+                      "_key": "a54f086cf388"
+                    }
+                  ],
+                  "level": 1,
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "cef6f204b63a",
+                  "listItem": "number",
+                  "markDefs": []
+                },
+                {
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "07c74906db16",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_key": "b699de876c49",
+                      "_type": "span",
+                      "marks": [],
+                      "text": ""
+                    }
+                  ]
+                },
+                {
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "aa065de3f1e1",
+                  "listItem": "number",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "text": "Yet",
+                      "_key": "47ad7e42e001",
+                      "_type": "span",
+                      "marks": []
+                    }
+                  ],
+                  "level": 1
+                },
+                {
+                  "listItem": "number",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "_key": "e02284c4df9d",
+                      "_type": "span",
+                      "marks": [],
+                      "text": "Another"
+                    }
+                  ],
+                  "level": 1,
+                  "_type": "block",
+                  "style": "normal",
+                  "_key": "938ec2bbdb9f"
+                },
+                {
+                  "_key": "f4d9a4e964a1",
+                  "listItem": "number",
+                  "markDefs": [],
+                  "children": [
+                    {
+                      "marks": [],
+                      "text": "List",
+                      "_key": "a63d7d8d8268",
+                      "_type": "span"
+                    }
+                  ],
+                  "level": 1,
+                  "_type": "block",
+                  "style": "normal"
+                }
+              ],
+              "_type": "richText"
+            }
+          },
+          {
+            "blocks": [
+              {
+                "style": "h2",
+                "_key": "cc3f12a53cc8",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": "What is Lorem Ipsum?",
+                    "_key": "12c62f633fd60"
+                  }
+                ],
+                "_type": "block"
+              },
+              {
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": ["strong"],
+                    "text": "Lorem Ipsum",
+                    "_key": "cdbd04696bce0"
+                  },
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                    "_key": "cdbd04696bce1"
+                  }
+                ],
+                "_type": "block",
+                "style": "normal",
+                "_key": "acb92b776e0b"
+              },
+              {
+                "markDefs": [],
+                "children": [
+                  {
+                    "_key": "19d60ac9c7470",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Why do we use it?"
+                  }
+                ],
+                "_type": "block",
+                "style": "h2",
+                "_key": "c353fc84f339"
+              },
+              {
+                "style": "normal",
+                "_key": "a74eff1f8fec",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
+                    "_key": "eda9f179289b0"
+                  }
+                ],
+                "_type": "block"
+              },
+              {
+                "_type": "block",
+                "style": "h2",
+                "_key": "f0cb1962aabc",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Where does it come from?",
+                    "_key": "a81cfbbccd73"
+                  }
+                ]
+              },
+              {
+                "children": [
+                  {
+                    "_key": "7542d3ee2bfd0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum\" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, \"Lorem ipsum dolor sit amet..\", comes from a line in section 1.10.32."
+                  }
+                ],
+                "_type": "block",
+                "style": "normal",
+                "_key": "484d605d9e8a",
+                "markDefs": []
+              },
+              {
+                "markDefs": [],
+                "children": [
+                  {
+                    "_key": "2fc3509a306f0",
+                    "_type": "span",
+                    "marks": [],
+                    "text": "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
+                  }
+                ],
+                "_type": "block",
+                "style": "normal",
+                "_key": "a2360098f190"
+              },
+              {
+                "markDefs": [],
+                "children": [
+                  {
+                    "marks": [],
+                    "text": "Where can I get some?",
+                    "_key": "658c31e6fbfb0",
+                    "_type": "span"
+                  }
+                ],
+                "_type": "block",
+                "style": "h2",
+                "_key": "0f96dc9edd64"
+              },
+              {
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+                    "_key": "38d089c30dbe0"
+                  }
+                ],
+                "_type": "block",
+                "style": "normal",
+                "_key": "db81c5d96244"
+              },
+              {
+                "_type": "block",
+                "style": "normal",
+                "_key": "14b2cdacd75f",
+                "markDefs": [],
+                "children": [
+                  {
+                    "_type": "span",
+                    "marks": [],
+                    "text": "",
+                    "_key": "cb4f9e450dc0"
+                  }
+                ]
+              },
+              {
+                "analytics": {
+                  "identifier": "5",
+                  "_type": "analytics"
+                },
+                "_type": "card",
+                "_key": "3d41870c5b29",
+                "title": "Internal Card",
+                "content": {
+                  "analytics": {
+                    "identifier": "6",
+                    "_type": "analytics"
+                  },
+                  "_type": "richText"
+                }
+              },
+              {
+                "_key": "be7e885c155f",
+                "title": "Internal Group",
+                "items": [
+                  {
+                    "analytics": {
+                      "identifier": "5",
+                      "_type": "analytics"
+                    },
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                        "_type": "reference"
+                      }
+                    },
+                    "_type": "card",
+                    "_key": "9ce6c2b743c5"
+                  },
+                  {
+                    "analytics": {
+                      "identifier": "5",
+                      "_type": "analytics"
+                    },
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png"
+                      }
+                    },
+                    "_type": "card",
+                    "_key": "85cdc9bea3ae87c1518a4c1fdcee9918"
+                  },
+                  {
+                    "analytics": {
+                      "identifier": "5",
+                      "_type": "analytics"
+                    },
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                        "_type": "reference"
+                      }
+                    },
+                    "_type": "card",
+                    "_key": "19c623d7a0b835f9f247e5a26f6b6105"
+                  },
+                  {
+                    "analytics": {
+                      "_type": "analytics",
+                      "identifier": "5"
+                    },
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png",
+                        "_type": "reference"
+                      }
+                    },
+                    "_type": "card",
+                    "_key": "1071447e86072da6a0a89db8283b2d15"
+                  },
+                  {
+                    "analytics": {
+                      "identifier": "5",
+                      "_type": "analytics"
+                    },
+                    "image": {
+                      "_type": "image",
+                      "asset": {
+                        "_type": "reference",
+                        "_ref": "image-2c6601ea619b5064b232eaea43a8f6b42fa60ede-400x300-png"
+                      }
+                    },
+                    "_type": "card",
+                    "_key": "e42ffc4b363504d89c08ed2c0f531b3b"
+                  }
+                ],
+                "analytics": {
+                  "identifier": "4",
+                  "_type": "analytics"
+                },
+                "_type": "group",
+                "description": "Internal Group description"
+              }
+            ],
+            "_type": "richText",
+            "_key": "ac94307e9450"
+          }
+        ]
+      }
+    ],
+    "_originalId": "drafts.19ae9505-e6fe-4420-80ad-d42ab5bf56b6",
+    "_rev": "c118a347-b989-4dcc-babf-a4db01898269",
+    "_id": "19ae9505-e6fe-4420-80ad-d42ab5bf56b6",
+    "path": "/tab1",
+    "_updatedAt": "2023-09-19T13:05:15Z",
+    "category": "Basic",
+    "title": "Tab - 1"
+  },
+  "ms": 20
+}

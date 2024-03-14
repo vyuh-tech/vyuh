@@ -1,0 +1,47 @@
+import 'package:vyuh_core/vyuh_core.dart';
+
+final class NoOpContentProvider extends ContentProvider {
+  NoOpContentProvider()
+      : super(
+          title: 'No Op Content Provider',
+          name: 'vyuh.contentProvider.noop',
+        );
+
+  @override
+  Future<void> dispose() => Future.value();
+
+  @override
+  Future<List<T>?> fetchMultiple<T>(String query,
+          {required FromJsonConverter<T> fromJson,
+          Map<String, String>? queryParams}) =>
+      Future.value(null);
+
+  @override
+  Future<RouteBase?> fetchRoute({String? path, String? routeId}) =>
+      Future.value(null);
+
+  @override
+  Future<T?> fetchSingle<T>(String query,
+          {required FromJsonConverter<T> fromJson,
+          Map<String, String>? queryParams}) =>
+      Future.value(null);
+
+  @override
+  String fieldValue(String key, Map<String, dynamic> json) =>
+      throw UnimplementedError();
+
+  @override
+  Uri? imageUrl(String imageRefId,
+          {int? width,
+          int? height,
+          int? devicePixelRatio,
+          int? quality,
+          String? format}) =>
+      throw UnimplementedError();
+
+  @override
+  Future<void> init() => Future.value();
+
+  @override
+  String schemaType(Map<String, dynamic> json) => throw UnimplementedError();
+}

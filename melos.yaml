@@ -1,0 +1,11 @@
+name: vyuh
+
+packages:
+  - packages/*
+  - packages/{system,sanity}/*
+  - features/*
+  - apps/*
+
+command:
+  bootstrap:
+    usePubspecOverrides: true
