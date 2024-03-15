@@ -1,4 +1,4 @@
-package run.vyuh.vyuh_demo
+package tech.vyuh.vyuh_demo
 
 import io.flutter.embedding.android.FlutterActivity
 

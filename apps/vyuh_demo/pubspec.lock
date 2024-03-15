@@ -399,14 +399,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  sanity_client:
-    dependency: "direct main"
-    description:
-      name: sanity_client
-      sha256: "964f39c93c8ef52cdc67e263d9c3f90c81b9faee892ca9bc23bf919a12a4ad13"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0-beta.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -538,21 +530,21 @@ packages:
       path: "../../packages/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0-beta.1"
   vyuh_extension_content:
     dependency: "direct main"
     description:
       path: "../../packages/vyuh_extension_content"
       relative: true
     source: path
-    version: "0.0.1"
+    version: "1.0.0-beta.1"
   vyuh_feature_developer:
     dependency: "direct main"
     description:
       path: "../../packages/vyuh_feature_developer"
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.0-beta.1"
   web:
     dependency: transitive
     description:

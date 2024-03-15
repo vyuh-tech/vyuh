@@ -1,6 +1,9 @@
 name: vyuh_cache
 description: A generic caching package for Vyuh
-version: 1.0.0
+version: 1.0.0-beta.1
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh
+issue_tracker: https://github.com/vyuh-tech/vyuh/issues
 
 environment:
   sdk: ^3.1.0

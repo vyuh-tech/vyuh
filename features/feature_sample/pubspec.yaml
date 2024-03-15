@@ -1,8 +1,6 @@
 name: feature_sample
 description: Sample feature for Vyuh
 version: 1.0.0
-homepage: https://vyuh.tech
-repository: https://github.com/vyuh-tech/vyuh
 publish_to: none
 
 environment:

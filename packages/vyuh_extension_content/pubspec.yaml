@@ -1,7 +1,9 @@
 name: vyuh_extension_content
 description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+version: 1.0.0-beta.1
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh
+issue_tracker: https://github.com/vyuh-tech/vyuh/issues
 
 environment:
   sdk: '>=3.3.0 <4.0.0'

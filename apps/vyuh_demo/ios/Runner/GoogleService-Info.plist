@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>run.vyuh.vyuhDemo</string>
+	<string>tech.vyuh.vyuhDemo</string>
 	<key>PROJECT_ID</key>
 	<string>vyuh-demo</string>
 	<key>STORAGE_BUCKET</key>

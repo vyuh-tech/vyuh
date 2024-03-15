@@ -1,4 +1,5 @@
 name: vyuh
+repository: https://github.com/vyuh-tech/vyuh
 
 packages:
   - packages/*
