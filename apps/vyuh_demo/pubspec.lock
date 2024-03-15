@@ -535,21 +535,21 @@ packages:
   vyuh_core:
     dependency: "direct main"
     description:
-      path: "../../packages/system/vyuh_core"
+      path: "../../packages/vyuh_core"
       relative: true
     source: path
     version: "1.0.0"
   vyuh_extension_content:
     dependency: "direct main"
     description:
-      path: "../../packages/system/vyuh_extension_content"
+      path: "../../packages/vyuh_extension_content"
       relative: true
     source: path
     version: "0.0.1"
   vyuh_feature_developer:
     dependency: "direct main"
     description:
-      path: "../../packages/system/vyuh_feature_developer"
+      path: "../../packages/vyuh_feature_developer"
       relative: true
     source: path
     version: "1.0.0"
