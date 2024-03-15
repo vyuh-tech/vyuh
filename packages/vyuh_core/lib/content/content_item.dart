@@ -10,16 +10,12 @@ abstract class ContentItem {
   @JsonKey(fromJson: typeFromFirstOfListJson<LayoutConfiguration>)
   final LayoutConfiguration<ContentItem>? layout;
 
-  @JsonKey(fromJson: typeFromFirstOfListJson<ExtensionConfiguration>)
-  final List<ExtensionConfiguration>? extensions;
-
   @JsonKey(includeFromJson: false)
   ContentItem? parent;
 
   ContentItem({
     required this.schemaType,
     this.layout,
-    this.extensions,
   });
 
   factory ContentItem.fromJson(Map<String, dynamic> json) {
@@ -38,8 +34,6 @@ abstract class ContentItem {
     }
   }
 }
-
-abstract class ExtensionConfiguration {}
 
 abstract class LayoutConfiguration<T extends ContentItem> {
   final String schemaType;

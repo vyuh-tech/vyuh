@@ -20,9 +20,6 @@ abstract class ContentBuilder<T extends ContentItem> {
     registerDescriptors<LayoutConfiguration>(descriptors.expand((element) =>
         element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]));
 
-    registerDescriptors<ExtensionConfiguration>(descriptors.expand((element) =>
-        element.extensions ?? <TypeDescriptor<ExtensionConfiguration>>[]));
-
     // Default layout could be registered explicitly by the ContentItem,
     // in which case, we don't do it again.
     if (!vyuh.content

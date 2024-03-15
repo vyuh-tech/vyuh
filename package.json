@@ -1,0 +1,7 @@
+{
+  "name": "vyuh",
+  "version": "1.0.0",
+  "dependencies": {
+    "prettier": "^3.2.5"
+  }
+}

@@ -1,3 +1,4 @@
-## 0.0.1
+## 1.0.0-beta.1
 
-* TODO: Describe initial release.
+- Initial release.
+- Exposes the extension for adding a CMS integration
