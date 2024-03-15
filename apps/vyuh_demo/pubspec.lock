@@ -150,13 +150,12 @@ packages:
     source: hosted
     version: "2.2.0+2"
   flutter_sanity_portable_text:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: flutter_sanity_portable_text
-      sha256: a8f7ee74671f6cb249be882a479c1df762df325f64c3281d75ca0cc953673e71
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0-beta.2"
+      path: "../../packages/sanity/flutter_sanity_portable_text"
+      relative: true
+    source: path
+    version: "1.0.0-beta.3"
   flutter_sticky_header:
     dependency: transitive
     description:
@@ -571,4 +570,4 @@ packages:
     version: "1.0.4"
 sdks:
   dart: ">=3.3.0-279.1.beta <4.0.0"
-  flutter: ">=3.16.0"
+  flutter: ">=3.13.0"
