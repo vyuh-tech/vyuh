@@ -9,10 +9,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   vc.runApp(
-    initialLocation: '/ad',
+    initialLocation: '/',
     features: [
       developer.feature,
-      sample.feature,
+      sample.featureDevLink,
     ],
     plugins: [
       vc.ConsoleLoggerPlugin(),

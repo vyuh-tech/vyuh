@@ -155,7 +155,7 @@ packages:
       path: "../../packages/sanity/flutter_sanity_portable_text"
       relative: true
     source: path
-    version: "1.0.0-beta.3"
+    version: "1.0.0-beta.4"
   flutter_sticky_header:
     dependency: transitive
     description:
