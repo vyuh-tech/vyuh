@@ -1,5 +1,5 @@
 name: vyuh_extension_content
-description: "A new Flutter package project."
+description: An extension for the Vyuh framework for creating CMS integrations
 version: 1.0.0-beta.1
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
