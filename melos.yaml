@@ -8,3 +8,7 @@ packages:
 command:
   bootstrap:
     usePubspecOverrides: true
+
+ide:
+  intellij:
+    moduleNamePrefix: ''
