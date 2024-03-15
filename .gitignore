@@ -10,3 +10,4 @@ coverage
 pubspec_overrides.yaml
 .flutter-plugins
 .flutter-plugins-dependencies
+*.iml
