@@ -1,6 +1,6 @@
 name: sanity_client
 description: A client for running queries on Sanity.io
-version: 1.0.0-beta.3
+version: 1.0.0-beta.4
 
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/sanity/sanity_client

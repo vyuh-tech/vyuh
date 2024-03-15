@@ -15,6 +15,29 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`sanity_client` - `v1.0.0-beta.4`](#sanity_client---v100-beta4)
+
+---
+
+#### `sanity_client` - `v1.0.0-beta.4`
+
+ - Moved the sanity packages under the vyuh repo
+
+ - **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under vyuh. ([f1175fbd](https://github.com/vyuh-tech/vyuh/commit/f1175fbdb602588ef5f8d978a3d474f15a96e861))
+
+
+## 2024-03-15
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`flutter_sanity_portable_text` - `v1.0.0-beta.4`](#flutter_sanity_portable_text---v100-beta4)
  - [`vyuh_extension_content` - `v1.0.0-beta.2`](#vyuh_extension_content---v100-beta2)
  - [`vyuh_core` - `v1.0.0-beta.2`](#vyuh_core---v100-beta2)
