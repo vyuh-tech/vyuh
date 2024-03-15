@@ -1,3 +1,5 @@
-## 0.0.1
+## 1.0.0-beta.1
 
-- TODO: Describe initial release.
+- Initial release.
+- Shows details of the various features in the app
+- Drill down into the plugins for more details
