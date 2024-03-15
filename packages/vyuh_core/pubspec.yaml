@@ -20,7 +20,7 @@ dependencies:
   mobx: ^2.3.0+1
   get_it: ^7.6.4
   logger: ^2.1.0
-  flutter_sanity_portable_text: ^1.0.0-beta.2
+  flutter_sanity_portable_text: ^1.0.0-beta.4
 
 dev_dependencies:
   flutter_test:

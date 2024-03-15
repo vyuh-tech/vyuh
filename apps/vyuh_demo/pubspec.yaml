@@ -13,9 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
-  vyuh_core: ^1.0.0
-  vyuh_extension_content: ^1.0.0
-  vyuh_feature_developer: ^1.0.0
+  vyuh_core: ^1.0.0-beta.1
+  vyuh_extension_content: ^1.0.0-beta.1
+  vyuh_feature_developer: ^1.0.0-beta.1
   feature_sample: ^1.0.0
 
 dev_dependencies:
