@@ -46,7 +46,7 @@ It comes with powerful capabilities like:
 
 Vyuh comes with some core building blocks such as:
 
-- **Features**: build use facing functionality in a modular, reusable, atomic
+- **Features**: build user-facing functionality in a modular, reusable, atomic
   manner. Features can be composed together to create the entire app or a family
   of apps. Features can also be transferred between apps easily.
 - **Plugins**: All third party integrations are handled in a cross-cutting
