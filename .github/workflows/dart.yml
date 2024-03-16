@@ -17,6 +17,10 @@ jobs:
     strategy:
       matrix:
         package:
+          - packages/system/vyuh_extension_content
+          - packages/system/vyuh_cache
+          - packages/system/vyuh_core
+          - packages/system/vyuh_feature_developer
           - packages/sanity/sanity_client
           - packages/sanity/flutter_sanity_portable_text
 
