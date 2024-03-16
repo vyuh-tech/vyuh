@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 void runApp({
   required List<FeatureDescriptor> features,
-  required List<Plugin> plugins,
+  List<Plugin>? plugins,
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
 }) async {
@@ -14,7 +14,7 @@ void runApp({
 
   vyuh = DefaultVyuhPlatform(
     features: features,
-    plugins: plugins,
+    plugins: plugins ?? [],
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
   );

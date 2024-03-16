@@ -16,9 +16,6 @@ void main() async {
       sample.featureCounter,
       sample.featureSettings,
     ],
-    plugins: [
-      vc.ConsoleLoggerPlugin(),
-    ],
     platformWidgetBuilder:
         vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
       return Observer(
@@ -28,18 +25,8 @@ void main() async {
           return MaterialApp.router(
             title: 'Vyuh Demo',
             themeMode: mode,
-            theme: ThemeData.from(
-                useMaterial3: true,
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.deepPurple,
-                  brightness: Brightness.light,
-                )),
-            darkTheme: ThemeData.from(
-                useMaterial3: true,
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: Colors.deepPurpleAccent,
-                  brightness: Brightness.dark,
-                )),
+            theme: ThemeData.light(useMaterial3: true),
+            darkTheme: ThemeData.dark(useMaterial3: true),
             routerConfig: platform.router,
           );
         },
