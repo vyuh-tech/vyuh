@@ -14,6 +14,7 @@ void main() async {
       developer.feature,
       sample.featureLauncher,
       sample.featureCounter,
+      sample.featureSettings,
     ],
     plugins: [
       vc.ConsoleLoggerPlugin(),

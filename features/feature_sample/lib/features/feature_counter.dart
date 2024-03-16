@@ -8,6 +8,7 @@ final featureCounter = FeatureDescriptor(
   name: 'counter',
   title: 'The classic Flutter counter',
   description: 'A simple counter that tracks the number of button presses',
+  icon: Icons.add_circle_outlined,
   routes: () async {
     return [
       GoRoute(

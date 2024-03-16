@@ -1,4 +1,5 @@
 library feature_sample;
 
-export './feature_counter.dart';
-export './feature_launcher.dart';
+export 'features/feature_counter.dart';
+export 'features/feature_launcher.dart';
+export 'features/feature_settings.dart';

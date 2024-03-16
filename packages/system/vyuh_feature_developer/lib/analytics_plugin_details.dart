@@ -3,9 +3,9 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
 class AnalyticsPluginDetailsView extends StatelessWidget {
-  final AnalyticsPlugin analytics;
+  final AnalyticsPlugin plugin;
 
-  const AnalyticsPluginDetailsView({super.key, required this.analytics});
+  const AnalyticsPluginDetailsView({super.key, required this.plugin});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +14,17 @@ class AnalyticsPluginDetailsView extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              title: Text(analytics.title),
+              title: Text(plugin.title),
               pinned: true,
               primary: true,
             ),
             StickySection(
-              title: 'Providers [${analytics.providers.length}]',
+              title: 'Providers [${plugin.providers.length}]',
               sliver: SliverPadding(
                 padding: const EdgeInsets.all(8.0),
                 sliver: SliverList.list(
                   children: [
-                    for (final provider in analytics.providers)
+                    for (final provider in plugin.providers)
                       _AnalyticsProviderDetail(provider: provider, index: 1),
                   ],
                 ),

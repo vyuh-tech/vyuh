@@ -102,41 +102,6 @@ class FeatureDetail extends StatelessWidget {
                 feature: feature,
               ),
             ),
-            // StickySection(
-            //   title: 'Contents',
-            //   sliver: feature.contents != null
-            //       ? SliverList.builder(
-            //           itemBuilder: (_, index) {
-            //             return ContentDetail(content: feature.contents![index]);
-            //           },
-            //           itemCount: feature.contents!.length,
-            //         )
-            //       : null,
-            // ),
-            // StickySection(
-            //   title: 'ContentBuilders',
-            //   sliver: feature.contentBuilders != null
-            //       ? ItemsAsGrid(
-            //           items: feature.contentBuilders!
-            //               .map((e) => (e.content.title, e.content.schemaType)))
-            //       : null,
-            // ),
-            // StickySection(
-            //   title: 'Actions',
-            //   sliver: feature.actions != null
-            //       ? ItemsAsGrid(
-            //           items:
-            //               feature.actions!.map((e) => (e.title, e.schemaType)))
-            //       : null,
-            // ),
-            // StickySection(
-            //   title: 'Conditions',
-            //   sliver: feature.conditions != null
-            //       ? ItemsAsGrid(
-            //           items: feature.conditions!
-            //               .map((e) => (e.title, e.schemaType)))
-            //       : null,
-            // ),
             StickySection(
               title: 'Extensions',
               sliver: feature.extensions != null

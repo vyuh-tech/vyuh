@@ -6,6 +6,7 @@ final featureLauncher = FeatureDescriptor(
   name: 'launcher',
   title: 'A launchpad for all features',
   description: 'Launchpad for features where the actual liftoff happens',
+  icon: Icons.rocket_launch,
   routes: () async {
     return [
       GoRoute(
