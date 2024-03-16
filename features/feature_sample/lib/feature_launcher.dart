@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-final featureDevLink = FeatureDescriptor(
-  name: 'devLink',
-  title: 'Link to /developer',
-  description: 'A simple feature that links to the /developer route',
+final featureLauncher = FeatureDescriptor(
+  name: 'launcher',
+  title: 'A launchpad for all features',
+  description: 'Launchpad for features where the actual liftoff happens',
   routes: () async {
     return [
       GoRoute(
@@ -26,7 +26,7 @@ class _LaunchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Local Root')),
+      appBar: AppBar(title: const Text('Launchpad')),
       body: Column(
         children: [
           ListTile(
@@ -35,7 +35,21 @@ class _LaunchPage extends StatelessWidget {
             onTap: () => context.push('/developer'),
             leading: const Icon(Icons.account_tree),
             trailing: const Icon(Icons.chevron_right),
-          )
+          ),
+          ListTile(
+            title: const Text('Counter'),
+            subtitle: const Text('The classic Flutter counter'),
+            onTap: () => context.push('/counter'),
+            leading: const Icon(Icons.add_circle_outlined),
+            trailing: const Icon(Icons.chevron_right),
+          ),
+          ListTile(
+            title: const Text('Theme Settings'),
+            subtitle: const Text('Switch to Light / Dark mode'),
+            onTap: () => context.push('/settings'),
+            leading: const Icon(Icons.light_mode),
+            trailing: const Icon(Icons.chevron_right),
+          ),
         ],
       ),
     );

@@ -24,19 +24,32 @@ class _FallbackRouteNotifier extends StatelessWidget {
   Widget build(BuildContext context) {
     if (kDebugMode) {
       return Scaffold(
+        appBar: AppBar(
+          title: const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.warning_amber,
+                color: Colors.redAccent,
+              ),
+              SizedBox(width: 8),
+              Text('Missing Route'),
+            ],
+          ),
+        ),
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Expanded(child: child),
-              const Icon(
-                Icons.warning,
-                color: Colors.red,
-              ),
               Text(
                 'Using a fallback Page for "$path"',
                 textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .labelMedium
+                    ?.apply(color: Colors.redAccent),
               ),
+              Expanded(child: child),
             ],
           ),
         ),

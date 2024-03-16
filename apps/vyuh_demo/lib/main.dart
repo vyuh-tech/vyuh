@@ -12,7 +12,8 @@ void main() async {
     initialLocation: '/',
     features: [
       developer.feature,
-      sample.featureDevLink,
+      sample.featureLauncher,
+      sample.featureCounter,
     ],
     plugins: [
       vc.ConsoleLoggerPlugin(),
@@ -26,26 +27,22 @@ void main() async {
           return MaterialApp.router(
             title: 'Vyuh Demo',
             themeMode: mode,
-            theme: ThemeMode.light.theme,
-            darkTheme: ThemeMode.dark.theme,
+            theme: ThemeData.from(
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.deepPurple,
+                  brightness: Brightness.light,
+                )),
+            darkTheme: ThemeData.from(
+                useMaterial3: true,
+                colorScheme: ColorScheme.fromSeed(
+                  seedColor: Colors.deepPurpleAccent,
+                  brightness: Brightness.dark,
+                )),
             routerConfig: platform.router,
           );
         },
       );
     }),
   );
-}
-
-extension ThemeInfoProvider on ThemeMode {
-  String get name => switch (this) {
-        ThemeMode.system => 'System',
-        ThemeMode.light => 'Light',
-        ThemeMode.dark => 'Dark',
-      };
-
-  ThemeData get theme => switch (this) {
-        ThemeMode.system => ThemeData.fallback(useMaterial3: true),
-        ThemeMode.light => ThemeData.light(useMaterial3: true),
-        ThemeMode.dark => ThemeData.dark(useMaterial3: true)
-      };
 }
