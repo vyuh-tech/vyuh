@@ -5,7 +5,6 @@
   <h1 align="center">Vyuh Framework</h1>
   <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
   <h4 align="center">
-    <a href="https://vyuh.tech/docs/get-started?ref=gh">Get Started</a> |
     <a href="https://vyuh.tech/docs">Docs</a> |
     <a href="https://vyuh.tech">Website</a>
   </h4>
@@ -33,13 +32,13 @@ only possible when you build a cohesive framework. **Vyuh** is that framework.
 
 It comes with powerful capabilities like:
 
-- Remote configuration of content, enabling Server-Driven UI
-- Building features atomically and in a modular fashion
-- Extensible Plugin based model to add new third-party integrations
-- Team Independence
-- Decentralised development
-- Creating a family of apps with reusable features
-- A growing set of integrations (aka building blocks) to make app development
+- [x] Building features atomically and in a modular fashion
+- [x] Remote configuration of content, enabling Server-Driven UI
+- [x] Extensible Plugin based model to add new third-party integrations
+- [x] Team Independence
+- [x] Decentralised development
+- [x] Creating a family of apps with reusable features
+- [x] A growing set of integrations (aka building blocks) to make app development
   faster
 
 ## The Building Blocks
@@ -66,7 +65,7 @@ Start with the documentation on the [website](https://vyuh.tech).
 
 ## Contact
 
-Follow us, stay upto date or reach out on:
+Follow us, stay up to date or reach out on:
 
 - [@vyuh_tech](https://x.com/vyuh_tech)
 - [LinkedIn](https://www.linkedin.com/company/vyuh-tech)
@@ -74,4 +73,4 @@ Follow us, stay upto date or reach out on:
 
 ## License
 
-We are still in the Beta period and do not have a License yet.
+The framework is [MIT Licensed](LICENSE).
