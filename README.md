@@ -13,14 +13,14 @@
 [![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish-dart.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish-dart.yml)&nbsp;
 [![Discord](https://img.shields.io/discord/1198906057502769252?style=for-the-badge&logo=discord)](https://vyuh.tech/discord)
 
-<hr />
+<hr style="height: 1px;"/>
 
 [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)&nbsp;
 [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)&nbsp;
 [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)&nbsp;
 [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text)&nbsp;
 
-<hr />
+<hr style="height: 1px;"/>
 
 Vyuh is a framework to build CMS-driven Flutter Apps at scale. It gives the
 **no-code** flexibility to the Business teams (via the CMS), and the
