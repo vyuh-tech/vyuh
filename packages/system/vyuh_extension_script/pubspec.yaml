@@ -1,13 +1,13 @@
 name: vyuh_extension_script
 description: A scripting extension for the Vyuh Framework
-version: 1.0.0-beta.1
+version: 1.0.0-beta.2
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_extension_script
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
-  flutter: ">=3.16.0"
+  sdk: '>=3.3.0 <4.0.0'
+  flutter: '>=3.16.0'
 
 dependencies:
   flutter:
