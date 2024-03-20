@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   vc.runApp(
-    initialLocation: '/',
+    initialLocation: '/counter',
     features: [
       developer.feature,
       sample.featureLauncher,
