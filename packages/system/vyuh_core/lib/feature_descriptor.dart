@@ -17,7 +17,7 @@ final class FeatureDescriptor {
   final List<FeatureExtensionDescriptor>? extensions;
   final List<FeatureExtensionBuilder>? extensionBuilders;
 
-  final RouteBuilderFunction? _routes;
+  final RouteBuilderFunction _routes;
   RouteBuilderFunction? get routes => _routes;
 
   FeatureDescriptor({
@@ -26,10 +26,10 @@ final class FeatureDescriptor {
     this.description,
     this.icon,
     this.init,
-    RouteBuilderFunction? routes,
+    required RouteBuilderFunction routes,
     this.extensions,
     this.extensionBuilders,
-  }) : _routes = routes == null ? null : _runOnce(routes);
+  }) : _routes = _runOnce(routes);
 }
 
 FutureOr<T?> Function() _runOnce<T>(FutureOr<T?> Function() fn) {
