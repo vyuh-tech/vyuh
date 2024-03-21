@@ -1,3 +1,7 @@
+## 1.0.0-beta.3
+
+ - Adding the js_script file in the exports
+
 ## 1.0.0-beta.1 - 1.0.0-beta.2
 
 - Initial release

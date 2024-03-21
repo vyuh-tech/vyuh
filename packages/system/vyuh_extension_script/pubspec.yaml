@@ -1,6 +1,6 @@
 name: vyuh_extension_script
 description: A scripting extension for the Vyuh Framework that allows you to invoke JavaScript-based actions
-version: 1.0.0-beta.2
+version: 1.0.0-beta.3
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_extension_script
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
