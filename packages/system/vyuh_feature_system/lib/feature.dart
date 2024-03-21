@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vt;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_extension_script/js_script.dart';
 import 'package:vyuh_extension_script/vyuh_extension_script.dart';
 import 'package:vyuh_feature_system/content/card/list_item_layout.dart';
 import 'package:vyuh_feature_system/content/portable_text/invoke_action.dart';

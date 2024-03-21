@@ -3,8 +3,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-import 'script_runtime.dart'
-    if (dart.library.html) 'web_script_runtime.dart' as rt;
+import 'script_runtime.dart' if (dart.library.html) 'web_script_runtime.dart'
+    as rt;
 
 part 'js_script.g.dart';
 

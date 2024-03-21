@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_feature_developer/vyuh_feature_developer.dart'
     as developer;
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() async {
       sample.featureLauncher,
       sample.featureCounter,
       sample.featureSettings,
+      vf.feature
     ],
     platformWidgetBuilder:
         vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
