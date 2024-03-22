@@ -7,8 +7,6 @@ packages:
   - apps/*
 
 command:
-  bootstrap:
-    usePubspecOverrides: true
   version:
     workspaceChangelog: false
 
