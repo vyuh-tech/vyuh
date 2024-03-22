@@ -9,7 +9,6 @@ import 'package:vyuh_extension_script/vyuh_extension_script.dart';
 import 'package:vyuh_feature_system/content/card/list_item_layout.dart';
 import 'package:vyuh_feature_system/content/portable_text/invoke_action.dart';
 import 'package:vyuh_feature_system/content/route/default_layout.dart';
-import 'package:vyuh_feature_system/content/route/dialog_layout.dart';
 import 'package:vyuh_feature_system/content/route/route_type.dart';
 import 'package:vyuh_feature_system/content/route/sliver_layout.dart';
 import 'package:vyuh_feature_system/content/route/tabs.dart';
@@ -78,11 +77,6 @@ final feature = FeatureDescriptor(
             schemaType: SliverRouteLayout.schemaName,
             title: 'Sliver Layout',
             fromJson: SliverRouteLayout.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: DialogRouteLayout.schemaName,
-            title: 'Dialog Layout',
-            fromJson: DialogRouteLayout.fromJson,
           ),
         ]),
         CardDescriptor(layouts: [

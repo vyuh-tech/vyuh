@@ -45,7 +45,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
               Flexible(
                 child: e.ContentImage(
                   ref: content.image?.asset?.ref,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
                 ),
               ),
             f.Padding(
