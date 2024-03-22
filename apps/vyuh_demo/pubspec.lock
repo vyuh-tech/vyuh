@@ -583,21 +583,21 @@ packages:
       path: "../../packages/system/vyuh_extension_script"
       relative: true
     source: path
-    version: "1.0.0-beta.2"
+    version: "1.0.0-beta.3"
   vyuh_feature_developer:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_developer"
       relative: true
     source: path
-    version: "1.0.0-beta.3"
+    version: "1.0.0-beta.4"
   vyuh_feature_system:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.2"
+    version: "1.0.0-beta.3"
   web:
     dependency: transitive
     description:
