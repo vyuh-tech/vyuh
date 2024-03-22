@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-final class ContentExtensionBuilder extends FeatureExtensionBuilder {
+final class ContentExtensionBuilder extends ExtensionBuilder {
   final Map<Type, Map<String, FromJsonConverter>> _typeConverterMap = {};
   final Map<String, ContentBuilder> _contentBuilderMap = {};
 
@@ -13,7 +13,7 @@ final class ContentExtensionBuilder extends FeatureExtensionBuilder {
         );
 
   @override
-  void build(List<FeatureExtensionDescriptor> extensions) {
+  void build(List<ExtensionDescriptor> extensions) {
     final descriptors = extensions.cast<ContentExtensionDescriptor>();
 
     final contentBuilders = descriptors

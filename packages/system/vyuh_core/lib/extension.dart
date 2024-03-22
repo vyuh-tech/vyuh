@@ -1,21 +1,21 @@
-abstract class FeatureExtensionDescriptor {
+abstract class ExtensionDescriptor {
   final String title;
 
-  FeatureExtensionDescriptor({
+  ExtensionDescriptor({
     required this.title,
   });
 }
 
-abstract class FeatureExtensionBuilder {
+abstract class ExtensionBuilder {
   final String title;
   final Type extensionType;
 
-  FeatureExtensionBuilder({
+  ExtensionBuilder({
     required this.extensionType,
     required this.title,
   });
 
-  void build(List<FeatureExtensionDescriptor> extensions) {}
+  void build(List<ExtensionDescriptor> extensions) {}
 
   void init() {}
   void dispose() {}
