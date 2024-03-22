@@ -1,6 +1,4 @@
-import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -8,28 +6,36 @@ part 'action.g.dart';
 
 @JsonSerializable()
 final class Action {
-  @JsonKey(fromJson: typeFromFirstOfListJson<ActionConfiguration>)
-  final ActionConfiguration? configuration;
+  final String? title;
 
-  FutureOr<void> execute(BuildContext context) {
-    configuration?.execute(context);
+  @JsonKey(fromJson: Action.configurationList)
+  final List<ActionConfiguration>? configurations;
+
+  static configurationList(dynamic json) =>
+      listFromJson<ActionConfiguration>(json);
+
+  void execute(BuildContext context) {
+    for (final config in configurations ?? []) {
+      config.execute(context);
+    }
   }
 
-  Action({this.configuration});
+  Action({this.title, this.configurations});
 
   factory Action.fromJson(Map<String, dynamic> json) => _$ActionFromJson(json);
+
+  bool get isEmpty => configurations?.isEmpty ?? true;
+  bool get isNotEmpty => !isEmpty;
 }
 
 abstract class ActionConfiguration {
   final String? title;
   final String schemaType;
-  final bool isAsync;
 
   ActionConfiguration({
     required this.schemaType,
-    this.isAsync = false,
     this.title,
   });
 
-  FutureOr<void> execute(BuildContext context);
+  void execute(BuildContext context);
 }

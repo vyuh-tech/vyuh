@@ -21,7 +21,9 @@ final class JavaScriptAction extends ActionConfiguration {
   @JsonKey(defaultValue: '')
   final String script;
 
-  JavaScriptAction({required this.script, super.isAsync})
+  final bool isAsync;
+
+  JavaScriptAction({required this.script, this.isAsync = false})
       : super(schemaType: schemaName);
 
   factory JavaScriptAction.fromJson(Map<String, dynamic> json) =>
