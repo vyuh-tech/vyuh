@@ -39,11 +39,11 @@ final class NavigationAction extends ActionConfiguration {
       _$NavigationActionFromJson(json);
 
   @override
-  Future<void> execute(BuildContext context) async {
+  void execute(BuildContext context) async {
     assert(url != null || route != null, 'One of url or route must be set.');
 
     if (linkType == LinkType.route && route != null) {
-      return _performNavigation(context, routeId: route!.ref);
+      _performNavigation(context, routeId: route!.ref);
     }
 
     final uri = Uri.parse(url!);
