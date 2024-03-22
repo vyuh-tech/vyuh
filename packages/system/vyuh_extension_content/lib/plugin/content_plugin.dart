@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 final class DefaultContentPlugin extends ContentPlugin {
-  late final ContentExtensionBuilder _extensionBuilder;
+  ContentExtensionBuilder? _extensionBuilder;
 
   DefaultContentPlugin({required super.provider})
       : super(
@@ -14,11 +14,11 @@ final class DefaultContentPlugin extends ContentPlugin {
 
   @override
   Map<Type, Map<String, FromJsonConverter>> get typeRegistry =>
-      _extensionBuilder.getTypeRegistry();
+      _extensionBuilder!.getTypeRegistry();
 
   @override
   Widget buildContent(BuildContext context, ContentItem content) {
-    final builder = _extensionBuilder.getContentBuilder(content.schemaType);
+    final builder = _extensionBuilder!.getContentBuilder(content.schemaType);
 
     assert(builder != null,
         'Failed to retrieve builder for schemaType: ${content.schemaType}');
@@ -48,16 +48,16 @@ final class DefaultContentPlugin extends ContentPlugin {
   @override
   T? fromJson<T>(Map<String, dynamic> json) {
     final type = provider.schemaType(json);
-    return _extensionBuilder.fromJson<T>(type, json);
+    return _extensionBuilder!.fromJson<T>(type, json);
   }
 
   @override
   register<T>(TypeDescriptor<T> descriptor) =>
-      _extensionBuilder.register<T>(descriptor);
+      _extensionBuilder!.register<T>(descriptor);
 
   @override
   isRegistered<T>(TypeDescriptor<T> descriptor) =>
-      _extensionBuilder.isRegistered<T>(descriptor);
+      _extensionBuilder!.isRegistered<T>(descriptor);
 
   @override
   Future<void> dispose() => provider.dispose();
@@ -66,7 +66,7 @@ final class DefaultContentPlugin extends ContentPlugin {
   Future<void> init() {
     // Create a one-time reaction to clear the maps whenever the framework is restarted
     when((_) => vyuh.tracker.currentState.value == InitState.notStarted, () {
-      _extensionBuilder.reset();
+      _extensionBuilder?.reset();
     });
 
     return provider.init();
