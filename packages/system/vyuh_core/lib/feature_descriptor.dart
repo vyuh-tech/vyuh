@@ -14,8 +14,8 @@ final class FeatureDescriptor {
   final IconData? icon;
   final FeatureInitFunction? init;
 
-  final List<FeatureExtensionDescriptor>? extensions;
-  final List<FeatureExtensionBuilder>? extensionBuilders;
+  final List<ExtensionDescriptor>? extensions;
+  final List<ExtensionBuilder>? extensionBuilders;
 
   final RouteBuilderFunction _routes;
   RouteBuilderFunction? get routes => _routes;

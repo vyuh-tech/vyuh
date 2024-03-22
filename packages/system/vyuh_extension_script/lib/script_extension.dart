@@ -5,7 +5,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'script_runtime.dart' if (dart.library.html) 'web_script_runtime.dart'
     as rt;
 
-final class ScriptExtensionDescriptor extends FeatureExtensionDescriptor {
+final class ScriptExtensionDescriptor extends ExtensionDescriptor {
   final String name;
 
   String get runtime => 'javascript';
@@ -16,13 +16,13 @@ final class ScriptExtensionDescriptor extends FeatureExtensionDescriptor {
       : super(title: 'ScriptExtension: $name');
 }
 
-final class ScriptExtensionBuilder extends FeatureExtensionBuilder {
+final class ScriptExtensionBuilder extends ExtensionBuilder {
   ScriptExtensionBuilder()
       : super(
             extensionType: ScriptExtensionDescriptor, title: 'ScriptExtension');
 
   @override
-  void build(List<FeatureExtensionDescriptor> extensions) {
+  void build(List<ExtensionDescriptor> extensions) {
     for (final extension in extensions.cast<ScriptExtensionDescriptor>()) {
       rt.ScriptRuntime.registerFunction(extension.name, extension.function);
     }

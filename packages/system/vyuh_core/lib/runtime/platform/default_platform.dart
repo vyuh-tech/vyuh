@@ -13,7 +13,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 final class DefaultVyuhPlatform extends VyuhPlatform {
   final Map<PluginType, Plugin> _pluginMap = {};
-  final Map<Type, FeatureExtensionBuilder> _featureExtensionBuilderMap = {};
+  final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
 
   late RoutingConfigNotifier _routingConfig;
 
@@ -184,8 +184,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
   void _initFeatureExtensions() {
     final builders = features
-        .expand((element) =>
-            element.extensionBuilders ?? <FeatureExtensionBuilder>[])
+        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
         .groupListsBy((element) => element.extensionType);
 
     for (final entry in builders.entries) {
@@ -199,8 +198,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
     }
 
     final extensions = features
-        .expand(
-            (element) => element.extensions ?? <FeatureExtensionDescriptor>[])
+        .expand((element) => element.extensions ?? <ExtensionDescriptor>[])
         .groupListsBy((element) => element.runtimeType);
 
     extensions.forEach((runtimeType, descriptors) {
