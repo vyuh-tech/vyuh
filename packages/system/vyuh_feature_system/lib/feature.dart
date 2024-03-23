@@ -178,6 +178,7 @@ final feature = FeatureDescriptor(
       actions: [
         NavigationAction.typeDescriptor,
         JavaScriptAction.typeDescriptor,
+        ConditionalAction.typeDescriptor,
       ],
     ),
     ScriptExtensionDescriptor(

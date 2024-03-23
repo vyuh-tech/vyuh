@@ -1,5 +1,6 @@
 library vyuh_feature_system;
 
+export 'action/conditional_action.dart';
 export 'action/navigation.dart';
 export 'condition/boolean.dart';
 export 'content/index.dart';
