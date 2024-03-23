@@ -44,6 +44,7 @@ final class NavigationAction extends ActionConfiguration {
 
     if (linkType == LinkType.route && route != null) {
       _performNavigation(context, routeId: route!.ref);
+      return;
     }
 
     final uri = Uri.parse(url!);
