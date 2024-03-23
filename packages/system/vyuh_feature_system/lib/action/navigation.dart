@@ -8,7 +8,7 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'navigation.g.dart';
 
-enum NavigationType { go, push }
+enum NavigationType { go, push, replace }
 
 enum LinkType { url, route }
 
@@ -98,10 +98,16 @@ final class NavigationAction extends ActionConfiguration {
 
 extension on NavigationType {
   void apply(BuildContext context, String path, [vf.Route? route]) {
-    if (this == NavigationType.push) {
-      context.push(path, extra: route);
-    } else {
-      context.go(path, extra: route);
+    switch (this) {
+      case NavigationType.go:
+        context.go(path, extra: route);
+        break;
+      case NavigationType.push:
+        context.push(path, extra: route);
+        break;
+      case NavigationType.replace:
+        context.replace(path, extra: route);
+        break;
     }
   }
 }

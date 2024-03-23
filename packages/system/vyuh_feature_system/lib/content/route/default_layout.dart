@@ -1,47 +1,59 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as flutter;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'default_layout.g.dart';
 
+enum MenuIconType {
+  home,
+  settings,
+  category,
+  account;
+
+  flutter.IconData get iconData => switch (this) {
+        MenuIconType.home => flutter.Icons.home,
+        MenuIconType.settings => flutter.Icons.settings,
+        MenuIconType.category => flutter.Icons.category,
+        MenuIconType.account => flutter.Icons.account_circle,
+      };
+}
+
 @JsonSerializable()
-final class DefaultRouteLayout extends LayoutConfiguration<vf.Route> {
-  static const schemaName = '${vf.Route.schemaName}.layout.default';
+class MenuAction {
+  // Define your fields here based on menuAction schema
+  final String title;
+  final MenuIconType icon;
+  final Action? action;
+
+  MenuAction({
+    this.title = '',
+    this.icon = MenuIconType.home,
+    this.action,
+  });
+
+  factory MenuAction.fromJson(Map<String, dynamic> json) =>
+      _$MenuActionFromJson(json);
+}
+
+@JsonSerializable()
+class DefaultRouteLayout extends LayoutConfiguration<Route> {
+  static const schemaName = '${Route.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Default Route Layout',
     fromJson: DefaultRouteLayout.fromJson,
   );
 
-  DefaultRouteLayout() : super(schemaType: schemaName);
+  final List<MenuAction>? actions;
+
+  DefaultRouteLayout({this.actions}) : super(schemaType: schemaName);
 
   factory DefaultRouteLayout.fromJson(Map<String, dynamic> json) =>
       _$DefaultRouteLayoutFromJson(json);
 
   @override
-  Widget build(BuildContext context, vf.Route content) {
-    final theme = Theme.of(context);
-    final items = content.regions
-        .expand((element) => element.items)
-        .toList(growable: false);
-
-    return vf.RouteContainer(
-      content: content,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text(content.title),
-          scrolledUnderElevation: 1,
-          shadowColor: theme.colorScheme.shadow,
-        ),
-        body: SafeArea(
-          child: ListView.builder(
-              itemCount: items.length,
-              itemBuilder: (_, index) {
-                return vyuh.content.buildContent(context, items[index]);
-              }),
-        ),
-      ),
-    );
-  }
+  flutter.Widget build(flutter.BuildContext context, Route content) =>
+      DefaultPageRouteLayout(content: content, layout: this);
 }
