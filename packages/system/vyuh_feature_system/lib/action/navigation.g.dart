@@ -23,6 +23,7 @@ NavigationAction _$NavigationActionFromJson(Map<String, dynamic> json) =>
 const _$NavigationTypeEnumMap = {
   NavigationType.go: 'go',
   NavigationType.push: 'push',
+  NavigationType.replace: 'replace',
 };
 
 const _$LinkTypeEnumMap = {

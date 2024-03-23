@@ -51,8 +51,6 @@ final class Route extends RouteBase {
     return routeType?.create(child, this) ?? flutter.MaterialPage(child: child);
   }
 
-  static defaultPageBuilder({Uri? uri, String? routeId, Route? route}) {}
-
   @override
   Future<RouteBase?> init() async {
     if (_initializedInstance != null) {
