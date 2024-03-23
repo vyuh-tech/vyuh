@@ -45,6 +45,10 @@ final class DialogRouteType extends RouteTypeConfiguration {
 
   @override
   Page<T> create<T>(Widget child, vc.RouteBase route) {
-    return ModalDialogPage(builder: (context) => child);
+    return switch (behavior) {
+      DialogBehavior.modalBottomSheet =>
+        ModalDialogPage(builder: (context) => child),
+      DialogBehavior.fullscreen => DialogPage(builder: (context) => child),
+    };
   }
 }

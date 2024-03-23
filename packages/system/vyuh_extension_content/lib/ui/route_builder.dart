@@ -74,7 +74,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
                 vyuh.analytics.reportError(exception);
 
                 return vyuh.widgetBuilder.errorView(
-                  title: 'Failed to load route',
+                  title: 'Failed to load route from CMS',
                   error: exception,
                   onRetry: _refresh,
                 );
