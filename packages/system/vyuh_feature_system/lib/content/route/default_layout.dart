@@ -10,13 +10,15 @@ enum MenuIconType {
   home,
   settings,
   category,
-  account;
+  account,
+  menu;
 
   flutter.IconData get iconData => switch (this) {
         MenuIconType.home => flutter.Icons.home,
         MenuIconType.settings => flutter.Icons.settings,
         MenuIconType.category => flutter.Icons.category,
         MenuIconType.account => flutter.Icons.account_circle,
+        MenuIconType.menu => flutter.Icons.menu,
       };
 }
 

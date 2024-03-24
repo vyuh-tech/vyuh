@@ -50,7 +50,7 @@ class _FrameworkInitViewState extends State<FrameworkInitView> {
                 onRetry: () {
                   vyuh.tracker.init();
                 },
-                canGoHome: false,
+                showRestart: false,
               );
         final pendingApp = MaterialApp(home: child);
 

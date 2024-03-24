@@ -30,6 +30,8 @@ final feature = FeatureDescriptor(
             title: 'System error',
             error: state.extra.toString(),
             onRetry: () => vyuh.tracker.init(),
+            retryLabel: 'Restart',
+            showRestart: false,
           ),
         );
       },

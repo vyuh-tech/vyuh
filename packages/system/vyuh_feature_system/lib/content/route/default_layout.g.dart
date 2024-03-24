@@ -20,6 +20,7 @@ const _$MenuIconTypeEnumMap = {
   MenuIconType.settings: 'settings',
   MenuIconType.category: 'category',
   MenuIconType.account: 'account',
+  MenuIconType.menu: 'menu',
 };
 
 DefaultRouteLayout _$DefaultRouteLayoutFromJson(Map<String, dynamic> json) =>
