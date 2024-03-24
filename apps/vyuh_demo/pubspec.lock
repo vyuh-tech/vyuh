@@ -422,14 +422,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
-  sheet:
-    dependency: transitive
-    description:
-      name: sheet
-      sha256: f7619b2bd5e031f206d8c22228ef2b12794192dea25b5af0862fa5e37fe6e36d
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -443,6 +435,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  smooth_sheets:
+    dependency: transitive
+    description:
+      name: smooth_sheets
+      sha256: "8713933c662cafd8497d56fccf9141c5caf29e07dfe276196aaffc2f76da6c8f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.4.1"
   source_span:
     dependency: transitive
     description:
