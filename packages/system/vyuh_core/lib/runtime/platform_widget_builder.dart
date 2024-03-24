@@ -20,7 +20,7 @@ typedef ErrorViewBuilder = Widget Function({
   String? retryLabel,
   VoidCallback? onRetry,
   String? subtitle,
-  bool canGoHome,
+  bool showRestart,
 });
 
 final class PlatformWidgetBuilder {

@@ -6,7 +6,7 @@ class ErrorView extends StatelessWidget {
   final String? subtitle;
   final dynamic error;
   final VoidCallback? onRetry;
-  final bool canGoHome;
+  final bool showRestart;
 
   final String? retryLabel;
 
@@ -16,7 +16,7 @@ class ErrorView extends StatelessWidget {
     this.subtitle,
     this.error,
     this.onRetry,
-    this.canGoHome = true,
+    this.showRestart = true,
     this.retryLabel,
   });
 
@@ -75,7 +75,7 @@ class ErrorView extends StatelessWidget {
                   child: FilledButton(
                       onPressed: onRetry, child: Text(retryLabel ?? 'Retry')),
                 ),
-              if (canGoHome)
+              if (showRestart)
                 TextButton(
                     child: Text('Restart',
                         style: theme.textTheme.bodyMedium

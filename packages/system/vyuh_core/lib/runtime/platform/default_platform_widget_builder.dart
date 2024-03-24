@@ -43,7 +43,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
       onRetry,
       subtitle,
       error,
-      canGoHome = true,
+      showRestart = true,
     }) =>
         ErrorView(
           title: title,
@@ -51,7 +51,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           error: error,
           retryLabel: retryLabel,
           onRetry: onRetry,
-          canGoHome: canGoHome,
+          showRestart: showRestart,
         ),
     routeErrorView: ({
       required path,
@@ -67,7 +67,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           error: error,
           onRetry: onRetry,
           retryLabel: retryLabel,
-          canGoHome: true,
+          showRestart: true,
         ));
 
 class _DefaultRouteLoader extends StatefulWidget {
