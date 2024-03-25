@@ -8,7 +8,7 @@ class ContentExtensionDescriptor extends ExtensionDescriptor {
     this.contentBuilders,
     this.actions,
     this.conditions,
-    this.routeInitializers,
+    this.lifecycleHandlers,
     this.routeTypes,
   }) : super(title: 'Content Extension');
 
@@ -16,7 +16,7 @@ class ContentExtensionDescriptor extends ExtensionDescriptor {
   final List<ContentBuilder>? contentBuilders;
   final List<TypeDescriptor<ActionConfiguration>>? actions;
   final List<TypeDescriptor<ConditionConfiguration>>? conditions;
-  final List<TypeDescriptor<RouteInitConfiguration>>? routeInitializers;
+  final List<TypeDescriptor<RouteLifecycleHandler>>? lifecycleHandlers;
   final List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
 }
 
@@ -29,10 +29,10 @@ abstract class RouteTypeConfiguration {
   Page<T> create<T>(Widget child, RouteBase route);
 }
 
-abstract class RouteInitConfiguration {
+abstract class RouteLifecycleHandler {
   final String? title;
 
-  RouteInitConfiguration({this.title});
+  RouteLifecycleHandler({this.title});
 
   Future<void> init(RouteBase route);
 

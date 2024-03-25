@@ -19,9 +19,9 @@ Route _$RouteFromJson(Map<String, dynamic> json) => Route(
       id: readValue(json, 'id') as String,
       category: json['category'] as String?,
       layout: typeFromFirstOfListJson(json['layout']),
-      initConfigurations: json['initConfigurations'] == null
+      lifecycleHandlers: json['lifecycleHandlers'] == null
           ? []
-          : Route.initConfigurationsFromJson(json['initConfigurations']),
+          : Route.lifecycleHandlersFromJson(json['lifecycleHandlers']),
     );
 
 Region _$RegionFromJson(Map<String, dynamic> json) => Region(

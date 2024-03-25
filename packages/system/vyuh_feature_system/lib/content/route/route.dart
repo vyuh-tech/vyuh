@@ -29,19 +29,18 @@ final class Route extends RouteBase {
     required super.id,
     super.category,
     super.layout,
-    this.initConfigurations,
+    this.lifecycleHandlers,
   }) : super(schemaType: Route.schemaName) {
     setParent(regions.expand((element) => element.items));
   }
 
-  @JsonKey(defaultValue: [], fromJson: initConfigurationsFromJson)
-  final List<RouteInitConfiguration>? initConfigurations;
+  @JsonKey(defaultValue: [], fromJson: lifecycleHandlersFromJson)
+  final List<RouteLifecycleHandler>? lifecycleHandlers;
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 
-  static List<RouteInitConfiguration>? initConfigurationsFromJson(
-          dynamic json) =>
-      listFromJson<RouteInitConfiguration>(json);
+  static List<RouteLifecycleHandler>? lifecycleHandlersFromJson(dynamic json) =>
+      listFromJson<RouteLifecycleHandler>(json);
 
   flutter.Page<T> createPage<T>(flutter.BuildContext context) {
     final child = kDebugMode
@@ -57,8 +56,8 @@ final class Route extends RouteBase {
       return _initializedInstance;
     }
 
-    if (initConfigurations != null && initConfigurations!.isNotEmpty) {
-      for (final config in initConfigurations!) {
+    if (lifecycleHandlers != null && lifecycleHandlers!.isNotEmpty) {
+      for (final config in lifecycleHandlers!) {
         await config.init(this);
       }
     }
@@ -69,8 +68,8 @@ final class Route extends RouteBase {
 
   @override
   Future<void> dispose() async {
-    if (initConfigurations != null && initConfigurations!.isNotEmpty) {
-      for (final config in initConfigurations!) {
+    if (lifecycleHandlers != null && lifecycleHandlers!.isNotEmpty) {
+      for (final config in lifecycleHandlers!) {
         await config.dispose();
       }
     }
@@ -95,11 +94,11 @@ final class Region {
 }
 
 final class RouteDescriptor extends ContentDescriptor {
-  List<TypeDescriptor<RouteInitConfiguration>>? initConfigurations;
+  List<TypeDescriptor<RouteLifecycleHandler>>? lifecycleHandlers;
   List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
 
   RouteDescriptor({
-    this.initConfigurations,
+    this.lifecycleHandlers,
     this.routeTypes,
     super.layouts,
   }) : super(schemaType: Route.schemaName, title: 'Route');
@@ -122,11 +121,10 @@ final class RouteContentBuilder extends ContentBuilder<Route> {
 
     final rtDescriptors = descriptors.cast<RouteDescriptor>();
     final initConfigs = rtDescriptors.expand((element) =>
-        element.initConfigurations ??
-        <TypeDescriptor<RouteInitConfiguration>>[]);
+        element.lifecycleHandlers ?? <TypeDescriptor<RouteLifecycleHandler>>[]);
 
     for (final config in initConfigs) {
-      vyuh.content.register<RouteInitConfiguration>(config);
+      vyuh.content.register<RouteLifecycleHandler>(config);
     }
 
     final routeTypes = rtDescriptors.expand((element) =>
