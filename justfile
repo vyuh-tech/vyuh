@@ -5,7 +5,7 @@ gen-vyuh_core: (_generate-json "packages/system/vyuh_core" "watch")
 gen-vyuh_extension_script: (_generate-json "packages/system/vyuh_extension_script" "watch")
 gen-vyuh_extension_content: (_generate-json "packages/system/vyuh_extension_content" "watch")
 gen-vyuh_feature_system: (_generate-json "packages/system/vyuh_feature_system" "watch")
-gen-feature_sample: (_generate-json "features/sample/feature_sample" "watch")
+gen-feature_sample: (_generate-json "features/feature_sample" "watch")
 
 _generate-json package command="build":
     #!/usr/bin/env bash
