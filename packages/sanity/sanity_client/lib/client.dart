@@ -38,8 +38,10 @@ final class SanityConfig {
         this.apiVersion = apiVersion ?? defaultApiVersion,
         this.perspective = perspective ?? Perspective.raw,
         this.explainQuery = explainQuery ?? false {
-    assert(this.token.trim().isNotEmpty,
-        'Invalid Token provided. Setup an API token, with Viewer access, in the Sanity Management Console.');
+    assert(this.token.trim().isNotEmpty, '''
+Invalid Token provided. 
+Setup an API token, with Viewer access, in the Sanity Management Console.
+Without a valid token you will not be able to fetch data from Sanity.''');
   }
 }
 
@@ -56,9 +58,7 @@ class SanityClient {
     final UrlBuilder? urlBuilder,
   })  : httpClient = httpClient ?? http.Client(),
         urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
-        _requestHeaders = config.token != null
-            ? {'Authorization': 'Bearer ${config.token}'}
-            : {};
+        _requestHeaders = {'Authorization': 'Bearer ${config.token}'};
 
   Future<SanityQueryResponse> fetch(Uri uri) async {
     final response = await httpClient.get(uri, headers: _requestHeaders);
