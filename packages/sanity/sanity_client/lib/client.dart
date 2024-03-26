@@ -15,7 +15,16 @@ final class SanityConfig {
   final Perspective perspective;
   final bool explainQuery;
 
-  static const defaultApiVersion = 'v2021-10-21';
+  static final String defaultApiVersion = (() {
+    final today = DateTime.now();
+    final parts = [
+      today.year.toString(),
+      today.month.toString().padLeft(2, '0'),
+      today.day.toString().padLeft(2, '0')
+    ].join('-');
+
+    return 'v$parts';
+  })();
 
   SanityConfig({
     required this.projectId,
@@ -29,7 +38,8 @@ final class SanityConfig {
         this.apiVersion = apiVersion ?? defaultApiVersion,
         this.perspective = perspective ?? Perspective.raw,
         this.explainQuery = explainQuery ?? false {
-    assert(this.token.trim().isNotEmpty, 'Invalid Token provided');
+    assert(this.token.trim().isNotEmpty,
+        'Invalid Token provided. Setup an API token, with Viewer access, in the Sanity Management Console.');
   }
 }
 
@@ -46,7 +56,9 @@ class SanityClient {
     final UrlBuilder? urlBuilder,
   })  : httpClient = httpClient ?? http.Client(),
         urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
-        _requestHeaders = {'Authorization': 'Bearer ${config.token}'};
+        _requestHeaders = config.token != null
+            ? {'Authorization': 'Bearer ${config.token}'}
+            : {};
 
   Future<SanityQueryResponse> fetch(Uri uri) async {
     final response = await httpClient.get(uri, headers: _requestHeaders);
