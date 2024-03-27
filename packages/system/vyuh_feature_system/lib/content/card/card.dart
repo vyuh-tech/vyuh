@@ -19,6 +19,7 @@ class Card extends ContentItem implements PortableBlockItem {
   final String? title;
   final String? description;
   final ImageReference? image;
+  final Uri? imageUrl;
   final PortableTextContent? content;
 
   final vx.Action? action;
@@ -30,6 +31,7 @@ class Card extends ContentItem implements PortableBlockItem {
     required this.description,
     this.content,
     this.image,
+    this.imageUrl,
     this.action,
     this.secondaryAction,
     this.tertiaryAction,

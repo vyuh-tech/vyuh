@@ -24,6 +24,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
         .expand((element) => element.contents ?? <ContentDescriptor>[])
         .groupListsBy((element) => element.schemaType);
 
+    // Collect the builders
     for (final entry in contentBuilders.entries) {
       assert(entry.value.length == 1,
           'There can be only one ContentBuilder for a content-type. We found ${entry.value.length} for ${entry.key}');
@@ -31,15 +32,22 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
       _contentBuilderMap[entry.key] = entry.value.first;
     }
 
+    // Ensure every ContentDescriptor has a ContentBuilder
     for (final entry in contents.entries) {
       final schemaType = entry.key;
-      final descriptors = entry.value;
       final builder = _contentBuilderMap[schemaType];
 
       assert(builder != null,
           'Missing ContentBuilder for ContentDescriptor of schemaType: $schemaType');
+    }
 
-      builder?.init(descriptors);
+    // Setup the builders
+    for (final entry in _contentBuilderMap.entries) {
+      final schemaType = entry.key;
+      final builder = entry.value;
+      final descriptors = contents[schemaType] ?? [];
+
+      builder.init(descriptors);
     }
 
     _initTypeRegistrations(

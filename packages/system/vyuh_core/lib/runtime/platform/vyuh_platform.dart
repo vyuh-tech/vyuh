@@ -29,6 +29,7 @@ abstract class VyuhPlatform {
     PluginType.content,
     PluginType.di,
     PluginType.analytics,
+    PluginType.network,
     // PluginType.storage,
   ];
 
@@ -57,6 +58,8 @@ extension NamedPlugins on VyuhPlatform {
 
   AnalyticsPlugin get analytics =>
       ensurePlugin<AnalyticsPlugin>(PluginType.analytics);
+
+  NetworkPlugin get network => ensurePlugin<NetworkPlugin>(PluginType.network);
 
   T ensurePlugin<T>(PluginType type, {bool mustExist = true}) {
     final plugin = getPlugin(type) as T;

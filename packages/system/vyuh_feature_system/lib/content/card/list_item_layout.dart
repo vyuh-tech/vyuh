@@ -26,42 +26,45 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  if (content.image?.asset?.ref != null)
-                    Container(
-                      clipBehavior: Clip.antiAlias,
-                      decoration:
-                          BoxDecoration(borderRadius: BorderRadius.circular(8)),
-                      height: 64,
-                      width: 128,
-                      child: sys.ContentImage(
-                        ref: content.image?.asset?.ref,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  if (content.title != null)
-                    Expanded(
-                        child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      child: Text(
-                        content.title!,
-                        style: theme.textTheme.bodyLarge,
-                      ),
-                    )),
-                  const Icon(Icons.chevron_right_rounded)
-                ],
-              ),
-              if (content.description != null)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    content.description!,
-                    style: theme.textTheme.bodyMedium,
+              if (content.image?.asset?.ref != null || content.imageUrl != null)
+                Container(
+                  clipBehavior: Clip.antiAlias,
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  height: 64,
+                  width: 92,
+                  child: sys.ContentImage(
+                    url: content.imageUrl?.toString(),
+                    ref: content.image?.asset?.ref,
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (content.title != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Text(
+                          content.title!,
+                          style: theme.textTheme.bodyLarge,
+                        ),
+                      ),
+                    if (content.description != null)
+                      Text(
+                        content.description!,
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                  ],
+                ),
+              ),
+              if (content.action != null)
+                const Icon(Icons.chevron_right_rounded)
             ],
           ),
         ),

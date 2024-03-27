@@ -7,7 +7,6 @@ typedef RouteLoader = Widget Function([Uri? url, String? routeId]);
 typedef ImagePlaceholderBuilder = Widget Function(
     {double? width, double? height});
 typedef RouteErrorViewBuilder = Widget Function({
-  required String path,
   required String title,
   String? retryLabel,
   VoidCallback? onRetry,

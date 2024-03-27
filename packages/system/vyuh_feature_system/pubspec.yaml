@@ -26,6 +26,7 @@ dependencies:
   vyuh_core: ^1.0.0-beta.1
   vyuh_extension_content: ^1.0.0-beta.1
   vyuh_extension_script: ^1.0.0-beta.1
+  json_path: ^0.7.1
 
 dev_dependencies:
   flutter_test:
