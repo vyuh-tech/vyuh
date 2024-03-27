@@ -26,12 +26,11 @@ final feature = FeatureDescriptor(
       path: '/__system_error__',
       pageBuilder: (context, state) {
         return MaterialPage(
-          child: vyuh.widgetBuilder.errorView(
+          child: vyuh.widgetBuilder.routeErrorView(
             title: 'System error',
             error: state.extra.toString(),
             onRetry: () => vyuh.tracker.init(),
             retryLabel: 'Restart',
-            showRestart: false,
           ),
         );
       },
@@ -156,7 +155,9 @@ final feature = FeatureDescriptor(
           ],
         ),
         DividerDescriptor(),
-        AccordionDescriptor()
+        APIContentDescriptor(
+          handlers: [SimpleAPIHandler.typeDescriptor],
+        ),
       ],
       contentBuilders: [
         RouteContentBuilder(),
@@ -169,6 +170,7 @@ final feature = FeatureDescriptor(
         PortableTextContentBuilder(),
         DividerContentBuilder(),
         AccordionContentBuilder(),
+        APIContentBuilder(),
       ],
       conditions: [
         TypeDescriptor(

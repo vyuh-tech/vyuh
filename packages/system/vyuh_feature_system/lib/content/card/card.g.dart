@@ -16,6 +16,9 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
       image: json['image'] == null
           ? null
           : ImageReference.fromJson(json['image'] as Map<String, dynamic>),
+      imageUrl: json['imageUrl'] == null
+          ? null
+          : Uri.parse(json['imageUrl'] as String),
       action: json['action'] == null
           ? null
           : Action.fromJson(json['action'] as Map<String, dynamic>),

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -14,9 +16,9 @@ final class Action {
   static configurationList(dynamic json) =>
       listFromJson<ActionConfiguration>(json);
 
-  void execute(BuildContext context) {
+  FutureOr<void> execute(BuildContext context) async {
     for (final config in configurations ?? []) {
-      config.execute(context);
+      await config.execute(context);
     }
   }
 
@@ -37,5 +39,5 @@ abstract class ActionConfiguration {
     this.title,
   });
 
-  void execute(BuildContext context);
+  FutureOr<void> execute(BuildContext context);
 }

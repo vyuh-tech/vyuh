@@ -2,6 +2,7 @@ library vyuh_feature_system;
 
 export 'action/conditional_action.dart';
 export 'action/navigation.dart';
+export 'api_handler/simple_api_handler.dart';
 export 'condition/boolean.dart';
 export 'content/index.dart';
 export 'feature.dart';

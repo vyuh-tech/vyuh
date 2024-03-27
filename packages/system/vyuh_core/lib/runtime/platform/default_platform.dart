@@ -172,8 +172,8 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
       debugLogDiagnostics: kDebugMode,
       observers: analytics.observers,
       errorBuilder: (_, state) => widgetBuilder.routeErrorView(
-        path: state.matchedLocation,
         title: 'Failed to load route',
+        subtitle: state.matchedLocation,
         error: state.error,
         onRetry: () {
           vyuh.tracker.init(tracker.currentState.value);
@@ -230,6 +230,7 @@ extension on PluginType {
           AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
         PluginType.content => NoOpContentPlugin(),
         PluginType.di => GetItDIPlugin(),
+        PluginType.network => HttpNetworkPlugin(),
         _ => null
       };
 }

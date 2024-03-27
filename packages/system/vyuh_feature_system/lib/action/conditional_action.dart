@@ -29,7 +29,7 @@ class ConditionalAction extends ActionConfiguration {
       _$ConditionalActionFromJson(json);
 
   @override
-  void execute(flutter.BuildContext context) async {
+  Future<void> execute(flutter.BuildContext context) async {
     final value = (await condition?.execute()) ?? defaultCase;
 
     if (context.mounted) {

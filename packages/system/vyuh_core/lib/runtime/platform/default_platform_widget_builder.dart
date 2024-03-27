@@ -51,17 +51,15 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           error: error,
           retryLabel: retryLabel,
           onRetry: onRetry,
-          showRestart: showRestart,
         ),
     routeErrorView: ({
-      required path,
       required title,
       onRetry,
       retryLabel,
       subtitle,
       error,
     }) =>
-        ErrorView(
+        ErrorViewScaffold(
           title: title,
           subtitle: subtitle,
           error: error,
