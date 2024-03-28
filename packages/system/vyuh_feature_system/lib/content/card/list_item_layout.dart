@@ -32,14 +32,15 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
               if (content.image?.asset?.ref != null || content.imageUrl != null)
                 Container(
                   clipBehavior: Clip.antiAlias,
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(8)),
+                  decoration: BoxDecoration(
+                      color: theme.colorScheme.background,
+                      borderRadius: BorderRadius.circular(8)),
                   height: 64,
                   width: 92,
                   child: sys.ContentImage(
                     url: content.imageUrl?.toString(),
                     ref: content.image?.asset?.ref,
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.contain,
                   ),
                 ),
               const SizedBox(width: 8),

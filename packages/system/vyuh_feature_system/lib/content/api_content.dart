@@ -21,7 +21,7 @@ final class APIContent extends ContentItem {
       _$APIContentFromJson(json);
 
   APIContent({
-    this.showError = true,
+    this.showError = kDebugMode,
     this.showPending = true,
     this.handler,
   }) : super(schemaType: APIContent.schemaName);
