@@ -93,6 +93,7 @@ final feature = FeatureDescriptor(
             title: 'Grid Layout',
             fromJson: GridGroupLayout.fromJson,
           ),
+          vf.ListGroupLayout.typeDescriptor,
         ]),
         ConditionalDescriptor(),
         ConditionalRouteDescriptor(),

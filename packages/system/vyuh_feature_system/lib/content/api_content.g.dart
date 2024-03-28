@@ -7,7 +7,7 @@ part of 'api_content.dart';
 // **************************************************************************
 
 APIContent _$APIContentFromJson(Map<String, dynamic> json) => APIContent(
-      showError: json['showError'] as bool? ?? true,
+      showError: json['showError'] as bool? ?? kDebugMode,
       showPending: json['showPending'] as bool? ?? true,
       handler: typeFromFirstOfListJson(json['handler']),
     );

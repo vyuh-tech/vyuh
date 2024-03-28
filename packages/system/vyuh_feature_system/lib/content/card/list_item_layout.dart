@@ -54,12 +54,17 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                         child: Text(
                           content.title!,
                           style: theme.textTheme.bodyLarge,
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                         ),
                       ),
                     if (content.description != null)
                       Text(
                         content.description!,
                         style: theme.textTheme.bodyMedium,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        softWrap: true,
                       ),
                   ],
                 ),

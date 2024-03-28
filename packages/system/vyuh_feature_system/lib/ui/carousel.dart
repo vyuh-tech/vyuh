@@ -19,36 +19,38 @@ class _CarouselState extends State<Carousel> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Column(
-      children: [
-        SizedBox(
-          height: 200,
-          child: PageView(
-            padEnds: false,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 100, maxHeight: 200),
+      child: Column(
+        children: [
+          Expanded(
+            child: PageView(
+              padEnds: false,
+              controller: _controller,
+              pageSnapping: true,
+              scrollDirection: Axis.horizontal,
+              children: widget.content.items
+                  .map((e) => vyuh.content.buildContent(context, e))
+                  .toList(growable: false),
+            ),
+          ),
+          SmoothPageIndicator(
             controller: _controller,
-            pageSnapping: true,
-            scrollDirection: Axis.horizontal,
-            children: widget.content.items
-                .map((e) => vyuh.content.buildContent(context, e))
-                .toList(growable: false),
-          ),
-        ),
-        SmoothPageIndicator(
-          controller: _controller,
-          onDotClicked: (index) => _controller.animateToPage(index,
-              curve: Curves.easeInOutCubic,
-              duration: const Duration(milliseconds: 300)),
-          count: widget.content.items.length,
-          effect: WormEffect(
-            offset: 20,
-            spacing: 4,
-            dotHeight: 3,
-            dotWidth: 12,
-            dotColor: theme.colorScheme.inversePrimary,
-            activeDotColor: theme.colorScheme.primary,
-          ),
-        )
-      ],
+            onDotClicked: (index) => _controller.animateToPage(index,
+                curve: Curves.easeInOutCubic,
+                duration: const Duration(milliseconds: 300)),
+            count: widget.content.items.length,
+            effect: WormEffect(
+              offset: 20,
+              spacing: 4,
+              dotHeight: 3,
+              dotWidth: 12,
+              dotColor: theme.colorScheme.inversePrimary,
+              activeDotColor: theme.colorScheme.primary,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

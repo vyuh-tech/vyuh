@@ -29,8 +29,9 @@ final class APIContent extends ContentItem {
 
 abstract base class APIHandler<T> {
   final String schemaType;
+  final String? title;
 
-  APIHandler({required this.schemaType});
+  APIHandler({required this.schemaType, this.title});
 
   Future<T?> invoke(BuildContext context);
 
@@ -96,7 +97,8 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
           if (content.showError && snapshot.hasError) {
             // Show error if API call resulted in an error
             return vyuh.widgetBuilder.errorView(
-              title: 'API Error',
+              title:
+                  'API Error${content.handler?.title != null ? ': ${content.handler!.title}' : ''}',
               subtitle:
                   'Handler in context was "${content.handler?.schemaType}"',
               error: snapshot.error,
@@ -108,14 +110,7 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
           }
         } else {
           // In case, the future is neither in progress nor done.
-          return kDebugMode
-              ? vyuh.widgetBuilder.errorView(
-                  title: 'API Error',
-                  error:
-                      'Something went wrong invoking the api with ${content.handler?.schemaType}',
-                  showRestart: false,
-                )
-              : empty;
+          return empty;
         }
       },
     );
