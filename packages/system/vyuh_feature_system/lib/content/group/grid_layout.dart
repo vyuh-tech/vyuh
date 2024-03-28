@@ -15,7 +15,10 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
   @JsonKey(defaultValue: 1.0)
   final double aspectRatio;
 
-  GridGroupLayout({this.columns = 2, this.aspectRatio = 1.0})
+  final bool allowScroll;
+
+  GridGroupLayout(
+      {this.columns = 2, this.aspectRatio = 1.0, this.allowScroll = false})
       : super(schemaType: schemaName) {
     assert(columns >= 2, 'Minimum of 2 columns is required');
   }
@@ -26,8 +29,24 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
   @override
   Widget build(BuildContext context, Group content) {
     final theme = Theme.of(context);
+    final gridContent = GridView.builder(
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: allowScroll
+          ? const AlwaysScrollableScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: columns,
+        childAspectRatio: aspectRatio,
+      ),
+      itemBuilder: (context, index) =>
+          vyuh.content.buildContent(context, content.items[index]),
+      itemCount: content.items.length,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (content.title != null)
           Padding(
@@ -39,20 +58,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
             padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
             child: Text(content.description!, style: theme.textTheme.bodySmall),
           ),
-        GridView(
-          padding: EdgeInsets.zero,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: columns,
-            childAspectRatio: aspectRatio,
-          ),
-          children: content.items
-              .map((e) => vyuh.content.buildContent(context, e))
-              .toList(
-                growable: false,
-              ),
-        ),
+        if (allowScroll) Expanded(child: gridContent) else gridContent,
       ],
     );
   }

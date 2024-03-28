@@ -47,24 +47,24 @@ class GroupContentBuilder extends ContentBuilder<Group> {
               schemaType: Group.schemaName,
               title: 'Group',
               fromJson: Group.fromJson),
-          defaultLayout: DefaultGroupLayout(),
-          defaultLayoutDescriptor: DefaultGroupLayout.typeDescriptor,
+          defaultLayout: CarouselGroupLayout(),
+          defaultLayoutDescriptor: CarouselGroupLayout.typeDescriptor,
         );
 }
 
 @JsonSerializable()
-final class DefaultGroupLayout extends LayoutConfiguration<Group> {
+final class CarouselGroupLayout extends LayoutConfiguration<Group> {
   static const schemaName = '${Group.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Default Group Layout',
-    fromJson: DefaultGroupLayout.fromJson,
+    fromJson: CarouselGroupLayout.fromJson,
   );
 
-  DefaultGroupLayout() : super(schemaType: schemaName);
+  CarouselGroupLayout() : super(schemaType: schemaName);
 
-  factory DefaultGroupLayout.fromJson(Map<String, dynamic> json) =>
-      _$DefaultGroupLayoutFromJson(json);
+  factory CarouselGroupLayout.fromJson(Map<String, dynamic> json) =>
+      _$CarouselGroupLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, Group content) {
