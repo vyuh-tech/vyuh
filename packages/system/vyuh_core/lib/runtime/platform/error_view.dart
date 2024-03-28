@@ -42,7 +42,6 @@ class ErrorViewScaffold extends StatelessWidget {
                 color: textColor,
                 size: 64,
               ),
-              Text(title, textAlign: TextAlign.center),
               if (subtitle != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -53,7 +52,7 @@ class ErrorViewScaffold extends StatelessWidget {
                 ),
               Expanded(
                   child: SingleChildScrollView(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(8),
                 child: Column(
                   children: [
                     if (error != null)
