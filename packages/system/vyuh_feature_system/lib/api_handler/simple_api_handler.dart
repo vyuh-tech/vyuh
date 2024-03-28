@@ -69,7 +69,7 @@ final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
 
     return switch (root) {
       List() => root.map((e) => _createCard(e)).toList(),
-      Map() => [_createCard(root.values.first)],
+      Map() => [_createCard(root as Map<String, dynamic>)],
       _ => null
     };
   }
@@ -99,10 +99,18 @@ final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
 
   @override
   Widget buildData(BuildContext context, List<vf.Card>? data) {
-    return data == null ? empty : _buildCardList(data);
+    return data == null ? empty : _buildCardList(context, data);
   }
 
-  _buildCardList(List<vf.Card> data) {
+  _buildCardList(BuildContext context, List<vf.Card> data) {
+    if (data.isEmpty) {
+      return vyuh.content.buildContent(
+          context,
+          vf.Card(
+              title: 'No Data',
+              description: 'We could not find any data for the url: $url'));
+    }
+
     return LimitedBox(
       maxHeight: 200,
       child: ListView.builder(
