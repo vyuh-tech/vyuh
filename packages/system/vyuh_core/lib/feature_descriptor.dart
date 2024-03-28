@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:vyuh_core/vyuh_core.dart';
 
-typedef FeatureInitFunction = Future<void> Function();
+typedef VoidFutureFunction = Future<void> Function();
 typedef RouteBuilderFunction = FutureOr<List<g.RouteBase>?> Function();
 
 final class FeatureDescriptor {
@@ -12,7 +12,8 @@ final class FeatureDescriptor {
   final String title;
   final String? description;
   final IconData? icon;
-  final FeatureInitFunction? init;
+  final VoidFutureFunction? init;
+  final VoidFutureFunction? dispose;
 
   final List<ExtensionDescriptor>? extensions;
   final List<ExtensionBuilder>? extensionBuilders;
@@ -26,6 +27,7 @@ final class FeatureDescriptor {
     this.description,
     this.icon,
     this.init,
+    this.dispose,
     required RouteBuilderFunction routes,
     this.extensions,
     this.extensionBuilders,

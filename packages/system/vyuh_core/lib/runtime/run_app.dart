@@ -3,7 +3,7 @@ import 'package:vyuh_core/runtime/platform/default_platform.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 void runApp({
-  required List<FeatureDescriptor> features,
+  required FeaturesBuilder features,
   List<Plugin>? plugins,
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
@@ -13,7 +13,7 @@ void runApp({
   final widgetBuilder = platformWidgetBuilder ?? defaultPlatformWidgetBuilder;
 
   vyuh = DefaultVyuhPlatform(
-    features: features,
+    featuresBuilder: features,
     plugins: plugins ?? [],
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
