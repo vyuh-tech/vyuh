@@ -37,13 +37,18 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   @override
   SystemInitTracker get tracker => _tracker;
 
+  List<FeatureDescriptor> _features = [];
+
+  @override
+  List<vt.FeatureDescriptor> get features => _features;
+
   final Map<String, Future<void>> _readyFeatures = {};
 
   @override
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
   DefaultVyuhPlatform({
-    required super.features,
+    required super.featuresBuilder,
     required List<Plugin> plugins,
     required super.widgetBuilder,
     this.initialLocation,
@@ -116,40 +121,47 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
       });
 
   @override
-  Future<void> initFeatures() =>
-      analytics.runWithTrace<void>('Init Features', () async {
-        _readyFeatures.clear();
+  Future<void> initFeatures() async {
+    // Run a cleanup first
+    final disposeFns =
+        _features.where((e) => e.dispose != null).map((e) => e.dispose!());
+    await Future.wait(disposeFns, eagerError: true);
 
-        final initFns = features.map((feature) => analytics
-                .runWithTrace<List<g.RouteBase>>(
-                    'Init Feature: ${feature.title}', () {
-              final future = _initFeature(feature);
+    return analytics.runWithTrace<void>('Init Features', () async {
+      _readyFeatures.clear();
+      _features = await featuresBuilder();
 
-              _readyFeatures[feature.name] = future;
+      final initFns = _features.map((feature) => analytics
+              .runWithTrace<List<g.RouteBase>>('Init Feature: ${feature.title}',
+                  () {
+            final future = _initFeature(feature);
 
-              return future;
-            }));
+            _readyFeatures[feature.name] = future;
 
-        final allRoutes = await Future.wait(initFns, eagerError: true);
-        _initRouter(
-          allRoutes
-              .where((routes) => routes != null)
-              .cast<List<g.RouteBase>>()
-              .expand((routes) => routes)
-              .toList()
-            ..add(g.GoRoute(
-              path: '/:path(.*)',
-              pageBuilder: fallbackRoutePageBuilder,
-            ))
-            ..toList(growable: false),
-        );
+            return future;
+          }));
 
-        _initContent();
-        _initFeatureExtensions();
-      });
+      final allRoutes = await Future.wait(initFns, eagerError: true);
+      _initRouter(
+        allRoutes
+            .where((routes) => routes != null)
+            .cast<List<g.RouteBase>>()
+            .expand((routes) => routes)
+            .toList()
+          ..add(g.GoRoute(
+            path: '/:path(.*)',
+            pageBuilder: fallbackRoutePageBuilder,
+          ))
+          ..toList(growable: false),
+      );
 
-  void _initContent() {
-    content.setup(features);
+      _initContent(_features);
+      _initFeatureExtensions(_features);
+    });
+  }
+
+  void _initContent(List<vt.FeatureDescriptor> featureList) {
+    content.setup(featureList);
   }
 
   Future<List<g.RouteBase>> _initFeature(FeatureDescriptor feature) async {
@@ -182,8 +194,8 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  void _initFeatureExtensions() {
-    final builders = features
+  void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
+    final builders = featureList
         .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
         .groupListsBy((element) => element.extensionType);
 
@@ -197,7 +209,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
       entry.value.first.init();
     }
 
-    final extensions = features
+    final extensions = featureList
         .expand((element) => element.extensions ?? <ExtensionDescriptor>[])
         .groupListsBy((element) => element.runtimeType);
 

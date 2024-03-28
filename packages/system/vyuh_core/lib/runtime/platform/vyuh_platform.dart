@@ -6,8 +6,10 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 late final VyuhPlatform vyuh;
 
+typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
+
 abstract class VyuhPlatform {
-  final List<FeatureDescriptor> features;
+  final FeaturesBuilder featuresBuilder;
   final List<Plugin> plugins;
   final PlatformWidgetBuilder widgetBuilder;
 
@@ -18,6 +20,8 @@ abstract class VyuhPlatform {
   SystemInitTracker get tracker;
 
   Future<void>? featureReady(String featureName);
+
+  List<FeatureDescriptor> get features;
 
   @protected
   static const preloadedPlugins = [
@@ -34,7 +38,7 @@ abstract class VyuhPlatform {
   ];
 
   VyuhPlatform({
-    required this.features,
+    required this.featuresBuilder,
     required this.plugins,
     required this.widgetBuilder,
   });
