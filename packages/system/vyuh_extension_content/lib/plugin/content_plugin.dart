@@ -3,6 +3,9 @@ import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
+/// The default ContentPlugin implementation for the Vyuh framework.
+/// This plugin is responsible for fetching content from a CMS and rendering content items.
+/// It uses a [ContentExtensionBuilder] to keep track of the various [ContentItem] types.
 final class DefaultContentPlugin extends ContentPlugin {
   ContentExtensionBuilder? _extensionBuilder;
 
