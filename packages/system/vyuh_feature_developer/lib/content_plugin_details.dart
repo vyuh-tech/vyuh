@@ -39,7 +39,7 @@ class ContentPluginDetailsView extends StatelessWidget {
                         const SizedBox(width: 8),
                         Text(
                           '(${plugin.provider.name})',
-                          style: theme.textTheme.bodyMedium
+                          style: theme.textTheme.labelMedium
                               ?.apply(color: theme.disabledColor),
                         ),
                       ],
@@ -55,7 +55,21 @@ class ContentPluginDetailsView extends StatelessWidget {
                     children: [
                       for (final schemaType
                           in entry.value.keys.sortedBy((element) => element))
-                        Text(schemaType)
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(entry.value[schemaType]!.title),
+                              const SizedBox(width: 8),
+                              Text(
+                                '($schemaType)',
+                                style: theme.textTheme.labelMedium
+                                    ?.apply(color: theme.disabledColor),
+                              ),
+                            ],
+                          ),
+                        )
                     ],
                   ),
                 ),

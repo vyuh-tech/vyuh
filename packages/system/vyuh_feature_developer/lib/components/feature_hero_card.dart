@@ -36,7 +36,7 @@ class FeatureHeroCard extends StatelessWidget {
                 children: [
                   Text(
                     feature.name,
-                    style: theme.textTheme.bodySmall
+                    style: theme.textTheme.labelMedium
                         ?.apply(color: theme.disabledColor),
                   ),
                   if (feature.description != null)

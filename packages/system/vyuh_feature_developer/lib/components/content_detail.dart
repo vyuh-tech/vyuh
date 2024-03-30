@@ -15,7 +15,7 @@ class ContentDetail extends StatelessWidget {
       subtitle: Row(
         children: [
           Text(content.schemaType,
-              style: theme.textTheme.bodyMedium
+              style: theme.textTheme.labelMedium
                   ?.apply(color: theme.disabledColor)),
           if (layoutCount > 0)
             Padding(

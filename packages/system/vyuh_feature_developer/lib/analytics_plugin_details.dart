@@ -56,7 +56,7 @@ class _AnalyticsProviderDetail extends StatelessWidget {
       children: [
         Text(
           provider.name,
-          style: theme.textTheme.bodyMedium?.apply(color: theme.disabledColor),
+          style: theme.textTheme.labelMedium?.apply(color: theme.disabledColor),
         ),
         Text(
           provider.title,
@@ -67,7 +67,7 @@ class _AnalyticsProviderDetail extends StatelessWidget {
           child: Text(provider.description),
         ),
         const SizedBox(height: 8),
-        Text('Type: ${provider.runtimeType}'),
+        Text('${provider.runtimeType}'),
         const SizedBox(height: 8),
         Text(
           'Observers:',

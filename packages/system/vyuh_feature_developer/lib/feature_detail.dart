@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/feature_hero_card.dart';
 import 'package:vyuh_feature_developer/components/items_as_grid.dart';
 import 'package:vyuh_feature_developer/components/routes_detail.dart';
@@ -47,14 +48,16 @@ class _FeatureItem extends StatelessWidget {
                     Flexible(
                       child: Text(
                         feature.name,
-                        style: theme.textTheme.bodySmall
+                        style: theme.textTheme.labelMedium
                             ?.apply(color: theme.disabledColor),
                       ),
                     ),
                     Flexible(
                       child: Text(
                         feature.title,
-                        style: theme.textTheme.bodyLarge,
+                        style: theme.textTheme.bodyLarge?.apply(
+                            color: theme.colorScheme.primary,
+                            fontWeightDelta: 2),
                         maxLines: 1,
                       ),
                     ),
@@ -107,9 +110,11 @@ class FeatureDetail extends StatelessWidget {
               sliver: feature.extensions != null
                   ? ItemsAsGrid(
                       columns: 1,
-                      childAspectRatio: 1 / 0.3,
-                      items: feature.extensions!
-                          .map((e) => (e.title, e.runtimeType.toString())))
+                      childAspectRatio: 1 / 0.25,
+                      children: feature.extensions!
+                          .map((e) => e.build(context))
+                          .toList(growable: false),
+                    )
                   : null,
             ),
             StickySection(
@@ -117,14 +122,33 @@ class FeatureDetail extends StatelessWidget {
               sliver: feature.extensionBuilders != null
                   ? ItemsAsGrid(
                       columns: 1,
-                      childAspectRatio: 1 / 0.3,
-                      items: feature.extensionBuilders!
-                          .map((e) => (e.title, null)))
+                      childAspectRatio: 1 / 0.25,
+                      children: feature.extensionBuilders!
+                          .map((e) => ItemCard(title: e.title))
+                          .toList(growable: false),
+                    )
                   : null,
             ),
           ],
         ),
       ),
     );
+  }
+}
+
+extension ExtensionDescriptorWidgetBuilder on ExtensionDescriptor {
+  Widget build(BuildContext context) {
+    switch (this) {
+      case ContentExtensionDescriptor():
+        return ListTile(
+          title: Text(title),
+          subtitle: Text(runtimeType.toString()),
+          trailing: const Icon(Icons.chevron_right_rounded),
+          onTap: () =>
+              context.push('/developer/extensions/content', extra: this),
+        );
+      default:
+        return ItemCard(title: title, description: runtimeType.toString());
+    }
   }
 }

@@ -3,7 +3,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 final class ContentExtensionBuilder extends ExtensionBuilder {
-  final Map<Type, Map<String, FromJsonConverter>> _typeConverterMap = {};
+  final Map<Type, Map<String, TypeDescriptor>> _typeConverterMap = {};
   final Map<String, ContentBuilder> _contentBuilderMap = {};
 
   ContentExtensionBuilder()
@@ -62,8 +62,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     );
   }
 
-  Map<Type, Map<String, FromJsonConverter>> getTypeRegistry() {
-    return Map<Type, Map<String, FromJsonConverter>>.unmodifiable(
+  Map<Type, Map<String, TypeDescriptor>> getTypeRegistry() {
+    return Map<Type, Map<String, TypeDescriptor>>.unmodifiable(
         _typeConverterMap);
   }
 
@@ -77,7 +77,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   }
 
   T? fromJson<T>(String typeName, Map<String, dynamic> json) {
-    return _typeConverterMap[T]?[typeName]?.call(json);
+    return _typeConverterMap[T]?[typeName]?.fromJson.call(json);
   }
 
   register<T>(TypeDescriptor<T> descriptor) {
@@ -87,7 +87,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     assert(hasKey == false,
         'A duplicate schemaType: ${descriptor.schemaType} is being registered.');
 
-    _typeConverterMap[T]![descriptor.schemaType] = descriptor.fromJson;
+    _typeConverterMap[T]![descriptor.schemaType] = descriptor;
   }
 
   isRegistered<T>(TypeDescriptor<T> descriptor) {

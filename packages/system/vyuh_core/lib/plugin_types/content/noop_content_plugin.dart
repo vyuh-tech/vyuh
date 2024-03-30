@@ -42,5 +42,5 @@ final class NoOpContentPlugin extends ContentPlugin {
   }
 
   @override
-  Map<Type, Map<String, FromJsonConverter>> get typeRegistry => {};
+  Map<Type, Map<String, TypeDescriptor>> get typeRegistry => {};
 }
