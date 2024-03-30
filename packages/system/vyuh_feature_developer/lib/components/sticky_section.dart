@@ -22,12 +22,7 @@ class StickySection extends StatelessWidget {
                 ?.apply(color: theme.colorScheme.onInverseSurface),
             textAlign: TextAlign.center),
       ),
-      sliver: sliver ??
-          const SliverToBoxAdapter(
-              child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text('None defined.'),
-          )),
+      sliver: sliver ?? const SliverToBoxAdapter(child: Text('None defined.')),
     );
   }
 }

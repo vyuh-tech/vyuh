@@ -15,13 +15,14 @@ class StandardPluginView extends StatelessWidget {
       children: [
         Text(
           plugin.title,
-          style: theme.textTheme.bodyLarge?.apply(fontWeightDelta: 2),
+          style: theme.textTheme.bodyLarge
+              ?.apply(fontWeightDelta: 2, color: theme.colorScheme.primary),
         ),
         Text(plugin.name,
             style:
-                theme.textTheme.bodyMedium?.apply(color: theme.disabledColor)),
+                theme.textTheme.labelMedium?.apply(color: theme.disabledColor)),
         const SizedBox(height: 4),
-        Text('Type: ${plugin.runtimeType}'),
+        Text('${plugin.runtimeType}'),
       ],
     );
   }

@@ -10,7 +10,7 @@ abstract base class ContentPlugin extends Plugin {
     required super.title,
   }) : super(pluginType: PluginType.content);
 
-  Map<Type, Map<String, FromJsonConverter>> get typeRegistry;
+  Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
 
   Widget buildContent(BuildContext context, ContentItem content);
 

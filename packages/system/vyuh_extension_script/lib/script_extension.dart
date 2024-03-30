@@ -19,7 +19,8 @@ final class ScriptExtensionDescriptor extends ExtensionDescriptor {
 final class ScriptExtensionBuilder extends ExtensionBuilder {
   ScriptExtensionBuilder()
       : super(
-            extensionType: ScriptExtensionDescriptor, title: 'ScriptExtension');
+            extensionType: ScriptExtensionDescriptor,
+            title: 'Script Extension Builder');
 
   @override
   void build(List<ExtensionDescriptor> extensions) {

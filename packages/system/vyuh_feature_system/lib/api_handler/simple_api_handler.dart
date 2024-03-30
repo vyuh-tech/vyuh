@@ -31,7 +31,6 @@ extension type const JSONPath(String path) {
 final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
   static const schemaName = 'vyuh.apiContent.handler.simple';
 
-  final String? title;
   final String url;
   final Map<String, String>? headers;
   final List<(String name, String value)>? requestBody;
@@ -46,7 +45,7 @@ final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
   );
 
   SimpleAPIHandler({
-    this.title,
+    super.title,
     this.url = '',
     this.headers,
     this.requestBody,
