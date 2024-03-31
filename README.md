@@ -16,10 +16,10 @@
 
 | Packages                                                                                                                                                                                                                            |
 |:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Sanity Integration**                                                                                                                                                                                                              |
+| _Sanity Integration_                                                                                                                                                                                                                |
 | [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)                                                             |
 | [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text) |
-| **Vyuh**                                                                                                                                                                                                                            |
+| _Vyuh_                                                                                                                                                                                                                              |
 | [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)                                                                             |
 | [![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)                                                                         |
 | [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)                         |
