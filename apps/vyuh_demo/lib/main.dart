@@ -11,7 +11,7 @@ void main() async {
 
   vc.runApp(
     initialLocation: '/counter',
-    features: [
+    features: () => [
       developer.feature,
       sample.featureLauncher,
       sample.featureCounter,

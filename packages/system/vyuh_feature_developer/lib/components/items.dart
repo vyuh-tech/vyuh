@@ -20,7 +20,7 @@ class ItemTile extends StatelessWidget {
       dense: true,
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
-      titleAlignment: ListTileTitleAlignment.top,
+      titleAlignment: ListTileTitleAlignment.center,
       title: Text(
         title,
         style: theme.textTheme.bodyLarge,

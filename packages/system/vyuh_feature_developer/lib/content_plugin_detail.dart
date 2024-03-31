@@ -62,7 +62,6 @@ class ContentPluginDetailsView extends StatelessWidget {
 
 class _ContentPluginHeader extends StatelessWidget {
   const _ContentPluginHeader({
-    super.key,
     required this.plugin,
   });
 

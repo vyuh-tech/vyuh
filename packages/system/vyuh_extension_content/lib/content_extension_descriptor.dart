@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-class ContentExtensionDescriptor extends ExtensionDescriptor {
+final class ContentExtensionDescriptor extends ExtensionDescriptor {
   ContentExtensionDescriptor({
     this.contents,
     this.contentBuilders,
