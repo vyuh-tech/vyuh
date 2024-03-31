@@ -1,56 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:vyuh_core/plugin_types/plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 
 extension WidgetBuilder on Plugin {
   Widget build(BuildContext context) {
     switch (pluginType) {
-      case PluginType.analytics:
-        final analytics = this as AnalyticsPlugin;
-        return _AnalyticsPluginView(analytics: analytics);
-      case PluginType.content:
-        final content = this as ContentPlugin;
-        return _ContentPluginView(content: content);
+      case PluginType.analytics || PluginType.content:
+        return _PluginWithDetailsItem(plugin: this);
       default:
         return ListTile(
-          title: StandardPluginView(plugin: this),
+          leading: Icon(pluginType.icon),
+          title: StandardPluginItem(plugin: this),
         );
     }
   }
 }
 
-class _ContentPluginView extends StatelessWidget {
-  final ContentPlugin content;
-
-  const _ContentPluginView({required this.content});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        context.push('/developer/plugins/content');
-      },
-      title: StandardPluginView(plugin: content),
-      trailing: const Icon(Icons.chevron_right),
-    );
+extension on PluginType {
+  IconData get icon {
+    switch (this) {
+      case PluginType.analytics:
+        return Icons.show_chart;
+      case PluginType.content:
+        return Icons.category;
+      case PluginType.logger:
+        return Icons.line_style;
+      case PluginType.di:
+        return Icons.insert_link;
+      case PluginType.network:
+        return Icons.network_check;
+      case PluginType.storage:
+        return Icons.data_object;
+      case PluginType.secureStorage:
+        return Icons.dataset;
+      case PluginType.featureFlag:
+        return Icons.flag;
+      case PluginType.auth:
+        return Icons.account_circle;
+      default:
+        return Icons.extension;
+    }
   }
 }
 
-class _AnalyticsPluginView extends StatelessWidget {
-  const _AnalyticsPluginView({
-    required this.analytics,
-  });
+class _PluginWithDetailsItem extends StatelessWidget {
+  final Plugin plugin;
 
-  final AnalyticsPlugin analytics;
+  const _PluginWithDetailsItem({required this.plugin});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      leading: Icon(plugin.pluginType.icon),
       onTap: () {
-        context.push('/developer/plugins/analytics');
+        context.push('/developer/plugins/${plugin.pluginType}');
       },
-      title: StandardPluginView(plugin: analytics),
+      title: StandardPluginItem(plugin: plugin),
       trailing: const Icon(Icons.chevron_right),
     );
   }

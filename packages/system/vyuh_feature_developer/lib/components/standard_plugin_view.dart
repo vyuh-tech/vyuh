@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-class StandardPluginView extends StatelessWidget {
+class StandardPluginItem extends StatelessWidget {
   final Plugin plugin;
 
-  const StandardPluginView({super.key, required this.plugin});
+  const StandardPluginItem({super.key, required this.plugin});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,10 @@ class StandardPluginView extends StatelessWidget {
             style:
                 theme.textTheme.labelMedium?.apply(color: theme.disabledColor)),
         const SizedBox(height: 4),
-        Text('${plugin.runtimeType}'),
+        Text(
+          '${plugin.runtimeType}',
+          style: theme.textTheme.labelLarge,
+        ),
       ],
     );
   }

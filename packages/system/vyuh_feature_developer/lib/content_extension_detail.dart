@@ -4,10 +4,10 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
-class ContentExtensionDetailsView extends StatelessWidget {
+class ContentExtensionDetail extends StatelessWidget {
   final ContentExtensionDescriptor extension;
 
-  const ContentExtensionDetailsView({super.key, required this.extension});
+  const ContentExtensionDetail({super.key, required this.extension});
 
   @override
   Widget build(BuildContext context) {

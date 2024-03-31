@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
+import 'package:vyuh_feature_developer/components/items.dart';
 
 class StickySection extends StatelessWidget {
   final String title;
@@ -22,7 +23,7 @@ class StickySection extends StatelessWidget {
                 ?.apply(color: theme.colorScheme.onInverseSurface),
             textAlign: TextAlign.center),
       ),
-      sliver: sliver ?? const SliverToBoxAdapter(child: Text('None defined.')),
+      sliver: sliver ?? const SliverToBoxAdapter(child: EmptyItemTile()),
     );
   }
 }
