@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_developer/components/items_as_grid.dart';
+import 'package:vyuh_feature_developer/components/items.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
 class ContentExtensionDetailsView extends StatelessWidget {
@@ -11,8 +11,6 @@ class ContentExtensionDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -27,7 +25,7 @@ class ContentExtensionDetailsView extends StatelessWidget {
               sliver: SliverList.list(
                 children: [
                   for (final item in extension.actions ?? <TypeDescriptor>[])
-                    ItemCard(title: item.title, description: item.schemaType)
+                    ItemTile(title: item.title, description: item.schemaType)
                 ],
               ),
             ),
@@ -39,11 +37,11 @@ class ContentExtensionDetailsView extends StatelessWidget {
                       children: [
                         for (final item
                             in extension.routeTypes ?? <TypeDescriptor>[])
-                          ItemCard(
+                          ItemTile(
                               title: item.title, description: item.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemCard()),
+                  : const SliverToBoxAdapter(child: EmptyItemTile()),
             ),
             StickySection(
               title: 'Conditions [${extension.conditions?.length ?? 0}]',
@@ -53,11 +51,11 @@ class ContentExtensionDetailsView extends StatelessWidget {
                       children: [
                         for (final item
                             in extension.conditions ?? <TypeDescriptor>[])
-                          ItemCard(
+                          ItemTile(
                               title: item.title, description: item.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemCard()),
+                  : const SliverToBoxAdapter(child: EmptyItemTile()),
             ),
             StickySection(
               title:
@@ -68,67 +66,76 @@ class ContentExtensionDetailsView extends StatelessWidget {
                       children: [
                         for (final item
                             in extension.contentBuilders ?? <ContentBuilder>[])
-                          ItemCard(
+                          ItemTile(
                               title: item.content.title,
                               description: item.content.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemCard()),
+                  : const SliverToBoxAdapter(child: EmptyItemTile()),
             ),
             StickySection(
               title: 'Content Descriptors [${extension.contents?.length ?? 0}]',
-              sliver: extension.contents != null &&
-                      extension.contents!.isNotEmpty
-                  ? SliverList.list(
-                      children: [
-                        for (final item
-                            in extension.contents ?? <ContentDescriptor>[])
-                          Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ItemCard(
-                                    title: item.title,
-                                    description: item.schemaType,
-                                    asCard: false,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text('Layouts [${item.layouts?.length ?? 0}]',
-                                      style: theme.textTheme.labelMedium),
-                                  for (final layout
-                                      in item.layouts ?? <TypeDescriptor>[])
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 8.0, right: 4.0),
-                                            child: Text('↳',
-                                                style: theme.textTheme.bodyLarge
-                                                    ?.apply(
-                                                        color: theme
-                                                            .disabledColor))),
-                                        ItemCard(
-                                          title: layout.title,
-                                          description: layout.schemaType,
-                                          asCard: false,
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ),
-                          )
-                      ],
-                    )
-                  : const SliverToBoxAdapter(child: EmptyItemCard()),
+              sliver:
+                  extension.contents != null && extension.contents!.isNotEmpty
+                      ? SliverList.list(
+                          children: [
+                            for (final item
+                                in extension.contents ?? <ContentDescriptor>[])
+                              _ContentDescriptorTile(item: item)
+                          ],
+                        )
+                      : const SliverToBoxAdapter(child: EmptyItemTile()),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ContentDescriptorTile extends StatelessWidget {
+  const _ContentDescriptorTile({
+    required this.item,
+  });
+
+  final ContentDescriptor item;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        ItemTile(
+          title: item.title,
+          description: item.schemaType,
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 8.0),
+          child: Text('Layouts [${item.layouts?.length ?? 0}]',
+              style: theme.textTheme.labelMedium),
+        ),
+        for (final layout in item.layouts ?? <TypeDescriptor>[])
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                  padding: const EdgeInsets.only(left: 16.0),
+                  child: Text('↳',
+                      style: theme.textTheme.bodyLarge
+                          ?.apply(color: theme.disabledColor))),
+              Expanded(
+                child: ItemTile(
+                  title: layout.title,
+                  description: layout.schemaType,
+                ),
+              ),
+            ],
+          ),
+        const Divider()
+      ],
     );
   }
 }

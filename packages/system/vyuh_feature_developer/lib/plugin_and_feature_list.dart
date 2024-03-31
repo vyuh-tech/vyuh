@@ -31,7 +31,8 @@ class PluginAndFeatureList extends StatelessWidget {
             StickySection(
               title: 'Features [${features.length}]',
               sliver: SliverList.builder(
-                itemBuilder: (_, index) => features[index].build(context),
+                itemBuilder: (_, index) =>
+                    FeatureItem(feature: features[index]),
                 itemCount: features.length,
               ),
             ),

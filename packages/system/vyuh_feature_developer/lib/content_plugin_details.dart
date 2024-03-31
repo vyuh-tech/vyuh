@@ -23,28 +23,7 @@ class ContentPluginDetailsView extends StatelessWidget {
               primary: true,
             ),
             SliverToBoxAdapter(
-              child: Card(
-                  margin: const EdgeInsets.only(left: 8, right: 8, bottom: 20),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        StandardPluginView(plugin: plugin),
-                        const SizedBox(height: 8),
-                        Text(
-                          plugin.provider.title,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                        const SizedBox(width: 8),
-                        Text(
-                          '(${plugin.provider.name})',
-                          style: theme.textTheme.labelMedium
-                              ?.apply(color: theme.disabledColor),
-                        ),
-                      ],
-                    ),
-                  )),
+              child: _ContentPluginHeader(plugin: plugin),
             ),
             for (final entry in plugin.typeRegistry.entries)
               StickySection(
@@ -76,6 +55,41 @@ class ContentPluginDetailsView extends StatelessWidget {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ContentPluginHeader extends StatelessWidget {
+  const _ContentPluginHeader({
+    super.key,
+    required this.plugin,
+  });
+
+  final ContentPlugin plugin;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          StandardPluginView(plugin: plugin),
+          const SizedBox(height: 8),
+          Text(
+            plugin.provider.title,
+            style: theme.textTheme.titleMedium,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            '(${plugin.provider.name})',
+            style:
+                theme.textTheme.labelMedium?.apply(color: theme.disabledColor),
+          ),
+        ],
       ),
     );
   }
