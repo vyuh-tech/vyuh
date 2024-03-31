@@ -1,4 +1,4 @@
-abstract class ExtensionDescriptor {
+abstract base class ExtensionDescriptor {
   final String title;
 
   ExtensionDescriptor({
@@ -6,7 +6,7 @@ abstract class ExtensionDescriptor {
   });
 }
 
-abstract class ExtensionBuilder {
+abstract base class ExtensionBuilder {
   final String title;
   final Type extensionType;
 
