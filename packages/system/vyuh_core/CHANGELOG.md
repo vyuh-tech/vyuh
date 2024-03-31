@@ -1,10 +1,20 @@
 ## 1.0.0-beta.3
 
+- Using `TypeDescriptor` to register types instead of the previous
+  `FromJsonConverter`
+- Adding plugin interface for `FeatureFlagPlugin`
+- Refactored error views to be different for content and routes
+- `features` are now an async function allowing you to decide which ones to
+  include at runtime. This becomes a breaking change for `FeatureDescriptor`.
+- Added a `NetworkPlugin` interface with the default implementation for Http. It
+  now becomes a required plugin.
+
 ## 1.0.0-beta.2
 
- - Plugins in the runApp are optional
+- Plugins in the runApp are optional
 
- - **REFACTOR**: moving packages into the system folder. ([e1b3a744](https://github.com/vyuh-tech/vyuh/commit/e1b3a744e16d2c464ce8128a6782d47f85f8e5ed))
+- **REFACTOR**: moving packages into the system folder.
+  ([e1b3a744](https://github.com/vyuh-tech/vyuh/commit/e1b3a744e16d2c464ce8128a6782d47f85f8e5ed))
 
 ## 1.0.0-beta.1
 

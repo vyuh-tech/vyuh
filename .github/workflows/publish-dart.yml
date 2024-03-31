@@ -8,6 +8,7 @@ on:
 jobs:
   publish_dart_packages:
     runs-on: ubuntu-latest
+    if: always()
 
     strategy:
       matrix:
