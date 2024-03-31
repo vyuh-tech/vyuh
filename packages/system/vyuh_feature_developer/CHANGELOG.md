@@ -1,3 +1,7 @@
+## 1.0.0-beta.5
+
+ - Bump "vyuh_feature_developer" to `1.0.0-beta.5`.
+
 ## 1.0.0-beta.4
 
  - Improved the description in pubspec
