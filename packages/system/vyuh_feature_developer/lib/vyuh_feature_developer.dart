@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content_extension_descriptor.dart';
-import 'package:vyuh_feature_developer/analytics_plugin_details.dart';
+import 'package:vyuh_feature_developer/analytics_plugin_detail.dart';
 import 'package:vyuh_feature_developer/content_extension_detail.dart';
-import 'package:vyuh_feature_developer/content_plugin_details.dart';
+import 'package:vyuh_feature_developer/content_plugin_detail.dart';
 import 'package:vyuh_feature_developer/feature_detail.dart';
 import 'package:vyuh_feature_developer/plugin_and_feature_list.dart';
 
@@ -23,7 +23,7 @@ final feature = FeatureDescriptor(
             return '/developer/list';
           }
 
-          return state.fullPath;
+          return state.uri.path;
         },
         routes: [
           GoRoute(
@@ -31,29 +31,45 @@ final feature = FeatureDescriptor(
             builder: (context, state) => const PluginAndFeatureList(),
           ),
           GoRoute(
-            path: 'detail',
-            builder: (context, state) =>
-                FeatureDetail(feature: state.extra as FeatureDescriptor),
+            path: 'features/:name',
+            builder: (context, state) => FeatureDetail(
+                feature: vyuh.features.firstWhere(
+                    (element) => element.name == state.pathParameters['name'])),
           ),
           GoRoute(
-            path: 'plugins/content',
-            builder: (context, state) => ContentPluginDetailsView(
-                plugin: vyuh.plugins.firstWhere(
-                        (element) => element.pluginType == PluginType.content)
-                    as ContentPlugin),
-          ),
-          GoRoute(
-            path: 'plugins/analytics',
-            builder: (context, state) => AnalyticsPluginDetailsView(
-                plugin: vyuh.plugins.firstWhere(
-                        (element) => element.pluginType == PluginType.analytics)
-                    as AnalyticsPlugin),
+            path: 'plugins/:name',
+            builder: (context, state) {
+              final pluginType = PluginType.values.firstWhere((element) =>
+                  element.toString() == state.pathParameters['name']);
+
+              return pluginType.detailsView(context);
+            },
           ),
           GoRoute(
             path: 'extensions/content',
-            builder: (context, state) => ContentExtensionDetailsView(
+            builder: (context, state) => ContentExtensionDetail(
                 extension: state.extra as ContentExtensionDescriptor),
           ),
         ]),
   ],
 );
+
+extension on PluginType {
+  Widget detailsView(BuildContext context) {
+    final plugin =
+        vyuh.plugins.firstWhere((element) => element.pluginType == this);
+
+    switch (this) {
+      case PluginType.analytics:
+        return AnalyticsPluginDetail(
+          plugin: plugin as AnalyticsPlugin,
+        );
+      case PluginType.content:
+        return ContentPluginDetailsView(
+          plugin: plugin as ContentPlugin,
+        );
+      default:
+        return const SizedBox();
+    }
+  }
+}

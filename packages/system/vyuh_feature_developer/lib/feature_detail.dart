@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/feature_hero_card.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
-import 'package:vyuh_feature_developer/components/routes_detail.dart';
+import 'package:vyuh_feature_developer/components/route_list.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
 class FeatureItem extends StatelessWidget {
@@ -20,7 +20,7 @@ class FeatureItem extends StatelessWidget {
     final theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: () => context.push('/developer/detail', extra: feature),
+      onTap: () => context.push('/developer/features/${feature.name}'),
       child: ListTile(
         titleAlignment: ListTileTitleAlignment.center,
         contentPadding:
@@ -109,7 +109,7 @@ class FeatureDetail extends StatelessWidget {
   }
 }
 
-extension ExtensionDescriptorWidgetBuilder on ExtensionDescriptor {
+extension WidgetBuilder on ExtensionDescriptor {
   Widget build(BuildContext context) {
     switch (this) {
       case ContentExtensionDescriptor():

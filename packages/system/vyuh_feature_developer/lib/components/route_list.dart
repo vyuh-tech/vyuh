@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_developer/components/items.dart';
 
 class RoutesList extends StatefulWidget {
   final FeatureDescriptor feature;
@@ -62,12 +63,9 @@ class _RoutesListState extends State<RoutesList> {
       builder: (_, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final paths = snapshot.data!;
-          return SliverPadding(
-            padding: const EdgeInsets.all(8),
-            sliver: _PathList(paths: paths),
-          );
+          return _PathList(paths: paths);
         } else {
-          return const SliverToBoxAdapter(child: SizedBox.shrink());
+          return const SliverToBoxAdapter(child: EmptyItemTile());
         }
       },
     );
@@ -83,30 +81,36 @@ class _PathList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemBuilder: (_, index) {
-        final path = paths[index];
+    return paths.isNotEmpty
+        ? SliverPadding(
+            padding: const EdgeInsets.all(8.0),
+            sliver: SliverList.builder(
+              itemBuilder: (_, index) {
+                final path = paths[index];
 
-        return Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(width: path.$2 * 10),
-            if (path.$2 > 0)
-              Transform.flip(
-                  flipY: true, child: const Icon(Icons.turn_right_rounded)),
-            Expanded(
-              child: Text(
-                path.$1,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.apply(fontFamily: 'Courier'),
-              ),
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: path.$2 * 10),
+                    if (path.$2 > 0)
+                      Transform.flip(
+                          flipY: true,
+                          child: const Icon(Icons.turn_right_rounded)),
+                    Expanded(
+                      child: Text(
+                        path.$1,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.apply(fontFamily: 'Courier'),
+                      ),
+                    ),
+                  ],
+                );
+              },
+              itemCount: paths.length,
             ),
-          ],
-        );
-      },
-      itemCount: paths.length,
-    );
+          )
+        : const SliverToBoxAdapter(child: EmptyItemTile());
   }
 }

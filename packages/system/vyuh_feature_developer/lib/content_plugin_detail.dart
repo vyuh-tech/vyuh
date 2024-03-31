@@ -77,17 +77,29 @@ class _ContentPluginHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          StandardPluginView(plugin: plugin),
+          StandardPluginItem(plugin: plugin),
           const SizedBox(height: 8),
-          Text(
-            plugin.provider.title,
-            style: theme.textTheme.titleMedium,
-          ),
-          const SizedBox(width: 8),
-          Text(
-            '(${plugin.provider.name})',
-            style:
-                theme.textTheme.labelMedium?.apply(color: theme.disabledColor),
+          Row(
+            children: [
+              const Icon(Icons.check_circle_rounded),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      plugin.provider.title,
+                      style: theme.textTheme.labelLarge,
+                    ),
+                    Text(
+                      '(${plugin.provider.name})',
+                      style: theme.textTheme.labelMedium
+                          ?.apply(color: theme.disabledColor),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ),

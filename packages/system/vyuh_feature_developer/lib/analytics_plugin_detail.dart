@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
-class AnalyticsPluginDetailsView extends StatelessWidget {
+class AnalyticsPluginDetail extends StatelessWidget {
   final AnalyticsPlugin plugin;
 
-  const AnalyticsPluginDetailsView({super.key, required this.plugin});
+  const AnalyticsPluginDetail({super.key, required this.plugin});
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +18,11 @@ class AnalyticsPluginDetailsView extends StatelessWidget {
               title: Text(plugin.title),
               pinned: true,
               primary: true,
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StandardPluginItem(plugin: plugin)),
             ),
             StickySection(
               title: 'Providers [${plugin.providers.length}]',
