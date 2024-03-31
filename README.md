@@ -65,7 +65,7 @@ components along with its performance.
 
 This clear separation allows a phenomenal flexibility in building simple to large scale apps.
 
-Vyuh comes with powerful capabilities like:
+**Vyuh** comes with powerful capabilities like:
 
 - [x] Building features atomically and in a modular fashion.
 - [x] Features are transferable between apps as reusable units of functionality.
