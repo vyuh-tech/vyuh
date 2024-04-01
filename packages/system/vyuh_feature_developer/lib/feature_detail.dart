@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_developer/components/feature_hero_card.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 import 'package:vyuh_feature_developer/components/route_list.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
@@ -104,6 +103,54 @@ class FeatureDetail extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class FeatureHeroCard extends StatelessWidget {
+  const FeatureHeroCard({
+    super.key,
+    required this.feature,
+  });
+
+  final FeatureDescriptor feature;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        children: [
+          Hero(
+            tag: feature.name,
+            transitionOnUserGestures: true,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16.0),
+              child: Icon(
+                feature.icon ?? Icons.question_mark_rounded,
+                size: 64,
+              ),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  feature.name,
+                  style: theme.textTheme.labelMedium
+                      ?.apply(color: theme.disabledColor),
+                ),
+                if (feature.description != null)
+                  Flexible(child: Text(feature.description!)),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }
