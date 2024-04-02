@@ -51,7 +51,8 @@ class TextBlockItem implements PortableBlockItem {
   /// Nested blocks are indented on the left.
   final int? level;
 
-  /// An internal field to track the index of the list item
+  /// To explicitly track the index of the list item.
+  /// This is a derived field and usually set by a higher level component.
   int? listItemIndex;
 
   TextBlockItem({
@@ -61,6 +62,7 @@ class TextBlockItem implements PortableBlockItem {
     this.markDefs = const <MarkDef>[],
     this.listItem,
     this.level,
+    this.listItemIndex,
   }) : key = key ?? nanoid();
 
   factory TextBlockItem.fromJson(final Map<String, dynamic> json) =>
