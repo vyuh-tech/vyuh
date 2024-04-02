@@ -3,6 +3,7 @@ repository: https://github.com/vyuh-tech/vyuh
 
 packages:
   - packages/{sanity,system,}/*
+  - packages/{sanity,system,}/*/example
   - features/*
   - apps/*
 
