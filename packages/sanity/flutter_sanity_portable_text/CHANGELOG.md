@@ -1,14 +1,14 @@
-## 1.0.0-beta.11
+## 1.0.0-beta.10 - 1.0.0-beta.11
 
-## 1.0.0-beta.10
+- Fixing the format for screenshots in pubspec.yaml
+- Updated readme and example code
 
- - Fixing the format for screenshots in pubspec.yaml
-
- - **FIX**: using the right format for screenshots. ([ce78e1f9](https://github.com/vyuh-tech/vyuh/commit/ce78e1f9ee6baf497a177bec4a1b7547d1eac2e7))
+- **FIX**: using the right format for screenshots.
+  ([ce78e1f9](https://github.com/vyuh-tech/vyuh/commit/ce78e1f9ee6baf497a177bec4a1b7547d1eac2e7))
 
 ## 1.0.0-beta.9
 
- - Added screenshot and readme with example
+- Added screenshot and readme with example
 
 ## 1.0.0-beta.8
 
