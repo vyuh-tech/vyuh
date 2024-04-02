@@ -1,3 +1,8 @@
+## 1.0.0-beta.5
+
+- Refactored file structure
+- Added documentation for all classes
+
 ## 1.0.0-beta.4
 
 - Moved the sanity packages under the vyuh repo
