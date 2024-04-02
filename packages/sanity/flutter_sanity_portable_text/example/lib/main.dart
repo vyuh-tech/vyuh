@@ -104,13 +104,16 @@ class MyApp extends StatelessWidget {
                 _listItem('Square bullet text', ListItemType.square),
                 TextBlockItem(
                   children: [
-                    _span('Strong text, ', marks: ['strong']),
-                    _span('Emphasized text, ', marks: ['em']),
-                    _span('Underlined text, ', marks: ['underline']),
-                    _span('Strike through text, ', marks: ['strike-through']),
-                    _span('All combined',
+                    Span(text: 'Strong text, ', marks: ['strong']),
+                    Span(text: 'Emphasized text, ', marks: ['em']),
+                    Span(text: 'Underlined text, ', marks: ['underline']),
+                    Span(
+                        text: 'Strike through text, ',
+                        marks: ['strike-through']),
+                    Span(
+                        text: 'All combined',
                         marks: ['strong', 'em', 'underline', 'strike-through']),
-                    _span('.'),
+                    Span(text: '.'),
                   ],
                 ),
                 _textBlock('And not to forget...the unsung'),
@@ -152,9 +155,5 @@ class MyApp extends StatelessWidget {
       ],
       listItem: type,
     );
-  }
-
-  _span(String text, {List<String>? marks}) {
-    return Span(text: text, marks: marks ?? []);
   }
 }
