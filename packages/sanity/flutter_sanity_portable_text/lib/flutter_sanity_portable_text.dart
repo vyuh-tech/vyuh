@@ -1,3 +1,16 @@
+/// This is a library for rendering Portable Text from Sanity.io in Flutter.
+/// It is based on the official Portable Text specification found at https://www.portabletext.org/.
+///
+/// Supported features:
+/// - Text blocks
+/// - Custom blocks
+/// - Custom block containers
+/// - Inline text marks
+/// - Custom text styles
+/// - Custom mark definitions
+/// - Custom text mark recognizers
+/// - Shared config across all Portable Text Widgets
+///
 library flutter_sanity_portable_text;
 
 export 'model/markdef_descriptor.dart';

@@ -6,21 +6,25 @@ import '../flutter_sanity_portable_text.dart';
 
 part 'markdef_descriptor.g.dart';
 
+/// Builds a [GestureRecognizer] for a given [MarkDef].
 typedef GestureRecognizerBuilder = GestureRecognizer Function(
   MarkDef mark,
   BuildContext context,
 );
 
+/// Builds a [TextStyle] for a given [MarkDef].
 typedef MarkDefTextStyleBuilder = TextStyle Function(
   MarkDef mark,
   BuildContext context,
   TextStyle base,
 );
 
+/// Deserializes a [MarkDef] from a JSON map.
 typedef MarkDefFromJson = MarkDef Function(
   Map<String, dynamic> json,
 );
 
+/// Describes a [MarkDef] and its associated builders.
 final class MarkDefDescriptor {
   final String schemaType;
   final MarkDefFromJson fromJson;
@@ -39,6 +43,7 @@ final class MarkDefDescriptor {
   });
 }
 
+/// A single mark definition.
 @JsonSerializable()
 class MarkDef {
   @JsonKey(name: '_key')
@@ -53,6 +58,8 @@ class MarkDef {
       _$MarkDefFromJson(json);
 }
 
+/// Converts a list of [MarkDef]s from JSON.
+/// It is an internal class used during the deserialization process.
 class MarkDefsConverter extends JsonConverter<List<MarkDef>, List<dynamic>> {
   const MarkDefsConverter();
 
