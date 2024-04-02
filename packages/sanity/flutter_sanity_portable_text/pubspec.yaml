@@ -15,8 +15,8 @@ topics:
   - json
 
 screenshots:
-  description: Rendered Portable Text
-  path: example/screenshot.png
+  - description: Rendered Portable Text
+    path: example/screenshot.png
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
