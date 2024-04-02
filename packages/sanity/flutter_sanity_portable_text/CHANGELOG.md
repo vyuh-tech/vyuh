@@ -1,3 +1,7 @@
+## 1.0.0-beta.9
+
+ - Added screenshot and readme with example
+
 ## 1.0.0-beta.8
 
 - Updated example to avoid analyzer issues and added better description for the

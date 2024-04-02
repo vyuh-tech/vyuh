@@ -1,5 +1,5 @@
 name: flutter_sanity_portable_text
-version: 1.0.0-beta.8
+version: 1.0.0-beta.9
 description: |
   Flutter renderer for the Sanity.io Portable Text format. 
   It includes support for the standard blocks, spans, annotations, including
@@ -13,6 +13,10 @@ topics:
   - portable-text
   - renderer
   - json
+
+screenshots:
+  description: Rendered Portable Text
+  path: example/screenshot.png
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
