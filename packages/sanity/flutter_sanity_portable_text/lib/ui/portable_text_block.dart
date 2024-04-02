@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 
 import '../flutter_sanity_portable_text.dart';
 
+/// Renders a single block of Portable Text. This widget is used internally by the
+/// [PortableText] widget. It is not meant to be used directly for most common scenarios. If you
+/// need to render a single block of Portable Text, consider using the [PortableText] widget.
+///
+/// This widget is responsible for rendering the text content of a block, including any marks
+/// (annotations) that are applied to the text. It also handles rendering of list items. It relies
+/// on the [PortableTextConfig] to determine the visual representation of the block.
 class PortableTextBlock extends StatelessWidget {
+  /// The model representing the block of Portable Text.
   final TextBlockItem model;
 
   const PortableTextBlock({super.key, required this.model});

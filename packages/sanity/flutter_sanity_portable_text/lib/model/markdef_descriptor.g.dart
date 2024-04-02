@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'markdef_descriptor.dart';
+part of '../model/markdef_descriptor.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
