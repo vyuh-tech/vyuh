@@ -1,3 +1,7 @@
+## 1.0.0-beta.6
+
+ - Added more documentation
+
 ## 1.0.0-beta.5
 
 - Refactored file structure
