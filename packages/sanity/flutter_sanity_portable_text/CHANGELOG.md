@@ -1,3 +1,7 @@
+## 1.0.0-beta.7
+
+ - Added example and simplified API for direct usage
+
 ## 1.0.0-beta.6
 
  - Added more documentation

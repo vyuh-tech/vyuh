@@ -1,5 +1,5 @@
 name: flutter_sanity_portable_text
-version: 1.0.0-beta.6
+version: 1.0.0-beta.7
 description: Flutter renderer for Sanity.io Portable Text format.
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/sanity/flutter_sanity_portable_text
