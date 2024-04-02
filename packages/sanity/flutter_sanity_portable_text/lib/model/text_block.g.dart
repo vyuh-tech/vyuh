@@ -8,14 +8,14 @@ part of 'text_block.dart';
 
 TextBlockItem _$TextBlockItemFromJson(Map<String, dynamic> json) =>
     TextBlockItem(
-      key: json['_key'] as String,
+      key: json['_key'] as String?,
       children: (json['children'] as List<dynamic>?)
               ?.map((e) => Span.fromJson(e as Map<String, dynamic>))
               .toList() ??
-          [],
+          const <Span>[],
       style: json['style'] as String? ?? 'normal',
       markDefs: json['markDefs'] == null
-          ? []
+          ? const <MarkDef>[]
           : const MarkDefsConverter().fromJson(json['markDefs'] as List),
       listItem: $enumDecodeNullable(_$ListItemTypeEnumMap, json['listItem']),
       level: json['level'] as int?,
@@ -28,9 +28,9 @@ const _$ListItemTypeEnumMap = {
 };
 
 Span _$SpanFromJson(Map<String, dynamic> json) => Span(
-      type: json['_type'] as String,
+      type: json['_type'] as String? ?? Span.schemaName,
       text: json['text'] as String? ?? '',
       marks:
           (json['marks'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              [],
+              const <String>[],
     );

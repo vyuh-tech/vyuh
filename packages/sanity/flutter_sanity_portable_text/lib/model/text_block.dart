@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nanoid/nanoid.dart';
 
 import '../flutter_sanity_portable_text.dart';
 
@@ -30,17 +31,14 @@ class TextBlockItem implements PortableBlockItem {
   final String key;
 
   /// Children is an array of spans or custom inline types that is contained within a block.
-  @JsonKey(defaultValue: [])
   final List<Span> children;
 
   /// Mark definitions is an array of objects with a key, type and some data.
   /// Mark definitions are tied to spans by adding the referring _key in the marks array.
-  @JsonKey(defaultValue: [])
   final List<MarkDef> markDefs;
 
   /// Style typically describes a visual property for the whole block. Typical values
   /// are "h1", "h2", "h3", "normal", "blockquote", etc.
-  @JsonKey(defaultValue: 'normal')
   final String style;
 
   /// A block can be given the property listItem with a value that describes
@@ -57,13 +55,13 @@ class TextBlockItem implements PortableBlockItem {
   int? listItemIndex;
 
   TextBlockItem({
-    required this.key,
-    required this.children,
-    required this.style,
-    required this.markDefs,
+    String? key,
+    this.children = const <Span>[],
+    this.style = 'normal',
+    this.markDefs = const <MarkDef>[],
     this.listItem,
     this.level,
-  });
+  }) : key = key ?? nanoid();
 
   factory TextBlockItem.fromJson(final Map<String, dynamic> json) =>
       _$TextBlockItemFromJson(json);
@@ -72,19 +70,23 @@ class TextBlockItem implements PortableBlockItem {
 /// A Span is the standard way to express inline text within a block
 @JsonSerializable()
 class Span {
+  static const schemaName = 'span';
+
   @JsonKey(name: '_type')
   final String type;
 
   /// Contains the text content of the span
-  @JsonKey(defaultValue: '')
   final String text;
 
   /// Set of annotations and decorations to apply to this span of text.
   /// Custom annotations are also allowed.
-  @JsonKey(defaultValue: [])
   final List<String> marks;
 
-  Span({required this.type, required this.text, required this.marks});
+  Span({
+    this.type = Span.schemaName,
+    this.text = '',
+    this.marks = const <String>[],
+  });
 
   factory Span.fromJson(final Map<String, dynamic> json) =>
       _$SpanFromJson(json);

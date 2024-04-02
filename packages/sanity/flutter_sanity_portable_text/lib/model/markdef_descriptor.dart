@@ -26,13 +26,20 @@ typedef MarkDefFromJson = MarkDef Function(
 
 /// Describes a [MarkDef] and its associated builders.
 final class MarkDefDescriptor {
+  /// The schema type of the mark.
   final String schemaType;
+
+  /// Deserializes a [MarkDef] from a JSON map.
   final MarkDefFromJson fromJson;
 
   // We need to maintain separate style and recognizer builders as TextSpans
   // don't support recognizers on inner children.
   // Only the top-level TextSpan will be able to handle the hit-testing.
+
+  /// Builds a [TextStyle] for a given [MarkDef].
   final MarkDefTextStyleBuilder? styleBuilder;
+
+  /// Builds a [GestureRecognizer] for a given [MarkDef].
   final GestureRecognizerBuilder? recognizerBuilder;
 
   MarkDefDescriptor({
@@ -46,14 +53,17 @@ final class MarkDefDescriptor {
 /// A single mark definition.
 @JsonSerializable()
 class MarkDef {
+  /// The key of the mark definition.
   @JsonKey(name: '_key')
   final String key;
 
+  /// The type of the mark definition.
   @JsonKey(name: '_type')
   final String type;
 
   MarkDef({required this.key, required this.type});
 
+  /// Converts a [MarkDef] to a JSON map.
   factory MarkDef.fromJson(final Map<String, dynamic> json) =>
       _$MarkDefFromJson(json);
 }
