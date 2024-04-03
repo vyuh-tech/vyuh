@@ -320,6 +320,162 @@ class MyApp extends StatelessWidget {
 
 ```
 
+### With a custom mark
+
+```dart
+final class CustomMarkDef implements MarkDef {
+  CustomMarkDef({
+    required this.color,
+    required this.key,
+  });
+
+  @override
+  final String key;
+
+  final Color color;
+
+  @override
+  String get type => 'custom-mark';
+}
+
+void main() {
+  // Registering a custom mark
+  _registerCustomMark();
+
+  runApp(const MyApp());
+}
+
+void _registerCustomMark() {
+  PortableTextConfig.shared.markDefs['custom-mark'] = MarkDefDescriptor(
+    schemaType: 'custom-mark',
+    styleBuilder: (context, markDef, textStyle) {
+      final mark = markDef as CustomMarkDef;
+
+      final style = textStyle.apply(
+        decoration: TextDecoration.underline,
+        decorationColor: mark.color,
+      );
+
+      return style;
+    },
+    fromJson: (json) => CustomMarkDef(color: json['color'], key: json['key']),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PortableText(
+              blocks: [
+                TextBlockItem(
+                  children: [
+                    Span(
+                      text: 'Sanity Portable Text',
+                    ),
+                  ],
+                  style: 'h1',
+                ),
+
+                TextBlockItem(
+                  children: [
+                    Span(
+                      text: 'We can also do ',
+                    ),
+                    Span(text: 'custom marks!', marks: ['custom-key']),
+                  ],
+                  markDefs: [
+                    CustomMarkDef(color: Colors.red, key: 'custom-key'),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### When a custom mark is not registered
+
+```dart
+final class UnregisteredMarkDef implements MarkDef {
+  UnregisteredMarkDef({
+    required this.key,
+  });
+
+  @override
+  final String key;
+
+  @override
+  String get type => 'unregistered-mark';
+}
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      home: Scaffold(
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PortableText(
+              blocks: [
+                TextBlockItem(
+                  children: [
+                    Span(
+                      text: 'Sanity Portable Text',
+                    ),
+                  ],
+                  style: 'h1',
+                ),
+
+                TextBlockItem(
+                  children: [
+                    Span(
+                        text:
+                            ' and report when a custom mark is not registered, such as:'),
+                    Span(text: ' this.', marks: ['missing-key']),
+                  ],
+                  markDefs: [
+                    UnregisteredMarkDef(key: 'missing-key')
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+```
+
 ## Exploring further
 
 There are several other features which have been excluded from the examples
