@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:go_router/go_router.dart';
@@ -114,11 +113,34 @@ final feature = FeatureDescriptor(
                   decoration: TextDecoration.underline,
                 );
               },
-              recognizerBuilder: (context, def) {
-                return TapGestureRecognizer()
-                  ..onTap = () {
-                    (def as InvokeActionMarkDef).action.execute(context);
-                  };
+              spanBuilder: (context, def, text, style) {
+                return WidgetSpan(
+                  child: GestureDetector(
+                    onTap: () {
+                      (def as InvokeActionMarkDef).action.execute(context);
+                    },
+                    child: Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.center,
+                      direction: Axis.horizontal,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        Text(
+                          text,
+                          style: style,
+                          softWrap: false,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.left,
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          size: 16,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
               },
             )
           ],

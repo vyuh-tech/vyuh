@@ -71,6 +71,28 @@ void _registerCustomMark() {
 
       return style;
     },
+    spanBuilder: (context, markDef, text, style) {
+      return WidgetSpan(
+        child: Container(
+          color: Colors.black12,
+          padding: const EdgeInsets.only(right: 4),
+          child: GestureDetector(
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.bolt,
+                  color: (markDef as CustomMarkDef).color,
+                  size: 20,
+                ),
+                Text(text, style: style),
+              ],
+            ),
+            onTap: () => debugPrint('Tapped on $markDef'),
+          ),
+        ),
+      );
+    },
     fromJson: (json) => CustomMarkDef(color: json['color'], key: json['key']),
   );
 }
