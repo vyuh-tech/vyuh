@@ -80,29 +80,42 @@ class PortableTextBlock extends StatelessWidget {
     }
 
     GestureRecognizer? recognizer;
+    int totalRecognizers = 0;
+    String? errorText;
 
     for (final markDef in pendingMarkDefs) {
       final descriptor = config.markDefs[markDef.type];
       if (descriptor == null) {
-        debugPrint('Missing descriptor for markDef: ${markDef.type}');
+        errorText = 'Missing markDef descriptor for "${markDef.type}"';
         continue;
       }
 
-      style = descriptor.styleBuilder?.call(markDef, context, style) ?? style;
+      style = descriptor.styleBuilder?.call(context, markDef, style) ?? style;
 
-      final currentRecognizer =
-          descriptor.recognizerBuilder?.call(markDef, context);
-      assert(recognizer == null && currentRecognizer != null,
-          'There can only be one recognizer for a set of MarkDefs. We found more than one.');
+      recognizer = descriptor.recognizerBuilder?.call(context, markDef);
 
-      recognizer = currentRecognizer;
+      if (recognizer != null) {
+        totalRecognizers++;
+
+        if (totalRecognizers > 1) {
+          errorText =
+              'There can only be one recognizer for a set of MarkDefs. We found more than one.';
+        }
+      }
     }
 
-    return TextSpan(
-      text: span.text,
-      recognizer: recognizer,
-      style: style,
-    );
+    return errorText != null
+        ? WidgetSpan(
+            child: ErrorView(
+              message: errorText,
+              asBlock: false,
+            ),
+          )
+        : TextSpan(
+            text: span.text,
+            recognizer: recognizer,
+            style: style,
+          );
   }
 
   InlineSpan _bulletMark(final BuildContext context) {
@@ -128,7 +141,7 @@ class PortableTextBlock extends StatelessWidget {
           alignment: PlaceholderAlignment.middle,
           child: const Padding(
             padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.check_box_outline_blank, size: 6),
+            child: Icon(Icons.check_box_outline_blank, size: 8),
           ),
           style: textStyle,
         );

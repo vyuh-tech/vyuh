@@ -27,8 +27,6 @@ class PortableText extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final theme = Theme.of(context);
-
     return ListView.builder(
       primary: usePrimaryScroller,
       shrinkWrap: shrinkwrap,
@@ -40,21 +38,7 @@ class PortableText extends StatelessWidget {
 
         final builder = PortableTextConfig.shared.blocks[type];
         if (builder == null) {
-          return Container(
-            color: theme.colorScheme.onErrorContainer,
-            padding: const EdgeInsets.all(8),
-            child: Row(
-              children: [
-                Icon(Icons.error_outline, color: theme.colorScheme.error),
-                const SizedBox(width: 8),
-                Text(
-                  'Missing builder for: $type',
-                  style: theme.textTheme.bodyMedium
-                      ?.apply(color: theme.colorScheme.errorContainer),
-                ),
-              ],
-            ),
-          );
+          return ErrorView(message: 'Missing builder for block "$type"');
         }
 
         return builder(context, item);

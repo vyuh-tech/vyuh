@@ -201,3 +201,40 @@ class PortableTextConfig {
         ),
   };
 }
+
+/// Renders an error message when a block type is missing a builder or when a mark is misconfigured.
+class ErrorView extends StatelessWidget {
+  final String message;
+  final bool asBlock;
+
+  const ErrorView({
+    super.key,
+    required this.message,
+    this.asBlock = true,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Container(
+        color: theme.colorScheme.onErrorContainer,
+        padding: const EdgeInsets.all(4),
+        child: Row(
+          mainAxisSize: asBlock ? MainAxisSize.max : MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.error_outline, color: theme.colorScheme.error),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                message,
+                style: theme.textTheme.bodyMedium
+                    ?.apply(color: theme.colorScheme.errorContainer),
+              ),
+            ),
+          ],
+        ));
+  }
+}

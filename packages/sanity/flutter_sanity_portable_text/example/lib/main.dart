@@ -21,8 +21,59 @@ final class CustomBlockItem implements PortableBlockItem {
   final Color backgroundColor;
 }
 
+final class CustomMarkDef implements MarkDef {
+  CustomMarkDef({
+    required this.color,
+    required this.key,
+  });
+
+  @override
+  final String key;
+
+  final Color color;
+
+  @override
+  String get type => 'custom-mark';
+}
+
+final class UnregisteredMarkDef implements MarkDef {
+  UnregisteredMarkDef({
+    required this.key,
+  });
+
+  @override
+  final String key;
+
+  @override
+  String get type => 'unregistered-mark';
+}
+
 void main() {
   // Registering a custom block
+  _registerCustomBlock();
+  _registerCustomMark();
+
+  runApp(const MyApp());
+}
+
+void _registerCustomMark() {
+  PortableTextConfig.shared.markDefs['custom-mark'] = MarkDefDescriptor(
+    schemaType: 'custom-mark',
+    styleBuilder: (context, markDef, textStyle) {
+      final mark = markDef as CustomMarkDef;
+
+      final style = textStyle.apply(
+        decoration: TextDecoration.underline,
+        decorationColor: mark.color,
+      );
+
+      return style;
+    },
+    fromJson: (json) => CustomMarkDef(color: json['color'], key: json['key']),
+  );
+}
+
+void _registerCustomBlock() {
   PortableTextConfig.shared.blocks['custom'] = (context, item) {
     final theme = Theme.of(context);
     final custom = item as CustomBlockItem;
@@ -46,8 +97,6 @@ void main() {
       child: Text(custom.text, style: style),
     );
   };
-
-  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -126,6 +175,22 @@ class MyApp extends StatelessWidget {
                 _textBlock(
                     ('And report when a block item is not registered for rendering..')),
                 UnregisteredBlockItem(),
+                TextBlockItem(
+                  children: [
+                    Span(
+                      text: 'We can also do ',
+                    ),
+                    Span(text: 'custom marks!', marks: ['custom-key']),
+                    Span(
+                        text:
+                            ' and report when a custom mark is not registered, such as:'),
+                    Span(text: ' this.', marks: ['missing-key']),
+                  ],
+                  markDefs: [
+                    CustomMarkDef(color: Colors.red, key: 'custom-key'),
+                    UnregisteredMarkDef(key: 'missing-key')
+                  ],
+                ),
                 TextBlockItem(children: [
                   Span(text: '\nAnd there ends the quick tour of '),
                   Span(text: 'Sanity Portable Text. ', marks: ['strong', 'em']),
