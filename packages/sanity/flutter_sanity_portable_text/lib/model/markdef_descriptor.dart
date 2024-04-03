@@ -8,14 +8,14 @@ part 'markdef_descriptor.g.dart';
 
 /// Builds a [GestureRecognizer] for a given [MarkDef].
 typedef GestureRecognizerBuilder = GestureRecognizer Function(
-  MarkDef mark,
   BuildContext context,
+  MarkDef mark,
 );
 
 /// Builds a [TextStyle] for a given [MarkDef].
 typedef MarkDefTextStyleBuilder = TextStyle Function(
-  MarkDef mark,
   BuildContext context,
+  MarkDef mark,
   TextStyle base,
 );
 

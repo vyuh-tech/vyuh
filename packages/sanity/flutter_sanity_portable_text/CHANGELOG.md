@@ -1,3 +1,9 @@
+## 1.0.0-beta.12
+
+- Added support to report errors for missing annotations
+- Changed signatures of the builders for mark, block and container
+- Refactored the error view to be more universally useful
+
 ## 1.0.0-beta.10 - 1.0.0-beta.11
 
 - Fixing the format for screenshots in pubspec.yaml

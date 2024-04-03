@@ -104,7 +104,7 @@ final feature = FeatureDescriptor(
             MarkDefDescriptor(
               schemaType: 'invokeAction',
               fromJson: InvokeActionMarkDef.fromJson,
-              styleBuilder: (def, context, style) {
+              styleBuilder: (context, def, style) {
                 final theme = Theme.of(context);
 
                 return style.copyWith(
@@ -114,7 +114,7 @@ final feature = FeatureDescriptor(
                   decoration: TextDecoration.underline,
                 );
               },
-              recognizerBuilder: (def, context) {
+              recognizerBuilder: (context, def) {
                 return TapGestureRecognizer()
                   ..onTap = () {
                     (def as InvokeActionMarkDef).action.execute(context);
