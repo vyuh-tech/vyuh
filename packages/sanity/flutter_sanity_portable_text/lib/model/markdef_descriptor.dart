@@ -6,12 +6,6 @@ import '../flutter_sanity_portable_text.dart';
 
 part 'markdef_descriptor.g.dart';
 
-/// Builds a [GestureRecognizer] for a given [MarkDef].
-typedef GestureRecognizerBuilder = GestureRecognizer Function(
-  BuildContext context,
-  MarkDef mark,
-);
-
 /// Builds a [TextStyle] for a given [MarkDef].
 typedef MarkDefTextStyleBuilder = TextStyle Function(
   BuildContext context,
@@ -22,6 +16,14 @@ typedef MarkDefTextStyleBuilder = TextStyle Function(
 /// Deserializes a [MarkDef] from a JSON map.
 typedef MarkDefFromJson = MarkDef Function(
   Map<String, dynamic> json,
+);
+
+/// Builds an [InlineSpan] for a given [MarkDef].
+typedef MarkDefSpanBuilder = InlineSpan Function(
+  BuildContext context,
+  MarkDef mark,
+  String text,
+  TextStyle style,
 );
 
 /// Describes a [MarkDef] and its associated builders.
@@ -40,13 +42,13 @@ final class MarkDefDescriptor {
   final MarkDefTextStyleBuilder? styleBuilder;
 
   /// Builds a [GestureRecognizer] for a given [MarkDef].
-  final GestureRecognizerBuilder? recognizerBuilder;
+  final MarkDefSpanBuilder? spanBuilder;
 
   MarkDefDescriptor({
     required this.schemaType,
     required this.fromJson,
     this.styleBuilder,
-    this.recognizerBuilder,
+    this.spanBuilder,
   });
 }
 

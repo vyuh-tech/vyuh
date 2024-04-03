@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../flutter_sanity_portable_text.dart';
@@ -22,7 +21,7 @@ class PortableTextBlock extends StatelessWidget {
     final config = PortableTextConfig.shared;
 
     final spans = model.children
-        .map((final span) => _convertSpan(span, Theme.of(context), context))
+        .map((final span) => _buildInlineSpan(span, Theme.of(context), context))
         .toList(growable: false);
 
     final content = Text.rich(
@@ -47,7 +46,7 @@ class PortableTextBlock extends StatelessWidget {
     );
   }
 
-  InlineSpan _convertSpan(
+  InlineSpan _buildInlineSpan(
     final Span span,
     final ThemeData theme,
     final BuildContext context,
@@ -79,10 +78,9 @@ class PortableTextBlock extends StatelessWidget {
       pendingMarkDefs.add(markDef);
     }
 
-    GestureRecognizer? recognizer;
-    int totalRecognizers = 0;
     String? errorText;
 
+    // Build the style across all marks
     for (final markDef in pendingMarkDefs) {
       final descriptor = config.markDefs[markDef.type];
       if (descriptor == null) {
@@ -91,31 +89,49 @@ class PortableTextBlock extends StatelessWidget {
       }
 
       style = descriptor.styleBuilder?.call(context, markDef, style) ?? style;
+    }
 
-      recognizer = descriptor.recognizerBuilder?.call(context, markDef);
+    // Now build the final InlineSpan, if any
+    InlineSpan? inlineSpan;
+    int totalSpans = 0;
 
-      if (recognizer != null) {
-        totalRecognizers++;
+    // Only go ahead if there are no errors from previous step
+    if (errorText == null) {
+      for (final markDef in pendingMarkDefs) {
+        final descriptor = config.markDefs[markDef.type];
+        inlineSpan =
+            descriptor?.spanBuilder?.call(context, markDef, span.text, style);
 
-        if (totalRecognizers > 1) {
-          errorText =
-              'There can only be one recognizer for a set of MarkDefs. We found more than one.';
+        if (inlineSpan == null) {
+          continue;
+        }
+
+        totalSpans++;
+        if (totalSpans > 1) {
+          final markDefChain = pendingMarkDefs.map((e) => e.type).join(' -> ');
+          errorText = '''
+We currently support a single custom markDef generating the InlineSpan. 
+We found $totalSpans. The chain of markDefs was: $markDefChain.
+ 
+Suggestion: Try to refactor your custom markDef chain to only generate a single InlineSpan. 
+You can rely on TextStyles instead for custom styling.''';
+          break;
         }
       }
     }
 
-    return errorText != null
-        ? WidgetSpan(
-            child: ErrorView(
-              message: errorText,
-              asBlock: false,
-            ),
-          )
-        : TextSpan(
-            text: span.text,
-            recognizer: recognizer,
-            style: style,
-          );
+    if (errorText != null) {
+      return WidgetSpan(
+        child: GestureDetector(
+          child: ErrorView(
+            message: errorText,
+            asBlock: false,
+          ),
+        ),
+      );
+    }
+
+    return inlineSpan ?? TextSpan(text: span.text, style: style);
   }
 
   InlineSpan _bulletMark(final BuildContext context) {
