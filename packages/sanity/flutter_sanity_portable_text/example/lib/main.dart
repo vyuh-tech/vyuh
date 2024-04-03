@@ -51,6 +51,8 @@ final class UnregisteredMarkDef implements MarkDef {
 void main() {
   // Registering a custom block
   _registerCustomBlock();
+
+  // Registering a custom mark
   _registerCustomMark();
 
   runApp(const MyApp());
