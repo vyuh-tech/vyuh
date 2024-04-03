@@ -1,3 +1,9 @@
+## 1.0.0-beta.5
+
+ - Updating signatures based on changes to flutter_sanity_portable_text
+
+ - **FEAT**: refactored portable text to be more resilient. ([39db715f](https://github.com/vyuh-tech/vyuh/commit/39db715ff85032721b94c82176d7b8ebda384151))
+
 ## 1.0.0-beta.4
 
 - **REFACTOR**: navigation and default route layout.
