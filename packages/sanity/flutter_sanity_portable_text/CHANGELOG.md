@@ -1,3 +1,7 @@
+## 1.0.0-beta.14
+
+ - Bump "flutter_sanity_portable_text" to `1.0.0-beta.14`.
+
 ## 1.0.0-beta.13
 
  - Updated readme
