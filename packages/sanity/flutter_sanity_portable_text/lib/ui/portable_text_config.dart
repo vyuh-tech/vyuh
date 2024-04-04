@@ -24,7 +24,7 @@ typedef BlockWidgetBuilder = Widget Function(
 /// configuration is based on the Material Design guidelines.
 ///
 /// Note that the configuration is shared across all instances of the [PortableText] widget.
-class PortableTextConfig {
+final class PortableTextConfig {
   /// The styles used to render the Portable Text content. The keys are the style names used
   /// in the Portable Text content, such as "h1", "h2", "blockquote", etc. The default styles
   /// are based on the Material Design typography guidelines. You can customize the styles by
@@ -51,14 +51,13 @@ class PortableTextConfig {
   final Map<String, MarkDefDescriptor> markDefs = {};
 
   /// The indentation used for list items. The default value is 16.
-  double listIndent = 16;
+  double listIndent = defaultListIndent;
 
   /// The padding used for list items. The default value is 8.
-  EdgeInsets itemPadding = const EdgeInsets.only(bottom: 8);
+  EdgeInsets itemPadding = defaultItemPadding;
 
   /// The base style used for rendering the Portable Text content. The default value is the bodyMedium style from the theme.
-  TextStyle? Function(BuildContext) baseStyle =
-      (context) => Theme.of(context).textTheme.bodyMedium;
+  TextStyle? Function(BuildContext) baseStyle = defaultBaseStyle;
 
   /// The shared instance of the PortableTextConfig. This instance is used by all [PortableText] widgets
   /// in the application. You can customize the configuration by calling the [apply] method.
@@ -68,12 +67,13 @@ class PortableTextConfig {
 
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
   apply({
-    final double listIndent = 16,
-    final EdgeInsets itemPadding = const EdgeInsets.only(bottom: 8),
+    final double listIndent = defaultListIndent,
+    final EdgeInsets itemPadding = defaultItemPadding,
     final Map<String, TextStyleBuilder>? styles,
     final Map<String, BlockContainerBuilder>? blockContainers,
     final Map<String, BlockWidgetBuilder>? blocks,
     final Map<String, MarkDefDescriptor>? markDefs,
+    final TextStyle? Function(BuildContext)? baseStyle,
   }) {
     this.listIndent = listIndent;
     this.itemPadding = itemPadding;
@@ -81,6 +81,31 @@ class PortableTextConfig {
     this.blockContainers.addAll(blockContainers ?? {});
     this.markDefs.addAll(markDefs ?? {});
     this.blocks.addAll(blocks ?? {});
+    this.baseStyle = baseStyle ?? defaultBaseStyle;
+  }
+
+  /// Resets the shared instance of the [PortableTextConfig] to the default configuration.
+  void reset() {
+    listIndent = defaultListIndent;
+    itemPadding = defaultItemPadding;
+    baseStyle = defaultBaseStyle;
+
+    styles
+      ..clear()
+      ..addAll(defaultStyles);
+    blockContainers
+      ..clear()
+      ..addAll(defaultBlockContainers);
+    markDefs.clear();
+    blocks
+      ..clear()
+      ..addAll(defaultBlocks);
+  }
+
+  static const defaultListIndent = 16.0;
+  static const defaultItemPadding = EdgeInsets.only(bottom: 8);
+  static TextStyle? defaultBaseStyle(BuildContext context) {
+    return Theme.of(context).textTheme.bodyMedium;
   }
 
   /// The default text styles used by the shared instance of [PortableTextConfig].

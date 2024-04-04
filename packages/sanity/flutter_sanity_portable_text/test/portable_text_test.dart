@@ -3,6 +3,10 @@ import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  setUp(() {
+    PortableTextConfig.shared.reset();
+  });
+
   testWidgets('PortableText can be created with required parameters',
       (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(
@@ -71,7 +75,7 @@ void main() {
   testWidgets(
       'PortableText shows an ErrorView when a builder for a block type is missing',
       (WidgetTester tester) async {
-    final blocks = [const MissingPortableBlockItem()];
+    final blocks = [const _MissingBlockItem()];
 
     await tester.pumpWidget(MaterialApp(
       home: PortableText(blocks: blocks),
@@ -79,11 +83,105 @@ void main() {
 
     expect(find.byType(ErrorView), findsOneWidget);
   });
+
+  testWidgets(
+      'PortableText shows an ErrorView when a MarkDef is missing for a mark type',
+      (WidgetTester tester) async {
+    final blocks = [
+      TextBlockItem(
+        children: [
+          Span(text: 'Hello, ', marks: ['missing-mark']),
+        ],
+      ),
+    ];
+
+    await tester.pumpWidget(MaterialApp(
+      home: PortableText(blocks: blocks),
+    ));
+
+    expect(find.byType(ErrorView), findsOneWidget);
+  });
+
+  testWidgets(
+      'PortableText shows an ErrorView when a builder is missing for a mark type',
+      (WidgetTester tester) async {
+    final blocks = [
+      TextBlockItem(
+        children: [
+          Span(text: 'Hello, ', marks: ['missing-key']),
+        ],
+        markDefs: [_CustomMarkDef(key: 'missing-key', color: Colors.red)],
+      ),
+    ];
+
+    await tester.pumpWidget(MaterialApp(
+      home: PortableText(blocks: blocks),
+    ));
+
+    expect(find.byType(ErrorView), findsOneWidget);
+  });
+
+  // test for a custom style
+  testWidgets('PortableText can apply a custom style to a mark type',
+      (WidgetTester tester) async {
+    PortableTextConfig.shared.markDefs['custom-mark'] = MarkDefDescriptor(
+      schemaType: 'custom-mark',
+      fromJson: (json) => _CustomMarkDef.fromJson(json),
+      styleBuilder: (context, markDef, style) {
+        return style.apply(color: (markDef as _CustomMarkDef).color);
+      },
+    );
+
+    final blocks = [
+      TextBlockItem(
+        children: [
+          Span(text: 'Hello, World', marks: ['custom-key']),
+        ],
+        markDefs: [
+          _CustomMarkDef(
+            color: Colors.red,
+            key: 'custom-key',
+          ),
+        ],
+      ),
+    ];
+
+    await tester.pumpWidget(MaterialApp(
+      home: PortableText(blocks: blocks),
+    ));
+
+    final richText = find.byType(RichText).evaluate().first.widget as RichText;
+    TextSpan? textSpan;
+    richText.text.visitChildren((span) {
+      if (span is TextSpan && span.toPlainText() == 'Hello, World') {
+        textSpan = span;
+        return false;
+      }
+
+      return true;
+    });
+
+    expect(textSpan?.style?.color, Colors.red);
+  });
 }
 
-final class MissingPortableBlockItem implements PortableBlockItem {
-  @override
-  final String blockType = 'missingType';
+class _CustomMarkDef extends MarkDef {
+  final Color color;
 
-  const MissingPortableBlockItem();
+  _CustomMarkDef({required this.color, required super.key})
+      : super(type: 'custom-mark');
+
+  factory _CustomMarkDef.fromJson(final Map<String, dynamic> json) {
+    return _CustomMarkDef(
+      color: Color(json['color']),
+      key: json['_key'],
+    );
+  }
+}
+
+final class _MissingBlockItem implements PortableBlockItem {
+  @override
+  final String blockType = 'missing-block';
+
+  const _MissingBlockItem();
 }
