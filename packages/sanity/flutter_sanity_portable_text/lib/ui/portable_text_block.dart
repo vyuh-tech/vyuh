@@ -34,8 +34,9 @@ class PortableTextBlock extends StatelessWidget {
     );
 
     final builder = config.blockContainers[model.style] ??
-        config.blockContainers['default']!;
-    final child = builder(content, context);
+        config.blockContainers['__default__']!;
+
+    final child = builder(context, content);
 
     final leftPadding =
         model.listItem == null ? 0.0 : config.listIndent * (model.level ?? 0);
@@ -55,15 +56,21 @@ class PortableTextBlock extends StatelessWidget {
 
     final baseStyle = config.baseStyle(context) ?? theme.textTheme.bodyLarge!;
 
+    final styleBuilder = config.styles[model.style];
+    if (styleBuilder == null) {
+      return WidgetSpan(
+          child: ErrorView(message: 'Missing style for ${model.style}'));
+    }
+
     var style =
-        config.styles[model.style]?.call(baseStyle, context) ?? baseStyle;
+        config.styles[model.style]?.call(context, baseStyle) ?? baseStyle;
 
     final pendingMarkDefs = <MarkDef>[];
     for (final mark in span.marks) {
       /// Standard marks (aka annotations)
       final builder = config.styles[mark];
       if (builder != null) {
-        style = builder(style, context);
+        style = builder(context, style);
         continue;
       }
 
@@ -122,11 +129,9 @@ You can rely on TextStyles instead for custom styling.''';
 
     if (errorText != null) {
       return WidgetSpan(
-        child: GestureDetector(
-          child: ErrorView(
-            message: errorText,
-            asBlock: false,
-          ),
+        child: ErrorView(
+          message: errorText,
+          asBlock: false,
         ),
       );
     }
@@ -138,26 +143,28 @@ You can rely on TextStyles instead for custom styling.''';
     final textStyle = PortableTextConfig.shared.baseStyle(context);
 
     switch (model.listItem) {
-      case ListItemType.bullet:
-        return WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.circle, size: 8),
-          ),
-          style: textStyle,
-        );
       case ListItemType.number:
         return TextSpan(
           text: '${(model.listItemIndex ?? 0) + 1}.  ',
           style: textStyle,
         );
-      default:
+
+      case ListItemType.square:
         return WidgetSpan(
           alignment: PlaceholderAlignment.middle,
           child: const Padding(
             padding: EdgeInsets.only(right: 8.0),
             child: Icon(Icons.check_box_outline_blank, size: 8),
+          ),
+          style: textStyle,
+        );
+
+      default:
+        return WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.circle, size: 8),
           ),
           style: textStyle,
         );

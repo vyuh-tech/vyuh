@@ -4,12 +4,12 @@ import '../flutter_sanity_portable_text.dart';
 
 /// A function that builds a text style for a Portable Text block or span.
 typedef TextStyleBuilder = TextStyle Function(
-  TextStyle base,
   BuildContext context,
+  TextStyle base,
 );
 
 /// A function that builds a widget for a Portable block container.
-typedef BlockContainerBuilder = Widget Function(Widget, BuildContext);
+typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);
 
 /// A function that builds a widget for a Portable block item.
 typedef BlockWidgetBuilder = Widget Function(
@@ -86,68 +86,68 @@ class PortableTextConfig {
   /// The default text styles used by the shared instance of [PortableTextConfig].
   static final Map<String, TextStyleBuilder> defaultStyles = {
     'h1': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.headlineLarge!,
     'h2': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.headlineMedium!,
     'h3': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.headlineSmall!,
     'h4': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.titleLarge!,
     'h5': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.titleMedium!,
     'h6': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.titleSmall!,
     'normal': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         Theme.of(context).textTheme.bodyMedium!,
     'em': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         base.copyWith(fontStyle: FontStyle.italic),
     'strong': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         base.copyWith(fontWeight: FontWeight.bold),
     'blockquote': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         base.copyWith(color: Theme.of(context).colorScheme.primary),
     'strike-through': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         base.copyWith(
@@ -157,8 +157,8 @@ class PortableTextConfig {
           ]),
         ),
     'underline': (
-      final TextStyle base,
-      final BuildContext context, [
+      final BuildContext context,
+      final TextStyle base, [
       final MarkDef? mark,
     ]) =>
         base.copyWith(
@@ -171,8 +171,8 @@ class PortableTextConfig {
 
   /// The default block containers used by the shared instance of [PortableTextConfig].
   static final Map<String, BlockContainerBuilder> defaultBlockContainers = {
-    'default': (final Widget child, final BuildContext context) => child,
-    'blockquote': (final Widget child, final BuildContext context) {
+    '__default__': (final BuildContext context, final Widget child) => child,
+    'blockquote': (final BuildContext context, final Widget child) {
       final theme = Theme.of(context);
 
       return Container(

@@ -109,7 +109,7 @@ final feature = FeatureDescriptor(
                 return style.copyWith(
                   color: theme.colorScheme.primary,
                   decorationColor: theme.colorScheme.inversePrimary,
-                  decorationStyle: TextDecorationStyle.double,
+                  decorationStyle: TextDecorationStyle.dashed,
                   decoration: TextDecoration.underline,
                 );
               },
@@ -133,7 +133,7 @@ final feature = FeatureDescriptor(
                           textAlign: TextAlign.left,
                         ),
                         Icon(
-                          Icons.arrow_forward,
+                          Icons.chevron_right,
                           size: 16,
                           color: Theme.of(context).colorScheme.primary,
                         ),
