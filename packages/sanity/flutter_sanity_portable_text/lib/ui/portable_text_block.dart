@@ -54,18 +54,20 @@ class PortableTextBlock extends StatelessWidget {
   ) {
     final config = PortableTextConfig.shared;
 
+    // Step 1: Start with the base style
     final baseStyle = config.baseStyle(context) ?? theme.textTheme.bodyLarge!;
 
     final styleBuilder = config.styles[model.style];
     if (styleBuilder == null) {
-      return WidgetSpan(
-          child: ErrorView(message: 'Missing style for ${model.style}'));
+      return _errorSpan('Missing style for ${model.style}');
     }
 
     var style =
         config.styles[model.style]?.call(context, baseStyle) ?? baseStyle;
 
     final pendingMarkDefs = <MarkDef>[];
+
+    // Step 2: Accumulate the styles across all marks
     for (final mark in span.marks) {
       /// Standard marks (aka annotations)
       final builder = config.styles[mark];
@@ -78,65 +80,59 @@ class PortableTextBlock extends StatelessWidget {
       final markDef = model.markDefs
           .firstWhereOrNull((final element) => element.key == mark);
 
+      // A custom mark exists on this span but no corresponding markDef was found
       if (markDef == null) {
-        continue;
+        return _errorSpan('Missing markDef for "$mark"');
       }
 
       pendingMarkDefs.add(markDef);
     }
 
-    String? errorText;
-
-    // Build the style across all marks
+    // Step 3: Continue building styles for custom markDefs
     for (final markDef in pendingMarkDefs) {
       final descriptor = config.markDefs[markDef.type];
       if (descriptor == null) {
-        errorText = 'Missing markDef descriptor for "${markDef.type}"';
-        continue;
+        return _errorSpan('Missing markDef descriptor for "${markDef.type}"');
       }
 
       style = descriptor.styleBuilder?.call(context, markDef, style) ?? style;
     }
 
-    // Now build the final InlineSpan, if any
+    // Step 4: Now build the final InlineSpan, if any
     InlineSpan? inlineSpan;
     int totalSpans = 0;
 
-    // Only go ahead if there are no errors from previous step
-    if (errorText == null) {
-      for (final markDef in pendingMarkDefs) {
-        final descriptor = config.markDefs[markDef.type];
-        inlineSpan =
-            descriptor?.spanBuilder?.call(context, markDef, span.text, style);
+    for (final markDef in pendingMarkDefs) {
+      final descriptor = config.markDefs[markDef.type];
+      inlineSpan =
+          descriptor?.spanBuilder?.call(context, markDef, span.text, style);
 
-        if (inlineSpan == null) {
-          continue;
-        }
+      if (inlineSpan == null) {
+        continue;
+      }
 
-        totalSpans++;
-        if (totalSpans > 1) {
-          final markDefChain = pendingMarkDefs.map((e) => e.type).join(' -> ');
-          errorText = '''
+      totalSpans++;
+      if (totalSpans > 1) {
+        final markDefChain = pendingMarkDefs.map((e) => e.type).join(' -> ');
+        return _errorSpan('''
 We currently support a single custom markDef generating the InlineSpan. 
 We found $totalSpans. The chain of markDefs was: $markDefChain.
  
 Suggestion: Try to refactor your custom markDef chain to only generate a single InlineSpan. 
-You can rely on TextStyles instead for custom styling.''';
-          break;
-        }
+You can rely on TextStyles instead for custom styling.''');
       }
     }
 
-    if (errorText != null) {
-      return WidgetSpan(
-        child: ErrorView(
-          message: errorText,
-          asBlock: false,
-        ),
-      );
-    }
-
     return inlineSpan ?? TextSpan(text: span.text, style: style);
+  }
+
+  WidgetSpan _errorSpan(final String message, {final bool asBlock = true}) {
+    return WidgetSpan(
+      child: ErrorView(
+        message: message,
+        asBlock: asBlock,
+      ),
+    );
   }
 
   InlineSpan _bulletMark(final BuildContext context) {
