@@ -479,5 +479,14 @@ class MyApp extends StatelessWidget {
 ## Exploring further
 
 There are several other features which have been excluded from the examples
-above. You can look at the properties of `PortableConfig` for more customization
-opportunities, including changing the base styles.
+above, such as:
+
+- Custom block styles
+- Custom Block containers
+- Item padding inside a `PortableText` widget
+- Indents for list items
+- Changing the base style
+- Changing the default block and mark styles
+
+You can look at the properties of `PortableConfig` for more customization
+opportunities.

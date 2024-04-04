@@ -55,7 +55,23 @@ void main() {
   // Registering a custom mark
   _registerCustomMark();
 
+  // Registering a custom block style
+  _registerCustomBlockStyle();
+
   runApp(const MyApp());
+}
+
+void _registerCustomBlockStyle() {
+  PortableTextConfig.shared.styles['custom-style'] =
+      (final BuildContext context, final TextStyle base) {
+    final theme = Theme.of(context);
+
+    return base.copyWith(
+      color: theme.colorScheme.primary,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+    );
+  };
 }
 
 void _registerCustomMark() {
@@ -189,6 +205,9 @@ class MyApp extends StatelessWidget {
                     Span(text: '.'),
                   ],
                 ),
+                _textBlock('Custom Styles', style: 'custom-style'),
+                _textBlock('Report errors for missing styles...'),
+                _textBlock('Unregistered Styles', style: 'unregistered-style'),
                 _textBlock('And not to forget...the unsung'),
                 for (final index in [1, 2, 3, 4, 5, 6])
                   _textBlock('H$index', style: 'h$index'),
