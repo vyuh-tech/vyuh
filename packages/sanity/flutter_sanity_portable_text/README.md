@@ -64,110 +64,112 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+### Rendered directly from JSON
+
+```dart
+
+final text = PortableText(
+  blocks: [
+    TextBlockItem.fromJson(jsonDecode('''
+{
+  "_type": "block",
+  "style": "h3",
+  "children": [
+    {
+      "_type": "span",
+      "text": "Rendered in "
+    },
+    {
+      "_type": "span",
+      "text": "Flutter",
+      "marks": ["em", "strong", "underline"]
+    }
+  ]
+}
+''')),
+  ],
+);
+
+
+```
+
 ### With multiple blocks and different styles
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 
-void main() {
-  runApp(const MyApp());
+final text = PortableText(
+  blocks: [
+    TextBlockItem(
+      children: [
+        Span(
+          text: 'Sanity Portable Text',
+        ),
+      ],
+      style: 'h1',
+    ),
+
+    // Let's try a blockquote now
+    TextBlockItem(
+      children: [
+        Span(
+          text:
+          '"The best way to predict the future is to invent it."',
+        ),
+        Span(
+          text: '\n- Steve Jobs',
+        ),
+      ],
+      style: 'blockquote',
+    ),
+
+    TextBlockItem(
+      children: [
+        Span(
+          text:
+          'Supports all standard marks and styles, including support for:',
+        ),
+      ],
+    ),
+
+    _listItem('Bulleted text', ListItemType.bullet),
+    _listItem('Numbered text', ListItemType.number),
+    _listItem('Square bullet text', ListItemType.square),
+    TextBlockItem(
+      children: [
+        Span(text: 'Strong text, ', marks: ['strong']),
+        Span(text: 'Emphasized text, ', marks: ['em']),
+        Span(text: 'Underlined text, ', marks: ['underline']),
+        Span(
+            text: 'Strike through text, ',
+            marks: ['strike-through']),
+        Span(
+            text: 'All combined',
+            marks: ['strong', 'em', 'underline', 'strike-through']),
+        Span(text: '.'),
+      ],
+    ),
+    _textBlock('And not to forget...the unsung'),
+    for (final index in [1, 2, 3, 4, 5, 6])
+      _textBlock('H$index', style: 'h$index'),
+  ],
+);
+
+TextBlockItem _textBlock(String text, {String? style}) {
+  return TextBlockItem(
+    children: [
+      Span(text: text),
+    ],
+    style: style ?? 'normal',
+  );
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Scaffold(
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: PortableText(
-              blocks: [
-                TextBlockItem(
-                  children: [
-                    Span(
-                      text: 'Sanity Portable Text',
-                    ),
-                  ],
-                  style: 'h1',
-                ),
-
-                // Let's try a blockquote now
-                TextBlockItem(
-                  children: [
-                    Span(
-                      text:
-                          '"The best way to predict the future is to invent it."',
-                    ),
-                    Span(
-                      text: '\n- Steve Jobs',
-                    ),
-                  ],
-                  style: 'blockquote',
-                ),
-
-                TextBlockItem(
-                  children: [
-                    Span(
-                      text:
-                          'Supports all standard marks and styles, including support for:',
-                    ),
-                  ],
-                ),
-
-                _listItem('Bulleted text', ListItemType.bullet),
-                _listItem('Numbered text', ListItemType.number),
-                _listItem('Square bullet text', ListItemType.square),
-                TextBlockItem(
-                  children: [
-                    Span(text: 'Strong text, ', marks: ['strong']),
-                    Span(text: 'Emphasized text, ', marks: ['em']),
-                    Span(text: 'Underlined text, ', marks: ['underline']),
-                    Span(
-                        text: 'Strike through text, ',
-                        marks: ['strike-through']),
-                    Span(
-                        text: 'All combined',
-                        marks: ['strong', 'em', 'underline', 'strike-through']),
-                    Span(text: '.'),
-                  ],
-                ),
-                _textBlock('And not to forget...the unsung'),
-                for (final index in [1, 2, 3, 4, 5, 6])
-                  _textBlock('H$index', style: 'h$index'),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  TextBlockItem _textBlock(String text, {String? style}) {
-    return TextBlockItem(
-      children: [
-        Span(text: text),
-      ],
-      style: style ?? 'normal',
-    );
-  }
-
-  TextBlockItem _listItem(String text, ListItemType type) {
-    return TextBlockItem(
-      children: [
-        Span(text: text),
-      ],
-      listItem: type,
-    );
-  }
+TextBlockItem _listItem(String text, ListItemType type) {
+  return TextBlockItem(
+    children: [
+      Span(text: text),
+    ],
+    listItem: type,
+  );
 }
 
 ```
@@ -409,7 +411,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-### When a custom mark is not registered
+### When a custom mark is not registered, an error will be shown
 
 ```dart
 final class UnregisteredMarkDef implements MarkDef {
