@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 
@@ -165,6 +167,25 @@ class MyApp extends StatelessWidget {
                   style: 'h1',
                 ),
 
+                // Directly from JSON
+                TextBlockItem.fromJson(jsonDecode('''
+    {
+      "_type": "block",
+      "style": "h3",
+      "children": [
+        {
+          "_type": "span",
+          "text": "Rendered in "
+        },
+        {
+          "_type": "span",
+          "text": "Flutter",
+          "marks": ["em", "strong", "underline"]
+        }
+      ]
+    }
+  ''')),
+
                 // Let's try a blockquote now
                 TextBlockItem(
                   children: [
@@ -246,22 +267,22 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
 
-  TextBlockItem _textBlock(String text, {String? style}) {
-    return TextBlockItem(
-      children: [
-        Span(text: text),
-      ],
-      style: style ?? 'normal',
-    );
-  }
+TextBlockItem _textBlock(String text, {String? style}) {
+  return TextBlockItem(
+    children: [
+      Span(text: text),
+    ],
+    style: style ?? 'normal',
+  );
+}
 
-  TextBlockItem _listItem(String text, ListItemType type) {
-    return TextBlockItem(
-      children: [
-        Span(text: text),
-      ],
-      listItem: type,
-    );
-  }
+TextBlockItem _listItem(String text, ListItemType type) {
+  return TextBlockItem(
+    children: [
+      Span(text: text),
+    ],
+    listItem: type,
+  );
 }
