@@ -1,3 +1,5 @@
+## 1.0.0-beta.5
+
 ## 1.0.0-beta.4
 
  - Moved the sanity packages under the vyuh repo
