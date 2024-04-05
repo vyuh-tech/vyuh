@@ -1,5 +1,5 @@
 name: flutter_sanity_portable_text
-version: 1.0.0-beta.17
+version: 1.0.0-beta.18
 description: |
   Flutter renderer for the Sanity.io Portable Text format with support for 
   standard and custom blocks, spans, annotations, and styles.
