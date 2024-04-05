@@ -1,3 +1,5 @@
+## 1.0.0-beta.19
+
 ## 1.0.0-beta.18
 
  - Shorter pubspec description
