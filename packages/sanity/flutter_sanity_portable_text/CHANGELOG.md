@@ -1,3 +1,7 @@
+## 1.0.0-beta.17
+
+ - 100% test coverage
+
 ## 1.0.0-beta.16
 
 - **FIX**: using the right format for screenshots.
