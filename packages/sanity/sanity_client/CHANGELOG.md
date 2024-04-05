@@ -1,10 +1,16 @@
 ## 1.0.0-beta.5
 
+- Refactored tests for 100% coverage
+- Updated pubspec description and readme
+- Added documentation for all the classes and methods
+
 ## 1.0.0-beta.4
 
- - Moved the sanity packages under the vyuh repo
+- Moved the sanity packages under the vyuh repo
 
- - **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under vyuh. ([f1175fbd](https://github.com/vyuh-tech/vyuh/commit/f1175fbdb602588ef5f8d978a3d474f15a96e861))
+- **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under
+  vyuh.
+  ([f1175fbd](https://github.com/vyuh-tech/vyuh/commit/f1175fbdb602588ef5f8d978a3d474f15a96e861))
 
 ## 1.0.0-beta.3
 

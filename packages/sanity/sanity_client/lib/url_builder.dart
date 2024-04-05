@@ -2,33 +2,58 @@ import 'dart:math';
 
 import 'package:sanity_client/sanity_client.dart';
 
+/// Options to customize the image URL.
+///
+/// This class is used to customize the image URL when fetching images from Sanity.
+/// You can provide various parameter such as [width], [height], [quality], [devicePixelRatio], [format],
+/// which will then be used to generate the image URL.
 class ImageOptions {
+  /// The width of the image in pixels.
   final int? width;
+
+  /// The height of the image in pixels.
   final int? height;
+
+  /// The device pixel ratio of the image.
   final int? devicePixelRatio;
+
+  /// The quality of the image, expressed as value between 0-100
   final int? quality;
+
+  /// The format of the image. Can be either `jpg`, `png`, `webp`, or `auto`.
   final String? format;
 
-  ImageOptions(
-      {this.width,
-      this.height,
-      this.devicePixelRatio,
-      this.quality,
-      this.format});
+  ImageOptions({
+    this.width,
+    this.height,
+    this.devicePixelRatio,
+    this.quality,
+    this.format,
+  });
 }
 
+/// Provides the main interface for building URLs for Sanity assets.
+///
+/// This class is used to build URLs for Sanity assets such as files, images, and queries.
 abstract class UrlBuilder<TConfig> {
+  /// The configuration object for the client, which is specific to the URL builder implementation.
   final TConfig config;
 
   UrlBuilder(this.config);
 
+  /// Builds a URL for a file asset.
   Uri fileUrl(String fileRefId);
 
+  /// Builds a URL for an image asset.
   Uri imageUrl(String imageRefId, {ImageOptions? options});
 
+  /// Builds a URL for a GROQ query.
   Uri queryUrl(String query, {Map<String, String>? params});
 }
 
+/// A URL builder implementation for Sanity.
+///
+/// Supports building URLs for files, images, and queries.
 final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
   SanityUrlBuilder(super.config);
 
@@ -92,6 +117,7 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
   }
 }
 
+/// Internal class to parse image reference IDs.
 class _ParsedReference {
   final String id;
   final int width;
