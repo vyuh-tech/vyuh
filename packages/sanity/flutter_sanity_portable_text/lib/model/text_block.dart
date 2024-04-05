@@ -20,7 +20,6 @@ enum ListItemType { bullet, square, number }
 /// within the Portable Text instance. Most of the fields are based on the specification for Portable Text,
 /// which can be seen here: https://www.portabletext.org/
 @JsonSerializable()
-@MarkDefsConverter()
 class TextBlockItem implements PortableBlockItem {
   static const schemaName = 'block';
 
@@ -35,6 +34,7 @@ class TextBlockItem implements PortableBlockItem {
 
   /// Mark definitions is an array of objects with a key, type and some data.
   /// Mark definitions are tied to spans by adding the referring _key in the marks array.
+  @JsonKey(fromJson: _markDefsFromJson)
   final List<MarkDef> markDefs;
 
   /// Style typically describes a visual property for the whole block. Typical values
@@ -92,4 +92,20 @@ class Span {
 
   factory Span.fromJson(final Map<String, dynamic> json) =>
       _$SpanFromJson(json);
+}
+
+List<MarkDef> _markDefsFromJson(final List<dynamic> json) {
+  final markDefs = PortableTextConfig.shared.markDefs;
+
+  final items = json.map((final item) {
+    final json = item as Map<String, dynamic>;
+    final type = item['_type'] as String;
+
+    final descriptor = markDefs[type];
+    final builder = descriptor?.fromJson ?? MarkDef.fromJson;
+
+    return builder(json);
+  }).toList(growable: false);
+
+  return items;
 }

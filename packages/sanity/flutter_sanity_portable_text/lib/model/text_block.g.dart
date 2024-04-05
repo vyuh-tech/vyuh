@@ -16,10 +16,11 @@ TextBlockItem _$TextBlockItemFromJson(Map<String, dynamic> json) =>
       style: json['style'] as String? ?? 'normal',
       markDefs: json['markDefs'] == null
           ? const <MarkDef>[]
-          : const MarkDefsConverter().fromJson(json['markDefs'] as List),
+          : _markDefsFromJson(json['markDefs'] as List),
       listItem: $enumDecodeNullable(_$ListItemTypeEnumMap, json['listItem']),
       level: json['level'] as int?,
-    )..listItemIndex = json['listItemIndex'] as int?;
+      listItemIndex: json['listItemIndex'] as int?,
+    );
 
 const _$ListItemTypeEnumMap = {
   ListItemType.bullet: 'bullet',

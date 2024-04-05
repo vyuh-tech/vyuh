@@ -34,7 +34,7 @@ class PortableTextBlock extends StatelessWidget {
     );
 
     final builder = config.blockContainers[model.style] ??
-        config.blockContainers['__default__']!;
+        PortableTextConfig.defaultBlockContainerBuilder;
 
     final child = builder(context, content);
 
@@ -55,7 +55,8 @@ class PortableTextBlock extends StatelessWidget {
     final config = PortableTextConfig.shared;
 
     // Step 1: Start with the base style
-    final baseStyle = config.baseStyle(context) ?? theme.textTheme.bodyLarge!;
+    final baseStyle = config.baseStyle(context) ??
+        PortableTextConfig.defaultBaseStyle(context)!;
 
     final styleBuilder = config.styles[model.style];
     if (styleBuilder == null) {
@@ -95,7 +96,7 @@ class PortableTextBlock extends StatelessWidget {
         return _errorSpan('Missing markDef descriptor for "${markDef.type}"');
       }
 
-      style = descriptor.styleBuilder?.call(context, markDef, style) ?? style;
+      style = descriptor.styleBuilder.call(context, markDef, style);
     }
 
     // Step 4: Now build the final InlineSpan, if any
