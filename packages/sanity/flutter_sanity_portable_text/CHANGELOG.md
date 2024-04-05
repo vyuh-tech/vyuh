@@ -1,3 +1,12 @@
+## 1.0.0-beta.18
+
+ - Shorter pubspec description
+
+ - **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under vyuh. ([f1175fbd](https://github.com/vyuh-tech/vyuh/commit/f1175fbdb602588ef5f8d978a3d474f15a96e861))
+ - **FIX**: using the right format for screenshots. ([ce78e1f9](https://github.com/vyuh-tech/vyuh/commit/ce78e1f9ee6baf497a177bec4a1b7547d1eac2e7))
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation. ([2e9d4550](https://github.com/vyuh-tech/vyuh/commit/2e9d45503e149159a3cd982357c97e91ab26bdd1))
+ - **FEAT**: refactored portable text to be more resilient. ([39db715f](https://github.com/vyuh-tech/vyuh/commit/39db715ff85032721b94c82176d7b8ebda384151))
+
 ## 1.0.0-beta.17
 
  - 100% test coverage
