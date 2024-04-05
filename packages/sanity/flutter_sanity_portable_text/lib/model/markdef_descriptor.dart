@@ -2,10 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../flutter_sanity_portable_text.dart';
-
-part 'markdef_descriptor.g.dart';
-
 /// Builds a [TextStyle] for a given [MarkDef].
 typedef MarkDefTextStyleBuilder = TextStyle Function(
   BuildContext context,
@@ -39,7 +35,7 @@ final class MarkDefDescriptor {
   // Only the top-level TextSpan will be able to handle the hit-testing.
 
   /// Builds a [TextStyle] for a given [MarkDef].
-  final MarkDefTextStyleBuilder? styleBuilder;
+  final MarkDefTextStyleBuilder styleBuilder;
 
   /// Builds a [GestureRecognizer] for a given [MarkDef].
   final MarkDefSpanBuilder? spanBuilder;
@@ -47,14 +43,13 @@ final class MarkDefDescriptor {
   MarkDefDescriptor({
     required this.schemaType,
     required this.fromJson,
-    this.styleBuilder,
+    required this.styleBuilder,
     this.spanBuilder,
   });
 }
 
 /// A single mark definition.
-@JsonSerializable()
-class MarkDef {
+abstract class MarkDef {
   /// The key of the mark definition.
   @JsonKey(name: '_key')
   final String key;
@@ -65,35 +60,7 @@ class MarkDef {
 
   MarkDef({required this.key, required this.type});
 
-  /// Converts a [MarkDef] to a JSON map.
+  /// Converts a [MarkDef] to a JSON map. Should be implemented by subclasses.
   factory MarkDef.fromJson(final Map<String, dynamic> json) =>
-      _$MarkDefFromJson(json);
-}
-
-/// Converts a list of [MarkDef]s from JSON.
-/// It is an internal class used during the deserialization process.
-class MarkDefsConverter extends JsonConverter<List<MarkDef>, List<dynamic>> {
-  const MarkDefsConverter();
-
-  @override
-  List toJson(final List<MarkDef> object) {
-    throw UnimplementedError();
-  }
-
-  @override
-  List<MarkDef> fromJson(final List<dynamic> json) {
-    final markDefs = PortableTextConfig.shared.markDefs;
-
-    final items = json.map((final item) {
-      final json = item as Map<String, dynamic>;
-      final type = item['_type'] as String;
-
-      final descriptor = markDefs[type];
-      final builder = descriptor?.fromJson ?? MarkDef.fromJson;
-
-      return builder(json);
-    }).toList(growable: false);
-
-    return items;
-  }
+      throw UnsupportedError('This should be implemented by the subclass.');
 }

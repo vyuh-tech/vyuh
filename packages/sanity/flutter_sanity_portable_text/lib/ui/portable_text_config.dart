@@ -108,6 +108,11 @@ final class PortableTextConfig {
     return Theme.of(context).textTheme.bodyMedium;
   }
 
+  static BlockContainerBuilder defaultBlockContainerBuilder =
+      (final BuildContext context, final Widget child) {
+    return child;
+  };
+
   /// The default text styles used by the shared instance of [PortableTextConfig].
   static final Map<String, TextStyleBuilder> defaultStyles = {
     'h1': (
@@ -115,43 +120,49 @@ final class PortableTextConfig {
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.headlineLarge!,
+        base.merge(Theme.of(context).textTheme.headlineLarge),
     'h2': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.headlineMedium!,
+        base.merge(Theme.of(context).textTheme.headlineMedium),
     'h3': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.headlineSmall!,
+        base.merge(Theme.of(context).textTheme.headlineSmall),
     'h4': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.titleLarge!,
+        base.merge(Theme.of(context).textTheme.titleLarge),
     'h5': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.titleMedium!,
+        base.merge(Theme.of(context).textTheme.titleMedium),
     'h6': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.titleSmall!,
+        base.merge(Theme.of(context).textTheme.titleSmall),
+    'blockquote': (
+      final BuildContext context,
+      final TextStyle base, [
+      final MarkDef? mark,
+    ]) =>
+        base.copyWith(color: Theme.of(context).colorScheme.primary),
     'normal': (
       final BuildContext context,
       final TextStyle base, [
       final MarkDef? mark,
     ]) =>
-        Theme.of(context).textTheme.bodyMedium!,
+        base.merge(Theme.of(context).textTheme.bodyMedium),
     'em': (
       final BuildContext context,
       final TextStyle base, [
@@ -164,12 +175,6 @@ final class PortableTextConfig {
       final MarkDef? mark,
     ]) =>
         base.copyWith(fontWeight: FontWeight.bold),
-    'blockquote': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(color: Theme.of(context).colorScheme.primary),
     'strike-through': (
       final BuildContext context,
       final TextStyle base, [
@@ -196,7 +201,6 @@ final class PortableTextConfig {
 
   /// The default block containers used by the shared instance of [PortableTextConfig].
   static final Map<String, BlockContainerBuilder> defaultBlockContainers = {
-    '__default__': (final BuildContext context, final Widget child) => child,
     'blockquote': (final BuildContext context, final Widget child) {
       final theme = Theme.of(context);
 
