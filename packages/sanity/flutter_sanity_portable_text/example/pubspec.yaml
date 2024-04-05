@@ -1,4 +1,4 @@
-name: example
+name: flutter_sanity_portable_text_example
 description: A simple Flutter project to show the usage of flutter_sanity_portable_text
 publish_to: none
 version: 1.0.0+1

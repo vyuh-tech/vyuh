@@ -30,6 +30,29 @@ void main() {
     expect(client.urlBuilder, isA<SanityUrlBuilder>());
   });
 
+  test('Asserts that a token is provided', () async {
+    expect(
+      () => SanityConfig(
+        projectId: project,
+        dataset: dataset,
+        token: '',
+      ),
+      throwsA(isA<AssertionError>()),
+    );
+  });
+
+  test('Asserts that the apiVersion has a valid format', () async {
+    expect(
+      () => SanityConfig(
+        projectId: project,
+        dataset: dataset,
+        token: token,
+        apiVersion: 'invalid',
+      ),
+      throwsA(isA<AssertionError>()),
+    );
+  });
+
   test('Request is constructed properly', () async {
     final httpClient = MockClient((final req) async {
       expect(req.url.host, contains('$project.apicdn.sanity.io'));
@@ -45,7 +68,7 @@ void main() {
 
     final c1 = getClient(httpClient: httpClient);
 
-    await c1.fetch(c1.queryUrl('some query'));
+    await c1.fetch('some query');
   });
 
   test('Params are being sent properly', () async {
@@ -53,7 +76,7 @@ void main() {
       expect(req.url.query, contains('test=true'));
       expect(req.url.query, contains('explain=true'));
       expect(req.url.toString(), contains('api.sanity.io'));
-      expect(req.url.path, contains('v12345'));
+      expect(req.url.path, contains('v2024-02-16'));
 
       return http.Response(_sanityResponse, 200);
     });
@@ -63,10 +86,10 @@ void main() {
       explainQuery: true,
       perspective: Perspective.previewDrafts,
       useCdn: false,
-      apiVersion: 'v12345',
+      apiVersion: 'v2024-02-16',
     );
 
-    await c1.fetch(c1.queryUrl('some query', params: {'test': 'true'}));
+    await c1.fetch('some query', params: {'test': 'true'});
   });
 
   test('Correct domain is used when CDN is false', () async {
@@ -84,7 +107,7 @@ void main() {
       httpClient: httpClient,
     );
 
-    await c1.fetch(c1.queryUrl('some query'));
+    await c1.fetch('some query');
   });
 
   group('Throws an exception for invalid conditions', () {
@@ -122,7 +145,7 @@ void main() {
       test('Throws for $key', () {
         expect(
           () async {
-            await client.fetch(client.queryUrl(key));
+            await client.fetch(key);
           },
           throwsA(value.$2),
         );
@@ -134,7 +157,7 @@ void main() {
     var message = '';
     try {
       final client = getClient();
-      await client.fetch(client.queryUrl('Unauthorized 403'));
+      await client.fetch('Unauthorized 403');
     } catch (e) {
       message = e.toString();
     }
@@ -160,7 +183,7 @@ void main() {
 
     final client = getClient(httpClient: httpClient);
 
-    final response = await client.fetch(client.queryUrl('valid query'));
+    final response = await client.fetch('valid query');
     expect(response.result, equals({}));
     expect(response.info.serverTimeMs, equals(20));
   });

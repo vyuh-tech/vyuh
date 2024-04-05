@@ -4,17 +4,33 @@ import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
 
+/// The various perspectives that can be used to fetch data from Sanity
 enum Perspective { raw, previewDrafts, published }
 
+/// Configuration for the Sanity client
 final class SanityConfig {
+  /// The dataset to fetch data from
   final String dataset;
+
+  /// The project id
   final String projectId;
+
+  /// The token to use for authentication
   final String token;
+
+  /// Whether to use the CDN or not
   final bool useCdn;
+
+  /// The API version to use. It follows the format `vYYYY-MM-DD`
   final String apiVersion;
+
+  /// The perspective to use
   final Perspective perspective;
+
+  /// Whether to explain the query or not
   final bool explainQuery;
 
+  /// The default API version to use
   static final String defaultApiVersion = (() {
     final today = DateTime.now();
     final parts = [
@@ -42,12 +58,22 @@ final class SanityConfig {
 Invalid Token provided. 
 Setup an API token, with Viewer access, in the Sanity Management Console.
 Without a valid token you will not be able to fetch data from Sanity.''');
+
+    assert(RegExp(r'^v\d{4}-\d{2}-\d{2}$').hasMatch(this.apiVersion),
+        'Invalid API version provided. It should follow the format `vYYYY-MM-DD`');
   }
 }
 
+/// The client for fetching data from Sanity
 class SanityClient {
+  /// The configuration for the client
   final SanityConfig config;
+
+  /// The HTTP client to use. Generally not needed to be provided.
+  /// It is used for testing purposes
   final http.Client httpClient;
+
+  /// The URL builder to use. When not provided it uses the default Sanity URL builder
   final UrlBuilder urlBuilder;
 
   final Map<String, String> _requestHeaders;
@@ -60,16 +86,21 @@ class SanityClient {
         urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
         _requestHeaders = {'Authorization': 'Bearer ${config.token}'};
 
-  Future<SanityQueryResponse> fetch(Uri uri) async {
+  /// Fetches data from Sanity by running the GROQ Query with the passed in parameters
+  Future<SanityQueryResponse> fetch(String query,
+      {Map<String, String>? params}) async {
+    final uri = queryUrl(query, params: params);
     final response = await httpClient.get(uri, headers: _requestHeaders);
 
     return _getQueryResult(response);
   }
 
+  /// The URL for the query
   Uri queryUrl(String query, {Map<String, String>? params}) =>
       urlBuilder.queryUrl(query, params: params);
 
-//ignore: long-parameter-list
+  /// Return the associated image url
+  //ignore: long-parameter-list
   Uri imageUrl(
     final String imageRefId, {
     final int? width,
