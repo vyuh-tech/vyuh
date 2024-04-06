@@ -1,3 +1,9 @@
+## 1.0.0-beta.6
+
+ - Updated interfaces for portable text
+
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+
 ## 1.0.0-beta.5
 
  - Updating signatures based on changes to flutter_sanity_portable_text

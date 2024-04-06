@@ -10,12 +10,14 @@
   </h4>
 </p>
 
+[![Codecov](https://img.shields.io/codecov/c/github/vyuh-tech/vyuh?token=5NL6KJ70AR&logo=codecov&style=for-the-badge)](https://codecov.io/github/vyuh-tech/vyuh)
+&nbsp;
 [![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish-dart.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish-dart.yml)
 &nbsp;
 [![Discord](https://img.shields.io/discord/1198906057502769252?style=for-the-badge&logo=discord)](https://vyuh.tech/discord)
 
 | Packages                                                                                                                                                                                                                            |
-|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | _Sanity Integration_                                                                                                                                                                                                                |
 | [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)                                                             |
 | [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text) |
@@ -34,7 +36,8 @@ Vyuh is a framework to build CMS-driven Flutter Apps at scale. It gives the
 **full-code** power to the Engineering teams. This puts the right control at the
 right place without compromise.
 
-> The CMS is one of the many extensible integrations inside Vyuh. All integrations are managed as a Plugin.
+> The CMS is one of the many extensible integrations inside Vyuh. All
+> integrations are managed as a Plugin.
 
 ## Why did we build this?
 
@@ -42,28 +45,32 @@ A common problem when building large scale apps is the need to stay modular as
 you keep growing the feature set. You also want different teams to work in
 parallel without stepping on each other. The typical approach of creating a
 single project and building all the functionality in it does not scale very well
-over time. You could break up the app into several packages but that still does not give you the clarity of
-who owns what. It does not tell you how to combine these packages together to create the app.
+over time. You could break up the app into several packages but that still does
+not give you the clarity of who owns what. It does not tell you how to combine
+these packages together to create the app.
 
-Additionally, Apps today are very content-oriented and need to be dynamic. This means your
-journeys, page content, themes, etc. should be remotely controllable. In other
-words, making your app Server-driven.
+Additionally, Apps today are very content-oriented and need to be dynamic. This
+means your journeys, page content, themes, etc. should be remotely controllable.
+In other words, making your app Server-driven.
 
 ### Separation of Concerns
 
-Combining all these capabilities together requires a holistic approach, which is only possible when you build a cohesive
-framework.
+Combining all these capabilities together requires a holistic approach, which is
+only possible when you build a cohesive framework.
 
 > **Vyuh** is that framework.
 >
 > It allows you to create the perfect balance of simple, modular components on
-> the `CMS`, with powerful `Flutter` counterparts that take care of all the complexity.
+> the `CMS`, with powerful `Flutter` counterparts that take care of all the
+> complexity.
 
-The teams managing the content and experience don't have to worry about pixel precision or performance and focus more
-on building the screen journeys and page content instead. The Flutter engineering teams handle the complexity of the
+The teams managing the content and experience don't have to worry about pixel
+precision or performance and focus more on building the screen journeys and page
+content instead. The Flutter engineering teams handle the complexity of the
 components along with its performance.
 
-This clear separation allows a phenomenal flexibility in building simple to large scale apps.
+This clear separation allows a phenomenal flexibility in building simple to
+large scale apps.
 
 **Vyuh** comes with powerful capabilities like:
 
@@ -74,8 +81,8 @@ This clear separation allows a phenomenal flexibility in building simple to larg
 - [x] Team Independence.
 - [x] Decentralised development.
 - [x] Creating a family of apps with reusable features.
-- [x] A growing set of integrations (aka building blocks) to make app development
-  faster.
+- [x] A growing set of integrations (aka building blocks) to make app
+      development faster.
 
 ## The Building Blocks
 
@@ -88,8 +95,9 @@ Vyuh comes with some core building blocks such as:
   manner using Plugins. Authentication, Networking, CMS, Storage, Permissions,
   Ads, etc. are all plugins that are available to all features.
 - **CMS-Driven UI**: Also known as Server-Driven UI, the entire app experience
-  can be driven from a CMS. This includes the screen journeys, page content, themes, etc. The CMS itself is a plugin, so
-  bring your own CMS as a new plugin!
+  can be driven from a CMS. This includes the screen journeys, page content,
+  themes, etc. The CMS itself is a plugin, so bring your own CMS as a new
+  plugin!
 - **Community packages**: leverages the best community packages like `mobx`,
   `go_router`, `get_it`, `hive`, `firebase`, etc. This means you don't have to
   learn anything proprietary to use Vyuh.
