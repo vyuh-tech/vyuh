@@ -1,5 +1,7 @@
 # Sanity Client
 
+[![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)
+
 A Dart client for connecting to Sanity.io projects and executing GROQ queries.
 It supports the HTTP semantics described here:
 https://www.sanity.io/docs/http-query
