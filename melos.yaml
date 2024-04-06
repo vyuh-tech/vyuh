@@ -10,6 +10,8 @@ packages:
 command:
   version:
     workspaceChangelog: false
+    fetchTags: false
+    updateGitTagRefs: false
 
 ide:
   intellij:
