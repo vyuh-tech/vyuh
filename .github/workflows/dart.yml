@@ -14,7 +14,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    name: {{ matrix.package }}
     strategy:
       matrix:
         # All the packages are specified by their name and not path.
