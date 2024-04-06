@@ -46,11 +46,11 @@ jobs:
           dart run melos bs
 
       - name: Analyze package
-        run: melos exec --scope="{{ matrix.package }}" -- dart analyze --fatal-infos
+        run: melos exec --scope="${{ matrix.package }}" -- dart analyze --fatal-infos
 
       - name: Run tests
         if: matrix.test
-        run: melos exec --scope="{{ matrix.package }}" -- flutter test --coverage
+        run: melos exec --scope="${{ matrix.package }}" -- flutter test --coverage
 
       - name: Upload coverage reports to Codecov
         if: matrix.test
