@@ -5,18 +5,32 @@
 Renders the [Portable Text format](https://github.com/portabletext/portabletext)
 in Flutter.
 
-<img src="example/screenshot.png" width="300" alt="Screenshot of the rendered Portable Text" />
+<img
+src="https://raw.githubusercontent.com/vyuh-tech/vyuh/main/packages/sanity/flutter_sanity_portable_text/example/screenshot.png"
+width="300"
+alt="Screenshot of the rendered Portable Text" />
 
 ## Features
 
 - [x] Renders all standard styles and marks
 - [x] Renders multiple blocks of text
-- [x] Includes supports for custom blocks
-- [x] Supports custom styles and marks including gestures
+- [x] Includes support for custom blocks and block containers
+- [x] Supports custom styles and marks including complex annotations
+- [x] Ability to customize all the default styles, blocks and containers
+- [x] Shows inline errors for unregistered blocks, marks and styles. This is
+      useful during debugging and development.
 
 ## Usage
 
 The below samples show the various ways of using the `PortableText` widget.
+
+- [With a simple TextBlockItem](#with-a-simple-textblockitem)
+- [Rendered directly from JSON](#rendered-directly-from-json)
+- [With multiple blocks and different styles](#with-multiple-blocks-and-different-styles)
+- [With a custom block](#with-a-custom-block)
+- [Using an unregistered block shows an error](#using-an-unregistered-block-shows-an-error)
+- [With a custom mark](#with-a-custom-mark)
+- [When a custom mark is not registered, an error will be shown](#when-a-custom-mark-is-not-registered-an-error-will-be-shown)
 
 ### With a simple TextBlockItem
 
@@ -308,7 +322,7 @@ class MyApp extends StatelessWidget {
                   style: 'h1',
                 ),
 
-                // this will show an error on the PortableWidget
+                // this will show an error on the PortableText Widget
                 UnregisteredBlockItem(),
               ],
             ),
@@ -460,7 +474,7 @@ class MyApp extends StatelessWidget {
                   children: [
                     Span(
                         text:
-                            ' and report when a custom mark is not registered, such as:'),
+                        ' and report when a custom mark is not registered, such as:'),
                     Span(text: ' this.', marks: ['missing-key']),
                   ],
                   markDefs: [
