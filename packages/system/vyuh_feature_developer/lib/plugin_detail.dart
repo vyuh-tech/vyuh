@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/plugin_types/plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 
