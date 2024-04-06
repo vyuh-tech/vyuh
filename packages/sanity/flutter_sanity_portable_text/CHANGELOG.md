@@ -1,3 +1,5 @@
+## 1.0.0-beta.21
+
 ## 1.0.0-beta.20
 
 - Bump "flutter_sanity_portable_text" to `1.0.0-beta.20`.
