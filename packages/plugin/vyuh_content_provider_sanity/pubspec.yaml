@@ -1,0 +1,30 @@
+name: vyuh_content_provider_sanity
+description: A Content Provider for the Vyuh Framework that reads documents from Sanity.io.
+version: 1.0.0-beta.1
+
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/plugin/vyuh_content_provider_sanity
+issue_tracker: https://github.com/vyuh-tech/vyuh/issues
+
+topics:
+  - sanity
+  - content-provider
+  - vyuh
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: '>=3.16.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sanity_client: ^1.0.0-beta.2
+  vyuh_core: ^1.0.0-beta.1
+  vyuh_cache: ^1.0.0-beta.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:

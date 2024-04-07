@@ -645,7 +645,7 @@ packages:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.5"
+    version: "1.0.0-beta.6"
   web:
     dependency: transitive
     description:
