@@ -1,3 +1,14 @@
+## 1.0.0-beta.7
+
+ - **REFACTOR**: navigation and default route layout. ([7719a8c0](https://github.com/vyuh-tech/vyuh/commit/7719a8c029b9f346e6cf5ccaa343c8cdc8732666))
+ - **REFACTOR**: action now is a list of configurations instead of a single item. ([7cfb6a82](https://github.com/vyuh-tech/vyuh/commit/7cfb6a82d357716acfa92a6a57f5e6eff71172e0))
+ - **FEAT**: added single item layout. ([4b8aad2f](https://github.com/vyuh-tech/vyuh/commit/4b8aad2ff743511e9496b91015e8b1b850a4965c))
+ - **FEAT**: added a new layout for route for a single item. ([06b4e668](https://github.com/vyuh-tech/vyuh/commit/06b4e6687d9c8d4f870a0b65969dcb1a30950ee7))
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation. ([2e9d4550](https://github.com/vyuh-tech/vyuh/commit/2e9d45503e149159a3cd982357c97e91ab26bdd1))
+ - **FEAT**: refactored portable text to be more resilient. ([39db715f](https://github.com/vyuh-tech/vyuh/commit/39db715ff85032721b94c82176d7b8ebda384151))
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load. ([4a5b705e](https://github.com/vyuh-tech/vyuh/commit/4a5b705e88992aadbec1b0cb629695b991163b2e))
+ - **FEAT**: added conditional action. ([546c5d3c](https://github.com/vyuh-tech/vyuh/commit/546c5d3c9b05dee08f628496b8b2420a66e94a48))
+
 ## 1.0.0-beta.6
 
  - Updated interfaces for portable text
