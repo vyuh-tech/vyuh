@@ -1,3 +1,7 @@
+## 1.0.0-beta.8
+
+ - **FIX**: analysis issues.
+
 ## 1.0.0-beta.7
 
 - **FEAT**: added single item layout.
