@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_path/json_path.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/content/card/list_item_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
