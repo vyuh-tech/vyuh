@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vt;
+import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_extension_script/vyuh_extension_script.dart';
-import 'package:vyuh_feature_system/content/card/list_item_layout.dart';
-import 'package:vyuh_feature_system/content/portable_text/invoke_action.dart';
-import 'package:vyuh_feature_system/content/route/default_layout.dart';
-import 'package:vyuh_feature_system/content/route/route_type.dart';
-import 'package:vyuh_feature_system/content/route/sliver_layout.dart';
-import 'package:vyuh_feature_system/content/route/tabs.dart';
-import 'package:vyuh_feature_system/content/web_view.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -77,6 +70,11 @@ final feature = FeatureDescriptor(
             schemaType: SliverRouteLayout.schemaName,
             title: 'Sliver Layout',
             fromJson: SliverRouteLayout.fromJson,
+          ),
+          TypeDescriptor(
+            schemaType: SingleItemLayout.schemaName,
+            title: 'Single Item Layout',
+            fromJson: SingleItemLayout.fromJson,
           ),
         ]),
         CardDescriptor(layouts: [
@@ -216,7 +214,7 @@ final feature = FeatureDescriptor(
     ScriptExtensionDescriptor(
       name: 'switchTheme',
       function: (args) {
-        final service = vyuh.di.get<vt.ThemeService>();
+        final service = vyuh.di.get<vc.ThemeService>();
         service.changeTheme(
           service.currentMode.value == ThemeMode.light
               ? ThemeMode.dark
