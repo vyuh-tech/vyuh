@@ -13,6 +13,8 @@ command:
     workspaceChangelog: false
     fetchTags: false
     updateGitTagRefs: false
+    includeCommitId: false
+    linkToCommits: false
 
 ide:
   intellij:
