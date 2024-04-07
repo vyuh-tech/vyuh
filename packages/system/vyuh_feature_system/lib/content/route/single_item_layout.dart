@@ -25,13 +25,11 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
       return vf.empty;
     }
 
-    final body = useSafeArea
-        ? SafeArea(child: vyuh.content.buildContent(context, content))
-        : vyuh.content.buildContent(context, first);
+    final child = vyuh.content.buildContent(context, first);
 
     return vf.RouteContainer(
       content: content,
-      child: Scaffold(body: body),
+      child: Scaffold(body: useSafeArea ? SafeArea(child: child) : child),
     );
   }
 }
