@@ -5,6 +5,11 @@ homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_cache
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
 
+topics:
+  - cache
+  - vyuh
+  - system
+
 environment:
   sdk: ^3.1.0
 

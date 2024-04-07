@@ -5,6 +5,12 @@ homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_extension_content
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
 
+topics:
+  - vyuh
+  - extension
+  - content
+  - system
+
 environment:
   sdk: '>=3.3.0 <4.0.0'
   flutter: '>=3.16.0'

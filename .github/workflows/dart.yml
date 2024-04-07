@@ -25,6 +25,7 @@ jobs:
           - vyuh_feature_developer
           - vyuh_feature_system
           - vyuh_extension_script
+          - vyuh_content_provider_sanity
           - sanity_client
           - flutter_sanity_portable_text
         include:
