@@ -10,6 +10,9 @@ final class AnonymousAuthPlugin extends AuthPlugin {
         );
 
   @override
+  User? get currentUser => User.anonymous;
+
+  @override
   Future<void> deleteAccount() async {
     controller.add(User.anonymous);
   }

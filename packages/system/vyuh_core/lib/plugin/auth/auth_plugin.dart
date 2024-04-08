@@ -13,9 +13,12 @@ abstract base class AuthPlugin extends Plugin {
   AuthPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.auth);
 
-  Stream<User> get user {
+  User? get currentUser;
+
+  Stream<User> get userChanges {
     if (!_initialized) {
-      throw StateError('Plugin not initialized');
+      throw StateError(
+          'AuthPlugin is not yet initialized. Call init() before accessing userChanges.');
     }
 
     return controller.stream;
@@ -61,42 +64,4 @@ abstract base class AuthPlugin extends Plugin {
   Future<void> logout();
 
   Future<void> deleteAccount();
-}
-
-class User {
-  final String id;
-  final String? name;
-  final String? email;
-  final String? phoneNumber;
-  final String? photoUrl;
-  final LoginMethod loginMethod;
-
-  const User({
-    required this.id,
-    this.name,
-    this.email,
-    this.phoneNumber,
-    this.photoUrl,
-    this.loginMethod = LoginMethod.anonymous,
-  });
-
-  bool get isAnonymous => this == anonymous;
-
-  static const anonymous = User(
-    id: 'anonymous',
-  );
-}
-
-enum LoginMethod {
-  anonymous,
-  emailPassword,
-  phoneOtp,
-  emailLink,
-  google,
-  meta,
-  apple,
-  twitter,
-  github,
-  linkedin,
-  microsoft,
 }
