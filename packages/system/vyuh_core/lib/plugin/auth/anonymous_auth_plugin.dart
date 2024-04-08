@@ -35,7 +35,7 @@ final class AnonymousAuthPlugin extends AuthPlugin {
 
   @override
   Future<void> loginWithEmailPassword(
-      {required String username, required String password}) async {
+      {required String email, required String password}) async {
     controller.add(User.anonymous);
   }
 
