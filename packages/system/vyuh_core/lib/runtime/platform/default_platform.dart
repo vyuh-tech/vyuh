@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' as flutter;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:mobx/mobx.dart';
+import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
 import 'package:vyuh_core/runtime/platform/fallback_route_page_builder.dart';
 import 'package:vyuh_core/runtime/platform/framework_init_view.dart';
 import 'package:vyuh_core/runtime/platform/platform_init_tracker.dart';
@@ -242,6 +243,7 @@ extension on PluginType {
         PluginType.content => NoOpContentPlugin(),
         PluginType.di => GetItDIPlugin(),
         PluginType.network => HttpNetworkPlugin(),
+        PluginType.auth => AnonymousAuthPlugin(),
         _ => null
       };
 }

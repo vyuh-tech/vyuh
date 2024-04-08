@@ -11,6 +11,7 @@ export 'feature_descriptor.dart';
 export 'plugin/analytics/analytics_plugin.dart';
 export 'plugin/analytics/analytics_provider.dart';
 export 'plugin/analytics/noop_analytics_provider.dart';
+export 'plugin/auth/auth_plugin.dart';
 export 'plugin/content/content_plugin.dart';
 export 'plugin/content/content_provider.dart';
 export 'plugin/content/noop_content_plugin.dart';
