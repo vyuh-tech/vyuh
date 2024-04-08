@@ -13,7 +13,7 @@ abstract base class AuthPlugin extends Plugin {
   AuthPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.auth);
 
-  User? get currentUser;
+  User? get currentUser => throw UnimplementedError();
 
   Stream<User> get userChanges {
     if (!_initialized) {
@@ -43,25 +43,63 @@ abstract base class AuthPlugin extends Plugin {
     _initialized = true;
   }
 
-  Future<void> loginAnonymously();
+  Future<void> loginAnonymously() {
+    throw UnimplementedError();
+  }
 
   Future<void> loginWithPhoneOtp(
-      {required String phoneNumber, required String otp});
+      {required String phoneNumber, required String otp}) {
+    throw UnimplementedError();
+  }
+
   Future<void> loginWithEmailPassword(
-      {required String username, required String password});
-  Future<void> sendEmailLink({required String email, required String clientId});
+      {required String email, required String password}) {
+    throw UnimplementedError();
+  }
+
+  Future<void> sendEmailLink(
+      {required String email, required String clientId}) {
+    throw UnimplementedError();
+  }
+
   Future<void> loginWithEmailLink(
-      {required String email, required String link});
+      {required String email, required String link}) {
+    throw UnimplementedError();
+  }
 
-  Future<void> loginWithGoogle();
-  Future<void> loginWithMeta();
-  Future<void> loginWithApple();
-  Future<void> loginWithTwitter();
-  Future<void> loginWithGithub();
-  Future<void> loginWithLinkedin();
-  Future<void> loginWithMicrosoft();
+  Future<void> loginWithGoogle() {
+    throw UnimplementedError();
+  }
 
-  Future<void> logout();
+  Future<void> loginWithMeta() {
+    throw UnimplementedError();
+  }
 
-  Future<void> deleteAccount();
+  Future<void> loginWithApple() {
+    throw UnimplementedError();
+  }
+
+  Future<void> loginWithTwitter() {
+    throw UnimplementedError();
+  }
+
+  Future<void> loginWithGithub() {
+    throw UnimplementedError();
+  }
+
+  Future<void> loginWithLinkedin() {
+    throw UnimplementedError();
+  }
+
+  Future<void> loginWithMicrosoft() {
+    throw UnimplementedError();
+  }
+
+  Future<void> logout() {
+    throw UnimplementedError();
+  }
+
+  Future<void> deleteAccount() {
+    throw UnimplementedError();
+  }
 }

@@ -7,18 +7,19 @@ class User {
   final LoginMethod loginMethod;
 
   const User({
+    required this.loginMethod,
     required this.id,
     this.name,
     this.email,
     this.phoneNumber,
     this.photoUrl,
-    this.loginMethod = LoginMethod.anonymous,
   });
 
   bool get isAnonymous => this == anonymous;
 
   static const anonymous = User(
     id: 'anonymous',
+    loginMethod: LoginMethod.anonymous,
   );
 }
 
