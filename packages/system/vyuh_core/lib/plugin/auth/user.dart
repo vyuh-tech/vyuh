@@ -24,12 +24,13 @@ class User {
 }
 
 enum LoginMethod {
+  unknown,
   anonymous,
   emailPassword,
   phoneOtp,
   emailLink,
   google,
-  meta,
+  facebook,
   apple,
   twitter,
   github,
