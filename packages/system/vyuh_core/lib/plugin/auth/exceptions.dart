@@ -4,6 +4,11 @@ abstract class AuthException implements Exception {
   const AuthException(this.error);
 
   final Object error;
+
+  @override
+  String toString() {
+    return '[$runtimeType]: $error';
+  }
 }
 
 final class LoginMethodFailure extends AuthException {
