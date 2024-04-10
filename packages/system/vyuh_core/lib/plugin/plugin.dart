@@ -12,7 +12,7 @@ enum PluginType {
   ads,
 }
 
-abstract base class Plugin {
+abstract class Plugin {
   final String name;
   final String title;
   final PluginType pluginType;
