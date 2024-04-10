@@ -1,3 +1,16 @@
+## 1.0.0-beta.9
+
+ - **REFACTOR**: navigation and default route layout.
+ - **REFACTOR**: action now is a list of configurations instead of a single item.
+ - **FIX**: analysis issues.
+ - **FIX**: analysis issues.
+ - **FEAT**: added single item layout.
+ - **FEAT**: added a new layout for route for a single item.
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+ - **FEAT**: refactored portable text to be more resilient.
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load.
+ - **FEAT**: added conditional action.
+
 ## 1.0.0-beta.8
 
  - **FIX**: analysis issues.
