@@ -1,3 +1,7 @@
+## 1.0.0-beta.5
+
+ - **FIX**: adding missing export.
+
 ## 1.0.0-beta.4
 
  - **FEAT**: added exception to the auth plugin.
