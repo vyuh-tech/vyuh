@@ -1,3 +1,7 @@
+## 1.0.0-beta.4
+
+ - **FEAT**: added exception to the auth plugin.
+
 ## 1.0.0-beta.3
 
 - Using `TypeDescriptor` to register types instead of the previous
