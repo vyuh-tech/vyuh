@@ -47,24 +47,30 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     if (content.title != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: Text(
-                          content.title!,
-                          style: theme.textTheme.bodyLarge,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: true,
+                      Flexible(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                            content.title!,
+                            style: theme.textTheme.bodyLarge,
+                            overflow: TextOverflow.ellipsis,
+                            softWrap: true,
+                          ),
                         ),
                       ),
                     if (content.description != null)
-                      Text(
-                        content.description!,
-                        style: theme.textTheme.bodyMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        softWrap: true,
+                      Flexible(
+                        child: Text(
+                          content.description!,
+                          style: theme.textTheme.bodyMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          softWrap: true,
+                        ),
                       ),
                   ],
                 ),
