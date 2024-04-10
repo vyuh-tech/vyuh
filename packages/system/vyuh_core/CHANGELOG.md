@@ -1,3 +1,7 @@
+## 1.0.0-beta.6
+
+ - **FIX**: removed class modifier "base" to allow external inheritance.
+
 ## 1.0.0-beta.5
 
  - **FIX**: adding missing export.
