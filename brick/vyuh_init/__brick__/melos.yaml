@@ -1,0 +1,17 @@
+name: {{ name.snakeCase() }}
+description: {{ description }}
+
+
+packages:
+  - plugins/*
+  - features/*
+  - features/*/*
+  - apps/*
+
+ide:
+  intellij:
+    moduleNamePrefix: ''
+
+command:
+  version:
+    workspaceChangelog: false

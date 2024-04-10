@@ -1,7 +1,7 @@
 name: sanity_client_example
 description: An example for using the sanity_client package
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
+publish_to: none
 
 environment:
   sdk: ^3.3.3
