@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract base class AuthPlugin extends Plugin {
+abstract class AuthPlugin extends Plugin {
   @protected
   var controller = StreamController<User>.broadcast();
 
