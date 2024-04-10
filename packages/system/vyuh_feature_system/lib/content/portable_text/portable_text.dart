@@ -166,13 +166,15 @@ class DefaultPortableTextContentLayout
 
   @override
   Widget build(BuildContext context, PortableTextContent content) {
+    final child = PortableText(blocks: content.blocks ?? []);
+
     if (content.parent is vc.RouteBase) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: PortableText(blocks: content.blocks ?? []),
+        child: child,
       );
     }
 
-    return PortableText(blocks: content.blocks ?? []);
+    return child;
   }
 }
