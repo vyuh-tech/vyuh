@@ -243,7 +243,7 @@ extension on PluginType {
         PluginType.content => NoOpContentPlugin(),
         PluginType.di => GetItDIPlugin(),
         PluginType.network => HttpNetworkPlugin(),
-        PluginType.auth => AnonymousAuthPlugin(),
+        PluginType.auth => UnknownAuthPlugin(),
         _ => null
       };
 }
