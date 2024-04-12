@@ -1,3 +1,7 @@
+## 1.0.0-beta.7
+
+ - **FEAT**: adding better handling of auth with the use of an Unknown User.
+
 ## 1.0.0-beta.6
 
  - **FIX**: removed class modifier "base" to allow external inheritance.
