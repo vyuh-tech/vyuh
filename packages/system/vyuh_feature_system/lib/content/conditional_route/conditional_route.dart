@@ -1,9 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'conditional_route.g.dart';
@@ -29,7 +27,7 @@ final class ConditionalRoute extends RouteBase {
   final String? defaultCase;
   final Condition? condition;
 
-  vf.Route? _initializedInstance;
+  RouteBase? _initializedInstance;
 
   ConditionalRoute({
     this.condition,
@@ -47,6 +45,27 @@ final class ConditionalRoute extends RouteBase {
 
   @override
   Future<RouteBase?> init() async {
+    return this;
+    // if (_initializedInstance != null) {
+    //   return _initializedInstance;
+    // }
+    //
+    // final value = (await condition?.execute()) ?? defaultCase;
+    // final caseItem = (cases ?? []).firstWhereOrNull((x) => x.value == value);
+    //
+    // final ref = caseItem?.item;
+    // RouteBase? leafRoute;
+    //
+    // if (ref != null) {
+    //   final route = await vyuh.content.provider.fetchRoute(routeId: ref.ref);
+    //   leafRoute = await route?.init();
+    // }
+    //
+    // _initializedInstance = leafRoute as vf.Route?;
+    // return _initializedInstance;
+  }
+
+  Future<RouteBase?> evaluate() async {
     if (_initializedInstance != null) {
       return _initializedInstance;
     }
@@ -62,7 +81,7 @@ final class ConditionalRoute extends RouteBase {
       leafRoute = await route?.init();
     }
 
-    _initializedInstance = leafRoute as vf.Route?;
+    _initializedInstance = leafRoute;
     return _initializedInstance;
   }
 
@@ -87,26 +106,4 @@ final class ConditionalRouteBuilder extends ContentBuilder<ConditionalRoute> {
           defaultLayout: DefaultConditionalRouteLayout(),
           defaultLayoutDescriptor: DefaultConditionalRouteLayout.typeDescriptor,
         );
-}
-
-class DefaultConditionalRouteLayout
-    extends LayoutConfiguration<ConditionalRoute> {
-  static const schemaName = '${ConditionalRoute.schemaName}.layout.default';
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    title: 'Default ConditionalRoute Layout',
-    fromJson: DefaultConditionalRouteLayout.fromJson,
-  );
-
-  DefaultConditionalRouteLayout()
-      : super(schemaType: '${ConditionalRoute.schemaName}.layout.default');
-
-  factory DefaultConditionalRouteLayout.fromJson(Map<String, dynamic> json) =>
-      DefaultConditionalRouteLayout();
-
-  @override
-  Widget build(BuildContext context, ConditionalRoute content) {
-    // This should never be called
-    throw UnimplementedError();
-  }
 }
