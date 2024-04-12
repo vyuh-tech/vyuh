@@ -1,3 +1,19 @@
+## 1.0.0-beta.12
+
+ - **REFACTOR**: navigation and default route layout.
+ - **REFACTOR**: action now is a list of configurations instead of a single item.
+ - **FIX**: analysis issues.
+ - **FIX**: analysis issues.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: showing details of the conditional route in an intermediate layout.
+ - **FEAT**: added single item layout.
+ - **FEAT**: added a new layout for route for a single item.
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+ - **FEAT**: refactored portable text to be more resilient.
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load.
+ - **FEAT**: added conditional action.
+
 ## 1.0.0-beta.11
 
  - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
