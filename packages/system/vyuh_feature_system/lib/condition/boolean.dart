@@ -9,16 +9,22 @@ part 'boolean.g.dart';
 final class BooleanCondition extends ConditionConfiguration {
   static const schemaName = 'vyuh.condition.boolean';
 
-  @JsonKey(defaultValue: false)
   final bool value;
 
-  BooleanCondition({this.value = false}) : super(schemaType: schemaName);
+  final int evaluationDelayInSeconds;
+
+  BooleanCondition({this.value = false, this.evaluationDelayInSeconds = 0})
+      : super(schemaType: schemaName);
 
   factory BooleanCondition.fromJson(Map<String, dynamic> json) =>
       _$BooleanConditionFromJson(json);
 
   @override
   Future<String?> execute() async {
+    if (evaluationDelayInSeconds > 0) {
+      await Future.delayed(Duration(seconds: evaluationDelayInSeconds));
+    }
+
     return value.toString();
   }
 }
