@@ -1,3 +1,7 @@
+## 1.0.0-beta.11
+
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+
 ## 1.0.0-beta.10
 
  - **FEAT**: showing details of the conditional route in an intermediate layout.
