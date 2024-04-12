@@ -1,3 +1,7 @@
+## 1.0.0-beta.10
+
+ - **FEAT**: showing details of the conditional route in an intermediate layout.
+
 ## 1.0.0-beta.9
 
  - **REFACTOR**: navigation and default route layout.
