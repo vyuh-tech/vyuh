@@ -11,12 +11,21 @@ final class NoOpContentPlugin extends ContentPlugin {
 
   @override
   Widget buildContent(BuildContext context, ContentItem content) {
-    return const SizedBox.shrink();
+    return vyuh.widgetBuilder.errorView(
+        title: 'No Content Plugin',
+        subtitle:
+            'No content plugin is available to render ${content.schemaType}.');
   }
 
   @override
   Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) {
-    return const SizedBox.shrink();
+    final routeDetail = [
+      if (url != null) 'Url: $url',
+      if (routeId != null) 'RouteId: $routeId',
+    ].join('');
+    return vyuh.widgetBuilder.routeErrorView(
+        title: 'No Content Plugin',
+        subtitle: 'No content plugin is available to render $routeDetail.');
   }
 
   @override
