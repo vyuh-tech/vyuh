@@ -23,7 +23,7 @@ Future<void> run(HookContext context) async {
           '--platforms=ios,android,web',
           '--description=$description',
         ],
-        workingDirectory: 'apps',
+        workingDirectory: '$appName/apps',
       );
     },
   );
@@ -33,7 +33,11 @@ Future<void> run(HookContext context) async {
     startMessage: 'Running `melos bootstrap` on apps/$appName',
     endMessage: 'Melos bootstrap complete for apps/$appName',
     operation: () async {
-      await Process.run('melos', ['bootstrap']);
+      await Process.run(
+        'melos',
+        ['bootstrap'],
+        workingDirectory: appName,
+      );
     },
   );
 
@@ -62,7 +66,7 @@ Future<void> run(HookContext context) async {
             '--output-path',
             '$studioName',
           ],
-          workingDirectory: 'apps',
+          workingDirectory: '$appName/apps',
         );
       },
     );

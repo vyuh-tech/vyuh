@@ -6,8 +6,10 @@ gen-feature_sample: (_generate-json "features/feature_counter" "watch")
 sync-npm:
     syncpack fix-mismatches format
 
+{{=<% %>=}}
 _generate-json package command="build":
     #!/usr/bin/env bash
     echo "Building JSON-Serializable in {{package}}"
     cd {{package}}
     dart run build_runner {{command}} --delete-conflicting-outputs
+<%={{ }}=%>
