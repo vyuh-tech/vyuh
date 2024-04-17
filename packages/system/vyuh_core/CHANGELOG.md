@@ -1,3 +1,7 @@
+## 1.0.0-beta.8
+
+ - **FIX**: adding error when using content plugin without configuring it.
+
 ## 1.0.0-beta.7
 
  - **FEAT**: adding better handling of auth with the use of an Unknown User.

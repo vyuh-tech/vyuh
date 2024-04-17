@@ -1,3 +1,7 @@
+## 1.0.0-beta.2
+
+ - **FEAT**: added a simple constructor for SanityContentProvider.
+
 ## 1.0.0-beta.1
 
 - Initial release
