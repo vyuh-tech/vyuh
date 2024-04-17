@@ -30,6 +30,14 @@ final class SanityContentProvider extends ContentProvider {
             name: 'vyuh.content.provider.sanity',
             title: 'Sanity Content Provider');
 
+  factory SanityContentProvider.withConfig(
+      {required SanityConfig config, required Duration cacheDuration}) {
+    return SanityContentProvider(
+      SanityClient(config),
+      cacheDuration: cacheDuration,
+    );
+  }
+
   @override
   String fieldValue(String key, Map<String, dynamic> json) =>
       json[fieldMap[key]];
