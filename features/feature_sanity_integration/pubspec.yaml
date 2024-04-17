@@ -1,6 +1,7 @@
 name: feature_sanity_integration
 description: A feature_Sanity Integration feature package for the Vyuh Framework
 version: 1.0.0
+publish_to: none
 
 environment:
   sdk: '>=3.3.3 <4.0.0'
