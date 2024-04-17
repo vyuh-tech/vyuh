@@ -5,6 +5,7 @@ import 'package:mason/mason.dart';
 
 Future<void> run(HookContext context) async {
   final String name = context.vars['name'];
+  final folderName = name.camelCase;
 
   await _trackOperation(
     context,
@@ -16,7 +17,7 @@ Future<void> run(HookContext context) async {
         [
           'install',
         ],
-        workingDirectory: '.',
+        workingDirectory: folderName,
       );
     },
   );
