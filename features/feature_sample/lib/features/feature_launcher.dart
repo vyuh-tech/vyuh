@@ -2,27 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-final featureLauncher = FeatureDescriptor(
-  name: 'launcher',
-  title: 'A launchpad for all features',
-  description: 'Launchpad for features where the actual liftoff happens',
-  icon: Icons.rocket_launch,
-  routes: () async {
-    return [
-      GoRoute(
-          path: '/',
-          pageBuilder: (context, state) {
-            return const MaterialPage(child: _LaunchPage());
-          }),
-    ];
-  },
-  init: () async {
-    vyuh.di.register<ThemeService>(ThemeService());
-  },
-);
+featureLauncher(List<EntryPoint> entryPoints) => FeatureDescriptor(
+      name: 'launcher',
+      title: 'A launchpad for all features',
+      description: 'Launchpad for features where the actual liftoff happens',
+      icon: Icons.rocket_launch,
+      routes: () async {
+        return [
+          GoRoute(
+              path: '/',
+              pageBuilder: (context, state) {
+                return MaterialPage(
+                    child: _LaunchPage(entryPoints: entryPoints));
+              }),
+        ];
+      },
+      init: () async {
+        vyuh.di.register<ThemeService>(ThemeService());
+      },
+    );
+
+final class EntryPoint {
+  final String title;
+  final String description;
+  final String path;
+  final IconData icon;
+
+  EntryPoint({
+    required this.title,
+    required this.description,
+    required this.path,
+    required this.icon,
+  });
+}
 
 class _LaunchPage extends StatelessWidget {
-  const _LaunchPage();
+  final List<EntryPoint> entryPoints;
+  const _LaunchPage({required this.entryPoints});
 
   @override
   Widget build(BuildContext context) {
@@ -30,27 +46,14 @@ class _LaunchPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Launchpad')),
       body: Column(
         children: [
-          ListTile(
-            title: const Text('Developer Tools'),
-            subtitle: const Text('See details of all the features and plugins'),
-            onTap: () => context.push('/developer'),
-            leading: const Icon(Icons.account_tree),
-            trailing: const Icon(Icons.chevron_right),
-          ),
-          ListTile(
-            title: const Text('Counter'),
-            subtitle: const Text('The classic Flutter counter'),
-            onTap: () => context.push('/counter'),
-            leading: const Icon(Icons.add_circle_outlined),
-            trailing: const Icon(Icons.chevron_right),
-          ),
-          ListTile(
-            title: const Text('Theme Settings'),
-            subtitle: const Text('Switch to Light / Dark mode'),
-            onTap: () => context.push('/settings'),
-            leading: const Icon(Icons.light_mode),
-            trailing: const Icon(Icons.chevron_right),
-          ),
+          for (final entryPoint in entryPoints)
+            ListTile(
+              title: Text(entryPoint.title),
+              subtitle: Text(entryPoint.description),
+              onTap: () => context.push(entryPoint.path),
+              leading: Icon(entryPoint.icon),
+              trailing: const Icon(Icons.chevron_right),
+            ),
         ],
       ),
     );

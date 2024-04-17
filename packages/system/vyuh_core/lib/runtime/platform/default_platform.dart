@@ -195,6 +195,11 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
+    // Run a cleanup first
+    _features
+        .expand((e) => e.extensionBuilders ?? <vt.ExtensionBuilder>[])
+        .forEach((e) => e.dispose());
+
     final builders = featureList
         .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
         .groupListsBy((element) => element.extensionType);
