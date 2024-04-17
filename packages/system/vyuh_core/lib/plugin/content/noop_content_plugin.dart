@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+final messages = {
+  'title': (_) => 'No Content Plugin',
+  'error': (String arg) => '''
+No content plugin configured to render $arg. 
+Please use one of the available content plugins or create a custom content plugin to render this content.'''
+};
+
 final class NoOpContentPlugin extends ContentPlugin {
   NoOpContentPlugin()
       : super(
@@ -12,9 +19,9 @@ final class NoOpContentPlugin extends ContentPlugin {
   @override
   Widget buildContent(BuildContext context, ContentItem content) {
     return vyuh.widgetBuilder.errorView(
-        title: 'No Content Plugin',
-        subtitle:
-            'No content plugin is available to render ${content.schemaType}.');
+      title: messages['title']!(''),
+      error: messages['error']!(content.schemaType),
+    );
   }
 
   @override
@@ -24,8 +31,9 @@ final class NoOpContentPlugin extends ContentPlugin {
       if (routeId != null) 'RouteId: $routeId',
     ].join('');
     return vyuh.widgetBuilder.routeErrorView(
-        title: 'No Content Plugin',
-        subtitle: 'No content plugin is available to render $routeDetail.');
+      title: messages['title']!(''),
+      error: messages['error']!(routeDetail),
+    );
   }
 
   @override

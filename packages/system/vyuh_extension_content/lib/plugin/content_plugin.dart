@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -63,15 +62,13 @@ final class DefaultContentPlugin extends ContentPlugin {
       _extensionBuilder!.isRegistered<T>(descriptor);
 
   @override
-  Future<void> dispose() => provider.dispose();
+  Future<void> dispose() async {
+    await provider.dispose();
+    _extensionBuilder?.dispose();
+  }
 
   @override
   Future<void> init() {
-    // Create a one-time reaction to clear the maps whenever the framework is restarted
-    when((_) => vyuh.tracker.currentState.value == InitState.notStarted, () {
-      _extensionBuilder?.reset();
-    });
-
     return provider.init();
   }
 

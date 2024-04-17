@@ -19,6 +19,7 @@ dependencies:
   vyuh_feature_system: ^1.0.0-beta.2
   vyuh_extension_script: ^1.0.0-beta.2
   feature_sample: ^1.0.0
+  feature_sanity_integration: ^1.0.0
 
 dev_dependencies:
   flutter_test:

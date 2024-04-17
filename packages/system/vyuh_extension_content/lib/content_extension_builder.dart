@@ -71,7 +71,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     return _contentBuilderMap[schemaType];
   }
 
-  void reset() {
+  @override
+  void dispose() {
     _typeConverterMap.clear();
     _contentBuilderMap.clear();
   }

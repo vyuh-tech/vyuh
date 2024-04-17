@@ -96,6 +96,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0"
+  feature_sanity_integration:
+    dependency: "direct main"
+    description:
+      path: "../../features/feature_sanity_integration"
+      relative: true
+    source: path
+    version: "1.0.0"
   ffi:
     dependency: transitive
     description:
@@ -617,7 +624,7 @@ packages:
       path: "../../packages/system/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0-beta.3"
+    version: "1.0.0-beta.8"
   vyuh_extension_content:
     dependency: "direct main"
     description:
@@ -638,14 +645,14 @@ packages:
       path: "../../packages/system/vyuh_feature_developer"
       relative: true
     source: path
-    version: "1.0.0-beta.5"
+    version: "1.0.0-beta.6"
   vyuh_feature_system:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.6"
+    version: "1.0.0-beta.12"
   web:
     dependency: transitive
     description:
