@@ -1,3 +1,7 @@
+## 1.0.0-beta.9
+
+ - **FIX**: ensured the extension builders are also disposed and init-ed correctly.
+
 ## 1.0.0-beta.8
 
  - **FIX**: adding error when using content plugin without configuring it.

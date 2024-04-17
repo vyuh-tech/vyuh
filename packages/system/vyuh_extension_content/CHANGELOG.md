@@ -1,3 +1,7 @@
+## 1.0.0-beta.3
+
+ - **FIX**: ensured the extension builders are also disposed and init-ed correctly.
+
 ## 1.0.0-beta.2
 
 - **REFACTOR**: action now is a list of configurations instead of a single item.
