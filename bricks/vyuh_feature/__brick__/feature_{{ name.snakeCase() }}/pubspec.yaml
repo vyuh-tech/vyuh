@@ -1,6 +1,7 @@
 name: feature_{{ name.snakeCase() }}
 description: A feature_{{ name.titleCase() }} feature package for the Vyuh Framework
 version: 1.0.0
+publish_to: none
 
 environment:
   sdk: '>=3.3.3 <4.0.0'

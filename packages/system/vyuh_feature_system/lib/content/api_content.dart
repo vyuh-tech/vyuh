@@ -35,7 +35,7 @@ abstract base class APIHandler<T> {
 
   Future<T?> invoke(BuildContext context);
 
-  Widget buildData(BuildContext context, T? data);
+  Widget build(BuildContext context, T? data);
 }
 
 class APIContentDescriptor extends ContentDescriptor {
@@ -106,7 +106,7 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
             );
           } else {
             // Show data when API call is successful
-            return content.handler?.buildData(context, snapshot.data) ?? empty;
+            return content.handler?.build(context, snapshot.data) ?? empty;
           }
         } else {
           // In case, the future is neither in progress nor done.

@@ -96,7 +96,7 @@ final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
   }
 
   @override
-  Widget buildData(BuildContext context, List<vf.Card>? data) {
+  Widget build(BuildContext context, List<vf.Card>? data) {
     return data == null ? empty : _buildCardList(context, data);
   }
 

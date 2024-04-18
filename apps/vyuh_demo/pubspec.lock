@@ -173,7 +173,7 @@ packages:
     source: hosted
     version: "2.2.1+1"
   flutter_sanity_portable_text:
-    dependency: "direct overridden"
+    dependency: "direct main"
     description:
       path: "../../packages/sanity/flutter_sanity_portable_text"
       relative: true
@@ -477,6 +477,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  sanity_client:
+    dependency: "direct main"
+    description:
+      path: "../../packages/sanity/sanity_client"
+      relative: true
+    source: path
+    version: "1.0.0-beta.5"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -618,20 +625,34 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "13.0.0"
+  vyuh_cache:
+    dependency: "direct overridden"
+    description:
+      path: "../../packages/system/vyuh_cache"
+      relative: true
+    source: path
+    version: "1.0.0-beta.2"
+  vyuh_content_provider_sanity:
+    dependency: "direct main"
+    description:
+      path: "../../packages/plugin/vyuh_content_provider_sanity"
+      relative: true
+    source: path
+    version: "1.0.0-beta.2"
   vyuh_core:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0-beta.8"
+    version: "1.0.0-beta.9"
   vyuh_extension_content:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_extension_content"
       relative: true
     source: path
-    version: "1.0.0-beta.2"
+    version: "1.0.0-beta.3"
   vyuh_extension_script:
     dependency: "direct main"
     description:
