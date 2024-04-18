@@ -1,3 +1,7 @@
+## 1.0.0-beta.22
+
+ - **FEAT**: added support for the "code" style markdef.
+
 ## 1.0.0-beta.21
 
 - Updated readme
