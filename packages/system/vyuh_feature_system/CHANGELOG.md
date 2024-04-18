@@ -1,3 +1,7 @@
+## 1.0.0-beta.13
+
+ - **REFACTOR**: renamed buildData => build for ApiHandler.
+
 ## 1.0.0-beta.12
 
  - **REFACTOR**: navigation and default route layout.
