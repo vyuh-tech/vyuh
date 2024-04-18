@@ -1,3 +1,7 @@
+## 1.0.0-beta.4
+
+ - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
+
 ## 1.0.0-beta.3
 
  - **FIX**: ensured the extension builders are also disposed and init-ed correctly.
