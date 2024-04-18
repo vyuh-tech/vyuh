@@ -175,6 +175,16 @@ final class PortableTextConfig {
       final MarkDef? mark,
     ]) =>
         base.copyWith(fontWeight: FontWeight.bold),
+    'code': (
+      final BuildContext context,
+      final TextStyle base, [
+      final MarkDef? mark,
+    ]) =>
+        base.copyWith(
+          fontFamily: 'monospace',
+          fontFamilyFallback: ['Courier New'],
+          fontWeight: FontWeight.bold,
+        ),
     'strike-through': (
       final BuildContext context,
       final TextStyle base, [
