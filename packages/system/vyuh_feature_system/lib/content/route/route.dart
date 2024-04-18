@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' as flutter;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -11,9 +9,6 @@ part 'route.g.dart';
 final class Route extends RouteBase {
   static const schemaName = 'vyuh.route';
 
-  @JsonKey(fromJson: typeFromFirstOfListJson<RouteTypeConfiguration>)
-  final RouteTypeConfiguration? routeType;
-
   @JsonKey(defaultValue: [])
   final List<Region> regions;
 
@@ -21,7 +16,7 @@ final class Route extends RouteBase {
 
   Route({
     required super.title,
-    required this.routeType,
+    required super.routeType,
     required super.path,
     required this.regions,
     required super.createdAt,
@@ -41,14 +36,6 @@ final class Route extends RouteBase {
 
   static List<RouteLifecycleHandler>? lifecycleHandlersFromJson(dynamic json) =>
       listFromJson<RouteLifecycleHandler>(json);
-
-  flutter.Page<T> createPage<T>(flutter.BuildContext context) {
-    final child = kDebugMode
-        ? vyuh.content.buildRoute(context, routeId: id)
-        : vyuh.content.buildContent(context, this);
-
-    return routeType?.create(child, this) ?? flutter.MaterialPage(child: child);
-  }
 
   @override
   Future<RouteBase?> init() async {

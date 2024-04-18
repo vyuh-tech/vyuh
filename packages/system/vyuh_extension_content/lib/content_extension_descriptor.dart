@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -18,15 +17,6 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
   final List<TypeDescriptor<ConditionConfiguration>>? conditions;
   final List<TypeDescriptor<RouteLifecycleHandler>>? lifecycleHandlers;
   final List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
-}
-
-abstract class RouteTypeConfiguration {
-  final String? title;
-  final String schemaType;
-
-  RouteTypeConfiguration({this.title, required this.schemaType});
-
-  Page<T> create<T>(Widget child, RouteBase route);
 }
 
 abstract class RouteLifecycleHandler {

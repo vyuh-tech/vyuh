@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
-import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/ui/dialog_page.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -13,7 +12,7 @@ enum PageBehavior { material, cupertino }
 enum DialogBehavior { modalBottomSheet, fullscreen }
 
 @JsonSerializable()
-final class PageRouteType extends RouteTypeConfiguration {
+final class PageRouteType extends vc.RouteTypeConfiguration {
   static const schemaName = 'vyuh.route.page';
 
   final PageBehavior behavior;
@@ -33,7 +32,7 @@ final class PageRouteType extends RouteTypeConfiguration {
 }
 
 @JsonSerializable()
-final class DialogRouteType extends RouteTypeConfiguration {
+final class DialogRouteType extends vc.RouteTypeConfiguration {
   static const schemaName = 'vyuh.route.dialog';
 
   final DialogBehavior behavior;
