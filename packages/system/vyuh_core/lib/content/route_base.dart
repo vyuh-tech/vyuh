@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -8,6 +10,9 @@ abstract class RouteBase extends ContentItem implements RootItem {
 
   final String path;
   final String? category;
+
+  @JsonKey(fromJson: typeFromFirstOfListJson<RouteTypeConfiguration>)
+  final RouteTypeConfiguration? routeType;
 
   @JsonKey(readValue: readValue)
   final String id;
@@ -20,6 +25,7 @@ abstract class RouteBase extends ContentItem implements RootItem {
 
   RouteBase({
     required super.schemaType,
+    required this.routeType,
     required this.title,
     required this.path,
     this.category,
@@ -35,4 +41,21 @@ abstract class RouteBase extends ContentItem implements RootItem {
   Future<RouteBase?> init();
 
   Future<void> dispose();
+
+  Page<T> createPage<T>(BuildContext context) {
+    final child = kDebugMode
+        ? vyuh.content.buildRoute(context, routeId: id)
+        : vyuh.content.buildContent(context, this);
+
+    return routeType?.create(child, this) ?? MaterialPage(child: child);
+  }
+}
+
+abstract class RouteTypeConfiguration {
+  final String? title;
+  final String schemaType;
+
+  RouteTypeConfiguration({this.title, required this.schemaType});
+
+  Page<T> create<T>(Widget child, RouteBase route);
 }

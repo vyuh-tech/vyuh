@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'navigation.g.dart';
@@ -77,7 +77,7 @@ final class NavigationAction extends ActionConfiguration {
           .fetchRoute(path: uri?.toString(), routeId: routeId);
       final route = await routeResult?.init();
 
-      final path = (route as vf.Route?)?.path;
+      final path = route?.path;
       if (path == null) {
         throw ArgumentError(
             'Unable to determine path from route. Tried with uri: ${uri.toString()}, routeId: $routeId');
@@ -97,7 +97,7 @@ final class NavigationAction extends ActionConfiguration {
 }
 
 extension on NavigationType {
-  void apply(BuildContext context, String path, [vf.Route? route]) {
+  void apply(BuildContext context, String path, [vc.RouteBase? route]) {
     switch (this) {
       case NavigationType.go:
         context.go(path, extra: route);

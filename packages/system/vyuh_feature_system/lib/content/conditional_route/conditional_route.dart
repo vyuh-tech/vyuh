@@ -38,7 +38,7 @@ final class ConditionalRoute extends RouteBase {
     required super.createdAt,
     required super.updatedAt,
     required super.id,
-  }) : super(schemaType: ConditionalRoute.schemaName);
+  }) : super(schemaType: ConditionalRoute.schemaName, routeType: null);
 
   factory ConditionalRoute.fromJson(Map<String, dynamic> json) =>
       _$ConditionalRouteFromJson(json);
@@ -46,23 +46,6 @@ final class ConditionalRoute extends RouteBase {
   @override
   Future<RouteBase?> init() async {
     return this;
-    // if (_initializedInstance != null) {
-    //   return _initializedInstance;
-    // }
-    //
-    // final value = (await condition?.execute()) ?? defaultCase;
-    // final caseItem = (cases ?? []).firstWhereOrNull((x) => x.value == value);
-    //
-    // final ref = caseItem?.item;
-    // RouteBase? leafRoute;
-    //
-    // if (ref != null) {
-    //   final route = await vyuh.content.provider.fetchRoute(routeId: ref.ref);
-    //   leafRoute = await route?.init();
-    // }
-    //
-    // _initializedInstance = leafRoute as vf.Route?;
-    // return _initializedInstance;
   }
 
   Future<RouteBase?> evaluate() async {
