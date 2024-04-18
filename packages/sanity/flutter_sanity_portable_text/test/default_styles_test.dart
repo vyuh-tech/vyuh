@@ -19,6 +19,7 @@ void main() {
           Span(text: 'Emphasized', marks: ['em']),
           Span(text: 'Strike Through', marks: ['strike-through']),
           Span(text: 'Underline', marks: ['underline']),
+          Span(text: 'Inline Code', marks: ['code']),
         ]),
       ]),
     ));
@@ -32,6 +33,8 @@ void main() {
           span.style?.decoration?.contains(TextDecoration.lineThrough) == true,
       'Underline': (span) =>
           span.style?.decoration?.contains(TextDecoration.underline) == true,
+      'Inline Code': (span) =>
+          span.style?.fontFamily?.contains('monospace') == true,
     };
 
     for (final entry in predicates.entries) {
