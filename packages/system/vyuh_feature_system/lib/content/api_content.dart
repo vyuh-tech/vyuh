@@ -14,8 +14,8 @@ final class APIContent extends ContentItem {
   final bool showPending;
   final bool showError;
 
-  @JsonKey(fromJson: typeFromFirstOfListJson<APIHandler>)
-  final APIHandler? handler;
+  @JsonKey(fromJson: typeFromFirstOfListJson<ApiConfiguration>)
+  final ApiConfiguration? handler;
 
   factory APIContent.fromJson(Map<String, dynamic> json) =>
       _$APIContentFromJson(json);
@@ -27,11 +27,11 @@ final class APIContent extends ContentItem {
   }) : super(schemaType: APIContent.schemaName);
 }
 
-abstract base class APIHandler<T> {
+abstract base class ApiConfiguration<T> {
   final String schemaType;
   final String? title;
 
-  APIHandler({required this.schemaType, this.title});
+  ApiConfiguration({required this.schemaType, this.title});
 
   Future<T?> invoke(BuildContext context);
 
@@ -39,7 +39,7 @@ abstract base class APIHandler<T> {
 }
 
 class APIContentDescriptor extends ContentDescriptor {
-  final List<TypeDescriptor<APIHandler>>? handlers;
+  final List<TypeDescriptor<ApiConfiguration>>? handlers;
 
   APIContentDescriptor({this.handlers})
       : super(schemaType: APIContent.schemaName, title: 'API Content');
@@ -62,10 +62,10 @@ final class APIContentBuilder extends ContentBuilder<APIContent> {
     super.init(descriptors);
 
     final apiHandlers = descriptors.cast<APIContentDescriptor>().expand(
-        (element) => element.handlers ?? <TypeDescriptor<APIHandler>>[]);
+        (element) => element.handlers ?? <TypeDescriptor<ApiConfiguration>>[]);
 
     for (final handler in apiHandlers) {
-      vyuh.content.register<APIHandler>(handler);
+      vyuh.content.register<ApiConfiguration>(handler);
     }
   }
 }

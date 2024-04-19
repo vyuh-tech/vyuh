@@ -27,7 +27,7 @@ extension type const JSONPath(String path) {
 }
 
 @JsonSerializable()
-final class SimpleAPIHandler extends APIHandler<List<vf.Card>> {
+final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
   static const schemaName = 'vyuh.apiContent.handler.simple';
 
   final String url;
