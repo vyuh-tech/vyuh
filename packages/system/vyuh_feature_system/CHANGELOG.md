@@ -1,3 +1,7 @@
+## 1.0.0-beta.15
+
+ - **REFACTOR**: renamed APIHandler => ApiConfiguration to be in sync with rest of the naming.
+
 ## 1.0.0-beta.14
 
  - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
