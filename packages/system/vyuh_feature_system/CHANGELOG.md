@@ -1,3 +1,7 @@
+## 1.0.0-beta.16
+
+ - **REFACTOR**: renamed rest of handlers to configs.
+
 ## 1.0.0-beta.15
 
  - **REFACTOR**: renamed APIHandler => ApiConfiguration to be in sync with rest of the naming.
