@@ -177,7 +177,7 @@ final feature = FeatureDescriptor(
         ),
         DividerDescriptor(),
         APIContentDescriptor(
-          handlers: [SimpleAPIHandler.typeDescriptor],
+          configurations: [JsonPathApiConfiguration.typeDescriptor],
         ),
       ],
       contentBuilders: [
