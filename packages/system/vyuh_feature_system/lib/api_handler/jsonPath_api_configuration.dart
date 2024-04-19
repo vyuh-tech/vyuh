@@ -8,7 +8,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
-part 'simple_api_handler.g.dart';
+part 'jsonPath_api_configuration.g.dart';
 
 @JsonSerializable()
 final class DisplayFieldMap {
@@ -27,8 +27,8 @@ extension type const JSONPath(String path) {
 }
 
 @JsonSerializable()
-final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
-  static const schemaName = 'vyuh.apiContent.handler.simple';
+final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
+  static const schemaName = 'vyuh.apiContent.configuration.jsonPath';
 
   final String url;
   final Map<String, String>? headers;
@@ -38,12 +38,12 @@ final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
   final DisplayFieldMap? fieldMap;
 
   static final typeDescriptor = TypeDescriptor(
-    schemaType: SimpleAPIHandler.schemaName,
-    fromJson: SimpleAPIHandler.fromJson,
-    title: 'Simple API Handler',
+    schemaType: JsonPathApiConfiguration.schemaName,
+    fromJson: JsonPathApiConfiguration.fromJson,
+    title: 'JSONPath API Configuration',
   );
 
-  SimpleAPIHandler({
+  JsonPathApiConfiguration({
     super.title,
     this.url = '',
     this.headers,
@@ -52,8 +52,8 @@ final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
     this.fieldMap,
   }) : super(schemaType: schemaName);
 
-  factory SimpleAPIHandler.fromJson(Map<String, dynamic> json) =>
-      _$SimpleAPIHandlerFromJson(json);
+  factory JsonPathApiConfiguration.fromJson(Map<String, dynamic> json) =>
+      _$JsonPathApiConfigurationFromJson(json);
 
   @override
   Future<List<vf.Card>?> invoke(BuildContext context) async {
@@ -70,6 +70,11 @@ final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
       Map() => [_createCard(root as Map<String, dynamic>)],
       _ => null
     };
+  }
+
+  @override
+  Widget build(BuildContext context, List<vf.Card>? data) {
+    return data == null ? empty : _buildCardList(context, data);
   }
 
   vf.Card _createCard(Map<String, dynamic> json) {
@@ -93,11 +98,6 @@ final class SimpleAPIHandler extends ApiConfiguration<List<vf.Card>> {
           fields['imageUrl'] != null ? Uri.parse(fields['imageUrl']!) : null,
       layout: ListItemCardLayout(title: 'List Item'),
     );
-  }
-
-  @override
-  Widget build(BuildContext context, List<vf.Card>? data) {
-    return data == null ? empty : _buildCardList(context, data);
   }
 
   _buildCardList(BuildContext context, List<vf.Card> data) {

@@ -15,7 +15,7 @@ final class APIContent extends ContentItem {
   final bool showError;
 
   @JsonKey(fromJson: typeFromFirstOfListJson<ApiConfiguration>)
-  final ApiConfiguration? handler;
+  final ApiConfiguration? configuration;
 
   factory APIContent.fromJson(Map<String, dynamic> json) =>
       _$APIContentFromJson(json);
@@ -23,7 +23,7 @@ final class APIContent extends ContentItem {
   APIContent({
     this.showError = kDebugMode,
     this.showPending = true,
-    this.handler,
+    this.configuration,
   }) : super(schemaType: APIContent.schemaName);
 }
 
@@ -39,9 +39,9 @@ abstract base class ApiConfiguration<T> {
 }
 
 class APIContentDescriptor extends ContentDescriptor {
-  final List<TypeDescriptor<ApiConfiguration>>? handlers;
+  final List<TypeDescriptor<ApiConfiguration>>? configurations;
 
-  APIContentDescriptor({this.handlers})
+  APIContentDescriptor({this.configurations})
       : super(schemaType: APIContent.schemaName, title: 'API Content');
 }
 
@@ -61,11 +61,11 @@ final class APIContentBuilder extends ContentBuilder<APIContent> {
   void init(List<ContentDescriptor> descriptors) {
     super.init(descriptors);
 
-    final apiHandlers = descriptors.cast<APIContentDescriptor>().expand(
-        (element) => element.handlers ?? <TypeDescriptor<ApiConfiguration>>[]);
+    final configs = descriptors.cast<APIContentDescriptor>().expand((element) =>
+        element.configurations ?? <TypeDescriptor<ApiConfiguration>>[]);
 
-    for (final handler in apiHandlers) {
-      vyuh.content.register<ApiConfiguration>(handler);
+    for (final config in configs) {
+      vyuh.content.register<ApiConfiguration>(config);
     }
   }
 }
@@ -85,8 +85,17 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
 
   @override
   Widget build(BuildContext context, APIContent content) {
+    if (content.configuration == null) {
+      return vyuh.widgetBuilder.errorView(
+        title: 'Missing API Configuration',
+        subtitle:
+            'Could not find a matching API Configuration. Please ensure it has been registered with the correct schema type.',
+        showRestart: false,
+      );
+    }
+
     return FutureBuilder<dynamic>(
-      future: content.handler?.invoke(context),
+      future: content.configuration?.invoke(context),
       builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (content.showPending &&
             (snapshot.connectionState == ConnectionState.waiting ||
@@ -98,15 +107,16 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
             // Show error if API call resulted in an error
             return vyuh.widgetBuilder.errorView(
               title:
-                  'API Error${content.handler?.title != null ? ': ${content.handler!.title}' : ''}',
+                  'API Error${content.configuration?.title != null ? ': ${content.configuration!.title}' : ''}',
               subtitle:
-                  'Handler in context was "${content.handler?.schemaType}"',
+                  'Handler in context was "${content.configuration?.schemaType}"',
               error: snapshot.error,
               showRestart: false,
             );
           } else {
             // Show data when API call is successful
-            return content.handler?.build(context, snapshot.data) ?? empty;
+            return content.configuration?.build(context, snapshot.data) ??
+                empty;
           }
         } else {
           // In case, the future is neither in progress nor done.

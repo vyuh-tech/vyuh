@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'simple_api_handler.dart';
+part of 'jsonPath_api_configuration.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -16,8 +16,9 @@ DisplayFieldMap _$DisplayFieldMapFromJson(Map<String, dynamic> json) =>
           json['imageUrl'] == null ? null : JSONPath.fromJson(json['imageUrl']),
     );
 
-SimpleAPIHandler _$SimpleAPIHandlerFromJson(Map<String, dynamic> json) =>
-    SimpleAPIHandler(
+JsonPathApiConfiguration _$JsonPathApiConfigurationFromJson(
+        Map<String, dynamic> json) =>
+    JsonPathApiConfiguration(
       title: json['title'] as String?,
       url: json['url'] as String? ?? '',
       headers: (json['headers'] as Map<String, dynamic>?)?.map(
