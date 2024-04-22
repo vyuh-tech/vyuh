@@ -15,14 +15,17 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
   final List<ContentBuilder>? contentBuilders;
   final List<TypeDescriptor<ActionConfiguration>>? actions;
   final List<TypeDescriptor<ConditionConfiguration>>? conditions;
-  final List<TypeDescriptor<RouteLifecycleHandler>>? lifecycleHandlers;
+  final List<TypeDescriptor<RouteLifecycleConfiguration>>? lifecycleHandlers;
   final List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
 }
 
-abstract class RouteLifecycleHandler {
+abstract class RouteLifecycleConfiguration implements SchemaItem {
+  @override
+  final String schemaType;
+
   final String? title;
 
-  RouteLifecycleHandler({this.title});
+  RouteLifecycleConfiguration({this.title, required this.schemaType});
 
   Future<void> init(RouteBase route);
 

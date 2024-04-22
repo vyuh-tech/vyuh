@@ -20,9 +20,11 @@ final class Condition {
       _$ConditionFromJson(json);
 }
 
-abstract class ConditionConfiguration {
-  final String? title;
+abstract class ConditionConfiguration implements SchemaItem {
+  @override
   final String schemaType;
+
+  final String? title;
   ConditionConfiguration({
     required this.schemaType,
     this.title,

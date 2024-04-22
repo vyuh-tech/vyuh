@@ -83,6 +83,11 @@ final feature = FeatureDescriptor(
             title: 'List Item Layout',
             fromJson: ListItemCardLayout.fromJson,
           ),
+          TypeDescriptor(
+            schemaType: ConditionalCardLayout.schemaName,
+            title: 'Conditional Card Layout',
+            fromJson: ConditionalCardLayout.fromJson,
+          ),
         ]),
         GroupDescriptor(layouts: [
           TypeDescriptor(

@@ -30,12 +30,13 @@ final class Route extends RouteBase {
   }
 
   @JsonKey(defaultValue: [], fromJson: lifecycleHandlersFromJson)
-  final List<RouteLifecycleHandler>? lifecycleHandlers;
+  final List<RouteLifecycleConfiguration>? lifecycleHandlers;
 
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 
-  static List<RouteLifecycleHandler>? lifecycleHandlersFromJson(dynamic json) =>
-      listFromJson<RouteLifecycleHandler>(json);
+  static List<RouteLifecycleConfiguration>? lifecycleHandlersFromJson(
+          dynamic json) =>
+      listFromJson<RouteLifecycleConfiguration>(json);
 
   @override
   Future<RouteBase?> init() async {
@@ -81,7 +82,7 @@ final class Region {
 }
 
 final class RouteDescriptor extends ContentDescriptor {
-  List<TypeDescriptor<RouteLifecycleHandler>>? lifecycleHandlers;
+  List<TypeDescriptor<RouteLifecycleConfiguration>>? lifecycleHandlers;
   List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
 
   RouteDescriptor({
@@ -108,10 +109,11 @@ final class RouteContentBuilder extends ContentBuilder<Route> {
 
     final rtDescriptors = descriptors.cast<RouteDescriptor>();
     final initConfigs = rtDescriptors.expand((element) =>
-        element.lifecycleHandlers ?? <TypeDescriptor<RouteLifecycleHandler>>[]);
+        element.lifecycleHandlers ??
+        <TypeDescriptor<RouteLifecycleConfiguration>>[]);
 
     for (final config in initConfigs) {
-      vyuh.content.register<RouteLifecycleHandler>(config);
+      vyuh.content.register<RouteLifecycleConfiguration>(config);
     }
 
     final routeTypes = rtDescriptors.expand((element) =>

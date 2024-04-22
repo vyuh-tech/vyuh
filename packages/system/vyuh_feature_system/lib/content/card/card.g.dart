@@ -30,3 +30,13 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
           : Action.fromJson(json['tertiaryAction'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
     );
+
+ConditionalCardLayout _$ConditionalCardLayoutFromJson(
+        Map<String, dynamic> json) =>
+    ConditionalCardLayout(
+      cases: (json['cases'] as List<dynamic>)
+          .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      defaultCase: json['defaultCase'] as String,
+      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
+    );
