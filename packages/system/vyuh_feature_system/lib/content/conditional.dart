@@ -36,7 +36,7 @@ class Conditional extends ContentItem {
 }
 
 @JsonSerializable()
-final class CaseItem {
+final class CaseItem<T extends SchemaItem> {
   final String? value;
 
   @JsonKey(fromJson: typeFromFirstOfListJson<ContentItem>)

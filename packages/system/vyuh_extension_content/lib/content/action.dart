@@ -30,9 +30,11 @@ final class Action {
   bool get isNotEmpty => !isEmpty;
 }
 
-abstract class ActionConfiguration {
-  final String? title;
+abstract class ActionConfiguration implements SchemaItem {
+  @override
   final String schemaType;
+
+  final String? title;
 
   ActionConfiguration({
     required this.schemaType,

@@ -8,7 +8,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
-part 'jsonPath_api_configuration.g.dart';
+part 'json_path_api_configuration.g.dart';
 
 @JsonSerializable()
 final class DisplayFieldMap {

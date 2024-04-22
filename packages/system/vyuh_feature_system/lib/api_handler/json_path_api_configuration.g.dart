@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'jsonPath_api_configuration.dart';
+part of 'json_path_api_configuration.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

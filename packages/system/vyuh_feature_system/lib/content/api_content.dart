@@ -27,8 +27,10 @@ final class APIContent extends ContentItem {
   }) : super(schemaType: APIContent.schemaName);
 }
 
-abstract base class ApiConfiguration<T> {
+abstract base class ApiConfiguration<T> implements SchemaItem {
+  @override
   final String schemaType;
+
   final String? title;
 
   ApiConfiguration({required this.schemaType, this.title});

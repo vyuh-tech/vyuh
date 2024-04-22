@@ -8,7 +8,8 @@ part of 'conditional.dart';
 
 Conditional _$ConditionalFromJson(Map<String, dynamic> json) => Conditional(
       cases: (json['cases'] as List<dynamic>?)
-              ?.map((e) => CaseItem.fromJson(e as Map<String, dynamic>))
+              ?.map((e) =>
+                  CaseItem<SchemaItem>.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       condition: json['condition'] == null
@@ -17,7 +18,9 @@ Conditional _$ConditionalFromJson(Map<String, dynamic> json) => Conditional(
       defaultCase: json['defaultCase'] as String?,
     );
 
-CaseItem _$CaseItemFromJson(Map<String, dynamic> json) => CaseItem(
+CaseItem<T> _$CaseItemFromJson<T extends SchemaItem>(
+        Map<String, dynamic> json) =>
+    CaseItem<T>(
       value: json['value'] as String?,
       item: typeFromFirstOfListJson(json['item']),
     );

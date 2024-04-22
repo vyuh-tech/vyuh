@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+abstract interface class SchemaItem {
+  String get schemaType;
+}
+
 @JsonSerializable(createFactory: false)
-abstract class ContentItem {
+abstract class ContentItem implements SchemaItem {
+  @override
   @JsonKey(includeFromJson: false)
   final String schemaType;
 
@@ -35,7 +40,9 @@ abstract class ContentItem {
   }
 }
 
-abstract class LayoutConfiguration<T extends ContentItem> {
+abstract class LayoutConfiguration<T extends ContentItem>
+    implements SchemaItem {
+  @override
   final String schemaType;
 
   LayoutConfiguration({required this.schemaType});

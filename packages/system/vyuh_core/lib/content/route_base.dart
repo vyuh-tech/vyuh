@@ -51,8 +51,10 @@ abstract class RouteBase extends ContentItem implements RootItem {
   }
 }
 
-abstract class RouteTypeConfiguration {
+abstract class RouteTypeConfiguration implements SchemaItem {
   final String? title;
+
+  @override
   final String schemaType;
 
   RouteTypeConfiguration({this.title, required this.schemaType});
