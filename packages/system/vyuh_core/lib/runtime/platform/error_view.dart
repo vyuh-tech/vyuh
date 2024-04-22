@@ -24,8 +24,9 @@ class ErrorViewScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final backgroundColor = theme.colorScheme.surface;
+    final backgroundColor = theme.colorScheme.errorContainer;
     final textColor = theme.colorScheme.onSurface;
+
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -115,23 +116,27 @@ class ErrorView extends StatelessWidget {
     return ConstrainedBox(
       constraints: const BoxConstraints(minHeight: 100, maxHeight: 200),
       child: Card(
+        color: theme.colorScheme.errorContainer,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 8),
             Icon(
               Icons.hide_source_rounded,
               color: textColor,
               size: 32,
             ),
-            Text(title, textAlign: TextAlign.center),
+            const SizedBox(height: 8),
+            Text(title,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.titleMedium?.apply(color: textColor)),
             if (subtitle != null)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(subtitle!,
                     textAlign: TextAlign.center,
-                    style:
-                        theme.textTheme.titleMedium?.apply(color: textColor)),
+                    style: theme.textTheme.titleSmall?.apply(color: textColor)),
               ),
             Expanded(
                 child: SingleChildScrollView(
