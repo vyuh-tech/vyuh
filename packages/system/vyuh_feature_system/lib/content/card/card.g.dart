@@ -31,9 +31,9 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
       layout: typeFromFirstOfListJson(json['layout']),
     );
 
-ConditionalCardLayout _$ConditionalCardLayoutFromJson(
+CardConditionalLayout _$CardConditionalLayoutFromJson(
         Map<String, dynamic> json) =>
-    ConditionalCardLayout(
+    CardConditionalLayout(
       cases: (json['cases'] as List<dynamic>)
           .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
           .toList(),
