@@ -62,10 +62,12 @@ abstract class ConditionalLayout<T extends ContentItem>
 
               final caseItem =
                   cases.firstWhereOrNull((element) => element.value == value);
+
               return caseItem?.item?.build(context, content) ??
                   vyuh.widgetBuilder.errorView(
                       title:
-                          'Missing LayoutConfiguration for content with schemaType: ${content.schemaType}');
+                          'No LayoutConfiguration for content with schemaType: ${content.schemaType}.',
+                      subtitle: 'Condition evaluated to: $value.');
             default:
               return vyuh.widgetBuilder.contentLoader();
           }

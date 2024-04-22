@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'conditional.g.dart';
 
@@ -31,6 +31,7 @@ class Conditional extends ContentItem {
 
     final caseItem =
         cases?.firstWhereOrNull((element) => element.value == value);
+
     return caseItem?.item;
   }
 }
@@ -83,37 +84,26 @@ final class DefaultConditionalLayout extends LayoutConfiguration<Conditional> {
       _ConditionalBuilder(conditional: content);
 }
 
-class _ConditionalBuilder extends StatefulWidget {
+class _ConditionalBuilder extends StatelessWidget {
   final Conditional conditional;
 
   const _ConditionalBuilder({required this.conditional});
 
   @override
-  State<_ConditionalBuilder> createState() => _ConditionalBuilderState();
-}
-
-class _ConditionalBuilderState extends State<_ConditionalBuilder> {
-  late final ObservableFuture<ContentItem?> _future;
-
-  @override
-  void initState() {
-    super.initState();
-    _future = ObservableFuture(Future.value(widget.conditional.execute()));
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      switch (_future.status) {
-        case FutureStatus.pending:
-          return vyuh.widgetBuilder.contentLoader();
+    return FutureBuilder(
+        future: conditional.execute(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.done || ConnectionState.active:
+              final item = snapshot.data;
+              return item == null
+                  ? empty
+                  : vyuh.content.buildContent(context, item);
 
-        case FutureStatus.rejected || FutureStatus.fulfilled:
-          final item = _future.value;
-          return item == null
-              ? Container()
-              : vyuh.content.buildContent(context, item);
-      }
-    });
+            default:
+              return vyuh.widgetBuilder.contentLoader();
+          }
+        });
   }
 }
