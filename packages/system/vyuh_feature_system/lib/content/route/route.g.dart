@@ -32,3 +32,13 @@ Region _$RegionFromJson(Map<String, dynamic> json) => Region(
               .toList() ??
           [],
     );
+
+RouteConditionalLayout _$RouteConditionalLayoutFromJson(
+        Map<String, dynamic> json) =>
+    RouteConditionalLayout(
+      cases: (json['cases'] as List<dynamic>)
+          .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      defaultCase: json['defaultCase'] as String,
+      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
+    );

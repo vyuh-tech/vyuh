@@ -76,6 +76,11 @@ final feature = FeatureDescriptor(
             title: 'Single Item Layout',
             fromJson: SingleItemLayout.fromJson,
           ),
+          TypeDescriptor(
+            schemaType: RouteConditionalLayout.schemaName,
+            title: 'Route Conditional Layout',
+            fromJson: CardConditionalLayout.fromJson,
+          ),
         ]),
         CardDescriptor(layouts: [
           TypeDescriptor(
@@ -84,9 +89,9 @@ final feature = FeatureDescriptor(
             fromJson: ListItemCardLayout.fromJson,
           ),
           TypeDescriptor(
-            schemaType: ConditionalCardLayout.schemaName,
-            title: 'Conditional Card Layout',
-            fromJson: ConditionalCardLayout.fromJson,
+            schemaType: CardConditionalLayout.schemaName,
+            title: 'Card Conditional Layout',
+            fromJson: CardConditionalLayout.fromJson,
           ),
         ]),
         GroupDescriptor(layouts: [
@@ -96,6 +101,11 @@ final feature = FeatureDescriptor(
             fromJson: GridGroupLayout.fromJson,
           ),
           vf.ListGroupLayout.typeDescriptor,
+          TypeDescriptor(
+            schemaType: GroupConditionalLayout.schemaName,
+            title: 'Group Conditional Layout',
+            fromJson: GroupConditionalLayout.fromJson,
+          ),
         ]),
         ConditionalDescriptor(),
         ConditionalRouteDescriptor(),

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/content/route/default_layout.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'route.g.dart';
 
@@ -123,4 +123,18 @@ final class RouteContentBuilder extends ContentBuilder<Route> {
       vyuh.content.register<RouteTypeConfiguration>(config);
     }
   }
+}
+
+@JsonSerializable()
+final class RouteConditionalLayout extends ConditionalLayout<Route> {
+  static const schemaName = '${Route.schemaName}.layout.conditional';
+
+  RouteConditionalLayout({
+    required super.cases,
+    required super.defaultCase,
+    required super.condition,
+  }) : super(schemaType: schemaName);
+
+  factory RouteConditionalLayout.fromJson(Map<String, dynamic> json) =>
+      _$RouteConditionalLayoutFromJson(json);
 }

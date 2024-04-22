@@ -43,20 +43,6 @@ class Card extends ContentItem implements PortableBlockItem {
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
 }
 
-@JsonSerializable()
-final class ConditionalCardLayout extends ConditionalLayout<Card> {
-  static const schemaName = '${Card.schemaName}.layout.conditional';
-
-  ConditionalCardLayout({
-    required super.cases,
-    required super.defaultCase,
-    required super.condition,
-  }) : super(schemaType: schemaName);
-
-  factory ConditionalCardLayout.fromJson(Map<String, dynamic> json) =>
-      _$ConditionalCardLayoutFromJson(json);
-}
-
 class CardDescriptor extends ContentDescriptor {
   CardDescriptor({super.layouts})
       : super(schemaType: Card.schemaName, title: 'Card');
@@ -72,4 +58,18 @@ final class CardContentBuilder extends ContentBuilder<Card> {
           defaultLayout: DefaultCardLayout(title: 'Default'),
           defaultLayoutDescriptor: DefaultCardLayout.typeDescriptor,
         );
+}
+
+@JsonSerializable()
+final class CardConditionalLayout extends ConditionalLayout<Card> {
+  static const schemaName = '${Card.schemaName}.layout.conditional';
+
+  CardConditionalLayout({
+    required super.cases,
+    required super.defaultCase,
+    required super.condition,
+  }) : super(schemaType: schemaName);
+
+  factory CardConditionalLayout.fromJson(Map<String, dynamic> json) =>
+      _$CardConditionalLayoutFromJson(json);
 }

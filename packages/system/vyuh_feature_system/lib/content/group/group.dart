@@ -71,3 +71,17 @@ final class CarouselGroupLayout extends LayoutConfiguration<Group> {
     return Carousel(content: content);
   }
 }
+
+@JsonSerializable()
+final class GroupConditionalLayout extends ConditionalLayout<Group> {
+  static const schemaName = '${Group.schemaName}.layout.conditional';
+
+  GroupConditionalLayout({
+    required super.cases,
+    required super.defaultCase,
+    required super.condition,
+  }) : super(schemaType: schemaName);
+
+  factory GroupConditionalLayout.fromJson(Map<String, dynamic> json) =>
+      _$GroupConditionalLayoutFromJson(json);
+}
