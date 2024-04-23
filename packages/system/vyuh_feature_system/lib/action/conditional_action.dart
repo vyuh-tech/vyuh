@@ -17,7 +17,7 @@ class ConditionalAction extends ActionConfiguration {
   );
 
   @JsonKey(defaultValue: [])
-  final List<CaseAction>? cases;
+  final List<ActionCase>? cases;
 
   final String? defaultCase;
   final Condition? condition;
@@ -42,13 +42,13 @@ class ConditionalAction extends ActionConfiguration {
 }
 
 @JsonSerializable()
-final class CaseAction {
+final class ActionCase {
   final String? value;
 
   final Action? action;
 
-  CaseAction({this.value, this.action});
+  ActionCase({this.value, this.action});
 
-  factory CaseAction.fromJson(Map<String, dynamic> json) =>
-      _$CaseActionFromJson(json);
+  factory ActionCase.fromJson(Map<String, dynamic> json) =>
+      _$ActionCaseFromJson(json);
 }

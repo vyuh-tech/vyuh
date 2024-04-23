@@ -9,7 +9,7 @@ part of 'conditional_action.dart';
 ConditionalAction _$ConditionalActionFromJson(Map<String, dynamic> json) =>
     ConditionalAction(
       cases: (json['cases'] as List<dynamic>?)
-              ?.map((e) => CaseAction.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => ActionCase.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
       condition: json['condition'] == null
@@ -18,7 +18,7 @@ ConditionalAction _$ConditionalActionFromJson(Map<String, dynamic> json) =>
       defaultCase: json['defaultCase'] as String?,
     );
 
-CaseAction _$CaseActionFromJson(Map<String, dynamic> json) => CaseAction(
+ActionCase _$ActionCaseFromJson(Map<String, dynamic> json) => ActionCase(
       value: json['value'] as String?,
       action: json['action'] == null
           ? null
