@@ -1,3 +1,8 @@
+## 1.0.0-beta.17
+
+ - **FEAT**: adding conditional layouts for card, group and route. Rest can be added as needed.
+ - **FEAT**: first cut of conditional layouts.
+
 ## 1.0.0-beta.16
 
  - **REFACTOR**: renamed rest of handlers to configs.
