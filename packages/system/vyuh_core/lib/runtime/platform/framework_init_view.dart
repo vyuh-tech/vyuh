@@ -46,10 +46,6 @@ class _FrameworkInitViewState extends State<FrameworkInitView> {
             : vyuh.widgetBuilder.routeErrorView(
                 title: 'Failed to load app',
                 error: vyuh.tracker.error,
-                retryLabel: 'Try Again',
-                onRetry: () {
-                  vyuh.tracker.init();
-                },
               );
         final pendingApp = MaterialApp(home: child);
 

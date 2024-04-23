@@ -21,8 +21,6 @@ final feature = FeatureDescriptor(
           child: vyuh.widgetBuilder.routeErrorView(
             title: 'System error',
             error: state.extra.toString(),
-            onRetry: () => vyuh.tracker.init(),
-            retryLabel: 'Restart',
           ),
         );
       },
