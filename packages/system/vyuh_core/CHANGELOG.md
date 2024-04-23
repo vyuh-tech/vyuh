@@ -1,3 +1,7 @@
+## 1.0.0-beta.11
+
+ - **FEAT**: first cut of conditional layouts.
+
 ## 1.0.0-beta.10
 
  - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
