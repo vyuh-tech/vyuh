@@ -612,10 +612,9 @@ packages:
   vyuh_extension_content:
     dependency: "direct main"
     description:
-      name: vyuh_extension_content
-      sha256: "0e3a4da46ee0c30e01d63952133c753495041ecade17443ad131fa9bd0509ac2"
-      url: "https://pub.dev"
-    source: hosted
+      path: "../../packages/system/vyuh_extension_content"
+      relative: true
+    source: path
     version: "1.0.0-beta.5"
   vyuh_feature_developer:
     dependency: "direct main"
