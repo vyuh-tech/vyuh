@@ -1,3 +1,7 @@
+## 1.0.0-beta.7
+
+ - package updates
+
 ## 1.0.0-beta.6
 
  - Bump "vyuh_feature_developer" to `1.0.0-beta.6`.
