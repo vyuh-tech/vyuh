@@ -1,3 +1,7 @@
+## 1.0.0-beta.18
+
+ - package updates
+
 ## 1.0.0-beta.17
 
  - **FEAT**: adding conditional layouts for card, group and route. Rest can be added as needed.
