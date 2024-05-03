@@ -21,14 +21,11 @@ dependencies:
   # Vyuh Framework
   vyuh_core: ^1.0.0-beta.1
   vyuh_extension_content: ^1.0.0-beta.1
-  vyuh_content_provider_sanity: ^1.0.0-beta.1
   vyuh_feature_developer: ^1.0.0-beta.2
   vyuh_feature_system: ^1.0.0-beta.2
-  vyuh_extension_script: ^1.0.0-beta.2
 
   # Features
   feature_sample: ^1.0.0
-  feature_sanity_integration: ^1.0.0
 
 dev_dependencies:
   flutter_test:
