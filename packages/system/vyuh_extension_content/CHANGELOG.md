@@ -1,3 +1,7 @@
+## 1.0.0-beta.6
+
+ - **REFACTOR**: cleanups.
+
 ## 1.0.0-beta.5
 
  - **FEAT**: first cut of conditional layouts.
