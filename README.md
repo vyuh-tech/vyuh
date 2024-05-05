@@ -30,7 +30,7 @@
 
 <hr style="height: 1px;"/>
 
-Vyuh is a framework to build CMS-driven Flutter Apps at scale. It gives the
+**Vyuh** is a framework to build CMS-driven Flutter Apps at scale. It gives the
 **no-code** flexibility to the Business teams (via the CMS), and the
 **full-code** power to the Engineering teams. This puts the right control at the
 right place without any compromise.
