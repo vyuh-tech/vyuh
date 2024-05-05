@@ -1,3 +1,7 @@
+## 1.0.0-beta.13
+
+ - Adding a Powered by Vyuh marker
+
 ## 1.0.0-beta.12
 
  - package updates
