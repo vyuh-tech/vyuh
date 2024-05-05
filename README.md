@@ -100,6 +100,11 @@ Vyuh comes with some core building blocks such as:
   can be driven from a CMS. This includes the screen journeys, page content,
   themes, etc. The CMS itself is a standard plugin with custom Providers. Bring
   your own CMS as a `ContentProvider`!
+
+  > **Note**: The default CMS we use is [Sanity.io](https://sanity.io). This
+  > integration is currently part of the
+  > [Enterprise Plan](https://vyuh.tech/pricing).
+
 - **Community packages**: leverages the best community packages like `mobx`,
   `go_router`, `get_it`, `hive`, `firebase`, etc. This means you don't have to
   learn anything proprietary to use Vyuh.
