@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 class ErrorViewScaffold extends StatelessWidget {
@@ -83,7 +84,8 @@ class ErrorViewScaffold extends StatelessWidget {
                             ?.copyWith(color: textColor)),
                     onPressed: () {
                       vyuh.tracker.init();
-                    })
+                    }),
+              const PoweredByWidget(),
             ],
           ),
         ),
@@ -162,6 +164,7 @@ class ErrorView extends StatelessWidget {
                 child: FilledButton(
                     onPressed: onRetry, child: Text(retryLabel ?? 'Retry')),
               ),
+            const PoweredByWidget(),
           ],
         ),
       ),
