@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
+import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 Page<dynamic> fallbackRoutePageBuilder(
@@ -50,6 +51,7 @@ class _FallbackRouteNotifier extends StatelessWidget {
                     ?.apply(color: Colors.redAccent),
               ),
               Expanded(child: child),
+              const PoweredByWidget(),
             ],
           ),
         ),

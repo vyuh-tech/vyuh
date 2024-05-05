@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/runtime/platform/error_view.dart';
+import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
@@ -24,7 +25,12 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
     contentLoader: () => const Center(
             child: Padding(
           padding: EdgeInsets.all(8.0),
-          child: CircularProgressIndicator(),
+          child: Column(
+            children: [
+              CircularProgressIndicator(),
+              PoweredByWidget(),
+            ],
+          ),
         )),
     imagePlaceholder: ({width, height}) => Container(
           width: width,
@@ -111,12 +117,19 @@ class _DefaultRouteLoaderState extends State<_DefaultRouteLoader> {
     final body = BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
       child: Center(
-        child: FractionallySizedBox(
-          widthFactor: 0.5,
-          child: LinearProgressIndicator(
-            backgroundColor: progressColor.withOpacity(0.25),
-            color: progressColor,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            FractionallySizedBox(
+              widthFactor: 0.5,
+              child: LinearProgressIndicator(
+                backgroundColor: progressColor.withOpacity(0.25),
+                color: progressColor,
+              ),
+            ),
+            const PoweredByWidget(),
+          ],
         ),
       ),
     );
