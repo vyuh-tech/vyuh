@@ -12,7 +12,7 @@
 
 [![Codecov](https://img.shields.io/codecov/c/github/vyuh-tech/vyuh?token=5NL6KJ70AR&logo=codecov&style=for-the-badge)](https://codecov.io/github/vyuh-tech/vyuh)
 &nbsp;
-[![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish-dart.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish-dart.yml)
+[![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish.yml)
 &nbsp;
 [![Discord](https://img.shields.io/discord/1198906057502769252?style=for-the-badge&logo=discord)](https://discord.gg/b49sbjqszG)
 
