@@ -27,6 +27,7 @@ dependencies:
   logger: ^2.1.0
   flutter_sanity_portable_text: ^1.0.0-beta.4
   http: ^1.2.1
+  local_auth: ^2.2.0
 
 dev_dependencies:
   flutter_test:

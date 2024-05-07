@@ -10,6 +10,7 @@ enum PluginType {
   auth,
   notifications,
   ads,
+  biometrics,
 }
 
 abstract class Plugin {
