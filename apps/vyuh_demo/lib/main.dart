@@ -31,8 +31,6 @@ final entryPoints = [
 ];
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
   vc.runApp(
     initialLocation: '/',
     features: () => [

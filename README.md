@@ -64,16 +64,23 @@ possible when you build a cohesive framework.
 > the `CMS`, with powerful `Flutter` counterparts that take care of all the
 > complexity.
 
-The teams managing the content and experience don't have to worry about pixel
-precision or performance and focus more on _building the screen journeys and
-page content_ instead. The Flutter engineering teams handle the complexity of
-the components along with its performance.
+The teams (Business teams) managing the content and experience don't have to
+worry about UI Design, pixel precision or performance and focus more on
+_building the screen journeys and page content_ instead. The Flutter engineering
+teams handle the complexity of the components along with its performance.
 
 This clear separation allows a phenomenal flexibility in building simple to
 large scale apps. It also gives _the right tools to the right teams_ and makes
 them more productive.
 
-**Vyuh** comes with powerful capabilities like:
+> _Business_ teams **assemble** page-content and journeys, whereas the
+> _Engineering_ teams focus on the **developing** the design, performance and
+> scalability of those _content-blocks_. This results in a _gallery of blocks_
+> which the Business teams use to create the content of the App.
+
+### The Framework
+
+The **Vyuh** framework has some powerful built-in capabilities such as:
 
 - [x] Building features atomically and in a modular fashion.
 - [x] Features as transferable and reusable units of functionality that can be
@@ -88,7 +95,7 @@ them more productive.
 
 ## The Building Blocks
 
-Vyuh comes with some core building blocks such as:
+The core building blocks that enable all of this include:
 
 - **Features**: build user-facing functionality in a modular, reusable, atomic
   manner. Features can be composed together to create the entire app or a family
