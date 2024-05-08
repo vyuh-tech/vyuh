@@ -386,10 +386,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_foundation
-      sha256: "5a7999be66e000916500be4f15a3633ebceb8302719b47b9cc49ce924125350f"
+      sha256: f234384a3fdd67f989b4d54a5d73ca2a6c422fa55ae694381ae0f4375cd1ea16
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.4.0"
   path_provider_linux:
     dependency: transitive
     description:
@@ -608,28 +608,28 @@ packages:
       path: "../../packages/system/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0-beta.11"
+    version: "1.0.0-beta.14"
   vyuh_extension_content:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_extension_content"
       relative: true
     source: path
-    version: "1.0.0-beta.5"
+    version: "1.0.0-beta.6"
   vyuh_feature_developer:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_developer"
       relative: true
     source: path
-    version: "1.0.0-beta.6"
+    version: "1.0.0-beta.7"
   vyuh_feature_system:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.17"
+    version: "1.0.0-beta.18"
   web:
     dependency: transitive
     description:
