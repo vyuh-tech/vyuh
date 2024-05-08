@@ -1,3 +1,7 @@
+## 1.0.0-beta.14
+
+ - **REFACTOR**: moving content types into the plugin.
+
 ## 1.0.0-beta.13
 
  - Adding a Powered by Vyuh marker
