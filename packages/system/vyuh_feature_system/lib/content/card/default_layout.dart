@@ -41,11 +41,11 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (content.image?.asset?.ref != null || content.imageUrl != null)
+            if (content.image != null || content.imageUrl != null)
               Flexible(
                 child: e.ContentImage(
                   url: content.imageUrl?.toString(),
-                  ref: content.image?.asset?.ref,
+                  ref: content.image,
                   fit: BoxFit.contain,
                 ),
               ),

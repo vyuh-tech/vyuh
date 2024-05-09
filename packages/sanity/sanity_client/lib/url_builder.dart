@@ -59,6 +59,14 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
 
   @override
   Uri fileUrl(String fileRefId) {
+    final fileName = SanityUrlBuilder.fileName(fileRefId);
+
+    final path = '${config.projectId}/${config.dataset}/$fileName';
+
+    return Uri.parse('https://cdn.sanity.io/files/$path');
+  }
+
+  static String fileName(String fileRefId) {
     final parts = fileRefId.split('-');
     assert(parts.length == 3, 'Invalid file reference: $fileRefId');
 
@@ -66,22 +74,14 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     assert(prefix.toLowerCase() == 'file',
         'Invalid file reference: $fileRefId. Must begin with "file"');
 
-    final path = '${config.projectId}/${config.dataset}/$id.$format';
-
-    return Uri.parse('https://cdn.sanity.io/files/$path');
+    return '$id.$format';
   }
 
   @override
   Uri imageUrl(String imageRefId, {ImageOptions? options}) {
-    _ParsedReference ref;
-    try {
-      ref = _ParsedReference.from(imageRefId);
-    } catch (e) {
-      throw InvalidReferenceException(imageRefId);
-    }
+    final fileName = SanityUrlBuilder.imageFileName(imageRefId);
 
-    final path =
-        '${config.projectId}/${config.dataset}/${ref.id}-${ref.width}x${ref.height}.${ref.format}';
+    final path = '${config.projectId}/${config.dataset}/$fileName';
 
     final params = options == null
         ? ''
@@ -97,6 +97,17 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
 
     final query = params.isEmpty ? '' : '?$params';
     return Uri.parse('https://cdn.sanity.io/images/$path$query');
+  }
+
+  static String imageFileName(String imageRefId) {
+    _ParsedReference ref;
+    try {
+      ref = _ParsedReference.from(imageRefId);
+    } catch (e) {
+      throw InvalidReferenceException(imageRefId);
+    }
+
+    return '${ref.id}-${ref.width}x${ref.height}.${ref.format}';
   }
 
   @override

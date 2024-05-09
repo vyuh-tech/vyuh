@@ -14,6 +14,7 @@ export 'plugin/content/content_plugin.dart';
 export 'plugin/content/content_provider.dart';
 export 'plugin/content/noop_content_plugin.dart';
 export 'plugin/content/noop_content_provider.dart';
+export 'plugin/content/reference.dart';
 export 'plugin/content/route_base.dart';
 export 'plugin/content/serialization.dart';
 export 'plugin/content/type_descriptor.dart';

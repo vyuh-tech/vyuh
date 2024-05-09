@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class ContentImage extends StatelessWidget {
   final String? url;
-  final String? ref;
+  final ImageReference? ref;
   final double? width;
   final double? height;
 
@@ -49,37 +49,31 @@ class ContentImage extends StatelessWidget {
             ? MediaQuery.sizeOf(context).width.roundedTo(nearestSize)
             : roundedWidth;
 
-        final url = (ref != null)
-            ? vyuh.content.provider
-                .imageUrl(
-                  ref!,
-                  width: roundedWidth,
-                  height: roundedHeight,
-                  devicePixelRatio: dpr,
-                  quality: dpr > 1 ? 90 : 50,
-                  format: format,
-                )
-                ?.toString()
-            : this.url;
+        final provider = (ref != null)
+            ? vyuh.content.provider.image(
+                ref!,
+                width: roundedWidth,
+                height: roundedHeight,
+                devicePixelRatio: dpr,
+                quality: dpr > 1 ? 90 : 50,
+                format: format,
+              )
+            : NetworkImage(url ?? '');
 
-        return CachedNetworkImage(
-          imageUrl: url ?? '',
-          placeholder: (final context, final __) => vyuh.widgetBuilder
-              .imagePlaceholder(
-                  width: roundedWidth?.toDouble(),
-                  height: roundedHeight?.toDouble()),
-          errorWidget: (final context, final __, final ___) =>
-              vyuh.widgetBuilder.imagePlaceholder(
-                  width: roundedWidth?.toDouble(),
-                  height: roundedHeight?.toDouble()),
-          width: roundedWidth?.toDouble() ?? width,
-          height: roundedHeight?.toDouble() ?? height,
-          memCacheHeight: roundedHeight ?? width?.toInt(),
-          maxHeightDiskCache: roundedHeight ?? height?.toInt(),
-          fit: fit,
-          fadeOutDuration: Duration.zero,
-          fadeInDuration: Duration.zero,
-        );
+        return provider == null
+            ? vyuh.widgetBuilder.imagePlaceholder(
+                width: roundedWidth?.toDouble(),
+                height: roundedHeight?.toDouble())
+            : Image(
+                image: provider,
+                errorBuilder: (final context, final __, final ___) =>
+                    vyuh.widgetBuilder.imagePlaceholder(
+                        width: roundedWidth?.toDouble(),
+                        height: roundedHeight?.toDouble()),
+                width: roundedWidth?.toDouble() ?? width,
+                height: roundedHeight?.toDouble() ?? height,
+                fit: fit,
+              );
       },
     );
   }
