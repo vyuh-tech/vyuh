@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract base class ContentProvider {
@@ -16,14 +17,16 @@ abstract base class ContentProvider {
   Future<void> init();
   Future<void> dispose();
 
-  Uri? imageUrl(
-    final String imageRefId, {
+  ImageProvider? image(
+    final ImageReference imageRef, {
     final int? width,
     final int? height,
     final int? devicePixelRatio,
     final int? quality,
     final String? format,
   });
+
+  Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson});
 
   Future<T?> fetchSingle<T>(String query,
       {required FromJsonConverter<T> fromJson,

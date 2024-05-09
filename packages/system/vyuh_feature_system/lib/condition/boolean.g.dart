@@ -9,5 +9,6 @@ part of 'boolean.dart';
 BooleanCondition _$BooleanConditionFromJson(Map<String, dynamic> json) =>
     BooleanCondition(
       value: json['value'] as bool? ?? false,
-      evaluationDelayInSeconds: json['evaluationDelayInSeconds'] as int? ?? 0,
+      evaluationDelayInSeconds:
+          (json['evaluationDelayInSeconds'] as num?)?.toInt() ?? 0,
     );

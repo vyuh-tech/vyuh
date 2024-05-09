@@ -11,6 +11,7 @@ ImageReference _$ImageReferenceFromJson(Map<String, dynamic> json) =>
       asset: json['asset'] == null
           ? null
           : ObjectReference.fromJson(json['asset'] as Map<String, dynamic>),
+      sanityAsset: json['_sanityAsset'] as String?,
     );
 
 ObjectReference _$ObjectReferenceFromJson(Map<String, dynamic> json) =>

@@ -8,7 +8,7 @@ part of 'grid_layout.dart';
 
 GridGroupLayout _$GridGroupLayoutFromJson(Map<String, dynamic> json) =>
     GridGroupLayout(
-      columns: json['columns'] as int? ?? 2,
+      columns: (json['columns'] as num?)?.toInt() ?? 2,
       aspectRatio: (json['aspectRatio'] as num?)?.toDouble() ?? 1.0,
       allowScroll: json['allowScroll'] as bool? ?? false,
     );

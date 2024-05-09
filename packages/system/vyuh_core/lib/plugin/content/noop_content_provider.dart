@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class NoOpContentProvider extends ContentProvider {
@@ -31,7 +32,7 @@ final class NoOpContentProvider extends ContentProvider {
       throw UnimplementedError();
 
   @override
-  Uri? imageUrl(String imageRefId,
+  ImageProvider? image(ImageReference imageRef,
           {int? width,
           int? height,
           int? devicePixelRatio,
@@ -44,4 +45,9 @@ final class NoOpContentProvider extends ContentProvider {
 
   @override
   String schemaType(Map<String, dynamic> json) => throw UnimplementedError();
+
+  @override
+  Future<T?> fetchById<T>(String id,
+          {required FromJsonConverter<T> fromJson}) =>
+      Future.value(null);
 }

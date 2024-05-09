@@ -7,8 +7,12 @@ part 'reference.g.dart';
 class ImageReference {
   final ObjectReference? asset;
 
+  @JsonKey(name: '_sanityAsset')
+  final String? sanityAsset;
+
   ImageReference({
     required this.asset,
+    this.sanityAsset,
   });
 
   factory ImageReference.fromJson(final Map<String, dynamic> json) =>

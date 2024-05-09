@@ -29,7 +29,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              if (content.image?.asset?.ref != null || content.imageUrl != null)
+              if (content.image != null || content.imageUrl != null)
                 Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
@@ -39,7 +39,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                   width: 92,
                   child: sys.ContentImage(
                     url: content.imageUrl?.toString(),
-                    ref: content.image?.asset?.ref,
+                    ref: content.image,
                     fit: BoxFit.contain,
                   ),
                 ),
