@@ -1,3 +1,7 @@
+## 1.0.0-beta.19
+
+ - **FEAT**: refactor for deeper support of Sanity Images.
+
 ## 1.0.0-beta.18
 
  - package updates

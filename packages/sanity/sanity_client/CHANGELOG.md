@@ -1,3 +1,7 @@
+## 1.0.0-beta.6
+
+ - **FEAT**: refactor for deeper support of Sanity Images.
+
 ## 1.0.0-beta.5
 
 - Refactored tests for 100% coverage

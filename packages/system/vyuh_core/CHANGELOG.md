@@ -1,3 +1,7 @@
+## 1.0.0-beta.15
+
+ - **FEAT**: refactor for deeper support of Sanity Images.
+
 ## 1.0.0-beta.14
 
  - **REFACTOR**: moving content types into the plugin.
