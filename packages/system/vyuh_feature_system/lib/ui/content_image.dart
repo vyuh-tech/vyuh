@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class ContentImage extends StatelessWidget {
   final String? url;
