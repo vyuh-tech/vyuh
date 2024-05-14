@@ -105,16 +105,18 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
           // Showing a loading spinner during API call
           return vyuh.widgetBuilder.contentLoader();
         } else if (snapshot.connectionState == ConnectionState.done) {
-          if (content.showError && snapshot.hasError) {
+          if (snapshot.hasError) {
             // Show error if API call resulted in an error
-            return vyuh.widgetBuilder.errorView(
-              title:
-                  'API Error${content.configuration?.title != null ? ': ${content.configuration!.title}' : ''}',
-              subtitle:
-                  'Handler in context was "${content.configuration?.schemaType}"',
-              error: snapshot.error,
-              showRestart: false,
-            );
+            return content.showError
+                ? vyuh.widgetBuilder.errorView(
+                    title:
+                        'API Error${content.configuration?.title != null ? ': ${content.configuration!.title}' : ''}',
+                    subtitle:
+                        'Handler in context was "${content.configuration?.schemaType}"',
+                    error: snapshot.error,
+                    showRestart: false,
+                  )
+                : empty;
           } else {
             // Show data when API call is successful
             return content.configuration?.build(context, snapshot.data) ??
