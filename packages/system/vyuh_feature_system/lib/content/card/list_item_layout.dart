@@ -33,7 +33,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                 Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                      color: theme.colorScheme.background,
+                      color: theme.colorScheme.surface,
                       borderRadius: BorderRadius.circular(8)),
                   height: 64,
                   width: 92,

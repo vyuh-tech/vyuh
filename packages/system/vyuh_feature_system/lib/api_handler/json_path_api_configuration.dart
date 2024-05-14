@@ -118,7 +118,7 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
       margin: const EdgeInsets.only(left: 4, right: 4, top: 8, bottom: 8),
       padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
-          color: theme.colorScheme.background,
+          color: theme.colorScheme.surface,
           border: Border.all(color: theme.colorScheme.outlineVariant),
           borderRadius: const BorderRadius.all(Radius.circular(8))),
       child: LimitedBox(
