@@ -1,3 +1,7 @@
+## 1.0.0-beta.21
+
+ - **FIX**: analysis errors.
+
 ## 1.0.0-beta.20
 
  - **FIX**: ensuring errors are properly shown in API Content handler.
