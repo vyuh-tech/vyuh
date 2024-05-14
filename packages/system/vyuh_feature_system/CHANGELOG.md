@@ -1,3 +1,7 @@
+## 1.0.0-beta.20
+
+ - **FIX**: ensuring errors are properly shown in API Content handler.
+
 ## 1.0.0-beta.19
 
  - **FEAT**: refactor for deeper support of Sanity Images.
