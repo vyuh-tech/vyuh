@@ -468,7 +468,7 @@ packages:
       path: "../../packages/sanity/sanity_client"
       relative: true
     source: path
-    version: "1.0.0-beta.5"
+    version: "1.0.0-beta.6"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -608,7 +608,7 @@ packages:
       path: "../../packages/system/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0-beta.14"
+    version: "1.0.0-beta.15"
   vyuh_extension_content:
     dependency: "direct main"
     description:
@@ -629,7 +629,7 @@ packages:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.18"
+    version: "1.0.0-beta.20"
   web:
     dependency: transitive
     description:
