@@ -9,8 +9,7 @@ Page<dynamic> defaultRoutePageBuilder(
 
   if (route == null) {
     return MaterialPage(
-      child: vyuh.content
-          .buildRoute(context, url: Uri.parse(state.matchedLocation)),
+      child: vyuh.content.buildRoute(context, url: state.uri),
     );
   }
 
