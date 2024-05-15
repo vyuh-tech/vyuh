@@ -1,3 +1,7 @@
+## 1.0.0-beta.23
+
+ - **FIX**: reverting to previous state of default route handling.
+
 ## 1.0.0-beta.22
 
  - **FIX**: using the state.uri for the full path of the page.
