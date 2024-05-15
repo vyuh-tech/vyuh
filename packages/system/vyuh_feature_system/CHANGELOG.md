@@ -1,3 +1,7 @@
+## 1.0.0-beta.24
+
+ - **FIX**: adjusting the layout of the schemaType.
+
 ## 1.0.0-beta.23
 
  - **FIX**: reverting to previous state of default route handling.
