@@ -33,27 +33,32 @@ final class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
   @override
   Widget build(BuildContext context, Unknown content) {
     final theme = Theme.of(context);
+
     return Container(
         color: Colors.red.shade300,
         padding: const EdgeInsets.all(8),
         child: Column(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(
                   Icons.do_not_disturb_alt_rounded,
                   color: Colors.white54,
                   size: 32,
                 ),
-                const SizedBox(width: 10),
-                const Text('Missing schemaType:'),
                 const SizedBox(width: 4),
-                Text(content.missingSchemaType,
-                    style:
-                        theme.textTheme.bodyMedium?.apply(fontWeightDelta: 4)),
+                Text(
+                  'Missing schemaType',
+                  style: theme.textTheme.labelLarge,
+                ),
               ],
             ),
-            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Text(content.missingSchemaType,
+                  style: theme.textTheme.bodyMedium?.apply(fontWeightDelta: 4)),
+            ),
             Text(content.description),
           ],
         ));
