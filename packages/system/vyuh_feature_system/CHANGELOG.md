@@ -1,3 +1,7 @@
+## 1.0.0-beta.22
+
+ - **FIX**: using the state.uri for the full path of the page.
+
 ## 1.0.0-beta.21
 
  - **FIX**: analysis errors.

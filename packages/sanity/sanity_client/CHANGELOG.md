@@ -1,3 +1,7 @@
+## 1.0.0-beta.7
+
+ - **FIX**: using the state.uri for the full path of the page.
+
 ## 1.0.0-beta.6
 
  - **FEAT**: refactor for deeper support of Sanity Images.
