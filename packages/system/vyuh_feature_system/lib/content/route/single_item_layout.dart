@@ -29,7 +29,10 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
 
     return vf.RouteContainer(
       content: content,
-      child: Scaffold(body: useSafeArea ? SafeArea(child: child) : child),
+      child: Scaffold(
+        appBar: AppBar(title: Text(content.title)),
+        body: useSafeArea ? SafeArea(child: child) : child,
+      ),
     );
   }
 }
