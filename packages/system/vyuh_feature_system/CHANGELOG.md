@@ -1,3 +1,7 @@
+## 1.0.0-beta.25
+
+ - **FEAT**: adding AppBar to the Single Item Layout.
+
 ## 1.0.0-beta.24
 
  - **FIX**: adjusting the layout of the schemaType.
