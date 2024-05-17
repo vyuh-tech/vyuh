@@ -9,9 +9,13 @@ part 'single_item_layout.g.dart';
 final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
   static const schemaName = 'vyuh.route.layout.single';
 
+  final bool showAppBar;
   final bool useSafeArea;
 
-  SingleItemLayout({this.useSafeArea = false}) : super(schemaType: schemaName);
+  SingleItemLayout({
+    this.useSafeArea = false,
+    this.showAppBar = false,
+  }) : super(schemaType: schemaName);
 
   factory SingleItemLayout.fromJson(Map<String, dynamic> json) =>
       _$SingleItemLayoutFromJson(json);
@@ -21,16 +25,13 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     final first =
         content.regions.expand((element) => element.items).firstOrNull;
 
-    if (first == null) {
-      return vf.empty;
-    }
-
-    final child = vyuh.content.buildContent(context, first);
+    final child =
+        first == null ? vf.empty : vyuh.content.buildContent(context, first);
 
     return vf.RouteContainer(
       content: content,
       child: Scaffold(
-        appBar: AppBar(title: Text(content.title)),
+        appBar: showAppBar ? AppBar(title: Text(content.title)) : null,
         body: useSafeArea ? SafeArea(child: child) : child,
       ),
     );
