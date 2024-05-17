@@ -1,3 +1,7 @@
+## 1.0.0-beta.26
+
+ - **FEAT**: adding support for optional App Bar in the single item layout.
+
 ## 1.0.0-beta.25
 
  - **FEAT**: adding AppBar to the Single Item Layout.
