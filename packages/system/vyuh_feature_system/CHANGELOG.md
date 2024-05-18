@@ -1,3 +1,33 @@
+## 1.0.0-beta.27
+
+ - **REFACTOR**: renamed rest of handlers to configs.
+ - **REFACTOR**: renamed APIHandler => ApiConfiguration to be in sync with rest of the naming.
+ - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
+ - **REFACTOR**: renamed buildData => build for ApiHandler.
+ - **REFACTOR**: navigation and default route layout.
+ - **REFACTOR**: action now is a list of configurations instead of a single item.
+ - **FIX**: adjusting the layout of the schemaType.
+ - **FIX**: reverting to previous state of default route handling.
+ - **FIX**: using the state.uri for the full path of the page.
+ - **FIX**: analysis errors.
+ - **FIX**: ensuring errors are properly shown in API Content handler.
+ - **FIX**: analysis issues.
+ - **FIX**: analysis issues.
+ - **FEAT**: adding support for optional App Bar in the single item layout.
+ - **FEAT**: adding AppBar to the Single Item Layout.
+ - **FEAT**: refactor for deeper support of Sanity Images.
+ - **FEAT**: adding conditional layouts for card, group and route. Rest can be added as needed.
+ - **FEAT**: first cut of conditional layouts.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: showing details of the conditional route in an intermediate layout.
+ - **FEAT**: added single item layout.
+ - **FEAT**: added a new layout for route for a single item.
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+ - **FEAT**: refactored portable text to be more resilient.
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load.
+ - **FEAT**: added conditional action.
+
 ## 1.0.0-beta.26
 
  - **FEAT**: adding support for optional App Bar in the single item layout.
