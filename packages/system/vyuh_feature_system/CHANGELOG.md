@@ -1,3 +1,7 @@
+## 1.0.0-beta.28
+
+ - **FEAT**: added a route refresh action.
+
 ## 1.0.0-beta.27
 
  - **REFACTOR**: renamed rest of handlers to configs.
