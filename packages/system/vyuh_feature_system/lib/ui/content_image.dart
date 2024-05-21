@@ -12,7 +12,7 @@ class ContentImage extends StatelessWidget {
 
   static const int nearestSize = 10;
 
-  ContentImage({
+  const ContentImage({
     super.key,
     this.url,
     this.width,
@@ -20,7 +20,7 @@ class ContentImage extends StatelessWidget {
     this.ref,
     this.fit = BoxFit.cover,
     this.format,
-  }) {}
+  });
 
   @override
   Widget build(final BuildContext context) {
