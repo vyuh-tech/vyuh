@@ -1,3 +1,7 @@
+## 1.0.0-beta.30
+
+ - **FIX**: ensuring the list item index is set correctly for multiple levels of the numbered list.
+
 ## 1.0.0-beta.29
 
  - **FIX**: proper use of width and height and handling null ref and url at the same time.
