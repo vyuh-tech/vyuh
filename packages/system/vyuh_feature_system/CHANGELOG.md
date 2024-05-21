@@ -1,3 +1,7 @@
+## 1.0.0-beta.31
+
+ - **FIX**: analysis errors.
+
 ## 1.0.0-beta.30
 
  - **FIX**: ensuring the list item index is set correctly for multiple levels of the numbered list.
