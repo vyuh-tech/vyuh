@@ -20,10 +20,7 @@ class ContentImage extends StatelessWidget {
     this.ref,
     this.fit = BoxFit.cover,
     this.format,
-  }) {
-    assert((url != null && ref == null) || (url == null && ref != null),
-        'One of url or ref must be specified.');
-  }
+  }) {}
 
   @override
   Widget build(final BuildContext context) {
@@ -57,20 +54,22 @@ class ContentImage extends StatelessWidget {
                 quality: dpr > 1 ? 90 : 50,
                 format: format,
               )
-            : NetworkImage(url ?? '');
+            : url != null && url!.isNotEmpty
+                ? NetworkImage(url!)
+                : null;
 
         return provider == null
             ? vyuh.widgetBuilder.imagePlaceholder(
-                width: roundedWidth?.toDouble(),
-                height: roundedHeight?.toDouble())
+                width: width ?? roundedWidth?.toDouble(),
+                height: height ?? roundedHeight?.toDouble())
             : Image(
                 image: provider,
                 errorBuilder: (final context, final __, final ___) =>
                     vyuh.widgetBuilder.imagePlaceholder(
                         width: roundedWidth?.toDouble(),
                         height: roundedHeight?.toDouble()),
-                width: roundedWidth?.toDouble() ?? width,
-                height: roundedHeight?.toDouble() ?? height,
+                width: width ?? roundedWidth?.toDouble(),
+                height: height ?? roundedHeight?.toDouble(),
                 fit: fit,
               );
       },
