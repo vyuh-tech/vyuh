@@ -53,25 +53,36 @@ class PortableTextContent extends ContentItem {
   }
 
   static void _setListItemIndexes(final List<PortableBlockItem> items) {
-    int? listStartIndex;
+    List<int> indexStack = [];
+    int previousLevel = 0;
 
     for (var index = 0; index < items.length; index++) {
       final item = items[index];
+
       switch (item) {
         case TextBlockItem():
           if (item.listItem == null || item.listItem != ListItemType.number) {
-            listStartIndex = null;
+            item.listItemIndex = null;
             continue;
           }
 
-          // Assign a starting index to the list only if previously
-          // we were not inside a list
-          listStartIndex ??= index;
-          item.listItemIndex = index - listStartIndex;
+          // Initialize the list numbering when starting out fresh or
+          // when there is a jump in level. When going back to previous level,
+          // pop out the last index to restore previous numbering.
+          if (item.level != null && item.level! > previousLevel) {
+            indexStack.add(-1);
+          } else if (item.level != null && item.level! < previousLevel) {
+            indexStack.removeLast();
+          }
+
+          // Increment index for the current level
+          indexStack[indexStack.length - 1]++;
+
+          item.listItemIndex = indexStack.last;
+          previousLevel = item.level!;
           break;
 
         default:
-          listStartIndex = null;
           continue;
       }
     }
