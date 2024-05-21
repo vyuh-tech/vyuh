@@ -1,3 +1,7 @@
+## 1.0.0-beta.29
+
+ - **FIX**: proper use of width and height and handling null ref and url at the same time.
+
 ## 1.0.0-beta.28
 
  - **FEAT**: added a route refresh action.
