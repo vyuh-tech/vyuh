@@ -12,6 +12,10 @@ class ContentImage extends StatelessWidget {
 
   static const int nearestSize = 10;
 
+  final Color? color;
+  final BlendMode? colorBlendMode;
+  final AlignmentGeometry alignment;
+
   const ContentImage({
     super.key,
     this.url,
@@ -20,6 +24,9 @@ class ContentImage extends StatelessWidget {
     this.ref,
     this.fit = BoxFit.cover,
     this.format,
+    this.color,
+    this.colorBlendMode,
+    this.alignment = Alignment.center,
   });
 
   @override
@@ -71,6 +78,9 @@ class ContentImage extends StatelessWidget {
                 width: width ?? roundedWidth?.toDouble(),
                 height: height ?? roundedHeight?.toDouble(),
                 fit: fit,
+                alignment: alignment,
+                color: color,
+                colorBlendMode: colorBlendMode,
               );
       },
     );
