@@ -49,7 +49,7 @@ final class NavigationAction extends ActionConfiguration {
     final uri = Uri.parse(url!);
 
     if (uri.scheme.startsWith('http')) {
-      context.push('/__system_navigate__', extra: uri);
+      vyuh.router.push('/__system_navigate__', extra: uri);
 
       return;
     }
@@ -89,7 +89,7 @@ final class NavigationAction extends ActionConfiguration {
 
       navigationType.apply(context, path, route);
     } catch (e) {
-      context.push('/__system_error__', extra: e);
+      vyuh.router.push('/__system_error__', extra: e);
     } finally {
       entry.remove();
     }
@@ -100,10 +100,10 @@ extension on NavigationType {
   void apply(BuildContext context, String path, [vc.RouteBase? route]) {
     switch (this) {
       case NavigationType.go:
-        context.go(path, extra: route);
+        vyuh.router.go(path, extra: route);
         break;
       case NavigationType.push:
-        context.push(path, extra: route);
+        vyuh.router.push(path, extra: route);
         break;
       case NavigationType.replace:
         context.replace(path, extra: route);

@@ -50,7 +50,7 @@ class _LaunchPage extends StatelessWidget {
             ListTile(
               title: Text(entryPoint.title),
               subtitle: Text(entryPoint.description),
-              onTap: () => context.push(entryPoint.path),
+              onTap: () => vyuh.router.push(entryPoint.path),
               leading: Icon(entryPoint.icon),
               trailing: const Icon(Icons.chevron_right),
             ),
