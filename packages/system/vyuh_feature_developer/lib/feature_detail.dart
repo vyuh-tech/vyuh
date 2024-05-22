@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
@@ -19,7 +18,7 @@ class FeatureItem extends StatelessWidget {
     final theme = Theme.of(context);
 
     return GestureDetector(
-      onTap: () => context.push('/developer/features/${feature.name}'),
+      onTap: () => vyuh.router.push('/developer/features/${feature.name}'),
       child: ListTile(
         titleAlignment: ListTileTitleAlignment.center,
         contentPadding:
@@ -164,7 +163,7 @@ extension WidgetBuilder on ExtensionDescriptor {
           title: title,
           description: runtimeType.toString(),
           onTap: () =>
-              context.push('/developer/extensions/content', extra: this),
+              vyuh.router.push('/developer/extensions/content', extra: this),
         );
       default:
         return ItemTile(

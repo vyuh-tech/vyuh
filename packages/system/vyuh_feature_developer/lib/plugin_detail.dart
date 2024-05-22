@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 
@@ -38,6 +37,8 @@ extension on PluginType {
         return Icons.flag;
       case PluginType.auth:
         return Icons.account_circle;
+      case PluginType.navigation:
+        return Icons.navigation_outlined;
       default:
         return Icons.extension;
     }
@@ -54,7 +55,7 @@ class _PluginWithDetailsItem extends StatelessWidget {
     return ListTile(
       leading: Icon(plugin.pluginType.icon),
       onTap: () {
-        context.push('/developer/plugins/${plugin.pluginType}');
+        vyuh.router.push('/developer/plugins/${plugin.pluginType}');
       },
       title: StandardPluginItem(plugin: plugin),
       trailing: const Icon(Icons.chevron_right),
