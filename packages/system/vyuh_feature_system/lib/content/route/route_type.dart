@@ -26,8 +26,8 @@ final class PageRouteType extends vc.RouteTypeConfiguration {
   @override
   Page<T> create<T>(Widget child, vc.RouteBase route) {
     return behavior == PageBehavior.material
-        ? MaterialPage(child: child)
-        : CupertinoPage(child: child);
+        ? MaterialPage(child: child, name: route.path)
+        : CupertinoPage(child: child, name: route.path);
   }
 }
 

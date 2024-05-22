@@ -3,6 +3,7 @@ enum PluginType {
   di,
   analytics,
   featureFlag,
+  navigation,
   logger,
   storage,
   secureStorage,

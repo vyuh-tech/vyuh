@@ -54,7 +54,8 @@ final class NavigationAction extends ActionConfiguration {
       return;
     }
 
-    final localRoute = vyuh.router.configuration.findMatch(uri.toString());
+    final localRoute =
+        vyuh.router.instance.configuration.findMatch(uri.toString());
     var isLocal = localRoute.routes.any((route) => route is CMSRoute) == false;
 
     if (isLocal) {

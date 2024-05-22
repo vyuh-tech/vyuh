@@ -10,7 +10,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
     appBuilder: (platform) {
       return MaterialApp.router(
         theme: ThemeData.light(useMaterial3: true),
-        routerConfig: platform.router,
+        routerConfig: platform.router.instance,
       );
     },
     appLoader: () => const _DefaultRouteLoader(
