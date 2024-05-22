@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart' as g;
 import 'package:vyuh_core/vyuh_core.dart';
 
 late final VyuhPlatform vyuh;
@@ -14,8 +13,6 @@ abstract class VyuhPlatform {
   final PlatformWidgetBuilder widgetBuilder;
 
   GlobalKey<NavigatorState> get rootNavigatorKey;
-
-  g.GoRouter get router;
 
   SystemInitTracker get tracker;
 
@@ -35,6 +32,7 @@ abstract class VyuhPlatform {
     PluginType.analytics,
     PluginType.network,
     PluginType.auth,
+    PluginType.navigation,
     // PluginType.storage,
   ];
 
@@ -67,6 +65,9 @@ extension NamedPlugins on VyuhPlatform {
   NetworkPlugin get network => ensurePlugin<NetworkPlugin>(PluginType.network);
 
   AuthPlugin get auth => ensurePlugin<AuthPlugin>(PluginType.auth);
+
+  NavigationPlugin get router =>
+      ensurePlugin<NavigationPlugin>(PluginType.navigation);
 
   T ensurePlugin<T>(PluginType type, {bool mustExist = true}) {
     final plugin = getPlugin(type) as T;

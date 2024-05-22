@@ -51,7 +51,7 @@ void main() async {
             themeMode: mode,
             theme: ThemeData.light(useMaterial3: true),
             darkTheme: ThemeData.dark(useMaterial3: true),
-            routerConfig: platform.router,
+            routerConfig: platform.router.instance,
           );
         },
       );

@@ -23,6 +23,7 @@ export 'plugin/di/di_plugin.dart';
 export 'plugin/di/plugin_di_get_it.dart';
 export 'plugin/logger/console_logger_plugin.dart';
 export 'plugin/logger/logger_plugin.dart';
+export 'plugin/navigation.dart';
 export 'plugin/network/http_network_plugin.dart';
 export 'plugin/network/network_plugin.dart';
 export 'plugin/plugin.dart';

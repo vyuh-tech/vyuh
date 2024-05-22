@@ -17,8 +17,6 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
   late RoutingConfigNotifier _routingConfig;
 
-  late g.GoRouter _router;
-
   /// Initialize first time to avoid any late-init errors.
   /// Eventually this will be initialized anytime we restart the platform
   GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -27,9 +25,6 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
   /// The initial Location that will be used by the router
   final String? initialLocation;
-
-  @override
-  g.GoRouter get router => _router;
 
   @override
   GlobalKey<NavigatorState> get rootNavigatorKey => _rootNavigatorKey;
@@ -177,7 +172,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
   Future<void> _initRouter(List<g.RouteBase> routes) async {
     _routingConfig = RoutingConfigNotifier(routes);
-    _router = g.GoRouter.routingConfig(
+    router.setRouter(g.GoRouter.routingConfig(
       initialLocation: initialLocation ?? '/',
       routingConfig: _routingConfig,
       navigatorKey: _rootNavigatorKey,
@@ -191,7 +186,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
           vyuh.tracker.init(tracker.currentState.value);
         },
       ),
-    );
+    ));
   }
 
   void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
@@ -249,6 +244,7 @@ extension on PluginType {
         PluginType.di => GetItDIPlugin(),
         PluginType.network => HttpNetworkPlugin(),
         PluginType.auth => UnknownAuthPlugin(),
+        PluginType.navigation => DefaultNavigationPlugin(),
         _ => null
       };
 }
