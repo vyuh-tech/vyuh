@@ -1,3 +1,7 @@
+## 1.0.0-beta.32
+
+ - **FEAT**: the router is now part of the Navigation Plugin.
+
 ## 1.0.0-beta.31
 
  - **FIX**: analysis errors.
