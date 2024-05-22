@@ -1,3 +1,7 @@
+## 1.0.0-beta.8
+
+ - **FEAT**: adopting the navigation plugin in features and packages.
+
 ## 1.0.0-beta.7
 
  - package updates
