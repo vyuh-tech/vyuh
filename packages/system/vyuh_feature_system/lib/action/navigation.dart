@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
@@ -106,7 +105,7 @@ extension on NavigationType {
         vyuh.router.push(path, extra: route);
         break;
       case NavigationType.replace:
-        context.replace(path, extra: route);
+        vyuh.router.replace(path, extra: route);
         break;
     }
   }
