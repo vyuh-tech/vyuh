@@ -1,3 +1,7 @@
+## 1.0.0-beta.35
+
+ - **FEAT**: adding more parameters to ContentImage.
+
 ## 1.0.0-beta.34
 
  - **FEAT**: adopting the navigation plugin in features and packages.
