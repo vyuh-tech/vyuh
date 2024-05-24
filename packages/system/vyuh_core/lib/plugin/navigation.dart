@@ -1,13 +1,11 @@
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract class NavigationPlugin implements Plugin {
+abstract class NavigationPlugin extends Plugin {
   GoRouter get instance;
 
-  @override
-  final pluginType = PluginType.navigation;
-
-  NavigationPlugin();
+  NavigationPlugin({required super.name, required super.title})
+      : super(pluginType: PluginType.navigation);
 
   void setRouter(GoRouter router);
 
@@ -46,24 +44,19 @@ abstract class NavigationPlugin implements Plugin {
   });
 }
 
-final class DefaultNavigationPlugin implements NavigationPlugin {
+final class DefaultNavigationPlugin extends NavigationPlugin {
   GoRouter _router = GoRouter(
     routes: [],
   );
 
-  DefaultNavigationPlugin();
+  DefaultNavigationPlugin()
+      : super(
+          name: 'vyuh.plugin.navigation.default',
+          title: 'Default Navigation Plugin (GoRouter)',
+        );
 
   @override
   GoRouter get instance => _router;
-
-  @override
-  PluginType get pluginType => PluginType.navigation;
-
-  @override
-  String get name => 'vyuh.plugin.navigation.default';
-
-  @override
-  String get title => 'Default Navigation Plugin (GoRouter)';
 
   @override
   void setRouter(GoRouter router) {
