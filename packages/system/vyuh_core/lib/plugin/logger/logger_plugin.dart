@@ -1,6 +1,6 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract base class LoggerPlugin extends Plugin {
+abstract class LoggerPlugin extends Plugin {
   LoggerPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.logger);
 

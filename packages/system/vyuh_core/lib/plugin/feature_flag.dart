@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// Feature Flags are useful to control the visibility of features in an application.
 /// They are setup on the server side and can be controlled by the server to
 /// enable/disable features for different users.
-abstract base class FeatureFlagPlugin<TSettings, TContext> extends Plugin {
+abstract class FeatureFlagPlugin<TSettings, TContext> extends Plugin {
   /// The settings for the feature flag plugin.
   final TSettings settings;
 

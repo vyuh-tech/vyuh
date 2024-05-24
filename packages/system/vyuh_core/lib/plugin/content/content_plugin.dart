@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract base class ContentPlugin extends Plugin {
+abstract class ContentPlugin extends Plugin {
   final ContentProvider provider;
 
   ContentPlugin({
