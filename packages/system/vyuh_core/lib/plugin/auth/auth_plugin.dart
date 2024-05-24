@@ -13,7 +13,7 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
   AuthPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.auth);
 
-  User get currentUser => throw UnimplementedError();
+  TUser get currentUser => throw UnimplementedError();
 
   Stream<TUser> get userChanges {
     if (!_initialized) {
