@@ -69,6 +69,10 @@ extension NamedPlugins on VyuhPlatform {
   NavigationPlugin get router =>
       ensurePlugin<NavigationPlugin>(PluginType.navigation);
 
+  FeatureFlagPlugin? get featureFlag =>
+      ensurePlugin<FeatureFlagPlugin?>(PluginType.featureFlag,
+          mustExist: false);
+
   T ensurePlugin<T>(PluginType type, {bool mustExist = true}) {
     final plugin = getPlugin(type) as T;
 

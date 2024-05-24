@@ -4,6 +4,7 @@ export 'action/conditional_action.dart';
 export 'action/navigation.dart';
 export 'api_handler/json_path_api_configuration.dart';
 export 'condition/boolean.dart';
+export 'condition/feature_flag.dart';
 export 'content/index.dart';
 export 'feature.dart';
 export 'ui/carousel.dart';

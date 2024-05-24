@@ -21,6 +21,7 @@ export 'plugin/content/type_descriptor.dart';
 export 'plugin/content/unknown.dart';
 export 'plugin/di/di_plugin.dart';
 export 'plugin/di/plugin_di_get_it.dart';
+export 'plugin/feature_flag.dart';
 export 'plugin/logger/console_logger_plugin.dart';
 export 'plugin/logger/logger_plugin.dart';
 export 'plugin/navigation.dart';

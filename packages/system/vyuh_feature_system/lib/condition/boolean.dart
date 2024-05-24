@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'boolean.g.dart';
@@ -8,6 +9,12 @@ part 'boolean.g.dart';
 @JsonSerializable()
 final class BooleanCondition extends ConditionConfiguration {
   static const schemaName = 'vyuh.condition.boolean';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Boolean Condition',
+    fromJson: BooleanCondition.fromJson,
+  );
 
   final bool value;
 
