@@ -1,3 +1,7 @@
+## 1.0.0-beta.20
+
+ - **FIX**: adding the missing TUser generic value.
+
 ## 1.0.0-beta.19
 
  - **FEAT**: added a feature flag condition and included featureFlag has a field of the Vyuh platform instance.
