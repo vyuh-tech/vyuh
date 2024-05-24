@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract class AuthPlugin extends Plugin {
+abstract class AuthPlugin<TUser extends User> extends Plugin {
   @protected
-  var controller = StreamController<User>.broadcast();
+  var controller = StreamController<TUser>.broadcast();
 
   @protected
   var _initialized = false;
@@ -15,7 +15,7 @@ abstract class AuthPlugin extends Plugin {
 
   User get currentUser => throw UnimplementedError();
 
-  Stream<User> get userChanges {
+  Stream<TUser> get userChanges {
     if (!_initialized) {
       throw StateError(
           'AuthPlugin is not yet initialized. Call init() before accessing userChanges.');
@@ -38,7 +38,7 @@ abstract class AuthPlugin extends Plugin {
       return;
     }
 
-    controller = StreamController<User>.broadcast();
+    controller = StreamController<TUser>.broadcast();
 
     _initialized = true;
   }
