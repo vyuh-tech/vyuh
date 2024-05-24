@@ -1,3 +1,7 @@
+## 1.0.0-beta.18
+
+ - **FEAT**: removed the base modifier from all plugin classes.
+
 ## 1.0.0-beta.17
 
  - **FEAT**: making the AuthPlugin have a generic User parameter.
