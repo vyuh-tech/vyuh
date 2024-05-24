@@ -19,9 +19,14 @@ class Conditional extends ContentItem {
 
   final String? defaultCase;
   final Condition? condition;
+  final bool showPending;
 
-  Conditional({this.cases, this.condition, this.defaultCase})
-      : super(schemaType: Conditional.schemaName);
+  Conditional({
+    this.cases,
+    this.condition,
+    this.defaultCase,
+    this.showPending = false,
+  }) : super(schemaType: Conditional.schemaName);
 
   factory Conditional.fromJson(Map<String, dynamic> json) =>
       _$ConditionalFromJson(json);
@@ -102,7 +107,9 @@ class _ConditionalBuilder extends StatelessWidget {
                   : vyuh.content.buildContent(context, item);
 
             default:
-              return vyuh.widgetBuilder.contentLoader();
+              return conditional.showPending
+                  ? vyuh.widgetBuilder.contentLoader()
+                  : empty;
           }
         });
   }
