@@ -65,23 +65,27 @@ class ContentImage extends StatelessWidget {
                 ? NetworkImage(url!)
                 : null;
 
-        return provider == null
-            ? vyuh.widgetBuilder.imagePlaceholder(
+        if (provider == null) {
+          return ClipRect(
+            child: vyuh.widgetBuilder.imagePlaceholder(
                 width: width ?? roundedWidth?.toDouble(),
-                height: height ?? roundedHeight?.toDouble())
-            : Image(
-                image: provider,
-                errorBuilder: (final context, final __, final ___) =>
-                    vyuh.widgetBuilder.imagePlaceholder(
-                        width: roundedWidth?.toDouble(),
-                        height: roundedHeight?.toDouble()),
-                width: width ?? roundedWidth?.toDouble(),
-                height: height ?? roundedHeight?.toDouble(),
-                fit: fit,
-                alignment: alignment,
-                color: color,
-                colorBlendMode: colorBlendMode,
-              );
+                height: height ?? roundedHeight?.toDouble()),
+          );
+        } else {
+          return Image(
+            image: provider,
+            errorBuilder: (final context, final __, final ___) =>
+                vyuh.widgetBuilder.imagePlaceholder(
+                    width: roundedWidth?.toDouble(),
+                    height: roundedHeight?.toDouble()),
+            width: width ?? roundedWidth?.toDouble(),
+            height: height ?? roundedHeight?.toDouble(),
+            fit: fit,
+            alignment: alignment,
+            color: color,
+            colorBlendMode: colorBlendMode,
+          );
+        }
       },
     );
   }
