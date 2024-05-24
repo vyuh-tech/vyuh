@@ -1,3 +1,7 @@
+## 1.0.0-beta.17
+
+ - **FEAT**: making the AuthPlugin have a generic User parameter.
+
 ## 1.0.0-beta.16
 
  - **FEAT**: the router is now part of the Navigation Plugin.
