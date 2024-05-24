@@ -207,11 +207,8 @@ final feature = FeatureDescriptor(
         APIContentBuilder(),
       ],
       conditions: [
-        TypeDescriptor(
-          schemaType: BooleanCondition.schemaName,
-          title: 'Boolean Condition',
-          fromJson: BooleanCondition.fromJson,
-        )
+        BooleanCondition.typeDescriptor,
+        FeatureFlagCondition.typeDescriptor,
       ],
       actions: [
         NavigationAction.typeDescriptor,
