@@ -1,3 +1,7 @@
+## 1.0.0-beta.36
+
+ - **FEAT**: clipping content image placeholder for overflows.
+
 ## 1.0.0-beta.35
 
  - **FEAT**: adding more parameters to ContentImage.
