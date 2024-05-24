@@ -1,3 +1,7 @@
+## 1.0.0-beta.19
+
+ - **FEAT**: added a feature flag condition and included featureFlag has a field of the Vyuh platform instance.
+
 ## 1.0.0-beta.18
 
  - **FEAT**: removed the base modifier from all plugin classes.

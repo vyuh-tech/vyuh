@@ -1,3 +1,7 @@
+## 1.0.0-beta.37
+
+ - **FEAT**: added a feature flag condition and included featureFlag has a field of the Vyuh platform instance.
+
 ## 1.0.0-beta.36
 
  - **FEAT**: clipping content image placeholder for overflows.
