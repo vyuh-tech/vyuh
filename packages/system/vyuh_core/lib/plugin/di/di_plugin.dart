@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// It is associated with the Dependency Injection (DI) Plugin type and
 /// includes methods for registering, unregistering, retrieving, and
 /// checking the existence of instances in the DI container.
-abstract base class DIPlugin extends Plugin {
+abstract class DIPlugin extends Plugin {
   /// The `DIPlugin` constructor accepts two required parameters: `name` and `title`.
   DIPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.di);

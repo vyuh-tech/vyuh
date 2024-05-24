@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract base class ContentProvider {
+abstract class ContentProvider {
   final String name;
   final String title;
 
