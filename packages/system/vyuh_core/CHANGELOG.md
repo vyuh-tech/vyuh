@@ -1,3 +1,7 @@
+## 1.0.0-beta.21
+
+ - **FEAT**: adding storage related plugins.
+
 ## 1.0.0-beta.20
 
  - **FIX**: adding the missing TUser generic value.
