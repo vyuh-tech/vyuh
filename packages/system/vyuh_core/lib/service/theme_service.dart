@@ -7,4 +7,11 @@ final class ThemeService {
   void changeTheme(ThemeMode mode) {
     runInAction(() => currentMode.value = mode);
   }
+
+  void toggleTheme() {
+    final newValue =
+        currentMode.value == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
+
+    runInAction(() => currentMode.value = newValue);
+  }
 }
