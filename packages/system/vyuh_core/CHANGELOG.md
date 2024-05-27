@@ -1,3 +1,7 @@
+## 1.0.0-beta.22
+
+ - **FEAT**: adding a toggle theme method.
+
 ## 1.0.0-beta.21
 
  - **FEAT**: adding storage related plugins.
