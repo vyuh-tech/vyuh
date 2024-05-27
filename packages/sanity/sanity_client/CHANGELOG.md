@@ -1,3 +1,7 @@
+## 1.0.0
+
+ - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
+
 ## 1.0.0-beta.7
 
  - **FIX**: using the state.uri for the full path of the page.
