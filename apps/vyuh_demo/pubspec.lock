@@ -163,7 +163,7 @@ packages:
       path: "../../packages/sanity/flutter_sanity_portable_text"
       relative: true
     source: path
-    version: "1.0.0-beta.22"
+    version: "1.0.0"
   flutter_shaders:
     dependency: transitive
     description:
@@ -468,7 +468,7 @@ packages:
       path: "../../packages/sanity/sanity_client"
       relative: true
     source: path
-    version: "1.0.0-beta.7"
+    version: "1.0.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -608,28 +608,28 @@ packages:
       path: "../../packages/system/vyuh_core"
       relative: true
     source: path
-    version: "1.0.0-beta.19"
+    version: "1.0.0"
   vyuh_extension_content:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_extension_content"
       relative: true
     source: path
-    version: "1.0.0-beta.6"
+    version: "1.0.0"
   vyuh_feature_developer:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_developer"
       relative: true
     source: path
-    version: "1.0.0-beta.8"
+    version: "1.0.0"
   vyuh_feature_system:
     dependency: "direct main"
     description:
       path: "../../packages/system/vyuh_feature_system"
       relative: true
     source: path
-    version: "1.0.0-beta.38"
+    version: "1.0.0"
   web:
     dependency: transitive
     description:
