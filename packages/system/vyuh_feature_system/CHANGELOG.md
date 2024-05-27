@@ -1,3 +1,7 @@
+## 1.0.0
+
+ - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
+
 ## 1.0.0-beta.38
 
  - **FEAT**: conditional shows the pending indicator based on a boolean setting on the conditional.
