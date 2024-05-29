@@ -1,3 +1,7 @@
+## 1.0.1
+
+ - **FEAT**: moving more of the routing logic into the navigation plugin. Also added the ability to do dynamic route changes.
+
 ## 1.0.0
 
  - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
