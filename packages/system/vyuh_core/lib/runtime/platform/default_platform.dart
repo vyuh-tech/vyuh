@@ -1,11 +1,9 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' as flutter;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
-import 'package:vyuh_core/runtime/platform/fallback_route_page_builder.dart';
 import 'package:vyuh_core/runtime/platform/framework_init_view.dart';
 import 'package:vyuh_core/runtime/platform/platform_init_tracker.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vt;
@@ -14,8 +12,6 @@ import 'package:vyuh_core/vyuh_core.dart';
 final class DefaultVyuhPlatform extends VyuhPlatform {
   final Map<PluginType, Plugin> _pluginMap = {};
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
-
-  late RoutingConfigNotifier _routingConfig;
 
   /// Initialize first time to avoid any late-init errors.
   /// Eventually this will be initialized anytime we restart the platform
@@ -142,12 +138,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
             .where((routes) => routes != null)
             .cast<List<g.RouteBase>>()
             .expand((routes) => routes)
-            .toList()
-          ..add(g.GoRoute(
-            path: '/:path(.*)',
-            pageBuilder: fallbackRoutePageBuilder,
-          ))
-          ..toList(growable: false),
+            .toList(),
       );
 
       _initContent(_features);
@@ -171,22 +162,11 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   Future<void> _initRouter(List<g.RouteBase> routes) async {
-    _routingConfig = RoutingConfigNotifier(routes);
-    router.setRouter(g.GoRouter.routingConfig(
+    router.initRouter(
+      routes: routes,
       initialLocation: initialLocation ?? '/',
-      routingConfig: _routingConfig,
-      navigatorKey: _rootNavigatorKey,
-      debugLogDiagnostics: kDebugMode,
-      observers: analytics.observers,
-      errorBuilder: (_, state) => widgetBuilder.routeErrorView(
-        title: 'Failed to load route',
-        subtitle: state.matchedLocation,
-        error: state.error,
-        onRetry: () {
-          vyuh.tracker.init(tracker.currentState.value);
-        },
-      ),
-    ));
+      rootNavigatorKey: _rootNavigatorKey,
+    );
   }
 
   void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
