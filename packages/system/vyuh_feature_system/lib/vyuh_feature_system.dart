@@ -2,6 +2,8 @@ library vyuh_feature_system;
 
 export 'action/conditional_action.dart';
 export 'action/navigation.dart';
+export 'action/restart.dart';
+export 'action/toggle_theme.dart';
 export 'api_handler/json_path_api_configuration.dart';
 export 'condition/boolean.dart';
 export 'condition/feature_flag.dart';
