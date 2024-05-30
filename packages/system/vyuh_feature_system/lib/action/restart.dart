@@ -9,7 +9,7 @@ part 'restart.g.dart';
 
 @JsonSerializable()
 final class RestartApplication extends ActionConfiguration {
-  static const schemaName = 'tmdb.action.restart';
+  static const schemaName = 'vyuh.action.restart';
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
