@@ -13,6 +13,9 @@ final feature = FeatureDescriptor(
   title: 'System',
   description: 'The core building blocks of the framework',
   icon: Icons.hub,
+  init: () async {
+    vyuh.di.register(ThemeService());
+  },
   routes: () => [
     GoRoute(
       path: '/__system_error__',
