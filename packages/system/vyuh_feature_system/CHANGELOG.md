@@ -1,3 +1,7 @@
+## 1.1.1
+
+ - **FIX**: including the ThemeService in system init.
+
 ## 1.1.0
 
  - **FEAT**: adding restart and toggleTheme actions.
