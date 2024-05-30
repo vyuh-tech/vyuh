@@ -9,7 +9,7 @@ part 'toggle_theme.g.dart';
 
 @JsonSerializable()
 final class ToggleTheme extends ActionConfiguration {
-  static const schemaName = 'tmdb.action.toggleTheme';
+  static const schemaName = 'vyuh.action.toggleTheme';
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
