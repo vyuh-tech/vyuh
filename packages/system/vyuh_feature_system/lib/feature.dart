@@ -214,6 +214,8 @@ final feature = FeatureDescriptor(
         NavigationAction.typeDescriptor,
         ConditionalAction.typeDescriptor,
         RouteRefreshAction.typeDescriptor,
+        ToggleTheme.typeDescriptor,
+        RestartApplication.typeDescriptor,
       ],
     ),
   ],
