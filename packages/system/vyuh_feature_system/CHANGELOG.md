@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: adding restart and toggleTheme actions.
+
 ## 1.0.1
 
  - **REFACTOR**: version updates of packages.
