@@ -1,3 +1,7 @@
+## 1.1.2
+
+ - **FIX**: update schema names.
+
 ## 1.1.1
 
  - **FIX**: including the ThemeService in system init.
