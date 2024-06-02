@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
+
 ## 1.1.2
 
  - **FIX**: update schema names.
