@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 final featureSettings = FeatureDescriptor(
   name: 'settings',
@@ -30,7 +31,7 @@ class _Settings extends StatefulWidget {
 class _SettingsState extends State<_Settings> {
   @override
   Widget build(BuildContext context) {
-    final service = vyuh.di.get<ThemeService>();
+    final service = vyuh.di.get<vf.ThemeService>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),

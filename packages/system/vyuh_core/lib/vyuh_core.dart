@@ -34,4 +34,3 @@ export 'runtime/platform/default_platform_widget_builder.dart';
 export 'runtime/platform/vyuh_platform.dart';
 export 'runtime/platform_widget_builder.dart';
 export 'runtime/run_app.dart';
-export 'service/theme_service.dart';

@@ -46,7 +46,7 @@ abstract class ConditionalLayout<T extends ContentItem>
   @override
   Widget build(BuildContext context, T content) {
     return FutureBuilder(
-        future: condition.execute(),
+        future: condition.execute(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.active || ConnectionState.done:

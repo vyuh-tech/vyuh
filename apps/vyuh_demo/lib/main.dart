@@ -44,7 +44,7 @@ void main() async {
         vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
       return Observer(
         builder: (_) {
-          var mode = platform.di.get<vc.ThemeService>().currentMode.value;
+          var mode = platform.di.get<system.ThemeService>().currentMode.value;
 
           return MaterialApp.router(
             title: 'Vyuh Demo',

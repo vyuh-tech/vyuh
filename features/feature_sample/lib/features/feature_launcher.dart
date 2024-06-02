@@ -17,9 +17,6 @@ featureLauncher(List<EntryPoint> entryPoints) => FeatureDescriptor(
               }),
         ];
       },
-      init: () async {
-        vyuh.di.register<ThemeService>(ThemeService());
-      },
     );
 
 final class EntryPoint {
