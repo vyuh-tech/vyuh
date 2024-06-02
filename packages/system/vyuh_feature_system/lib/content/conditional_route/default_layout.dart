@@ -38,7 +38,7 @@ class _ConditionalRouteLayoutViewState
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: widget.content.evaluate(),
+        future: widget.content.evaluate(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return _ConditionalRouteView(content: widget.content);

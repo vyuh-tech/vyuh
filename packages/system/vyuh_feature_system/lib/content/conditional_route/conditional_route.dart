@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -48,12 +49,12 @@ final class ConditionalRoute extends RouteBase {
     return this;
   }
 
-  Future<RouteBase?> evaluate() async {
+  Future<RouteBase?> evaluate(BuildContext context) async {
     if (_initializedInstance != null) {
       return _initializedInstance;
     }
 
-    final value = (await condition?.execute()) ?? defaultCase;
+    final value = (await condition?.execute(context)) ?? defaultCase;
     final caseItem = (cases ?? []).firstWhereOrNull((x) => x.value == value);
 
     final ref = caseItem?.item;

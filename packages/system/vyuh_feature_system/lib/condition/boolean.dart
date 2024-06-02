@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -27,7 +28,7 @@ final class BooleanCondition extends ConditionConfiguration {
       _$BooleanConditionFromJson(json);
 
   @override
-  Future<String?> execute() async {
+  Future<String?> execute(BuildContext context) async {
     if (evaluationDelayInSeconds > 0) {
       await Future.delayed(Duration(seconds: evaluationDelayInSeconds));
     }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -29,7 +30,7 @@ final class FeatureFlagCondition extends ConditionConfiguration {
       _$FeatureFlagConditionFromJson(json);
 
   @override
-  Future<String?> execute() async {
+  Future<String?> execute(BuildContext context) async {
     if (flagName.isEmpty) {
       return null;
     }

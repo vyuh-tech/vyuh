@@ -5,6 +5,10 @@ import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/action/route_refresh.dart';
+import 'package:vyuh_feature_system/condition/current_platform.dart';
+import 'package:vyuh_feature_system/condition/current_theme_mode.dart';
+import 'package:vyuh_feature_system/condition/screen_size.dart';
+import 'package:vyuh_feature_system/condition/user_authenticated.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -15,6 +19,7 @@ final feature = FeatureDescriptor(
   icon: Icons.hub,
   init: () async {
     vyuh.di.register(ThemeService());
+    vyuh.di.register(BreakpointService());
   },
   routes: () => [
     GoRoute(
@@ -212,6 +217,10 @@ final feature = FeatureDescriptor(
       conditions: [
         BooleanCondition.typeDescriptor,
         FeatureFlagCondition.typeDescriptor,
+        UserAuthenticated.typeDescriptor,
+        CurrentThemeMode.typeDescriptor,
+        ScreenSize.typeDescriptor,
+        CurrentPlatform.typeDescriptor,
       ],
       actions: [
         NavigationAction.typeDescriptor,

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -31,8 +30,8 @@ class Conditional extends ContentItem {
   factory Conditional.fromJson(Map<String, dynamic> json) =>
       _$ConditionalFromJson(json);
 
-  Future<ContentItem?> execute() async {
-    final value = (await condition?.execute()) ?? defaultCase;
+  Future<ContentItem?> execute(BuildContext context) async {
+    final value = (await condition?.execute(context)) ?? defaultCase;
 
     final caseItem =
         cases?.firstWhereOrNull((element) => element.value == value);
@@ -97,7 +96,7 @@ class _ConditionalBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: conditional.execute(),
+        future: conditional.execute(context),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.done || ConnectionState.active:

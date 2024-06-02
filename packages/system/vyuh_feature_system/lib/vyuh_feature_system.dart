@@ -9,6 +9,8 @@ export 'condition/boolean.dart';
 export 'condition/feature_flag.dart';
 export 'content/index.dart';
 export 'feature.dart';
+export 'service/breakpoint_service.dart';
+export 'service/theme_service.dart';
 export 'ui/carousel.dart';
 export 'ui/conditional_layout.dart';
 export 'ui/content_image.dart';

@@ -30,7 +30,7 @@ class ConditionalAction extends ActionConfiguration {
 
   @override
   Future<void> execute(flutter.BuildContext context) async {
-    final value = (await condition?.execute()) ?? defaultCase;
+    final value = (await condition?.execute(context)) ?? defaultCase;
 
     if (context.mounted) {
       final caseAction =
