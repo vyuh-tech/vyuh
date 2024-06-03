@@ -37,7 +37,7 @@ class DefaultPageRouteLayout extends StatelessWidget {
         body: SafeArea(
           child: ListView.builder(
               itemCount: items.length,
-              cacheExtent: screenHeight / 2,
+              cacheExtent: screenHeight,
               key: PageStorageKey<String>(
                 content.path,
               ),
