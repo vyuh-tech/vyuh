@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: adding cache extent for smoother scrolling.
+
 ## 1.3.0
 
  - **FEAT**: adding cache extent for smoother scrolling.
