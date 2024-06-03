@@ -1,3 +1,10 @@
+## 1.1.0
+
+ - **REFACTOR**: version updates of packages.
+ - **REFACTOR**: more cleanups.
+ - **REFACTOR**: moving packages into the system folder.
+ - **FEAT**: adopting the navigation plugin in features and packages.
+
 ## 1.0.1
 
  - **REFACTOR**: version updates of packages.

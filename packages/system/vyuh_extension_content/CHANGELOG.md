@@ -1,3 +1,15 @@
+## 1.2.0
+
+ - **REFACTOR**: version updates of packages.
+ - **REFACTOR**: cleanups.
+ - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
+ - **REFACTOR**: action now is a list of configurations instead of a single item.
+ - **REFACTOR**: moving packages into the system folder.
+ - **FIX**: ensured the extension builders are also disposed and init-ed correctly.
+ - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
+ - **FEAT**: first cut of conditional layouts.
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load.
+
 ## 1.1.0
 
  - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.

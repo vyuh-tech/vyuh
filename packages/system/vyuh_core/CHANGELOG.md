@@ -1,3 +1,27 @@
+## 1.2.0
+
+ - **REFACTOR**: version updates of packages.
+ - **REFACTOR**: moving content types into the plugin.
+ - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
+ - **REFACTOR**: moving packages into the system folder.
+ - **FIX**: adding the missing TUser generic value.
+ - **FIX**: ensured the extension builders are also disposed and init-ed correctly.
+ - **FIX**: adding error when using content plugin without configuring it.
+ - **FIX**: removed class modifier "base" to allow external inheritance.
+ - **FIX**: adding missing export.
+ - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
+ - **FEAT**: moving more of the routing logic into the navigation plugin. Also added the ability to do dynamic route changes.
+ - **FEAT**: adding a toggle theme method.
+ - **FEAT**: adding storage related plugins.
+ - **FEAT**: added a feature flag condition and included featureFlag has a field of the Vyuh platform instance.
+ - **FEAT**: removed the base modifier from all plugin classes.
+ - **FEAT**: making the AuthPlugin have a generic User parameter.
+ - **FEAT**: the router is now part of the Navigation Plugin.
+ - **FEAT**: refactor for deeper support of Sanity Images.
+ - **FEAT**: first cut of conditional layouts.
+ - **FEAT**: adding better handling of auth with the use of an Unknown User.
+ - **FEAT**: added exception to the auth plugin.
+
 ## 1.1.0
 
  - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.

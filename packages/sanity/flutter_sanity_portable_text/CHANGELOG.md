@@ -1,3 +1,12 @@
+## 1.1.0
+
+ - **REFACTOR**: version updates of packages.
+ - **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under vyuh.
+ - **FIX**: using the right format for screenshots.
+ - **FEAT**: added support for the "code" style markdef.
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+ - **FEAT**: refactored portable text to be more resilient.
+
 ## 1.0.1
 
  - **REFACTOR**: version updates of packages.

@@ -1,3 +1,9 @@
+## 1.1.0
+
+ - **REFACTOR**: moving flutter_sanity_portable_text and sanity_client under vyuh.
+ - **FIX**: using the state.uri for the full path of the page.
+ - **FEAT**: refactor for deeper support of Sanity Images.
+
 ## 1.0.0
 
  - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.

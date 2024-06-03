@@ -1,3 +1,52 @@
+## 1.5.0
+
+ - **REFACTOR**: renamed rest of handlers to configs.
+ - **REFACTOR**: navigation and default route layout.
+ - **REFACTOR**: renamed buildData => build for ApiHandler.
+ - **REFACTOR**: version updates of packages.
+ - **REFACTOR**: The RouteTypeConfiguration class is removed from the vyuh_extension_content and moved to the vyuh_core content.
+ - **REFACTOR**: renamed APIHandler => ApiConfiguration to be in sync with rest of the naming.
+ - **REFACTOR**: action now is a list of configurations instead of a single item.
+ - **FIX**: analysis issues.
+ - **FIX**: analysis issues.
+ - **FIX**: update schema names.
+ - **FIX**: including the ThemeService in system init.
+ - **FIX**: ensuring errors are properly shown in API Content handler.
+ - **FIX**: analysis errors.
+ - **FIX**: using the state.uri for the full path of the page.
+ - **FIX**: analysis errors.
+ - **FIX**: Use CachedNetworkImageProvider also for images other than CMS images in ContentImage.
+ - **FIX**: ensuring the list item index is set correctly for multiple levels of the numbered list.
+ - **FIX**: proper use of width and height and handling null ref and url at the same time.
+ - **FIX**: adjusting the layout of the schemaType.
+ - **FIX**: reverting to previous state of default route handling.
+ - **FEAT**: adding AppBar to the Single Item Layout.
+ - **FEAT**: added a route refresh action.
+ - **FEAT**: the router is now part of the Navigation Plugin.
+ - **FEAT**: adopting the navigation plugin in features and packages.
+ - **FEAT**: adopting the navigation plugin in features and packages.
+ - **FEAT**: adding more parameters to ContentImage.
+ - **FEAT**: refactor for deeper support of Sanity Images.
+ - **FEAT**: adding conditional layouts for card, group and route. Rest can be added as needed.
+ - **FEAT**: first cut of conditional layouts.
+ - **FEAT**: clipping content image placeholder for overflows.
+ - **FEAT**: added a feature flag condition and included featureFlag has a field of the Vyuh platform instance.
+ - **FEAT**: conditional shows the pending indicator based on a boolean setting on the conditional.
+ - **FEAT**: adding restart and toggleTheme actions.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: adding delay to the boolean condition for simulated delays during testing.
+ - **FEAT**: showing details of the conditional route in an intermediate layout.
+ - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
+ - **FEAT**: adding cache extent for smoother scrolling.
+ - **FEAT**: added single item layout.
+ - **FEAT**: added a new layout for route for a single item.
+ - **FEAT**: changed the interface of MarkDefDescriptor to become more flexible with generating InlineSpan instead of just a TextSpan. This allows greater decorations to be attached to an annotation.
+ - **FEAT**: refactored portable text to be more resilient.
+ - **FEAT**: adding cache extent for smoother scrolling.
+ - **FEAT**: added the dialog route behavior and also modified the message when a cms route fails to load.
+ - **FEAT**: added conditional action.
+ - **FEAT**: adding support for optional App Bar in the single item layout.
+
 ## 1.4.0
 
  - **FEAT**: adding cache extent for smoother scrolling.
