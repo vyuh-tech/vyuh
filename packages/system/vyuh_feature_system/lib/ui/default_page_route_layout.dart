@@ -14,6 +14,8 @@ class DefaultPageRouteLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final screenHeight = MediaQuery.sizeOf(context).height;
+
     final items = content.regions
         .expand((element) => element.items)
         .toList(growable: false);
@@ -35,6 +37,10 @@ class DefaultPageRouteLayout extends StatelessWidget {
         body: SafeArea(
           child: ListView.builder(
               itemCount: items.length,
+              cacheExtent: screenHeight / 2,
+              key: PageStorageKey<String>(
+                content.path,
+              ),
               itemBuilder: (_, index) {
                 return vyuh.content.buildContent(context, items[index]);
               }),
