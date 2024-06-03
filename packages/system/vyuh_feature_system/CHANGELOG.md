@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: adding cache extent for smoother scrolling.
+
 ## 1.2.0
 
  - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
