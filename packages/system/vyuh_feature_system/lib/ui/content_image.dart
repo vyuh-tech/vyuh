@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -52,6 +53,9 @@ class ContentImage extends StatelessWidget {
             ? MediaQuery.sizeOf(context).width.roundedTo(nearestSize)
             : roundedWidth;
 
+        final imageWidth = width ?? roundedWidth?.toDouble();
+        final imageHeight = height ?? roundedHeight?.toDouble();
+
         final provider = (ref != null)
             ? vyuh.content.provider.image(
                 ref!,
@@ -62,24 +66,30 @@ class ContentImage extends StatelessWidget {
                 format: format,
               )
             : url != null && url!.isNotEmpty
-                ? NetworkImage(url!)
+                ? CachedNetworkImageProvider(
+                    url!,
+                    maxHeight: imageHeight?.toInt(),
+                    maxWidth: imageWidth?.toInt(),
+                  )
                 : null;
 
         if (provider == null) {
           return ClipRect(
             child: vyuh.widgetBuilder.imagePlaceholder(
-                width: width ?? roundedWidth?.toDouble(),
-                height: height ?? roundedHeight?.toDouble()),
+              width: imageWidth,
+              height: imageHeight,
+            ),
           );
         } else {
           return Image(
             image: provider,
             errorBuilder: (final context, final __, final ___) =>
                 vyuh.widgetBuilder.imagePlaceholder(
-                    width: roundedWidth?.toDouble(),
-                    height: roundedHeight?.toDouble()),
-            width: width ?? roundedWidth?.toDouble(),
-            height: height ?? roundedHeight?.toDouble(),
+              width: imageWidth,
+              height: imageHeight,
+            ),
+            width: imageWidth,
+            height: imageHeight,
             fit: fit,
             alignment: alignment,
             color: color,
