@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**(content-image): use CachedNetworkImageProvider for all images.
+
 ## 1.4.0
 
  - **FEAT**: adding cache extent for smoother scrolling.
