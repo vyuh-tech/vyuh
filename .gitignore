@@ -13,3 +13,4 @@ pubspec_overrides.yaml
 *.iml
 mason-lock.json
 .mason
+*.lock
