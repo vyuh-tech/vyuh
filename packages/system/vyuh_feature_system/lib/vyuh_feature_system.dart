@@ -1,8 +1,14 @@
 library vyuh_feature_system;
 
 export 'action/conditional_action.dart';
+export 'action/drawer.dart';
+export 'action/navigate_back.dart';
 export 'action/navigation.dart';
+export 'action/open_in_dialog.dart';
+export 'action/open_url.dart';
 export 'action/restart.dart';
+export 'action/route_refresh.dart';
+export 'action/snack_bar.dart';
 export 'action/toggle_theme.dart';
 export 'api_handler/json_path_api_configuration.dart';
 export 'condition/boolean.dart';

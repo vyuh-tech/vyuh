@@ -6,5 +6,6 @@ part of 'restart.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-RestartApplication _$RestartApplicationFromJson(Map<String, dynamic> json) =>
-    RestartApplication();
+RestartApplicationAction _$RestartApplicationActionFromJson(
+        Map<String, dynamic> json) =>
+    RestartApplicationAction();

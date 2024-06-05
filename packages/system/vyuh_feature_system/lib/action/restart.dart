@@ -8,22 +8,23 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 part 'restart.g.dart';
 
 @JsonSerializable()
-final class RestartApplication extends ActionConfiguration {
+final class RestartApplicationAction extends ActionConfiguration {
   static const schemaName = 'vyuh.action.restart';
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
-    fromJson: RestartApplication.fromJson,
+    fromJson: RestartApplicationAction.fromJson,
     title: 'Restart Application',
   );
 
-  RestartApplication() : super(schemaType: schemaName);
+  RestartApplicationAction() : super(schemaType: schemaName);
 
-  factory RestartApplication.fromJson(Map<String, dynamic> json) =>
-      _$RestartApplicationFromJson(json);
+  factory RestartApplicationAction.fromJson(Map<String, dynamic> json) =>
+      _$RestartApplicationActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context) {
+  FutureOr<void> execute(BuildContext context,
+      {Map<String, dynamic>? arguments}) {
     vyuh.tracker.init();
   }
 }

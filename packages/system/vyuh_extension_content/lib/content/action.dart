@@ -16,9 +16,10 @@ final class Action {
   static configurationList(dynamic json) =>
       listFromJson<ActionConfiguration>(json);
 
-  FutureOr<void> execute(BuildContext context) async {
+  FutureOr<void> execute(BuildContext context,
+      {Map<String, dynamic>? arguments}) async {
     for (final config in configurations ?? []) {
-      await config.execute(context);
+      await config.execute(context, arguments: arguments);
     }
   }
 
@@ -41,5 +42,6 @@ abstract class ActionConfiguration implements SchemaItem {
     this.title,
   });
 
-  FutureOr<void> execute(BuildContext context);
+  FutureOr<void> execute(BuildContext context,
+      {Map<String, dynamic>? arguments});
 }

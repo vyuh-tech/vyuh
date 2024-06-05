@@ -9,22 +9,23 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 part 'toggle_theme.g.dart';
 
 @JsonSerializable()
-final class ToggleTheme extends ActionConfiguration {
+final class ToggleThemeAction extends ActionConfiguration {
   static const schemaName = 'vyuh.action.toggleTheme';
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
-    fromJson: ToggleTheme.fromJson,
+    fromJson: ToggleThemeAction.fromJson,
     title: 'Toggle Light/Dark Theme',
   );
 
-  ToggleTheme() : super(schemaType: schemaName);
+  ToggleThemeAction() : super(schemaType: schemaName);
 
-  factory ToggleTheme.fromJson(Map<String, dynamic> json) =>
-      _$ToggleThemeFromJson(json);
+  factory ToggleThemeAction.fromJson(Map<String, dynamic> json) =>
+      _$ToggleThemeActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context) {
+  FutureOr<void> execute(BuildContext context,
+      {Map<String, dynamic>? arguments}) {
     vyuh.di.get<ThemeService>().toggleTheme();
   }
 }

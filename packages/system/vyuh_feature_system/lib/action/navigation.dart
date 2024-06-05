@@ -37,7 +37,7 @@ final class NavigationAction extends ActionConfiguration {
       _$NavigationActionFromJson(json);
 
   @override
-  void execute(BuildContext context) async {
+  void execute(BuildContext context, {Map<String, dynamic>? arguments}) async {
     assert(url != null || route != null, 'One of url or route must be set.');
 
     if (linkType == LinkType.route && route != null) {

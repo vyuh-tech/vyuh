@@ -22,7 +22,7 @@ final class RouteRefreshAction extends ActionConfiguration {
       _$RouteRefreshActionFromJson(json);
 
   @override
-  void execute(BuildContext context) async {
+  void execute(BuildContext context, {Map<String, dynamic>? arguments}) async {
     final routeProxy = RouteBuilderProxy.of(context);
     routeProxy?.refresh();
   }
