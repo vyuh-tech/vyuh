@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/action/route_refresh.dart';
 import 'package:vyuh_feature_system/condition/current_platform.dart';
 import 'package:vyuh_feature_system/condition/current_theme_mode.dart';
 import 'package:vyuh_feature_system/condition/screen_size.dart';
@@ -224,10 +223,15 @@ final feature = FeatureDescriptor(
       ],
       actions: [
         NavigationAction.typeDescriptor,
+        NavigateBack.typeDescriptor,
+        OpenUrlAction.typeDescriptor,
+        OpenInDialogAction.typeDescriptor,
         ConditionalAction.typeDescriptor,
         RouteRefreshAction.typeDescriptor,
-        ToggleTheme.typeDescriptor,
-        RestartApplication.typeDescriptor,
+        ToggleThemeAction.typeDescriptor,
+        RestartApplicationAction.typeDescriptor,
+        ShowSnackBarAction.typeDescriptor,
+        HideSnackBarAction.typeDescriptor,
       ],
     ),
   ],
