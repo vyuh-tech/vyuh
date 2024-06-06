@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -36,27 +37,48 @@ final class OpenInDialogAction extends ActionConfiguration {
   @override
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) {
+    final theme = Theme.of(context);
+
     switch (behavior) {
       case DialogBehavior.modalBottomSheet:
         showModalBottomSheet(
           context: context,
-          builder: (context) => vyuh.content.buildRoute(
-            context,
-            url: url == null ? null : Uri.tryParse(url!),
-            routeId: route?.ref,
-          ),
+          enableDrag: true,
+          clipBehavior: Clip.antiAlias,
+          isDismissible: true,
+          showDragHandle: true,
+          useSafeArea: true,
+          builder: (context) => _dialogContent(context),
         );
         break;
       case DialogBehavior.fullscreen:
         showDialog(
           context: context,
-          builder: (context) => vyuh.content.buildRoute(
-            context,
-            url: url == null ? null : Uri.tryParse(url!),
-            routeId: route?.ref,
+          barrierDismissible: true,
+          useSafeArea: false,
+          builder: (context) => Dialog.fullscreen(
+            backgroundColor: theme.colorScheme.surface,
+            child: SafeArea(
+              child: Column(children: [
+                Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton.filled(
+                        onPressed: () => context.pop(),
+                        icon: const Icon(Icons.close))),
+                Expanded(child: _dialogContent(context)),
+              ]),
+            ),
           ),
         );
         break;
     }
+  }
+
+  _dialogContent(BuildContext context) {
+    return vyuh.content.buildRoute(
+      context,
+      url: url == null ? null : Uri.tryParse(url!),
+      routeId: route?.ref,
+    );
   }
 }

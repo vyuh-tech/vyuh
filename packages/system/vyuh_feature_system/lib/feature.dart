@@ -232,6 +232,7 @@ final feature = FeatureDescriptor(
         RestartApplicationAction.typeDescriptor,
         ShowSnackBarAction.typeDescriptor,
         HideSnackBarAction.typeDescriptor,
+        DrawerAction.typeDescriptor,
       ],
     ),
   ],
