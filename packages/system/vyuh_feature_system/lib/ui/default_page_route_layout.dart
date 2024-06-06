@@ -16,8 +16,21 @@ class DefaultPageRouteLayout extends StatelessWidget {
     final theme = Theme.of(context);
     final screenHeight = MediaQuery.sizeOf(context).height;
 
-    final items = content.regions
-        .expand((element) => element.items)
+    final bodyItems = content.regions.length == 1
+        ? content.regions.first.items
+        : content.regions
+            .where((x) => x.identifier == 'body')
+            .expand((elt) => elt.items)
+            .toList(growable: false);
+
+    final drawerItems = content.regions
+        .where((x) => x.identifier == 'drawer')
+        .expand((elt) => elt.items)
+        .toList(growable: false);
+
+    final endDrawerItems = content.regions
+        .where((x) => x.identifier == 'endDrawer')
+        .expand((elt) => elt.items)
         .toList(growable: false);
 
     return vf.RouteContainer(
@@ -36,16 +49,29 @@ class DefaultPageRouteLayout extends StatelessWidget {
                 .toList(growable: false)),
         body: SafeArea(
           child: ListView.builder(
-              itemCount: items.length,
+              itemCount: bodyItems.length,
               cacheExtent: screenHeight,
               key: PageStorageKey<String>(
                 content.path,
               ),
               itemBuilder: (_, index) {
-                return vyuh.content.buildContent(context, items[index]);
+                return vyuh.content.buildContent(context, bodyItems[index]);
               }),
         ),
+        drawer:
+            drawerItems.isNotEmpty ? _buildDrawer(context, drawerItems) : null,
+        endDrawer: endDrawerItems.isNotEmpty
+            ? _buildDrawer(context, endDrawerItems)
+            : null,
       ),
+    );
+  }
+
+  _buildDrawer(BuildContext context, List<ContentItem> items) {
+    return NavigationDrawer(
+      children: [
+        for (final item in items) vyuh.content.buildContent(context, item),
+      ],
     );
   }
 }
