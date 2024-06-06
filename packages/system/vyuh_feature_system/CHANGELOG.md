@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: added the alert action.
+
 ## 1.5.0
 
  - **FEAT**: adding rest of the actions such drawer, open in dialog.
