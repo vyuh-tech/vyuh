@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: expanding the set of actions to include navigation, theme switch, opening dialogs, show/hide snackbars.
+
 ## 1.1.0
 
  - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.
