@@ -1,3 +1,8 @@
+## 1.5.0
+
+ - **FEAT**: adding rest of the actions such drawer, open in dialog.
+ - **FEAT**: expanding the set of actions to include navigation, theme switch, opening dialogs, show/hide snackbars.
+
 ## 1.4.1
 
  - **FIX**(content-image): use CachedNetworkImageProvider for all images.
