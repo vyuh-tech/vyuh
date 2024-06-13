@@ -1,3 +1,7 @@
+## 1.7.0
+
+ - **FEAT**: added the alert action.
+
 ## 1.6.0
 
  - **FEAT**: added the alert action.
