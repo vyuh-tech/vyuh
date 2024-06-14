@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 
 abstract interface class AnalyticsProvider {
@@ -17,11 +19,11 @@ abstract interface class AnalyticsProvider {
   Future<void> reportFlutterError(FlutterErrorDetails details,
       {bool fatal = false});
   Future<void> reportMessage(String message, {Map<String, dynamic>? params});
-  AnalyticsTrace createTrace(String name);
+
+  Future<AnalyticsTrace> startTrace(String name, String operation);
 }
 
 abstract class AnalyticsTrace {
-  Future<void> start();
   Future<void> stop();
 
   void setMetric(String name, int value);
@@ -29,4 +31,6 @@ abstract class AnalyticsTrace {
 
   void setAttributes(Map<String, String> attributes);
   Map<String, String> getAttributes();
+
+  Future<AnalyticsTrace> startChild(String name, String operation);
 }

@@ -26,11 +26,10 @@ final class PlatformInitTracker implements SystemInitTracker {
       /// There could be plugins that can depend on the platform getting
       /// ready before they do their work.
       _loader.value = ObservableFuture(Future.value()).then((_) async {
-        final trace = vyuh.analytics.createTrace('Init Platform');
+        final trace = await vyuh.analytics.startTrace('Platform', 'Init');
 
         try {
-          await trace.start();
-          await _initLoop(initialState);
+          await _initLoop(initialState, trace);
         } catch (exception, trace) {
           vyuh.analytics.reportError(exception, stackTrace: trace);
           rethrow;
@@ -43,7 +42,8 @@ final class PlatformInitTracker implements SystemInitTracker {
     });
   }
 
-  Future<void> _initLoop(InitState initialState) async {
+  Future<void> _initLoop(
+      InitState initialState, AnalyticsTrace parentTrace) async {
     runInAction(() => currentState.value = initialState);
 
     while (currentState.value != InitState.ready) {
@@ -53,12 +53,12 @@ final class PlatformInitTracker implements SystemInitTracker {
           break;
 
         case InitState.plugins:
-          await platform.initPlugins();
+          await platform.initPlugins(parentTrace);
           runInAction(() => currentState.value = InitState.features);
           break;
 
         case InitState.features:
-          await platform.initFeatures();
+          await platform.initFeatures(parentTrace);
           runInAction(() => currentState.value = InitState.ready);
 
         case InitState.ready:

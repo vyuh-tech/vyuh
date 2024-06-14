@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -35,9 +36,13 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
   }
 
   @override
-  AnalyticsTrace createTrace(String name) {
-    final traces = providers.map((element) => element.createTrace(name));
-    return CompositeAnalyticsTrace(traces.toList(growable: false));
+  Future<AnalyticsTrace> startTrace(String name, String operation) async {
+    final traceFutures = providers
+        .map((p) => p.startTrace(name, operation))
+        .toList(growable: false);
+    final traces = await Future.wait(traceFutures);
+
+    return CompositeAnalyticsTrace(traces, providers: providers);
   }
 
   @override
@@ -84,11 +89,18 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
     return Future.wait(futures);
   }
 
-  Future<T?> runWithTrace<T>(String name, FutureOr<T?> Function() fn) async {
-    final trace = createTrace(name);
-    await trace.start();
+  Future<T?> runWithTrace<T>({
+    required String name,
+    required String operation,
+    required FutureOr<T?> Function(AnalyticsTrace? parentTrace) fn,
+    AnalyticsTrace? parentTrace,
+  }) async {
+    final trace = parentTrace != null
+        ? await parentTrace.startChild(name, operation)
+        : await startTrace(name, operation);
+
     try {
-      final value = fn();
+      final value = fn(trace);
       if (value is Future) {
         return await value;
       }
@@ -105,8 +117,9 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
 
 final class CompositeAnalyticsTrace extends AnalyticsTrace {
   final List<AnalyticsTrace> traces;
+  final List<AnalyticsProvider> providers;
 
-  CompositeAnalyticsTrace(this.traces);
+  CompositeAnalyticsTrace(this.traces, {required this.providers});
 
   @override
   Map<String, String> getAttributes() {
@@ -133,8 +146,14 @@ final class CompositeAnalyticsTrace extends AnalyticsTrace {
   }
 
   @override
-  Future<void> start() => Future.wait(traces.map((e) => e.start()));
+  Future<void> stop() => Future.wait(traces.map((e) => e.stop()));
 
   @override
-  Future<void> stop() => Future.wait(traces.map((e) => e.stop()));
+  Future<AnalyticsTrace> startChild(String name, String operation) async {
+    final childTraceFutures =
+        traces.map((trace) => trace.startChild(name, operation));
+    final childTraces = await Future.wait(childTraceFutures);
+
+    return CompositeAnalyticsTrace(childTraces, providers: providers);
+  }
 }

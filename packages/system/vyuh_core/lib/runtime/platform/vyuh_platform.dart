@@ -44,9 +44,9 @@ abstract class VyuhPlatform {
 
   FutureOr<void> run();
 
-  Future<void> initPlugins();
+  Future<void> initPlugins(AnalyticsTrace parentTrace);
 
-  Future<void> initFeatures();
+  Future<void> initFeatures(AnalyticsTrace parentTrace);
 
   Plugin? getPlugin(PluginType type);
 }
