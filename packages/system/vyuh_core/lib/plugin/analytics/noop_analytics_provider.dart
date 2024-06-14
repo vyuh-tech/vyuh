@@ -3,7 +3,8 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 final class NoOpAnalyticsProvider implements AnalyticsProvider {
   @override
-  AnalyticsTrace createTrace(String name) => NoOpAnalyticsTrace();
+  Future<AnalyticsTrace> startTrace(String name, String operation) async =>
+      _NoOpAnalyticsTrace();
 
   @override
   String get name => 'vyuh.analyticsProvider.noop';
@@ -50,7 +51,7 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   }
 }
 
-class NoOpAnalyticsTrace extends AnalyticsTrace {
+final class _NoOpAnalyticsTrace extends AnalyticsTrace {
   @override
   Map<String, String> getAttributes() => {};
 
@@ -64,12 +65,12 @@ class NoOpAnalyticsTrace extends AnalyticsTrace {
   void setMetric(String name, int value) {}
 
   @override
-  Future<void> start() {
+  Future<void> stop() {
     return Future.value();
   }
 
   @override
-  Future<void> stop() {
-    return Future.value();
+  Future<AnalyticsTrace> startChild(String name, String operation) {
+    return Future.value(_NoOpAnalyticsTrace());
   }
 }

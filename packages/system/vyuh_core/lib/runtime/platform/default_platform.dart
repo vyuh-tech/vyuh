@@ -96,67 +96,91 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Future<void> initPlugins() =>
-      analytics.runWithTrace('Init Plugins', () async {
-        // Run a cleanup first
-        final disposeFns = _pluginMap.entries.map((e) => e.value.dispose());
-        await Future.wait(disposeFns, eagerError: true);
+  Future<void> initPlugins(vt.AnalyticsTrace parentTrace) =>
+      analytics.runWithTrace(
+          name: 'Plugins',
+          operation: 'Init',
+          parentTrace: parentTrace,
+          fn: (trace) async {
+            // Run a cleanup first
+            final disposeFns = _pluginMap.entries.map((e) => e.value.dispose());
+            await Future.wait(disposeFns, eagerError: true);
 
-        // Check
-        final initFns = _pluginMap.entries.map((e) {
-          return analytics.runWithTrace<void>(
-              'Init Plugin: ${e.value.title}', e.value.init);
-        });
+            // Check
+            final initFns = _pluginMap.entries.map((e) {
+              return analytics.runWithTrace<void>(
+                name: 'Plugin: ${e.value.title}',
+                operation: 'Init',
+                parentTrace: trace,
+                fn: (_) => e.value.init(),
+              );
+            });
 
-        await Future.wait(initFns, eagerError: true);
-      });
+            await Future.wait(initFns, eagerError: true);
+          });
 
   @override
-  Future<void> initFeatures() async {
+  Future<void> initFeatures(vt.AnalyticsTrace parentTrace) async {
     // Run a cleanup first
     final disposeFns =
         _features.where((e) => e.dispose != null).map((e) => e.dispose!());
     await Future.wait(disposeFns, eagerError: true);
 
-    return analytics.runWithTrace<void>('Init Features', () async {
-      _readyFeatures.clear();
-      _features = await featuresBuilder();
+    return analytics.runWithTrace<void>(
+      name: 'Features',
+      operation: 'Init',
+      parentTrace: parentTrace,
+      fn: (trace) async {
+        _readyFeatures.clear();
+        _features = await featuresBuilder();
 
-      final initFns = _features.map((feature) => analytics
-              .runWithTrace<List<g.RouteBase>>('Init Feature: ${feature.title}',
-                  () {
-            final future = _initFeature(feature);
+        final initFns = _features
+            .map((feature) => analytics.runWithTrace<List<g.RouteBase>>(
+                  name: 'Feature: ${feature.title}',
+                  operation: 'Init',
+                  parentTrace: trace,
+                  fn: (trace) {
+                    final future = _initFeature(feature, trace);
 
-            _readyFeatures[feature.name] = future;
+                    _readyFeatures[feature.name] = future;
 
-            return future;
-          }));
+                    return future;
+                  },
+                ));
 
-      final allRoutes = await Future.wait(initFns, eagerError: true);
-      _initRouter(
-        allRoutes
-            .where((routes) => routes != null)
-            .cast<List<g.RouteBase>>()
-            .expand((routes) => routes)
-            .toList(),
-      );
+        final allRoutes = await Future.wait(initFns, eagerError: true);
+        _initRouter(
+          allRoutes
+              .where((routes) => routes != null)
+              .cast<List<g.RouteBase>>()
+              .expand((routes) => routes)
+              .toList(),
+        );
 
-      _initContent(_features);
-      _initFeatureExtensions(_features);
-    });
+        _initContent(_features);
+        _initFeatureExtensions(_features);
+      },
+    );
   }
 
   void _initContent(List<vt.FeatureDescriptor> featureList) {
     content.setup(featureList);
   }
 
-  Future<List<g.RouteBase>> _initFeature(FeatureDescriptor feature) async {
+  Future<List<g.RouteBase>> _initFeature(
+      FeatureDescriptor feature, vt.AnalyticsTrace? parentTrace) async {
     await feature.init?.call();
 
-    final featureRoutes = feature.routes == null
-        ? null
-        : await analytics.runWithTrace<List<g.RouteBase>>(
-            'Init Routes: ${feature.title}', feature.routes!);
+    if (feature.routes == null) {
+      return [];
+    }
+
+    final featureRoutes = await analytics.runWithTrace<List<g.RouteBase>>(
+      name: 'Routes: ${feature.title}',
+      operation: 'Init',
+      parentTrace: parentTrace,
+      fn: (_) => feature.routes!(),
+    );
 
     return featureRoutes ?? [];
   }
