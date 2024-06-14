@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: added support for child traces in analytics.
+
 ## 1.1.0
 
  - **FEAT**: refactoring services and introducing some new conditions for screen-size, theme-mode, platform, user-auth.

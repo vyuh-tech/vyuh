@@ -1,3 +1,7 @@
+## 1.2.1
+
+ - Update a dependency to the latest release.
+
 ## 1.2.0
 
  - **FEAT**: expanding the set of actions to include navigation, theme switch, opening dialogs, show/hide snackbars.

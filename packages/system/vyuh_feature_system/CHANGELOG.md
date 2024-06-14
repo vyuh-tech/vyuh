@@ -1,3 +1,7 @@
+## 1.7.1
+
+ - **REFACTOR**: version upgrades.
+
 ## 1.7.0
 
  - **FEAT**: added the alert action.
