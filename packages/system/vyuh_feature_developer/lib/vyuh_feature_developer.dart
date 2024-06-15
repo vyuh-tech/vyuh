@@ -39,8 +39,8 @@ final feature = FeatureDescriptor(
           GoRoute(
             path: 'plugins/:name',
             builder: (context, state) {
-              final pluginType = PluginType.values.firstWhere((element) =>
-                  element.toString() == state.pathParameters['name']);
+              final pluginType = PluginType.values.firstWhere(
+                  (element) => element.name == state.pathParameters['name']);
 
               return pluginType.detailsView(context);
             },

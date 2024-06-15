@@ -55,7 +55,7 @@ class _PluginWithDetailsItem extends StatelessWidget {
     return ListTile(
       leading: Icon(plugin.pluginType.icon),
       onTap: () {
-        vyuh.router.push('/developer/plugins/${plugin.pluginType}');
+        vyuh.router.push('/developer/plugins/${plugin.pluginType.name}');
       },
       title: StandardPluginItem(plugin: plugin),
       trailing: const Icon(Icons.chevron_right),

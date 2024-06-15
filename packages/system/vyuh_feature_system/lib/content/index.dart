@@ -14,7 +14,6 @@ export 'group/list_layout.dart';
 export 'portable_text/invoke_action.dart';
 export 'portable_text/portable_text.dart';
 export 'route/default_layout.dart';
-export 'route/default_route.dart';
 export 'route/route.dart';
 export 'route/route_container.dart';
 export 'route/route_type.dart';
