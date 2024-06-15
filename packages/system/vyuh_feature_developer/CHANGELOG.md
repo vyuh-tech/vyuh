@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: adding ability to resolve a CMS path from a local path. It's currently one-directional...local->CMS.
+
 ## 1.0.2
 
  - Update a dependency to the latest release.
