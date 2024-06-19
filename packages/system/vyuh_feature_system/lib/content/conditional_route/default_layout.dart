@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -23,25 +24,20 @@ class DefaultConditionalRouteLayout
   }
 }
 
-class _ConditionalRouteLayoutView extends StatefulWidget {
+class _ConditionalRouteLayoutView extends StatelessWidget {
   final ConditionalRoute content;
 
   const _ConditionalRouteLayoutView({required this.content});
 
   @override
-  State<_ConditionalRouteLayoutView> createState() =>
-      _ConditionalRouteLayoutViewState();
-}
-
-class _ConditionalRouteLayoutViewState
-    extends State<_ConditionalRouteLayoutView> {
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: widget.content.evaluate(context),
+        future: content.evaluate(context),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return _ConditionalRouteView(content: widget.content);
+            return kDebugMode
+                ? _ConditionalRouteDebugView(content: content)
+                : vyuh.widgetBuilder.routeLoader();
           }
 
           if (snapshot.hasError || snapshot.hasData == false) {
@@ -55,10 +51,10 @@ class _ConditionalRouteLayoutViewState
   }
 }
 
-class _ConditionalRouteView extends StatelessWidget {
+class _ConditionalRouteDebugView extends StatelessWidget {
   final ConditionalRoute content;
 
-  const _ConditionalRouteView({required this.content});
+  const _ConditionalRouteDebugView({required this.content});
 
   @override
   Widget build(BuildContext context) {
