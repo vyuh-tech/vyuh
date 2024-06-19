@@ -1,3 +1,7 @@
+## 1.8.1
+
+ - **FIX**: using the default layout for conditional route only in debug mode.
+
 ## 1.8.0
 
  - **FEAT**: adding ability to resolve a CMS path from a local path. It's currently one-directional...local->CMS.
