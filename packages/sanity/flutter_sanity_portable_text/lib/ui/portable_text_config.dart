@@ -17,6 +17,10 @@ typedef BlockWidgetBuilder = Widget Function(
   PortableBlockItem item,
 );
 
+/// A function that builds an InlineSpan for a single bullet mark. Using the
+/// [TextBlockItem]'s listItem, listItemIndex and level, the bullet can be customized as needed.
+typedef BulletRenderer = InlineSpan Function(BuildContext, TextBlockItem);
+
 /// The configuration used for rendering Portable Text. This class is used to
 /// define the visual representation of the Portable Text blocks, spans, and marks. It
 /// is used by the [PortableText] widget to render the Portable Text content. The
@@ -63,12 +67,17 @@ final class PortableTextConfig {
   /// in the application. You can customize the configuration by calling the [apply] method.
   static final PortableTextConfig shared = PortableTextConfig._();
 
+  /// The bullet renderer used to render the bullet for list items. The default value is a simple bullet renderer
+  /// that handles the default bullet types: number, square, and circle.
+  BulletRenderer bulletRenderer = defaultBulletRenderer;
+
   PortableTextConfig._();
 
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
   apply({
     final double listIndent = defaultListIndent,
     final EdgeInsets itemPadding = defaultItemPadding,
+    final BulletRenderer? bulletRenderer,
     final Map<String, TextStyleBuilder>? styles,
     final Map<String, BlockContainerBuilder>? blockContainers,
     final Map<String, BlockWidgetBuilder>? blocks,
@@ -76,6 +85,7 @@ final class PortableTextConfig {
     final TextStyle? Function(BuildContext)? baseStyle,
   }) {
     this.listIndent = listIndent;
+    this.bulletRenderer = bulletRenderer ?? defaultBulletRenderer;
     this.itemPadding = itemPadding;
     this.styles.addAll(styles ?? {});
     this.blockContainers.addAll(blockContainers ?? {});
@@ -87,6 +97,7 @@ final class PortableTextConfig {
   /// Resets the shared instance of the [PortableTextConfig] to the default configuration.
   void reset() {
     listIndent = defaultListIndent;
+    bulletRenderer = defaultBulletRenderer;
     itemPadding = defaultItemPadding;
     baseStyle = defaultBaseStyle;
 
@@ -104,6 +115,39 @@ final class PortableTextConfig {
 
   static const defaultListIndent = 16.0;
   static const defaultItemPadding = EdgeInsets.only(bottom: 8);
+  static BulletRenderer defaultBulletRenderer =
+      (final BuildContext context, final TextBlockItem model) {
+    final textStyle = PortableTextConfig.shared.baseStyle(context);
+
+    switch (model.listItem) {
+      case ListItemType.number:
+        return TextSpan(
+          text: '${(model.listItemIndex ?? 0) + 1}.  ',
+          style: textStyle,
+        );
+
+      case ListItemType.square:
+        return WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.check_box_outline_blank, size: 8),
+          ),
+          style: textStyle,
+        );
+
+      default:
+        return WidgetSpan(
+          alignment: PlaceholderAlignment.middle,
+          child: const Padding(
+            padding: EdgeInsets.only(right: 8.0),
+            child: Icon(Icons.circle, size: 8),
+          ),
+          style: textStyle,
+        );
+    }
+  };
+
   static TextStyle? defaultBaseStyle(BuildContext context) {
     return Theme.of(context).textTheme.bodyMedium;
   }
