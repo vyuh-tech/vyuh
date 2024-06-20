@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: adding the ability to customize the bullet renderer.
+
 ## 1.0.1
 
  - **REFACTOR**: version updates of packages.
