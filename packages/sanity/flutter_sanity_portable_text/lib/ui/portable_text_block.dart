@@ -27,7 +27,7 @@ class PortableTextBlock extends StatelessWidget {
     final content = Text.rich(
       TextSpan(
         children: [
-          if (model.listItem != null) _bulletMark(context),
+          if (model.listItem != null) config.bulletRenderer(context, model),
           ...spans,
         ],
       ),
@@ -134,37 +134,5 @@ You can rely on TextStyles instead for custom styling.''');
         asBlock: asBlock,
       ),
     );
-  }
-
-  InlineSpan _bulletMark(final BuildContext context) {
-    final textStyle = PortableTextConfig.shared.baseStyle(context);
-
-    switch (model.listItem) {
-      case ListItemType.number:
-        return TextSpan(
-          text: '${(model.listItemIndex ?? 0) + 1}.  ',
-          style: textStyle,
-        );
-
-      case ListItemType.square:
-        return WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.check_box_outline_blank, size: 8),
-          ),
-          style: textStyle,
-        );
-
-      default:
-        return WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.circle, size: 8),
-          ),
-          style: textStyle,
-        );
-    }
   }
 }
