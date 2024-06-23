@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' as flutter;
 import 'package:flutter/material.dart';
@@ -18,6 +20,8 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   late final SystemInitTracker _tracker;
+
+  String _userInitialLocation = '/';
 
   /// The initial Location that will be used by the router
   final String? initialLocation;
@@ -91,6 +95,8 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
     for (final plugin in VyuhPlatform.preloadedPlugins) {
       await _pluginMap[plugin]?.init();
     }
+
+    _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
     flutter.runApp(const FrameworkInitView());
   }
@@ -188,7 +194,9 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   Future<void> _initRouter(List<g.RouteBase> routes) async {
     router.initRouter(
       routes: routes,
-      initialLocation: initialLocation ?? '/',
+      initialLocation: _userInitialLocation == '/'
+          ? initialLocation ?? '/'
+          : _userInitialLocation,
       rootNavigatorKey: _rootNavigatorKey,
     );
   }
