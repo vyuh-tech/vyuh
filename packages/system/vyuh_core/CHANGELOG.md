@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: restoring user selected initialRoute.
+
 ## 1.3.0
 
  - **FEAT**: adding ability to resolve a CMS path from a local path. It's currently one-directional...local->CMS.
