@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: switching to the FSL license with future MIT license after 2 years.
+
 ## 1.2.2
 
  - Update a dependency to the latest release.

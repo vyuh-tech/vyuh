@@ -1,3 +1,7 @@
+## 1.9.0
+
+ - **FEAT**: switching to the FSL license with future MIT license after 2 years.
+
 ## 1.8.1
 
  - **FIX**: using the default layout for conditional route only in debug mode.
