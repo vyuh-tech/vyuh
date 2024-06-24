@@ -1,3 +1,8 @@
+## 1.6.0
+
+ - **FEAT**: pulling some go router configuration into the default navigation plugin.
+ - **FEAT**: adding the FSL license at the top level.
+
 ## 1.5.0
 
  - **FEAT**: switching to the FSL license with future MIT license after 2 years.
