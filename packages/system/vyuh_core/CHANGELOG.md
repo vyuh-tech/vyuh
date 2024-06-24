@@ -1,3 +1,8 @@
+## 1.5.0
+
+ - **FEAT**: switching to the FSL license with future MIT license after 2 years.
+ - **FEAT**: restoring user selected initialRoute.
+
 ## 1.4.0
 
  - **FEAT**: restoring user selected initialRoute.

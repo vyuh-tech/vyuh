@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: switching to the FSL license with future MIT license after 2 years.
+
 ## 1.0.0
 
  - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.

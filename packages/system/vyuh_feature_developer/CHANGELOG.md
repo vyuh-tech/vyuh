@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: switching to the FSL license with future MIT license after 2 years.
+
 ## 1.1.0
 
  - **FEAT**: adding ability to resolve a CMS path from a local path. It's currently one-directional...local->CMS.
