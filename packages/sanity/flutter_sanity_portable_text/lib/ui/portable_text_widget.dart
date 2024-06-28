@@ -18,17 +18,23 @@ class PortableText extends StatelessWidget {
   /// only the space it needs. It is true by default.
   final bool shrinkwrap;
 
+  /// The scroll physics to use for the list view.
+  /// It is [AlwaysScrollableScrollPhysics] by default.
+  final ScrollPhysics scrollPhysics;
+
   const PortableText({
     super.key,
     required this.blocks,
     this.usePrimaryScroller = false,
     this.shrinkwrap = true,
+    this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
   });
 
   @override
   Widget build(final BuildContext context) {
     return ListView.builder(
       primary: usePrimaryScroller,
+      physics: scrollPhysics,
       shrinkWrap: shrinkwrap,
       itemCount: blocks.length,
       padding: EdgeInsets.zero,
