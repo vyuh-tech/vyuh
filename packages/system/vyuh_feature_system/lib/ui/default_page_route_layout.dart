@@ -36,17 +36,19 @@ class DefaultPageRouteLayout extends StatelessWidget {
     return vf.RouteContainer(
       content: content,
       child: Scaffold(
-        appBar: AppBar(
-            title: Text(content.title),
-            scrolledUnderElevation: 1,
-            shadowColor: theme.colorScheme.shadow,
-            actions: layout.actions
-                ?.map(
-                  (e) => IconButton(
-                      onPressed: () => e.action?.execute(context),
-                      icon: Icon(e.icon.iconData)),
-                )
-                .toList(growable: false)),
+        appBar: layout.showAppBar
+            ? AppBar(
+                title: Text(content.title),
+                scrolledUnderElevation: 1,
+                shadowColor: theme.colorScheme.shadow,
+                actions: layout.actions
+                    ?.map(
+                      (e) => IconButton(
+                          onPressed: () => e.action?.execute(context),
+                          icon: Icon(e.icon.iconData)),
+                    )
+                    .toList(growable: false))
+            : null,
         body: SafeArea(
           child: ListView.builder(
               itemCount: bodyItems.length,

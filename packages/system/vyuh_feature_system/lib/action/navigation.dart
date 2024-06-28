@@ -55,7 +55,7 @@ final class NavigationAction extends ActionConfiguration {
 
     final localRoute =
         vyuh.router.instance.configuration.findMatch(uri.toString());
-    var isLocal = localRoute.routes.any((route) => route is CMSRoute) == false;
+    var isLocal = localRoute.isNotEmpty;
 
     if (isLocal) {
       navigationType.apply(context, uri.toString());

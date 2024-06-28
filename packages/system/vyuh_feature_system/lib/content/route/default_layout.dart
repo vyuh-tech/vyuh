@@ -48,9 +48,11 @@ class DefaultRouteLayout extends LayoutConfiguration<Route> {
     fromJson: DefaultRouteLayout.fromJson,
   );
 
+  final bool showAppBar;
   final List<MenuAction>? actions;
 
-  DefaultRouteLayout({this.actions}) : super(schemaType: schemaName);
+  DefaultRouteLayout({this.actions, this.showAppBar = true})
+      : super(schemaType: schemaName);
 
   factory DefaultRouteLayout.fromJson(Map<String, dynamic> json) =>
       _$DefaultRouteLayoutFromJson(json);
