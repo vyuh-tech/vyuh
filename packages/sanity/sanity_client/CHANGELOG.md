@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: adding the FSL license at the top level.
+
 ## 1.1.0
 
  - **FEAT**: switching to the FSL license with future MIT license after 2 years.

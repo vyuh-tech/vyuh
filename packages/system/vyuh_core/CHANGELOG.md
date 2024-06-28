@@ -1,3 +1,8 @@
+## 1.7.0
+
+ - **FEAT**: pulling some go router configuration into the default navigation plugin.
+ - **FEAT**: adding the FSL license at the top level.
+
 ## 1.6.0
 
  - **FEAT**: pulling some go router configuration into the default navigation plugin.
