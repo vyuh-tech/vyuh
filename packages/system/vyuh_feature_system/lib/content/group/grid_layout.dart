@@ -19,9 +19,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
 
   GridGroupLayout(
       {this.columns = 2, this.aspectRatio = 1.0, this.allowScroll = false})
-      : super(schemaType: schemaName) {
-    assert(columns >= 2, 'Minimum of 2 columns is required');
-  }
+      : super(schemaType: schemaName);
 
   factory GridGroupLayout.fromJson(Map<String, dynamic> json) =>
       _$GridGroupLayoutFromJson(json);

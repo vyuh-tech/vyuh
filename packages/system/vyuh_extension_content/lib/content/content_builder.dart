@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-abstract class ContentBuilder<T extends ContentItem> {
+class ContentBuilder<T extends ContentItem> {
   final TypeDescriptor<T> content;
   final LayoutConfiguration<T> defaultLayout;
   final TypeDescriptor<LayoutConfiguration> defaultLayoutDescriptor;

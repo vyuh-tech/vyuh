@@ -1,3 +1,8 @@
+## 1.4.0
+
+ - **FEAT**: ContentBuilder is no longer abstract, Card layout adjustments, AppBar can be toggled in default route layout, grid layout can now have single column, minor fixes in navigation action.
+ - **FEAT**: adding the FSL license at the top level.
+
 ## 1.3.0
 
  - **FEAT**: switching to the FSL license with future MIT license after 2 years.

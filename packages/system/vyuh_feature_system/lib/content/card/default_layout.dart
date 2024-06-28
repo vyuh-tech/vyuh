@@ -6,6 +6,12 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart' as e;
 
 part 'default_layout.g.dart';
 
+enum _CardRenderVariant {
+  imageOnly,
+  imageAndText,
+  textOnly,
+}
+
 @JsonSerializable()
 class DefaultCardLayout extends LayoutConfiguration<e.Card> {
   static const schemaName = '${e.Card.schemaName}.layout.default';
@@ -25,52 +31,136 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
 
   @override
   Widget build(BuildContext context, e.Card content) {
-    final theme = Theme.of(context);
+    final variant = _getVariant(content);
+
+    final child = switch (variant) {
+      _CardRenderVariant.imageOnly => _buildImageOnly(context, content),
+      _CardRenderVariant.imageAndText => _buildImageAndText(context, content),
+      _CardRenderVariant.textOnly => _buildTextOnly(context, content),
+    };
+
+    return e.PressEffect(
+        onTap: content.action != null
+            ? (context) => content.action!.execute(context)
+            : null,
+        child: child);
+  }
+
+  Widget _buildImageOnly(f.BuildContext context, e.Card content) {
+    return f.Card(
+      clipBehavior: Clip.antiAlias,
+      child: e.ContentImage(
+        url: content.imageUrl?.toString(),
+        ref: content.image,
+        fit: BoxFit.cover,
+      ),
+    );
+  }
+
+  Widget _buildTextOnly(f.BuildContext context, e.Card content) {
+    final theme = f.Theme.of(context);
 
     final blockLength = content.content?.blocks?.length;
     final hasBlockContent = blockLength != null && blockLength > 0;
 
-    return e.PressEffect(
-      onTap: content.action != null
-          ? (context) => content.action!.execute(context)
-          : null,
-      child: f.Card(
-        color: theme.cardColor,
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (content.image != null || content.imageUrl != null)
-              Flexible(
-                child: e.ContentImage(
-                  url: content.imageUrl?.toString(),
-                  ref: content.image,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            f.Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  if (content.title != null)
-                    Text(
-                      content.title!,
-                      style: theme.textTheme.titleMedium,
-                    ),
-                  if (content.description != null) Text(content.description!),
-                  if (hasBlockContent)
-                    Flexible(
-                        child: vyuh.content
-                            .buildContent(context, content.content!)),
-                ],
-              ),
+    return f.Card(
+      color: theme.cardColor,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          f.Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (content.title != null)
+                  Text(
+                    content.title!,
+                    style: theme.textTheme.titleMedium,
+                  ),
+                if (content.description != null) Text(content.description!),
+                if (hasBlockContent)
+                  Flexible(
+                      child:
+                          vyuh.content.buildContent(context, content.content!)),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  _buildImageAndText(f.BuildContext context, e.Card content) {
+    final theme = f.Theme.of(context);
+
+    final blockLength = content.content?.blocks?.length;
+    final hasBlockContent = blockLength != null && blockLength > 0;
+
+    return f.Card(
+      color: theme.cardColor,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Flexible(
+            child: e.ContentImage(
+              url: content.imageUrl?.toString(),
+              ref: content.image,
+              fit: BoxFit.cover,
+            ),
+          ),
+          f.Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                if (content.title != null)
+                  Text(
+                    content.title!,
+                    style:
+                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 1),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                  ),
+                if (content.description != null)
+                  Text(
+                    content.description!,
+                    style: theme.textTheme.labelMedium,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                if (hasBlockContent)
+                  f.LimitedBox(
+                      maxHeight: 50,
+                      child:
+                          vyuh.content.buildContent(context, content.content!)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _CardRenderVariant _getVariant(e.Card content) {
+    if (content.image != null || content.imageUrl != null) {
+      if (content.title != null ||
+          content.description != null ||
+          content.content?.blocks != null) {
+        return _CardRenderVariant.imageAndText;
+      } else {
+        return _CardRenderVariant.imageOnly;
+      }
+    } else {
+      return _CardRenderVariant.textOnly;
+    }
   }
 }
