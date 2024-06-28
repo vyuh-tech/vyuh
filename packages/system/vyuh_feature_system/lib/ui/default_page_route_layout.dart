@@ -13,9 +13,6 @@ class DefaultPageRouteLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final screenHeight = MediaQuery.sizeOf(context).height;
-
     final bodyItems = content.regions.length == 1
         ? content.regions.first.items
         : content.regions
@@ -36,29 +33,37 @@ class DefaultPageRouteLayout extends StatelessWidget {
     return vf.RouteContainer(
       content: content,
       child: Scaffold(
-        appBar: layout.showAppBar
-            ? AppBar(
-                title: Text(content.title),
-                scrolledUnderElevation: 1,
-                shadowColor: theme.colorScheme.shadow,
-                actions: layout.actions
-                    ?.map(
-                      (e) => IconButton(
-                          onPressed: () => e.action?.execute(context),
-                          icon: Icon(e.icon.iconData)),
-                    )
-                    .toList(growable: false))
-            : null,
         body: SafeArea(
-          child: ListView.builder(
-              itemCount: bodyItems.length,
-              cacheExtent: screenHeight,
-              key: PageStorageKey<String>(
-                content.path,
-              ),
-              itemBuilder: (_, index) {
-                return vyuh.content.buildContent(context, bodyItems[index]);
-              }),
+          child: CustomScrollView(
+            primary: true,
+            key: PageStorageKey<String>(
+              content.path,
+            ),
+            slivers: [
+              if (layout.showAppBar)
+                SliverAppBar(
+                  pinned: true,
+                  stretch: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: Text(content.title),
+                    centerTitle: true,
+                  ),
+                  scrolledUnderElevation: 2,
+                  actions: layout.actions
+                      ?.map(
+                        (e) => IconButton(
+                            onPressed: () => e.action?.execute(context),
+                            icon: Icon(e.icon.iconData)),
+                      )
+                      .toList(growable: false),
+                ),
+              SliverList.builder(
+                itemBuilder: (context, index) =>
+                    vyuh.content.buildContent(context, bodyItems[index]),
+                itemCount: bodyItems.length,
+              )
+            ],
+          ),
         ),
         drawer:
             drawerItems.isNotEmpty ? _buildDrawer(context, drawerItems) : null,
