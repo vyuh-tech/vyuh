@@ -1,3 +1,7 @@
+## 1.11.0
+
+ - **FEAT**: merging the sliver route layout with default.
+
 ## 1.10.0
 
  - **FEAT**: ContentBuilder is no longer abstract, Card layout adjustments, AppBar can be toggled in default route layout, grid layout can now have single column, minor fixes in navigation action.
