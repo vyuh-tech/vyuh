@@ -13,6 +13,7 @@ DrawerAction _$DrawerActionFromJson(Map<String, dynamic> json) => DrawerAction(
               DrawerActionType.open,
       isEndDrawer: json['isEndDrawer'] as bool? ?? false,
     );
+
 const _$DrawerActionTypeEnumMap = {
   DrawerActionType.open: 'open',
   DrawerActionType.close: 'close',
