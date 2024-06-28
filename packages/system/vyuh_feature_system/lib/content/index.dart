@@ -18,7 +18,6 @@ export 'route/route.dart';
 export 'route/route_container.dart';
 export 'route/route_type.dart';
 export 'route/single_item_layout.dart';
-export 'route/sliver_layout.dart';
 export 'route/tabs.dart';
 export 'unknown.dart';
 export 'web_view.dart';

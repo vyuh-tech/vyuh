@@ -73,11 +73,6 @@ final feature = FeatureDescriptor(
             fromJson: TabsRouteLayout.fromJson,
           ),
           TypeDescriptor(
-            schemaType: SliverRouteLayout.schemaName,
-            title: 'Sliver Layout',
-            fromJson: SliverRouteLayout.fromJson,
-          ),
-          TypeDescriptor(
             schemaType: SingleItemLayout.schemaName,
             title: 'Single Item Layout',
             fromJson: SingleItemLayout.fromJson,
