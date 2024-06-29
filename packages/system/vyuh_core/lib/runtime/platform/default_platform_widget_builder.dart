@@ -27,7 +27,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           padding: EdgeInsets.all(8.0),
           child: Column(
             children: [
-              CircularProgressIndicator(),
+              RepaintBoundary(child: CircularProgressIndicator()),
               PoweredByWidget(),
             ],
           ),
@@ -123,9 +123,11 @@ class _DefaultRouteLoaderState extends State<_DefaultRouteLoader> {
           children: [
             FractionallySizedBox(
               widthFactor: 0.5,
-              child: LinearProgressIndicator(
-                backgroundColor: progressColor.withOpacity(0.25),
-                color: progressColor,
+              child: RepaintBoundary(
+                child: LinearProgressIndicator(
+                  backgroundColor: progressColor.withOpacity(0.25),
+                  color: progressColor,
+                ),
               ),
             ),
             const PoweredByWidget(),

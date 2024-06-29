@@ -15,10 +15,10 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
   @JsonKey(defaultValue: 1.0)
   final double aspectRatio;
 
-  final bool allowScroll;
+  final bool scrollable;
 
   GridGroupLayout(
-      {this.columns = 2, this.aspectRatio = 1.0, this.allowScroll = false})
+      {this.columns = 2, this.aspectRatio = 1.0, this.scrollable = false})
       : super(schemaType: schemaName);
 
   factory GridGroupLayout.fromJson(Map<String, dynamic> json) =>
@@ -30,7 +30,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
     final gridContent = GridView.builder(
       padding: EdgeInsets.zero,
       shrinkWrap: true,
-      physics: allowScroll
+      physics: scrollable
           ? const AlwaysScrollableScrollPhysics()
           : const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -56,7 +56,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
             padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
             child: Text(content.description!, style: theme.textTheme.bodySmall),
           ),
-        if (allowScroll) Expanded(child: gridContent) else gridContent,
+        if (scrollable) Expanded(child: gridContent) else gridContent,
       ],
     );
   }
