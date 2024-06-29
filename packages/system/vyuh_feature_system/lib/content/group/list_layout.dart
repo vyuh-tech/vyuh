@@ -23,27 +23,34 @@ final class ListGroupLayout extends LayoutConfiguration<Group> {
   @override
   Widget build(BuildContext context, Group content) {
     final theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (content.title != null)
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(content.title!, style: theme.textTheme.titleMedium),
+    final maxScreenHeight = MediaQuery.sizeOf(context).height * 0.8;
+
+    return LimitedBox(
+      maxHeight: maxScreenHeight,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (content.title != null)
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(content.title!, style: theme.textTheme.titleMedium),
+            ),
+          if (content.description != null)
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
+              child:
+                  Text(content.description!, style: theme.textTheme.bodySmall),
+            ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: content.items.length,
+              itemBuilder: (context, index) =>
+                  vyuh.content.buildContent(context, content.items[index]),
+            ),
           ),
-        if (content.description != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
-            child: Text(content.description!, style: theme.textTheme.bodySmall),
-          ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: content.items.length,
-            itemBuilder: (context, index) =>
-                vyuh.content.buildContent(context, content.items[index]),
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
