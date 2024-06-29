@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.
+
 ## 1.7.0
 
  - **FEAT**: pulling some go router configuration into the default navigation plugin.

@@ -1,3 +1,8 @@
+## 1.12.0
+
+ - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.
+ - **FEAT**: merging the sliver route layout with default.
+
 ## 1.11.0
 
  - **FEAT**: merging the sliver route layout with default.
