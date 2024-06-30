@@ -1,3 +1,7 @@
+## 1.13.4
+
+ - **FIX**: better handling of keys in pages.
+
 ## 1.13.3
 
  - **FIX**: better handling of keys in pages.
