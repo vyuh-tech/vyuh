@@ -3,6 +3,13 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/content/route/default_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
+enum _KnownRegions {
+  // ignore: unused_field
+  body,
+  drawer,
+  endDrawer,
+}
+
 class DefaultPageRouteLayout extends StatelessWidget {
   final vf.Route content;
 
@@ -13,20 +20,20 @@ class DefaultPageRouteLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bodyItems = content.regions.length == 1
-        ? content.regions.first.items
-        : content.regions
-            .where((x) => x.identifier == 'body')
-            .expand((elt) => elt.items)
-            .toList(growable: false);
+    // Non-drawer items
+    final bodyRegions = content.regions
+        .where((x) =>
+            x.identifier != _KnownRegions.drawer.name ||
+            x.identifier != _KnownRegions.endDrawer.name)
+        .toList(growable: false);
 
     final drawerItems = content.regions
-        .where((x) => x.identifier == 'drawer')
+        .where((x) => x.identifier == _KnownRegions.drawer.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
     final endDrawerItems = content.regions
-        .where((x) => x.identifier == 'endDrawer')
+        .where((x) => x.identifier == _KnownRegions.endDrawer.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
@@ -57,11 +64,12 @@ class DefaultPageRouteLayout extends StatelessWidget {
                       )
                       .toList(growable: false),
                 ),
-              SliverList.builder(
-                itemBuilder: (context, index) =>
-                    vyuh.content.buildContent(context, bodyItems[index]),
-                itemCount: bodyItems.length,
-              )
+              for (final body in bodyRegions)
+                SliverList.builder(
+                  itemBuilder: (context, index) =>
+                      vyuh.content.buildContent(context, body.items[index]),
+                  itemCount: body.items.length,
+                )
             ],
           ),
         ),
