@@ -1,3 +1,9 @@
+## 1.13.3
+
+ - **FIX**: better handling of keys in pages.
+ - **FIX**: using UniqueKey for pages.
+ - **FIX**: adding keys for route type pages.
+
 ## 1.13.2
 
  - **FIX**: using UniqueKey for pages.
