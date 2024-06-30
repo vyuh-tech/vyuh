@@ -25,7 +25,7 @@ abstract class RouteBase extends ContentItem implements RootItem {
 
   RouteBase({
     required super.schemaType,
-    required this.routeType,
+    this.routeType,
     required this.title,
     required this.path,
     this.category,
@@ -47,7 +47,8 @@ abstract class RouteBase extends ContentItem implements RootItem {
         ? vyuh.content.buildRoute(context, routeId: id)
         : vyuh.content.buildContent(context, this);
 
-    return routeType?.create(child, this) ?? MaterialPage(child: child);
+    return routeType?.create(child, this) ??
+        MaterialPage(child: child, name: path, key: ValueKey(path));
   }
 }
 
