@@ -26,8 +26,14 @@ final class PageRouteType extends vc.RouteTypeConfiguration {
   @override
   Page<T> create<T>(Widget child, vc.RouteBase route) {
     return behavior == PageBehavior.material
-        ? MaterialPage(child: child, name: route.path)
-        : CupertinoPage(child: child, name: route.path);
+        ? MaterialPage(
+            child: child,
+            name: route.path,
+            key: ValueKey('page:material:${route.path}'))
+        : CupertinoPage(
+            child: child,
+            name: route.path,
+            key: ValueKey('page:cupertino:${route.path}'));
   }
 }
 
@@ -46,9 +52,14 @@ final class DialogRouteType extends vc.RouteTypeConfiguration {
   @override
   Page<T> create<T>(Widget child, vc.RouteBase route) {
     return switch (behavior) {
-      DialogBehavior.modalBottomSheet =>
-        ModalDialogPage(builder: (context) => child),
-      DialogBehavior.fullscreen => DialogPage(builder: (context) => child),
+      DialogBehavior.modalBottomSheet => ModalDialogPage(
+          builder: (context) => child,
+          key: ValueKey('dialog:bottomSheet:${route.path}'),
+        ),
+      DialogBehavior.fullscreen => DialogPage(
+          builder: (context) => child,
+          key: ValueKey('dialog:fullScreen:${route.path}'),
+        ),
     };
   }
 }
