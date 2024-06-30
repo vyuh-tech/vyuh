@@ -1,3 +1,8 @@
+## 1.9.3
+
+ - **FIX**: keeping the route build for all modes.
+ - **FIX**: better handling of keys in pages.
+
 ## 1.9.2
 
  - **FIX**: better handling of keys in pages.
