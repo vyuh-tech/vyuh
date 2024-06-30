@@ -1,3 +1,8 @@
+## 1.9.0
+
+ - **FIX**: making sure the navigation happens correctly with a ValueKey for the MaterialPage.
+ - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.
+
 ## 1.8.0
 
  - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.

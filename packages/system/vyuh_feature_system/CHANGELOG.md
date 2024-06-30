@@ -1,3 +1,9 @@
+## 1.13.0
+
+ - **FIX**: making sure the navigation happens correctly with a ValueKey for the MaterialPage.
+ - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.
+ - **FEAT**: merging the sliver route layout with default.
+
 ## 1.12.0
 
  - **FEAT**: adding repaint boundaries and fixing grid and single item layouts.
