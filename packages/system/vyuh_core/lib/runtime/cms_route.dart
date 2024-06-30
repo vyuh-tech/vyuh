@@ -40,6 +40,7 @@ Page<dynamic> defaultRoutePageBuilder(
     return MaterialPage(
       child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
       name: state.matchedLocation,
+      key: UniqueKey(),
     );
   }
 
