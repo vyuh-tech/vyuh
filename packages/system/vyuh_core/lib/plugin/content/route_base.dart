@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -43,9 +42,7 @@ abstract class RouteBase extends ContentItem implements RootItem {
   Future<void> dispose();
 
   Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey]) {
-    final child = kDebugMode
-        ? vyuh.content.buildRoute(context, routeId: id)
-        : vyuh.content.buildContent(context, this);
+    final child = vyuh.content.buildRoute(context, routeId: id);
 
     return routeType?.create(child, this, pageKey) ??
         MaterialPage(child: child, name: path, key: pageKey);
