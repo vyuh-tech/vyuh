@@ -24,10 +24,18 @@ final class PageRouteType extends vc.RouteTypeConfiguration {
       _$PageRouteTypeFromJson(json);
 
   @override
-  Page<T> create<T>(Widget child, vc.RouteBase route) {
+  Page<T> create<T>(Widget child, vc.RouteBase route, [LocalKey? pageKey]) {
     return behavior == PageBehavior.material
-        ? MaterialPage(child: child, name: route.path, key: UniqueKey())
-        : CupertinoPage(child: child, name: route.path, key: UniqueKey());
+        ? MaterialPage(
+            child: child,
+            name: route.path,
+            key: pageKey,
+          )
+        : CupertinoPage(
+            child: child,
+            name: route.path,
+            key: pageKey,
+          );
   }
 }
 
@@ -44,16 +52,12 @@ final class DialogRouteType extends vc.RouteTypeConfiguration {
       _$DialogRouteTypeFromJson(json);
 
   @override
-  Page<T> create<T>(Widget child, vc.RouteBase route) {
+  Page<T> create<T>(Widget child, vc.RouteBase route, [LocalKey? pageKey]) {
     return switch (behavior) {
       DialogBehavior.modalBottomSheet => ModalDialogPage(
-          builder: (context) => child,
-          key: UniqueKey(),
-        ),
-      DialogBehavior.fullscreen => DialogPage(
-          builder: (context) => child,
-          key: UniqueKey(),
-        ),
+          builder: (context) => child, name: route.path, key: pageKey),
+      DialogBehavior.fullscreen =>
+        DialogPage(builder: (context) => child, name: route.path, key: pageKey),
     };
   }
 }

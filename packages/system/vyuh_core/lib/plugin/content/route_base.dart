@@ -42,13 +42,13 @@ abstract class RouteBase extends ContentItem implements RootItem {
 
   Future<void> dispose();
 
-  Page<T> createPage<T>(BuildContext context) {
+  Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey]) {
     final child = kDebugMode
         ? vyuh.content.buildRoute(context, routeId: id)
         : vyuh.content.buildContent(context, this);
 
-    return routeType?.create(child, this) ??
-        MaterialPage(child: child, name: path, key: ValueKey(path));
+    return routeType?.create(child, this, pageKey) ??
+        MaterialPage(child: child, name: path, key: pageKey);
   }
 }
 
@@ -60,5 +60,5 @@ abstract class RouteTypeConfiguration implements SchemaItem {
 
   RouteTypeConfiguration({this.title, required this.schemaType});
 
-  Page<T> create<T>(Widget child, RouteBase route);
+  Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]);
 }
