@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'single_item_layout.g.dart';
 
@@ -11,10 +12,12 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
 
   final bool showAppBar;
   final bool useSafeArea;
+  final List<MenuAction>? actions;
 
   SingleItemLayout({
     this.useSafeArea = false,
     this.showAppBar = false,
+    this.actions,
   }) : super(schemaType: schemaName);
 
   factory SingleItemLayout.fromJson(Map<String, dynamic> json) =>
@@ -31,7 +34,18 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     return vf.RouteContainer(
       content: content,
       child: Scaffold(
-        appBar: showAppBar ? AppBar(title: Text(content.title)) : null,
+        appBar: showAppBar
+            ? AppBar(
+                title: Text(content.title),
+                actions: actions
+                    ?.map(
+                      (e) => IconButton(
+                          onPressed: () => e.action?.execute(context),
+                          icon: Icon(e.icon.iconData)),
+                    )
+                    .toList(growable: false),
+              )
+            : null,
         body: useSafeArea ? SafeArea(child: child) : child,
       ),
     );
