@@ -1,3 +1,8 @@
+## 1.9.2
+
+ - **FIX**: better handling of keys in pages.
+ - **FIX**: using UniqueKey for pages.
+
 ## 1.9.1
 
  - **FIX**: using UniqueKey for pages.
