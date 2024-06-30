@@ -1,3 +1,7 @@
+## 1.9.1
+
+ - **FIX**: using UniqueKey for pages.
+
 ## 1.9.0
 
  - **FIX**: making sure the navigation happens correctly with a ValueKey for the MaterialPage.
