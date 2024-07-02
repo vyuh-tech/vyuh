@@ -1,3 +1,7 @@
+## 1.3.1
+
+ - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
+
 ## 1.3.0
 
  - **FEAT**: added control for scrollPhysics in PortableText.
