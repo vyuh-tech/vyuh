@@ -1,6 +1,6 @@
 name: vyuh_feature_system
 description: Provides the essential building blocks for a CMS-driven UI
-version: 1.13.4
+version: 1.13.5
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_feature_system
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
