@@ -79,11 +79,22 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                 if (content.title != null)
                   Text(
                     content.title!,
-                    style: theme.textTheme.titleMedium,
+                    style:
+                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 1),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
                   ),
-                if (content.description != null) Text(content.description!),
+                if (content.description != null)
+                  Text(
+                    content.description!,
+                    style: theme.textTheme.labelMedium,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 if (hasBlockContent)
-                  Flexible(
+                  Expanded(
                       child:
                           vyuh.content.buildContent(context, content.content!)),
               ],
@@ -138,8 +149,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 if (hasBlockContent)
-                  f.LimitedBox(
-                      maxHeight: 50,
+                  Flexible(
                       child:
                           vyuh.content.buildContent(context, content.content!)),
               ],

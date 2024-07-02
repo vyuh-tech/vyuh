@@ -42,6 +42,7 @@ class DefaultPageRouteLayout extends StatelessWidget {
       child: Scaffold(
         body: SafeArea(
           child: CustomScrollView(
+            cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
             primary: true,
             key: PageStorageKey<String>(
               content.path,

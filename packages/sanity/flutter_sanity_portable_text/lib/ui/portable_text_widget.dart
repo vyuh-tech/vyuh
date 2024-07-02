@@ -27,7 +27,7 @@ class PortableText extends StatelessWidget {
     required this.blocks,
     this.usePrimaryScroller = false,
     this.shrinkwrap = true,
-    this.scrollPhysics = const AlwaysScrollableScrollPhysics(),
+    this.scrollPhysics = const NeverScrollableScrollPhysics(),
   });
 
   @override
