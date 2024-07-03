@@ -68,8 +68,6 @@ class ContentImage extends StatelessWidget {
             : url != null && url!.isNotEmpty
                 ? CachedNetworkImageProvider(
                     url!,
-                    maxHeight: imageHeight?.toInt(),
-                    maxWidth: imageWidth?.toInt(),
                   )
                 : null;
 
