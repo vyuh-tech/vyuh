@@ -1,3 +1,7 @@
+## 1.13.6
+
+ - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
+
 ## 1.13.5
 
  - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.

@@ -1,3 +1,7 @@
+## 1.9.4
+
+ - **FIX**: adding API documentation..WIP.
+
 ## 1.9.3
 
  - **FIX**: keeping the route build for all modes.
