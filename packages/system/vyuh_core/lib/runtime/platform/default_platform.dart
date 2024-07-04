@@ -1,17 +1,6 @@
-import 'dart:ui';
+part of '../run_app.dart';
 
-import 'package:collection/collection.dart';
-import 'package:flutter/material.dart' as flutter;
-import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart' as g;
-import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
-import 'package:vyuh_core/runtime/platform/framework_init_view.dart';
-import 'package:vyuh_core/runtime/platform/platform_init_tracker.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vt;
-import 'package:vyuh_core/vyuh_core.dart';
-
-final class DefaultVyuhPlatform extends VyuhPlatform {
+final class _DefaultVyuhPlatform extends VyuhPlatform {
   final Map<PluginType, Plugin> _pluginMap = {};
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
 
@@ -42,13 +31,13 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   @override
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
-  DefaultVyuhPlatform({
+  _DefaultVyuhPlatform({
     required super.featuresBuilder,
     required List<Plugin> plugins,
     required super.widgetBuilder,
     this.initialLocation,
   }) : super(plugins: _ensureRequiredPlugins(plugins)) {
-    _tracker = PlatformInitTracker(this);
+    _tracker = _PlatformInitTracker(this);
 
     for (final plugin in this.plugins) {
       _pluginMap[plugin.pluginType] = plugin;
@@ -98,7 +87,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
-    flutter.runApp(const FrameworkInitView());
+    flutter.runApp(const _FrameworkInitView());
   }
 
   @override

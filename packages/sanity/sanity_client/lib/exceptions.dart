@@ -1,5 +1,6 @@
 /// Base type for exceptions thrown by the Sanity client.
-abstract class SanityException implements Exception {
+abstract base class SanityException implements Exception {
+  /// Creates a new Sanity exception.
   SanityException([
     this._message,
     this._prefix,
@@ -13,26 +14,30 @@ abstract class SanityException implements Exception {
 }
 
 /// Exception thrown when a document is not found.
-class FetchDataException extends SanityException {
+final class FetchDataException extends SanityException {
+  /// Creates a new fetch data exception.
   FetchDataException([final String? message])
       : super(message, 'Error during communication: ');
 }
 
 /// Exception when the request is invalid.
-class BadRequestException extends SanityException {
+final class BadRequestException extends SanityException {
+  /// Creates a new bad request exception.
   BadRequestException([final String? message])
       : super(message, 'Invalid request: ');
 }
 
 /// Exception when the request is unauthorized and does not include a valid token
 /// in the Authorization header.
-class UnauthorizedException extends SanityException {
+final class UnauthorizedException extends SanityException {
+  /// Creates a new unauthorized exception.
   UnauthorizedException([final String? message])
       : super(message, 'Unauthorized: ');
 }
 
 /// Exception when the request is forbidden.
-class InvalidReferenceException extends SanityException {
+final class InvalidReferenceException extends SanityException {
+  /// Creates a new invalid reference exception.
   InvalidReferenceException([final String? message])
       : super(message, 'Invalid reference: ');
 }

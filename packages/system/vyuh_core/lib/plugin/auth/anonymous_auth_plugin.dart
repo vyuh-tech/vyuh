@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// An authentication plugin that does not support any authentication methods.
 final class UnknownAuthPlugin extends AuthPlugin {
+  /// Creates an instance of [UnknownAuthPlugin].
   UnknownAuthPlugin()
       : super(
           title: 'Unknown Auth Plugin',

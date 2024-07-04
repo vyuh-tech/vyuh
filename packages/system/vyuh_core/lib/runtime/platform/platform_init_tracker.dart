@@ -1,7 +1,6 @@
-import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+part of '../run_app.dart';
 
-final class PlatformInitTracker implements SystemInitTracker {
+final class _PlatformInitTracker implements SystemInitTracker {
   @override
   final VyuhPlatform platform;
 
@@ -16,7 +15,7 @@ final class PlatformInitTracker implements SystemInitTracker {
   @override
   dynamic get error => _loader.value?.error;
 
-  PlatformInitTracker(this.platform);
+  _PlatformInitTracker(this.platform);
 
   @override
   Future<void> init([InitState initialState = InitState.notStarted]) {

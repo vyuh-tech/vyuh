@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:vyuh_cache/vyuh_cache.dart';
 
+/// A simple in-memory cache storage implementation
 final class MemoryCacheStorage<T> implements CacheStorage<T> {
   final Map<String, CacheEntry<T>> _cache = {};
 

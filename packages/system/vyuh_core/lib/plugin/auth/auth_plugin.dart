@@ -3,18 +3,23 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// An authentication plugin that supports various authentication methods.
 abstract class AuthPlugin<TUser extends User> extends Plugin {
+  /// The controller for the user changes stream.
   @protected
   var controller = StreamController<TUser>.broadcast();
 
   @protected
   var _initialized = false;
 
+  /// Creates an instance of [AuthPlugin].
   AuthPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.auth);
 
+  /// The current user that is signed in.
   TUser get currentUser => throw UnimplementedError();
 
+  /// A stream of user changes.
   Stream<TUser> get userChanges {
     if (!_initialized) {
       throw StateError(
@@ -95,10 +100,12 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
     throw UnimplementedError();
   }
 
+  /// Logs out the current user.
   Future<void> logout() {
     throw UnimplementedError();
   }
 
+  /// Deletes the current user account.
   Future<void> deleteAccount() {
     throw UnimplementedError();
   }

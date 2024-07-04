@@ -3,7 +3,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/runtime/platform/default_platform.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class DefaultNavigationPlugin extends NavigationPlugin {

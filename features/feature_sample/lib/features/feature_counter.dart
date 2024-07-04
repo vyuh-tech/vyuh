@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// Feature for counter
 final featureCounter = FeatureDescriptor(
   name: 'counter',
   title: 'The classic Flutter counter',
