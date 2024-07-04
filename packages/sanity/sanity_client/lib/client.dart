@@ -5,7 +5,20 @@ import 'package:http/http.dart' as http;
 import 'sanity_client.dart';
 
 /// The various perspectives that can be used to fetch data from Sanity
-enum Perspective { raw, previewDrafts, published }
+enum Perspective {
+  /// Fetch all documents including drafts
+  raw,
+
+  /// Fetch drafts as if they were published.
+  ///
+  /// Note: Queries using the previewDrafts perspective are not cached in the CDN,
+  /// and will return an error if [useCdn] is not set to false.
+  /// You should always explicitly set [useCdn] to false when using previewDrafts.
+  previewDrafts,
+
+  /// Fetch only the published documents
+  published,
+}
 
 /// Configuration for the Sanity client
 final class SanityConfig {
@@ -42,6 +55,7 @@ final class SanityConfig {
     return 'v$parts';
   })();
 
+  /// Creates a new Sanity configuration for fetching documents from a project and dataset
   SanityConfig({
     required this.projectId,
     required this.dataset,
@@ -78,6 +92,8 @@ class SanityClient {
 
   final Map<String, String> _requestHeaders;
 
+  /// Creates a new Sanity client with the provided configuration. Use the optional
+  /// parameters to provide a custom HTTP client or URL builder.
   SanityClient(
     this.config, {
     final http.Client? httpClient,

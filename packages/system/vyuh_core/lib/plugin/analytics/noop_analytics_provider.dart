@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// A no-op implementation of [AnalyticsProvider].
 final class NoOpAnalyticsProvider implements AnalyticsProvider {
   @override
   Future<AnalyticsTrace> startTrace(String name, String operation) async =>

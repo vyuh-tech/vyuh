@@ -5,6 +5,7 @@ import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
+/// Feature for settings
 final featureSettings = FeatureDescriptor(
   name: 'settings',
   title: 'Settings',

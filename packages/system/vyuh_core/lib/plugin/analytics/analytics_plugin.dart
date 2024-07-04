@@ -4,7 +4,9 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// The default implementation for an Analytics Plugin.
 final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
+  /// The list of providers for the plugin.
   final List<AnalyticsProvider> providers;
 
   bool _initialized = false;
@@ -12,6 +14,7 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
   @override
   String get description => 'Analytics Plugin';
 
+  /// Creates a new AnalyticsPlugin.
   AnalyticsPlugin({required this.providers})
       : super(
           name: 'vyuh.plugin.analytics',
@@ -42,7 +45,7 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
         .toList(growable: false);
     final traces = await Future.wait(traceFutures);
 
-    return CompositeAnalyticsTrace(traces, providers: providers);
+    return _CompositeAnalyticsTrace(traces, providers: providers);
   }
 
   @override
@@ -89,6 +92,8 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
     return Future.wait(futures);
   }
 
+  /// Runs a function with a trace. This is useful for wrapping functions that
+  /// need to be traced. It can also be part of a nested trace, using the [parentTrace] parameter.
   Future<T?> runWithTrace<T>({
     required String name,
     required String operation,
@@ -115,11 +120,11 @@ final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
   }
 }
 
-final class CompositeAnalyticsTrace extends AnalyticsTrace {
+final class _CompositeAnalyticsTrace extends AnalyticsTrace {
   final List<AnalyticsTrace> traces;
   final List<AnalyticsProvider> providers;
 
-  CompositeAnalyticsTrace(this.traces, {required this.providers});
+  _CompositeAnalyticsTrace(this.traces, {required this.providers});
 
   @override
   Map<String, String> getAttributes() {
@@ -154,6 +159,6 @@ final class CompositeAnalyticsTrace extends AnalyticsTrace {
         traces.map((trace) => trace.startChild(name, operation));
     final childTraces = await Future.wait(childTraceFutures);
 
-    return CompositeAnalyticsTrace(childTraces, providers: providers);
+    return _CompositeAnalyticsTrace(childTraces, providers: providers);
   }
 }

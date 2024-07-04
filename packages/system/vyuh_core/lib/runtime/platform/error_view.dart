@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+part of 'default_platform_widget_builder.dart';
 
-class ErrorViewScaffold extends StatelessWidget {
+class _ErrorViewScaffold extends StatelessWidget {
   final String title;
   final String? subtitle;
   final dynamic error;
@@ -11,8 +9,7 @@ class ErrorViewScaffold extends StatelessWidget {
 
   final String? retryLabel;
 
-  const ErrorViewScaffold({
-    super.key,
+  const _ErrorViewScaffold({
     this.title = 'Something is not right!',
     this.subtitle,
     this.error,
@@ -94,15 +91,14 @@ class ErrorViewScaffold extends StatelessWidget {
   }
 }
 
-class ErrorView extends StatelessWidget {
+class _ErrorView extends StatelessWidget {
   final String title;
   final String? subtitle;
   final dynamic error;
   final VoidCallback? onRetry;
   final String? retryLabel;
 
-  const ErrorView({
-    super.key,
+  const _ErrorView({
     this.title = 'Something is not right!',
     this.subtitle,
     this.error,

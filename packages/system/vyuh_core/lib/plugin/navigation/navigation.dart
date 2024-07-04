@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/runtime/platform/fallback_route_page_builder.dart';
+import 'package:vyuh_core/plugin/navigation/fallback_route_page_builder.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class NavigationPlugin extends Plugin {
