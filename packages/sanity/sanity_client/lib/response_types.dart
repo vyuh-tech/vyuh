@@ -31,7 +31,7 @@ class SanityDataset {
 @JsonSerializable()
 class ServerResponse {
   /// The result of the query, which can be a null, object or array.
-  final Map<String, dynamic>? result;
+  final dynamic result;
 
   /// The time it took for the server to respond to the query.
   final int ms;

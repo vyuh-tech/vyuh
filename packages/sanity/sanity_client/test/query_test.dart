@@ -167,14 +167,14 @@ void main() {
     );
   });
 
-  test('Parses results for valid query', () async {
+  test('Parses results for valid query, with results as a Map', () async {
     final httpClient = MockClient(
       (final request) async => http.Response(
         '''
       {
         "ms": 20,
         "query": "",
-        "result": {}
+        "result": {"_type": "someType"}
       }
       ''',
         200,
@@ -184,7 +184,32 @@ void main() {
     final client = getClient(httpClient: httpClient);
 
     final response = await client.fetch('valid query');
-    expect(response.result, equals({}));
+    expect(response.result, equals({'_type': 'someType'}));
+    expect(response.info.serverTimeMs, equals(20));
+  });
+
+  test('Parses results for valid query, with results as a List', () async {
+    final httpClient = MockClient(
+      (final request) async => http.Response(
+        '''
+      {
+        "ms": 20,
+        "query": "",
+        "result": [{"_type": "someType"}]
+      }
+      ''',
+        200,
+      ),
+    );
+
+    final client = getClient(httpClient: httpClient);
+
+    final response = await client.fetch('valid query');
+    expect(
+        response.result,
+        equals([
+          {'_type': 'someType'}
+        ]));
     expect(response.info.serverTimeMs, equals(20));
   });
 }

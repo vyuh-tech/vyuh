@@ -79,7 +79,7 @@ Without a valid token you will not be able to fetch data from Sanity.''');
 }
 
 /// The client for fetching data from Sanity
-class SanityClient {
+final class SanityClient {
   /// The configuration for the client
   final SanityConfig config;
 
