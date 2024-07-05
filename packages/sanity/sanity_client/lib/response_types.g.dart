@@ -14,7 +14,7 @@ SanityDataset _$SanityDatasetFromJson(Map<String, dynamic> json) =>
 
 ServerResponse _$ServerResponseFromJson(Map<String, dynamic> json) =>
     ServerResponse(
-      result: json['result'] as Map<String, dynamic>?,
-      ms: json['ms'] as int,
+      result: json['result'],
+      ms: (json['ms'] as num).toInt(),
       query: json['query'] as String,
     );
