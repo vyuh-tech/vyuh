@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// A feature that provides a launchpad for all features. This is built as
+/// a function to demonstrate a different way of creating a feature.
 featureLauncher(List<EntryPoint> entryPoints) => FeatureDescriptor(
       name: 'launcher',
       title: 'A launchpad for all features',
@@ -19,12 +21,21 @@ featureLauncher(List<EntryPoint> entryPoints) => FeatureDescriptor(
       },
     );
 
+/// A simple entry point for a feature
 final class EntryPoint {
+  /// Title of the entry point
   final String title;
+
+  /// Description of the entry point
   final String description;
+
+  /// Path to navigate to when the entry point is selected
   final String path;
+
+  /// Icon to display for the entry point
   final IconData icon;
 
+  /// Constructor for the entry point
   EntryPoint({
     required this.title,
     required this.description,

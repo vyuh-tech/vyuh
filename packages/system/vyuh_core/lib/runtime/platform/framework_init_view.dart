@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+part of '../run_app.dart';
 
 // Sets up the root view that loads the entire app. It waits for the platform to init and then loads the main App. During
 // the load, a splash screen is shown, which can be customized.
@@ -11,14 +8,14 @@ import 'package:vyuh_core/vyuh_core.dart';
 // We could have done this with a dynamic routing-config for GoRouter where this view is loaded as part of the '/' route.
 // When the app gets loaded we switch the routing-config to the routes from the app. However, this has the issue
 // of not being able to control the transition from the splash screen to the app.
-class FrameworkInitView extends StatefulWidget {
-  const FrameworkInitView({super.key});
+class _FrameworkInitView extends StatefulWidget {
+  const _FrameworkInitView();
 
   @override
-  State<FrameworkInitView> createState() => _FrameworkInitViewState();
+  State<_FrameworkInitView> createState() => _FrameworkInitViewState();
 }
 
-class _FrameworkInitViewState extends State<FrameworkInitView> {
+class _FrameworkInitViewState extends State<_FrameworkInitView> {
   @override
   void initState() {
     super.initState();

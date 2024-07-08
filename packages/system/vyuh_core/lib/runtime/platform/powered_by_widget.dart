@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
+/// A widget that displays the 'Powered by Vyuh' text.
+/// The signature of this Framework.
 class PoweredByWidget extends StatelessWidget {
+  /// Creates a [PoweredByWidget]. Only used internally within the framework.
   const PoweredByWidget({super.key});
 
   @override

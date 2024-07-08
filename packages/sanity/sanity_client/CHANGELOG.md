@@ -1,3 +1,12 @@
+## 1.2.2
+
+ - **FIX**: result type of sanity_client is now dynamic instead of Map<String, dynamic>.
+ - **FIX**: adding API documentation..WIP.
+
+## 1.2.1
+
+ - **FIX**: adding API documentation..WIP.
+
 ## 1.2.0
 
  - **FEAT**: adding the FSL license at the top level.

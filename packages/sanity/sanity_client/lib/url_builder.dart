@@ -23,6 +23,8 @@ class ImageOptions {
   /// The format of the image. Can be either `jpg`, `png`, `webp`, or `auto`.
   final String? format;
 
+  /// Creates a new image options object with the provided parameters. This
+  /// handles width, height, device pixel ratio, quality, and format.
   ImageOptions({
     this.width,
     this.height,
@@ -39,6 +41,7 @@ abstract class UrlBuilder<TConfig> {
   /// The configuration object for the client, which is specific to the URL builder implementation.
   final TConfig config;
 
+  /// Creates a new URL builder with the provided configuration.
   UrlBuilder(this.config);
 
   /// Builds a URL for a file asset.
@@ -55,6 +58,7 @@ abstract class UrlBuilder<TConfig> {
 ///
 /// Supports building URLs for files, images, and queries.
 final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
+  /// Creates a new Sanity URL builder with the provided configuration.
   SanityUrlBuilder(super.config);
 
   @override
@@ -66,6 +70,7 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     return Uri.parse('https://cdn.sanity.io/files/$path');
   }
 
+  /// Generates the file name from the file reference ID.
   static String fileName(String fileRefId) {
     final parts = fileRefId.split('-');
     assert(parts.length == 3, 'Invalid file reference: $fileRefId');
@@ -99,6 +104,7 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     return Uri.parse('https://cdn.sanity.io/images/$path$query');
   }
 
+  /// Generates the image file name from the image reference ID.
   static String imageFileName(String imageRefId) {
     _ParsedReference ref;
     try {

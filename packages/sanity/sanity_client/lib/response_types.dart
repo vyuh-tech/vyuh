@@ -11,8 +11,10 @@ class SanityDataset {
   /// The ACL mode of the dataset.
   final String aclMode;
 
+  /// Creates a new Sanity dataset with the given name and ACL mode.
   SanityDataset({required this.name, required this.aclMode});
 
+  /// Creates a new Sanity dataset from a JSON map.
   factory SanityDataset.fromJson(final Map<String, dynamic> json) =>
       _$SanityDatasetFromJson(json);
 
@@ -29,7 +31,7 @@ class SanityDataset {
 @JsonSerializable()
 class ServerResponse {
   /// The result of the query, which can be a null, object or array.
-  final Map<String, dynamic>? result;
+  final dynamic result;
 
   /// The time it took for the server to respond to the query.
   final int ms;
@@ -37,12 +39,14 @@ class ServerResponse {
   /// The query that was sent to the server.
   final String query;
 
+  /// Creates a new server response with the given result, time and query.
   ServerResponse({
     required this.result,
     required this.ms,
     required this.query,
   });
 
+  /// Creates a new server response from a JSON map.
   factory ServerResponse.fromJson(Map<String, dynamic> json) =>
       _$ServerResponseFromJson(json);
 }
@@ -65,6 +69,8 @@ final class PerformanceInfo {
   /// The age of the data that was returned in the response.
   final int age;
 
+  /// Creates a new performance information object with the given query, server timing,
+  /// client timing, shard and age.
   PerformanceInfo({
     required this.query,
     required this.serverTimeMs,
@@ -82,5 +88,6 @@ final class SanityQueryResponse {
   /// The performance information of the query.
   final PerformanceInfo info;
 
+  /// Creates a new Sanity query response with the given result and performance information.
   SanityQueryResponse({required this.result, required this.info});
 }
