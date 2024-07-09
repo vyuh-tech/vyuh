@@ -29,4 +29,5 @@ DefaultRouteLayout _$DefaultRouteLayoutFromJson(Map<String, dynamic> json) =>
           ?.map((e) => MenuAction.fromJson(e as Map<String, dynamic>))
           .toList(),
       showAppBar: json['showAppBar'] as bool? ?? true,
+      useSafeArea: json['useSafeArea'] as bool? ?? true,
     );
