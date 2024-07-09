@@ -1,3 +1,7 @@
+## 1.2.2
+
+ - **FIX**: adding API documentation..WIP.
+
 ## 1.2.1
 
  - **FIX**: adding API documentation..WIP.
