@@ -1,3 +1,7 @@
+## 1.15.1
+
+ - **REFACTOR**: deps upgrade.
+
 ## 1.15.0
 
  - **REFACTOR**: using typeDescriptor and contentBuilder to hide details for all content items.

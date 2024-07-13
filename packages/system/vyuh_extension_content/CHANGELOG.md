@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **REFACTOR**: deps upgrade.
+
 ## 1.4.0
 
  - **FEAT**: ContentBuilder is no longer abstract, Card layout adjustments, AppBar can be toggled in default route layout, grid layout can now have single column, minor fixes in navigation action.
