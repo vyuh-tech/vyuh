@@ -1,3 +1,7 @@
+## 1.3.4
+
+ - **REFACTOR**: deps upgrade.
+
 ## 1.3.3
 
  - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.

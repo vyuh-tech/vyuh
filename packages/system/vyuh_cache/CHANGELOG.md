@@ -1,3 +1,7 @@
+## 1.2.4
+
+ - **REFACTOR**: deps upgrade.
+
 ## 1.2.3
 
  - **FIX**: adding API documentation..WIP.
