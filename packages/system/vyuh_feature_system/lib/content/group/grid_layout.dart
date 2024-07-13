@@ -8,6 +8,11 @@ part 'grid_layout.g.dart';
 @JsonSerializable()
 final class GridGroupLayout extends LayoutConfiguration<Group> {
   static const schemaName = '${Group.schemaName}.layout.grid';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Grid Layout',
+    fromJson: GridGroupLayout.fromJson,
+  );
 
   @JsonKey(defaultValue: 2)
   final int columns;

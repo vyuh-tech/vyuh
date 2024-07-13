@@ -13,6 +13,18 @@ part 'group.g.dart';
 class Group extends ContentItem implements PortableBlockItem, ContainerItem {
   static const schemaName = 'vyuh.group';
 
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: Group.schemaName,
+    title: 'Group',
+    fromJson: Group.fromJson,
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: Group.typeDescriptor,
+    defaultLayout: CarouselGroupLayout(),
+    defaultLayoutDescriptor: CarouselGroupLayout.typeDescriptor,
+  );
+
   @override
   String get blockType => schemaName;
 
@@ -40,18 +52,6 @@ class GroupDescriptor extends ContentDescriptor {
       : super(schemaType: Group.schemaName, title: 'Group');
 }
 
-class GroupContentBuilder extends ContentBuilder<Group> {
-  GroupContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Group.schemaName,
-              title: 'Group',
-              fromJson: Group.fromJson),
-          defaultLayout: CarouselGroupLayout(),
-          defaultLayoutDescriptor: CarouselGroupLayout.typeDescriptor,
-        );
-}
-
 @JsonSerializable()
 final class CarouselGroupLayout extends LayoutConfiguration<Group> {
   static const schemaName = '${Group.schemaName}.layout.default';
@@ -75,6 +75,12 @@ final class CarouselGroupLayout extends LayoutConfiguration<Group> {
 @JsonSerializable()
 final class GroupConditionalLayout extends ConditionalLayout<Group> {
   static const schemaName = '${Group.schemaName}.layout.conditional';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: GroupConditionalLayout.schemaName,
+    title: 'Group Conditional Layout',
+    fromJson: GroupConditionalLayout.fromJson,
+  );
 
   GroupConditionalLayout({
     required super.cases,

@@ -9,6 +9,11 @@ part 'single_item_layout.g.dart';
 @JsonSerializable()
 final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
   static const schemaName = 'vyuh.route.layout.single';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Single Item Layout',
+    fromJson: SingleItemLayout.fromJson,
+  );
 
   final bool showAppBar;
   final bool useSafeArea;

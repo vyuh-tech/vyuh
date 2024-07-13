@@ -16,6 +16,7 @@ final class DefaultPageRouteLayout extends StatelessWidget {
       sliverAppBar: layout.showAppBar
           ? SliverAppBar(
               pinned: true,
+              floating: false,
               stretch: false,
               flexibleSpace: FlexibleSpaceBar(
                 title: Text(content.title),

@@ -8,6 +8,11 @@ part 'list_item_layout.g.dart';
 @JsonSerializable()
 class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
   static const schemaName = '${sys.Card.schemaName}.layout.listItem';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'List Item Card Layout',
+    fromJson: ListItemCardLayout.fromJson,
+  );
 
   @JsonKey(defaultValue: '')
   final String title;

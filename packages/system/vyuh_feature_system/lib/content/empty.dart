@@ -10,6 +10,16 @@ const empty = SizedBox.shrink();
 @JsonSerializable()
 class Empty extends ContentItem {
   static const schemaName = 'vyuh.empty';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Empty',
+    fromJson: Empty.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: Empty.typeDescriptor,
+    defaultLayout: DefaultEmptyLayout(),
+    defaultLayoutDescriptor: DefaultEmptyLayout.typeDescriptor,
+  );
 
   Empty() : super(schemaType: Empty.schemaName);
 
@@ -18,18 +28,6 @@ class Empty extends ContentItem {
 
 class EmptyDescriptor extends ContentDescriptor {
   EmptyDescriptor() : super(schemaType: Empty.schemaName, title: 'Empty');
-}
-
-class EmptyContentBuilder extends ContentBuilder<Empty> {
-  EmptyContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Empty.schemaName,
-              title: 'Empty',
-              fromJson: Empty.fromJson),
-          defaultLayout: DefaultEmptyLayout(),
-          defaultLayoutDescriptor: DefaultEmptyLayout.typeDescriptor,
-        );
 }
 
 final class DefaultEmptyLayout extends LayoutConfiguration<Empty> {

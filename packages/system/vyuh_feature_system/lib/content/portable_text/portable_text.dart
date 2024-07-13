@@ -11,6 +11,12 @@ part 'portable_text.g.dart';
 @JsonSerializable()
 class PortableTextContent extends ContentItem {
   static const schemaName = 'vyuh.portableText';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Portable Text',
+    fromJson: PortableTextContent.fromJson,
+  );
+  static final contentBuilder = _PortableTextContentBuilder();
 
   @JsonKey(defaultValue: [], fromJson: blockItemsFromJson)
   final List<PortableBlockItem>? blocks;
@@ -34,7 +40,7 @@ class PortableTextContent extends ContentItem {
     return value
         .map((e) {
           final type = vyuh.content.provider.schemaType(e);
-          final itemDescriptor = PortableTextContentBuilder.blockMap[type];
+          final itemDescriptor = _PortableTextContentBuilder.blockMap[type];
 
           if (itemDescriptor == null) {
             return kDebugMode
@@ -112,16 +118,13 @@ class PortableTextDescriptor extends ContentDescriptor {
             schemaType: PortableTextContent.schemaName, title: 'Portable Text');
 }
 
-final class PortableTextContentBuilder
+final class _PortableTextContentBuilder
     extends ContentBuilder<PortableTextContent> {
   static Map<String, BlockItemDescriptor> blockMap = {};
 
-  PortableTextContentBuilder()
+  _PortableTextContentBuilder()
       : super(
-          content: TypeDescriptor(
-              schemaType: PortableTextContent.schemaName,
-              title: 'Portable Text',
-              fromJson: PortableTextContent.fromJson),
+          content: PortableTextContent.typeDescriptor,
           defaultLayout: DefaultPortableTextContentLayout(),
           defaultLayoutDescriptor:
               DefaultPortableTextContentLayout.typeDescriptor,

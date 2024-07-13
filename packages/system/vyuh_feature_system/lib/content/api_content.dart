@@ -10,6 +10,12 @@ part 'api_content.g.dart';
 @JsonSerializable()
 final class APIContent extends ContentItem {
   static const schemaName = 'vyuh.apiContent';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'API Content',
+    fromJson: APIContent.fromJson,
+  );
+  static final contentBuilder = _APIContentBuilder();
 
   final bool showPending;
   final bool showError;
@@ -47,14 +53,10 @@ class APIContentDescriptor extends ContentDescriptor {
       : super(schemaType: APIContent.schemaName, title: 'API Content');
 }
 
-final class APIContentBuilder extends ContentBuilder<APIContent> {
-  APIContentBuilder()
+final class _APIContentBuilder extends ContentBuilder<APIContent> {
+  _APIContentBuilder()
       : super(
-          content: TypeDescriptor(
-            schemaType: APIContent.schemaName,
-            title: 'API Content',
-            fromJson: APIContent.fromJson,
-          ),
+          content: APIContent.typeDescriptor,
           defaultLayout: DefaultAPIContentLayout(),
           defaultLayoutDescriptor: DefaultAPIContentLayout.typeDescriptor,
         );
