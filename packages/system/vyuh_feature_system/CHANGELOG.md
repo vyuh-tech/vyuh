@@ -1,3 +1,9 @@
+## 1.15.0
+
+ - **REFACTOR**: using typeDescriptor and contentBuilder to hide details for all content items.
+ - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
+ - **FEAT**: adding support for safeArea in default layout and extracting the core route builder as a scaffold.
+
 ## 1.14.0
 
  - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
