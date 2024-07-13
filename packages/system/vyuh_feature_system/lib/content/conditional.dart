@@ -12,6 +12,16 @@ part 'conditional.g.dart';
 @JsonSerializable()
 class Conditional extends ContentItem {
   static const schemaName = 'vyuh.conditional';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Conditional',
+    fromJson: Conditional.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: Conditional.typeDescriptor,
+    defaultLayout: DefaultConditionalLayout(),
+    defaultLayoutDescriptor: DefaultConditionalLayout.typeDescriptor,
+  );
 
   @JsonKey(defaultValue: [])
   final List<CaseItem>? cases;
@@ -56,18 +66,6 @@ final class CaseItem<T extends SchemaItem> {
 class ConditionalDescriptor extends ContentDescriptor {
   ConditionalDescriptor({super.layouts})
       : super(schemaType: Conditional.schemaName, title: 'Conditional');
-}
-
-final class ConditionalContentBuilder extends ContentBuilder<Conditional> {
-  ConditionalContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Conditional.schemaName,
-              title: 'Conditional',
-              fromJson: Conditional.fromJson),
-          defaultLayout: DefaultConditionalLayout(),
-          defaultLayoutDescriptor: DefaultConditionalLayout.typeDescriptor,
-        );
 }
 
 final class DefaultConditionalLayout extends LayoutConfiguration<Conditional> {

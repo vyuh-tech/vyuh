@@ -8,6 +8,12 @@ part 'route.g.dart';
 @JsonSerializable()
 final class Route extends RouteBase {
   static const schemaName = 'vyuh.route';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Route',
+    fromJson: Route.fromJson,
+  );
+  static final contentBuilder = _RouteContentBuilder();
 
   @JsonKey(defaultValue: [])
   final List<Region> regions;
@@ -92,8 +98,8 @@ final class RouteDescriptor extends ContentDescriptor {
   }) : super(schemaType: Route.schemaName, title: 'Route');
 }
 
-final class RouteContentBuilder extends ContentBuilder<Route> {
-  RouteContentBuilder()
+final class _RouteContentBuilder extends ContentBuilder<Route> {
+  _RouteContentBuilder()
       : super(
           content: TypeDescriptor(
               schemaType: Route.schemaName,
@@ -128,6 +134,12 @@ final class RouteContentBuilder extends ContentBuilder<Route> {
 @JsonSerializable()
 final class RouteConditionalLayout extends ConditionalLayout<Route> {
   static const schemaName = '${Route.schemaName}.layout.conditional';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Conditional Route Layout',
+    fromJson: RouteConditionalLayout.fromJson,
+  );
 
   RouteConditionalLayout({
     required super.cases,

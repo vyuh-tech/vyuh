@@ -9,6 +9,16 @@ part 'card.g.dart';
 @JsonSerializable()
 class Card extends ContentItem implements PortableBlockItem {
   static const schemaName = 'vyuh.card';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Card',
+    fromJson: Card.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: Card.typeDescriptor,
+    defaultLayout: DefaultCardLayout(title: 'Default'),
+    defaultLayoutDescriptor: DefaultCardLayout.typeDescriptor,
+  );
 
   // Required to support Blocks inside Portable Text
   @override
@@ -48,21 +58,14 @@ class CardDescriptor extends ContentDescriptor {
       : super(schemaType: Card.schemaName, title: 'Card');
 }
 
-final class CardContentBuilder extends ContentBuilder<Card> {
-  CardContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Card.schemaName,
-              title: 'Card',
-              fromJson: Card.fromJson),
-          defaultLayout: DefaultCardLayout(title: 'Default'),
-          defaultLayoutDescriptor: DefaultCardLayout.typeDescriptor,
-        );
-}
-
 @JsonSerializable()
 final class CardConditionalLayout extends ConditionalLayout<Card> {
   static const schemaName = '${Card.schemaName}.layout.conditional';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Card Conditional Layout',
+    fromJson: CardConditionalLayout.fromJson,
+  );
 
   CardConditionalLayout({
     required super.cases,

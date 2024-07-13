@@ -22,6 +22,16 @@ final class CaseRouteItem {
 @JsonSerializable()
 final class ConditionalRoute extends RouteBase {
   static const schemaName = 'vyuh.conditionalRoute';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Conditional Route',
+    fromJson: ConditionalRoute.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: ConditionalRoute.typeDescriptor,
+    defaultLayout: DefaultConditionalRouteLayout(),
+    defaultLayoutDescriptor: DefaultConditionalRouteLayout.typeDescriptor,
+  );
 
   @JsonKey(defaultValue: [])
   final List<CaseRouteItem>? cases;
@@ -78,16 +88,4 @@ class ConditionalRouteDescriptor extends ContentDescriptor {
       : super(
             schemaType: ConditionalRoute.schemaName,
             title: 'Conditional Route');
-}
-
-final class ConditionalRouteBuilder extends ContentBuilder<ConditionalRoute> {
-  ConditionalRouteBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: ConditionalRoute.schemaName,
-              title: 'Conditional Route',
-              fromJson: ConditionalRoute.fromJson),
-          defaultLayout: DefaultConditionalRouteLayout(),
-          defaultLayoutDescriptor: DefaultConditionalRouteLayout.typeDescriptor,
-        );
 }

@@ -10,6 +10,12 @@ part 'tabs.g.dart';
 final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
   static const schemaName = 'vyuh.route.layout.tabs';
 
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Tabs Route Layout',
+    fromJson: TabsRouteLayout.fromJson,
+  );
+
   final List<LinkedRoute> routes;
 
   TabsRouteLayout({required this.routes}) : super(schemaType: schemaName);

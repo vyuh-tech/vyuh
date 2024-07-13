@@ -10,6 +10,16 @@ part 'accordion.g.dart';
 @JsonSerializable()
 final class Accordion extends ContentItem {
   static const schemaName = 'vyuh.accordion';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Accordion',
+    fromJson: Accordion.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: Accordion.typeDescriptor,
+    defaultLayout: DefaultAccordionLayout(),
+    defaultLayoutDescriptor: DefaultAccordionLayout.typeDescriptor,
+  );
 
   final String? title;
   final String? description;
@@ -47,18 +57,6 @@ final class AccordionItem {
 class AccordionDescriptor extends ContentDescriptor {
   AccordionDescriptor({super.layouts})
       : super(schemaType: Accordion.schemaName, title: 'Accordion');
-}
-
-final class AccordionContentBuilder extends ContentBuilder<Accordion> {
-  AccordionContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Accordion.schemaName,
-              title: 'Accordion',
-              fromJson: Accordion.fromJson),
-          defaultLayout: DefaultAccordionLayout(),
-          defaultLayoutDescriptor: DefaultAccordionLayout.typeDescriptor,
-        );
 }
 
 final class DefaultAccordionLayout extends LayoutConfiguration<Accordion> {
