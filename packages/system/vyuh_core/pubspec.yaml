@@ -24,7 +24,7 @@ dependencies:
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
   go_router: ^14.0.1
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   get_it: ^7.6.4
   logger: ^2.1.0
