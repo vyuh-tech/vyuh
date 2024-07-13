@@ -20,7 +20,7 @@ dependencies:
   cached_network_image: ^3.3.1
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
-  json_annotation: ^4.8.1
+  json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   smooth_page_indicator: ^1.1.0
   flutter_animate: ^4.3.0
