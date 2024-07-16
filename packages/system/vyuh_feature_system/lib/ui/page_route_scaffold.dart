@@ -105,7 +105,6 @@ class _ScrollView extends StatelessWidget {
     return CustomScrollView(
       cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
       primary: true,
-      key: PageStorageKey<String>(content.path),
       slivers: [
         if (appBar != null) appBar!,
         for (final body in bodyRegions)
