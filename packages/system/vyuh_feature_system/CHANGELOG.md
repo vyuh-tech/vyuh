@@ -1,3 +1,7 @@
+## 1.15.2
+
+ - **FIX**: removing the pagestorage key as it was interfering in proper disposal of some widget and causing unintended scroll effects in other widgets.
+
 ## 1.15.1
 
  - **REFACTOR**: deps upgrade.
