@@ -103,20 +103,20 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.content.title != null)
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(widget.content.title!,
                   style:
                       theme.textTheme.titleMedium?.apply(fontWeightDelta: 2)),
             ),
           if (widget.content.description != null)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 widget.content.description!,
                 style: theme.textTheme.bodyMedium
@@ -124,7 +124,7 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
               ),
             ),
           ExpansionPanelList(
-            expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 4),
+            expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 8),
             expansionCallback: (index, isExpanded) {
               setState(() {
                 _expansions[index] = isExpanded;

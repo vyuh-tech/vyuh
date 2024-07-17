@@ -32,13 +32,13 @@ final class ListGroupLayout extends LayoutConfiguration<Group> {
         children: [
           if (content.title != null)
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(content.title!, style: theme.textTheme.titleMedium),
             ),
           if (content.description != null)
             Padding(
               padding:
-                  const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
+                  const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 8.0),
               child:
                   Text(content.description!, style: theme.textTheme.bodySmall),
             ),

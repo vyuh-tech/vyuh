@@ -42,7 +42,7 @@ class _CarouselState extends State<Carousel> {
             count: widget.content.items.length,
             effect: WormEffect(
               offset: 20,
-              spacing: 4,
+              spacing: 8,
               dotHeight: 3,
               dotWidth: 12,
               dotColor: theme.colorScheme.inversePrimary,
