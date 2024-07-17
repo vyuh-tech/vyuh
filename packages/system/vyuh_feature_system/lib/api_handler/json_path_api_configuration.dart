@@ -115,8 +115,8 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
         vf.Group(title: title, items: data, layout: vf.ListGroupLayout()));
 
     return Container(
-      margin: const EdgeInsets.only(left: 4, right: 4, top: 8, bottom: 8),
-      padding: const EdgeInsets.all(4.0),
+      margin: const EdgeInsets.only(left: 8, right: 8, top: 8, bottom: 8),
+      padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           border: Border.all(color: theme.colorScheme.outlineVariant),

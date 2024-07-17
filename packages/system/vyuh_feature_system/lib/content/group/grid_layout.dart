@@ -33,7 +33,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
   Widget build(BuildContext context, Group content) {
     final theme = Theme.of(context);
     final gridContent = GridView.builder(
-      padding: EdgeInsets.zero,
+      padding: const EdgeInsets.all(8.0),
       shrinkWrap: true,
       physics: scrollable
           ? const AlwaysScrollableScrollPhysics()
@@ -51,16 +51,25 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (content.title != null)
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Text(content.title!, style: theme.textTheme.titleMedium),
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 8.0, right: 8, top: 8, bottom: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (content.title != null)
+                Text(content.title!,
+                    style:
+                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 2)),
+              if (content.description != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(content.description!,
+                      style: theme.textTheme.bodySmall),
+                ),
+            ],
           ),
-        if (content.description != null)
-          Padding(
-            padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
-            child: Text(content.description!, style: theme.textTheme.bodySmall),
-          ),
+        ),
         if (scrollable) Expanded(child: gridContent) else gridContent,
       ],
     );
