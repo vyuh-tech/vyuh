@@ -45,7 +45,7 @@ final class PageRouteScaffold extends StatelessWidget {
     // Non-drawer items
     final bodyRegions = content.regions
         .where((x) =>
-            x.identifier != _KnownRegions.drawer.name ||
+            x.identifier != _KnownRegions.drawer.name &&
             x.identifier != _KnownRegions.endDrawer.name)
         .toList(growable: false);
 

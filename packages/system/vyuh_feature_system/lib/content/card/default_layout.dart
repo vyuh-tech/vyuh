@@ -69,6 +69,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           f.Padding(
             padding: const EdgeInsets.all(8.0),
