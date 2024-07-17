@@ -41,6 +41,8 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columns,
         childAspectRatio: aspectRatio,
+        crossAxisSpacing: 8,
+        mainAxisSpacing: 8,
       ),
       itemBuilder: (context, index) =>
           vyuh.content.buildContent(context, content.items[index]),
