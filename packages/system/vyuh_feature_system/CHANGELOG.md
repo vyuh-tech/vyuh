@@ -1,3 +1,7 @@
+## 1.15.4
+
+ - **FIX**: padding fixes and changing hte way certain actions work.
+
 ## 1.15.3
 
  - **REFACTOR**: visual tweaks to increase padding.
