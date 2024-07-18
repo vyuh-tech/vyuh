@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: using the vyuh.network plugin as a preloaded plugin and also setting it for Sanity Content Provider..now there is a single http client used across the board in the Vyuh Framework.
+
 ## 1.2.2
 
  - **FIX**: result type of sanity_client is now dynamic instead of Map<String, dynamic>.
