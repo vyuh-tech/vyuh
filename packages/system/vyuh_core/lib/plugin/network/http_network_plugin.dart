@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
@@ -97,4 +98,21 @@ final class HttpNetworkPlugin extends NetworkPlugin {
           return e is SocketException || e is TimeoutException;
         },
       );
+
+  @override
+  void close() {
+    _client.close();
+    _initialized = false;
+  }
+
+  @override
+  Future<String> read(Uri url, {Map<String, String>? headers}) =>
+      _client.read(url, headers: headers);
+
+  @override
+  Future<Uint8List> readBytes(Uri url, {Map<String, String>? headers}) =>
+      _client.readBytes(url, headers: headers);
+
+  @override
+  Future<StreamedResponse> send(BaseRequest request) => _client.send(request);
 }
