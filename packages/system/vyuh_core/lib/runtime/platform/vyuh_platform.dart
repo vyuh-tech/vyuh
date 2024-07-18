@@ -38,6 +38,8 @@ abstract class VyuhPlatform {
   @protected
   static const preloadedPlugins = [
     PluginType.analytics,
+    PluginType.network,
+    PluginType.di,
   ];
 
   /// The list of plugins that are required for the platform to function correctly.

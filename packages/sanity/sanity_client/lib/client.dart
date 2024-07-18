@@ -84,8 +84,8 @@ final class SanityClient {
   final SanityConfig config;
 
   /// The HTTP client to use. Generally not needed to be provided.
-  /// It is used for testing purposes
-  final http.Client httpClient;
+  /// It can be set during testing or when used in the context of a framework that has its own [http.Client] instance.
+  http.Client httpClient;
 
   /// The URL builder to use. When not provided it uses the default Sanity URL builder
   final UrlBuilder urlBuilder;
@@ -139,6 +139,26 @@ final class SanityClient {
   /// Return the associated object url
   Uri fileUrl(final String fileRefId) => urlBuilder.fileUrl(fileRefId);
 
+  /// Fetches the associated datasets with this project
+  Future<List<SanityDataset>> datasets() async {
+    final uri = Uri.parse(
+        'https://api.sanity.io/${config.apiVersion}/projects/${config.projectId}/datasets');
+
+    final response = await httpClient.get(uri, headers: _requestHeaders);
+    final datasets = (jsonDecode(response.body) as List<dynamic>)
+        .map(
+          (final json) => SanityDataset.fromJson(json as Map<String, dynamic>),
+        )
+        .toList(growable: false);
+
+    return datasets;
+  }
+
+  /// Set the HTTP client to use for fetching data
+  setHttpClient(http.Client client) {
+    httpClient = client;
+  }
+
   SanityQueryResponse _getQueryResult(final http.Response response) {
     switch (response.statusCode) {
       case 200:
@@ -182,20 +202,5 @@ final class SanityClient {
       int.tryParse(turnaroundTimeMs, radix: 10),
       shard
     );
-  }
-
-  /// Fetches the associated datasets with this project
-  Future<List<SanityDataset>> datasets() async {
-    final uri = Uri.parse(
-        'https://api.sanity.io/${config.apiVersion}/projects/${config.projectId}/datasets');
-
-    final response = await httpClient.get(uri, headers: _requestHeaders);
-    final datasets = (jsonDecode(response.body) as List<dynamic>)
-        .map(
-          (final json) => SanityDataset.fromJson(json as Map<String, dynamic>),
-        )
-        .toList(growable: false);
-
-    return datasets;
   }
 }
