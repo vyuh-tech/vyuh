@@ -32,6 +32,7 @@ dependencies:
   vyuh_extension_content: ^1.4.3
   json_path: ^0.7.1
   url_launcher: ^6.3.0
+  nanoid: ^1.0.0
 
 dev_dependencies:
   flutter_test:

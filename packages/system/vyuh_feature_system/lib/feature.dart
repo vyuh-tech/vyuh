@@ -23,10 +23,13 @@ final feature = FeatureDescriptor(
     GoRoute(
       path: '/__system_error__',
       pageBuilder: (context, state) {
+        final exception = state.extra as (dynamic, StackTrace);
+
         return MaterialPage(
           child: vyuh.widgetBuilder.routeErrorView(
             title: 'System error',
-            error: state.extra.toString(),
+            error: exception.$1.toString(),
+            stackTrace: exception.$2,
           ),
         );
       },
