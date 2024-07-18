@@ -1,3 +1,7 @@
+## 1.10.0
+
+ - **FEAT**: adding retry and timeout options in Network plugin.
+
 ## 1.9.7
 
  - **REFACTOR**: deps upgrade.

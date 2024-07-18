@@ -1,3 +1,7 @@
+## 1.3.1
+
+ - Update a dependency to the latest release.
+
 ## 1.3.0
 
  - **FEAT**: adding the FSL license at the top level.
