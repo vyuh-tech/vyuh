@@ -87,8 +87,8 @@ final class NavigationAction extends ActionConfiguration {
       }
 
       navigationType.apply(context, path, route);
-    } catch (e) {
-      vyuh.router.push('/__system_error__', extra: e);
+    } catch (e, stackTrace) {
+      vyuh.router.push('/__system_error__', extra: (e, stackTrace));
     } finally {
       entry.remove();
     }

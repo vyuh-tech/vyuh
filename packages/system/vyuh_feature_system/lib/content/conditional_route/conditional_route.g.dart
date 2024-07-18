@@ -24,7 +24,7 @@ ConditionalRoute _$ConditionalRouteFromJson(Map<String, dynamic> json) =>
               .toList() ??
           [],
       defaultCase: json['defaultCase'] as String?,
-      title: json['title'] as String,
+      title: json['title'] as String? ?? 'Untitled',
       path: json['path'] as String,
       createdAt: DateTime.parse(readValue(json, 'createdAt') as String),
       updatedAt: DateTime.parse(readValue(json, 'updatedAt') as String),

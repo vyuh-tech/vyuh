@@ -51,12 +51,14 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
       onRetry,
       subtitle,
       error,
+      stackTrace,
       showRestart = true,
     }) =>
         _ErrorView(
           title: title,
           subtitle: subtitle,
           error: error,
+          stackTrace: stackTrace,
           retryLabel: retryLabel,
           onRetry: onRetry,
         ),
@@ -66,11 +68,13 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
       retryLabel,
       subtitle,
       error,
+      stackTrace,
     }) =>
         _ErrorViewScaffold(
           title: title,
           subtitle: subtitle,
           error: error,
+          stackTrace: stackTrace,
           onRetry: onRetry,
           retryLabel: retryLabel,
           showRestart: true,

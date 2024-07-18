@@ -5,6 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class RouteBase extends ContentItem implements RootItem {
+  @JsonKey(defaultValue: 'Untitled')
   final String title;
 
   final String path;

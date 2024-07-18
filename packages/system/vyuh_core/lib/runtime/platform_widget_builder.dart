@@ -20,6 +20,7 @@ typedef RouteErrorViewBuilder = Widget Function({
   String? retryLabel,
   VoidCallback? onRetry,
   dynamic error,
+  StackTrace? stackTrace,
   String? subtitle,
 });
 
@@ -27,6 +28,7 @@ typedef RouteErrorViewBuilder = Widget Function({
 typedef ErrorViewBuilder = Widget Function({
   required String title,
   dynamic error,
+  StackTrace? stackTrace,
   String? retryLabel,
   VoidCallback? onRetry,
   String? subtitle,

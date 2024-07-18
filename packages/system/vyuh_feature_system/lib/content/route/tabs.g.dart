@@ -14,8 +14,8 @@ TabsRouteLayout _$TabsRouteLayoutFromJson(Map<String, dynamic> json) =>
     );
 
 LinkedRoute _$LinkedRouteFromJson(Map<String, dynamic> json) => LinkedRoute(
-      title: json['title'] as String,
-      identifier: json['identifier'] as String,
+      title: json['title'] as String?,
+      identifier: json['identifier'] as String?,
       route: ObjectReference.fromJson(json['route'] as Map<String, dynamic>),
       description: json['description'] as String?,
     );
