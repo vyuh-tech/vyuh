@@ -1,3 +1,7 @@
+## 1.15.7
+
+ - **FIX**: making the title optional.
+
 ## 1.15.6
 
  - Update a dependency to the latest release.
