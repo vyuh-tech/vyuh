@@ -1,3 +1,7 @@
+## 1.11.2
+
+ - **FIX**: better messaging on errors for missing types.
+
 ## 1.11.1
 
  - **FIX**: making the title optional.
