@@ -1,3 +1,7 @@
+## 1.16.0
+
+ - **FEAT**: adding button layout.
+
 ## 1.15.7
 
  - **FIX**: making the title optional.
