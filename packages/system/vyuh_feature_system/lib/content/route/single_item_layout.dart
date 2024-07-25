@@ -38,7 +38,8 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
 
     return vf.RouteContainer(
       content: content,
-      child: Scaffold(
+      child: vf.PageRouteScaffold(
+        content: content,
         appBar: showAppBar
             ? AppBar(
                 title: Text(content.title),
@@ -51,7 +52,8 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
                     .toList(growable: false),
               )
             : null,
-        body: useSafeArea ? SafeArea(child: child) : child,
+        useSafeArea: useSafeArea,
+        body: child,
       ),
     );
   }
