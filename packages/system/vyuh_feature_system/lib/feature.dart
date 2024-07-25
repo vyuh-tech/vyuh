@@ -8,6 +8,7 @@ import 'package:vyuh_feature_system/condition/current_platform.dart';
 import 'package:vyuh_feature_system/condition/current_theme_mode.dart';
 import 'package:vyuh_feature_system/condition/screen_size.dart';
 import 'package:vyuh_feature_system/condition/user_authenticated.dart';
+import 'package:vyuh_feature_system/content/card/button_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(
@@ -61,7 +62,9 @@ final feature = FeatureDescriptor(
           RouteConditionalLayout.typeDescriptor,
         ]),
         CardDescriptor(layouts: [
+          DefaultCardLayout.typeDescriptor,
           ListItemCardLayout.typeDescriptor,
+          ButtonCardLayout.typeDescriptor,
           CardConditionalLayout.typeDescriptor,
         ]),
         GroupDescriptor(layouts: [

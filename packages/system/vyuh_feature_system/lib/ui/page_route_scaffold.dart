@@ -7,6 +7,8 @@ enum _KnownRegions {
   body,
   drawer,
   endDrawer,
+  header,
+  footer,
 }
 
 /// A [Scaffold] that uses a [CustomScrollView] to display the content of a [vf.Route].
@@ -44,9 +46,7 @@ final class PageRouteScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     // Non-drawer items
     final bodyRegions = content.regions
-        .where((x) =>
-            x.identifier != _KnownRegions.drawer.name &&
-            x.identifier != _KnownRegions.endDrawer.name)
+        .where((x) => x.identifier == _KnownRegions.body.name)
         .toList(growable: false);
 
     final drawerItems = content.regions
@@ -59,12 +59,25 @@ final class PageRouteScaffold extends StatelessWidget {
         .expand((elt) => elt.items)
         .toList(growable: false);
 
-    final bodyContent = body ??
-        _ScrollView(
-          content: content,
-          appBar: sliverAppBar,
-          bodyRegions: bodyRegions,
-        );
+    final footerItems = content.regions
+        .where((x) => x.identifier == _KnownRegions.footer.name)
+        .expand((elt) => elt.items)
+        .toList(growable: false);
+
+    final bodyContent = Column(
+      children: [
+        Expanded(
+          child: body ??
+              _ScrollView(
+                content: content,
+                appBar: sliverAppBar,
+                bodyRegions: bodyRegions,
+              ),
+        ),
+        for (final footerItem in footerItems)
+          vyuh.content.buildContent(context, footerItem),
+      ],
+    );
 
     return vf.RouteContainer(
       content: content,
