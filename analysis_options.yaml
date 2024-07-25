@@ -10,5 +10,4 @@ analyzer:
 linter:
   rules:
     - directives_ordering
-    - public_member_api_docs
 
