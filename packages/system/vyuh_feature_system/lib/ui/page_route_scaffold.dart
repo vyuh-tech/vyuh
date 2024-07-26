@@ -16,9 +16,6 @@ final class PageRouteScaffold extends StatelessWidget {
   /// The [vf.Route] instance to display.
   final vf.Route content;
 
-  /// The [SliverAppBar] to display at the top of the page.
-  final SliverAppBar? sliverAppBar;
-
   /// The [AppBar] to display at the top of the page.
   final AppBar? appBar;
 
@@ -33,18 +30,15 @@ final class PageRouteScaffold extends StatelessWidget {
     super.key,
     required this.content,
     this.appBar,
-    this.sliverAppBar,
     this.body,
     this.useSafeArea = true,
-  }) {
-    assert(appBar == null || sliverAppBar == null,
-        'Cannot provide both an AppBar and a SliverAppBar');
-  }
+  });
 
   @override
   Widget build(BuildContext context) {
-    final bodyRegions = content.regions
+    final bodyItems = content.regions
         .where((x) => x.identifier == _KnownRegions.body.name)
+        .expand((elt) => elt.items)
         .toList(growable: false);
 
     final drawerItems = content.regions
@@ -75,8 +69,7 @@ final class PageRouteScaffold extends StatelessWidget {
           child: body ??
               _ScrollView(
                 content: content,
-                appBar: sliverAppBar,
-                bodyRegions: bodyRegions,
+                bodyItems: bodyItems,
               ),
         ),
         for (final footerItem in footerItems)
@@ -110,13 +103,11 @@ final class PageRouteScaffold extends StatelessWidget {
 class _ScrollView extends StatelessWidget {
   const _ScrollView({
     required this.content,
-    required this.appBar,
-    required this.bodyRegions,
+    required this.bodyItems,
   });
 
   final vf.Route content;
-  final SliverAppBar? appBar;
-  final List<vf.Region> bodyRegions;
+  final List<ContentItem> bodyItems;
 
   @override
   Widget build(BuildContext context) {
@@ -124,13 +115,11 @@ class _ScrollView extends StatelessWidget {
       cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
       primary: true,
       slivers: [
-        if (appBar != null) appBar!,
-        for (final body in bodyRegions)
-          SliverList.builder(
-            itemBuilder: (context, index) =>
-                vyuh.content.buildContent(context, body.items[index]),
-            itemCount: body.items.length,
-          )
+        SliverList.builder(
+          itemBuilder: (context, index) =>
+              vyuh.content.buildContent(context, bodyItems[index]),
+          itemCount: bodyItems.length,
+        )
       ],
     );
   }
