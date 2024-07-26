@@ -3,7 +3,6 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 enum _KnownRegions {
-  // ignore: unused_field
   body,
   drawer,
   endDrawer,
@@ -44,7 +43,6 @@ final class PageRouteScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Non-drawer items
     final bodyRegions = content.regions
         .where((x) => x.identifier == _KnownRegions.body.name)
         .toList(growable: false);
@@ -59,6 +57,11 @@ final class PageRouteScaffold extends StatelessWidget {
         .expand((elt) => elt.items)
         .toList(growable: false);
 
+    final headerItems = content.regions
+        .where((x) => x.identifier == _KnownRegions.header.name)
+        .expand((elt) => elt.items)
+        .toList(growable: false);
+
     final footerItems = content.regions
         .where((x) => x.identifier == _KnownRegions.footer.name)
         .expand((elt) => elt.items)
@@ -66,6 +69,8 @@ final class PageRouteScaffold extends StatelessWidget {
 
     final bodyContent = Column(
       children: [
+        for (final headerItem in headerItems)
+          vyuh.content.buildContent(context, headerItem),
         Expanded(
           child: body ??
               _ScrollView(

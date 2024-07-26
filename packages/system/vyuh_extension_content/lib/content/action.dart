@@ -37,9 +37,12 @@ abstract class ActionConfiguration implements SchemaItem {
 
   final String? title;
 
+  final bool isAwaited;
+
   ActionConfiguration({
     required this.schemaType,
     this.title,
+    this.isAwaited = false,
   });
 
   FutureOr<void> execute(BuildContext context,

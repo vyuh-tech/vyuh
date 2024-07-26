@@ -17,12 +17,8 @@ final class DefaultPageRouteLayout extends StatelessWidget {
           ? SliverAppBar(
               pinned: true,
               floating: false,
-              stretch: false,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Text(content.title),
-                centerTitle: true,
-              ),
-              scrolledUnderElevation: 2,
+              title: Text(content.title),
+              scrolledUnderElevation: 1,
               actions: layout.actions
                   ?.map(
                     (e) => IconButton(
