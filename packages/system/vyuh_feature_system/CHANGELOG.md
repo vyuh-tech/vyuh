@@ -1,3 +1,7 @@
+## 1.17.1
+
+ - **FIX**: back to appBar instead of using SliverAppBar.
+
 ## 1.17.0
 
  - **FEAT**: adding delay action.
