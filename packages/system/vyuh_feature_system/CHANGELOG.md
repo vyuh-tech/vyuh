@@ -1,3 +1,7 @@
+## 1.18.0
+
+ - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
+
 ## 1.17.1
 
  - **FIX**: back to appBar instead of using SliverAppBar.

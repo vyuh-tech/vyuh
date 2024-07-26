@@ -1,3 +1,7 @@
+## 1.12.0
+
+ - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
+
 ## 1.11.2
 
  - **FIX**: better messaging on errors for missing types.
