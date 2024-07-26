@@ -1,3 +1,7 @@
+## 1.5.0
+
+ - **FEAT**: adding delay action.
+
 ## 1.4.3
 
  - Update a dependency to the latest release.
