@@ -11,7 +11,7 @@ final class DefaultPageRouteLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return vf.PageRouteScaffold(
+    return vf.RouteScaffold(
       content: content,
       appBar: layout.showAppBar
           ? AppBar(

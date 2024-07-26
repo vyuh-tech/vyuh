@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
-enum _KnownRegions {
+enum KnownRegions {
   body,
   drawer,
   endDrawer,
@@ -12,7 +12,7 @@ enum _KnownRegions {
 
 /// A [Scaffold] that uses a [CustomScrollView] to display the content of a [vf.Route].
 /// Use this when creating custom layouts for the Route content.
-final class PageRouteScaffold extends StatelessWidget {
+final class RouteScaffold extends StatelessWidget {
   /// The [vf.Route] instance to display.
   final vf.Route content;
 
@@ -25,8 +25,8 @@ final class PageRouteScaffold extends StatelessWidget {
   /// Whether to use [SafeArea] around the content.
   final bool useSafeArea;
 
-  /// Creates a new [PageRouteScaffold] instance.
-  PageRouteScaffold({
+  /// Creates a new [RouteScaffold] instance.
+  const RouteScaffold({
     super.key,
     required this.content,
     this.appBar,
@@ -37,27 +37,27 @@ final class PageRouteScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bodyItems = content.regions
-        .where((x) => x.identifier == _KnownRegions.body.name)
+        .where((x) => x.identifier == KnownRegions.body.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
     final drawerItems = content.regions
-        .where((x) => x.identifier == _KnownRegions.drawer.name)
+        .where((x) => x.identifier == KnownRegions.drawer.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
     final endDrawerItems = content.regions
-        .where((x) => x.identifier == _KnownRegions.endDrawer.name)
+        .where((x) => x.identifier == KnownRegions.endDrawer.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
     final headerItems = content.regions
-        .where((x) => x.identifier == _KnownRegions.header.name)
+        .where((x) => x.identifier == KnownRegions.header.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 
     final footerItems = content.regions
-        .where((x) => x.identifier == _KnownRegions.footer.name)
+        .where((x) => x.identifier == KnownRegions.footer.name)
         .expand((elt) => elt.items)
         .toList(growable: false);
 

@@ -36,25 +36,22 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     final child =
         first == null ? vf.empty : vyuh.content.buildContent(context, first);
 
-    return vf.RouteContainer(
+    return vf.RouteScaffold(
       content: content,
-      child: vf.PageRouteScaffold(
-        content: content,
-        appBar: showAppBar
-            ? AppBar(
-                title: Text(content.title),
-                actions: actions
-                    ?.map(
-                      (e) => IconButton(
-                          onPressed: () => e.action?.execute(context),
-                          icon: Icon(e.icon.iconData)),
-                    )
-                    .toList(growable: false),
-              )
-            : null,
-        useSafeArea: useSafeArea,
-        body: child,
-      ),
+      appBar: showAppBar
+          ? AppBar(
+              title: Text(content.title),
+              actions: actions
+                  ?.map(
+                    (e) => IconButton(
+                        onPressed: () => e.action?.execute(context),
+                        icon: Icon(e.icon.iconData)),
+                  )
+                  .toList(growable: false),
+            )
+          : null,
+      useSafeArea: useSafeArea,
+      body: child,
     );
   }
 }
