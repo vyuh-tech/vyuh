@@ -13,10 +13,8 @@ final class DefaultPageRouteLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return vf.PageRouteScaffold(
       content: content,
-      sliverAppBar: layout.showAppBar
-          ? SliverAppBar(
-              pinned: true,
-              floating: false,
+      appBar: layout.showAppBar
+          ? AppBar(
               title: Text(content.title),
               scrolledUnderElevation: 1,
               actions: layout.actions
