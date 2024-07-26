@@ -1,3 +1,7 @@
+## 1.17.0
+
+ - **FEAT**: adding delay action.
+
 ## 1.16.0
 
  - **FEAT**: adding button layout.
