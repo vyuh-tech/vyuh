@@ -1,3 +1,7 @@
+## 1.19.0
+
+ - **FEAT**: adding carousel as a separate layout for group.
+
 ## 1.18.0
 
  - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
