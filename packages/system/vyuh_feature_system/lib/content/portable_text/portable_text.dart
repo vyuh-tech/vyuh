@@ -168,7 +168,7 @@ class DefaultPortableTextContentLayout
   static const schemaName = '${PortableTextContent.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
-    title: 'Default Potable Text Layout',
+    title: 'Default Portable Text Layout',
     fromJson: DefaultPortableTextContentLayout.fromJson,
   );
 

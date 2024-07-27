@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/ui/text.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as e;
 
 part 'default_layout.g.dart';
@@ -78,21 +79,14 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (content.title != null)
-                  Text(
-                    content.title!,
-                    style:
-                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 1),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  TitleText(
+                    text: content.title!,
                     textAlign: TextAlign.center,
                   ),
                 if (content.description != null)
-                  Text(
-                    content.description!,
-                    style: theme.textTheme.labelMedium,
+                  SubtitleText(
+                    text: content.description!,
                     textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 if (hasBlockContent)
                   Expanded(
@@ -132,22 +126,16 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                if (content.title != null)
-                  Text(
-                    content.title!,
-                    style:
-                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 1),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                if (content.title != null && content.title!.isNotEmpty)
+                  TitleText(
+                    text: content.title!,
                     textAlign: TextAlign.center,
                   ),
-                if (content.description != null)
-                  Text(
-                    content.description!,
-                    style: theme.textTheme.labelMedium,
+                if (content.description != null &&
+                    content.description!.isNotEmpty)
+                  SubtitleText(
+                    text: content.description!,
                     textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                   ),
                 if (hasBlockContent)
                   Flexible(

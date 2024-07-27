@@ -36,7 +36,7 @@ final class SingleItemRouteScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firstItem = content.regions
-        .where((x) => x.identifier == vf.KnownRegions.body.name)
+        .where((x) => x.identifier == vf.KnownRegionType.body.name)
         .expand((elt) => elt.items)
         .firstOrNull;
 

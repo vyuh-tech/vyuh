@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
-enum KnownRegions {
+enum KnownRegionType {
   body,
   drawer,
   endDrawer,
@@ -36,30 +36,15 @@ final class RouteScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bodyItems = content.regions
-        .where((x) => x.identifier == KnownRegions.body.name)
-        .expand((elt) => elt.items)
-        .toList(growable: false);
+    final bodyItems = content.regionItems(KnownRegionType.body.name);
 
-    final drawerItems = content.regions
-        .where((x) => x.identifier == KnownRegions.drawer.name)
-        .expand((elt) => elt.items)
-        .toList(growable: false);
+    final drawerItems = content.regionItems(KnownRegionType.drawer.name);
 
-    final endDrawerItems = content.regions
-        .where((x) => x.identifier == KnownRegions.endDrawer.name)
-        .expand((elt) => elt.items)
-        .toList(growable: false);
+    final endDrawerItems = content.regionItems(KnownRegionType.endDrawer.name);
 
-    final headerItems = content.regions
-        .where((x) => x.identifier == KnownRegions.header.name)
-        .expand((elt) => elt.items)
-        .toList(growable: false);
+    final headerItems = content.regionItems(KnownRegionType.header.name);
 
-    final footerItems = content.regions
-        .where((x) => x.identifier == KnownRegions.footer.name)
-        .expand((elt) => elt.items)
-        .toList(growable: false);
+    final footerItems = content.regionItems(KnownRegionType.footer.name);
 
     final bodyContent = Column(
       children: [
@@ -122,5 +107,14 @@ class _ScrollView extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+extension RegionItems on vf.Route {
+  regionItems(String regionName) {
+    return regions
+        .where((x) => x.identifier == regionName)
+        .expand((elt) => elt.items)
+        .toList(growable: false);
   }
 }
