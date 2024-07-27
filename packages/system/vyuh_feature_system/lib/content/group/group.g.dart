@@ -16,9 +16,6 @@ Group _$GroupFromJson(Map<String, dynamic> json) => Group(
       layout: typeFromFirstOfListJson(json['layout']),
     );
 
-CarouselGroupLayout _$CarouselGroupLayoutFromJson(Map<String, dynamic> json) =>
-    CarouselGroupLayout();
-
 GroupConditionalLayout _$GroupConditionalLayoutFromJson(
         Map<String, dynamic> json) =>
     GroupConditionalLayout(

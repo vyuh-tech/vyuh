@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/content/group/default_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'grid_layout.g.dart';
@@ -31,9 +32,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
 
   @override
   Widget build(BuildContext context, Group content) {
-    final theme = Theme.of(context);
     final gridContent = GridView.builder(
-      padding: const EdgeInsets.all(8.0),
       shrinkWrap: true,
       physics: scrollable
           ? const AlwaysScrollableScrollPhysics()
@@ -41,39 +40,17 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: columns,
         childAspectRatio: aspectRatio,
-        crossAxisSpacing: 8,
-        mainAxisSpacing: 8,
+        crossAxisSpacing: 4,
+        mainAxisSpacing: 4,
       ),
       itemBuilder: (context, index) =>
           vyuh.content.buildContent(context, content.items[index]),
       itemCount: content.items.length,
     );
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 8.0, right: 8, top: 8, bottom: 8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (content.title != null)
-                Text(content.title!,
-                    style:
-                        theme.textTheme.titleMedium?.apply(fontWeightDelta: 2)),
-              if (content.description != null)
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Text(content.description!,
-                      style: theme.textTheme.bodySmall),
-                ),
-            ],
-          ),
-        ),
-        if (scrollable) Expanded(child: gridContent) else gridContent,
-      ],
+    return GroupLayoutContainer(
+      content: content,
+      body: scrollable ? Expanded(child: gridContent) : gridContent,
     );
   }
 }
