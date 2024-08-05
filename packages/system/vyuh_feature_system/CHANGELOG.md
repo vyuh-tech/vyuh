@@ -1,3 +1,7 @@
+## 1.19.1
+
+ - **FIX**: better rendering of json path api config.
+
 ## 1.19.0
 
  - **FEAT**: adding carousel as a separate layout for group.
