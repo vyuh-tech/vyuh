@@ -15,16 +15,16 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
         routerConfig: platform.router.instance,
       );
     },
-    appLoader: () => const _DefaultRouteLoader(
+    appLoader: (_) => const _DefaultRouteLoader(
           delay: Duration(milliseconds: 0),
           backgroundColor: Colors.black,
           progressColor: Colors.white,
         ),
-    routeLoader: ([_, __]) => const _DefaultRouteLoader(
+    routeLoader: (_, [__, ___]) => const _DefaultRouteLoader(
           delay: Duration(milliseconds: 0),
           backgroundColor: Colors.white30,
         ),
-    contentLoader: () => const Center(
+    contentLoader: (_) => const Center(
             child: Padding(
           padding: EdgeInsets.all(8.0),
           child: Column(
@@ -34,7 +34,7 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
             ],
           ),
         )),
-    imagePlaceholder: ({width, height}) => Container(
+    imagePlaceholder: (_, {width, height}) => Container(
           width: width,
           height: height,
           decoration: const BoxDecoration(color: Colors.black12),
@@ -45,7 +45,8 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
             size: 32,
           ),
         ),
-    errorView: ({
+    errorView: (
+      _, {
       required title,
       retryLabel,
       onRetry,
@@ -62,7 +63,8 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           retryLabel: retryLabel,
           onRetry: onRetry,
         ),
-    routeErrorView: ({
+    routeErrorView: (
+      _, {
       required title,
       onRetry,
       retryLabel,

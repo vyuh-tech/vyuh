@@ -30,6 +30,7 @@ final feature = FeatureDescriptor(
 
         return MaterialPage(
           child: vyuh.widgetBuilder.routeErrorView(
+            context,
             title: 'System error',
             error: exception.$1.toString(),
             stackTrace: exception.$2,

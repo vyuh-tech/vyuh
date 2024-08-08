@@ -9,4 +9,5 @@ part of 'default_layout.dart';
 DefaultCardLayout _$DefaultCardLayoutFromJson(Map<String, dynamic> json) =>
     DefaultCardLayout(
       title: json['title'] as String? ?? '',
+      maxDescriptionLines: (json['maxDescriptionLines'] as num?)?.toInt() ?? 2,
     );

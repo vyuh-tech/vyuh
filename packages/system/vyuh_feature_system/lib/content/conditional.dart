@@ -105,7 +105,7 @@ class _ConditionalBuilder extends StatelessWidget {
 
             default:
               return conditional.showPending
-                  ? vyuh.widgetBuilder.contentLoader()
+                  ? vyuh.widgetBuilder.contentLoader(context)
                   : empty;
           }
         });
