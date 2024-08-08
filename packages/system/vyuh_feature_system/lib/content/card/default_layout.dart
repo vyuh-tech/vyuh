@@ -25,7 +25,10 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
   @JsonKey(defaultValue: '')
   final String title;
 
-  DefaultCardLayout({required this.title}) : super(schemaType: schemaName);
+  final int maxDescriptionLines;
+
+  DefaultCardLayout({required this.title, this.maxDescriptionLines = 2})
+      : super(schemaType: schemaName);
 
   factory DefaultCardLayout.fromJson(Map<String, dynamic> json) =>
       _$DefaultCardLayoutFromJson(json);
@@ -87,6 +90,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   SubtitleText(
                     text: content.description!,
                     textAlign: TextAlign.center,
+                    maxLines: maxDescriptionLines,
                   ),
                 if (hasBlockContent)
                   Expanded(
@@ -136,6 +140,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   SubtitleText(
                     text: content.description!,
                     textAlign: TextAlign.center,
+                    maxLines: 1,
                   ),
                 if (hasBlockContent)
                   Flexible(

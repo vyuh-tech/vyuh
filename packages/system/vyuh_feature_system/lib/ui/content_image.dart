@@ -76,6 +76,7 @@ class ContentImage extends StatelessWidget {
         if (provider == null) {
           return ClipRect(
             child: vyuh.widgetBuilder.imagePlaceholder(
+              context,
               width: imageWidth,
               height: imageHeight,
             ),
@@ -85,6 +86,7 @@ class ContentImage extends StatelessWidget {
             image: provider,
             errorBuilder: (final context, final __, final ___) =>
                 vyuh.widgetBuilder.imagePlaceholder(
+              context,
               width: imageWidth,
               height: imageHeight,
             ),

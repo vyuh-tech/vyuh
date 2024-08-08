@@ -19,6 +19,7 @@ final class NoOpContentPlugin extends ContentPlugin {
   @override
   Widget buildContent(BuildContext context, ContentItem content) {
     return vyuh.widgetBuilder.errorView(
+      context,
       title: messages['title']!(''),
       error: messages['error']!(content.schemaType),
     );
@@ -31,6 +32,7 @@ final class NoOpContentPlugin extends ContentPlugin {
       if (routeId != null) 'RouteId: $routeId',
     ].join('');
     return vyuh.widgetBuilder.routeErrorView(
+      context,
       title: messages['title']!(''),
       error: messages['error']!(routeDetail),
     );

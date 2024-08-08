@@ -5,17 +5,19 @@ import 'package:vyuh_core/vyuh_core.dart';
 typedef AppBuilder = Widget Function(VyuhPlatform platform);
 
 /// A builder for a widget that is shown when the app is loading.
-typedef Loader = Widget Function();
+typedef Loader = Widget Function(BuildContext context);
 
 /// A builder for a widget that is shown when a route is loading.
-typedef RouteLoader = Widget Function([Uri? url, String? routeId]);
+typedef RouteLoader = Widget Function(BuildContext context,
+    [Uri? url, String? routeId]);
 
 /// A builder for an image placeholder widget.
-typedef ImagePlaceholderBuilder = Widget Function(
+typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
     {double? width, double? height});
 
 /// A builder for a route error view widget.
-typedef RouteErrorViewBuilder = Widget Function({
+typedef RouteErrorViewBuilder = Widget Function(
+  BuildContext context, {
   required String title,
   String? retryLabel,
   VoidCallback? onRetry,
@@ -25,7 +27,8 @@ typedef RouteErrorViewBuilder = Widget Function({
 });
 
 /// A builder for an error view widget.
-typedef ErrorViewBuilder = Widget Function({
+typedef ErrorViewBuilder = Widget Function(
+  BuildContext context, {
   required String title,
   dynamic error,
   StackTrace? stackTrace,
