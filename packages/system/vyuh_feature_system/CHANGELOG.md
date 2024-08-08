@@ -1,3 +1,7 @@
+## 1.20.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
 ## 1.19.1
 
  - **FIX**: better rendering of json path api config.
