@@ -1,3 +1,7 @@
+## 1.13.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
 ## 1.12.0
 
  - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
