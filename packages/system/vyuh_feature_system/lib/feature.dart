@@ -11,6 +11,7 @@ import 'package:vyuh_feature_system/condition/screen_size.dart';
 import 'package:vyuh_feature_system/condition/user_authenticated.dart';
 import 'package:vyuh_feature_system/content/card/button_layout.dart';
 import 'package:vyuh_feature_system/content/group/carousel_layout.dart';
+import 'package:vyuh_feature_system/content/video_player.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(
@@ -176,6 +177,7 @@ final feature = FeatureDescriptor(
         Divider.contentBuilder,
         Accordion.contentBuilder,
         APIContent.contentBuilder,
+        VideoPlayerItem.contentBuilder,
       ],
       conditions: [
         BooleanCondition.typeDescriptor,
