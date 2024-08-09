@@ -33,6 +33,8 @@ dependencies:
   json_path: ^0.7.1
   url_launcher: ^6.3.0
   nanoid: ^1.0.0
+  video_player: ^2.9.1
+  chewie: ^1.7.5
 
 dev_dependencies:
   flutter_test:
