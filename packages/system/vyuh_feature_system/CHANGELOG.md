@@ -1,3 +1,7 @@
+## 1.21.0
+
+ - **FEAT**: added a VideoPlayer content item for showing network videos.
+
 ## 1.20.0
 
  - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
