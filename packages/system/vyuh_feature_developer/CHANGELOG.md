@@ -1,3 +1,7 @@
+## 1.3.3
+
+ - **FIX**: fixed the arrow direction in the paths.
+
 ## 1.3.2
 
  - Update a dependency to the latest release.
