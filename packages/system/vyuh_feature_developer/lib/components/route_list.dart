@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
@@ -91,11 +92,12 @@ class _PathList extends StatelessWidget {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    SizedBox(width: path.$2 * 10),
+                    SizedBox(width: path.$2 * 8),
                     if (path.$2 > 0)
-                      Transform.flip(
-                          flipY: true,
-                          child: const Icon(Icons.turn_right_rounded)),
+                      Transform(
+                          alignment: Alignment.center,
+                          transform: Matrix4.rotationX(pi),
+                          child: const Icon(Icons.turn_right)),
                     Expanded(
                       child: Text(
                         path.$1,
