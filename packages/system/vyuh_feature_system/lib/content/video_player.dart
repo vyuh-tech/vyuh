@@ -8,6 +8,8 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'video_player.g.dart';
 
+enum VideoLinkType { url, file }
+
 @JsonSerializable()
 final class VideoPlayerItem extends ContentItem {
   static const schemaName = 'vyuh.videoPlayer';
@@ -29,8 +31,14 @@ final class VideoPlayerItem extends ContentItem {
   /// Optional title for the video that can be used as a caption
   final String? title;
 
+  /// The File reference of the video.
+  final VideoLinkType linkType;
+
+  /// The File reference of the video.
+  final FileReference? file;
+
   /// The URL of the video.
-  final String url;
+  final String? url;
 
   /// Whether the video should loop.
   final bool loop;
@@ -43,7 +51,9 @@ final class VideoPlayerItem extends ContentItem {
 
   VideoPlayerItem({
     this.title,
-    required this.url,
+    required this.linkType,
+    this.url,
+    this.file,
     this.loop = false,
     this.autoplay = false,
     this.muted = false,
@@ -86,8 +96,9 @@ final class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  late video.VideoPlayerController _controller;
+  video.VideoPlayerController? _controller;
   ChewieController? _chewieController;
+  Object? _error;
 
   @override
   void initState() {
@@ -97,30 +108,38 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   Future<void> _initPlayer() async {
-    _controller =
-        video.VideoPlayerController.networkUrl(Uri.parse(widget.content.url));
+    final videoUrl = widget.content.linkType == VideoLinkType.file
+        ? widget.content.file != null
+            ? vyuh.content.provider.fileUrl(widget.content.file!)
+            : null
+        : widget.content.url != null
+            ? Uri.parse(widget.content.url!)
+            : null;
 
-    _controller.initialize().then((_) {
-      _controller.setVolume(widget.content.muted ? 0 : 1);
+    if (videoUrl == null) {
+      _error = UnsupportedError('Unable to determine video url');
+      return;
+    }
 
-      _chewieController = ChewieController(
-          videoPlayerController: _controller,
-          autoPlay: widget.content.autoplay,
-          deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
-          looping: widget.content.loop,
-          hideControlsTimer: const Duration(seconds: 1),
-          errorBuilder: (context, errorMessage) {
-            return vyuh.widgetBuilder.errorView(context,
-                title: 'Failed to play video', error: errorMessage);
-          });
+    _controller = video.VideoPlayerController.networkUrl(videoUrl)
+      ..initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
 
-      setState(() {});
-    });
+        _controller!.setVolume(widget.content.muted ? 0 : 1);
+
+        _chewieController = _buildChewie(context, _controller!);
+
+        setState(() {});
+      });
+
+    _chewieController = _buildChewie(context, _controller!);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controller?.dispose();
     _chewieController?.dispose();
 
     super.dispose();
@@ -128,12 +147,14 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final ready = _chewieController != null &&
-        _chewieController!.videoPlayerController.value.isInitialized;
+    if (_error != null) {
+      return vyuh.widgetBuilder
+          .errorView(context, error: _error, title: 'Failed to load video');
+    }
 
     final theme = Theme.of(context);
 
-    return ready
+    return _chewieController != null
         ? Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -148,7 +169,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8))),
                   child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
+                      aspectRatio: _controller!.value.isInitialized
+                          ? _controller!.value.aspectRatio
+                          : 16 / 9,
                       child: Chewie(controller: _chewieController!)),
                 ),
                 if (widget.content.title != null)
@@ -170,5 +193,19 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
             ),
           )
         : vyuh.widgetBuilder.contentLoader(context);
+  }
+
+  _buildChewie(BuildContext context, video.VideoPlayerController controller) {
+    return ChewieController(
+        videoPlayerController: controller,
+        autoPlay: widget.content.autoplay,
+        deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
+        looping: widget.content.loop,
+        hideControlsTimer: const Duration(seconds: 1),
+        placeholder: vyuh.widgetBuilder.contentLoader(context),
+        errorBuilder: (context, errorMessage) {
+          return vyuh.widgetBuilder.errorView(context,
+              title: 'Failed to play video', error: errorMessage);
+        });
   }
 }

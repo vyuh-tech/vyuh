@@ -8,10 +8,19 @@ part of 'reference.dart';
 
 ImageReference _$ImageReferenceFromJson(Map<String, dynamic> json) =>
     ImageReference(
+      type: readValue(json, 'type') as String,
       asset: json['asset'] == null
           ? null
           : ObjectReference.fromJson(json['asset'] as Map<String, dynamic>),
       sanityAsset: json['_sanityAsset'] as String?,
+    );
+
+FileReference _$FileReferenceFromJson(Map<String, dynamic> json) =>
+    FileReference(
+      type: readValue(json, 'type') as String,
+      asset: json['asset'] == null
+          ? null
+          : ObjectReference.fromJson(json['asset'] as Map<String, dynamic>),
     );
 
 ObjectReference _$ObjectReferenceFromJson(Map<String, dynamic> json) =>

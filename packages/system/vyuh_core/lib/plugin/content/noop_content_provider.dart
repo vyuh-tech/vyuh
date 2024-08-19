@@ -50,4 +50,7 @@ final class NoOpContentProvider extends ContentProvider {
   Future<T?> fetchById<T>(String id,
           {required FromJsonConverter<T> fromJson}) =>
       Future.value(null);
+
+  @override
+  Uri? fileUrl(FileReference fileRef) => throw UnimplementedError();
 }

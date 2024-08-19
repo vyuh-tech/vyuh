@@ -26,6 +26,10 @@ abstract class ContentProvider {
     final String? format,
   });
 
+  Uri? fileUrl(
+    final FileReference fileRef,
+  );
+
   Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson});
 
   Future<T?> fetchSingle<T>(String query,
