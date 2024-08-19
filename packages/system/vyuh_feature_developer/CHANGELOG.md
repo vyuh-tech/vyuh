@@ -1,3 +1,7 @@
+## 1.3.4
+
+ - **FIX**: fixed the arrow direction in the paths.
+
 ## 1.3.3
 
  - **FIX**: fixed the arrow direction in the paths.

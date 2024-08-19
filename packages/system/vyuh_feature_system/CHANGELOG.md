@@ -1,3 +1,7 @@
+## 1.22.0
+
+ - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
+
 ## 1.21.0
 
  - **FEAT**: added a VideoPlayer content item for showing network videos.

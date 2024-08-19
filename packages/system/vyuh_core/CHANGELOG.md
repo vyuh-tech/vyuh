@@ -1,3 +1,7 @@
+## 1.14.0
+
+ - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
+
 ## 1.13.0
 
  - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
