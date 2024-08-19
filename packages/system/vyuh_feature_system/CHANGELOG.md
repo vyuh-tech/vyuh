@@ -1,3 +1,7 @@
+## 1.22.1
+
+ - **FIX**: better handling of invalid urls.
+
 ## 1.22.0
 
  - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
