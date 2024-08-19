@@ -5,18 +5,38 @@ part 'reference.g.dart';
 
 @JsonSerializable()
 class ImageReference {
+  @JsonKey(readValue: readValue)
+  final String type;
+
   final ObjectReference? asset;
 
   @JsonKey(name: '_sanityAsset')
   final String? sanityAsset;
 
   ImageReference({
+    required this.type,
     required this.asset,
     this.sanityAsset,
   });
 
   factory ImageReference.fromJson(final Map<String, dynamic> json) =>
       _$ImageReferenceFromJson(json);
+}
+
+@JsonSerializable()
+class FileReference {
+  @JsonKey(readValue: readValue)
+  final String type;
+
+  final ObjectReference? asset;
+
+  FileReference({
+    required this.type,
+    required this.asset,
+  });
+
+  factory FileReference.fromJson(final Map<String, dynamic> json) =>
+      _$FileReferenceFromJson(json);
 }
 
 @JsonSerializable()
