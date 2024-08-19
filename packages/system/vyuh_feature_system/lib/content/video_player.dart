@@ -170,9 +170,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                               topLeft: Radius.circular(8),
                               topRight: Radius.circular(8))),
                   child: AspectRatio(
-                      aspectRatio: _controller!.value.isInitialized
-                          ? _controller!.value.aspectRatio
-                          : 16 / 9,
+                      aspectRatio: _controller.value.aspectRatio,
                       child: Chewie(controller: _chewieController!)),
                 ),
                 if (widget.content.title != null)
