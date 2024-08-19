@@ -96,7 +96,7 @@ final class VideoPlayerWidget extends StatefulWidget {
 }
 
 class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
-  video.VideoPlayerController? _controller;
+  late final video.VideoPlayerController _controller;
   ChewieController? _chewieController;
   Object? _error;
 
@@ -127,19 +127,20 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
           return;
         }
 
-        _controller!.setVolume(widget.content.muted ? 0 : 1);
+        _controller.setVolume(widget.content.muted ? 0 : 1);
 
-        _chewieController = _buildChewie(context, _controller!);
+        _chewieController = _buildChewie(context, _controller);
 
         setState(() {});
+      }).timeout(const Duration(seconds: 5), onTimeout: () {
+        _error = Exception('Failed to load video from given url or file');
+        setState(() {});
       });
-
-    _chewieController = _buildChewie(context, _controller!);
   }
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     _chewieController?.dispose();
 
     super.dispose();
