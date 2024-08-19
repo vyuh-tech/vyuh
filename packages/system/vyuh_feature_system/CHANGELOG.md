@@ -1,3 +1,7 @@
+## 1.22.2
+
+ - **FIX**: better handling of invalid urls.
+
 ## 1.22.1
 
  - **FIX**: better handling of invalid urls.
