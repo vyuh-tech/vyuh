@@ -1,3 +1,7 @@
+## 1.22.3
+
+ - **FIX**: renders portable text correctly in a card.
+
 ## 1.22.2
 
  - **FIX**: better handling of invalid urls.
