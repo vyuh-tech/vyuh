@@ -93,7 +93,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                     maxLines: maxDescriptionLines,
                   ),
                 if (hasBlockContent)
-                  Expanded(
+                  Flexible(
                       child:
                           vyuh.content.buildContent(context, content.content!)),
               ],
