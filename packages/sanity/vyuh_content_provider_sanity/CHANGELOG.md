@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: adding sanity content provider to the OSS vyuh framework.
+
 ## 1.2.0
 
  - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
