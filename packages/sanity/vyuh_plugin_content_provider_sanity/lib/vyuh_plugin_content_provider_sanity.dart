@@ -1,11 +1,11 @@
-library vyuh_plugin_content_sanity;
+library vyuh_plugin_content_provider_sanity;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_cache/vyuh_cache.dart';
-import 'package:vyuh_content_provider_sanity/exception.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_plugin_content_provider_sanity/exception.dart';
 
 identity(Map<String, dynamic> json) => json;
 
