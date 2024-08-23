@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: renaming the package.
+
 ## 1.3.1
 
  - **FIX**: updating license.
