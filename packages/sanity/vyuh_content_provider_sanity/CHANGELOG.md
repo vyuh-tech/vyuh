@@ -1,3 +1,7 @@
+## 1.3.1
+
+ - **FIX**: updating license.
+
 ## 1.3.0
 
  - **FEAT**: adding sanity content provider to the OSS vyuh framework.
