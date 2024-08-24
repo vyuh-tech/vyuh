@@ -108,9 +108,7 @@ The core building blocks that enable all of this include:
   themes, etc. The CMS itself is a standard plugin with custom Providers. Bring
   your own CMS as a `ContentProvider`!
 
-  > **Note**: The default CMS we use is [Sanity.io](https://sanity.io). This
-  > integration is currently part of the
-  > [Enterprise Plan](https://vyuh.tech/pricing).
+  > **Note**: The default CMS we use is [Sanity.io](https://sanity.io).
 
 - **Community packages**: leverages the best community packages like `mobx`,
   `go_router`, `get_it`, `hive`, `firebase`, etc. This means you don't have to
@@ -133,4 +131,4 @@ Follow us, stay up to date or reach out on:
 
 ## License
 
-The framework is [MIT Licensed](LICENSE).
+The framework is [FSL Licensed](LICENSE).
