@@ -53,8 +53,7 @@ final class NavigationAction extends ActionConfiguration {
       return;
     }
 
-    final localRoute =
-        vyuh.router.instance.configuration.findMatch(uri.toString());
+    final localRoute = vyuh.router.instance.configuration.findMatch(uri);
     var isLocal = localRoute.isNotEmpty;
 
     if (isLocal) {
