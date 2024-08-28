@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**: keeping the topics to 5.
+
 ## 1.4.0
 
  - **FEAT**: renaming the package.

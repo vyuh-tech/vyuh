@@ -1,3 +1,7 @@
+## 1.22.4
+
+ - **FIX**: API change for findMatch() in GoRouter...from String -> Uri.
+
 ## 1.22.3
 
  - **FIX**: renders portable text correctly in a card.
