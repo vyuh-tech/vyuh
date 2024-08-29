@@ -1,3 +1,7 @@
+## 1.15.0
+
+ - **FEAT**: added a transitionsBuilder parameter to the default route page builder.
+
 ## 1.14.0
 
  - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
