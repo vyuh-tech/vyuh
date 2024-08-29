@@ -35,14 +35,24 @@ final class CMSRoute extends GoRoute {
 
 /// The default page builder for CMS routes.
 Page<dynamic> defaultRoutePageBuilder(
-    BuildContext context, GoRouterState state) {
+  BuildContext context,
+  GoRouterState state, {
+  Widget Function(BuildContext context, Animation<double> animation,
+          Animation<double> secondaryAnimation, Widget child)?
+      transitionsBuilder,
+  Duration? transitionDuration,
+}) {
   final route = state.extra as RouteBase?;
 
-  if (route == null) {
-    final path = state.topRoute is CMSRoute
-        ? (state.topRoute as CMSRoute).cmsPathResolver(state.matchedLocation)
-        : state.matchedLocation;
+  if (route != null) {
+    return route.createPage(context, state.pageKey);
+  }
 
+  final path = state.topRoute is CMSRoute
+      ? (state.topRoute as CMSRoute).cmsPathResolver(state.matchedLocation)
+      : state.matchedLocation;
+
+  if (transitionsBuilder == null) {
     return MaterialPage(
       child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
       name: state.matchedLocation,
@@ -50,5 +60,11 @@ Page<dynamic> defaultRoutePageBuilder(
     );
   }
 
-  return route.createPage(context, state.pageKey);
+  return CustomTransitionPage<dynamic>(
+    key: state.pageKey,
+    child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
+    transitionsBuilder: transitionsBuilder,
+    transitionDuration: transitionDuration ??
+        const Duration(milliseconds: 300), // Increase the duration here
+  );
 }
