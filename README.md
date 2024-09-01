@@ -15,18 +15,25 @@
 [![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish.yml)
 &nbsp;
 [![Discord](https://img.shields.io/discord/1198906057502769252?style=for-the-badge&logo=discord)](https://discord.gg/b49sbjqszG)
+&nbsp;
+[![AI-Code Agent](https://img.shields.io/badge/AI-Code%20Agent-EB9FDA?style=for-the-badge)](https://app.commanddash.io/agent/github_vyuh-tech_vyuh)
 
-| Packages                                                                                                                                                                                                                            |
-| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| _Sanity Integration_                                                                                                                                                                                                                |
-| [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)                                                             |
-| [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text) |
-| _Vyuh_                                                                                                                                                                                                                              |
-| [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)                                                                             |
-| [![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)                                                                         |
-| [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)                         |
-| [![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)                                     |
-| [![vyuh_feature_developer](https://img.shields.io/pub/v/vyuh_feature_developer.svg?label=vyuh_feature_developer&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_developer)                         |
+| Packages                                                                                                                                                                                                                                                        |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| _Sanity Integration_                                                                                                                                                                                                                                            |
+| [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)                                                                                         |
+| [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text)                             |
+| _Vyuh_                                                                                                                                                                                                                                                          |
+| [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)                                                                                                         |
+| [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)                                                     |
+| [![vyuh_plugin_content_provider_sanity](https://img.shields.io/pub/v/vyuh_plugin_content_provider_sanity.svg?label=vyuh_plugin_content_provider_sanity&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_content_provider_sanity) |
+| [![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)                                                                 |
+| [![vyuh_feature_developer](https://img.shields.io/pub/v/vyuh_feature_developer.svg?label=vyuh_feature_developer&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_developer)                                                     |
+| [![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)                                                                                                     |
+| _NPM_                                                                                                                                                                                                                                                           |
+| [![@vyuh/sanity-schema-core](https://img.shields.io/npm/v/%40vyuh%2Fsanity-schema-core.svg?logo=npm&label=%40vyuh%2Fsanity-schema-core&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/sanity-schema-core)                               |
+| [![@vyuh/sanity-schema-system](https://img.shields.io/npm/v/%40vyuh%2Fsanity-schema-system.svg?logo=npm&label=%40vyuh%2Fsanity-schema-system&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/sanity-schema-system)                       |
+| [![@vyuh/sanity-plugin-structure](https://img.shields.io/npm/v/%40vyuh%2Fsanity-plugin-structure.svg?logo=npm&label=%40vyuh%2Fsanity-plugin-structure&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/sanity-plugin-structure)           |
 
 <hr style="height: 1px;"/>
 
