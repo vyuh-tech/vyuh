@@ -1,3 +1,23 @@
+## 1.6.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
+## 1.5.0
+
+ - **FEAT**: adding delay action.
+
+## 1.4.3
+
+ - Update a dependency to the latest release.
+
+## 1.4.2
+
+ - Update a dependency to the latest release.
+
+## 1.4.1
+
+ - **REFACTOR**: deps upgrade.
+
 ## 1.4.0
 
  - **FEAT**: ContentBuilder is no longer abstract, Card layout adjustments, AppBar can be toggled in default route layout, grid layout can now have single column, minor fixes in navigation action.

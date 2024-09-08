@@ -1,3 +1,19 @@
+## 1.3.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
+## 1.2.4
+
+ - **REFACTOR**: deps upgrade.
+
+## 1.2.3
+
+ - **FIX**: adding API documentation..WIP.
+
+## 1.2.2
+
+ - **FIX**: adding API documentation..WIP.
+
 ## 1.2.1
 
  - **FIX**: adding API documentation..WIP.

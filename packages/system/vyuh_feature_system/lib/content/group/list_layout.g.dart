@@ -7,4 +7,6 @@ part of 'list_layout.dart';
 // **************************************************************************
 
 ListGroupLayout _$ListGroupLayoutFromJson(Map<String, dynamic> json) =>
-    ListGroupLayout();
+    ListGroupLayout(
+      percentHeight: (json['percentHeight'] as num?)?.toDouble() ?? 0.5,
+    );

@@ -4,6 +4,8 @@ class _ErrorViewScaffold extends StatelessWidget {
   final String title;
   final String? subtitle;
   final dynamic error;
+  final StackTrace? stackTrace;
+
   final VoidCallback? onRetry;
   final bool showRestart;
 
@@ -13,6 +15,7 @@ class _ErrorViewScaffold extends StatelessWidget {
     this.title = 'Something is not right!',
     this.subtitle,
     this.error,
+    this.stackTrace,
     this.onRetry,
     this.showRestart = true,
     this.retryLabel,
@@ -64,6 +67,15 @@ class _ErrorViewScaffold extends StatelessWidget {
                           color: textColor,
                         ),
                       ),
+                    const Divider(),
+                    if (stackTrace != null)
+                      Text(
+                        stackTrace.toString(),
+                        style: theme.textTheme.bodyMedium?.apply(
+                          fontFamily: 'Courier',
+                          color: textColor,
+                        ),
+                      ),
                   ],
                 ),
               )),
@@ -95,6 +107,8 @@ class _ErrorView extends StatelessWidget {
   final String title;
   final String? subtitle;
   final dynamic error;
+  final StackTrace? stackTrace;
+
   final VoidCallback? onRetry;
   final String? retryLabel;
 
@@ -102,6 +116,7 @@ class _ErrorView extends StatelessWidget {
     this.title = 'Something is not right!',
     this.subtitle,
     this.error,
+    this.stackTrace,
     this.onRetry,
     this.retryLabel,
   });
@@ -148,6 +163,15 @@ class _ErrorView extends StatelessWidget {
                         fontFamily: 'Courier',
                         fontWeightDelta: 2,
                         fontSizeDelta: 1,
+                        color: textColor,
+                      ),
+                    ),
+                  const Divider(),
+                  if (stackTrace != null)
+                    Text(
+                      stackTrace.toString(),
+                      style: theme.textTheme.bodyMedium?.apply(
+                        fontFamily: 'Courier',
                         color: textColor,
                       ),
                     ),

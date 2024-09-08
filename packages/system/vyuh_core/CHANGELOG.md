@@ -1,3 +1,47 @@
+## 1.15.0
+
+ - **FEAT**: added a transitionsBuilder parameter to the default route page builder.
+
+## 1.14.0
+
+ - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
+
+## 1.13.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
+## 1.12.0
+
+ - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
+
+## 1.11.2
+
+ - **FIX**: better messaging on errors for missing types.
+
+## 1.11.1
+
+ - **FIX**: making the title optional.
+
+## 1.11.0
+
+ - **FEAT**: using the vyuh.network plugin as a preloaded plugin and also setting it for Sanity Content Provider..now there is a single http client used across the board in the Vyuh Framework.
+
+## 1.10.0
+
+ - **FEAT**: adding retry and timeout options in Network plugin.
+
+## 1.9.7
+
+ - **REFACTOR**: deps upgrade.
+
+## 1.9.6
+
+ - **FIX**: adding API documentation..WIP.
+
+## 1.9.5
+
+ - **FIX**: adding API documentation..WIP.
+
 ## 1.9.4
 
  - **FIX**: adding API documentation..WIP.

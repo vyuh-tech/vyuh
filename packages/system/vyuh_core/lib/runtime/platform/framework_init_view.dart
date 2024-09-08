@@ -39,8 +39,9 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
         }
 
         final child = status == null || status == FutureStatus.pending
-            ? vyuh.widgetBuilder.appLoader()
+            ? vyuh.widgetBuilder.appLoader(context)
             : vyuh.widgetBuilder.routeErrorView(
+                context,
                 title: 'Failed to load app',
                 error: vyuh.tracker.error,
               );

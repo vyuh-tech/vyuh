@@ -1,3 +1,4 @@
+export '../ui/web_view.dart';
 export 'accordion.dart';
 export 'api_content.dart';
 export 'card/card.dart';
@@ -20,4 +21,3 @@ export 'route/route_type.dart';
 export 'route/single_item_layout.dart';
 export 'route/tabs.dart';
 export 'unknown.dart';
-export 'web_view.dart';

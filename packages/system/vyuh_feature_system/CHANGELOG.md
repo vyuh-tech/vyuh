@@ -1,3 +1,94 @@
+## 1.22.4
+
+ - **FIX**: API change for findMatch() in GoRouter...from String -> Uri.
+
+## 1.22.3
+
+ - **FIX**: renders portable text correctly in a card.
+
+## 1.22.2
+
+ - **FIX**: better handling of invalid urls.
+
+## 1.22.1
+
+ - **FIX**: better handling of invalid urls.
+
+## 1.22.0
+
+ - **FEAT**: adding support for FileReference, VideoPlayer supports  FileReference from Sanity.
+
+## 1.21.0
+
+ - **FEAT**: added a VideoPlayer content item for showing network videos.
+
+## 1.20.0
+
+ - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
+
+## 1.19.1
+
+ - **FIX**: better rendering of json path api config.
+
+## 1.19.0
+
+ - **FEAT**: adding carousel as a separate layout for group.
+
+## 1.18.0
+
+ - **FEAT**: renaming PageRouteScaffold to RouteScaffold. Added a SingleItemRouteScaffold for showing only the first item in a body region, a common use case.
+
+## 1.17.1
+
+ - **FIX**: back to appBar instead of using SliverAppBar.
+
+## 1.17.0
+
+ - **FEAT**: adding delay action.
+
+## 1.16.0
+
+ - **FEAT**: adding button layout.
+
+## 1.15.7
+
+ - **FIX**: making the title optional.
+
+## 1.15.6
+
+ - Update a dependency to the latest release.
+
+## 1.15.5
+
+ - Update a dependency to the latest release.
+
+## 1.15.4
+
+ - **FIX**: padding fixes and changing hte way certain actions work.
+
+## 1.15.3
+
+ - **REFACTOR**: visual tweaks to increase padding.
+
+## 1.15.2
+
+ - **FIX**: removing the pagestorage key as it was interfering in proper disposal of some widget and causing unintended scroll effects in other widgets.
+
+## 1.15.1
+
+ - **REFACTOR**: deps upgrade.
+
+## 1.15.0
+
+ - **REFACTOR**: using typeDescriptor and contentBuilder to hide details for all content items.
+ - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
+ - **FEAT**: adding support for safeArea in default layout and extracting the core route builder as a scaffold.
+
+## 1.14.0
+
+ - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.
+ - **FEAT**: adding support for safeArea in default layout and extracting the core route builder as a scaffold.
+
 ## 1.13.6
 
  - **FIX**: adding cacheExtent, layout tweaks for Card, PortableText and Route.

@@ -7,7 +7,7 @@ part of 'route.dart';
 // **************************************************************************
 
 Route _$RouteFromJson(Map<String, dynamic> json) => Route(
-      title: json['title'] as String,
+      title: json['title'] as String? ?? 'Untitled',
       routeType: typeFromFirstOfListJson(json['routeType']),
       path: json['path'] as String,
       regions: (json['regions'] as List<dynamic>?)

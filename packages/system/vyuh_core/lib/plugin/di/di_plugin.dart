@@ -10,23 +10,23 @@ abstract class DIPlugin extends Plugin {
       : super(pluginType: PluginType.di);
 
   /// Registers an instance of any Object type with the DI container.
-  void register<T extends Object>(T instance);
+  void register<T extends Object>(T instance, {String? name});
 
   /// Registers a function that produces an instance of any Object type when called.
   /// The instance is created lazily, i.e., it is not created until it is required.
-  void registerLazy<T extends Object>(T Function() fn);
+  void registerLazy<T extends Object>(T Function() fn, {String? name});
 
   /// Registers a factory function that produces an instance of any Object type whenever it's called.
-  void registerFactory<T extends Object>(T Function() fn);
+  void registerFactory<T extends Object>(T Function() fn, {String? name});
 
   /// Removes the instance of the specified Object type from the DI container.
-  void unregister<T extends Object>();
+  void unregister<T extends Object>({String? name});
 
   /// Retrieves the registered instance of the specified Object type from the DI container.
-  T get<T extends Object>();
+  T get<T extends Object>({String? name});
 
   /// Checks if the instance of the specified Object type is registered in the DI container.
-  bool has<T extends Object>();
+  bool has<T extends Object>({String? name});
 
   /// Clears all the instances registered in the DI container.
   Future<void> reset();

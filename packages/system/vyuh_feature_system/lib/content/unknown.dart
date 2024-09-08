@@ -47,7 +47,7 @@ final class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
                   color: Colors.white54,
                   size: 32,
                 ),
-                const SizedBox(width: 4),
+                const SizedBox(width: 8),
                 Text(
                   'Missing schemaType',
                   style: theme.textTheme.labelLarge,

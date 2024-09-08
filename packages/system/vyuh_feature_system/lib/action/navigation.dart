@@ -53,8 +53,7 @@ final class NavigationAction extends ActionConfiguration {
       return;
     }
 
-    final localRoute =
-        vyuh.router.instance.configuration.findMatch(uri.toString());
+    final localRoute = vyuh.router.instance.configuration.findMatch(uri);
     var isLocal = localRoute.isNotEmpty;
 
     if (isLocal) {
@@ -68,7 +67,7 @@ final class NavigationAction extends ActionConfiguration {
   _performNavigation(BuildContext context, {Uri? uri, String? routeId}) async {
     final state = Overlay.of(context);
     final entry = OverlayEntry(
-        builder: (_) => vyuh.widgetBuilder.routeLoader(uri, routeId));
+        builder: (_) => vyuh.widgetBuilder.routeLoader(context, uri, routeId));
     state.insert(entry);
 
     try {
@@ -87,8 +86,8 @@ final class NavigationAction extends ActionConfiguration {
       }
 
       navigationType.apply(context, path, route);
-    } catch (e) {
-      vyuh.router.push('/__system_error__', extra: e);
+    } catch (e, stackTrace) {
+      vyuh.router.push('/__system_error__', extra: (e, stackTrace));
     } finally {
       entry.remove();
     }

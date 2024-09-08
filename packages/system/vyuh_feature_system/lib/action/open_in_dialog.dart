@@ -75,10 +75,28 @@ final class OpenInDialogAction extends ActionConfiguration {
   }
 
   _dialogContent(BuildContext context) {
+    if (linkType == LinkType.url) {
+      final finalUrl = Uri.tryParse(url ?? '::Not valid URI::');
+
+      if (finalUrl == null) {
+        return empty;
+      }
+
+      if (finalUrl.scheme.startsWith('http')) {
+        return WebView(uri: finalUrl);
+      }
+
+      return vyuh.content.buildRoute(
+        context,
+        url: finalUrl,
+      );
+    }
+
+    final routeId = route?.ref;
+
     return vyuh.content.buildRoute(
       context,
-      url: url == null ? null : Uri.tryParse(url!),
-      routeId: route?.ref,
+      routeId: routeId,
     );
   }
 }

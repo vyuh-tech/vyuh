@@ -10,6 +10,16 @@ part 'accordion.g.dart';
 @JsonSerializable()
 final class Accordion extends ContentItem {
   static const schemaName = 'vyuh.accordion';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Accordion',
+    fromJson: Accordion.fromJson,
+  );
+  static final contentBuilder = ContentBuilder(
+    content: Accordion.typeDescriptor,
+    defaultLayout: DefaultAccordionLayout(),
+    defaultLayoutDescriptor: DefaultAccordionLayout.typeDescriptor,
+  );
 
   final String? title;
   final String? description;
@@ -47,18 +57,6 @@ final class AccordionItem {
 class AccordionDescriptor extends ContentDescriptor {
   AccordionDescriptor({super.layouts})
       : super(schemaType: Accordion.schemaName, title: 'Accordion');
-}
-
-final class AccordionContentBuilder extends ContentBuilder<Accordion> {
-  AccordionContentBuilder()
-      : super(
-          content: TypeDescriptor(
-              schemaType: Accordion.schemaName,
-              title: 'Accordion',
-              fromJson: Accordion.fromJson),
-          defaultLayout: DefaultAccordionLayout(),
-          defaultLayoutDescriptor: DefaultAccordionLayout.typeDescriptor,
-        );
 }
 
 final class DefaultAccordionLayout extends LayoutConfiguration<Accordion> {
@@ -105,20 +103,20 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding: const EdgeInsets.all(8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.content.title != null)
             Padding(
-              padding: const EdgeInsets.all(4.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(widget.content.title!,
                   style:
                       theme.textTheme.titleMedium?.apply(fontWeightDelta: 2)),
             ),
           if (widget.content.description != null)
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 widget.content.description!,
                 style: theme.textTheme.bodyMedium
@@ -126,7 +124,7 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
               ),
             ),
           ExpansionPanelList(
-            expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 4),
+            expandedHeaderPadding: const EdgeInsets.symmetric(vertical: 8),
             expansionCallback: (index, isExpanded) {
               setState(() {
                 _expansions[index] = isExpanded;

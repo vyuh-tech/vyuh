@@ -1,15 +1,17 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card, Divider, Route;
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/action/alert.dart';
+import 'package:vyuh_feature_system/action/delay.dart';
 import 'package:vyuh_feature_system/condition/current_platform.dart';
 import 'package:vyuh_feature_system/condition/current_theme_mode.dart';
 import 'package:vyuh_feature_system/condition/screen_size.dart';
 import 'package:vyuh_feature_system/condition/user_authenticated.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
+import 'package:vyuh_feature_system/content/card/button_layout.dart';
+import 'package:vyuh_feature_system/content/group/carousel_layout.dart';
+import 'package:vyuh_feature_system/content/video_player.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(
@@ -25,10 +27,14 @@ final feature = FeatureDescriptor(
     GoRoute(
       path: '/__system_error__',
       pageBuilder: (context, state) {
+        final exception = state.extra as (dynamic, StackTrace);
+
         return MaterialPage(
           child: vyuh.widgetBuilder.routeErrorView(
+            context,
             title: 'System error',
-            error: state.extra.toString(),
+            error: exception.$1.toString(),
+            stackTrace: exception.$2,
           ),
         );
       },
@@ -51,62 +57,25 @@ final feature = FeatureDescriptor(
     ContentExtensionDescriptor(
       contents: [
         RouteDescriptor(routeTypes: [
-          TypeDescriptor(
-            schemaType: PageRouteType.schemaName,
-            title: 'Default Page Route',
-            fromJson: PageRouteType.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: DialogRouteType.schemaName,
-            title: 'Default Dialog Route',
-            fromJson: DialogRouteType.fromJson,
-          ),
+          PageRouteType.typeDescriptor,
+          DialogRouteType.typeDescriptor,
         ], layouts: [
-          TypeDescriptor(
-            schemaType: DefaultRouteLayout.schemaName,
-            title: 'Default Layout',
-            fromJson: DefaultRouteLayout.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: TabsRouteLayout.schemaName,
-            title: 'Tab Layout',
-            fromJson: TabsRouteLayout.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: SingleItemLayout.schemaName,
-            title: 'Single Item Layout',
-            fromJson: SingleItemLayout.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: RouteConditionalLayout.schemaName,
-            title: 'Route Conditional Layout',
-            fromJson: CardConditionalLayout.fromJson,
-          ),
+          DefaultRouteLayout.typeDescriptor,
+          TabsRouteLayout.typeDescriptor,
+          SingleItemLayout.typeDescriptor,
+          RouteConditionalLayout.typeDescriptor,
         ]),
         CardDescriptor(layouts: [
-          TypeDescriptor(
-            schemaType: ListItemCardLayout.schemaName,
-            title: 'List Item Layout',
-            fromJson: ListItemCardLayout.fromJson,
-          ),
-          TypeDescriptor(
-            schemaType: CardConditionalLayout.schemaName,
-            title: 'Card Conditional Layout',
-            fromJson: CardConditionalLayout.fromJson,
-          ),
+          DefaultCardLayout.typeDescriptor,
+          ListItemCardLayout.typeDescriptor,
+          ButtonCardLayout.typeDescriptor,
+          CardConditionalLayout.typeDescriptor,
         ]),
         GroupDescriptor(layouts: [
-          TypeDescriptor(
-            schemaType: GridGroupLayout.schemaName,
-            title: 'Grid Layout',
-            fromJson: GridGroupLayout.fromJson,
-          ),
-          vf.ListGroupLayout.typeDescriptor,
-          TypeDescriptor(
-            schemaType: GroupConditionalLayout.schemaName,
-            title: 'Group Conditional Layout',
-            fromJson: GroupConditionalLayout.fromJson,
-          ),
+          CarouselGroupLayout.typeDescriptor,
+          GridGroupLayout.typeDescriptor,
+          ListGroupLayout.typeDescriptor,
+          GroupConditionalLayout.typeDescriptor,
         ]),
         ConditionalDescriptor(),
         ConditionalRouteDescriptor(),
@@ -172,10 +141,10 @@ final feature = FeatureDescriptor(
                   PortableTextBlock(model: content as TextBlockItem),
             ),
             BlockItemDescriptor(
-              schemaType: vf.Card.schemaName,
-              fromJson: vf.Card.fromJson,
+              schemaType: Card.schemaName,
+              fromJson: Card.fromJson,
               builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as vf.Card),
+                  vyuh.content.buildContent(context, content as Card),
             ),
             BlockItemDescriptor(
               schemaType: Group.schemaName,
@@ -184,10 +153,10 @@ final feature = FeatureDescriptor(
                   vyuh.content.buildContent(context, content as Group),
             ),
             BlockItemDescriptor(
-              schemaType: vf.Divider.schemaName,
-              fromJson: vf.Divider.fromJson,
+              schemaType: Divider.schemaName,
+              fromJson: Divider.fromJson,
               builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as vf.Divider),
+                  vyuh.content.buildContent(context, content as Divider),
             ),
           ],
         ),
@@ -197,17 +166,18 @@ final feature = FeatureDescriptor(
         ),
       ],
       contentBuilders: [
-        RouteContentBuilder(),
-        CardContentBuilder(),
-        GroupContentBuilder(),
-        ConditionalContentBuilder(),
-        ConditionalRouteBuilder(),
+        Route.contentBuilder,
+        Card.contentBuilder,
+        Group.contentBuilder,
+        Conditional.contentBuilder,
+        ConditionalRoute.contentBuilder,
         UnknownContentBuilder(),
-        EmptyContentBuilder(),
-        PortableTextContentBuilder(),
-        DividerContentBuilder(),
-        AccordionContentBuilder(),
-        APIContentBuilder(),
+        Empty.contentBuilder,
+        PortableTextContent.contentBuilder,
+        Divider.contentBuilder,
+        Accordion.contentBuilder,
+        APIContent.contentBuilder,
+        VideoPlayerItem.contentBuilder,
       ],
       conditions: [
         BooleanCondition.typeDescriptor,
@@ -230,6 +200,7 @@ final feature = FeatureDescriptor(
         HideSnackBarAction.typeDescriptor,
         DrawerAction.typeDescriptor,
         ShowAlertAction.typeDescriptor,
+        DelayAction.typeDescriptor,
       ],
     ),
   ],

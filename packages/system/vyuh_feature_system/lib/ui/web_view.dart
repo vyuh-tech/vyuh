@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class WebView extends StatefulWidget {
+final class WebView extends StatefulWidget {
   final Uri uri;
 
   const WebView({super.key, required this.uri});
@@ -37,7 +39,14 @@ class _WebViewState extends State<WebView> {
         appBar: AppBar(title: Text(widget.uri.toString())),
         body: Stack(
           children: [
-            Positioned.fill(child: WebViewWidget(controller: _controller)),
+            Positioned.fill(
+                child: WebViewWidget(
+              controller: _controller,
+              gestureRecognizers: {
+                Factory<VerticalDragGestureRecognizer>(
+                    () => VerticalDragGestureRecognizer()),
+              },
+            )),
             if (_progress < 100)
               Positioned(
                   left: 0,

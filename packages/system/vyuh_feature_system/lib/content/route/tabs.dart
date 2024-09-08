@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:nanoid/nanoid.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vt;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -9,6 +10,12 @@ part 'tabs.g.dart';
 @JsonSerializable()
 final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
   static const schemaName = 'vyuh.route.layout.tabs';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Tabs Route Layout',
+    fromJson: TabsRouteLayout.fromJson,
+  );
 
   final List<LinkedRoute> routes;
 
@@ -30,7 +37,12 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
             toolbarHeight: 0,
             bottom: TabBar(
               tabs: layout.routes
-                  .map((e) => Tab(text: e.title))
+                  .map((e) => Tab(
+                        text: e.title,
+                        icon: e.title == null
+                            ? const Icon((Icons.question_mark))
+                            : null,
+                      ))
                   .toList(growable: false),
             ),
           ),
@@ -48,17 +60,17 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
 
 @JsonSerializable()
 final class LinkedRoute {
-  final String title;
+  final String? title;
   final String? description;
   final String identifier;
   final ObjectReference route;
 
   LinkedRoute({
-    required this.title,
-    required this.identifier,
+    this.title,
+    String? identifier,
     required this.route,
     this.description,
-  });
+  }) : identifier = identifier ?? nanoid();
 
   factory LinkedRoute.fromJson(Map<String, dynamic> json) =>
       _$LinkedRouteFromJson(json);

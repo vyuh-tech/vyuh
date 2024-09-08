@@ -1,3 +1,19 @@
+## 1.3.4
+
+ - **FIX**: fixed the arrow direction in the paths.
+
+## 1.3.3
+
+ - **FIX**: fixed the arrow direction in the paths.
+
+## 1.3.2
+
+ - Update a dependency to the latest release.
+
+## 1.3.1
+
+ - Update a dependency to the latest release.
+
 ## 1.3.0
 
  - **FEAT**: adding the FSL license at the top level.

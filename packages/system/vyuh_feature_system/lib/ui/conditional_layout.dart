@@ -52,6 +52,7 @@ abstract class ConditionalLayout<T extends ContentItem>
             case ConnectionState.active || ConnectionState.done:
               if (snapshot.hasError) {
                 return vyuh.widgetBuilder.errorView(
+                  context,
                   error: snapshot.error,
                   title:
                       'Failed to execute condition: ${condition.configuration?.schemaType}.',
@@ -64,12 +65,12 @@ abstract class ConditionalLayout<T extends ContentItem>
                   cases.firstWhereOrNull((element) => element.value == value);
 
               return caseItem?.item?.build(context, content) ??
-                  vyuh.widgetBuilder.errorView(
+                  vyuh.widgetBuilder.errorView(context,
                       title:
                           'No LayoutConfiguration for content with schemaType: ${content.schemaType}.',
                       subtitle: 'Condition evaluated to: $value.');
             default:
-              return vyuh.widgetBuilder.contentLoader();
+              return vyuh.widgetBuilder.contentLoader(context);
           }
         });
   }

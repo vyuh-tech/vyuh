@@ -10,6 +10,12 @@ part 'api_content.g.dart';
 @JsonSerializable()
 final class APIContent extends ContentItem {
   static const schemaName = 'vyuh.apiContent';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'API Content',
+    fromJson: APIContent.fromJson,
+  );
+  static final contentBuilder = _APIContentBuilder();
 
   final bool showPending;
   final bool showError;
@@ -47,14 +53,10 @@ class APIContentDescriptor extends ContentDescriptor {
       : super(schemaType: APIContent.schemaName, title: 'API Content');
 }
 
-final class APIContentBuilder extends ContentBuilder<APIContent> {
-  APIContentBuilder()
+final class _APIContentBuilder extends ContentBuilder<APIContent> {
+  _APIContentBuilder()
       : super(
-          content: TypeDescriptor(
-            schemaType: APIContent.schemaName,
-            title: 'API Content',
-            fromJson: APIContent.fromJson,
-          ),
+          content: APIContent.typeDescriptor,
           defaultLayout: DefaultAPIContentLayout(),
           defaultLayoutDescriptor: DefaultAPIContentLayout.typeDescriptor,
         );
@@ -89,6 +91,7 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
   Widget build(BuildContext context, APIContent content) {
     if (content.configuration == null) {
       return vyuh.widgetBuilder.errorView(
+        context,
         title: 'Missing API Configuration',
         subtitle:
             'Could not find a matching API Configuration. Please ensure it has been registered with the correct schema type.',
@@ -103,12 +106,13 @@ final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
             (snapshot.connectionState == ConnectionState.waiting ||
                 snapshot.connectionState == ConnectionState.active)) {
           // Showing a loading spinner during API call
-          return vyuh.widgetBuilder.contentLoader();
+          return vyuh.widgetBuilder.contentLoader(context);
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             // Show error if API call resulted in an error
             return content.showError
                 ? vyuh.widgetBuilder.errorView(
+                    context,
                     title:
                         'API Error${content.configuration?.title != null ? ': ${content.configuration!.title}' : ''}',
                     subtitle:

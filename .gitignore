@@ -14,3 +14,4 @@ pubspec_overrides.yaml
 mason-lock.json
 .mason
 *.lock
+devtools_options.yaml

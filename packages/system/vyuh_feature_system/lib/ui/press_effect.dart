@@ -41,7 +41,13 @@ class _PressEffectState extends State<PressEffect> {
 
                 Future.delayed(
                   const Duration(milliseconds: 50),
-                  () => widget.onTap?.call(context),
+                  () {
+                    if (!context.mounted) {
+                      return;
+                    }
+
+                    return widget.onTap?.call(context);
+                  },
                 );
               });
             }).toggle(

@@ -109,22 +109,13 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
               description: 'We could not find any data for the url: $url'));
     }
 
-    final theme = Theme.of(context);
+    final list = vyuh.content.buildContent(
+        context,
+        vf.Group(
+            title: title,
+            items: data,
+            layout: vf.ListGroupLayout(percentHeight: 0.5)));
 
-    final list = vyuh.content.buildContent(context,
-        vf.Group(title: title, items: data, layout: vf.ListGroupLayout()));
-
-    return Container(
-      margin: const EdgeInsets.only(left: 4, right: 4, top: 8, bottom: 8),
-      padding: const EdgeInsets.all(4.0),
-      decoration: BoxDecoration(
-          color: theme.colorScheme.surface,
-          border: Border.all(color: theme.colorScheme.outlineVariant),
-          borderRadius: const BorderRadius.all(Radius.circular(8))),
-      child: LimitedBox(
-        maxHeight: 200,
-        child: list,
-      ),
-    );
+    return list;
   }
 }
