@@ -8,15 +8,13 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// register a dependency, check if a dependency is already registered,
 /// unregister a dependency, etc.
 final class GetItDIPlugin extends DIPlugin {
-  GetIt _instance = GetIt.asNewInstance();
+  final _instance = GetIt.asNewInstance();
 
   GetItDIPlugin()
       : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
 
   @override
-  Future<void> init() async {
-    _instance = GetIt.asNewInstance();
-  }
+  Future<void> init() => _instance.reset();
 
   @override
   Future<void> dispose() async {}
