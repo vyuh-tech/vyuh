@@ -19,12 +19,12 @@ class _CacheableLookupPluginList {
     return plugin as T?;
   }
 
+  /// Add Items to List.
+  ///
+  /// NOTE: This remove the Lookup cache.
   void addAll(Iterable<Plugin> plugins) {
     _plugins.addAll(plugins);
-  }
-
-  void add(vt.Plugin plugin) {
-    _plugins.add(plugin);
+    _pluginsMap.clear();
   }
 
   // Get the list
