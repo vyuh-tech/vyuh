@@ -14,13 +14,13 @@ typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
 /// platform and managing the lifecycle of the platform.
 abstract class VyuhPlatform {
   /// The builder function that creates a set of features.
-  final FeaturesBuilder featuresBuilder;
+  FeaturesBuilder get featuresBuilder;
 
   /// The list of plugins that are available to the platform.
-  final List<Plugin> plugins;
+  List<Plugin> get plugins;
 
   /// The builder function that creates the various widgets for the platform.
-  final PlatformWidgetBuilder widgetBuilder;
+  PlatformWidgetBuilder get widgetBuilder;
 
   /// The key for the root navigator. This is plugged into the router plugin.
   GlobalKey<NavigatorState> get rootNavigatorKey;
@@ -46,13 +46,6 @@ abstract class VyuhPlatform {
     // PluginType.storage,
   ];
 
-  /// Creates a new instance of the platform.
-  VyuhPlatform({
-    required this.featuresBuilder,
-    required this.plugins,
-    required this.widgetBuilder,
-  });
-
   /// Initializes the platform. This is called internally by the platform and should not be invoked directly.
   FutureOr<void> run();
 
@@ -63,48 +56,35 @@ abstract class VyuhPlatform {
   Future<void> initFeatures(AnalyticsTrace parentTrace);
 
   /// Used to get the specific plugin instance for the given type.
-  Plugin? getPlugin(PluginType type);
+  T? getPlugin<T extends Plugin>(PluginType type);
 }
 
 /// An extension to access the named plugins.
 extension NamedPlugins on VyuhPlatform {
   /// The content plugin.
-  ContentPlugin get content => ensurePlugin<ContentPlugin>(PluginType.content);
+  ContentPlugin get content => getPlugin<ContentPlugin>(PluginType.content)!;
 
   /// The dependency injection plugin.
-  DIPlugin get di => ensurePlugin<DIPlugin>(PluginType.di);
+  DIPlugin get di => getPlugin<DIPlugin>(PluginType.di)!;
 
   /// The logger plugin.
-  LoggerPlugin? get log =>
-      ensurePlugin<LoggerPlugin?>(PluginType.logger, mustExist: false);
+  LoggerPlugin? get log => getPlugin<LoggerPlugin>(PluginType.logger);
 
   /// The analytics plugin.
   AnalyticsPlugin get analytics =>
-      ensurePlugin<AnalyticsPlugin>(PluginType.analytics);
+      getPlugin<AnalyticsPlugin>(PluginType.analytics)!;
 
   /// The network plugin.
-  NetworkPlugin get network => ensurePlugin<NetworkPlugin>(PluginType.network);
+  NetworkPlugin get network => getPlugin<NetworkPlugin>(PluginType.network)!;
 
   /// The authentication plugin.
-  AuthPlugin get auth => ensurePlugin<AuthPlugin>(PluginType.auth);
+  AuthPlugin get auth => getPlugin<AuthPlugin>(PluginType.auth)!;
 
   /// The navigation plugin.
   NavigationPlugin get router =>
-      ensurePlugin<NavigationPlugin>(PluginType.navigation);
+      getPlugin<NavigationPlugin>(PluginType.navigation)!;
 
   /// The feature flag plugin.
   FeatureFlagPlugin? get featureFlag =>
-      ensurePlugin<FeatureFlagPlugin?>(PluginType.featureFlag,
-          mustExist: false);
-
-  /// A safe way to get the plugin instance.
-  T ensurePlugin<T>(PluginType type, {bool mustExist = true}) {
-    final plugin = getPlugin(type) as T;
-
-    if (mustExist) {
-      assert(plugin != null, '$T is not available in your plugins');
-    }
-
-    return plugin;
-  }
+      getPlugin<FeatureFlagPlugin>(PluginType.featureFlag);
 }
