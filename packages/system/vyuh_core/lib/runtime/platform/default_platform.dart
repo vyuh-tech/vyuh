@@ -74,11 +74,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   _DefaultVyuhPlatform({
     required this.featuresBuilder,
-    required List<Plugin> plugins,
+    required PluginDescriptor pluginDescriptor,
     required this.widgetBuilder,
     this.initialLocation,
   }) {
-    _plugins.addAll(_ensureRequiredPlugins(plugins));
+    _plugins.addAll(pluginDescriptor.plugins);
 
     _tracker = _PlatformInitTracker(this);
 
@@ -90,32 +90,6 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         _rootNavigatorKey = GlobalKey<NavigatorState>();
       }
     });
-  }
-
-  static List<Plugin> _ensureRequiredPlugins(List<Plugin> plugins) {
-    // Ensure there is only one plugin for a PluginType
-    final pluginTypes = plugins.groupListsBy((element) => element.pluginType);
-    for (final entry in pluginTypes.entries) {
-      assert(entry.value.length == 1,
-          'There can be only one plugin for a pluginType. We found ${entry.value.length} for ${entry.key}');
-    }
-
-    final allPlugins = [...plugins];
-    for (final type in VyuhPlatform.requiredPlugins) {
-      // Put a default plugin instance when a required plugin is not explicitly given
-      if (!allPlugins.any((element) => element.pluginType == type)) {
-        final instance = type.defaultInstance();
-
-        assert(instance != null,
-            'The default instance for the required plugin: $type has not been provided.');
-
-        if (instance != null) {
-          allPlugins.add(instance);
-        }
-      }
-    }
-
-    return allPlugins;
   }
 
   @override
@@ -266,7 +240,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  T? getPlugin<T extends vt.Plugin>(PluginType type) => _plugins.getPlugin<T>();
+  T? getPlugin<T extends vt.Plugin>() => _plugins.getPlugin<T>();
 }
 
 final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
@@ -276,17 +250,4 @@ final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
   void setRoutes(List<g.RouteBase> routes) {
     value = g.RoutingConfig(routes: routes);
   }
-}
-
-extension on PluginType {
-  Plugin? defaultInstance() => switch (this) {
-        PluginType.analytics =>
-          AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
-        PluginType.content => NoOpContentPlugin(),
-        PluginType.di => GetItDIPlugin(),
-        PluginType.network => HttpNetworkPlugin(),
-        PluginType.auth => UnknownAuthPlugin(),
-        PluginType.navigation => DefaultNavigationPlugin(),
-        _ => null
-      };
 }

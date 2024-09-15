@@ -13,7 +13,7 @@ abstract class NavigationPlugin extends Plugin {
   );
 
   NavigationPlugin({required super.name, required super.title})
-      : super(pluginType: PluginType.navigation);
+      : super();
 
   void initRouter({
     String? initialLocation,

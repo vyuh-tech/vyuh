@@ -7,7 +7,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 abstract class DIPlugin extends Plugin with PreLoadedPlugin {
   /// The `DIPlugin` constructor accepts two required parameters: `name` and `title`.
   DIPlugin({required super.name, required super.title})
-      : super(pluginType: PluginType.di);
+      : super();
 
   /// Registers an instance of any Object type with the DI container.
   void register<T extends Object>(T instance, {String? name});

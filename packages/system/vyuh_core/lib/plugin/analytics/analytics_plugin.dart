@@ -21,7 +21,6 @@ final class AnalyticsPlugin extends Plugin
       : super(
           name: 'vyuh.plugin.analytics',
           title: 'Analytics Plugin',
-          pluginType: PluginType.analytics,
         );
 
   @override
