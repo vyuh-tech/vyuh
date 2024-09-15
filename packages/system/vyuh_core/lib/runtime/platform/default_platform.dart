@@ -81,8 +81,10 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   Future<void> run() async {
-    for (final plugin in VyuhPlatform.preloadedPlugins) {
-      await _pluginMap[plugin]?.init();
+    final plugins = _pluginMap.values.whereType<vt.PreLoadedPlugin>();
+
+    for (final plugin in plugins) {
+      await plugin.init();
     }
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;

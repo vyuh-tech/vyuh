@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-abstract class NetworkPlugin extends Plugin implements Client {
+abstract class NetworkPlugin extends Plugin
+    with PreLoadedPlugin
+    implements Client {
   NetworkPlugin({required super.name, required super.title})
       : super(pluginType: PluginType.network);
 
