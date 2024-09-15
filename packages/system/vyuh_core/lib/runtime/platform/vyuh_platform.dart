@@ -34,14 +34,6 @@ abstract class VyuhPlatform {
   /// The list of features that are available to the platform.
   List<FeatureDescriptor> get features;
 
-  /// The list of plugins that are preloaded and are available before the platform is initialized.
-  @protected
-  static const preloadedPlugins = [
-    PluginType.analytics,
-    PluginType.network,
-    PluginType.di,
-  ];
-
   /// The list of plugins that are required for the platform to function correctly.
   @protected
   static const requiredPlugins = [

@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// The default implementation for an Analytics Plugin.
-final class AnalyticsPlugin extends Plugin implements AnalyticsProvider {
+final class AnalyticsPlugin extends Plugin
+    with PreLoadedPlugin
+    implements AnalyticsProvider {
   /// The list of providers for the plugin.
   final List<AnalyticsProvider> providers;
 
