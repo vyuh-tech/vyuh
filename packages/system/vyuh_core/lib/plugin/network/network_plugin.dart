@@ -7,7 +7,7 @@ abstract class NetworkPlugin extends Plugin
     with PreLoadedPlugin
     implements Client {
   NetworkPlugin({required super.name, required super.title})
-      : super(pluginType: PluginType.network);
+      : super();
 
   @override
   Future<Response> get(Uri url, {Map<String, String>? headers});

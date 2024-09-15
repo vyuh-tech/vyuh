@@ -34,18 +34,6 @@ abstract class VyuhPlatform {
   /// The list of features that are available to the platform.
   List<FeatureDescriptor> get features;
 
-  /// The list of plugins that are required for the platform to function correctly.
-  @protected
-  static const requiredPlugins = [
-    PluginType.content,
-    PluginType.di,
-    PluginType.analytics,
-    PluginType.network,
-    PluginType.auth,
-    PluginType.navigation,
-    // PluginType.storage,
-  ];
-
   /// Initializes the platform. This is called internally by the platform and should not be invoked directly.
   FutureOr<void> run();
 
@@ -56,35 +44,35 @@ abstract class VyuhPlatform {
   Future<void> initFeatures(AnalyticsTrace parentTrace);
 
   /// Used to get the specific plugin instance for the given type.
-  T? getPlugin<T extends Plugin>(PluginType type);
+  T? getPlugin<T extends Plugin>();
 }
 
 /// An extension to access the named plugins.
 extension NamedPlugins on VyuhPlatform {
   /// The content plugin.
-  ContentPlugin get content => getPlugin<ContentPlugin>(PluginType.content)!;
+  ContentPlugin get content => getPlugin<ContentPlugin>()!;
 
   /// The dependency injection plugin.
-  DIPlugin get di => getPlugin<DIPlugin>(PluginType.di)!;
+  DIPlugin get di => getPlugin<DIPlugin>()!;
 
   /// The logger plugin.
-  LoggerPlugin? get log => getPlugin<LoggerPlugin>(PluginType.logger);
+  LoggerPlugin? get log => getPlugin<LoggerPlugin>();
 
   /// The analytics plugin.
   AnalyticsPlugin get analytics =>
-      getPlugin<AnalyticsPlugin>(PluginType.analytics)!;
+      getPlugin<AnalyticsPlugin>()!;
 
   /// The network plugin.
-  NetworkPlugin get network => getPlugin<NetworkPlugin>(PluginType.network)!;
+  NetworkPlugin get network => getPlugin<NetworkPlugin>()!;
 
   /// The authentication plugin.
-  AuthPlugin get auth => getPlugin<AuthPlugin>(PluginType.auth)!;
+  AuthPlugin get auth => getPlugin<AuthPlugin>()!;
 
   /// The navigation plugin.
   NavigationPlugin get router =>
-      getPlugin<NavigationPlugin>(PluginType.navigation)!;
+      getPlugin<NavigationPlugin>()!;
 
   /// The feature flag plugin.
   FeatureFlagPlugin? get featureFlag =>
-      getPlugin<FeatureFlagPlugin>(PluginType.featureFlag);
+      getPlugin<FeatureFlagPlugin>();
 }
