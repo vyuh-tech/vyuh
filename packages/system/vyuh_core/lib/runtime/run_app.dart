@@ -8,13 +8,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/plugin/plugin_descriptor.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vt;
+import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 
 part 'platform/default_platform.dart';
-
 part 'platform/framework_init_view.dart';
-
 part 'platform/platform_init_tracker.dart';
 
 /// The main entry point to kick off the Vyuh Application.
@@ -32,7 +30,7 @@ void runApp({
 
   vyuh = _DefaultVyuhPlatform(
     featuresBuilder: features,
-    pluginDescriptor: plugins ?? defaultPlugins(),
+    pluginDescriptor: plugins ?? PluginDescriptor.defaultPlugins,
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
   );

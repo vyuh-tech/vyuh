@@ -13,7 +13,7 @@ import 'navigation/navigation.dart';
 import 'network/http_network_plugin.dart';
 import 'network/network_plugin.dart';
 
-class PluginDescriptor {
+final class PluginDescriptor {
   final Set<Plugin> _plugins = {};
 
   List<Plugin> get plugins => List.unmodifiable(_plugins);
@@ -27,22 +27,24 @@ class PluginDescriptor {
     required final NavigationPlugin navigation,
     final List<Plugin>? others,
   }) {
-    _plugins.add(di);
-    _plugins.add(content);
-    _plugins.add(analytics);
-    _plugins.add(network);
-    _plugins.add(auth);
-    _plugins.add(navigation);
-    _plugins.add(navigation);
+    _plugins.addAll([
+      di,
+      content,
+      analytics,
+      network,
+      auth,
+      navigation,
+      navigation,
+    ]);
     _plugins.addAll(others ?? []);
   }
-}
 
-PluginDescriptor defaultPlugins() => PluginDescriptor(
-      di: GetItDIPlugin(),
-      content: NoOpContentPlugin(),
-      analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
-      network: HttpNetworkPlugin(),
-      auth: UnknownAuthPlugin(),
-      navigation: DefaultNavigationPlugin(),
-    );
+  static final defaultPlugins = PluginDescriptor(
+    di: GetItDIPlugin(),
+    content: NoOpContentPlugin(),
+    analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
+    network: HttpNetworkPlugin(),
+    auth: UnknownAuthPlugin(),
+    navigation: DefaultNavigationPlugin(),
+  );
+}
