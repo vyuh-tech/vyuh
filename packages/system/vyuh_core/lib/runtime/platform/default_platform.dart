@@ -1,9 +1,9 @@
 part of '../run_app.dart';
 
-class _CacheableLookupPluginList {
+class _PluginInstanceCache {
   final Set<Plugin> _plugins = {};
 
-  _CacheableLookupPluginList();
+  _PluginInstanceCache();
 
   final Map<Type, Plugin?> _pluginsMap = {};
 
@@ -32,7 +32,7 @@ class _CacheableLookupPluginList {
 }
 
 final class _DefaultVyuhPlatform extends VyuhPlatform {
-  final _CacheableLookupPluginList _plugins = _CacheableLookupPluginList();
+  final _PluginInstanceCache _plugins = _PluginInstanceCache();
 
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
 
@@ -56,7 +56,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   List<FeatureDescriptor> _features = [];
 
   @override
-  List<vt.FeatureDescriptor> get features => _features;
+  List<vc.FeatureDescriptor> get features => _features;
 
   final Map<String, Future<void>> _readyFeatures = {};
 
@@ -94,7 +94,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   Future<void> run() async {
-    final preLoadedPlugins = plugins.whereType<vt.PreLoadedPlugin>();
+    final preLoadedPlugins = plugins.whereType<vc.PreloadedPlugin>();
 
     for (final plugin in preLoadedPlugins) {
       await plugin.init();
@@ -106,7 +106,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Future<void> initPlugins(vt.AnalyticsTrace parentTrace) =>
+  Future<void> initPlugins(vc.AnalyticsTrace parentTrace) =>
       analytics.runWithTrace(
           name: 'Plugins',
           operation: 'Init',
@@ -130,7 +130,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           });
 
   @override
-  Future<void> initFeatures(vt.AnalyticsTrace parentTrace) async {
+  Future<void> initFeatures(vc.AnalyticsTrace parentTrace) async {
     // Run a cleanup first
     final disposeFns =
         _features.where((e) => e.dispose != null).map((e) => e.dispose!());
@@ -173,12 +173,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  void _initContent(List<vt.FeatureDescriptor> featureList) {
+  void _initContent(List<vc.FeatureDescriptor> featureList) {
     content.setup(featureList);
   }
 
   Future<List<g.RouteBase>> _initFeature(
-      FeatureDescriptor feature, vt.AnalyticsTrace? parentTrace) async {
+      FeatureDescriptor feature, vc.AnalyticsTrace? parentTrace) async {
     await feature.init?.call();
 
     if (feature.routes == null) {
@@ -208,7 +208,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
     // Run a cleanup first
     _features
-        .expand((e) => e.extensionBuilders ?? <vt.ExtensionBuilder>[])
+        .expand((e) => e.extensionBuilders ?? <vc.ExtensionBuilder>[])
         .forEach((e) => e.dispose());
 
     final builders = featureList
@@ -240,7 +240,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  T? getPlugin<T extends vt.Plugin>() => _plugins.getPlugin<T>();
+  T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
 }
 
 final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {

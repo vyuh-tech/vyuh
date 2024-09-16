@@ -4,10 +4,9 @@ import 'package:http/http.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class NetworkPlugin extends Plugin
-    with PreLoadedPlugin
+    with PreloadedPlugin
     implements Client {
-  NetworkPlugin({required super.name, required super.title})
-      : super();
+  NetworkPlugin({required super.name, required super.title}) : super();
 
   @override
   Future<Response> get(Uri url, {Map<String, String>? headers});
