@@ -1,3 +1,7 @@
+## 1.17.0
+
+ - **FEAT**: updating the auth plugin to be more open-ended with OAuth. Removes additional methods for github/linkedin/twitter etc.
+
 ## 1.16.1
 
  - **FIX**: using a toString on exception to detect SocketException. This makes it compatible with Web platform.
