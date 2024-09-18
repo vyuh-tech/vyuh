@@ -39,10 +39,10 @@ final feature = FeatureDescriptor(
           GoRoute(
             path: 'plugins/:name',
             builder: (context, state) {
-              final pluginType = PluginType.values.firstWhere(
+              final plugin = vyuh.plugins.firstWhere(
                   (element) => element.name == state.pathParameters['name']);
 
-              return pluginType.detailsView(context);
+              return plugin.detailsView(context);
             },
           ),
           GoRoute(
@@ -54,17 +54,16 @@ final feature = FeatureDescriptor(
   ],
 );
 
-extension on PluginType {
+extension on Plugin {
   Widget detailsView(BuildContext context) {
-    final plugin =
-        vyuh.plugins.firstWhere((element) => element.pluginType == this);
+    final plugin = vyuh.plugins.firstWhere((element) => element == this);
 
     switch (this) {
-      case PluginType.analytics:
+      case AnalyticsPlugin():
         return AnalyticsPluginDetail(
           plugin: plugin as AnalyticsPlugin,
         );
-      case PluginType.content:
+      case ContentPlugin():
         return ContentPluginDetailsView(
           plugin: plugin as ContentPlugin,
         );

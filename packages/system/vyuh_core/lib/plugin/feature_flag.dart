@@ -12,7 +12,7 @@ abstract class FeatureFlagPlugin<TSettings, TContext> extends Plugin {
     required this.settings,
     required super.name,
     required super.title,
-  }) : super(pluginType: PluginType.featureFlag);
+  }) : super();
 
   /// Returns the value of the feature flag as a boolean.
   Future<bool> getBool(String featureName, {bool defaultValue = false});

@@ -64,11 +64,11 @@ final class SanityConfig {
     bool? useCdn,
     Perspective? perspective,
     bool? explainQuery,
-  })  : this.useCdn = useCdn ?? true,
-        this.apiVersion = apiVersion ?? defaultApiVersion,
-        this.perspective = perspective ?? Perspective.raw,
-        this.explainQuery = explainQuery ?? false {
-    assert(this.token.trim().isNotEmpty, '''
+  })  : useCdn = useCdn ?? true,
+        apiVersion = apiVersion ?? defaultApiVersion,
+        perspective = perspective ?? Perspective.raw,
+        explainQuery = explainQuery ?? false {
+    assert(token.trim().isNotEmpty, '''
 Invalid Token provided. 
 Setup an API token, with Viewer access, in the Sanity Management Console.
 Without a valid token you will not be able to fetch data from Sanity.''');

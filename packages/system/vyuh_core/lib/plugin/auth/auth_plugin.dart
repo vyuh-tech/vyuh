@@ -14,7 +14,7 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
 
   /// Creates an instance of [AuthPlugin].
   AuthPlugin({required super.name, required super.title})
-      : super(pluginType: PluginType.auth);
+      : super();
 
   /// The current user that is signed in.
   TUser get currentUser => throw UnimplementedError();
