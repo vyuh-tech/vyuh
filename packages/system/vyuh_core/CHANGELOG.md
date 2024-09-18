@@ -1,3 +1,7 @@
+## 1.16.0
+
+ - Breaking change with the use of PluginDescriptor to describe plugins. The use of PluginType enum has been removed to be more opended with plugins
+
 ## 1.15.0
 
  - **FEAT**: added a transitionsBuilder parameter to the default route page builder.
