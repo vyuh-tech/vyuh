@@ -1,8 +1,7 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class LoggerPlugin extends Plugin {
-  LoggerPlugin({required super.name, required super.title})
-      : super();
+  LoggerPlugin({required super.name, required super.title});
 
   /// trace
   void t(dynamic message);

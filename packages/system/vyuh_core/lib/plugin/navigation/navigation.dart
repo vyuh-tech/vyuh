@@ -12,8 +12,7 @@ abstract class NavigationPlugin extends Plugin {
     pageBuilder: fallbackRoutePageBuilder,
   );
 
-  NavigationPlugin({required super.name, required super.title})
-      : super();
+  NavigationPlugin({required super.name, required super.title});
 
   void initRouter({
     String? initialLocation,
