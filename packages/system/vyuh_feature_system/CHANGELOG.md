@@ -1,3 +1,7 @@
+## 1.23.1
+
+ - **FIX**: removing the need for dart:io in feature system where current platform was being checked using Platform instead of TargetPlatform.
+
 ## 1.22.4
 
  - **FIX**: API change for findMatch() in GoRouter...from String -> Uri.

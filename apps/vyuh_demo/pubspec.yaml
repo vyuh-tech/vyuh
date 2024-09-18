@@ -22,7 +22,7 @@ dependencies:
   vyuh_core: ^1.16.1
   vyuh_extension_content: ^1.7.0
   vyuh_feature_developer: ^1.4.0
-  vyuh_feature_system: ^1.23.0
+  vyuh_feature_system: ^1.23.1
 
   # Features
   feature_sample: ^1.0.0
