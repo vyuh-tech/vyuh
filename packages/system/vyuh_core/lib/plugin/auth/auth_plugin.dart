@@ -71,31 +71,7 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
     throw UnimplementedError();
   }
 
-  Future<void> loginWithGoogle() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithMeta() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithApple() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithTwitter() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithGithub() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithLinkedin() {
-    throw UnimplementedError();
-  }
-
-  Future<void> loginWithMicrosoft() {
+  Future<void> loginWithOAuth(OAuthType type) {
     throw UnimplementedError();
   }
 
@@ -108,4 +84,15 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
   Future<void> deleteAccount() {
     throw UnimplementedError();
   }
+}
+
+enum OAuthType {
+  google,
+  apple,
+  meta,
+  github,
+  twitter,
+  linkedin,
+  microsoft,
+  custom,
 }

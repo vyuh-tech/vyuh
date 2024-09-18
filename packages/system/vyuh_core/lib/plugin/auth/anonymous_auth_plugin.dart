@@ -25,11 +25,6 @@ final class UnknownAuthPlugin extends AuthPlugin {
   }
 
   @override
-  Future<void> loginWithApple() async {
-    controller.add(User.unknown);
-  }
-
-  @override
   Future<void> loginWithEmailLink(
       {required String email, required String link}) async {
     controller.add(User.unknown);
@@ -42,38 +37,8 @@ final class UnknownAuthPlugin extends AuthPlugin {
   }
 
   @override
-  Future<void> loginWithGithub() async {
-    controller.add(User.unknown);
-  }
-
-  @override
-  Future<void> loginWithGoogle() async {
-    controller.add(User.unknown);
-  }
-
-  @override
-  Future<void> loginWithLinkedin() async {
-    controller.add(User.unknown);
-  }
-
-  @override
-  Future<void> loginWithMeta() async {
-    controller.add(User.unknown);
-  }
-
-  @override
-  Future<void> loginWithMicrosoft() async {
-    controller.add(User.unknown);
-  }
-
-  @override
   Future<void> loginWithPhoneOtp(
       {required String phoneNumber, required String otp}) async {
-    controller.add(User.unknown);
-  }
-
-  @override
-  Future<void> loginWithTwitter() async {
     controller.add(User.unknown);
   }
 
@@ -85,4 +50,9 @@ final class UnknownAuthPlugin extends AuthPlugin {
   @override
   Future<void> sendEmailLink(
       {required String email, required String clientId}) async {}
+
+  @override
+  Future<void> loginWithOAuth(OAuthType type) async {
+    controller.add(User.unknown);
+  }
 }

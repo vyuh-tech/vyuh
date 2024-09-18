@@ -25,5 +25,6 @@ Future<void> main() async {
   ''';
 
   final response = await client.fetch(query);
+  // ignore: avoid_print
   print(response);
 }
