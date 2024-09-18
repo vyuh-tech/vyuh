@@ -59,8 +59,7 @@ extension NamedPlugins on VyuhPlatform {
   LoggerPlugin? get log => getPlugin<LoggerPlugin>();
 
   /// The analytics plugin.
-  AnalyticsPlugin get analytics =>
-      getPlugin<AnalyticsPlugin>()!;
+  AnalyticsPlugin get analytics => getPlugin<AnalyticsPlugin>()!;
 
   /// The network plugin.
   NetworkPlugin get network => getPlugin<NetworkPlugin>()!;
@@ -69,10 +68,8 @@ extension NamedPlugins on VyuhPlatform {
   AuthPlugin get auth => getPlugin<AuthPlugin>()!;
 
   /// The navigation plugin.
-  NavigationPlugin get router =>
-      getPlugin<NavigationPlugin>()!;
+  NavigationPlugin get router => getPlugin<NavigationPlugin>()!;
 
   /// The feature flag plugin.
-  FeatureFlagPlugin? get featureFlag =>
-      getPlugin<FeatureFlagPlugin>();
+  FeatureFlagPlugin? get featureFlag => getPlugin<FeatureFlagPlugin>();
 }

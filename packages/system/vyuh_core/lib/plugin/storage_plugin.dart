@@ -1,8 +1,7 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class StoragePlugin extends Plugin {
-  StoragePlugin({required super.name, required super.title})
-      : super();
+  StoragePlugin({required super.name, required super.title});
 
   Future<dynamic> read(String key);
   Future<dynamic> write(String key, dynamic value);
@@ -11,8 +10,7 @@ abstract class StoragePlugin extends Plugin {
 }
 
 abstract class SecureStoragePlugin extends Plugin {
-  SecureStoragePlugin({required super.name, required super.title})
-      : super();
+  SecureStoragePlugin({required super.name, required super.title});
 
   Future<dynamic> read(String key);
   Future<dynamic> write(String key, dynamic value);
