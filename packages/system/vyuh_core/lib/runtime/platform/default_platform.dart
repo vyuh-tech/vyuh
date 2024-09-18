@@ -1,7 +1,39 @@
 part of '../run_app.dart';
 
+class _PluginInstanceCache {
+  final Set<Plugin> _plugins = {};
+
+  _PluginInstanceCache();
+
+  final Map<Type, Plugin?> _pluginsMap = {};
+
+  T? getPlugin<T extends Plugin>() {
+    if (_pluginsMap.containsKey(T)) {
+      return _pluginsMap[T] as T?;
+    }
+
+    final plugin = _plugins.firstWhereOrNull((final plugin) => plugin is T);
+
+    _pluginsMap[T] = plugin;
+
+    return plugin as T?;
+  }
+
+  /// Add Items to List.
+  ///
+  /// NOTE: This remove the Lookup cache.
+  void addAll(Iterable<Plugin> plugins) {
+    _plugins.addAll(plugins);
+    _pluginsMap.clear();
+  }
+
+  // Get the list
+  List<Plugin> get items => List.unmodifiable(_plugins);
+}
+
 final class _DefaultVyuhPlatform extends VyuhPlatform {
-  final Map<PluginType, Plugin> _pluginMap = {};
+  final _PluginInstanceCache _plugins = _PluginInstanceCache();
+
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
 
   /// Initialize first time to avoid any late-init errors.
@@ -24,24 +56,31 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   List<FeatureDescriptor> _features = [];
 
   @override
-  List<vt.FeatureDescriptor> get features => _features;
+  List<vc.FeatureDescriptor> get features => _features;
 
   final Map<String, Future<void>> _readyFeatures = {};
 
   @override
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
-  _DefaultVyuhPlatform({
-    required super.featuresBuilder,
-    required List<Plugin> plugins,
-    required super.widgetBuilder,
-    this.initialLocation,
-  }) : super(plugins: _ensureRequiredPlugins(plugins)) {
-    _tracker = _PlatformInitTracker(this);
+  @override
+  final FeaturesBuilder featuresBuilder;
 
-    for (final plugin in this.plugins) {
-      _pluginMap[plugin.pluginType] = plugin;
-    }
+  @override
+  List<Plugin> get plugins => _plugins.items;
+
+  @override
+  final PlatformWidgetBuilder widgetBuilder;
+
+  _DefaultVyuhPlatform({
+    required this.featuresBuilder,
+    required PluginDescriptor pluginDescriptor,
+    required this.widgetBuilder,
+    this.initialLocation,
+  }) {
+    _plugins.addAll(pluginDescriptor.plugins);
+
+    _tracker = _PlatformInitTracker(this);
 
     reaction((_) => _tracker.currentState.value == InitState.notStarted,
         (notStarted) {
@@ -53,36 +92,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     });
   }
 
-  static List<Plugin> _ensureRequiredPlugins(List<Plugin> plugins) {
-    // Ensure there is only one plugin for a PluginType
-    final pluginTypes = plugins.groupListsBy((element) => element.pluginType);
-    for (final entry in pluginTypes.entries) {
-      assert(entry.value.length == 1,
-          'There can be only one plugin for a pluginType. We found ${entry.value.length} for ${entry.key}');
-    }
-
-    final allPlugins = [...plugins];
-    for (final type in VyuhPlatform.requiredPlugins) {
-      // Put a default plugin instance when a required plugin is not explicitly given
-      if (!allPlugins.any((element) => element.pluginType == type)) {
-        final instance = type.defaultInstance();
-
-        assert(instance != null,
-            'The default instance for the required plugin: $type has not been provided.');
-
-        if (instance != null) {
-          allPlugins.add(instance);
-        }
-      }
-    }
-
-    return allPlugins;
-  }
-
   @override
   Future<void> run() async {
-    for (final plugin in VyuhPlatform.preloadedPlugins) {
-      await _pluginMap[plugin]?.init();
+    final preLoadedPlugins = plugins.whereType<vc.PreloadedPlugin>();
+
+    for (final plugin in preLoadedPlugins) {
+      await plugin.init();
     }
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
@@ -91,23 +106,23 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Future<void> initPlugins(vt.AnalyticsTrace parentTrace) =>
+  Future<void> initPlugins(vc.AnalyticsTrace parentTrace) =>
       analytics.runWithTrace(
           name: 'Plugins',
           operation: 'Init',
           parentTrace: parentTrace,
           fn: (trace) async {
             // Run a cleanup first
-            final disposeFns = _pluginMap.entries.map((e) => e.value.dispose());
+            final disposeFns = plugins.map((e) => e.dispose());
             await Future.wait(disposeFns, eagerError: true);
 
             // Check
-            final initFns = _pluginMap.entries.map((e) {
+            final initFns = plugins.map((e) {
               return analytics.runWithTrace<void>(
-                name: 'Plugin: ${e.value.title}',
+                name: 'Plugin: ${e.title}',
                 operation: 'Init',
                 parentTrace: trace,
-                fn: (_) => e.value.init(),
+                fn: (_) => e.init(),
               );
             });
 
@@ -115,7 +130,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           });
 
   @override
-  Future<void> initFeatures(vt.AnalyticsTrace parentTrace) async {
+  Future<void> initFeatures(vc.AnalyticsTrace parentTrace) async {
     // Run a cleanup first
     final disposeFns =
         _features.where((e) => e.dispose != null).map((e) => e.dispose!());
@@ -158,12 +173,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  void _initContent(List<vt.FeatureDescriptor> featureList) {
+  void _initContent(List<vc.FeatureDescriptor> featureList) {
     content.setup(featureList);
   }
 
   Future<List<g.RouteBase>> _initFeature(
-      FeatureDescriptor feature, vt.AnalyticsTrace? parentTrace) async {
+      FeatureDescriptor feature, vc.AnalyticsTrace? parentTrace) async {
     await feature.init?.call();
 
     if (feature.routes == null) {
@@ -193,7 +208,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
     // Run a cleanup first
     _features
-        .expand((e) => e.extensionBuilders ?? <vt.ExtensionBuilder>[])
+        .expand((e) => e.extensionBuilders ?? <vc.ExtensionBuilder>[])
         .forEach((e) => e.dispose());
 
     final builders = featureList
@@ -225,7 +240,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Plugin? getPlugin(PluginType type) => _pluginMap[type];
+  T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
 }
 
 final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
@@ -235,17 +250,4 @@ final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
   void setRoutes(List<g.RouteBase> routes) {
     value = g.RoutingConfig(routes: routes);
   }
-}
-
-extension on PluginType {
-  Plugin? defaultInstance() => switch (this) {
-        PluginType.analytics =>
-          AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
-        PluginType.content => NoOpContentPlugin(),
-        PluginType.di => GetItDIPlugin(),
-        PluginType.network => HttpNetworkPlugin(),
-        PluginType.auth => UnknownAuthPlugin(),
-        PluginType.navigation => DefaultNavigationPlugin(),
-        _ => null
-      };
 }

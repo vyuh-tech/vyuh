@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:vyuh_core/plugin/storage_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 
 extension WidgetBuilder on Plugin {
   Widget build(BuildContext context) {
-    switch (pluginType) {
-      case PluginType.analytics || PluginType.content:
+    switch (this) {
+      case AnalyticsPlugin() || ContentPlugin():
         return _PluginWithDetailsItem(plugin: this);
       default:
         return ListTile(
-          leading: Icon(pluginType.icon),
+          leading: Icon(icon),
           title: StandardPluginItem(plugin: this),
         );
     }
   }
-}
 
-extension on PluginType {
   IconData get icon {
     switch (this) {
-      case PluginType.analytics:
+      case AnalyticsPlugin():
         return Icons.show_chart;
-      case PluginType.content:
+      case ContentPlugin():
         return Icons.category;
-      case PluginType.logger:
+      case LoggerPlugin():
         return Icons.line_style;
-      case PluginType.di:
+      case DIPlugin():
         return Icons.insert_link;
-      case PluginType.network:
+      case NetworkPlugin():
         return Icons.network_check;
-      case PluginType.storage:
+      case StoragePlugin():
         return Icons.data_object;
-      case PluginType.secureStorage:
+      case SecureStoragePlugin():
         return Icons.dataset;
-      case PluginType.featureFlag:
+      case FeatureFlagPlugin():
         return Icons.flag;
-      case PluginType.auth:
+      case AuthPlugin():
         return Icons.account_circle;
-      case PluginType.navigation:
+      case NavigationPlugin():
         return Icons.navigation_outlined;
       default:
         return Icons.extension;
@@ -53,9 +52,9 @@ class _PluginWithDetailsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(plugin.pluginType.icon),
+      leading: Icon(plugin.icon),
       onTap: () {
-        vyuh.router.push('/developer/plugins/${plugin.pluginType.name}');
+        vyuh.router.push('/developer/plugins/${plugin.name}');
       },
       title: StandardPluginItem(plugin: plugin),
       trailing: const Icon(Icons.chevron_right),

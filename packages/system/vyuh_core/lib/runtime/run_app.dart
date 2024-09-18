@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vt;
+import 'package:vyuh_core/plugin/plugin_descriptor.dart';
+import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 
 part 'platform/default_platform.dart';
@@ -20,7 +20,7 @@ part 'platform/platform_init_tracker.dart';
 /// It initializes the Vyuh Platform and runs the application with given features and plugins.
 void runApp({
   required FeaturesBuilder features,
-  List<Plugin>? plugins,
+  PluginDescriptor? plugins,
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
 }) async {
@@ -30,7 +30,7 @@ void runApp({
 
   vyuh = _DefaultVyuhPlatform(
     featuresBuilder: features,
-    plugins: plugins ?? [],
+    pluginDescriptor: plugins ?? PluginDescriptor.defaultPlugins,
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
   );

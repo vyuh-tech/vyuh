@@ -11,7 +11,7 @@ abstract class ContentPlugin extends Plugin {
     required this.provider,
     required super.name,
     required super.title,
-  }) : super(pluginType: PluginType.content);
+  }) : super();
 
   /// The type registry that maps types to their descriptors
   Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
