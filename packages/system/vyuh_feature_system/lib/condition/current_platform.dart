@@ -1,7 +1,5 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content/condition.dart';
 
@@ -21,20 +19,23 @@ final class CurrentPlatform extends ConditionConfiguration {
       return Future.value('web');
     }
 
-    if (Platform.isAndroid) {
-      return Future.value('android');
-    } else if (Platform.isIOS) {
-      return Future.value('ios');
-    } else if (Platform.isMacOS) {
-      return Future.value('macos');
-    } else if (Platform.isWindows) {
-      return Future.value('windows');
-    } else if (Platform.isLinux) {
-      return Future.value('linux');
-    } else if (Platform.isFuchsia) {
-      return Future.value('fuchsia');
-    } else {
-      return Future.value(null);
+    final platform = Theme.of(context).platform;
+
+    switch (platform) {
+      case TargetPlatform.android:
+        return Future.value('android');
+      case TargetPlatform.iOS:
+        return Future.value('ios');
+      case TargetPlatform.macOS:
+        return Future.value('macos');
+      case TargetPlatform.windows:
+        return Future.value('windows');
+      case TargetPlatform.linux:
+        return Future.value('linux');
+      case TargetPlatform.fuchsia:
+        return Future.value('fuchsia');
+      default:
+        return Future.value(null);
     }
   }
 }
