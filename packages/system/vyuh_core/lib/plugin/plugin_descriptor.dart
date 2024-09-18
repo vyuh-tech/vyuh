@@ -1,17 +1,5 @@
-import 'package:vyuh_core/plugin/content/noop_content_plugin.dart';
-import 'package:vyuh_core/plugin/di/di_plugin.dart';
-import 'package:vyuh_core/plugin/di/plugin_di_get_it.dart';
-import 'package:vyuh_core/plugin/plugin.dart';
-
-import 'analytics/analytics_plugin.dart';
-import 'analytics/noop_analytics_provider.dart';
-import 'auth/anonymous_auth_plugin.dart';
-import 'auth/auth_plugin.dart';
-import 'content/content_plugin.dart';
-import 'navigation/default_navigation_plugin.dart';
-import 'navigation/navigation.dart';
-import 'network/http_network_plugin.dart';
-import 'network/network_plugin.dart';
+import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
 final class PluginDescriptor {
   final Set<Plugin> _plugins = {};
@@ -19,23 +7,23 @@ final class PluginDescriptor {
   List<Plugin> get plugins => List.unmodifiable(_plugins);
 
   PluginDescriptor({
-    required final DIPlugin di,
-    required final ContentPlugin content,
-    required final AnalyticsPlugin analytics,
-    required final NetworkPlugin network,
-    required final AuthPlugin auth,
-    required final NavigationPlugin navigation,
+    final DIPlugin? di,
+    final ContentPlugin? content,
+    final AnalyticsPlugin? analytics,
+    final NetworkPlugin? network,
+    final AuthPlugin? auth,
+    final NavigationPlugin? navigation,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
-      di,
-      content,
-      analytics,
-      network,
-      auth,
-      navigation,
-      navigation,
+      di ?? defaultPlugins.get<DIPlugin>(),
+      content ?? defaultPlugins.get<ContentPlugin>(),
+      analytics ?? defaultPlugins.get<AnalyticsPlugin>(),
+      network ?? defaultPlugins.get<NetworkPlugin>(),
+      auth ?? defaultPlugins.get<AuthPlugin>(),
+      navigation ?? defaultPlugins.get<NavigationPlugin>(),
     ]);
+
     _plugins.addAll(others ?? []);
   }
 
@@ -47,4 +35,8 @@ final class PluginDescriptor {
     auth: UnknownAuthPlugin(),
     navigation: DefaultNavigationPlugin(),
   );
+
+  Plugin get<T>() {
+    return _plugins.firstWhere((element) => element is T);
+  }
 }
