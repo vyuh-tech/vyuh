@@ -4,10 +4,10 @@ import 'package:sanity_client/sanity_client.dart';
 import 'util.dart';
 
 void main() {
-  [
+  for (var ref in [
     'invalid-ref',
     'imgInvalid-invalid-400x300-jpg',
-  ].forEach((ref) {
+  ]) {
     test('Invalid image-reference ($ref) throws exception', () {
       expect(
         () {
@@ -16,7 +16,7 @@ void main() {
         throwsA(const TypeMatcher<InvalidReferenceException>()),
       );
     });
-  });
+  }
 
   test('Valid image-reference generates proper image-url', () {
     final url = getClient()
@@ -26,10 +26,10 @@ void main() {
     expect(url, contains('cdn.sanity.io/images/$project/$dataset/'));
   });
 
-  [
+  for (var ref in [
     'invalid-ref',
     'fileInvalid-invalid-jpg',
-  ].forEach((ref) {
+  ]) {
     test('Invalid file-reference ($ref) throws exception', () {
       expect(
         () {
@@ -38,7 +38,7 @@ void main() {
         throwsA(const TypeMatcher<AssertionError>()),
       );
     });
-  });
+  }
 
   test('Valid file-reference generates proper file-url', () {
     final url = getClient()
