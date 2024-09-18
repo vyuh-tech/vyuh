@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:http/http.dart';
@@ -95,7 +94,10 @@ final class HttpNetworkPlugin extends NetworkPlugin {
   _withRetryAndTimeout(Future<Response> Function() fn) => _retryOptions.retry(
         () => fn().timeout(config.timeout),
         retryIf: (e) {
-          return e is SocketException || e is TimeoutException;
+          // Use the string based to check to avoid importing dart:io.
+          // This makes it easier to use this plugin in web.
+          return (e.toString().contains('SocketException')) ||
+              e is TimeoutException;
         },
       );
 
