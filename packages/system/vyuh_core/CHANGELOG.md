@@ -1,3 +1,7 @@
+## 1.16.1
+
+ - **FIX**: using a toString on exception to detect SocketException. This makes it compatible with Web platform.
+
 ## 1.16.0
 
  - Breaking change with the use of PluginDescriptor to describe plugins. The use of PluginType enum has been removed to be more opended with plugins
