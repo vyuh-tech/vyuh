@@ -1,3 +1,7 @@
+## 1.18.0
+
+ - **FEAT**: introducing an EnvPlugin for managing env-vars loaded from .env files or elsewhere.
+
 ## 1.17.0
 
  - **FEAT**: updating the auth plugin to be more open-ended with OAuth. Removes additional methods for github/linkedin/twitter etc.
