@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:vyuh_core/plugin/env/env_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// The platform interface for Vyuh. This tracks the instance of the platform and can be
@@ -72,4 +73,7 @@ extension NamedPlugins on VyuhPlatform {
 
   /// The feature flag plugin.
   FeatureFlagPlugin? get featureFlag => getPlugin<FeatureFlagPlugin>();
+
+  /// The env plugin.
+  EnvPlugin get env => getPlugin<EnvPlugin>()!;
 }
