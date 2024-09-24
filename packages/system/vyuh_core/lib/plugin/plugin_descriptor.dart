@@ -1,4 +1,6 @@
 import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
+import 'package:vyuh_core/plugin/env/env_plugin.dart';
+import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class PluginDescriptor {
@@ -13,6 +15,7 @@ final class PluginDescriptor {
     final NetworkPlugin? network,
     final AuthPlugin? auth,
     final NavigationPlugin? navigation,
+    final EnvPlugin? env,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
@@ -22,6 +25,7 @@ final class PluginDescriptor {
       network ?? defaultPlugins.get<NetworkPlugin>(),
       auth ?? defaultPlugins.get<AuthPlugin>(),
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
+      env ?? defaultPlugins.get<EnvPlugin>(),
     ]);
 
     _plugins.addAll(others ?? []);
@@ -34,6 +38,7 @@ final class PluginDescriptor {
     network: HttpNetworkPlugin(),
     auth: UnknownAuthPlugin(),
     navigation: DefaultNavigationPlugin(),
+    env: NoOpEnvPlugin(),
   );
 
   Plugin get<T>() {
