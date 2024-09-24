@@ -84,11 +84,18 @@ class ContentImage extends StatelessWidget {
         } else {
           return Image(
             image: provider,
-            errorBuilder: (final context, final __, final ___) =>
-                vyuh.widgetBuilder.imagePlaceholder(
+            loadingBuilder:
+                (final context, final child, final loadingProgress) {
+              return loadingProgress == null
+                  ? child
+                  : vyuh.widgetBuilder.imagePlaceholder(context);
+            },
+            errorBuilder: (final context, final error, final stackTrace) =>
+                vyuh.widgetBuilder.errorView(
               context,
-              width: imageWidth,
-              height: imageHeight,
+              title: 'Image loading error',
+              error: error,
+              stackTrace: stackTrace,
             ),
             width: imageWidth,
             height: imageHeight,
