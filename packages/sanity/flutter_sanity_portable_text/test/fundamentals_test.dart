@@ -18,25 +18,34 @@ void main() {
     expect(find.byType(PortableText), findsOneWidget);
   });
 
-  testWidgets(
-      'PortableText uses primary scroller when usePrimaryScroller is true',
+  testWidgets('PortableText uses default listBuilder when none is passed',
       (WidgetTester tester) async {
     await tester.pumpWidget(const MaterialApp(
-      home: PortableText(blocks: [], usePrimaryScroller: true),
+      home: PortableText(blocks: []),
     ));
 
     final listView = tester.widget<ListView>(find.byType(ListView));
-    expect(listView.primary, isTrue);
+    expect(listView, isNotNull);
   });
 
-  testWidgets('PortableText shrink-wraps the list view when shrinkwrap is true',
+  testWidgets(
+      'PortableText renders with a custom listBuilder that uses a Column',
       (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(
-      home: PortableText(blocks: [], shrinkwrap: true),
+    Widget columnBuilder(BuildContext context, List<PortableBlockItem> blocks) {
+      return Column(
+        children: blocks
+            .map(
+                (block) => PortableTextConfig.shared.buildBlock(context, block))
+            .toList(),
+      );
+    }
+
+    await tester.pumpWidget(MaterialApp(
+      home: PortableText(blocks: const [], listBuilder: columnBuilder),
     ));
 
-    final listView = tester.widget<ListView>(find.byType(ListView));
-    expect(listView.shrinkWrap, isTrue);
+    final column = tester.widget<Column>(find.byType(Column));
+    expect(column, isNotNull);
   });
 
   testWidgets('PortableText correctly renders the blocks passed to it',

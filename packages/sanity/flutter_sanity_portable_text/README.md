@@ -492,6 +492,22 @@ class MyApp extends StatelessWidget {
 
 ```
 
+### Using a custom List Builder to render the PortableText
+
+```dart
+Widget columnBuilder(BuildContext context, List<PortableBlockItem> blocks) {
+  return Column(
+    children: blocks
+        .map(
+            (block) => PortableTextConfig.shared.buildBlock(context, block))
+        .toList(),
+  );
+}
+
+final text = PortableText(blocks: [...], listBuilder: columnBuilder);
+
+```
+
 ## Exploring further
 
 There are several other features which have been excluded from the examples

@@ -94,6 +94,20 @@ final class PortableTextConfig {
     this.baseStyle = baseStyle ?? defaultBaseStyle;
   }
 
+  /// Builds a block widget for the given Portable block item.
+  /// The block widget is determined by the block type of the item. If the block type is not found in the
+  /// block widgets, an error view is rendered with a message indicating the missing block type.
+  Widget buildBlock(final BuildContext context, final PortableBlockItem item) {
+    final type = item.blockType;
+
+    final builder = blocks[type];
+    if (builder == null) {
+      return ErrorView(message: 'Missing builder for block "$type"');
+    }
+
+    return builder(context, item);
+  }
+
   /// Resets the shared instance of the [PortableTextConfig] to the default configuration.
   void reset() {
     listIndent = defaultListIndent;
