@@ -1,3 +1,7 @@
+## 1.23.3
+
+ - **FIX**: version upgrades.
+
 ## 1.23.2
 
  - **FIX**: adding image loader to content image.
