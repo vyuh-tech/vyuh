@@ -1,3 +1,8 @@
+## 1.24.0
+
+ - **FIX**: version upgrades.
+ - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
+
 ## 1.23.3
 
  - **FIX**: version upgrades.
