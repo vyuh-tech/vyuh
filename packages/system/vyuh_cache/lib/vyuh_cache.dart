@@ -54,6 +54,7 @@ final class Cache<V> {
     } catch (e) {
       log('Failed to generate value for key: $key');
       generateValue = null;
+      rethrow;
     } finally {
       if (generatedValue != null) {
         set(key, generatedValue);

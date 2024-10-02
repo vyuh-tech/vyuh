@@ -8,6 +8,8 @@ export 'conditional.dart';
 export 'conditional_route/conditional_route.dart';
 export 'conditional_route/default_layout.dart';
 export 'divider.dart';
+export 'document_view/document.dart';
+export 'document_view/document_section.dart';
 export 'empty.dart';
 export 'group/grid_layout.dart';
 export 'group/group.dart';

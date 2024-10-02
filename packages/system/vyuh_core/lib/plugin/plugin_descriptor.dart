@@ -1,5 +1,4 @@
 import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
-import 'package:vyuh_core/plugin/env/env_plugin.dart';
 import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 

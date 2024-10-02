@@ -8,6 +8,9 @@ abstract interface class SchemaItem {
   String get schemaType;
 }
 
+/// The base interface for all schema-driven document items.
+abstract interface class DocumentItem implements SchemaItem {}
+
 /// The base class for all content items. A content item represents a piece of
 /// content that can be rendered on the screen and fetched from a Content Management System (CMS).
 @JsonSerializable(createFactory: false)

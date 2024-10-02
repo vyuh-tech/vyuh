@@ -94,7 +94,8 @@ final class SanityContentProvider extends ContentProvider {
 
     return list
         .map((json) => fromJson(json as Map<String, dynamic>))
-        .toList(growable: false);
+        .where((x) => x != null)
+        .toList(growable: false) as List<T>;
   }
 
   Future<SanityQueryResponse?> _runQuery(String query,
@@ -195,6 +196,7 @@ final class SanityContentProvider extends ContentProvider {
     final condition = _idMatchCondition(id,
         includeDrafts: _client.config.perspective == Perspective.raw);
 
-    return fetchSingle('$condition[0]', fromJson: fromJson);
+    return fetchSingle('$condition[0]',
+        queryParams: {'\$id': '"$id"'}, fromJson: fromJson);
   }
 }
