@@ -33,7 +33,7 @@ final class APIContent extends ContentItem {
   }) : super(schemaType: APIContent.schemaName);
 }
 
-abstract base class ApiConfiguration<T> implements SchemaItem {
+abstract class ApiConfiguration<T> implements SchemaItem {
   @override
   final String schemaType;
 
@@ -57,8 +57,8 @@ final class _APIContentBuilder extends ContentBuilder<APIContent> {
   _APIContentBuilder()
       : super(
           content: APIContent.typeDescriptor,
-          defaultLayout: DefaultAPIContentLayout(),
-          defaultLayoutDescriptor: DefaultAPIContentLayout.typeDescriptor,
+          defaultLayout: _DefaultAPIContentLayout(),
+          defaultLayoutDescriptor: _DefaultAPIContentLayout.typeDescriptor,
         );
 
   @override
@@ -74,18 +74,18 @@ final class _APIContentBuilder extends ContentBuilder<APIContent> {
   }
 }
 
-final class DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
+final class _DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
   static const schemaName = '${APIContent.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Default APIContent Layout',
-    fromJson: DefaultAPIContentLayout.fromJson,
+    fromJson: _DefaultAPIContentLayout.fromJson,
   );
 
-  DefaultAPIContentLayout() : super(schemaType: schemaName);
+  _DefaultAPIContentLayout() : super(schemaType: schemaName);
 
-  factory DefaultAPIContentLayout.fromJson(Map<String, dynamic> json) =>
-      DefaultAPIContentLayout();
+  factory _DefaultAPIContentLayout.fromJson(Map<String, dynamic> json) =>
+      _DefaultAPIContentLayout();
 
   @override
   Widget build(BuildContext context, APIContent content) {

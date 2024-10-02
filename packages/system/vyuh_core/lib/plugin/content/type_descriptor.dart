@@ -1,4 +1,4 @@
-typedef FromJsonConverter<T> = T Function(Map<String, dynamic> json);
+typedef FromJsonConverter<T> = T? Function(Map<String, dynamic> json);
 
 class TypeDescriptor<T> {
   final String title;

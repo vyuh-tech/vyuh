@@ -51,11 +51,7 @@ final class RouteScaffold extends StatelessWidget {
         for (final headerItem in headerItems)
           vyuh.content.buildContent(context, headerItem),
         Expanded(
-          child: body ??
-              _ScrollView(
-                content: content,
-                bodyItems: bodyItems,
-              ),
+          child: body ?? vf.ContentItemsScrollView(items: bodyItems),
         ),
         for (final footerItem in footerItems)
           vyuh.content.buildContent(context, footerItem),
@@ -80,31 +76,6 @@ final class RouteScaffold extends StatelessWidget {
     return NavigationDrawer(
       children: [
         for (final item in items) vyuh.content.buildContent(context, item),
-      ],
-    );
-  }
-}
-
-class _ScrollView extends StatelessWidget {
-  const _ScrollView({
-    required this.content,
-    required this.bodyItems,
-  });
-
-  final vf.Route content;
-  final List<ContentItem> bodyItems;
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomScrollView(
-      cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
-      primary: true,
-      slivers: [
-        SliverList.builder(
-          itemBuilder: (context, index) =>
-              vyuh.content.buildContent(context, bodyItems[index]),
-          itemCount: bodyItems.length,
-        )
       ],
     );
   }

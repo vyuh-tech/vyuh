@@ -10,6 +10,7 @@ import 'package:vyuh_feature_system/condition/current_theme_mode.dart';
 import 'package:vyuh_feature_system/condition/screen_size.dart';
 import 'package:vyuh_feature_system/condition/user_authenticated.dart';
 import 'package:vyuh_feature_system/content/card/button_layout.dart';
+import 'package:vyuh_feature_system/content/document_view/document_section_layout.dart';
 import 'package:vyuh_feature_system/content/group/carousel_layout.dart';
 import 'package:vyuh_feature_system/content/video_player.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -164,6 +165,16 @@ final feature = FeatureDescriptor(
         APIContentDescriptor(
           configurations: [JsonPathApiConfiguration.typeDescriptor],
         ),
+        DocumentViewDescriptor(
+          layouts: [
+            DocumentViewConditionalLayout.typeDescriptor,
+          ],
+        ),
+        DocumentSectionViewDescriptor(
+          layouts: [
+            DocumentSectionViewConditionalLayout.typeDescriptor,
+          ],
+        ),
       ],
       contentBuilders: [
         Route.contentBuilder,
@@ -178,6 +189,8 @@ final feature = FeatureDescriptor(
         Accordion.contentBuilder,
         APIContent.contentBuilder,
         VideoPlayerItem.contentBuilder,
+        DocumentView.contentBuilder,
+        DocumentSectionView.contentBuilder,
       ],
       conditions: [
         BooleanCondition.typeDescriptor,

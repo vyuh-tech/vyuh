@@ -13,22 +13,22 @@ class UnknownContentBuilder extends ContentBuilder<Unknown> {
               schemaType: Unknown.schemaName,
               title: 'Unknown',
               fromJson: Unknown.fromJson),
-          defaultLayout: DefaultUnknownLayout(),
-          defaultLayoutDescriptor: DefaultUnknownLayout.typeDescriptor,
+          defaultLayout: _DefaultUnknownLayout(),
+          defaultLayoutDescriptor: _DefaultUnknownLayout.typeDescriptor,
         );
 }
 
-final class DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
+final class _DefaultUnknownLayout extends LayoutConfiguration<Unknown> {
   static const schemaName = '${Unknown.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(
       schemaType: schemaName,
       title: 'Default Unknown Layout',
-      fromJson: DefaultUnknownLayout.fromJson);
+      fromJson: _DefaultUnknownLayout.fromJson);
 
-  DefaultUnknownLayout() : super(schemaType: schemaName);
+  _DefaultUnknownLayout() : super(schemaType: schemaName);
 
-  factory DefaultUnknownLayout.fromJson(Map<String, dynamic> json) =>
-      DefaultUnknownLayout();
+  factory _DefaultUnknownLayout.fromJson(Map<String, dynamic> json) =>
+      _DefaultUnknownLayout();
 
   @override
   Widget build(BuildContext context, Unknown content) {

@@ -20,6 +20,7 @@ export 'service/theme_service.dart';
 export 'ui/carousel.dart';
 export 'ui/conditional_layout.dart';
 export 'ui/content_image.dart';
+export 'ui/content_items_scrollview.dart';
 export 'ui/default_page_route_layout.dart';
 export 'ui/dialog_page.dart';
 export 'ui/press_effect.dart';
