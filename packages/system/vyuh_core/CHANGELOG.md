@@ -1,3 +1,7 @@
+## 1.19.0
+
+ - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
+
 ## 1.18.0
 
  - **FEAT**: introducing an EnvPlugin for managing env-vars loaded from .env files or elsewhere.

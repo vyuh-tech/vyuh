@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
+
 ## 1.4.1
 
  - **FIX**: keeping the topics to 5.

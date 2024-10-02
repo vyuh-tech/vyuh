@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
+
 ## 1.3.0
 
  - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.
