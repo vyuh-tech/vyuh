@@ -30,6 +30,7 @@ final class APIContent extends ContentItem {
     this.showError = kDebugMode,
     this.showPending = true,
     this.configuration,
+    super.layout,
   }) : super(schemaType: APIContent.schemaName);
 }
 

@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/content/document_view/document_view_widget.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'document_section_layout.g.dart';
@@ -36,7 +35,7 @@ final class DefaultDocumentSectionViewLayout
       );
     }
 
-    final docWidgetState = DocumentViewWidgetState.of(context);
+    final docWidgetState = DocumentViewBuilderState.of(context);
 
     return Observer(builder: (context) {
       final snapshot = docWidgetState.document<DocumentItem>();

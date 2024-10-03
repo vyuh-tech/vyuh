@@ -3,15 +3,20 @@ import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
-class DocumentViewWidget extends StatefulWidget {
+class DocumentViewBuilder extends StatefulWidget {
   final DocumentView document;
-  const DocumentViewWidget({super.key, required this.document});
+  final Widget Function(BuildContext, List<ContentItem>) builder;
+  const DocumentViewBuilder({
+    super.key,
+    required this.document,
+    required this.builder,
+  });
 
   @override
-  State<DocumentViewWidget> createState() => DocumentViewWidgetState();
+  State<DocumentViewBuilder> createState() => DocumentViewBuilderState();
 }
 
-class DocumentViewWidgetState extends State<DocumentViewWidget> {
+class DocumentViewBuilderState extends State<DocumentViewBuilder> {
   final _documentFuture =
       Observable(ObservableFuture<DocumentItem?>(Future.value(null)));
 
@@ -28,8 +33,8 @@ class DocumentViewWidgetState extends State<DocumentViewWidget> {
   ObservableFuture<T?> document<T extends DocumentItem>() =>
       _documentFuture.value as ObservableFuture<T?>;
 
-  static DocumentViewWidgetState of(BuildContext context) {
-    final state = context.findAncestorStateOfType<DocumentViewWidgetState>();
+  static DocumentViewBuilderState of(BuildContext context) {
+    final state = context.findAncestorStateOfType<DocumentViewBuilderState>();
     if (state == null) {
       throw Exception('DocumentViewWidgetState not found in the widget tree');
     }
@@ -44,7 +49,7 @@ class DocumentViewWidgetState extends State<DocumentViewWidget> {
 
     return LimitedBox(
       maxHeight: height - insets.vertical,
-      child: ContentItemsScrollView(items: widget.document.items),
+      child: widget.builder(context, widget.document.items),
     );
   }
 

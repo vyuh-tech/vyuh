@@ -2,7 +2,6 @@ import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/content/document_view/document_view_widget.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'document.g.dart';
@@ -39,6 +38,7 @@ final class DocumentView extends ContentItem {
     this.loadStrategy = DocumentLoadStrategy.reference,
     this.items = const [],
     required this.query,
+    super.layout,
   }) : super(schemaType: schemaName) {
     if (loadStrategy == DocumentLoadStrategy.reference) {
       assert(reference != null,
@@ -75,7 +75,10 @@ final class DefaultDocumentViewLayout
 
   @override
   Widget build(BuildContext context, DocumentView content) {
-    return DocumentViewWidget(document: content);
+    return DocumentViewBuilder(
+      document: content,
+      builder: (context, items) => ContentItemsScrollView(items: items),
+    );
   }
 }
 
@@ -115,8 +118,11 @@ final class _DocumentViewContentBuilder extends ContentBuilder {
     registerDescriptors<QueryConfiguration>(ds.expand((element) =>
         element.queries ?? <TypeDescriptor<QueryConfiguration>>[]));
 
-    registerDescriptors<DocumentItem>(ds.expand((element) =>
-        element.documentTypes ?? <TypeDescriptor<DocumentItem>>[]));
+    registerDescriptors<DocumentItem>(
+      ds.expand((element) =>
+          element.documentTypes ?? <TypeDescriptor<DocumentItem>>[]),
+      checkUnique: true,
+    );
 
     super.init(descriptors);
   }

@@ -27,8 +27,12 @@ final class Accordion extends ContentItem {
   @JsonKey(defaultValue: [])
   final List<AccordionItem> items;
 
-  Accordion({this.title, this.description, required this.items})
-      : super(schemaType: schemaName);
+  Accordion({
+    this.title,
+    this.description,
+    required this.items,
+    super.layout,
+  }) : super(schemaType: schemaName);
 
   factory Accordion.fromJson(Map<String, dynamic> json) =>
       _$AccordionFromJson(json);

@@ -14,6 +14,7 @@ class Unknown extends ContentItem implements PortableBlockItem {
   Unknown({
     required this.missingSchemaType,
     required this.description,
+    super.layout,
   }) : super(schemaType: Unknown.schemaName);
 
   factory Unknown.fromJson(Map<String, dynamic> json) =>

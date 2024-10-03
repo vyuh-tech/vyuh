@@ -95,7 +95,8 @@ final class SanityContentProvider extends ContentProvider {
     return list
         .map((json) => fromJson(json as Map<String, dynamic>))
         .where((x) => x != null)
-        .toList(growable: false) as List<T>;
+        .cast<T>()
+        .toList(growable: false);
   }
 
   Future<SanityQueryResponse?> _runQuery(String query,

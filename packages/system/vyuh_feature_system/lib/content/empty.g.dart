@@ -6,4 +6,6 @@ part of 'empty.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Empty _$EmptyFromJson(Map<String, dynamic> json) => Empty();
+Empty _$EmptyFromJson(Map<String, dynamic> json) => Empty(
+      layout: typeFromFirstOfListJson(json['layout']),
+    );
