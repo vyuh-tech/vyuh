@@ -1,3 +1,7 @@
+## 1.25.0
+
+ - **FEAT**: added document list view.
+
 ## 1.24.0
 
  - **FIX**: version upgrades.
