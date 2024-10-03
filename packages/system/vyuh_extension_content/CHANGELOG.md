@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - **FEAT**: added document list view.
+
 ## 1.6.0
 
  - **FEAT**: added a BuildContext parameter to all loaders and error views. This helps in using the Theme from the context.

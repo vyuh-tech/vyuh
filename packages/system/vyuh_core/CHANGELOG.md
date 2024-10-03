@@ -1,3 +1,7 @@
+## 1.20.0
+
+ - **FEAT**: added document list view.
+
 ## 1.19.0
 
  - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
