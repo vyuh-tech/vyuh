@@ -24,8 +24,11 @@ class Divider extends ContentItem implements PortableBlockItem {
   final double? thickness;
   final double? indent;
 
-  Divider({this.thickness = 1, this.indent = 8})
-      : super(schemaType: Divider.schemaName);
+  Divider({
+    this.thickness = 1,
+    this.indent = 8,
+    super.layout,
+  }) : super(schemaType: Divider.schemaName);
 
   factory Divider.fromJson(Map<String, dynamic> json) =>
       _$DividerFromJson(json);

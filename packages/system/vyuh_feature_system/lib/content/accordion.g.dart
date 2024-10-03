@@ -13,6 +13,7 @@ Accordion _$AccordionFromJson(Map<String, dynamic> json) => Accordion(
               ?.map((e) => AccordionItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
+      layout: typeFromFirstOfListJson(json['layout']),
     );
 
 AccordionItem _$AccordionItemFromJson(Map<String, dynamic> json) =>

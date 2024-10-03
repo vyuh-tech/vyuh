@@ -29,8 +29,13 @@ class ContentBuilder<T extends ContentItem> {
   }
 
   @protected
-  void registerDescriptors<U>(Iterable<TypeDescriptor<U>> descriptors) {
+  void registerDescriptors<U>(Iterable<TypeDescriptor<U>> descriptors,
+      {bool checkUnique = false}) {
     for (var element in descriptors) {
+      if (checkUnique && vyuh.content.isRegistered<U>(element)) {
+        return;
+      }
+
       vyuh.content.register<U>(element);
     }
   }

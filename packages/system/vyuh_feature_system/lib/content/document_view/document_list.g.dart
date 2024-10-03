@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'document_section.dart';
+part of 'document_list.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DocumentSectionView _$DocumentSectionViewFromJson(Map<String, dynamic> json) =>
-    DocumentSectionView(
-      configuration: typeFromFirstOfListJson(json['configuration']),
+DocumentListView _$DocumentListViewFromJson(Map<String, dynamic> json) =>
+    DocumentListView(
+      listItem: typeFromFirstOfListJson(json['listItem']),
+      query: typeFromFirstOfListJson(json['query']),
       layout: typeFromFirstOfListJson(json['layout']),
     );

@@ -19,6 +19,7 @@ DocumentView _$DocumentViewFromJson(Map<String, dynamic> json) => DocumentView(
               .toList() ??
           const [],
       query: typeFromFirstOfListJson(json['query']),
+      layout: typeFromFirstOfListJson(json['layout']),
     );
 
 const _$DocumentLoadStrategyEnumMap = {

@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -11,8 +10,8 @@ part 'document_section.g.dart';
 final class DocumentSectionView extends ContentItem {
   static const schemaName = '${DocumentView.schemaName}.section';
 
-  @JsonKey(fromJson: typeFromFirstOfListJson<DocumentSectionConfiguration>)
-  final DocumentSectionConfiguration? configuration;
+  @JsonKey(fromJson: typeFromFirstOfListJson<DocumentItemConfiguration>)
+  final DocumentItemConfiguration? configuration;
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
@@ -22,29 +21,17 @@ final class DocumentSectionView extends ContentItem {
 
   static final contentBuilder = _DocumentSectionViewContentBuilder();
 
-  DocumentSectionView({this.configuration}) : super(schemaType: schemaName);
+  DocumentSectionView({
+    this.configuration,
+    super.layout,
+  }) : super(schemaType: schemaName);
 
   factory DocumentSectionView.fromJson(Map<String, dynamic> json) =>
       _$DocumentSectionViewFromJson(json);
 }
 
-abstract class DocumentSectionConfiguration<TDocument extends DocumentItem>
-    implements SchemaItem {
-  @override
-  final String schemaType;
-
-  final String? title;
-
-  DocumentSectionConfiguration({required this.schemaType, this.title});
-
-  factory DocumentSectionConfiguration.fromJson(Map<String, dynamic> json) =>
-      throw UnimplementedError('This must be implemented by the subclass');
-
-  Widget build(BuildContext context, TDocument document);
-}
-
 class DocumentSectionViewDescriptor extends ContentDescriptor {
-  final List<TypeDescriptor<DocumentSectionConfiguration>>? configurations;
+  final List<TypeDescriptor<DocumentItemConfiguration>>? configurations;
 
   DocumentSectionViewDescriptor({this.configurations, super.layouts})
       : super(
@@ -65,9 +52,9 @@ final class _DocumentSectionViewContentBuilder extends ContentBuilder {
   void init(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentSectionViewDescriptor>();
 
-    registerDescriptors<DocumentSectionConfiguration>(ds.expand((element) =>
+    registerDescriptors<DocumentItemConfiguration>(ds.expand((element) =>
         element.configurations ??
-        <TypeDescriptor<DocumentSectionConfiguration>>[]));
+        <TypeDescriptor<DocumentItemConfiguration>>[]));
 
     super.init(descriptors);
   }
