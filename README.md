@@ -136,6 +136,10 @@ Follow us, stay up to date or reach out on:
 - [Discord](https://discord.gg/b49sbjqszG)
 - [Email](mailto:ask@vyuh.tech)
 
+## Analytics
+
+![Alt](https://repobeats.axiom.co/api/embed/bbe1b79c2dcbd94a9b194633e368cdde06953673.svg 'Repobeats analytics image')
+
 ## License
 
 The framework is [FSL Licensed](LICENSE).
