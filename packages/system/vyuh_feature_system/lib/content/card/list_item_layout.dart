@@ -73,7 +73,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                           content.description!,
                           style: theme.textTheme.bodyMedium,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                          maxLines: 2,
                           softWrap: true,
                         ),
                       ),
