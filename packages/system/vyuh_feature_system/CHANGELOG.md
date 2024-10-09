@@ -1,3 +1,7 @@
+## 1.25.1
+
+ - **FIX**: fixed render overflow issue when image loading has errors.
+
 ## 1.25.0
 
  - **FEAT**: added document list view.
