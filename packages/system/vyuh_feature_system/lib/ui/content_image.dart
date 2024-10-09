@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class ContentImage extends StatelessWidget {
   final String? url;
@@ -75,6 +77,7 @@ class ContentImage extends StatelessWidget {
 
         if (provider == null) {
           return ClipRect(
+            clipBehavior: Clip.hardEdge,
             child: vyuh.widgetBuilder.imagePlaceholder(
               context,
               width: imageWidth,
@@ -91,11 +94,9 @@ class ContentImage extends StatelessWidget {
                   : vyuh.widgetBuilder.imagePlaceholder(context);
             },
             errorBuilder: (final context, final error, final stackTrace) =>
-                vyuh.widgetBuilder.errorView(
-              context,
-              title: 'Image loading error',
-              error: error,
-              stackTrace: stackTrace,
+                const ClipRect(
+              clipBehavior: Clip.hardEdge,
+              child: Icon(Icons.error_outline_rounded),
             ),
             width: imageWidth,
             height: imageHeight,
