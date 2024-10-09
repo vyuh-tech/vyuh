@@ -1,3 +1,7 @@
+## 1.25.2
+
+ - **FIX**: lint issue fixes.
+
 ## 1.25.1
 
  - **FIX**: fixed render overflow issue when image loading has errors.
