@@ -10,18 +10,20 @@ final class PluginDescriptor {
   PluginDescriptor({
     final DIPlugin? di,
     final ContentPlugin? content,
-    final List<AnalyticsProvider> analyticsProviders = const [],
-    final List<TelemetryProvider> telemetryProviders = const [],
     final NetworkPlugin? network,
     final AuthPlugin? auth,
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
+    final List<AnalyticsProvider>? analyticsProviders,
+    final List<TelemetryProvider>? telemetryProviders,
     final EventPlugin? event,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
-      AnalyticsPlugin(providers: analyticsProviders),
-      TelemetryPlugin(providers: telemetryProviders),
+      AnalyticsPlugin(
+          providers: analyticsProviders ?? [NoOpAnalyticsProvider()]),
+      TelemetryPlugin(
+          providers: telemetryProviders ?? [NoOpTelemetryProvider()]),
     ]);
 
     _plugins.addAll([
