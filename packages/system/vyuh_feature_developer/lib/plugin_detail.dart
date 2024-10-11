@@ -22,7 +22,7 @@ extension WidgetBuilder on Plugin {
         return Icons.show_chart;
       case ContentPlugin():
         return Icons.category;
-      case LoggerPlugin():
+      case TelemetryPlugin():
         return Icons.line_style;
       case DIPlugin():
         return Icons.insert_link;
