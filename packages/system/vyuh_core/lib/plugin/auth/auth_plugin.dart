@@ -47,42 +47,50 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
     _initialized = true;
   }
 
+  static String _errorMessage(String methodName) {
+    return '$methodName is not implemented. Configure the Auth Plugin to support this method.';
+  }
+
   Future<void> loginAnonymously() {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('loginAnonymously()'));
   }
 
   Future<void> loginWithPhoneOtp(
       {required String phoneNumber, required String otp}) {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('loginWithPhoneOtp()'));
   }
 
   Future<void> loginWithEmailPassword(
       {required String email, required String password}) {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('loginWithEmailPassword()'));
   }
 
   Future<void> sendEmailLink(
       {required String email, required String clientId}) {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('sendEmailLink()'));
+  }
+
+  Future<void> sendPasswordResetEmail({required String email}) {
+    throw UnimplementedError(_errorMessage('sendPasswordResetEmail()'));
   }
 
   Future<void> loginWithEmailLink(
       {required String email, required String link}) {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('loginWithEmailLink()'));
   }
 
   Future<void> loginWithOAuth(OAuthType type) {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('loginWithOAuth()'));
   }
 
   /// Logs out the current user.
   Future<void> logout() {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('logout()'));
   }
 
   /// Deletes the current user account.
   Future<void> deleteAccount() {
-    throw UnimplementedError();
+    throw UnimplementedError(_errorMessage('deleteAccount()'));
   }
 }
 
