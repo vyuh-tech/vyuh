@@ -49,3 +49,9 @@ final class SendEmailLinkFailure extends AuthException {
   /// Create a new SendEmailLinkFailure with the given error.
   const SendEmailLinkFailure(super.error);
 }
+
+/// Exception thrown when sending a password reset email.
+final class SendPasswordResetEmailFailure extends AuthException {
+  /// Create a new SendPasswordResetEmailFailure with the given error.
+  const SendPasswordResetEmailFailure(super.error);
+}
