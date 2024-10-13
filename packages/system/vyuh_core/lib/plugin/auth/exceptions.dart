@@ -10,7 +10,7 @@ abstract class AuthException implements Exception {
 
   @override
   String toString() {
-    return '[$runtimeType]: $error';
+    return '[$runtimeType] $error';
   }
 }
 
