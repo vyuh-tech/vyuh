@@ -65,6 +65,11 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
     throw UnimplementedError(_errorMessage('loginWithEmailPassword()'));
   }
 
+  Future<void> registerWithEmailPassword(
+      {required String email, required String password}) {
+    throw UnimplementedError(_errorMessage('registerWithEmailPassword()'));
+  }
+
   Future<void> sendEmailLink(
       {required String email, required String clientId}) {
     throw UnimplementedError(_errorMessage('sendEmailLink()'));
