@@ -1,3 +1,9 @@
+## 1.21.0
+
+ - **FEAT**: add new user registration to auth plugin, tweak the title and description of action field.
+ - **FEAT**: added oauth sign widgets and schemas.
+ - **FEAT**: refactoring the auth package.
+
 ## 1.20.0
 
  - **FEAT**: added document list view.
