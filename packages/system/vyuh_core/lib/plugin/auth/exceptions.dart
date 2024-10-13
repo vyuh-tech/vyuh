@@ -23,6 +23,11 @@ final class LoginMethodFailure extends AuthException {
   const LoginMethodFailure(this.method, super.error);
 }
 
+/// Exception thrown when creating a user fails.
+final class CreateUserFailure extends AuthException {
+  const CreateUserFailure(super.error);
+}
+
 /// Exception thrown when a login method is canceled.
 final class LoginMethodCanceled extends AuthException {
   /// The login method that was canceled.
