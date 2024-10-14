@@ -1,3 +1,7 @@
+## 1.22.0
+
+ - **FEAT**: add the ability to cancel out other auth flows when the active is in operation.
+
 ## 1.21.0
 
  - **FEAT**: add new user registration to auth plugin, tweak the title and description of action field.
