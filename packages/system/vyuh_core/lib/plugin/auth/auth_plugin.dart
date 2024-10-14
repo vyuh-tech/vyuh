@@ -107,5 +107,16 @@ enum OAuthType {
   twitter,
   linkedin,
   microsoft,
-  custom,
+  custom;
+
+  LoginMethod get loginMethod => switch (this) {
+        OAuthType.google => LoginMethod.google,
+        OAuthType.apple => LoginMethod.apple,
+        OAuthType.meta => LoginMethod.facebook,
+        OAuthType.github => LoginMethod.github,
+        OAuthType.twitter => LoginMethod.twitter,
+        OAuthType.linkedin => LoginMethod.linkedin,
+        OAuthType.microsoft => LoginMethod.microsoft,
+        OAuthType.custom => LoginMethod.custom,
+      };
 }
