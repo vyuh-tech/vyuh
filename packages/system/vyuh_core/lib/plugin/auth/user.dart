@@ -77,7 +77,10 @@ enum LoginMethod {
   linkedin,
 
   /// The user logged in using Microsoft.
-  microsoft;
+  microsoft,
+
+  /// The user logged in using a custom method.
+  custom;
 
   /// Returns the icon for this login method. This is useful only in the developer tools or UI.
   IconData icon() {
@@ -112,7 +115,8 @@ enum LoginMethod {
       LoginMethod.twitter => 'Twitter',
       LoginMethod.github => 'GitHub',
       LoginMethod.linkedin => 'LinkedIn',
-      LoginMethod.microsoft => 'Microsoft'
+      LoginMethod.microsoft => 'Microsoft',
+      LoginMethod.custom => 'Custom'
     };
   }
 }
