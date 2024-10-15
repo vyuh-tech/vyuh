@@ -1,3 +1,7 @@
+## 1.22.1
+
+ - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
+
 ## 1.22.0
 
  - **FEAT**: add the ability to cancel out other auth flows when the active is in operation.

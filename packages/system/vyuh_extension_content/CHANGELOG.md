@@ -1,3 +1,7 @@
+## 1.8.1
+
+ - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
+
 ## 1.8.0
 
  - **FEAT**: added document list view.
