@@ -3,7 +3,8 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 class UnknownDescriptor extends ContentDescriptor {
-  UnknownDescriptor() : super(schemaType: Unknown.schemaName, title: 'Unknown');
+  UnknownDescriptor()
+      : super(schemaType: Unknown.schemaName, title: 'Unknown', layouts: []);
 }
 
 class UnknownContentBuilder extends ContentBuilder<Unknown> {

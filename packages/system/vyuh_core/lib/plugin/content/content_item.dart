@@ -30,7 +30,7 @@ abstract class ContentItem implements SchemaItem {
   /// Creates an instance of [ContentItem].
   ContentItem({
     required this.schemaType,
-    this.layout,
+    required this.layout,
   });
 
   /// Converts the JSON representation of the content item to an instance of [ContentItem].

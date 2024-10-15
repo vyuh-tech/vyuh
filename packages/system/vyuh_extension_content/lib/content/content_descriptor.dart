@@ -8,6 +8,6 @@ abstract class ContentDescriptor {
   ContentDescriptor({
     required this.schemaType,
     required this.title,
-    this.layouts,
+    required this.layouts,
   });
 }

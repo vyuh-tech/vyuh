@@ -38,7 +38,8 @@ class Divider extends ContentItem implements PortableBlockItem {
 }
 
 class DividerDescriptor extends ContentDescriptor {
-  DividerDescriptor() : super(schemaType: Divider.schemaName, title: 'Divider');
+  DividerDescriptor({super.layouts})
+      : super(schemaType: Divider.schemaName, title: 'Divider');
 }
 
 final class DefaultDividerLayout extends LayoutConfiguration<Divider> {
