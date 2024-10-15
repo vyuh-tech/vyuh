@@ -115,6 +115,7 @@ class PortableTextDescriptor extends ContentDescriptor {
     this.blocks,
     this.markDefs,
     this.textStyleBuilders,
+    super.layouts,
   }) : super(
             schemaType: PortableTextContent.schemaName, title: 'Portable Text');
 }

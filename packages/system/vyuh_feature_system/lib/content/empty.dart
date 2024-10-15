@@ -27,7 +27,8 @@ class Empty extends ContentItem {
 }
 
 class EmptyDescriptor extends ContentDescriptor {
-  EmptyDescriptor() : super(schemaType: Empty.schemaName, title: 'Empty');
+  EmptyDescriptor()
+      : super(schemaType: Empty.schemaName, title: 'Empty', layouts: const []);
 }
 
 final class DefaultEmptyLayout extends LayoutConfiguration<Empty> {

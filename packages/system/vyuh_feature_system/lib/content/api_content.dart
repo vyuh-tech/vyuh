@@ -50,8 +50,10 @@ abstract class ApiConfiguration<T> implements SchemaItem {
 class APIContentDescriptor extends ContentDescriptor {
   final List<TypeDescriptor<ApiConfiguration>>? configurations;
 
-  APIContentDescriptor({this.configurations})
-      : super(schemaType: APIContent.schemaName, title: 'API Content');
+  APIContentDescriptor({
+    this.configurations,
+    super.layouts,
+  }) : super(schemaType: APIContent.schemaName, title: 'API Content');
 }
 
 final class _APIContentBuilder extends ContentBuilder<APIContent> {
