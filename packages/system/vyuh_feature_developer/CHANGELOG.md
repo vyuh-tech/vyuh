@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
+
 ## 1.3.4
 
  - **FIX**: fixed the arrow direction in the paths.

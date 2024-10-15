@@ -1,3 +1,7 @@
+## 1.25.3
+
+ - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
+
 ## 1.25.2
 
  - **FIX**: lint issue fixes.
