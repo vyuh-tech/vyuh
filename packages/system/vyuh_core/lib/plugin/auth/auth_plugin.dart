@@ -1,31 +1,39 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// An authentication plugin that supports various authentication methods.
-abstract class AuthPlugin<TUser extends User> extends Plugin {
+abstract class AuthPlugin extends Plugin {
   /// The controller for the user changes stream.
   @protected
-  var controller = StreamController<TUser>.broadcast();
+  var controller = StreamController<User>.broadcast();
 
-  @protected
   var _initialized = false;
+
+  User _currentUser = User.unknown;
 
   /// Creates an instance of [AuthPlugin].
   AuthPlugin({required super.name, required super.title}) : super();
 
   /// The current user that is signed in.
-  TUser get currentUser => throw UnimplementedError();
+  User get currentUser => _currentUser;
 
   /// A stream of user changes.
-  Stream<TUser> get userChanges {
+  Stream<User> get userChanges {
     if (!_initialized) {
       throw StateError(
           'AuthPlugin is not yet initialized. Call init() before accessing userChanges.');
     }
 
     return controller.stream;
+  }
+
+  @protected
+  @nonVirtual
+  setCurrentUser(User user) {
+    _currentUser = user;
+    controller.add(user);
   }
 
   @override
@@ -42,8 +50,7 @@ abstract class AuthPlugin<TUser extends User> extends Plugin {
       return;
     }
 
-    controller = StreamController<TUser>.broadcast();
-
+    controller = StreamController<User>.broadcast();
     _initialized = true;
   }
 
