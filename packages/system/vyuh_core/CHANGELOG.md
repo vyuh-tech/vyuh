@@ -1,3 +1,7 @@
+## 1.22.2
+
+ - **FIX**: make the AuthPlugin more generic.
+
 ## 1.22.1
 
  - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
