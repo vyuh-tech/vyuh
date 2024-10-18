@@ -1,3 +1,7 @@
+## 1.8.2
+
+ - **FIX**: make the isAwaiting flag work across actions.
+
 ## 1.8.1
 
  - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
