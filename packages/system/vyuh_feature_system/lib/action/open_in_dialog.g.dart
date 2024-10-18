@@ -18,6 +18,7 @@ OpenInDialogAction _$OpenInDialogActionFromJson(Map<String, dynamic> json) =>
       route: json['route'] == null
           ? null
           : ObjectReference.fromJson(json['route'] as Map<String, dynamic>),
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 const _$DialogBehaviorEnumMap = {

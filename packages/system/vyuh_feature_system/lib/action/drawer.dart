@@ -25,6 +25,7 @@ final class DrawerAction extends ActionConfiguration {
     super.title,
     this.actionType = DrawerActionType.open,
     this.isEndDrawer = false,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory DrawerAction.fromJson(Map<String, dynamic> json) =>

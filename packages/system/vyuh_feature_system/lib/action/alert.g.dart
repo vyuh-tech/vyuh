@@ -15,6 +15,7 @@ ShowAlertAction _$ShowAlertActionFromJson(Map<String, dynamic> json) =>
               .toList() ??
           const [],
       barrierDismissible: json['barrierDismissible'] as bool? ?? true,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 UserAction _$UserActionFromJson(Map<String, dynamic> json) => UserAction(

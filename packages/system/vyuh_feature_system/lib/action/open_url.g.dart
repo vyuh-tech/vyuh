@@ -12,6 +12,7 @@ OpenUrlAction _$OpenUrlActionFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String?,
       mode: $enumDecodeNullable(_$UrlLaunchModeEnumMap, json['mode']) ??
           UrlLaunchMode.platformDefault,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 const _$UrlLaunchModeEnumMap = {

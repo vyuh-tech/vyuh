@@ -29,7 +29,7 @@ final class DelayAction extends ActionConfiguration {
   @override
   Future<FutureOr<void>> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) async {
-    if (isAwaited) {
+    if (isAwaited == true) {
       ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(
         content:
             Text(message.isEmpty ? 'Waiting for $milliseconds ms' : message),

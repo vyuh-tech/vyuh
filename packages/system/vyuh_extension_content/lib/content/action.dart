@@ -19,7 +19,11 @@ final class Action {
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) async {
     for (final config in configurations ?? []) {
-      await config.execute(context, arguments: arguments);
+      if (config.isAwaited) {
+        await config.execute(context, arguments: arguments);
+      } else {
+        unawaited(config.execute(context, arguments: arguments));
+      }
     }
   }
 
@@ -37,12 +41,13 @@ abstract class ActionConfiguration implements SchemaItem {
 
   final String? title;
 
-  final bool isAwaited;
+  @JsonKey(defaultValue: false)
+  final bool? isAwaited;
 
   ActionConfiguration({
     required this.schemaType,
     this.title,
-    this.isAwaited = false,
+    required this.isAwaited,
   });
 
   FutureOr<void> execute(BuildContext context,

@@ -17,7 +17,7 @@ final class RestartApplicationAction extends ActionConfiguration {
     title: 'Restart Application',
   );
 
-  RestartApplicationAction() : super(schemaType: schemaName);
+  RestartApplicationAction({super.isAwaited}) : super(schemaType: schemaName);
 
   factory RestartApplicationAction.fromJson(Map<String, dynamic> json) =>
       _$RestartApplicationActionFromJson(json);
@@ -25,6 +25,6 @@ final class RestartApplicationAction extends ActionConfiguration {
   @override
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) {
-    vyuh.tracker.init();
+    return vyuh.tracker.init();
   }
 }

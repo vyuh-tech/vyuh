@@ -16,6 +16,7 @@ final class RouteRefreshAction extends ActionConfiguration {
 
   RouteRefreshAction({
     super.title,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory RouteRefreshAction.fromJson(Map<String, dynamic> json) =>
@@ -24,6 +25,6 @@ final class RouteRefreshAction extends ActionConfiguration {
   @override
   void execute(BuildContext context, {Map<String, dynamic>? arguments}) async {
     final routeProxy = RouteBuilderProxy.of(context);
-    routeProxy?.refresh();
+    return routeProxy?.refresh();
   }
 }

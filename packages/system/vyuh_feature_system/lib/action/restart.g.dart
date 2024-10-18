@@ -8,4 +8,6 @@ part of 'restart.dart';
 
 RestartApplicationAction _$RestartApplicationActionFromJson(
         Map<String, dynamic> json) =>
-    RestartApplicationAction();
+    RestartApplicationAction(
+      isAwaited: json['isAwaited'] as bool? ?? false,
+    );
