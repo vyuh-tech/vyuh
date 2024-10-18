@@ -37,6 +37,7 @@ final class OpenUrlAction extends ActionConfiguration {
     super.title,
     this.url,
     this.mode = UrlLaunchMode.platformDefault,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory OpenUrlAction.fromJson(Map<String, dynamic> json) =>
@@ -55,6 +56,6 @@ final class OpenUrlAction extends ActionConfiguration {
       return;
     }
 
-    launchUrlString(url!, mode: mode.launchMode);
+    await launchUrlString(url!, mode: mode.launchMode);
   }
 }

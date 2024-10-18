@@ -17,7 +17,10 @@ final class NavigateBack extends ActionConfiguration {
     fromJson: NavigateBack.fromJson,
   );
 
-  NavigateBack({super.title}) : super(schemaType: schemaName);
+  NavigateBack({
+    super.title,
+    super.isAwaited,
+  }) : super(schemaType: schemaName);
 
   @override
   FutureOr<void> execute(BuildContext context,

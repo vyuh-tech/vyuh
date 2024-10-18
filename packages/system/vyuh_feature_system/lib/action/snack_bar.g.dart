@@ -14,6 +14,7 @@ ShowSnackBarAction _$ShowSnackBarActionFromJson(Map<String, dynamic> json) =>
       behavior:
           $enumDecodeNullable(_$SnackBarBehaviorEnumMap, json['behavior']) ??
               SnackBarBehavior.fixed,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 const _$SnackBarBehaviorEnumMap = {
@@ -25,4 +26,5 @@ HideSnackBarAction _$HideSnackBarActionFromJson(Map<String, dynamic> json) =>
     HideSnackBarAction(
       title: json['title'] as String?,
       immediately: json['immediately'] as bool? ?? false,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );

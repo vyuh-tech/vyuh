@@ -29,6 +29,7 @@ final class OpenInDialogAction extends ActionConfiguration {
     this.linkType = LinkType.url,
     this.url,
     this.route,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory OpenInDialogAction.fromJson(Map<String, dynamic> json) =>
@@ -41,7 +42,7 @@ final class OpenInDialogAction extends ActionConfiguration {
 
     switch (behavior) {
       case DialogBehavior.modalBottomSheet:
-        showModalBottomSheet(
+        return showModalBottomSheet(
           context: context,
           enableDrag: true,
           clipBehavior: Clip.antiAlias,
@@ -50,9 +51,9 @@ final class OpenInDialogAction extends ActionConfiguration {
           useSafeArea: true,
           builder: (context) => _dialogContent(context),
         );
-        break;
+
       case DialogBehavior.fullscreen:
-        showDialog(
+        return showDialog(
           context: context,
           barrierDismissible: true,
           useSafeArea: false,
@@ -70,7 +71,6 @@ final class OpenInDialogAction extends ActionConfiguration {
             ),
           ),
         );
-        break;
     }
   }
 

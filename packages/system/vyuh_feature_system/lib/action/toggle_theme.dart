@@ -18,7 +18,7 @@ final class ToggleThemeAction extends ActionConfiguration {
     title: 'Toggle Light/Dark Theme',
   );
 
-  ToggleThemeAction() : super(schemaType: schemaName);
+  ToggleThemeAction({super.isAwaited}) : super(schemaType: schemaName);
 
   factory ToggleThemeAction.fromJson(Map<String, dynamic> json) =>
       _$ToggleThemeActionFromJson(json);

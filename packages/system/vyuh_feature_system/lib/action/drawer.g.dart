@@ -12,6 +12,7 @@ DrawerAction _$DrawerActionFromJson(Map<String, dynamic> json) => DrawerAction(
           $enumDecodeNullable(_$DrawerActionTypeEnumMap, json['actionType']) ??
               DrawerActionType.open,
       isEndDrawer: json['isEndDrawer'] as bool? ?? false,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 const _$DrawerActionTypeEnumMap = {

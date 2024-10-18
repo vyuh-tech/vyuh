@@ -7,4 +7,6 @@ part of 'toggle_theme.dart';
 // **************************************************************************
 
 ToggleThemeAction _$ToggleThemeActionFromJson(Map<String, dynamic> json) =>
-    ToggleThemeAction();
+    ToggleThemeAction(
+      isAwaited: json['isAwaited'] as bool? ?? false,
+    );

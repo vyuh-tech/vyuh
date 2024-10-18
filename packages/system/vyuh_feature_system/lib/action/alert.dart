@@ -25,6 +25,7 @@ final class ShowAlertAction extends ActionConfiguration {
     this.message = '',
     this.actions = const [],
     this.barrierDismissible = true,
+    required super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory ShowAlertAction.fromJson(Map<String, dynamic> json) =>
@@ -33,7 +34,7 @@ final class ShowAlertAction extends ActionConfiguration {
   @override
   FutureOr<void> execute(f.BuildContext context,
       {Map<String, dynamic>? arguments}) {
-    f.showDialog(
+    return f.showDialog(
         context: context,
         barrierDismissible: barrierDismissible,
         builder: (context) {

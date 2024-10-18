@@ -9,4 +9,5 @@ part of 'route_refresh.dart';
 RouteRefreshAction _$RouteRefreshActionFromJson(Map<String, dynamic> json) =>
     RouteRefreshAction(
       title: json['title'] as String?,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );

@@ -22,8 +22,12 @@ class ConditionalAction extends ActionConfiguration {
   final String? defaultCase;
   final Condition? condition;
 
-  ConditionalAction({this.cases, this.condition, this.defaultCase})
-      : super(schemaType: ConditionalAction.schemaName);
+  ConditionalAction({
+    this.cases,
+    this.condition,
+    this.defaultCase,
+    super.isAwaited,
+  }) : super(schemaType: ConditionalAction.schemaName);
 
   factory ConditionalAction.fromJson(Map<String, dynamic> json) =>
       _$ConditionalActionFromJson(json);

@@ -31,6 +31,7 @@ final class NavigationAction extends ActionConfiguration {
     this.route,
     this.url,
     super.title,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory NavigationAction.fromJson(Map<String, dynamic> json) =>

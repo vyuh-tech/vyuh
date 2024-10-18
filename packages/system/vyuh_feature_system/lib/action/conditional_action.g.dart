@@ -16,6 +16,7 @@ ConditionalAction _$ConditionalActionFromJson(Map<String, dynamic> json) =>
           ? null
           : Condition.fromJson(json['condition'] as Map<String, dynamic>),
       defaultCase: json['defaultCase'] as String?,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 ActionCase _$ActionCaseFromJson(Map<String, dynamic> json) => ActionCase(

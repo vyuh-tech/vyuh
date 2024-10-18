@@ -25,6 +25,7 @@ final class ShowSnackBarAction extends ActionConfiguration {
     this.allowClosing = false,
     this.showForSeconds = 3,
     this.behavior = SnackBarBehavior.fixed,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory ShowSnackBarAction.fromJson(Map<String, dynamic> json) =>
@@ -64,6 +65,7 @@ final class HideSnackBarAction extends ActionConfiguration {
   HideSnackBarAction({
     super.title,
     this.immediately = false,
+    super.isAwaited,
   }) : super(schemaType: schemaName);
 
   factory HideSnackBarAction.fromJson(Map<String, dynamic> json) =>

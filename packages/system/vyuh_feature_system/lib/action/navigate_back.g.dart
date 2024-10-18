@@ -8,4 +8,5 @@ part of 'navigate_back.dart';
 
 NavigateBack _$NavigateBackFromJson(Map<String, dynamic> json) => NavigateBack(
       title: json['title'] as String?,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );

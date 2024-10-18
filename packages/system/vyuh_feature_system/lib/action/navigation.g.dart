@@ -18,6 +18,7 @@ NavigationAction _$NavigationActionFromJson(Map<String, dynamic> json) =>
           : ObjectReference.fromJson(json['route'] as Map<String, dynamic>),
       url: json['url'] as String?,
       title: json['title'] as String?,
+      isAwaited: json['isAwaited'] as bool? ?? false,
     );
 
 const _$NavigationTypeEnumMap = {
