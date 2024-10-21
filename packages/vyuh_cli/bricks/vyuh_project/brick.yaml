@@ -1,4 +1,4 @@
-name: vyuh_init
+name: vyuh_project
 description: A brick that sets up a new project with the Vyuh Framework.
 
 repository: https://github.com/vyuh-tech/vyuh_packages

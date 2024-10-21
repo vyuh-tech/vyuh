@@ -6,9 +6,9 @@
 bundle-all: bundle-init bundle-feature bundle-feature-sanity-schema
     @echo "All templates have been bundled successfully!"
 
-# Bundle vyuh_init template
+# Bundle vyuh_project template
 bundle-init:
-    mason bundle bricks/vyuh_init -t dart -o lib/src/commands/create/templates/project
+    mason bundle bricks/vyuh_project -t dart -o lib/src/commands/create/templates/project
 
 # Bundle vyuh_feature template
 bundle-feature:
