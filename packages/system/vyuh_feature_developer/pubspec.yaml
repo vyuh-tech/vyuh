@@ -22,7 +22,7 @@ dependencies:
   flutter_sticky_header: ^0.6.5
   collection: ^1.18.0
   vyuh_core: ^1.22.2
-  vyuh_extension_content: ^1.8.2
+  vyuh_extension_content: ^1.8.3
 
 dev_dependencies:
   flutter_test:
