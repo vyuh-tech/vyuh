@@ -8,14 +8,14 @@ bundle-all: bundle-init bundle-feature bundle-feature-sanity-schema
 
 # Bundle vyuh_init template
 bundle-init:
-    mason bundle ../vyuh_init -t dart -o lib/src/commands/create/templates/project
+    mason bundle bricks/vyuh_init -t dart -o lib/src/commands/create/templates/project
 
 # Bundle vyuh_feature template
 bundle-feature:
-    mason bundle ../vyuh_feature -t dart -o lib/src/commands/create/templates/feature
+    mason bundle bricks/vyuh_feature -t dart -o lib/src/commands/create/templates/feature
 
 # Bundle vyuh_feature_sanity_schema template
 bundle-feature-sanity-schema:
-    mason bundle ../vyuh_feature_sanity_schema -t dart -o lib/src/commands/create/templates/schema
+    mason bundle bricks/vyuh_feature_sanity_schema -t dart -o lib/src/commands/create/templates/schema
 
 

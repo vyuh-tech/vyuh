@@ -15,7 +15,13 @@ command:
     updateGitTagRefs: false
     includeCommitId: false
     linkToCommits: false
+    hooks:
+      post: melos run update_version
 
 ide:
   intellij:
     moduleNamePrefix: ''
+
+scripts:
+  update_version:
+    run: dart run tools/update_version.dart
