@@ -1,0 +1,14 @@
+name: {{ name.snakeCase() }}_workspace
+description: {{ description }}
+
+
+packages:
+  - plugins/*
+  - features/*
+  - features/*/*
+  - packages/*
+  - apps/*
+
+command:
+  version:
+    workspaceChangelog: false

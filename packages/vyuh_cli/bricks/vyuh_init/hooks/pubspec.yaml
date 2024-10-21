@@ -1,0 +1,9 @@
+name: mason_hooks
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  mason: ^0.1.0-dev.59
+  yaml: ^3.1.2
+  yaml_edit: ^2.2.1
