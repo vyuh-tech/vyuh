@@ -18,11 +18,15 @@ final class Action {
 
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) async {
-    for (final config in configurations ?? []) {
-      if (config.isAwaited) {
+    if (configurations == null) {
+      return;
+    }
+
+    for (final config in configurations!) {
+      if (config.isAwaited == true) {
         await config.execute(context, arguments: arguments);
       } else {
-        unawaited(config.execute(context, arguments: arguments));
+        config.execute(context, arguments: arguments);
       }
     }
   }
