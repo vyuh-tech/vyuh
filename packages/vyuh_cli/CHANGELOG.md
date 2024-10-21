@@ -1,3 +1,8 @@
+## 0.0.4
+
+ - **FIX**: update path of feature in justfile.
+ - **FEAT**: adding more commands to the justfile.
+
 ## 0.0.3+5
 
  - **FIX**: update the pubspec with correct repo info.
