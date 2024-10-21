@@ -1,3 +1,7 @@
+## 0.0.4+2
+
+ - **FIX**: moved update version script into vyuh_cli.
+
 ## 0.0.4+1
 
  - **FIX**: normalizing path strings for windows.
