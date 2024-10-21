@@ -1,0 +1,42 @@
+name: vyuh_cli
+description: A command-line interface for the Vyuh Framework to generate Vyuh projects, features and schemas.
+version: 0.0.3+4
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/bricks/tree/main/vyuh_cli
+issue_tracker: https://github.com/vyuh-tech/bricks/issues
+
+topics:
+  - cli
+  - vyuh
+  - codegen
+  - template
+  - flutter
+
+screenshots:
+  - description: The Vyuh CLI in action showing the creation of a new Vyuh project.
+    path: _images/vyuh_cli.png
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  args: ^2.5.0
+  cli_completion: ^0.5.1
+  mason_logger: ^0.3.1
+  pub_updater: ^0.5.0
+  mason: ^0.1.0-dev.60
+  meta: ^1.15.0
+  universal_io: ^2.2.2
+  path: ^1.9.0
+  yaml_edit: ^2.2.1
+
+dev_dependencies:
+  build_runner: ^2.4.12
+  build_verify: ^3.1.0
+  build_version: ^2.1.1
+  flutter_lints: ^4.0.0
+  mocktail: ^1.0.4
+  test: ^1.25.8
+
+executables:
+  vyuh:
