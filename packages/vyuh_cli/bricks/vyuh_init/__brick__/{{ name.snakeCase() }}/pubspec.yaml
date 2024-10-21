@@ -6,7 +6,7 @@ environment:
 
 dev_dependencies:
   flutter_lints: ^4.0.0
-  melos: ^6.1.0
+  melos: ^6.2.0
 
 flutter:
   uses-material-design: true
