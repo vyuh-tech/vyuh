@@ -108,9 +108,21 @@ abstract class FeatureSubCommand extends Command<int> {
 
     final target = DirectoryGeneratorTarget(outputDirectory);
 
-    await generator.hooks.preGen(vars: vars, onVarsChanged: (v) => vars = v);
+    await generator.hooks.preGen(
+      vars: vars,
+      onVarsChanged: (v) => vars = v,
+      workingDirectory: target.dir.path,
+      logger: logger,
+    );
+
     final _ = await generator.generate(target, vars: vars, logger: logger);
-    await generator.hooks.postGen(vars: vars, onVarsChanged: (v) => vars = v);
+
+    await generator.hooks.postGen(
+      vars: vars,
+      onVarsChanged: (v) => vars = v,
+      workingDirectory: target.dir.path,
+      logger: logger,
+    );
 
     await template.onGenerateComplete(
       logger,

@@ -11,14 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "prettier": "^3.3.3",
-    "syncpack": "^11.2.1",
     "typescript": "^5.5.3"
-  },
-  "syncpack": {
-    "source": [
-      "apps/**/package.json",
-      "features/**/package.json",
-      "packages/**/package.json"
-    ]
   }
 }
