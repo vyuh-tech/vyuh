@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:yaml_edit/yaml_edit.dart';
+import 'package:path/path.dart' as p;
 
 import 'cli_command.dart';
 
@@ -28,15 +29,16 @@ final class FlutterCommand extends CliCommand {
         '--platforms=ios,android,web',
         '--description=$description',
       ],
-      workingDirectory: '$appName/apps',
+      workingDirectory: p.normalize('$appName/apps'),
     );
   }
 
   _addPackages(HookContext context, String name, String appName) async {
     await trackOperation(
       context,
-      startMessage: 'Setting up the Flutter project @ apps/$appName',
-      endMessage: 'Flutter project ready @ apps/$appName',
+      startMessage:
+          p.normalize('Setting up the Flutter project @ apps/$appName'),
+      endMessage: p.normalize('Flutter project ready @ apps/$appName'),
       operation: () async {
         await Process.run(
           'flutter',
@@ -46,7 +48,7 @@ final class FlutterCommand extends CliCommand {
             ...'sanity_client vyuh_core vyuh_extension_content vyuh_feature_system vyuh_feature_developer vyuh_plugin_content_provider_sanity mobx flutter_mobx'
                 .split(' '),
           ],
-          workingDirectory: '$appName/apps/$appName',
+          workingDirectory: p.normalize('$appName/apps/$appName'),
         );
       },
     );
@@ -77,7 +79,7 @@ final class FlutterCommand extends CliCommand {
   _updateMain(HookContext context, String appName) async {
     // Copy the main.dart file
     final mainFile = File.fromUri(Uri.parse('./$appName/overrides/main.dart'));
-    await mainFile.copy('./$appName/apps/$appName/lib/main.dart');
+    await mainFile.copy(p.normalize('./$appName/apps/$appName/lib/main.dart'));
 
     // Clear out the test file
     final testFile = File.fromUri(

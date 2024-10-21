@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:mason/mason.dart';
+import 'package:path/path.dart' as p;
 
 import 'cli_command.dart';
 
@@ -15,8 +16,9 @@ final class SanityCommand extends CliCommand {
 
     await trackOperation(
       context,
-      startMessage: 'Setting up the Sanity project @ apps/$studioName',
-      endMessage: 'Sanity project ready @ apps/$studioName',
+      startMessage:
+          p.normalize('Setting up the Sanity project @ apps/$studioName'),
+      endMessage: p.normalize('Sanity project ready @ apps/$studioName'),
       operation: () async {
         await Process.run(
           'pnpm',
@@ -35,7 +37,7 @@ final class SanityCommand extends CliCommand {
             '--output-path',
             studioName,
           ],
-          workingDirectory: '$appName/apps',
+          workingDirectory: p.normalize('$appName/apps'),
         );
 
         await Process.run(
@@ -45,7 +47,7 @@ final class SanityCommand extends CliCommand {
             ...('@vyuh/sanity-schema-core @vyuh/sanity-schema-system @vyuh/sanity-plugin-structure'
                 .split(' ')),
           ],
-          workingDirectory: '$appName/apps/$studioName',
+          workingDirectory: p.normalize('$appName/apps/$studioName'),
         );
       },
     );

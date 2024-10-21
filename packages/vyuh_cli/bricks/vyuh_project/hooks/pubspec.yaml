@@ -7,3 +7,4 @@ dependencies:
   mason: ^0.1.0-dev.59
   yaml: ^3.1.2
   yaml_edit: ^2.2.1
+  path: ^1.8.0
