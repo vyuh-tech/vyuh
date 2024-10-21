@@ -1,3 +1,7 @@
+## 0.0.4+1
+
+ - **FIX**: normalizing path strings for windows.
+
 ## 0.0.4
 
  - **FIX**: update path of feature in justfile.
