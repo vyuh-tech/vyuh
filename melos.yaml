@@ -24,4 +24,4 @@ ide:
 
 scripts:
   update_version:
-    run: dart run tools/update_version.dart
+    run: dart run packages/vyuh_cli/tools/update_version.dart

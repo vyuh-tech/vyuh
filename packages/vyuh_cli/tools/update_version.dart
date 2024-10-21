@@ -3,15 +3,13 @@ import 'dart:io';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pubspec_parse/pubspec_parse.dart';
 
-const _cliDirectory = 'packages/vyuh_cli';
-
 void main() async {
   final logger = Logger();
   logger.info('Starting version update process');
 
   try {
     // Read the pubspec.yaml file
-    final pubspecFile = File('$_cliDirectory/pubspec.yaml');
+    final pubspecFile = File('pubspec.yaml');
     logger.info('Reading pubspec.yaml');
     final pubspecContent = await pubspecFile.readAsString();
     final pubspec = Pubspec.parse(pubspecContent);
@@ -21,8 +19,8 @@ void main() async {
     logger.info('Current version: $version');
 
     // Update the version.dart file
-    final versionFile = File('$_cliDirectory/lib/src/version.dart');
-    logger.info('Updating $_cliDirectory/lib/src/version.dart');
+    final versionFile = File('lib/src/version.dart');
+    logger.info('Updating lib/src/version.dart');
     await versionFile.writeAsString('''
 // Generated code. Do not modify.
 const packageVersion = '$version';
