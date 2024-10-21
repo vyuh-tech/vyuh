@@ -1,0 +1,16 @@
+**/node_modules
+*.log
+build
+dist
+.sanity
+.DS_Store
+.idea
+coverage
+.dart_tool
+pubspec_overrides.yaml
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+*.lock
+mason-lock.json
+.mason

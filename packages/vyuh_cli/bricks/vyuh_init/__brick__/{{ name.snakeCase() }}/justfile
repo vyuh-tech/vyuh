@@ -1,0 +1,27 @@
+#!/usr/bin/env just --justfile
+export PATH := "./node_modules/.bin:" + env_var('PATH')
+
+gen-feature_counter: (_generate-json "features/feature_counter" "watch")
+
+sync-npm:
+    syncpack fix-mismatches format
+
+{{=<% %>=}}
+_generate-json package command="build":
+    #!/usr/bin/env bash
+    echo "Building JSON-Serializable in {{package}}"
+    cd {{package}}
+    dart run build_runner {{command}} --delete-conflicting-outputs
+<%={{ }}=%>
+
+# Launch images and Icons
+gen-launcher-icons:
+    #!/usr/bin/env bash
+    cd apps/{{name.snakeCase}}
+    flutter pub run flutter_launcher_icons
+
+gen-splash-screen:
+    #!/usr/bin/env bash
+    cd apps/{{name.snakeCase}}
+    flutter pub run flutter_native_splash:create
+
