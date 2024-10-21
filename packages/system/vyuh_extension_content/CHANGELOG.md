@@ -1,3 +1,7 @@
+## 1.8.3
+
+ - **FIX**: handle case when an ActionConfiguration is created manually instead of coming from the CMS.
+
 ## 1.8.2
 
  - **FIX**: make the isAwaiting flag work across actions.
