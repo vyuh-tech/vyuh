@@ -8,7 +8,7 @@ class ProjectTemplate extends Template {
   ProjectTemplate()
       : super(
           name: 'project',
-          bundle: vyuhInitBundle,
+          bundle: vyuhProjectBundle,
           help:
               'Generate a Vyuh Project with a Flutter Application and a Sanity Studio.',
         );
