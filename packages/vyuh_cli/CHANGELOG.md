@@ -1,3 +1,7 @@
+## 0.0.3+5
+
+ - **FIX**: update the pubspec with correct repo info.
+
 ## 0.0.3+4
 
  - **FIX**: update descriptions of commands.
