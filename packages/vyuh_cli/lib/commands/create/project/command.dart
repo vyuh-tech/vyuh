@@ -6,20 +6,26 @@ import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
-import 'package:vyuh_cli/src/commands/create/templates/template.dart';
-import 'package:vyuh_cli/src/commands/create/utils/utils.dart';
+import 'package:vyuh_cli/commands/create/project/template.dart';
+import 'package:vyuh_cli/utils/utils.dart';
+import 'package:vyuh_cli/template.dart';
 
 const _defaultOrgName = 'com.example.vyuh';
 const _defaultDescription = 'A Vyuh Flutter project created by Vyuh CLI.';
 
-abstract class ProjectSubCommand extends Command<int> {
-  ProjectSubCommand({
+class CreateProjectCommand extends Command<int> {
+  CreateProjectCommand({
     required this.logger,
-    @visibleForTesting required MasonGeneratorFromBundle? generatorFromBundle,
-    @visibleForTesting required MasonGeneratorFromBrick? generatorFromBrick,
+    required MasonGeneratorFromBundle? generatorFromBundle,
+    required MasonGeneratorFromBrick? generatorFromBrick,
   })  : _generatorFromBundle = generatorFromBundle ?? MasonGenerator.fromBundle,
         _generatorFromBrick = generatorFromBrick ?? MasonGenerator.fromBrick {
     argParser
+      ..addOption(
+        'application-id',
+        help: 'The bundle identifier on iOS or application id on Android. '
+            '(defaults to <org-name>.<project-name>)',
+      )
       ..addOption(
         'output-directory',
         abbr: 'o',
@@ -35,21 +41,26 @@ abstract class ProjectSubCommand extends Command<int> {
         'cms',
         help: 'The content management system for this new project.',
         defaultsTo: defaultCMS,
-      );
-
-    if (this is OrgName) {
-      argParser.addOption(
+      )
+      ..addOption(
         'org-name',
         help: 'The organization for this new project.',
         defaultsTo: _defaultOrgName,
         aliases: ['org'],
       );
-    }
   }
 
   final Logger logger;
   final MasonGeneratorFromBundle _generatorFromBundle;
   final MasonGeneratorFromBrick _generatorFromBrick;
+
+  @override
+  String get name => 'project';
+
+  @override
+  String get description => 'Create a new Vyuh project in Flutter.';
+
+  Template get template => ProjectTemplate();
 
   @visibleForTesting
   ArgResults? argResultOverrides;
@@ -68,8 +79,6 @@ abstract class ProjectSubCommand extends Command<int> {
   String get projectDescription => argResults['description'] as String? ?? '';
 
   String get cms => argResults['cms'] as String? ?? defaultCMS;
-
-  Template get template;
 
   @override
   String get invocation => 'vyuh create $name <project-name> [arguments]';
@@ -160,22 +169,23 @@ abstract class ProjectSubCommand extends Command<int> {
     return ExitCode.success.code;
   }
 
-  @mustCallSuper
   Map<String, dynamic> getTemplateVars() {
     final projectName = this.projectName;
     final projectDescription = this.projectDescription;
     final cms = this.cms;
+    final applicationId = argResults['application-id'] as String?;
 
     return <String, dynamic>{
       'name': projectName,
       'description': projectDescription,
       'cms': cms,
-      if (this is OrgName) 'org_name': (this as OrgName).orgName,
+      'org_name': orgName,
+      if (applicationId != null) 'application_id': applicationId
     };
   }
 }
 
-mixin OrgName on ProjectSubCommand {
+extension on CreateProjectCommand {
   String get orgName {
     final orgName = argResults['org-name'] as String? ?? _defaultOrgName;
     _validateOrgName(orgName);

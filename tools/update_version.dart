@@ -21,8 +21,8 @@ void main() async {
     logger.info('Current version: $version');
 
     // Update the version.dart file
-    final versionFile = File('$_cliDirectory/lib/src/version.dart');
-    logger.info('Updating $_cliDirectory/lib/src/version.dart');
+    final versionFile = File('$_cliDirectory/lib/version.dart');
+    logger.info('Updating $_cliDirectory/lib/version.dart');
     await versionFile.writeAsString('''
 // Generated code. Do not modify.
 const packageVersion = '$version';

@@ -1,7 +1,7 @@
 import 'package:mason/mason.dart';
 import 'package:path/path.dart' as path;
 import 'package:universal_io/io.dart';
-import 'package:vyuh_cli/src/commands/create/utils/logger_extension.dart';
+import 'package:vyuh_cli/utils/logger_extension.dart';
 
 typedef MasonGeneratorFromBundle = Future<MasonGenerator> Function(MasonBundle);
 

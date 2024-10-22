@@ -6,26 +6,41 @@ import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
-import 'package:vyuh_cli/src/commands/create/templates/template.dart';
-import 'package:vyuh_cli/src/commands/create/utils/utils.dart';
+import 'package:vyuh_cli/commands/create/schema/template.dart';
+import 'package:vyuh_cli/utils/utils.dart';
+import 'package:vyuh_cli/template.dart';
 
-abstract class FeatureSubCommand extends Command<int> {
-  FeatureSubCommand({
+final class CreateSanitySchemaCommand extends Command<int> {
+  CreateSanitySchemaCommand({
     required this.logger,
-    @visibleForTesting required MasonGeneratorFromBundle? generatorFromBundle,
-    @visibleForTesting required MasonGeneratorFromBrick? generatorFromBrick,
+    required MasonGeneratorFromBundle? generatorFromBundle,
+    required MasonGeneratorFromBrick? generatorFromBrick,
   })  : _generatorFromBundle = generatorFromBundle ?? MasonGenerator.fromBundle,
         _generatorFromBrick = generatorFromBrick ?? MasonGenerator.fromBrick {
-    argParser.addOption(
-      'output-directory',
-      abbr: 'o',
-      help: 'The desired output directory when creating a new feature.',
-    );
+    argParser
+      ..addOption(
+        'output-directory',
+        abbr: 'o',
+        help: 'The desired output directory when creating a new feature.',
+      )
+      ..addOption(
+        'cms',
+        help: 'The content management system for this new schema.',
+        defaultsTo: defaultCMS,
+      );
   }
 
   final Logger logger;
   final MasonGeneratorFromBundle _generatorFromBundle;
   final MasonGeneratorFromBrick _generatorFromBrick;
+
+  @override
+  String get name => 'schema';
+
+  @override
+  String get description => 'Create a new Vyuh feature CMS schema.';
+
+  Template get template => FeatureSanitySchemaTemplate();
 
   @visibleForTesting
   ArgResults? argResultOverrides;
@@ -41,7 +56,15 @@ abstract class FeatureSubCommand extends Command<int> {
     return args.first;
   }
 
-  Template get template;
+  String get cms {
+    final cms = argResults['cms'] as String? ?? defaultCMS;
+    if (cms != defaultCMS) {
+      usageException(
+        'The CMS "$cms" is not supported. Only "$defaultCMS" is supported at this time.',
+      );
+    }
+    return cms;
+  }
 
   @override
   String get invocation => 'vyuh create $name <feature-name> [arguments]';
@@ -135,9 +158,11 @@ abstract class FeatureSubCommand extends Command<int> {
   @mustCallSuper
   Map<String, dynamic> getTemplateVars() {
     final featureName = this.featureName;
+    final cms = this.cms;
 
     return <String, dynamic>{
       'name': featureName,
+      'cms': cms,
     };
   }
 }
