@@ -1,3 +1,7 @@
+## 0.0.4+2
+
+ - **REFACTOR**: tracking operations.
+
 ## 0.0.4+1
 
  - **FIX**: normalizing path strings for windows.
