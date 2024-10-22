@@ -1,3 +1,9 @@
+## 0.0.4+3
+
+ - **REFACTOR**: tracking operations.
+ - **FIX**: check for pnpm before running other commands.
+ - **FIX**: moved update version script into vyuh_cli.
+
 ## 0.0.4+2
 
  - **REFACTOR**: tracking operations.
