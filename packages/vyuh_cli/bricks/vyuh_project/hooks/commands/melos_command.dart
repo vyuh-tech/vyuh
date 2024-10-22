@@ -26,7 +26,7 @@ final class MelosCommand extends CliCommand {
     await trackOperation(
       context,
       startMessage: 'Running `melos bootstrap` on apps/$appName',
-      endMessage: 'Melos bootstrap complete for apps/$appName',
+      endMessage: 'Melos bootstrap completed for apps/$appName',
       operation: () async {
         await Process.run(
           'melos',
