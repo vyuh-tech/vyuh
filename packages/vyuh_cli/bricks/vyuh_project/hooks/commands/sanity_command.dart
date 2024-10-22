@@ -40,15 +40,18 @@ final class SanityCommand extends CliCommand {
           workingDirectory: p.normalize('$appName/apps'),
         );
 
-        await Process.run(
-          'pnpm',
-          [
-            'add',
-            ...('@vyuh/sanity-schema-core @vyuh/sanity-schema-system @vyuh/sanity-plugin-structure'
-                .split(' ')),
-          ],
-          workingDirectory: p.normalize('$appName/apps/$studioName'),
-        );
+        await trackOperation(context,
+            startMessage: p.normalize('Adding NPM packages @ apps/$studioName'),
+            endMessage: p.normalize('Added NPM packages @ apps/$studioName'),
+            operation: () async => Process.run(
+                  'pnpm',
+                  [
+                    'add',
+                    ...('@vyuh/sanity-schema-core @vyuh/sanity-schema-system @vyuh/sanity-plugin-structure'
+                        .split(' ')),
+                  ],
+                  workingDirectory: p.normalize('$appName/apps/$studioName'),
+                ));
       },
     );
   }

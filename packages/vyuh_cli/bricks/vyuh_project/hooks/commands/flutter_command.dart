@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:mason/mason.dart';
-import 'package:yaml_edit/yaml_edit.dart';
 import 'package:path/path.dart' as p;
+import 'package:yaml_edit/yaml_edit.dart';
 
 import 'cli_command.dart';
 
@@ -14,33 +14,35 @@ final class FlutterCommand extends CliCommand {
     final String description = context.vars['description'];
     final appName = name.snakeCase;
 
-    await _createProject(name, description, appName);
+    await _createProject(context, name, description, appName);
     await _addPackages(context, name, appName);
     await _applyOverrides(context, appName);
   }
 
-  _createProject(String name, String description, String appName) async {
-    await Process.run(
-      'flutter',
-      [
-        'create',
-        name.snakeCase,
-        '--template=app',
-        '--platforms=ios,android,web',
-        '--description=$description',
-      ],
-      workingDirectory: p.normalize('$appName/apps'),
-    );
-  }
+  _createProject(HookContext context, String name, String description,
+          String appName) =>
+      trackOperation(context,
+          startMessage:
+              p.normalize('Setting up the Flutter project @ apps/$appName'),
+          endMessage: p.normalize('Flutter project ready @ apps/$appName'),
+          operation: () => Process.run(
+                'flutter',
+                [
+                  'create',
+                  name.snakeCase,
+                  '--template=app',
+                  '--platforms=ios,android,web',
+                  '--description=$description',
+                ],
+                workingDirectory: p.normalize('$appName/apps'),
+              ));
 
-  _addPackages(HookContext context, String name, String appName) async {
-    await trackOperation(
-      context,
-      startMessage:
-          p.normalize('Setting up the Flutter project @ apps/$appName'),
-      endMessage: p.normalize('Flutter project ready @ apps/$appName'),
-      operation: () async {
-        await Process.run(
+  _addPackages(HookContext context, String name, String appName) =>
+      trackOperation(
+        context,
+        startMessage: p.normalize('Adding Flutter packages @ apps/$appName'),
+        endMessage: p.normalize('Added Flutter packages @ apps/$appName'),
+        operation: () async => Process.run(
           'flutter',
           [
             'pub',
@@ -49,22 +51,18 @@ final class FlutterCommand extends CliCommand {
                 .split(' '),
           ],
           workingDirectory: p.normalize('$appName/apps/$appName'),
-        );
-      },
-    );
-  }
+        ),
+      );
 
-  _applyOverrides(HookContext context, String appName) async {
-    await trackOperation(
-      context,
-      startMessage: 'Updating Flutter project',
-      endMessage: 'Flutter project updated',
-      operation: () async {
-        await _addFeature(appName);
-        await _updateMain(context, appName);
-      },
-    );
-  }
+  _applyOverrides(HookContext context, String appName) => trackOperation(
+        context,
+        startMessage: 'Updating Flutter project',
+        endMessage: 'Flutter project updated',
+        operation: () async {
+          await _addFeature(appName);
+          await _updateMain(context, appName);
+        },
+      );
 
   _addFeature(String appName) async {
     final pubspec =
