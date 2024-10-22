@@ -1,3 +1,7 @@
+## 0.0.4+4
+
+ - **REFACTOR**: flattening the command hierarchy.
+
 ## 0.0.4+3
 
  - **REFACTOR**: tracking operations.
