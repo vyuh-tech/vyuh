@@ -1,10 +1,12 @@
 import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
-import 'package:vyuh_cli/src/commands/create/commands/index.dart';
-import 'package:vyuh_cli/src/commands/create/utils/utils.dart';
+import 'package:vyuh_cli/commands/create/feature/command.dart';
+import 'package:vyuh_cli/commands/create/project/command.dart';
+import 'package:vyuh_cli/commands/create/schema/command.dart';
+import 'package:vyuh_cli/utils/utils.dart';
 
-class CreateCommand extends Command<int> {
+final class CreateCommand extends Command<int> {
   CreateCommand({
     required Logger logger,
     @visibleForTesting MasonGeneratorFromBundle? generatorFromBundle,
@@ -25,7 +27,7 @@ class CreateCommand extends Command<int> {
       ),
     );
     addSubcommand(
-      CreateSchemaCommand(
+      CreateSanitySchemaCommand(
         logger: logger,
         generatorFromBundle: generatorFromBundle,
         generatorFromBrick: generatorFromBrick,

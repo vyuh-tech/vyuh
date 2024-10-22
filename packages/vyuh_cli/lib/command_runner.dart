@@ -3,8 +3,9 @@ import 'package:args/command_runner.dart';
 import 'package:cli_completion/cli_completion.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
-import 'package:vyuh_cli/src/commands/commands.dart';
-import 'package:vyuh_cli/src/version.dart';
+import 'package:vyuh_cli/commands/create/command.dart';
+import 'package:vyuh_cli/commands/update/command.dart';
+import 'package:vyuh_cli/version.dart';
 
 const executableName = 'vyuh';
 const packageName = 'vyuh_cli';

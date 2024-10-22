@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
-import 'package:vyuh_cli/src/command_runner.dart';
-import 'package:vyuh_cli/src/version.dart';
+import 'package:vyuh_cli/command_runner.dart';
+import 'package:vyuh_cli/version.dart';
 
 class UpdateCommand extends Command<int> {
   UpdateCommand({

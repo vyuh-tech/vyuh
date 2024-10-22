@@ -4,9 +4,9 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:test/test.dart';
-import 'package:vyuh_cli/src/command_runner.dart';
-import 'package:vyuh_cli/src/commands/commands.dart';
-import 'package:vyuh_cli/src/version.dart';
+import 'package:vyuh_cli/command_runner.dart';
+import 'package:vyuh_cli/commands/update/command.dart';
+import 'package:vyuh_cli/version.dart';
 
 class _MockLogger extends Mock implements Logger {}
 
