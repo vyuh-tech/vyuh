@@ -20,7 +20,7 @@ final class SanityCommand extends CliCommand {
           p.normalize('Setting up the Sanity project @ apps/$studioName'),
       endMessage: p.normalize('Sanity project ready @ apps/$studioName'),
       operation: () async {
-        await Process.run(
+        final sanityCreateResult = await Process.run(
           'pnpm',
           [
             'create',
@@ -38,7 +38,13 @@ final class SanityCommand extends CliCommand {
             studioName,
           ],
           workingDirectory: p.normalize('$appName/apps'),
+          runInShell: true,
         );
+        final error = sanityCreateResult.stderr.toString();
+        if (error.isNotEmpty) {
+          context.logger.err('Failed to create Sanity Studio: $error');
+          exit(1);
+        }
 
         await trackOperation(context,
             startMessage: p.normalize('Adding NPM packages @ apps/$studioName'),
@@ -51,6 +57,7 @@ final class SanityCommand extends CliCommand {
                         .split(' ')),
                   ],
                   workingDirectory: p.normalize('$appName/apps/$studioName'),
+                  runInShell: true,
                 ));
       },
     );

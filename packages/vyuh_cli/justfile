@@ -2,6 +2,11 @@
 
 # Note: Make sure to re-generate bundles if the bricks are modified.
 
+# Watch & Bundle
+watch:
+    @echo "Watching bricks for changes..."
+    watchexec  --watch ./bricks just bundle-all
+
 # Bundle all templates
 bundle-all: bundle-init bundle-feature bundle-feature-sanity-schema
     @echo "All templates have been bundled successfully!"
