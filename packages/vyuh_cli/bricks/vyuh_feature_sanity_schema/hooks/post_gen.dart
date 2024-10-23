@@ -18,6 +18,7 @@ Future<void> run(HookContext context) async {
           'install',
         ],
         workingDirectory: folderName,
+        runInShell: true,
       );
     },
   );

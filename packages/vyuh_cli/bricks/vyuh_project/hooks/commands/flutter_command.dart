@@ -35,6 +35,7 @@ final class FlutterCommand extends CliCommand {
                   '--description=$description',
                 ],
                 workingDirectory: p.normalize('$appName/apps'),
+                runInShell: true,
               ));
 
   _addPackages(HookContext context, String name, String appName) =>
@@ -51,6 +52,7 @@ final class FlutterCommand extends CliCommand {
                 .split(' '),
           ],
           workingDirectory: p.normalize('$appName/apps/$appName'),
+          runInShell: true,
         ),
       );
 

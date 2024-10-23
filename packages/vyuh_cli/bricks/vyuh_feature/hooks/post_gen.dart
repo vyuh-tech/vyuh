@@ -12,6 +12,7 @@ Future<void> run(HookContext context) async {
       await Process.run(
         'melos',
         ['bootstrap'],
+        runInShell: true,
       );
     },
   );

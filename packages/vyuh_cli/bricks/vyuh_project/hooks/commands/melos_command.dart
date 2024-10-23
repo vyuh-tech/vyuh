@@ -19,6 +19,7 @@ final class MelosCommand extends CliCommand {
         await Process.run(
           'dart',
           ['pub', 'global', 'activate', 'melos'],
+          runInShell: true,
         );
       },
     );
@@ -32,6 +33,7 @@ final class MelosCommand extends CliCommand {
           'melos',
           ['bootstrap'],
           workingDirectory: appName,
+          runInShell: true,
         );
       },
     );
