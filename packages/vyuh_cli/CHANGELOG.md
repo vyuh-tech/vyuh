@@ -1,3 +1,7 @@
+## 0.0.4+5
+
+ - **FIX**: ensure we do checks for pnpm and sanity and print errors on failure.
+
 ## 0.0.4+4
 
  - **REFACTOR**: flattening the command hierarchy.
