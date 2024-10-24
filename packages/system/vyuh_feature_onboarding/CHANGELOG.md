@@ -1,0 +1,54 @@
+## 1.0.8
+
+ - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.
+
+## 1.0.7
+
+ - **FIX**: fixed a crash when the onboarding step has missing description.
+
+## 1.0.6
+
+ - **FIX**: setting the right icons.
+
+## 1.0.5
+
+ - Update a dependency to the latest release.
+
+## 1.0.4
+
+ - Update a dependency to the latest release.
+
+## 1.0.3
+
+ - Update a dependency to the latest release.
+
+## 1.0.2
+
+ - Update a dependency to the latest release.
+
+## 1.0.1
+
+ - Update a dependency to the latest release.
+
+## 1.0.0
+
+ - Graduate package to a stable release. See pre-releases prior to this version for changelog entries.
+
+## 1.0.0-beta.4
+
+ - **FEAT**: making the image fill width.
+
+## 1.0.0-beta.3
+
+ - **FEAT**: adjusting the next button to an arrow.
+
+## 1.0.0-beta.2
+
+ - **FIX**: setting image to BoxFit.contain.
+ - **FEAT**: adding the onboarding feature.
+
+## 1.0.0-beta.1
+
+- First release with support for multiple steps
+- Each step can have a title, rich text description and an image
+- Uses the introduction_screen package to display the onboarding screens

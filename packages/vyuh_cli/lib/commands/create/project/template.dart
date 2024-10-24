@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:mason/mason.dart';
 import 'package:vyuh_cli/commands/create/project/vyuh_project_bundle.dart';
-import 'package:vyuh_cli/utils/utils.dart';
 import 'package:vyuh_cli/template.dart';
+import 'package:vyuh_cli/utils/utils.dart';
 
 class ProjectTemplate extends Template {
   ProjectTemplate()

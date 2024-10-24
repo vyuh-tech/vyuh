@@ -1,0 +1,19 @@
+{
+  "name": "food-sanity-schema",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "private": true,
+  "dependencies": {
+    "@vyuh/sanity-schema-core": "^1.25.0",
+    "@vyuh/sanity-schema-system": "^1.25.0",
+    "react-icons": "^5.3.0",
+    "sanity": "^3.62.2"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

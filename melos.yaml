@@ -16,6 +16,7 @@ command:
     includeCommitId: false
     linkToCommits: false
     hooks:
+      pre: just bundle-all
       post: melos run update_version
 
 ide:
