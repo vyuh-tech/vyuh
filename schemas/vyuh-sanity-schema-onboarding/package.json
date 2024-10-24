@@ -1,0 +1,48 @@
+{
+  "name": "@vyuh/sanity-schema-onboarding",
+  "version": "1.25.0",
+  "description": "Sanity schemas for creating onboarding content when using the Vyuh Framework",
+  "homepage": "https://vyuh.tech",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vyuh-tech/vyuh"
+  },
+  "bugs": {
+    "url": "https://github.com/vyuh-tech/vyuh/issues"
+  },
+  "main": "src/index.ts",
+  "type": "module",
+  "publishConfig": {
+    "main": "index.js",
+    "types": "index.d.ts",
+    "access": "public",
+    "directory": "dist",
+    "linkDirectory": false
+  },
+  "scripts": {
+    "build": "tsup && cp package.json *.md dist/"
+  },
+  "author": {
+    "name": "Pavan Podila",
+    "url": "https://vyuh.tech"
+  },
+  "dependencies": {
+    "@vyuh/sanity-schema-core": "^1.25.0",
+    "@vyuh/sanity-schema-system": "^1.25.0",
+    "react-icons": "^5.3.0",
+    "sanity": "^3.61.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "eslint": "^8.57.1",
+    "tsup": "^8.3.0",
+    "typescript": "^5.6.3"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

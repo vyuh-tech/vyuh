@@ -1,8 +1,23 @@
 {
   "name": "vyuh",
   "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "publish-packages": "changeset version && pnpm --recursive --filter \"./schemas/*\" build && changeset publish"
+  },
+  "private": true,
+  "keywords": [],
+  "author": {
+    "email": "pavan@vyuh.tech",
+    "name": "Pavan Podila",
+    "url": "https://github.com/pavanpodila"
+  },
+  "license": "FSL",
+  "devDependencies": {
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3"
+  },
   "dependencies": {
-    "prettier": "^3.2.5",
-    "syncpack": "^12.3.2"
+    "@changesets/cli": "^2.27.9"
   }
 }

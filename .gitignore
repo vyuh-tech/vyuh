@@ -6,6 +6,7 @@ dist
 .DS_Store
 .idea
 coverage
+.metadata
 .dart_tool
 pubspec_overrides.yaml
 .flutter-plugins
