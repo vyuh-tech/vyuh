@@ -1,3 +1,7 @@
+## 0.0.4+6
+
+ - **FIX**: update bundles to remove the stray .DS_Store folders.
+
 ## 0.0.4+5
 
  - **FIX**: ensure we do checks for pnpm and sanity and print errors on failure.
