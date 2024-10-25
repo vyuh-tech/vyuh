@@ -4,8 +4,8 @@ repository: https://github.com/vyuh-tech/vyuh
 packages:
   - packages/{sanity,system,}/*
   - packages/{sanity,system,}/*/example
-  - features/*
-  - features/*/*
+  - examples/*
+  - examples/*/*
   - apps/*
 
 command:
