@@ -39,3 +39,18 @@ _generate-json package command="build":
     echo "Building JSON-Serializable in {{package}}"
     cd {{package}}
     dart run build_runner {{command}} --delete-conflicting-outputs
+
+# Publish to Testflight for testing on devices
+build-and-upload-ipa: _build-ipa _upload-to-testflight
+
+_build-ipa:
+    #!/usr/bin/env bash
+    cd apps/vyuh_demo
+    rm -rf build/ios/ipa
+    melos bootstrap
+    flutter build ipa --obfuscate --split-debug-info=build/ios/symbols
+
+_upload-to-testflight:
+    #!/usr/bin/env bash
+    cd apps/vyuh_demo/ios
+    fastlane beta
