@@ -22,6 +22,18 @@ gen-feature_misc: (_generate-json "features/misc/feature_misc" "watch")
 # Packages
 gen-tmdb_client: (_generate-json "packages/tmdb_client" "watch")
 
+# Launch images and Icons
+gen-launcher-icons:
+    #!/usr/bin/env bash
+    cd apps/vyuh_demo
+    flutter pub run flutter_launcher_icons
+
+gen-splash-screen:
+    #!/usr/bin/env bash
+    cd apps/vyuh_demo
+    flutter pub run flutter_native_splash:create
+
+
 _generate-json package command="build":
     #!/usr/bin/env bash
     echo "Building JSON-Serializable in {{package}}"
