@@ -1,4 +1,5 @@
 import {
+  BuiltContentSchemaBuilder,
   defaultLayoutConfiguration,
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
@@ -21,6 +22,8 @@ import {
   PhoneOtpFormDescriptor,
   PhoneOtpFormSchemaBuilder,
 } from './content/phone-otp-form';
+import { hintActionText } from './content/hint-action-text';
+import { FormDescriptor } from '@vyuh/sanity-schema-forms';
 
 export const auth = new FeatureDescriptor({
   name: 'auth',
@@ -33,7 +36,11 @@ export const auth = new FeatureDescriptor({
         { type: ForgotPasswordFormDescriptor.schemaType },
         { type: OAuthSignInDescriptor.schemaType },
         { type: PhoneOtpFormDescriptor.schemaType },
+        { type: hintActionText.name },
       ],
+    }),
+    new FormDescriptor({
+      items: [{ type: hintActionText.name }],
     }),
     new EmailPasswordFormDescriptor({
       layouts: [
@@ -69,5 +76,9 @@ export const auth = new FeatureDescriptor({
     new ForgotPasswordFormSchemaBuilder(),
     new OAuthSignInSchemaBuilder(),
     new PhoneOtpFormSchemaBuilder(),
+    new BuiltContentSchemaBuilder({
+      schemaType: hintActionText.name,
+      schema: hintActionText,
+    }),
   ],
 });

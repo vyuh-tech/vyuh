@@ -35,8 +35,9 @@ class _PhoneOTPViewState extends State<PhoneOTPView> {
                 child: Align(
                   alignment: Alignment.centerRight,
                   child: HintAction(
-                    hintText: "",
-                    actionText: "Get OTP",
+                    hintLabel: const SizedBox.shrink(),
+                    actionLabel:
+                        HintAction.defaultActionLabel(context, "Get OTP"),
                     onTap: (_) {
                       widget.content.getOtpAction?.execute(context);
                     },
@@ -57,8 +58,10 @@ class _PhoneOTPViewState extends State<PhoneOTPView> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: HintAction(
-                  hintText: "Don't have an account? ",
-                  actionText: "Sign Up",
+                  hintLabel: HintAction.defaultHintLabel(
+                      context, "Don't have an account? "),
+                  actionLabel:
+                      HintAction.defaultActionLabel(context, "Sign Up"),
                   onTap: (_) {
                     // final email = FormBuilder.of(context)
                     //     ?.instantValue['email'] as String?;

@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -146,34 +145,46 @@ class _PasswordFieldState extends State<PasswordField> {
 }
 
 class HintAction extends StatelessWidget {
-  final String hintText;
-  final String actionText;
+  final Widget hintLabel;
+  final Widget actionLabel;
   final void Function(BuildContext) onTap;
+  final WrapAlignment alignment;
 
   const HintAction({
     super.key,
-    required this.hintText,
-    required this.actionText,
+    required this.hintLabel,
+    required this.actionLabel,
     required this.onTap,
+    this.alignment = WrapAlignment.center,
   });
+
+  static Widget defaultHintLabel(BuildContext context, String label) =>
+      Text(label);
+
+  static Widget defaultActionLabel(BuildContext context, String label) => Text(
+        label,
+        style: TextStyle(
+            color: Theme.of(context).colorScheme.secondary,
+            fontWeight: FontWeight.bold),
+      );
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Text.rich(TextSpan(
-      children: [
-        TextSpan(text: hintText),
-        TextSpan(
-          text: actionText,
-          style: TextStyle(
-              color: theme.colorScheme.secondary, fontWeight: FontWeight.bold),
-          mouseCursor: SystemMouseCursors.click,
-          recognizer: TapGestureRecognizer()..onTap = () => onTap(context),
-        ),
-      ],
-      style: theme.textTheme.labelMedium,
-    ));
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Wrap(
+        alignment: alignment,
+        spacing: 4,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          hintLabel,
+          GestureDetector(
+            onTap: () => onTap(context),
+            child: actionLabel,
+          ),
+        ],
+      ),
+    );
   }
 }
 

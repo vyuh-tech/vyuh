@@ -47,6 +47,7 @@ final class RouteScaffold extends StatelessWidget {
     final footerItems = content.regionItems(KnownRegionType.footer.name);
 
     final bodyContent = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final headerItem in headerItems)
           vyuh.content.buildContent(context, headerItem),

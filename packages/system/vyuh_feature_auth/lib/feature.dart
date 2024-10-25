@@ -5,6 +5,7 @@ import 'package:vyuh_extension_content/content_extension_descriptor.dart';
 import 'package:vyuh_feature_auth/auth_user_card_layout.dart';
 import 'package:vyuh_feature_auth/content/email_password_form.dart';
 import 'package:vyuh_feature_auth/content/forgot_password_form.dart';
+import 'package:vyuh_feature_auth/content/hint_action_text.dart';
 import 'package:vyuh_feature_auth/content/oauth_signin.dart';
 import 'package:vyuh_feature_auth/content/phone_otp_form.dart';
 import 'package:vyuh_feature_system/content/index.dart';
@@ -25,6 +26,7 @@ feature({List<go.RouteBase> Function()? routes}) => FeatureDescriptor(
           ForgotPasswordForm.contentBuilder,
           OAuthSignIn.contentBuilder,
           PhoneOtpForm.contentBuilder,
+          HintActionText.contentBuilder,
         ])
       ],
       routes: routes ??

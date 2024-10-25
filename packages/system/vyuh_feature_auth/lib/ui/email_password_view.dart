@@ -57,8 +57,9 @@ class _EmailPasswordViewState extends State<EmailPasswordView> {
                   child: Align(
                     alignment: Alignment.centerRight,
                     child: HintAction(
-                      hintText: "",
-                      actionText: "Forgot your password?",
+                      hintLabel: const SizedBox.shrink(),
+                      actionLabel: HintAction.defaultActionLabel(
+                          context, "Forgot your password?"),
                       onTap: (_) {
                         // final email = FormBuilder.of(context)
                         //     ?.instantValue['email'] as String?;
@@ -78,8 +79,10 @@ class _EmailPasswordViewState extends State<EmailPasswordView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: HintAction(
-                    hintText: "Don't have an account? ",
-                    actionText: "Sign Up",
+                    hintLabel: HintAction.defaultHintLabel(
+                        context, "Don't have an account? "),
+                    actionLabel:
+                        HintAction.defaultActionLabel(context, "Sign Up"),
                     onTap: (_) {
                       // final email = FormBuilder.of(context)
                       //     ?.instantValue['email'] as String?;
@@ -91,8 +94,10 @@ class _EmailPasswordViewState extends State<EmailPasswordView> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
                   child: HintAction(
-                    hintText: "Already have an account? ",
-                    actionText: "Login",
+                    hintLabel: HintAction.defaultHintLabel(
+                        context, "Already have an account? "),
+                    actionLabel:
+                        HintAction.defaultActionLabel(context, "Login"),
                     onTap: (_) {
                       // final email = FormBuilder.of(context)
                       //     ?.instantValue['email'] as String?;

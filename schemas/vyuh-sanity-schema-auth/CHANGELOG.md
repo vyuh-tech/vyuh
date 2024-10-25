@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.26.0
+
+### Minor Changes
+
+- Added a hint-action-text item
+
 ## 1.25.1
 
 ### Patch Changes
