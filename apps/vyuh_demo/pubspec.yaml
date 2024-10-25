@@ -25,8 +25,8 @@ dependencies:
   vyuh_feature_system: ^1.23.3
   vyuh_feature_developer: ^1.2.0
   vyuh_plugin_content_provider_sanity: ^1.0.0
-  vyuh_feature_auth: ^1.12.0
-  vyuh_feature_onboarding: ^1.1.0
+  vyuh_feature_auth: ^1.12.1
+  vyuh_feature_onboarding: ^1.1.1
 
   # Example Features
   feature_sample: ^1.0.0
