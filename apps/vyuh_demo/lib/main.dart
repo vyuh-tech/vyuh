@@ -53,6 +53,7 @@ void main() async {
           return MaterialApp.router(
             title: 'Vyuh Demo',
             themeMode: mode,
+            debugShowCheckedModeBanner: false,
             theme: DesignSystem.lightTheme,
             darkTheme: DesignSystem.darkTheme,
             routerConfig: platform.router.instance,

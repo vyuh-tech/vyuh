@@ -14,6 +14,8 @@ dependencies:
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
   go_router: ^14.3.0
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.0
 
   # Sanity Integration
   sanity_client: ^1.0.0
@@ -52,3 +54,20 @@ flutter:
   uses-material-design: true
   assets:
     - .env
+    - assets/app-icon.png
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: 'assets/app-icon.png'
+  background_color_ios: '#ffffff'
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: 'assets/app-icon.png'
+    background_color: '#ffffff'
+    theme_color: '#a17fff'
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: 'assets/launchscreen-image.png'
