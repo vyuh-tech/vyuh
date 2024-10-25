@@ -31,6 +31,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+private_keys
+*.ipa
+*.zip
 
 # Symbolication related
 app.*.symbols

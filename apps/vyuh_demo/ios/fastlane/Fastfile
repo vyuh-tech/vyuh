@@ -1,0 +1,52 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Flutter Setup: https://docs.flutter.dev/deployment/cd#fastlane
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    # add actions here: https://docs.fastlane.tools/actions
+    increment_build_number(build_number: number_of_commits)
+
+    build_app(
+      skip_build_archive: true,
+      archive_path: "../build/ios/archive/Runner.xcarchive",
+    )
+
+    upload
+  end
+
+  lane :upload do
+    upload
+  end
+
+  def upload
+    key_path = File.expand_path(File.dirname(__FILE__), "./../../private_keys/AuthKey_Q32G8N2GAA.p8")
+    app_store_connect_api_key(
+      key_id: "Q32G8N2GAA",
+      issuer_id: "09d3b0d5-31e0-4c9e-b038-4feb748ce93e",
+      key_filepath: key_path,
+      duration: 1200, # optional (maximum 1200)
+      in_house: false # optional but may be required if using match/sigh
+    )
+
+    upload_to_testflight
+  end
+end
+
