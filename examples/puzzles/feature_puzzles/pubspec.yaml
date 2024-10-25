@@ -1,0 +1,46 @@
+name: feature_puzzles
+description: "A puzzle game crafted with Vyuh."
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^14.0.1
+  json_annotation: ^4.8.1
+  mobx: ^2.3.0+1
+  flutter_mobx: ^2.2.0+2
+  flutter_sanity_portable_text: ^1.4.0
+  vyuh_core: ^1.0.0
+  vyuh_feature_system: ^1.23.3
+  vyuh_extension_content: ^1.8.3
+  design_system: ^1.0.0
+  smooth_page_indicator: ^1.1.0
+  chakra_shared: ^1.0.0
+  equatable: ^2.0.5
+  water_fx: ^1.0.13
+  collection: ^1.18.0
+  flutter_animate: ^4.5.0
+  confetti: ^0.7.0
+  neopop: ^1.0.2
+  animated_flip_counter: ^0.3.4
+  uuid: ^4.5.0
+  skeletonizer: ^1.4.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/

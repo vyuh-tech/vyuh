@@ -1,0 +1,37 @@
+name: vyuh_feature_auth
+description: Provides the ability to create a Firebase Auth feature for your Vyuh project.
+version: 1.11.0
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh
+
+environment:
+  sdk: '>=3.3.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  json_annotation: ^4.9.0
+  flutter:
+    sdk: flutter
+  go_router: ^14.0.2
+  collection: ^1.18.0
+  vyuh_core: ^1.22.2
+  vyuh_feature_system: ^1.25.4
+  vyuh_extension_content: ^1.8.2
+  mobx: ^2.3.3+2
+  flutter_mobx: ^2.2.1+1
+  flutter_form_builder: ^9.5.0
+  form_builder_validators: ^11.0.0
+  async: ^2.11.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  json_serializable: ^6.7.1
+  build_runner: ^2.4.6
+
+flutter:
+  fonts:
+    - family: SocialIcons
+      fonts:
+        - asset: lib/fonts/SocialIcons.ttf

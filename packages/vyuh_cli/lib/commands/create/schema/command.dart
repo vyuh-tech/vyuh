@@ -7,8 +7,8 @@ import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
 import 'package:vyuh_cli/commands/create/schema/template.dart';
-import 'package:vyuh_cli/utils/utils.dart';
 import 'package:vyuh_cli/template.dart';
+import 'package:vyuh_cli/utils/utils.dart';
 
 final class CreateSanitySchemaCommand extends Command<int> {
   CreateSanitySchemaCommand({

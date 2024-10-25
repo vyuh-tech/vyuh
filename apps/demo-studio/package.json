@@ -1,0 +1,47 @@
+{
+  "name": "demo-studio",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
+  "scripts": {
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy",
+    "edit": "node scripts/edit-document.js"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@vyuh/sanity-plugin-structure": "^1.25.0",
+    "@vyuh/sanity-schema-auth": "^1.25.0",
+    "@vyuh/sanity-schema-core": "^1.25.0",
+    "@vyuh/sanity-schema-onboarding": "^1.25.0",
+    "@vyuh/sanity-schema-system": "^1.25.0",
+    "food-sanity-schema": "workspace:*",
+    "misc-sanity-schema": "workspace:*",
+    "puzzles-sanity-schema": "workspace:*",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "sanity": "^3.62.2",
+    "settings-sanity-schema": "workspace:*",
+    "styled-components": "^6.1.13",
+    "tmdb-sanity-schema": "workspace:*",
+    "wonderous-sanity-schema": "workspace:*"
+  },
+  "devDependencies": {
+    "@sanity/eslint-config-studio": "^4.0.0",
+    "@types/react": "^18.3.12",
+    "eslint": "^8.57.1",
+    "typescript": "^5.6.3"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
+  }
+}

@@ -4,8 +4,8 @@ repository: https://github.com/vyuh-tech/vyuh
 packages:
   - packages/{sanity,system,}/*
   - packages/{sanity,system,}/*/example
-  - features/*
-  - features/*/*
+  - examples/*
+  - examples/*/*
   - apps/*
 
 command:
@@ -16,6 +16,7 @@ command:
     includeCommitId: false
     linkToCommits: false
     hooks:
+      pre: just bundle-all
       post: melos run update_version
 
 ide:

@@ -13,19 +13,34 @@ dependencies:
   cupertino_icons: ^1.0.6
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
+  go_router: ^14.3.0
 
   # Sanity Integration
   sanity_client: ^1.0.0
   flutter_sanity_portable_text: ^1.0.0
 
   # Vyuh Framework
-  vyuh_core: ^1.18.0
-  vyuh_extension_content: ^1.7.0
-  vyuh_feature_developer: ^1.4.0
-  vyuh_feature_system: ^1.23.2
+  vyuh_core: ^1.15.0
+  vyuh_extension_content: ^1.8.3
+  vyuh_feature_system: ^1.23.3
+  vyuh_feature_developer: ^1.2.0
+  vyuh_plugin_content_provider_sanity: ^1.0.0
+  vyuh_feature_auth: ^1.0.0
+  vyuh_feature_onboarding: ^1.0.0
 
-  # Features
+  # Example Features
   feature_sample: ^1.0.0
+  feature_settings: ^1.0.0
+  feature_tmdb: ^1.0.0
+  feature_food: ^1.0.0
+  feature_wonderous: ^1.0.0
+  feature_misc: ^1.0.0
+  feature_puzzles: ^1.0.0
+  feature_unsplash: ^1.0.0
+
+  # Shared Packages
+  design_system: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -35,3 +50,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - .env
