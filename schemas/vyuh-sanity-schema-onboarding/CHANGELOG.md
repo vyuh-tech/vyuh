@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-onboarding
 
+## 1.25.1
+
+### Patch Changes
+
+- Moving schemas to the vyuh repo
+
 ## 1.25.0
 
 ### Patch Changes
