@@ -1,3 +1,7 @@
+## 1.1.2
+
+ - **FIX**: update pubspec and readme.
+
 ## 1.1.1
 
  - **FIX**: update licenses.
