@@ -138,48 +138,64 @@ Start with the documentation on the [Website](https://docs.vyuh.tech).
     <tr>
       <td>
         <img src="_images/example-counter.png" height="200">
-        <a href="examples/feature_sample/lib/features/feature_counter.dart" style="display: block;">Counter</a>
+        <br>
+        <a href="examples/feature_sample/lib/features/feature_counter.dart">Counter</a>
+        <br>
         The classic counter example from Flutter, as a Vyuh Feature.
       </td>
       <td>
         <img src="_images/example-settings.png" height="200">
-        <a href="examples/feature_sample/lib/features/feature_settings.dart" style="display: block;">Theme Settings</a>
+        <br>
+        <a href="examples/feature_sample/lib/features/feature_settings.dart">Theme Settings</a>
+        <br>
         Toggle between the light & dark themes.
       </td>
     </tr>
     <tr>
       <td>
         <img src="_images/example-wonderous.png" height="200">
-        <a href="examples/wonderous" style="display: block;">Wonderous</a>
+        <br>
+        <a href="examples/wonderous">Wonderous</a>
+        <br>
         The Wonderous App as a feature.
       </td>
       <td>
         <img src="_images/example-tmdb.png" height="200">
-        <a href="examples/tmdb" style="display: block;">Movies</a>
+        <br>
+        <a href="examples/tmdb">Movies</a>
+        <br>
         A Movies feature using the TMDB API.
       </td>
     </tr>
     <tr>
       <td>
         <img src="_images/example-unsplash.png" height="200">
-        <a href="examples/unsplash" style="display: block;">Unsplash</a>
+        <br>
+        <a href="examples/unsplash">Unsplash</a>
+        <br>
         Explore the photos from Unsplash
       </td>
       <td>
         <img src="_images/example-misc.png" height="200">
-        <a href="examples/misc" style="display: block;">Miscellaneous</a>
+        <br>
+        <a href="examples/misc">Miscellaneous</a>
+        <br>
         Explore the various framework capabilities in this miscellaneous feature.
       </td>
     </tr>
     <tr>
       <td>
         <img src="_images/example-food.png" height="200">
-        <a href="examples/food" style="display: block;">Food</a>
+        <br>
+        <a href="examples/food">Food</a>
+        <br>
         A fast-food menu feature
       </td>
       <td>
         <img src="_images/example-puzzle.png" height="200">
-        <a href="examples/puzzles" style="display: block;">Puzzle</a>
+        <br>
+        <a href="examples/puzzles">Puzzle</a>
+        <br>
         A fun little puzzle game, as a feature.
       </td>
     </tr>
