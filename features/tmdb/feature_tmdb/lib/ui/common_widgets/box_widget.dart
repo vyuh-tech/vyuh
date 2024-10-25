@@ -31,7 +31,7 @@ class BoxWidget extends StatelessWidget {
                 vertical: theme.spacing.s8,
               ),
               decoration: BoxDecoration(
-                color: theme.colorScheme.secondaryContainer,
+                color: theme.colorScheme.primary,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
