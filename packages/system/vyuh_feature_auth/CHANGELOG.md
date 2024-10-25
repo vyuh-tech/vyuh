@@ -1,3 +1,7 @@
+## 1.12.1
+
+ - **FIX**: update licenses.
+
 ## 1.12.0
 
  - **REFACTOR**: visual tweaks.

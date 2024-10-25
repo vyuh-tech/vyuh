@@ -1,3 +1,7 @@
+## 1.1.1
+
+ - **FIX**: update licenses.
+
 ## 1.1.0
 
  - **FEAT**: adding feature examples, schemas and some core feature packages like auth and onboarding.
