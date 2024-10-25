@@ -15,7 +15,7 @@ final class TmdbSearchStore<T> {
   final selectedChip = Observable<int>(0);
   late ObservableFuture<ListResponse<T>?> fetchFutureData =
       ObservableFuture.value(null);
-  final state = Observable(FutureStatus.pending);
+  final state = Observable(FutureStatus.fulfilled);
 
   final ScrollController scrollController = ScrollController();
 
@@ -26,7 +26,7 @@ final class TmdbSearchStore<T> {
   }) async {
     runInAction(() => errorMessage.value = null);
     if (query.isEmpty) {
-      runInAction(() => state.value = FutureStatus.pending);
+      runInAction(() => state.value = FutureStatus.fulfilled);
       chips = searchTypes
           .map((type) => ChipItem(label: type.title, searchType: type))
           .toList();
