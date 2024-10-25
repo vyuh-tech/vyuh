@@ -1,3 +1,7 @@
+## 1.26.0
+
+ - **FEAT**: added a Hint Action Text item useful when you have a question followed by an action in a single line.
+
 ## 1.25.4
 
  - **FIX**: make the isAwaiting flag work across actions.
