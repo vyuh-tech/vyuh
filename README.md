@@ -41,6 +41,8 @@
 
 <hr style="height: 1px;"/>
 
+## Hi there! 👋
+
 **Vyuh** is a framework to build CMS-driven Flutter Apps at scale. It gives the
 **no-code** flexibility to the Business teams (via the CMS), and the
 **full-code** power to the Engineering teams. This puts the right control at the
@@ -50,7 +52,7 @@ right place without any compromise.
 > are managed as Plugins, which are standardized interfaces to extend the
 > capabilities of the framework.
 
-## Why did we build this?
+## 🤔 Why did we build this?
 
 A common problem when building large scale apps is the _need to stay modular_ as
 you keep growing the feature set. You also want different teams to _work in
@@ -104,7 +106,7 @@ The **Vyuh** framework has some powerful built-in capabilities such as:
 - [x] A growing set of integrations (aka building blocks) to make app
       development faster.
 
-## The Building Blocks
+## 🔩 The Building Blocks
 
 The core building blocks that enable all of this include:
 
@@ -127,11 +129,17 @@ The core building blocks that enable all of this include:
 
 > It is plain old Flutter with a fresh approach to building scalable apps.
 
-## Getting Started
+## Getting Started 🚀
 
-Start with the documentation on the [Website](https://docs.vyuh.tech).
+1. Start with the documentation on the [Docs Website](https://docs.vyuh.tech).
+2. There are several examples to give you a taste of the Framework. Check them
+   out in the [examples](examples) directory. Some direct links to the examples
+   are listed below.
+3. To run the Vyuh Demo, there is some setup needed. This includes API Keys for
+   Unsplash and TMDB. All these details are in the
+   [Vyuh Demo README](apps/vyuh_demo/README.md).
 
-## Examples
+### Examples
 
 <table>
   <tbody>
