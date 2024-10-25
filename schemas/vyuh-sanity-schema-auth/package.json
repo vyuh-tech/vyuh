@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-auth",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "description": "Schemas for configuring Authentication on Sanity CMS when using the Vyuh Framework",
   "homepage": "https://vyuh.tech",
   "repository": {

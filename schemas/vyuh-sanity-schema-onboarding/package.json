@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-onboarding",
-  "version": "1.25.0",
+  "version": "1.25.1",
   "description": "Sanity schemas for creating onboarding content when using the Vyuh Framework",
   "homepage": "https://vyuh.tech",
   "license": "MIT",
