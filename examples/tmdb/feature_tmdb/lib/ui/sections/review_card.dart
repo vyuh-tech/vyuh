@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:chakra_shared/chakra_shared.dart';
-import 'package:chakra_shared/extension/string_extension.dart';
 import 'package:collection/collection.dart';
 import 'package:design_system/core/gap.dart';
 import 'package:design_system/design_system.dart' as ds;
@@ -13,6 +12,7 @@ import 'package:feature_tmdb/ui/section_title.dart';
 import 'package:feature_tmdb/utils/constants.dart';
 import 'package:flutter/material.dart' as f;
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as html_parser;
 import 'package:readmore/readmore.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
@@ -252,5 +252,12 @@ class ReviewCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+extension on String {
+  String parseHtml(String htmlString) {
+    final parsedString = html_parser.parse(htmlString);
+    return parsedString.body?.text ?? '';
   }
 }
