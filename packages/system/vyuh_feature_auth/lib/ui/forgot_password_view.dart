@@ -41,8 +41,10 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: HintAction(
                   onTap: (_) => widget.content.returnAction?.execute(context),
-                  hintText: 'Know your password? ',
-                  actionText: 'Go Back',
+                  hintLabel: HintAction.defaultHintLabel(
+                      context, 'Know your password? '),
+                  actionLabel:
+                      HintAction.defaultActionLabel(context, 'Go Back'),
                 ),
               ),
             ],
