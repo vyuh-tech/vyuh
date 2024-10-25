@@ -1,3 +1,7 @@
+## 1.1.0
+
+ - **FEAT**: adding feature examples, schemas and some core feature packages like auth and onboarding.
+
 ## 1.0.8
 
  - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.

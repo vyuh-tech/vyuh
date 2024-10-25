@@ -1,3 +1,7 @@
+## 0.0.5
+
+ - **FEAT**: adding feature examples, schemas and some core feature packages like auth and onboarding.
+
 ## 0.0.4+6
 
  - **FIX**: update bundles to remove the stray .DS_Store folders.

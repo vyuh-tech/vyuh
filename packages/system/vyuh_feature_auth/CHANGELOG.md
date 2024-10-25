@@ -1,3 +1,8 @@
+## 1.12.0
+
+ - **REFACTOR**: visual tweaks.
+ - **FEAT**: adding feature examples, schemas and some core feature packages like auth and onboarding.
+
 ## 1.11.0
 
  - **FEAT**: add an option to show/hide login error.
