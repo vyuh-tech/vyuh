@@ -15,7 +15,7 @@ dependencies:
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
   vyuh_core: ^1.18.0
-  vyuh_feature_system: ^1.23.2
+  vyuh_feature_system: ^1.26.0
   vyuh_extension_content: ^1.7.0
 
 dev_dependencies:

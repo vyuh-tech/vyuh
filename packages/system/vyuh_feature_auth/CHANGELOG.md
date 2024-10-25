@@ -1,3 +1,7 @@
+## 1.13.0
+
+ - **FEAT**: added a Hint Action Text item useful when you have a question followed by an action in a single line.
+
 ## 1.12.2
 
  - **FIX**: update pubspec and readme.
