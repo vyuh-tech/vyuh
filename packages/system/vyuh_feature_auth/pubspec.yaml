@@ -1,5 +1,5 @@
 name: vyuh_feature_auth
-description: Provides the ability to create a Firebase Auth feature for your Vyuh project.
+description: Provides the Auth feature for your Vyuh project.
 version: 1.12.1
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
