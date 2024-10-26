@@ -34,7 +34,7 @@ class AddToWatchlistButton extends StatelessWidget {
       child: Container(
         height: theme.sizing.s14,
         decoration: BoxDecoration(
-          color: theme.colorScheme.secondaryContainer,
+          color: theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(theme.borderRadius.small),
         ),
         child: Row(
