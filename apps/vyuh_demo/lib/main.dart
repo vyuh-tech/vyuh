@@ -1,9 +1,9 @@
-import 'package:chakra_shared/chakra_shared.dart';
+import 'package:chakra_shared/chakra_plugin_auth.dart';
 import 'package:design_system/design_system.dart';
+import 'package:feature_counter/feature_counter.dart' as counter;
 import 'package:feature_food/feature_food.dart' as food;
 import 'package:feature_misc/feature_misc.dart' as misc;
 import 'package:feature_puzzles/feature_puzzles.dart' as puzzles;
-import 'package:feature_sample/feature_sample.dart' as sample;
 import 'package:feature_tmdb/feature_tmdb.dart' as tmdb;
 import 'package:feature_unsplash/feature_unsplash.dart' as unsplash;
 import 'package:feature_wonderous/feature_wonderous.dart' as wonderous;
@@ -33,8 +33,7 @@ void main() async {
 
       // Example Features
       root.feature,
-      sample.featureCounter,
-      sample.featureSettings,
+      counter.feature,
       tmdb.feature,
       food.feature,
       wonderous.feature,

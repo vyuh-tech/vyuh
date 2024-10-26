@@ -116,11 +116,11 @@ class MovieHeroCard extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                         horizontal: theme.spacing.s8,
                       ),
-                      backgroundColor: theme.colorScheme.primary,
+                      backgroundColor: theme.colorScheme.secondary,
                       label: Text(
                         movie.status ?? '',
                         style: theme.tmdbTheme.bodySmall
-                            ?.copyWith(color: theme.colorScheme.onPrimary),
+                            ?.copyWith(color: theme.colorScheme.onSecondary),
                       ),
                     ),
                     if (movie.voteAverage != null)
