@@ -2,4 +2,3 @@ packages:
   - apps/*
   - schemas/*
   - examples/*/*
-  - ../vyuh_packages/schemas/*

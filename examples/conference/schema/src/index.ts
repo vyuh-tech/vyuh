@@ -12,9 +12,9 @@ import { track } from './documents/track.ts';
 import { confBreak, schedule, scheduleDay } from './documents/schedule.ts';
 
 export const conference = new FeatureDescriptor({
-  name: 'schema',
-  title: 'Schema',
-  description: 'Schema for the Schema feature',
+  name: 'conferences',
+  title: 'Conferences',
+  description: 'The Conferences feature to manage conference data',
   contents: [
     new DocumentDescriptor({
       documentTypes: [

@@ -48,6 +48,7 @@ const tabSchema: SchemaTypeDefinition = defineType({
     }),
   ],
 });
+// @ts-ignore
 export const settings = new FeatureDescriptor({
   name: 'common',
   title: 'Common Settings',
@@ -76,6 +77,7 @@ export const settings = new FeatureDescriptor({
             name: 'tabs',
             title: 'Tabs',
             type: 'array',
+            // @ts-ignore
             of: [tabSchema],
             validation: (Rule: any) => Rule.min(2),
           }),

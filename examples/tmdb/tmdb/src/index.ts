@@ -24,7 +24,7 @@ import { genresConfig } from './api-config/genres-config';
 
 export const tmdb = new FeatureDescriptor({
   name: 'tmdb',
-  title: 'Tmdb',
+  title: 'Tmdb Movies',
   description: 'Schema for the Tmdb feature',
   contents: [
     new RouteDescriptor({

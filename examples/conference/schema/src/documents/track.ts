@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity';
-import { HiCalendarDays as Icon } from 'react-icons/hi2';
+import { MdOutlineCategory as Icon } from 'react-icons/md';
 
 export const track = defineType({
   name: 'conf.track',

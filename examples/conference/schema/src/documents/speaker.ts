@@ -1,6 +1,6 @@
 // speaker schema
 import { defineField, defineType } from 'sanity';
-import { HiCalendarDays as Icon } from 'react-icons/hi2';
+import { MdCoPresent as Icon } from 'react-icons/md';
 
 export const speaker = defineType({
   name: 'conf.speaker',
