@@ -1,3 +1,7 @@
+## 1.9.0
+
+ - **FEAT**: updated the refresh button for routes and adjusting for the change in the BuiltContentSchemaBuilder.
+
 ## 1.8.3
 
  - **FIX**: handle case when an ActionConfiguration is created manually instead of coming from the CMS.
