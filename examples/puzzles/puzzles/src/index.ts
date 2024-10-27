@@ -24,22 +24,10 @@ export const puzzles = new FeatureDescriptor({
     }),
   ],
   contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schemaType: character.name,
-      schema: character,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: killCondition.name,
-      schema: killCondition,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: puzzleLevel.name,
-      schema: puzzleLevel,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: levelSection.name,
-      schema: levelSection,
-    }),
+    new BuiltContentSchemaBuilder(character),
+    new BuiltContentSchemaBuilder(killCondition),
+    new BuiltContentSchemaBuilder(puzzleLevel),
+    new BuiltContentSchemaBuilder(levelSection),
   ],
   contentSchemaModifiers: [
     new DefaultFieldsModifier({

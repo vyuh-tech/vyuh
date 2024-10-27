@@ -14,10 +14,5 @@ export const onboarding = new FeatureDescriptor({
       regionItems: [{ type: onboardingContent.name }],
     }),
   ],
-  contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schema: onboardingContent,
-      schemaType: onboardingContent.name,
-    }),
-  ],
+  contentSchemaBuilders: [new BuiltContentSchemaBuilder(onboardingContent)],
 });

@@ -1,3 +1,7 @@
+## 0.0.5+1
+
+ - **REFACTOR**: cleaning up some code, visual tweaks.
+
 ## 0.0.5
 
  - **FEAT**: adding feature examples, schemas and some core feature packages like auth and onboarding.
