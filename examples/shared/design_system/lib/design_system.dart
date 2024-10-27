@@ -10,9 +10,10 @@ export 'generated/theme.dart';
 export 'utils/extensions.dart';
 
 class DesignSystem {
-  static ThemeData get lightTheme =>
-      MaterialTheme(core.createTextTheme()).light().withExtensions;
+  static ThemeData get lightTheme => MaterialTheme(core.createTextTheme())
+      .lightMediumContrast()
+      .withExtensions;
 
   static ThemeData get darkTheme =>
-      MaterialTheme(core.createTextTheme()).dark().withExtensions;
+      MaterialTheme(core.createTextTheme()).darkMediumContrast().withExtensions;
 }

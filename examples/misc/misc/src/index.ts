@@ -56,9 +56,6 @@ export const misc = new FeatureDescriptor({
   ],
   contentSchemaBuilders: [
     new ProductCardContentBuilder(),
-    new BuiltContentSchemaBuilder({
-      schema: missingContent,
-      schemaType: missingContent.name,
-    }),
+    new BuiltContentSchemaBuilder(missingContent),
   ],
 });

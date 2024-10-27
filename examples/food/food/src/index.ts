@@ -3,7 +3,7 @@ import {
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
-import {menuItem, foodItemContent, selectItemAction} from './menu-item';
+import { menuItem, foodItemContent, selectItemAction } from './menu-item';
 
 export const food = new FeatureDescriptor({
   name: 'food',
@@ -19,14 +19,8 @@ export const food = new FeatureDescriptor({
     }),
   ],
   contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schemaType: menuItem.name,
-      schema: menuItem,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: foodItemContent.name,
-      schema: foodItemContent,
-    }),
+    new BuiltContentSchemaBuilder(menuItem),
+    new BuiltContentSchemaBuilder(foodItemContent),
   ],
   actions: [selectItemAction],
 });
