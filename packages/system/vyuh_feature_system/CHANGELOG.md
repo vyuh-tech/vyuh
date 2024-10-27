@@ -1,3 +1,7 @@
+## 1.27.0
+
+ - **FEAT**: updated the refresh button for routes and adjusting for the change in the BuiltContentSchemaBuilder.
+
 ## 1.26.0
 
  - **FEAT**: added a Hint Action Text item useful when you have a question followed by an action in a single line.
