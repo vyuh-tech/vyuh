@@ -117,8 +117,8 @@ class _ContentWithRefresh extends StatelessWidget {
           Positioned(
               left: 5,
               bottom: MediaQuery.of(context).viewPadding.bottom,
-              child: IconButton(
-                color: Theme.of(context).colorScheme.tertiary,
+              child: IconButton.filledTonal(
+                mouseCursor: SystemMouseCursors.click,
                 icon: const Icon(Icons.refresh),
                 onPressed: onRefresh,
               ))

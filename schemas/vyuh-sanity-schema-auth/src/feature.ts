@@ -76,9 +76,6 @@ export const auth = new FeatureDescriptor({
     new ForgotPasswordFormSchemaBuilder(),
     new OAuthSignInSchemaBuilder(),
     new PhoneOtpFormSchemaBuilder(),
-    new BuiltContentSchemaBuilder({
-      schemaType: hintActionText.name,
-      schema: hintActionText,
-    }),
+    new BuiltContentSchemaBuilder(hintActionText),
   ],
 });

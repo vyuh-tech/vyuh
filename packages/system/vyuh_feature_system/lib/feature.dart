@@ -91,11 +91,18 @@ final feature = FeatureDescriptor(
               styleBuilder: (context, def, style) {
                 final theme = Theme.of(context);
 
-                return style.copyWith(
-                  color: theme.colorScheme.primary,
-                  decorationColor: theme.colorScheme.inversePrimary,
-                  decorationStyle: TextDecorationStyle.dashed,
+                return style.apply(
+                  decorationColor: theme.colorScheme.primary,
+                  decorationStyle: TextDecorationStyle.solid,
                   decoration: TextDecoration.underline,
+                  fontWeightDelta: 2,
+                  shadows: [
+                    Shadow(
+                      color: theme.colorScheme.primary,
+                      offset: const Offset(0, -2),
+                    ),
+                  ],
+                  color: Colors.transparent,
                 );
               },
               spanBuilder: (context, def, text, style) {
@@ -116,11 +123,6 @@ final feature = FeatureDescriptor(
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.left,
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          size: 16,
-                          color: Theme.of(context).colorScheme.primary,
                         ),
                       ],
                     ),
