@@ -53,9 +53,8 @@ export const settings = new FeatureDescriptor({
   title: 'Common Settings',
   contents: [],
   contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schemaType: 'common.settings',
-      schema: defineType({
+    new BuiltContentSchemaBuilder(
+      defineType({
         name: 'common.settings',
         title: 'Settings',
         type: 'document',
@@ -82,7 +81,7 @@ export const settings = new FeatureDescriptor({
           }),
         ],
       }),
-    }),
+    ),
   ],
   contentSchemaModifiers: [
     new DefaultFieldsModifier({

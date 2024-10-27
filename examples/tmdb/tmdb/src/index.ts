@@ -58,34 +58,13 @@ export const tmdb = new FeatureDescriptor({
     }),
   ],
   contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schemaType: movieDetailSection.name,
-      schema: movieDetailSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: seriesDetailSection.name,
-      schema: seriesDetailSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: movieWatchlistSection.name,
-      schema: movieWatchlistSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: seriesWatchlistSection.name,
-      schema: seriesWatchlistSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: personDetailSection.name,
-      schema: personDetailSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: searchSection.name,
-      schema: searchSection,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: dropdownMenu.name,
-      schema: dropdownMenu,
-    }),
+    new BuiltContentSchemaBuilder(movieDetailSection),
+    new BuiltContentSchemaBuilder(seriesDetailSection),
+    new BuiltContentSchemaBuilder(movieWatchlistSection),
+    new BuiltContentSchemaBuilder(seriesWatchlistSection),
+    new BuiltContentSchemaBuilder(personDetailSection),
+    new BuiltContentSchemaBuilder(searchSection),
+    new BuiltContentSchemaBuilder(dropdownMenu),
   ],
   actions: [addToWatchlistAction, dropDownChangeAction],
 });

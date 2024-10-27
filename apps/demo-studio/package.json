@@ -16,12 +16,13 @@
     "sanity"
   ],
   "dependencies": {
-    "@vyuh/sanity-plugin-structure": "^1.25.0",
-    "@vyuh/sanity-schema-auth": "^1.25.0",
-    "@vyuh/sanity-schema-core": "^1.25.0",
-    "@vyuh/sanity-schema-onboarding": "^1.25.0",
-    "@vyuh/sanity-schema-system": "^1.25.0",
+    "@vyuh/sanity-plugin-structure": "^1.26.1",
+    "@vyuh/sanity-schema-auth": "^1.26.0",
+    "@vyuh/sanity-schema-core": "^1.26.1",
+    "@vyuh/sanity-schema-onboarding": "^1.26.0",
+    "@vyuh/sanity-schema-system": "^1.26.1",
     "food-sanity-schema": "workspace:*",
+    "conference-sanity-schema": "workspace:*",
     "misc-sanity-schema": "workspace:*",
     "puzzles-sanity-schema": "workspace:*",
     "react": "^18.3.1",

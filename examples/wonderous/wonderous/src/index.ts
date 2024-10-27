@@ -55,18 +55,9 @@ export const wonderous = new FeatureDescriptor({
     }),
   ],
   contentSchemaBuilders: [
-    new BuiltContentSchemaBuilder({
-      schemaType: wonderQuote.name,
-      schema: wonderQuote,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: wonderEvent.name,
-      schema: wonderEvent,
-    }),
-    new BuiltContentSchemaBuilder({
-      schemaType: wonder.name,
-      schema: wonder,
-    }),
+    new BuiltContentSchemaBuilder(wonderQuote),
+    new BuiltContentSchemaBuilder(wonderEvent),
+    new BuiltContentSchemaBuilder(wonder),
   ],
   contentSchemaModifiers: [
     new DefaultFieldsModifier({

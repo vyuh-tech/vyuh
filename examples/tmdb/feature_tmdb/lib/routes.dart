@@ -1,5 +1,4 @@
 import 'package:collection/collection.dart';
-import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_settings/feature_settings.dart';
 import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:flutter/material.dart';
@@ -63,8 +62,8 @@ List<go.RouteBase> routes(Settings settings) {
           return Scaffold(
             body: shell,
             bottomNavigationBar: NavigationBar(
-              backgroundColor: theme.colorScheme.onPrimary,
               labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
+              indicatorColor: theme.colorScheme.primary,
               destinations: settings.tabs
                   .map(
                     (tab) => NavigationDestination(
@@ -75,8 +74,6 @@ List<go.RouteBase> routes(Settings settings) {
                   )
                   .toList(growable: false),
               selectedIndex: shell.currentIndex,
-              height: theme.sizing.s22,
-              indicatorColor: theme.colorScheme.onPrimary,
               onDestinationSelected: (index) => shell.goBranch(
                 index,
                 initialLocation: index == shell.currentIndex,
