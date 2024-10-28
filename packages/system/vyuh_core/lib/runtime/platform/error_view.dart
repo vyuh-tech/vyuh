@@ -125,11 +125,12 @@ class _ErrorView extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final textColor = theme.colorScheme.onSurface;
+    final textColor = theme.colorScheme.onError;
+
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 100, maxHeight: 200),
+      constraints: const BoxConstraints(minHeight: 100, maxHeight: 400),
       child: Card(
-        color: theme.colorScheme.errorContainer,
+        color: theme.colorScheme.error,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -184,7 +185,7 @@ class _ErrorView extends StatelessWidget {
                 child: FilledButton(
                     onPressed: onRetry, child: Text(retryLabel ?? 'Retry')),
               ),
-            const PoweredByWidget(),
+            PoweredByWidget(color: textColor),
           ],
         ),
       ),
