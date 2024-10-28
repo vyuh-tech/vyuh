@@ -16,3 +16,4 @@ mason-lock.json
 .mason
 *.lock
 devtools_options.yaml
+pnpm-lock.yaml

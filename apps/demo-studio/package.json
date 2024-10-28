@@ -9,18 +9,17 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
-    "edit": "node scripts/edit-document.js"
+    "deploy-graphql": "sanity graphql deploy"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@vyuh/sanity-plugin-structure": "^1.27.1",
+    "@vyuh/sanity-plugin-structure": "^1.27.2",
     "@vyuh/sanity-schema-auth": "^1.26.0",
-    "@vyuh/sanity-schema-core": "^1.27.1",
+    "@vyuh/sanity-schema-core": "^1.27.2",
     "@vyuh/sanity-schema-onboarding": "^1.26.0",
-    "@vyuh/sanity-schema-system": "^1.27.1",
+    "@vyuh/sanity-schema-system": "^1.27.2",
     "conference-sanity-schema": "workspace:*",
     "food-sanity-schema": "workspace:*",
     "misc-sanity-schema": "workspace:*",
