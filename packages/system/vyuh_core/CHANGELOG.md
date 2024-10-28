@@ -1,3 +1,7 @@
+## 1.22.3
+
+ - **FIX**: using the right color combinations for error.
+
 ## 1.22.2
 
  - **FIX**: make the AuthPlugin more generic.
