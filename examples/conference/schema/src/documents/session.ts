@@ -8,6 +8,14 @@ export const session = defineType({
   icon: Icon,
   fields: [
     defineField({
+      name: 'edition',
+      title: 'Edition',
+      type: 'reference',
+      to: [{ type: 'conf.edition' }],
+      weak: true,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',

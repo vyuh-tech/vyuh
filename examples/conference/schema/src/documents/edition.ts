@@ -8,6 +8,14 @@ export const edition = defineType({
   icon: Icon,
   fields: [
     defineField({
+      name: 'conference',
+      title: 'Conference',
+      type: 'reference',
+      to: [{ type: 'conf.conference' }],
+      weak: true,
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'identifier',
       title: 'Identifier',
       type: 'string',

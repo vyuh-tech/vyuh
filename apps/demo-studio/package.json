@@ -9,7 +9,8 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy"
+    "deploy-graphql": "sanity graphql deploy",
+    "sanity:exec": "sanity exec scripts/sanity-script.ts --with-user-token"
   },
   "keywords": [
     "sanity"
@@ -36,6 +37,9 @@
     "@sanity/eslint-config-studio": "^4.0.0",
     "@types/react": "^18.3.12",
     "eslint": "^8.57.1",
-    "typescript": "^5.6.3"
+    "typescript": "^5.6.3",
+    "lodash-es": "^4.17.21",
+    "@types/lodash-es": "^4.17.12",
+    "nanoid": "^5.0.8"
   }
 }
