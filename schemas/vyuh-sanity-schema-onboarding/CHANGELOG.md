@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-onboarding
 
+## 1.27.0
+
+### Minor Changes
+
+- Updating the new API for BuiltContentSchemaBuilder
+
 ## 1.26.0
 
 ## 1.25.1
