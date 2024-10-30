@@ -1,7 +1,7 @@
 {
   "name": "demo-studio",
   "private": true,
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
@@ -17,9 +17,9 @@
   ],
   "dependencies": {
     "@vyuh/sanity-plugin-structure": "^1.27.2",
-    "@vyuh/sanity-schema-auth": "^1.26.0",
+    "@vyuh/sanity-schema-auth": "^1.27.1",
     "@vyuh/sanity-schema-core": "^1.27.2",
-    "@vyuh/sanity-schema-onboarding": "^1.26.0",
+    "@vyuh/sanity-schema-onboarding": "^1.27.1",
     "@vyuh/sanity-schema-system": "^1.27.2",
     "conference-sanity-schema": "workspace:*",
     "food-sanity-schema": "workspace:*",
@@ -35,11 +35,11 @@
   },
   "devDependencies": {
     "@sanity/eslint-config-studio": "^4.0.0",
+    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.3.12",
     "eslint": "^8.57.1",
-    "typescript": "^5.6.3",
     "lodash-es": "^4.17.21",
-    "@types/lodash-es": "^4.17.12",
-    "nanoid": "^5.0.8"
+    "nanoid": "^5.0.8",
+    "typescript": "^5.6.3"
   }
 }
