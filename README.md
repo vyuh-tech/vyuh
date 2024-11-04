@@ -123,9 +123,9 @@ The core building blocks that enable all of this include:
   themes, etc. The CMS itself is a standard plugin with custom Providers. Bring
   your own CMS as a `ContentProvider`!
 
-  > [!NOTE]
-  >
-  > The default CMS we use is [Sanity.io](https://sanity.io).
+> [!NOTE]
+>
+> The default CMS we use is [Sanity.io](https://sanity.io).
 
 - **Community packages**: leverages the best community packages like `mobx`,
   `go_router`, `get_it`, `hive`, `firebase`, etc. This means you don't have to
