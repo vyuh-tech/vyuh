@@ -48,6 +48,8 @@
 **full-code** power to the Engineering teams. This puts the right control at the
 right place without any compromise.
 
+> [!NOTE]
+>
 > CMS is one of the many extensible integrations inside Vyuh. All integrations
 > are managed as Plugins, which are standardized interfaces to extend the
 > capabilities of the framework.
@@ -121,7 +123,9 @@ The core building blocks that enable all of this include:
   themes, etc. The CMS itself is a standard plugin with custom Providers. Bring
   your own CMS as a `ContentProvider`!
 
-  > **Note**: The default CMS we use is [Sanity.io](https://sanity.io).
+  > [!NOTE]
+  >
+  > The default CMS we use is [Sanity.io](https://sanity.io).
 
 - **Community packages**: leverages the best community packages like `mobx`,
   `go_router`, `get_it`, `hive`, `firebase`, etc. This means you don't have to
