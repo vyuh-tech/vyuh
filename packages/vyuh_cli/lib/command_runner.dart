@@ -5,6 +5,7 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:pub_updater/pub_updater.dart';
 import 'package:vyuh_cli/commands/create/command.dart';
 import 'package:vyuh_cli/commands/update/command.dart';
+import 'package:vyuh_cli/doctor/command.dart';
 import 'package:vyuh_cli/version.dart';
 
 const executableName = 'vyuh';
@@ -43,6 +44,7 @@ class VyuhCliCommandRunner extends CompletionCommandRunner<int> {
     // Add sub commands
     addCommand(CreateCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, pubUpdater: _pubUpdater));
+    addCommand(DoctorCommand(logger: _logger));
   }
 
   @override
