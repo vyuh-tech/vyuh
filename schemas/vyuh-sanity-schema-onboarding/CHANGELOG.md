@@ -1,5 +1,7 @@
 # @vyuh/sanity-schema-onboarding
 
+## 1.27.3
+
 ## 1.27.2
 
 ### Patch Changes

@@ -23,6 +23,12 @@ export class PhoneOtpFormSchemaBuilder extends ContentSchemaBuilder {
     fields: [
       showLoginErrorField(),
       defineField({
+        name: 'action',
+        title: 'Action',
+        description: 'Action to invoke after signing in successfully',
+        type: 'vyuh.action',
+      }),
+      defineField({
         name: 'getOtpAction',
         title: 'Get OTP Action',
         description: 'Action to invoke when user requests for OTP',

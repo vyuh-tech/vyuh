@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.27.3
+
+### Patch Changes
+
+- Fix the missing action field
+
 ## 1.27.2
 
 ### Patch Changes
