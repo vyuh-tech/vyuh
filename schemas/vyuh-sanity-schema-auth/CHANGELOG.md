@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.28.0
+
+### Minor Changes
+
+- Exporting the descriptors
+
 ## 1.27.3
 
 ### Patch Changes
