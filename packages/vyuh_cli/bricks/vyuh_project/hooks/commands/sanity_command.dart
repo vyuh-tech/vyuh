@@ -40,8 +40,8 @@ final class SanityCommand extends CliCommand {
           workingDirectory: p.normalize('$appName/apps'),
           runInShell: true,
         );
-        final error = sanityCreateResult.stderr.toString();
-        if (error.isNotEmpty) {
+        if (sanityCreateResult.exitCode != 0) {
+          final error = sanityCreateResult.stderr.toString();
           context.logger.err('Failed to create Sanity Studio: $error');
           exit(1);
         }
