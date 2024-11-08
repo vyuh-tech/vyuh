@@ -1,3 +1,7 @@
+## 0.0.5+2
+
+ - **FIX**: fixed an issue where the Sanity command was incorrectly treated as error.
+
 ## 0.0.5+1
 
  - **REFACTOR**: cleaning up some code, visual tweaks.
