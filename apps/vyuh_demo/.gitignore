@@ -35,6 +35,7 @@ migrate_working_dir/
 private_keys
 *.ipa
 *.zip
+devtools_options.yaml
 
 # Symbolication related
 app.*.symbols
