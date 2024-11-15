@@ -36,12 +36,12 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^1.27.4",
-    "@vyuh/sanity-schema-forms": "^1.27.4",
-    "@vyuh/sanity-schema-system": "^1.27.4",
+    "@vyuh/sanity-schema-core": "^1.29.3",
+    "@vyuh/sanity-schema-forms": "^1.29.3",
+    "@vyuh/sanity-schema-system": "^1.29.3",
     "lodash-es": "^4.17.21",
     "react-icons": "^5.3.0",
-    "sanity": "^3.63.0"
+    "sanity": "^3.64.1"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
