@@ -4,8 +4,13 @@ import 'package:vyuh_core/vyuh_core.dart';
 final messages = {
   'title': (_) => 'No Content Plugin',
   'error': (String arg) => '''
-No content plugin configured to render $arg. 
-Please use one of the available content plugins or create a custom content plugin to render this content.'''
+No content plugin configured to render $arg.
+ 
+You have three options:
+1. Configure one of the default ContentPlugin-s to render this content.
+2. Create a custom ContentPlugin to render this content.
+3. Configure a custom GoRoute to handle this path.
+''',
 };
 
 final class NoOpContentPlugin extends ContentPlugin {
