@@ -1,3 +1,7 @@
+## 1.22.4
+
+ - **FIX**: updated the message for missing path handler.
+
 ## 1.22.3
 
  - **FIX**: using the right color combinations for error.
