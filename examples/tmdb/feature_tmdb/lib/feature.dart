@@ -70,7 +70,7 @@ final feature = FeatureDescriptor(
         ),
       ],
       contentBuilders: [
-        MovieDetailSectionBuilder(),
+        MovieDetailSection.contentBuilder,
         SeriesDetailSectionBuilder(),
         MovieWatchlistSectionBuilder(),
         SeriesWatchlistSectionBuilder(),

@@ -19,13 +19,45 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'movie_detail_section.g.dart';
 
-final class MovieDetailSectionBuilder extends ContentBuilder {
-  MovieDetailSectionBuilder()
-      : super(
-          content: MovieDetailSection.typeDescriptor,
-          defaultLayout: MovieDetailSectionLayout(),
-          defaultLayoutDescriptor: MovieDetailSectionLayout.typeDescriptor,
-        );
+@JsonSerializable()
+final class MovieDetailSection extends ContentItem {
+  static const schemaName = 'tmdb.movie.detailSection';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Movie Detail Section',
+    fromJson: MovieDetailSection.fromJson,
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: typeDescriptor,
+    defaultLayout: MovieDetailSectionLayout(),
+    defaultLayoutDescriptor: MovieDetailSectionLayout.typeDescriptor,
+  );
+
+  final MovieDetailSectionType type;
+  final ListRepresentation representation;
+
+  MovieDetailSection({
+    this.type = MovieDetailSectionType.hero,
+    this.representation = ListRepresentation.short,
+    super.layout,
+  }) : super(schemaType: schemaName);
+
+  factory MovieDetailSection.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailSectionFromJson(json);
+}
+
+enum MovieDetailSectionType {
+  hero,
+  cast,
+  crew,
+  statistics,
+  gallery,
+  recommendations,
+  reviews,
+  footer,
+  trailer,
 }
 
 @JsonSerializable()
@@ -95,39 +127,4 @@ final class MovieDetailSectionLayout
         return const TrailersSection(mode: BrowseMode.movies);
     }
   }
-}
-
-@JsonSerializable()
-final class MovieDetailSection extends ContentItem {
-  static const schemaName = 'tmdb.movie.detailSection';
-
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    title: 'Movie Detail Section',
-    fromJson: MovieDetailSection.fromJson,
-  );
-
-  final MovieDetailSectionType type;
-  final ListRepresentation representation;
-
-  MovieDetailSection({
-    this.type = MovieDetailSectionType.hero,
-    this.representation = ListRepresentation.short,
-    super.layout,
-  }) : super(schemaType: schemaName);
-
-  factory MovieDetailSection.fromJson(Map<String, dynamic> json) =>
-      _$MovieDetailSectionFromJson(json);
-}
-
-enum MovieDetailSectionType {
-  hero,
-  cast,
-  crew,
-  statistics,
-  gallery,
-  recommendations,
-  reviews,
-  footer,
-  trailer,
 }
