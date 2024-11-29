@@ -1,3 +1,7 @@
+## 1.22.5
+
+ - **FIX**: including the sendOtp method in auth plugin.
+
 ## 1.22.4
 
  - **FIX**: updated the message for missing path handler.
