@@ -62,6 +62,10 @@ abstract class AuthPlugin extends Plugin {
     throw UnimplementedError(_errorMessage('loginAnonymously()'));
   }
 
+  Future<void> sendOtp({required String phoneNumber}) {
+    throw UnimplementedError(_errorMessage('sendOtp()'));
+  }
+
   Future<void> loginWithPhoneOtp(
       {required String phoneNumber, required String otp}) {
     throw UnimplementedError(_errorMessage('loginWithPhoneOtp()'));

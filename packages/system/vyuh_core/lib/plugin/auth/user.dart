@@ -96,7 +96,7 @@ enum LoginMethod {
       LoginMethod.github ||
       LoginMethod.linkedin ||
       LoginMethod.microsoft =>
-        Icons.shield_outlined,
+        Icons.verified_user,
       _ => Icons.help,
     };
   }
