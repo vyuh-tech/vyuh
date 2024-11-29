@@ -65,43 +65,62 @@ class EmailField extends StatelessWidget {
 }
 
 class PhoneInputField extends StatelessWidget {
-  final void Function() submit;
-  const PhoneInputField({super.key, required this.submit});
+  final FormFieldValidator<String>? validator;
+  final InputDecoration? inputDecoration;
+  final void Function(BuildContext) submit;
+
+  const PhoneInputField({
+    super.key,
+    required this.submit,
+    this.validator,
+    this.inputDecoration,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: 'phone',
-      decoration: const InputDecoration(labelText: 'Phone Number'),
+      decoration:
+          inputDecoration ?? const InputDecoration(labelText: 'Phone Number'),
       keyboardType: TextInputType.phone,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
         FormBuilderValidators.phoneNumber(),
+        if (validator != null) validator!,
       ]),
-      onSubmitted: (_) => submit(),
+      onSubmitted: (_) => submit(context),
     );
   }
 }
 
 class OtpInputField extends StatelessWidget {
-  final void Function() submit;
-  const OtpInputField({super.key, required this.submit});
+  final FormFieldValidator<String>? validator;
+  final InputDecoration? inputDecoration;
+  final void Function(BuildContext) submit;
+
+  const OtpInputField({
+    super.key,
+    required this.submit,
+    this.inputDecoration,
+    this.validator,
+  });
 
   @override
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: 'otp',
       autofillHints: const [AutofillHints.oneTimeCode],
-      decoration: const InputDecoration(labelText: 'OTP'),
+      decoration: inputDecoration ?? const InputDecoration(labelText: 'OTP'),
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
         FormBuilderValidators.minLength(6),
         FormBuilderValidators.numeric(),
+        if (validator != null) validator!,
       ]),
-      onSubmitted: (_) => submit(),
+      onSubmitted: (_) => submit(context),
     );
   }
 }
@@ -236,9 +255,21 @@ class ErrorText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Text(
-      error.toString(),
-      style: theme.textTheme.bodyMedium?.apply(color: theme.colorScheme.error),
+    return Row(
+      children: [
+        Icon(
+          Icons.error,
+          color: theme.colorScheme.error,
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Text(
+            error.toString(),
+            style: theme.textTheme.bodyMedium
+                ?.apply(color: theme.colorScheme.error),
+          ),
+        ),
+      ],
     );
   }
 }

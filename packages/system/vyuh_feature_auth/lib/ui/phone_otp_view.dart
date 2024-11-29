@@ -29,7 +29,7 @@ class _PhoneOTPViewState extends State<PhoneOTPView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              PhoneInputField(submit: () => _submit(context, scope)),
+              PhoneInputField(submit: (context) => _submit(context, scope)),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
@@ -46,7 +46,7 @@ class _PhoneOTPViewState extends State<PhoneOTPView> {
               ),
               const SizedBox(height: 8),
               OtpInputField(
-                submit: () => _submit(context, scope),
+                submit: (context) => _submit(context, scope),
               ),
               const SizedBox(height: 20),
               AuthActionButton(

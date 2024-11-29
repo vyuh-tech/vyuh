@@ -21,6 +21,7 @@ enum AuthState {
   inProgress,
   error,
   cancelled,
+  partial,
 }
 
 final class AuthFlowScope {
