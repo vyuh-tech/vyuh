@@ -1,3 +1,7 @@
+## 1.14.0
+
+ - **FEAT**: adding an AuthFormBuilder to simplify building auth forms.
+
 ## 1.13.0
 
  - **FEAT**: added a Hint Action Text item useful when you have a question followed by an action in a single line.
