@@ -1,3 +1,7 @@
+## 1.23.0
+
+ - **FEAT**: introducing events that allow tracking lifecycle events as well as cross-feature communication with type-safety.
+
 ## 1.22.5
 
  - **FIX**: including the sendOtp method in auth plugin.
