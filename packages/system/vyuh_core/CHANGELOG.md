@@ -1,3 +1,7 @@
+## 1.23.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.23.0
 
  - **FEAT**: introducing events that allow tracking lifecycle events as well as cross-feature communication with type-safety.
