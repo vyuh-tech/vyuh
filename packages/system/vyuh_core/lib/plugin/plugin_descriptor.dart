@@ -15,6 +15,7 @@ final class PluginDescriptor {
     final AuthPlugin? auth,
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
+    final EventPlugin? event,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
@@ -24,6 +25,7 @@ final class PluginDescriptor {
       network ?? defaultPlugins.get<NetworkPlugin>(),
       auth ?? defaultPlugins.get<AuthPlugin>(),
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
+      event ?? defaultPlugins.get<EventPlugin>(),
       env ?? defaultPlugins.get<EnvPlugin>(),
     ]);
 
@@ -38,6 +40,7 @@ final class PluginDescriptor {
     auth: UnknownAuthPlugin(),
     navigation: DefaultNavigationPlugin(),
     env: NoOpEnvPlugin(),
+    event: DefaultEventPlugin(),
   );
 
   Plugin get<T>() {

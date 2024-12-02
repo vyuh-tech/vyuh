@@ -5,6 +5,11 @@ final feature = FeatureDescriptor(
   name: 'root',
   title: 'Vyuh Root Feature',
   description: 'The root feature for the Vyuh Demo app',
+  init: () async {
+    vyuh.event.once<SystemReadyEvent>((event) {
+      vyuh.log?.d('...and we are ready!');
+    });
+  },
   routes: () => [
     GoRoute(path: '/chakra', pageBuilder: defaultRoutePageBuilder),
   ],

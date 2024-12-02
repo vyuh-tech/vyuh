@@ -29,6 +29,8 @@ final class _PlatformInitTracker implements SystemInitTracker {
 
         try {
           await _initLoop(initialState, trace);
+
+          vyuh.event.emit(SystemReadyEvent());
         } catch (exception, trace) {
           vyuh.analytics.reportError(exception, stackTrace: trace);
           rethrow;

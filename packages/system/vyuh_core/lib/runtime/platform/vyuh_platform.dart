@@ -75,4 +75,7 @@ extension NamedPlugins on VyuhPlatform {
 
   /// The env plugin.
   EnvPlugin get env => getPlugin<EnvPlugin>()!;
+
+  /// The event plugin.
+  EventPlugin get event => getPlugin<EventPlugin>()!;
 }
