@@ -1,6 +1,6 @@
 name: vyuh_extension_content
 description: An extension for the Vyuh framework for creating CMS integrations
-version: 1.9.0
+version: 1.9.1
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_extension_content
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -22,7 +22,7 @@ dependencies:
   flutter_mobx: ^2.2.0+2
   mobx: ^2.3.0+1
   json_annotation: ^4.9.0
-  vyuh_core: ^1.23.1
+  vyuh_core: ^1.23.2
   flutter_sanity_portable_text: ^1.3.0
 
 dev_dependencies:

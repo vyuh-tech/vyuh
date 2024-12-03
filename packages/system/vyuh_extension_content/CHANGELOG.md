@@ -1,3 +1,7 @@
+## 1.9.1
+
+ - **FIX**: simplifying the setup of extension builders removed the specialized logic that existed earlier for the Content Plugin.
+
 ## 1.9.0
 
  - **FEAT**: updated the refresh button for routes and adjusting for the change in the BuiltContentSchemaBuilder.
