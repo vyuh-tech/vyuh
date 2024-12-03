@@ -1,3 +1,7 @@
+## 1.9.2
+
+ - **FIX**: analysis fixes.
+
 ## 1.9.1
 
  - **FIX**: simplifying the setup of extension builders removed the specialized logic that existed earlier for the Content Plugin.

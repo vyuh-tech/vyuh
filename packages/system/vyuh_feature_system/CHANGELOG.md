@@ -1,3 +1,7 @@
+## 1.27.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.27.0
 
  - **FEAT**: updated the refresh button for routes and adjusting for the change in the BuiltContentSchemaBuilder.

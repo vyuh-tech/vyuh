@@ -1,3 +1,7 @@
+## 1.4.2
+
+ - **FIX**: analysis fixes.
+
 ## 1.4.1
 
  - **FIX**: add the layouts parameter to ContentDescriptor and the layout parameter to ContentItem as mandatory.

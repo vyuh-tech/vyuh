@@ -1,3 +1,7 @@
+## 1.14.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.14.0
 
  - **FEAT**: adding an AuthFormBuilder to simplify building auth forms.

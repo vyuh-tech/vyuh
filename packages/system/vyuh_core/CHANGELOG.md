@@ -1,3 +1,7 @@
+## 1.23.3
+
+ - **FIX**: analysis fixes.
+
 ## 1.23.2
 
  - **FIX**: simplifying the setup of extension builders removed the specialized logic that existed earlier for the Content Plugin.

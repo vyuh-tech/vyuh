@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.4.0
 
  - **FEAT**: add a custom list builder to render a PortableText. The default one uses a ListView.builder and opens up opportunity to render using other methods as well such as SliverList or a plain Column.

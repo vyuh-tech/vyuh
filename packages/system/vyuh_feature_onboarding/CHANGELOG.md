@@ -1,3 +1,7 @@
+## 1.1.3
+
+ - **FIX**: analysis fixes.
+
 ## 1.1.2
 
  - **FIX**: update pubspec and readme.

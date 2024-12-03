@@ -1,3 +1,7 @@
+## 1.7.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.7.0
 
  - **FEAT**: added document list view.

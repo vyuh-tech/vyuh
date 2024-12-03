@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**: analysis fixes.
+
 ## 1.4.0
 
  - **FEAT**: updating the auth plugin to be more open-ended with OAuth. Removes additional methods for github/linkedin/twitter etc.
