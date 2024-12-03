@@ -17,7 +17,7 @@ dependencies:
   flutter_sanity_portable_text: ^1.4.1
   vyuh_core: ^1.23.3
   vyuh_feature_system: ^1.27.1
-  vyuh_extension_content: ^1.9.2
+  vyuh_extension_content: ^1.9.3
   unsplash_client: ^2.2.0
   flutter_blurhash: ^0.8.2
   photo_view: ^0.15.0

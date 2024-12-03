@@ -1,3 +1,7 @@
+## 1.9.3
+
+ - **FIX**: added an exception handler for cases when a layout can throw an exception. This shows an error_view with the exception.
+
 ## 1.9.2
 
  - **FIX**: analysis fixes.
