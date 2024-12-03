@@ -1,3 +1,3 @@
-library feature_wonderous;
+library;
 
 export 'feature.dart';

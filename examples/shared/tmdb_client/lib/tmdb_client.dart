@@ -1,4 +1,4 @@
-library tmdb_client;
+library;
 
 import 'package:tmdb_client/search_api.dart';
 import 'package:tmdb_client/tmdb_client.dart';

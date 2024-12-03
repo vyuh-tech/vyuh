@@ -1,4 +1,4 @@
-library vyuh_feature_system;
+library;
 
 export 'action/conditional_action.dart';
 export 'action/drawer.dart';

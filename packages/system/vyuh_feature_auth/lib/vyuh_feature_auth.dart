@@ -1,4 +1,4 @@
-library vyuh_feature_auth;
+library;
 
 export 'feature.dart';
 export 'ui/auth_form_builder.dart';

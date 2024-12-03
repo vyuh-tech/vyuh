@@ -1,4 +1,4 @@
-library design_system;
+library;
 
 import 'package:design_system/core/index.dart' as core;
 import 'package:design_system/generated/theme.dart';

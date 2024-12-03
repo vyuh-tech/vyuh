@@ -1,3 +1,3 @@
-library feature_conference;
+library;
 
 export 'feature.dart';

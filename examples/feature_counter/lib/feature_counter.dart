@@ -1,3 +1,3 @@
-library feature_counter;
+library;
 
 export 'feature.dart';

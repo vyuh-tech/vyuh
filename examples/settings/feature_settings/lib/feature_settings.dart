@@ -1,3 +1,3 @@
-library feature_settings;
+library;
 
 export 'settings.dart';

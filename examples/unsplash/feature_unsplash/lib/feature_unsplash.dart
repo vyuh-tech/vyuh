@@ -1,3 +1,3 @@
-library feature_unsplash;
+library;
 
 export 'feature.dart';

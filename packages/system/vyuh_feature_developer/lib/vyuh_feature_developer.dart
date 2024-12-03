@@ -1,4 +1,4 @@
-library vyuh_feature_developer;
+library;
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

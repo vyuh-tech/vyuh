@@ -1,3 +1,3 @@
-library feature_food;
+library;
 
 export 'feature.dart';

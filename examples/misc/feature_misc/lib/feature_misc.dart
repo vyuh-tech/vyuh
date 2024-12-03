@@ -1,3 +1,3 @@
-library feature_misc;
+library;
 
 export 'feature.dart';

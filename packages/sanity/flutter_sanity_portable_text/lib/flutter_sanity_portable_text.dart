@@ -11,7 +11,7 @@
 /// - Custom text mark recognizers
 /// - Shared config across all Portable Text Widgets
 ///
-library flutter_sanity_portable_text;
+library;
 
 export 'model/markdef_descriptor.dart';
 export 'model/text_block.dart';

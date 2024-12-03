@@ -1,4 +1,4 @@
-library vyuh_extension_content;
+library;
 
 export 'content/action.dart';
 export 'content/condition.dart';

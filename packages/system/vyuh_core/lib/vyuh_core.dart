@@ -1,4 +1,4 @@
-library vyuh_core;
+library;
 
 export 'asserts.dart';
 export 'extension.dart';

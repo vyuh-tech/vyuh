@@ -1,4 +1,4 @@
-library vyuh_plugin_content_provider_sanity;
+library;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/widgets.dart';

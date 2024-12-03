@@ -1,3 +1,3 @@
-library feature_puzzles;
+library;
 
 export 'feature.dart';

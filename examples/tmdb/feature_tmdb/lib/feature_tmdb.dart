@@ -1,3 +1,3 @@
-library feature_tmdb;
+library;
 
 export 'feature.dart';

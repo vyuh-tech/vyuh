@@ -1,3 +1,3 @@
-library vyuh_feature_onboarding;
+library;
 
 export 'feature.dart';

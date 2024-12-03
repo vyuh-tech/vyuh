@@ -1,7 +1,7 @@
 /// A Native Dart client to connect to Sanity.io and run GROQ queries.
 ///
 /// It supports all parameters of the query API.
-library sanity_client;
+library;
 
 export 'client.dart';
 export 'exceptions.dart';
