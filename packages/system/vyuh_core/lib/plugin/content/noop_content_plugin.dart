@@ -58,7 +58,7 @@ final class NoOpContentPlugin extends ContentPlugin {
   register<T>(TypeDescriptor<T> descriptor) {}
 
   @override
-  void setup(List<FeatureDescriptor> features) {}
+  void attach(ExtensionBuilder extBuilder) {}
 
   @override
   T? fromJson<T>(Map<String, dynamic> json) {

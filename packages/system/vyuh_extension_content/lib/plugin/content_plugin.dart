@@ -73,16 +73,11 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   @override
-  void setup(List<FeatureDescriptor> features) {
-    final extBuilders = features
-        .expand((element) => element.extensionBuilders ?? [])
-        .whereType<ContentExtensionBuilder>();
+  void attach(ExtensionBuilder extBuilder) {
+    assert(extBuilder is ContentExtensionBuilder,
+        '''For the $runtimeType to work, there must be one $ContentExtensionBuilder in your extension builders.
+        However, you have provided a ${extBuilder.runtimeType}''');
 
-    assert(
-        extBuilders.length == 1,
-        'For the $runtimeType to work, there must be only one $ContentExtensionBuilder in your extension builders. '
-        'However, we found ${extBuilders.length}.');
-
-    _extensionBuilder = extBuilders.first;
+    _extensionBuilder = extBuilder as ContentExtensionBuilder;
   }
 }

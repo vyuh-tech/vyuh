@@ -12,8 +12,25 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
           title: 'Content Extension Builder',
         );
 
+  Map<Type, Map<String, TypeDescriptor>> getTypeRegistry() {
+    return Map<Type, Map<String, TypeDescriptor>>.unmodifiable(
+        _typeConverterMap);
+  }
+
+  ContentBuilder<ContentItem>? getContentBuilder(String schemaType) {
+    return _contentBuilderMap[schemaType];
+  }
+
   @override
-  void build(List<ExtensionDescriptor> extensions) {
+  void init(List<ExtensionDescriptor> extensions) {
+    // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
+    final contentPlugin = vyuh.content;
+    contentPlugin.attach(this);
+
+    _build(extensions);
+  }
+
+  void _build(List<ExtensionDescriptor> extensions) {
     final descriptors = extensions.cast<ContentExtensionDescriptor>();
 
     final contentBuilders = descriptors
@@ -60,15 +77,6 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
       (feature) =>
           feature.conditions ?? <TypeDescriptor<ConditionConfiguration>>[],
     );
-  }
-
-  Map<Type, Map<String, TypeDescriptor>> getTypeRegistry() {
-    return Map<Type, Map<String, TypeDescriptor>>.unmodifiable(
-        _typeConverterMap);
-  }
-
-  ContentBuilder<ContentItem>? getContentBuilder(String schemaType) {
-    return _contentBuilderMap[schemaType];
   }
 
   @override

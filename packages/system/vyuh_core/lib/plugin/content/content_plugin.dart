@@ -23,9 +23,9 @@ abstract class ContentPlugin extends Plugin {
   /// These could represent a page, dialog or a conditional-route.
   Widget buildRoute(BuildContext context, {Uri? url, String? routeId});
 
-  /// Sets up the plugin with the given features. The plugin scans the features to extract all the content items.
-  /// This plugin relies on the ContentExtensionBuilder to do its work.
-  void setup(List<FeatureDescriptor> features);
+  /// Sets up the plugin with the ContentExtensionBuilder.
+  /// The plugin relies on the ContentExtensionBuilder to do its work.
+  void attach(ExtensionBuilder extBuilder);
 
   /// Converts the given json to a content item of type T
   T? fromJson<T>(Map<String, dynamic> json);

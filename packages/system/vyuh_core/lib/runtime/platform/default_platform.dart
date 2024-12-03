@@ -167,14 +167,9 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
               .toList(),
         );
 
-        _initContent(_features);
         _initFeatureExtensions(_features);
       },
     );
-  }
-
-  void _initContent(List<vc.FeatureDescriptor> featureList) {
-    content.setup(featureList);
   }
 
   Future<List<g.RouteBase>> _initFeature(
@@ -220,9 +215,6 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           'There can be only one FeatureExtensionBuilder for a schema-type. We found ${entry.value.length} for ${entry.key}');
 
       _featureExtensionBuilderMap[entry.key] = entry.value.first;
-
-      // Run one time init
-      entry.value.first.init();
     }
 
     final extensions = featureList
@@ -235,7 +227,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       assert(builder != null,
           'Missing FeatureExtensionBuilder for FeatureExtensionDescriptor of schemaType: $runtimeType');
 
-      builder?.build(descriptors);
+      builder?.init(descriptors);
     });
   }
 

@@ -25,11 +25,8 @@ abstract class ExtensionBuilder {
     required this.title,
   });
 
-  /// Builds the extension.
-  void build(List<ExtensionDescriptor> extensions) {}
-
   /// Initializes the extension.
-  void init() {}
+  void init(List<ExtensionDescriptor> extensions) {}
 
   /// Disposes the extension.
   void dispose() {}
