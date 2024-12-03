@@ -47,6 +47,14 @@ class ContentBuilder<T extends ContentItem> {
       vyuh.log?.d('No layout found for ${content.schemaType}. Using default.');
     }
 
-    return layout.build(context, content);
+    try {
+      return layout.build(context, content);
+    } catch (e) {
+      return vyuh.widgetBuilder.errorView(context,
+          error: e,
+          title: 'Failed to build layout',
+          subtitle:
+              'Layout: "${layout.schemaType}" for Content: "${content.schemaType}"');
+    }
   }
 }
