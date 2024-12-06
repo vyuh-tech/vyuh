@@ -1,3 +1,7 @@
+## 1.29.0
+
+ - **FEAT**: fixed up some of the default layouts to support themes properly.
+
 ## 1.28.0
 
  - **FEAT**: added support for content modifiers that are configurable from the CMS.
