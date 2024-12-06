@@ -1,6 +1,6 @@
 name: vyuh_core
 description: The core library for the Vyuh framework which contains the base types and runtime.
-version: 1.23.3
+version: 1.24.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_core
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -28,7 +28,7 @@ dependencies:
   mobx: ^2.3.0+1
   get_it: ^8.0.2
   logger: ^2.1.0
-  flutter_sanity_portable_text: ^1.4.1
+  flutter_sanity_portable_text: ^1.5.0
   http: ^1.2.1
   retry: ^3.1.2
   flutter_dotenv: ^5.1.0

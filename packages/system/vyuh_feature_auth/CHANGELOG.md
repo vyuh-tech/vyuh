@@ -1,3 +1,7 @@
+## 1.15.0
+
+ - **FEAT**: added support for content modifiers that are configurable from the CMS.
+
 ## 1.14.1
 
  - **FIX**: analysis fixes.
