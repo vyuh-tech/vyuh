@@ -51,7 +51,10 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
   }
 
   Widget _buildImageOnly(f.BuildContext context, e.Card content) {
+    final theme = f.Theme.of(context);
+
     return f.Card(
+      color: theme.cardTheme.color,
       clipBehavior: Clip.antiAlias,
       child: e.ContentImage(
         url: content.imageUrl?.toString(),
@@ -68,7 +71,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
     final hasBlockContent = blockLength != null && blockLength > 0;
 
     return f.Card(
-      color: theme.cardColor,
+      color: theme.cardTheme.color,
       clipBehavior: Clip.antiAlias,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -111,7 +114,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
     final hasBlockContent = blockLength != null && blockLength > 0;
 
     return f.Card(
-      color: theme.cardColor,
+      color: theme.cardTheme.color,
       clipBehavior: Clip.antiAlias,
       child: Column(
         mainAxisSize: MainAxisSize.min,
