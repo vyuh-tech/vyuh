@@ -24,11 +24,11 @@ dependencies:
   # Vyuh Framework
   vyuh_core: ^1.24.0
   vyuh_extension_content: ^1.10.0
-  vyuh_feature_system: ^1.28.0
+  vyuh_feature_system: ^1.29.1
   vyuh_feature_developer: ^1.4.2
   vyuh_plugin_content_provider_sanity: ^1.7.1
-  vyuh_feature_auth: ^1.15.0
-  vyuh_feature_onboarding: ^1.2.0
+  vyuh_feature_auth: ^1.15.1
+  vyuh_feature_onboarding: ^1.2.1
 
   # Example Features
   feature_counter: ^1.0.0

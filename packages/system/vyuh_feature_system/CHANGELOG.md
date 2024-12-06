@@ -1,3 +1,7 @@
+## 1.29.1
+
+ - **FIX**: version upgrades.
+
 ## 1.29.0
 
  - **FEAT**: fixed up some of the default layouts to support themes properly.
