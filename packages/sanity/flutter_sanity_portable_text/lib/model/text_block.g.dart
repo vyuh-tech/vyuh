@@ -18,8 +18,8 @@ TextBlockItem _$TextBlockItemFromJson(Map<String, dynamic> json) =>
           ? const <MarkDef>[]
           : _markDefsFromJson(json['markDefs'] as List),
       listItem: $enumDecodeNullable(_$ListItemTypeEnumMap, json['listItem']),
-      level: json['level'] as int?,
-      listItemIndex: json['listItemIndex'] as int?,
+      level: (json['level'] as num?)?.toInt(),
+      listItemIndex: (json['listItemIndex'] as num?)?.toInt(),
     );
 
 const _$ListItemTypeEnumMap = {

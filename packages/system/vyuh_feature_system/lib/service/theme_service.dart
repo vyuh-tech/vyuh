@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 final class ThemeService {
+  final Map<ThemeMode, ThemeData> _themeMap = {};
+
   final Observable<ThemeMode> currentMode = Observable(ThemeMode.light);
 
   void changeTheme(ThemeMode mode) {
@@ -14,4 +16,10 @@ final class ThemeService {
 
     runInAction(() => currentMode.value = newValue);
   }
+
+  void setThemes(Map<ThemeMode, ThemeData> themes) {
+    _themeMap.addAll(themes);
+  }
+
+  ThemeData? theme(ThemeMode mode) => _themeMap[mode];
 }

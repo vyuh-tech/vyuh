@@ -17,6 +17,8 @@ SearchSection _$SearchSectionFromJson(Map<String, dynamic> json) =>
       emptyView: json['emptyView'] == null
           ? null
           : ContentItem.fromJson(json['emptyView'] as Map<String, dynamic>),
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$SearchTypeEnumMap = {

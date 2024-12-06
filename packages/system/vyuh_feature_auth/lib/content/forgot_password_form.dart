@@ -28,6 +28,7 @@ final class ForgotPasswordForm extends ContentItem {
     this.returnAction,
     this.showLoginError = true,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory ForgotPasswordForm.fromJson(Map<String, dynamic> json) =>

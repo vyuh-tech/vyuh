@@ -30,6 +30,7 @@ final class Route extends RouteBase {
     required super.id,
     super.category,
     super.layout,
+    super.modifiers,
     this.lifecycleHandlers,
   }) : super(schemaType: Route.schemaName) {
     setParent(regions.expand((element) => element.items));

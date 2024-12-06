@@ -18,4 +18,5 @@ PhoneOtpForm _$PhoneOtpFormFromJson(Map<String, dynamic> json) => PhoneOtpForm(
           : Action.fromJson(json['signupAction'] as Map<String, dynamic>),
       showLoginError: json['showLoginError'] as bool? ?? true,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

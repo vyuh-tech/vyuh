@@ -16,6 +16,7 @@ OAuthSignIn _$OAuthSignInFromJson(Map<String, dynamic> json) => OAuthSignIn(
           ? null
           : Action.fromJson(json['action'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$OAuthTypeEnumMap = {

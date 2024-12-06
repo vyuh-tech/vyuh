@@ -16,4 +16,5 @@ ForgotPasswordForm _$ForgotPasswordFormFromJson(Map<String, dynamic> json) =>
           : Action.fromJson(json['returnAction'] as Map<String, dynamic>),
       showLoginError: json['showLoginError'] as bool? ?? true,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

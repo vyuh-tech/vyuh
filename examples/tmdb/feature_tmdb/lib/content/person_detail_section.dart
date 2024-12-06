@@ -74,6 +74,7 @@ final class PersonDetailSection extends ContentItem {
   PersonDetailSection({
     required this.type,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory PersonDetailSection.fromJson(Map<String, dynamic> json) =>

@@ -44,6 +44,7 @@ class Card extends ContentItem implements PortableBlockItem {
     this.secondaryAction,
     this.tertiaryAction,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: Card.schemaName) {
     setParent([
       if (content != null) content!,

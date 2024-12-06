@@ -11,4 +11,5 @@ DocumentListView _$DocumentListViewFromJson(Map<String, dynamic> json) =>
       listItem: typeFromFirstOfListJson(json['listItem']),
       query: typeFromFirstOfListJson(json['query']),
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

@@ -114,6 +114,7 @@ final class SeriesDetailSection extends ContentItem {
     this.type = SeriesDetailSectionType.hero,
     this.representation = ListRepresentation.short,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory SeriesDetailSection.fromJson(Map<String, dynamic> json) =>

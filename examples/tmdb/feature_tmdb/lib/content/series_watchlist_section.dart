@@ -25,6 +25,7 @@ final class SeriesWatchlistSection extends ContentItem {
 
   SeriesWatchlistSection({
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory SeriesWatchlistSection.fromJson(Map<String, dynamic> json) =>

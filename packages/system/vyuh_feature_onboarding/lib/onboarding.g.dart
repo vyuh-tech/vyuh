@@ -15,6 +15,8 @@ OnboardingContent _$OnboardingContentFromJson(Map<String, dynamic> json) =>
               ?.map((e) => OnboardingStep.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 OnboardingStep _$OnboardingStepFromJson(Map<String, dynamic> json) =>

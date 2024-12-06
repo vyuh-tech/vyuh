@@ -8,7 +8,10 @@ part of 'series_watchlist_section.dart';
 
 SeriesWatchlistSection _$SeriesWatchlistSectionFromJson(
         Map<String, dynamic> json) =>
-    SeriesWatchlistSection();
+    SeriesWatchlistSection(
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
+    );
 
 SeriesWatchlistSectionLayout _$SeriesWatchlistSectionLayoutFromJson(
         Map<String, dynamic> json) =>

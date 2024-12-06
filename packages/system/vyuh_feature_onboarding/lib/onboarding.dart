@@ -40,6 +40,7 @@ final class OnboardingContent extends ContentItem {
     this.doneAction,
     this.steps = const [],
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory OnboardingContent.fromJson(Map<String, dynamic> json) =>

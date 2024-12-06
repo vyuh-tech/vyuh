@@ -14,6 +14,8 @@ DropDownMenu _$DropDownMenuFromJson(Map<String, dynamic> json) => DropDownMenu(
       selectionChanged: json['selectionChanged'] == null
           ? null
           : Action.fromJson(json['selectionChanged'] as Map<String, dynamic>),
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 DropDownItem _$DropDownItemFromJson(Map<String, dynamic> json) => DropDownItem(

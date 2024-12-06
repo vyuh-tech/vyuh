@@ -14,6 +14,7 @@ import 'package:vyuh_feature_system/content/document_view/document_list_layout.d
 import 'package:vyuh_feature_system/content/document_view/document_section_layout.dart';
 import 'package:vyuh_feature_system/content/group/carousel_layout.dart';
 import 'package:vyuh_feature_system/content/video_player.dart';
+import 'package:vyuh_feature_system/content_modifiers/theme_modifier.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(
@@ -200,6 +201,9 @@ final feature = FeatureDescriptor(
         DocumentView.contentBuilder,
         DocumentSectionView.contentBuilder,
         DocumentListView.contentBuilder,
+      ],
+      contentModifiers: [
+        ThemeModifier.typeDescriptor,
       ],
       conditions: [
         BooleanCondition.typeDescriptor,

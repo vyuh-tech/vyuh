@@ -6,10 +6,6 @@ part of 'movie_detail_section.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MovieDetailSectionLayout _$MovieDetailSectionLayoutFromJson(
-        Map<String, dynamic> json) =>
-    MovieDetailSectionLayout();
-
 MovieDetailSection _$MovieDetailSectionFromJson(Map<String, dynamic> json) =>
     MovieDetailSection(
       type:
@@ -18,6 +14,8 @@ MovieDetailSection _$MovieDetailSectionFromJson(Map<String, dynamic> json) =>
       representation: $enumDecodeNullable(
               _$ListRepresentationEnumMap, json['representation']) ??
           ListRepresentation.short,
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$MovieDetailSectionTypeEnumMap = {
@@ -36,3 +34,7 @@ const _$ListRepresentationEnumMap = {
   ListRepresentation.short: 'short',
   ListRepresentation.long: 'long',
 };
+
+MovieDetailSectionLayout _$MovieDetailSectionLayoutFromJson(
+        Map<String, dynamic> json) =>
+    MovieDetailSectionLayout();

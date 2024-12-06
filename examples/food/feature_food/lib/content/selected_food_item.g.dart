@@ -9,6 +9,7 @@ part of 'selected_food_item.dart';
 SelectedFoodItem _$SelectedFoodItemFromJson(Map<String, dynamic> json) =>
     SelectedFoodItem(
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 DefaultFoodMenuItemLayout _$DefaultFoodMenuItemLayoutFromJson(

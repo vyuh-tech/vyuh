@@ -30,6 +30,7 @@ final class PhoneOtpForm extends ContentItem {
     this.signupAction,
     this.showLoginError = true,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory PhoneOtpForm.fromJson(Map<String, dynamic> json) =>

@@ -41,6 +41,7 @@ final class SearchSection extends ContentItem {
     this.searchTypes = const [SearchType.movies],
     this.emptyView,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory SearchSection.fromJson(Map<String, dynamic> json) =>

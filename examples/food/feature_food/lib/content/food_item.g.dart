@@ -27,6 +27,7 @@ FoodMenuItem _$FoodMenuItemFromJson(Map<String, dynamic> json) => FoodMenuItem(
               .toList() ??
           const [],
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(

@@ -32,7 +32,8 @@ abstract class RouteBase extends ContentItem implements RootItem {
     required this.createdAt,
     required this.updatedAt,
     required this.id,
-    super.layout,
+    required super.layout,
+    required super.modifiers,
   });
 
   factory RouteBase.fromJson(Map<String, dynamic> json) =>

@@ -37,6 +37,7 @@ final class EmailPasswordForm extends ContentItem {
     this.signupAction,
     this.loginAction,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory EmailPasswordForm.fromJson(Map<String, dynamic> json) =>

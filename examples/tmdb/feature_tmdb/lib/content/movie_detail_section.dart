@@ -42,6 +42,7 @@ final class MovieDetailSection extends ContentItem {
     this.type = MovieDetailSectionType.hero,
     this.representation = ListRepresentation.short,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory MovieDetailSection.fromJson(Map<String, dynamic> json) =>

@@ -12,6 +12,7 @@ PortableTextContent _$PortableTextContentFromJson(Map<String, dynamic> json) =>
           ? []
           : PortableTextContent.blockItemsFromJson(json['blocks']),
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 DefaultPortableTextContentLayout _$DefaultPortableTextContentLayoutFromJson(

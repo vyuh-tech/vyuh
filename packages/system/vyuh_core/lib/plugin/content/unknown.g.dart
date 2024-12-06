@@ -9,4 +9,6 @@ part of 'unknown.dart';
 Unknown _$UnknownFromJson(Map<String, dynamic> json) => Unknown(
       missingSchemaType: json['missingSchemaType'] as String,
       description: json['description'] as String,
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

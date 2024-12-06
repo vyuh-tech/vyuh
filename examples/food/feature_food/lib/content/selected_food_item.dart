@@ -22,6 +22,7 @@ final class SelectedFoodItem extends ContentItem {
 
   SelectedFoodItem({
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory SelectedFoodItem.fromJson(Map<String, dynamic> json) =>

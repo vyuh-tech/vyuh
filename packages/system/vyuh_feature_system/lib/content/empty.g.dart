@@ -8,4 +8,5 @@ part of 'empty.dart';
 
 Empty _$EmptyFromJson(Map<String, dynamic> json) => Empty(
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

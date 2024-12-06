@@ -24,6 +24,7 @@ final class DocumentSectionView extends ContentItem {
   DocumentSectionView({
     this.configuration,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory DocumentSectionView.fromJson(Map<String, dynamic> json) =>

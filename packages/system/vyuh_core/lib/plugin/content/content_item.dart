@@ -23,6 +23,12 @@ abstract class ContentItem implements SchemaItem {
   @JsonKey(fromJson: typeFromFirstOfListJson<LayoutConfiguration>)
   final LayoutConfiguration<ContentItem>? layout;
 
+  @JsonKey(fromJson: modifierList)
+  final List<ContentModifierConfiguration>? modifiers;
+
+  static List<ContentModifierConfiguration>? modifierList(dynamic json) =>
+      listFromJson<ContentModifierConfiguration>(json);
+
   /// The parent content item of this content item. This is used internally by the content system.
   @JsonKey(includeFromJson: false)
   ContentItem? parent;
@@ -31,6 +37,7 @@ abstract class ContentItem implements SchemaItem {
   ContentItem({
     required this.schemaType,
     required this.layout,
+    required this.modifiers,
   });
 
   /// Converts the JSON representation of the content item to an instance of [ContentItem].
@@ -50,6 +57,18 @@ abstract class ContentItem implements SchemaItem {
       child?.parent = this;
     }
   }
+}
+
+abstract class ContentModifierConfiguration implements SchemaItem {
+  @override
+  final String schemaType;
+
+  ContentModifierConfiguration({required this.schemaType});
+
+  factory ContentModifierConfiguration.fromJson(Map<String, dynamic> json) =>
+      throw Exception('Must be implemented in subclass');
+
+  Widget build(BuildContext context, Widget child, ContentItem content);
 }
 
 /// Base class for a Layout Configuration. A layout configuration is used to

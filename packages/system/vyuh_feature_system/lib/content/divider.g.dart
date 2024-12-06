@@ -10,4 +10,5 @@ Divider _$DividerFromJson(Map<String, dynamic> json) => Divider(
       thickness: (json['thickness'] as num?)?.toDouble() ?? 1,
       indent: (json['indent'] as num?)?.toDouble() ?? 8,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

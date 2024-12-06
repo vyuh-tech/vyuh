@@ -29,6 +29,7 @@ final class DocumentListView extends ContentItem {
     this.listItem,
     this.query,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName) {
     assert(listItem != null, 'A list item configuration must be provided');
     assert(query != null, 'A query configuration must be provided');

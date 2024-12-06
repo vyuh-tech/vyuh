@@ -58,6 +58,7 @@ final class VideoPlayerItem extends ContentItem {
     this.autoplay = false,
     this.muted = false,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 }
 

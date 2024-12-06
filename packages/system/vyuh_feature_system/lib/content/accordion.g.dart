@@ -14,6 +14,7 @@ Accordion _$AccordionFromJson(Map<String, dynamic> json) => Accordion(
               .toList() ??
           [],
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 AccordionItem _$AccordionItemFromJson(Map<String, dynamic> json) =>

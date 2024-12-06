@@ -13,6 +13,8 @@ PersonDetailSectionLayout _$PersonDetailSectionLayoutFromJson(
 PersonDetailSection _$PersonDetailSectionFromJson(Map<String, dynamic> json) =>
     PersonDetailSection(
       type: $enumDecode(_$PersonDetailSectionTypeEnumMap, json['type']),
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$PersonDetailSectionTypeEnumMap = {

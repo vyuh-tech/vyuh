@@ -31,4 +31,5 @@ ConditionalRoute _$ConditionalRouteFromJson(Map<String, dynamic> json) =>
       id: readValue(json, 'id') as String,
       layout: typeFromFirstOfListJson(json['layout']),
       category: json['category'] as String?,
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

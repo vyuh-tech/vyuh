@@ -21,7 +21,10 @@ class Empty extends ContentItem {
     defaultLayoutDescriptor: DefaultEmptyLayout.typeDescriptor,
   );
 
-  Empty({super.layout}) : super(schemaType: Empty.schemaName);
+  Empty({
+    super.layout,
+    super.modifiers,
+  }) : super(schemaType: Empty.schemaName);
 
   factory Empty.fromJson(Map<String, dynamic> json) => _$EmptyFromJson(json);
 }

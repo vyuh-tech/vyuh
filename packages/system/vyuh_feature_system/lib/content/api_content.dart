@@ -31,6 +31,7 @@ final class APIContent extends ContentItem {
     this.showPending = true,
     this.configuration,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: APIContent.schemaName);
 }
 

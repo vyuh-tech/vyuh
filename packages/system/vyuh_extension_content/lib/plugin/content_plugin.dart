@@ -25,12 +25,23 @@ final class DefaultContentPlugin extends ContentPlugin {
     assert(builder != null,
         'Failed to retrieve builder for schemaType: ${content.schemaType}');
 
-    final builtContent = builder?.build(context, content);
+    final contentWidget = builder?.build(context, content);
 
-    assert(builtContent != null,
+    assert(contentWidget != null,
         'Failed to build content for schemaType: ${content.schemaType}');
 
-    return builtContent ?? const SizedBox.shrink();
+    if (contentWidget != null) {
+      if (content.modifiers != null && content.modifiers!.isNotEmpty) {
+        return content.modifiers!.fold<Widget>(
+          contentWidget,
+          (child, modifier) => modifier.build(context, child, content),
+        );
+      }
+
+      return contentWidget;
+    }
+
+    return const SizedBox.shrink();
   }
 
   @override

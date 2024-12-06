@@ -7,4 +7,6 @@ part of 'drop_down_selection.dart';
 // **************************************************************************
 
 DropDownSelection _$DropDownSelectionFromJson(Map<String, dynamic> json) =>
-    DropDownSelection();
+    DropDownSelection(
+      isAwaited: json['isAwaited'] as bool? ?? false,
+    );

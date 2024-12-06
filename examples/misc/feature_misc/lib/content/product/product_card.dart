@@ -35,6 +35,7 @@ final class ProductCard extends ContentItem {
     required this.skuId,
     required this.category,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory ProductCard.fromJson(Map<String, dynamic> json) =>

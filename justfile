@@ -11,13 +11,15 @@ gen-feature_onboarding: (_generate-json "packages/system/vyuh_feature_onboarding
 gen-vyuh_feature_auth: (_generate-json "packages/system/vyuh_feature_auth" "watch")
 
 # Example Features
-gen-feature_sample: (_generate-json "features/feature_sample" "watch")
-gen-feature_tmdb: (_generate-json "features/tmdb/feature_tmdb" "watch")
-gen-feature_wonderous: (_generate-json "features/wonderous/feature_wonderous" "watch")
-gen-feature_puzzles: (_generate-json "features/puzzles/feature_puzzles")
-gen-feature_food: (_generate-json "features/food/feature_food" "watch")
-gen-feature_settings: (_generate-json "features/settings/feature_settings" "watch")
-gen-feature_misc: (_generate-json "features/misc/feature_misc" "watch")
+gen-feature_conference: (_generate-json "examples/conference/feature_conference" "watch")
+gen-feature_counter: (_generate-json "examples/feature_counter" "watch")
+gen-feature_food: (_generate-json "examples/food/feature_food" "watch")
+gen-feature_misc: (_generate-json "examples/misc/feature_misc" "watch")
+gen-feature_puzzles: (_generate-json "examples/puzzles/feature_puzzles")
+gen-feature_settings: (_generate-json "examples/settings/feature_settings" "watch")
+gen-feature_tmdb: (_generate-json "examples/tmdb/feature_tmdb" "watch")
+gen-feature_unsplash: (_generate-json "examples/unsplash/feature_unsplash" "watch")
+gen-feature_wonderous: (_generate-json "examples/wonderous/feature_wonderous" "watch")
 
 # Packages
 gen-tmdb_client: (_generate-json "packages/tmdb_client" "watch")

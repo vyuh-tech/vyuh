@@ -18,6 +18,7 @@ Conditional _$ConditionalFromJson(Map<String, dynamic> json) => Conditional(
       defaultCase: json['defaultCase'] as String?,
       showPending: json['showPending'] as bool? ?? false,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 CaseItem<T> _$CaseItemFromJson<T extends SchemaItem>(

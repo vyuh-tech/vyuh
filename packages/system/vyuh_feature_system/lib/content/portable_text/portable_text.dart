@@ -24,6 +24,7 @@ class PortableTextContent extends ContentItem {
   PortableTextContent({
     this.blocks,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: PortableTextContent.schemaName) {
     final items = (blocks ?? []).whereType<ContentItem>();
     setParent(items);

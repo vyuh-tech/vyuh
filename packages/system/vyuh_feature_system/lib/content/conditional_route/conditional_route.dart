@@ -51,6 +51,7 @@ final class ConditionalRoute extends RouteBase {
     required super.id,
     super.layout,
     super.category,
+    super.modifiers,
   }) : super(schemaType: ConditionalRoute.schemaName, routeType: null);
 
   factory ConditionalRoute.fromJson(Map<String, dynamic> json) =>

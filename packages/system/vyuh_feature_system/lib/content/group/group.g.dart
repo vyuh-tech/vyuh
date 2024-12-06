@@ -14,6 +14,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) => Group(
               .toList() ??
           [],
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 GroupConditionalLayout _$GroupConditionalLayoutFromJson(

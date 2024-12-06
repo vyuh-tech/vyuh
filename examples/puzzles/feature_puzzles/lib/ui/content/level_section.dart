@@ -26,6 +26,7 @@ final class LevelSection extends ContentItem {
   LevelSection({
     required this.title,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory LevelSection.fromJson(Map<String, dynamic> json) =>

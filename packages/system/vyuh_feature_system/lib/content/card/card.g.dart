@@ -29,6 +29,7 @@ Card _$CardFromJson(Map<String, dynamic> json) => Card(
           ? null
           : Action.fromJson(json['tertiaryAction'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 CardConditionalLayout _$CardConditionalLayoutFromJson(

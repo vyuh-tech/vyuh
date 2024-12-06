@@ -36,6 +36,7 @@ class Conditional extends ContentItem {
     this.defaultCase,
     this.showPending = false,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: Conditional.schemaName);
 
   factory Conditional.fromJson(Map<String, dynamic> json) =>

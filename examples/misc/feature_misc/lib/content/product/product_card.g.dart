@@ -16,4 +16,5 @@ ProductCard _$ProductCardFromJson(Map<String, dynamic> json) => ProductCard(
       skuId: json['skuId'] as String,
       category: json['category'] as String,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );

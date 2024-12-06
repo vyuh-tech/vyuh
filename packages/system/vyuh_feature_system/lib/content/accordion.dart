@@ -32,6 +32,7 @@ final class Accordion extends ContentItem {
     this.description,
     required this.items,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory Accordion.fromJson(Map<String, dynamic> json) =>

@@ -16,6 +16,7 @@ HintActionText _$HintActionTextFromJson(Map<String, dynamic> json) =>
       alignment: $enumDecodeNullable(
               _$HintActionAlignmentEnumMap, json['alignment']) ??
           HintActionAlignment.center,
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$HintActionAlignmentEnumMap = {

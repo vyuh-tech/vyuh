@@ -20,6 +20,7 @@ final class DropDownMenu extends ContentItem {
     this.label = '',
     this.selectionChanged,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory DropDownMenu.fromJson(Map<String, dynamic> json) =>

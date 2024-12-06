@@ -39,6 +39,7 @@ final class DocumentView extends ContentItem {
     this.items = const [],
     required this.query,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName) {
     if (loadStrategy == DocumentLoadStrategy.reference) {
       assert(reference != null,

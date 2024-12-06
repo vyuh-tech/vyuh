@@ -24,6 +24,7 @@ final class FoodMenuItem extends ContentItem {
     this.nutrition = const [],
     this.relatedItems = const [],
     super.layout,
+    super.modifiers,
   }) : super(schemaType: 'food.item');
 
   factory FoodMenuItem.fromJson(Map<String, dynamic> json) =>

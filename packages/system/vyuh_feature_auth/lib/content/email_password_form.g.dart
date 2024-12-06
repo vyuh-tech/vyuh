@@ -28,6 +28,7 @@ EmailPasswordForm _$EmailPasswordFormFromJson(Map<String, dynamic> json) =>
           ? null
           : Action.fromJson(json['loginAction'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$AuthActionTypeEnumMap = {

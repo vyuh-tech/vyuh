@@ -48,6 +48,7 @@ final class HintActionText extends ContentItem {
     required this.hint,
     this.action,
     this.alignment = HintActionAlignment.center,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory HintActionText.fromJson(Map<String, dynamic> json) =>

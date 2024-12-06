@@ -18,6 +18,7 @@ VideoPlayerItem _$VideoPlayerItemFromJson(Map<String, dynamic> json) =>
       autoplay: json['autoplay'] as bool? ?? false,
       muted: json['muted'] as bool? ?? false,
       layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$VideoLinkTypeEnumMap = {

@@ -18,6 +18,8 @@ SeriesDetailSection _$SeriesDetailSectionFromJson(Map<String, dynamic> json) =>
       representation: $enumDecodeNullable(
               _$ListRepresentationEnumMap, json['representation']) ??
           ListRepresentation.short,
+      layout: typeFromFirstOfListJson(json['layout']),
+      modifiers: ContentItem.modifierList(json['modifiers']),
     );
 
 const _$SeriesDetailSectionTypeEnumMap = {

@@ -40,6 +40,7 @@ class Group extends ContentItem implements PortableBlockItem, ContainerItem {
     this.description,
     required this.items,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: Group.schemaName) {
     setParent(items);
   }

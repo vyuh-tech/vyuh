@@ -69,6 +69,13 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
     _initTypeRegistrations(
       descriptors,
+      (feature) =>
+          feature.contentModifiers ??
+          <TypeDescriptor<ContentModifierConfiguration>>[],
+    );
+
+    _initTypeRegistrations(
+      descriptors,
       (feature) => feature.actions ?? <TypeDescriptor<ActionConfiguration>>[],
     );
 

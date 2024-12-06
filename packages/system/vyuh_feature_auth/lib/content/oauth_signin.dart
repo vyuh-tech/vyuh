@@ -28,6 +28,7 @@ final class OAuthSignIn extends ContentItem {
     this.showLoginError = true,
     this.action,
     super.layout,
+    super.modifiers,
   }) : super(schemaType: schemaName);
 
   factory OAuthSignIn.fromJson(Map<String, dynamic> json) =>
