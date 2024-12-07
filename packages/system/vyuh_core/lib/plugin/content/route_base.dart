@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+part 'route_base.g.dart';
+
 abstract class RouteBase extends ContentItem implements RootItem {
   @JsonKey(defaultValue: 'Untitled')
   final String title;
 
   final String path;
-  final String? category;
+  final Category? category;
 
   @JsonKey(fromJson: typeFromFirstOfListJson<RouteTypeConfiguration>)
   final RouteTypeConfiguration? routeType;
@@ -49,6 +51,44 @@ abstract class RouteBase extends ContentItem implements RootItem {
     return routeType?.create(child, this, pageKey) ??
         MaterialPage(child: child, name: path, key: pageKey);
   }
+
+  @override
+  LayoutConfiguration? getLayout() {
+    return super.getLayout() ?? category?.layout;
+  }
+
+  @override
+  List<ContentModifierConfiguration>? getModifiers() {
+    return super.getModifiers() ?? category?.modifiers;
+  }
+}
+
+@JsonSerializable()
+final class Category implements SchemaItem {
+  @override
+  String get schemaType => 'vyuh.category';
+
+  final String identifier;
+  final String title;
+
+  @JsonKey(fromJson: typeFromFirstOfListJson<LayoutConfiguration>)
+  final LayoutConfiguration? layout;
+
+  @JsonKey(fromJson: modifierList)
+  final List<ContentModifierConfiguration>? modifiers;
+
+  static List<ContentModifierConfiguration>? modifierList(dynamic json) =>
+      listFromJson<ContentModifierConfiguration>(json);
+
+  Category({
+    required this.identifier,
+    required this.title,
+    this.layout,
+    this.modifiers,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      _$CategoryFromJson(json);
 }
 
 abstract class RouteTypeConfiguration implements SchemaItem {

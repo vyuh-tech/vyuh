@@ -17,7 +17,9 @@ Route _$RouteFromJson(Map<String, dynamic> json) => Route(
       createdAt: DateTime.parse(readValue(json, 'createdAt') as String),
       updatedAt: DateTime.parse(readValue(json, 'updatedAt') as String),
       id: readValue(json, 'id') as String,
-      category: json['category'] as String?,
+      category: json['category'] == null
+          ? null
+          : Category.fromJson(json['category'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),
       lifecycleHandlers: json['lifecycleHandlers'] == null

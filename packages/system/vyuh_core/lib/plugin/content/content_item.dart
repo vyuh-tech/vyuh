@@ -21,7 +21,7 @@ abstract class ContentItem implements SchemaItem {
 
   /// The layout configuration for the content item.
   @JsonKey(fromJson: typeFromFirstOfListJson<LayoutConfiguration>)
-  final LayoutConfiguration<ContentItem>? layout;
+  final LayoutConfiguration? layout;
 
   @JsonKey(fromJson: modifierList)
   final List<ContentModifierConfiguration>? modifiers;
@@ -57,6 +57,16 @@ abstract class ContentItem implements SchemaItem {
       child?.parent = this;
     }
   }
+
+  /// Gets the layout to use for the [ContentItem]. By default its the [layout] itself.
+  /// However this acts as an extension point for custom [ContentItem]s
+  /// that may have a different strategy for applying layouts.
+  LayoutConfiguration? getLayout() => layout;
+
+  /// Gets the modifiers to use for the [ContentItem]. By default its the [modifiers] itself.
+  /// However this acts as an extension point for custom [ContentItem]s
+  /// that may have a different strategy for applying modifiers.
+  List<ContentModifierConfiguration>? getModifiers() => modifiers;
 }
 
 abstract class ContentModifierConfiguration implements SchemaItem {

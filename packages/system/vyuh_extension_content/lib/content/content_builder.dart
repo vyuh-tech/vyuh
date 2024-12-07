@@ -41,7 +41,7 @@ class ContentBuilder<T extends ContentItem> {
   }
 
   Widget build(BuildContext context, T content) {
-    var layout = content.layout;
+    var layout = content.getLayout();
     if (layout == null) {
       layout = defaultLayout;
       vyuh.log?.d('No layout found for ${content.schemaType}. Using default.');

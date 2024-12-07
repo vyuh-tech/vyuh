@@ -133,7 +133,7 @@ final class SanityContentProvider extends ContentProvider {
   static get _routeContentProjection => '''
 {
   ...,
-  "category": category->title,
+  "category": category->,
   "regions": regions[] {
     "identifier": region->identifier, 
     "title": region->title,

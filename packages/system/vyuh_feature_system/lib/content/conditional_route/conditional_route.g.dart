@@ -30,6 +30,8 @@ ConditionalRoute _$ConditionalRouteFromJson(Map<String, dynamic> json) =>
       updatedAt: DateTime.parse(readValue(json, 'updatedAt') as String),
       id: readValue(json, 'id') as String,
       layout: typeFromFirstOfListJson(json['layout']),
-      category: json['category'] as String?,
+      category: json['category'] == null
+          ? null
+          : Category.fromJson(json['category'] as Map<String, dynamic>),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );

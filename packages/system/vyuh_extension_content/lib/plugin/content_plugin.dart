@@ -31,8 +31,10 @@ final class DefaultContentPlugin extends ContentPlugin {
         'Failed to build content for schemaType: ${content.schemaType}');
 
     if (contentWidget != null) {
-      if (content.modifiers != null && content.modifiers!.isNotEmpty) {
-        return content.modifiers!.fold<Widget>(
+      final modifiers = content.getModifiers();
+
+      if (modifiers != null && modifiers.isNotEmpty) {
+        return modifiers.fold<Widget>(
           contentWidget,
           (child, modifier) => modifier.build(context, child, content),
         );
