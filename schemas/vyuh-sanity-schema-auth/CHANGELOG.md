@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.28.1
+
+### Patch Changes
+
+- Readme updates
+
 ## 1.28.0
 
 ### Minor Changes
