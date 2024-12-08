@@ -2,7 +2,3 @@
 
 This package contains the Sanity.io schemas for Onboarding screens
 [Vyuh Framework](https://vyuh.tech).
-
-## Getting Started
-
-## Reference

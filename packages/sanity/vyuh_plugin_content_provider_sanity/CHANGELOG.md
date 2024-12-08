@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - **FEAT**: first cut of the ability to specify modifiers for content and category.
+
 ## 1.7.1
 
  - **FIX**: analysis fixes.

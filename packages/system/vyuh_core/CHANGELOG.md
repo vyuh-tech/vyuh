@@ -1,3 +1,8 @@
+## 1.25.0
+
+ - **FIX**: adding a test behavior like debug.
+ - **FEAT**: first cut of the ability to specify modifiers for content and category.
+
 ## 1.24.0
 
  - **FEAT**: added support for content modifiers that are configurable from the CMS.

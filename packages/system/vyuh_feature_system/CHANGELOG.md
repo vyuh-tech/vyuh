@@ -1,3 +1,7 @@
+## 1.30.0
+
+ - **FEAT**: first cut of the ability to specify modifiers for content and category.
+
 ## 1.29.1
 
  - **FIX**: version upgrades.

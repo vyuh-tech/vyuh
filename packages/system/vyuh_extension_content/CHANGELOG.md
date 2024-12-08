@@ -1,3 +1,7 @@
+## 1.11.0
+
+ - **FEAT**: first cut of the ability to specify modifiers for content and category.
+
 ## 1.10.0
 
  - **FEAT**: added support for content modifiers that are configurable from the CMS.
