@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vyuh_core/plugin/content/debug_modifier.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// The base interface for all schema-driven content items.
