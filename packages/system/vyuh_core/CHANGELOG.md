@@ -1,3 +1,7 @@
+## 1.25.1
+
+ - **FIX**: fixed analysis errors.
+
 ## 1.25.0
 
  - **FIX**: adding a test behavior like debug.
