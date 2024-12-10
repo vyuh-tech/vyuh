@@ -86,7 +86,5 @@ _getPlugins() {
       ),
       env: vc.DefaultEnvPlugin(),
       auth: ChakraAuthPlugin(),
-      others: [
-        vc.ConsoleLoggerPlugin(),
-      ]);
+      telemetryProviders: [vc.ConsoleLoggerTelemetryProvider()]);
 }

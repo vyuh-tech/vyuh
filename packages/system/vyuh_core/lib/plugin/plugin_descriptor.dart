@@ -10,18 +10,25 @@ final class PluginDescriptor {
   PluginDescriptor({
     final DIPlugin? di,
     final ContentPlugin? content,
-    final AnalyticsPlugin? analytics,
     final NetworkPlugin? network,
     final AuthPlugin? auth,
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
+    final List<AnalyticsProvider>? analyticsProviders,
+    final List<TelemetryProvider>? telemetryProviders,
     final EventPlugin? event,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
+      AnalyticsPlugin(
+          providers: analyticsProviders ?? [NoOpAnalyticsProvider()]),
+      TelemetryPlugin(
+          providers: telemetryProviders ?? [NoOpTelemetryProvider()]),
+    ]);
+
+    _plugins.addAll([
       di ?? defaultPlugins.get<DIPlugin>(),
       content ?? defaultPlugins.get<ContentPlugin>(),
-      analytics ?? defaultPlugins.get<AnalyticsPlugin>(),
       network ?? defaultPlugins.get<NetworkPlugin>(),
       auth ?? defaultPlugins.get<AuthPlugin>(),
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
@@ -35,7 +42,6 @@ final class PluginDescriptor {
   static final defaultPlugins = PluginDescriptor(
     di: GetItDIPlugin(),
     content: NoOpContentPlugin(),
-    analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
     network: HttpNetworkPlugin(),
     auth: UnknownAuthPlugin(),
     navigation: DefaultNavigationPlugin(),
