@@ -6,12 +6,10 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 /// The default implementation for an Analytics Plugin.
 final class AnalyticsPlugin extends Plugin
-    with PreloadedPlugin
+    with PreloadedPlugin, InitOncePlugin
     implements AnalyticsProvider {
   /// The list of providers for the plugin.
   final List<AnalyticsProvider> providers;
-
-  bool _initialized = false;
 
   @override
   String get description => 'Analytics Plugin';
@@ -24,14 +22,8 @@ final class AnalyticsPlugin extends Plugin
         );
 
   @override
-  Future<void> init() async {
-    if (_initialized) {
-      return;
-    }
-
+  Future<void> initOnce() async {
     await Future.wait(providers.map((e) => e.init()));
-
-    _initialized = true;
   }
 
   @override
@@ -95,7 +87,7 @@ final class AnalyticsPlugin extends Plugin
 
   /// Runs a function with a trace. This is useful for wrapping functions that
   /// need to be traced. It can also be part of a nested trace, using the [parentTrace] parameter.
-  Future<T?> runWithTrace<T>({
+  Future<T?> trace<T>({
     required String name,
     required String operation,
     required FutureOr<T?> Function(AnalyticsTrace? parentTrace) fn,

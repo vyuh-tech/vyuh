@@ -36,3 +36,12 @@ abstract class ContentPlugin extends Plugin {
   /// Checks if the given type descriptor is registered
   isRegistered<T>(TypeDescriptor<T> descriptor);
 }
+
+enum FieldName {
+  id,
+  type,
+  key,
+  ref,
+  updatedAt,
+  createdAt,
+}

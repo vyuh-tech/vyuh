@@ -106,28 +106,27 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Future<void> initPlugins(vc.AnalyticsTrace parentTrace) =>
-      analytics.runWithTrace(
-          name: 'Plugins',
-          operation: 'Init',
-          parentTrace: parentTrace,
-          fn: (trace) async {
-            // Run a cleanup first
-            final disposeFns = plugins.map((e) => e.dispose());
-            await Future.wait(disposeFns, eagerError: true);
+  Future<void> initPlugins(vc.AnalyticsTrace parentTrace) => analytics.trace(
+      name: 'Plugins',
+      operation: 'Init',
+      parentTrace: parentTrace,
+      fn: (trace) async {
+        // Run a cleanup first
+        final disposeFns = plugins.map((e) => e.dispose());
+        await Future.wait(disposeFns, eagerError: true);
 
-            // Check
-            final initFns = plugins.map((e) {
-              return analytics.runWithTrace<void>(
-                name: 'Plugin: ${e.title}',
-                operation: 'Init',
-                parentTrace: trace,
-                fn: (_) => e.init(),
-              );
-            });
+        // Check
+        final initFns = plugins.map((e) {
+          return analytics.trace<void>(
+            name: 'Plugin: ${e.title}',
+            operation: 'Init',
+            parentTrace: trace,
+            fn: (_) => e.init(),
+          );
+        });
 
-            await Future.wait(initFns, eagerError: true);
-          });
+        await Future.wait(initFns, eagerError: true);
+      });
 
   @override
   Future<void> initFeatures(vc.AnalyticsTrace parentTrace) async {
@@ -136,7 +135,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         _features.where((e) => e.dispose != null).map((e) => e.dispose!());
     await Future.wait(disposeFns, eagerError: true);
 
-    return analytics.runWithTrace<void>(
+    return analytics.trace<void>(
       name: 'Features',
       operation: 'Init',
       parentTrace: parentTrace,
@@ -144,8 +143,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         _readyFeatures.clear();
         _features = await featuresBuilder();
 
-        final initFns = _features
-            .map((feature) => analytics.runWithTrace<List<g.RouteBase>>(
+        final initFns =
+            _features.map((feature) => analytics.trace<List<g.RouteBase>>(
                   name: 'Feature: ${feature.title}',
                   operation: 'Init',
                   parentTrace: trace,
@@ -180,7 +179,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       return [];
     }
 
-    final featureRoutes = await analytics.runWithTrace<List<g.RouteBase>>(
+    final featureRoutes = await analytics.trace<List<g.RouteBase>>(
       name: 'Routes: ${feature.title}',
       operation: 'Init',
       parentTrace: parentTrace,

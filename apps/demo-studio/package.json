@@ -16,11 +16,11 @@
     "sanity"
   ],
   "dependencies": {
-    "@vyuh/sanity-plugin-structure": "^1.33.1",
+    "@vyuh/sanity-plugin-structure": "^1.33.2",
     "@vyuh/sanity-schema-auth": "^1.28.1",
-    "@vyuh/sanity-schema-core": "^1.33.1",
+    "@vyuh/sanity-schema-core": "^1.33.2",
     "@vyuh/sanity-schema-onboarding": "^1.28.1",
-    "@vyuh/sanity-schema-system": "^1.33.1",
+    "@vyuh/sanity-schema-system": "^1.33.2",
     "conference-sanity-schema": "workspace:*",
     "food-sanity-schema": "workspace:*",
     "misc-sanity-schema": "workspace:*",
