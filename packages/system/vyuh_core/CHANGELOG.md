@@ -1,3 +1,7 @@
+## 1.25.2
+
+ - **FIX**: refactored the way an InitOnce plugin is used. NPM package upgrades.
+
 ## 1.25.1
 
  - **FIX**: fixed analysis errors.

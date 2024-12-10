@@ -21,7 +21,7 @@ dependencies:
   flutter:
     sdk: flutter
   sanity_client: ^1.4.1
-  vyuh_core: ^1.25.1
+  vyuh_core: ^1.25.2
   vyuh_cache: ^1.4.0
   cached_network_image: ^3.3.1
 
