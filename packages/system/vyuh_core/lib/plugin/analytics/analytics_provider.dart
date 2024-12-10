@@ -26,4 +26,48 @@ abstract interface class AnalyticsProvider {
 
   /// Reports an event with a specific name and optional parameters.
   Future<void> reportEvent(String name, {Map<String, dynamic>? params});
+
+  /// Reports an error with an optional stack trace and parameters.
+  @Deprecated("Moved to Telemetry Provider Report Error")
+  Future<void> reportError(dynamic exception,
+      {StackTrace? stackTrace,
+        Map<String, dynamic>? params,
+        bool fatal = false});
+
+  /// Reports a Flutter error with optional parameters.
+  @Deprecated("Moved to Telemetry Provider Report Flutter Error")
+  Future<void> reportFlutterError(FlutterErrorDetails details,
+      {bool fatal = false});
+
+  /// Reports a message with optional parameters.
+
+  @Deprecated("Moved to Telemetry Provider Report Message")
+  Future<void> reportMessage(String message, {Map<String, dynamic>? params});
+
+  /// Starts a trace with a specific name and operation.
+  @Deprecated("Moved to Telemetry Provider Start Trace")
+  Future<AnalyticsTrace> startTrace(String name, String operation);
+}
+
+/// The base interface for an Analytics Trace. The trace is responsible for
+/// tracking the duration of an operation, and reporting metrics and attributes.
+@Deprecated("Replaced with Trace")
+abstract class AnalyticsTrace {
+  /// Stops or finalizes the trace.
+  Future<void> stop();
+
+  /// Sets a metric with a specific name and value.
+  void setMetric(String name, int value);
+
+  /// Gets a metric with a specific name.
+  int getMetric(String name);
+
+  /// Sets an attribute with a specific name and value.
+  void setAttributes(Map<String, String> attributes);
+
+  /// Gets all attributes set so far in the trace.
+  Map<String, String> getAttributes();
+
+  /// Starts a child trace with a specific name and operation.
+  Future<AnalyticsTrace> startChild(String name, String operation);
 }
