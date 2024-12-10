@@ -43,8 +43,7 @@ final class _PlatformInitTracker implements SystemInitTracker {
     });
   }
 
-  Future<void> _initLoop(
-      InitState initialState, vc.Trace parentTrace) async {
+  Future<void> _initLoop(InitState initialState, vc.Trace parentTrace) async {
     runInAction(() => currentState.value = initialState);
 
     while (currentState.value != InitState.ready) {

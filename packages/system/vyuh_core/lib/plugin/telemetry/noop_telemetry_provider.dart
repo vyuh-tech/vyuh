@@ -5,7 +5,7 @@ import 'package:vyuh_core/plugin/telemetry/telemetry_provider.dart';
 import 'logger.dart';
 
 /// A no-op implementation of [TelemetryProvider].
-final class NoOpTelemetryProvider implements TelemetryProvider {
+class NoOpTelemetryProvider implements TelemetryProvider {
   @override
   Future<Trace> startTrace(String name, String operation) =>
       Future.value(_NoOpTrace());
