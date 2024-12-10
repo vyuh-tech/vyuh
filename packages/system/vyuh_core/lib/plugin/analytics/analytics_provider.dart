@@ -31,8 +31,8 @@ abstract interface class AnalyticsProvider {
   @Deprecated("Moved to Telemetry Provider Report Error")
   Future<void> reportError(dynamic exception,
       {StackTrace? stackTrace,
-        Map<String, dynamic>? params,
-        bool fatal = false});
+      Map<String, dynamic>? params,
+      bool fatal = false});
 
   /// Reports a Flutter error with optional parameters.
   @Deprecated("Moved to Telemetry Provider Report Flutter Error")

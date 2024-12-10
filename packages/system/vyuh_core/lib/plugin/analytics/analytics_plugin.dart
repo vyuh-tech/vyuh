@@ -34,7 +34,6 @@ final class AnalyticsPlugin extends Plugin
     return Future.wait(futures);
   }
 
-
   @override
   @Deprecated("Moved to Telemetry Plugin Start Trace")
   Future<AnalyticsTrace> startTrace(String name, String operation) async {
@@ -54,14 +53,14 @@ final class AnalyticsPlugin extends Plugin
   @Deprecated("Moved to Telemetry Plugin Report Error")
   Future<void> reportError(exception,
       {StackTrace? stackTrace,
-        Map<String, dynamic>? params,
-        bool fatal = false}) {
+      Map<String, dynamic>? params,
+      bool fatal = false}) {
     final futures = providers.map((provider) => provider.reportError(
-      exception,
-      stackTrace: stackTrace,
-      params: params,
-      fatal: fatal,
-    ));
+          exception,
+          stackTrace: stackTrace,
+          params: params,
+          fatal: fatal,
+        ));
 
     return Future.wait(futures);
   }
@@ -151,7 +150,7 @@ final class _CompositeAnalyticsTrace extends AnalyticsTrace {
   @override
   Future<AnalyticsTrace> startChild(String name, String operation) async {
     final childTraceFutures =
-    traces.map((trace) => trace.startChild(name, operation));
+        traces.map((trace) => trace.startChild(name, operation));
     final childTraces = await Future.wait(childTraceFutures);
 
     return _CompositeAnalyticsTrace(childTraces, providers: providers);

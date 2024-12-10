@@ -32,8 +32,8 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   @Deprecated("Moved to Telemetry Provider Report Error")
   Future<void> reportError(exception,
       {StackTrace? stackTrace,
-        Map<String, dynamic>? params,
-        bool fatal = false}) {
+      Map<String, dynamic>? params,
+      bool fatal = false}) {
     return Future.value();
   }
 
