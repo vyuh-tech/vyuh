@@ -100,7 +100,7 @@ class _Chip extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.inverseSurface.withOpacity(0.75),
+        color: theme.colorScheme.inverseSurface.withValues(alpha: 0.75),
         borderRadius: borderRadius,
       ),
       padding: padding,

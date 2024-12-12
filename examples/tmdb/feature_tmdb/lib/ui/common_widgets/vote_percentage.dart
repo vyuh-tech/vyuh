@@ -29,7 +29,7 @@ class VotePercentage extends StatelessWidget {
           decoration: hasBackground
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(theme.borderRadius.small),
-                  color: theme.colorScheme.shadow.withOpacity(0.6),
+                  color: theme.colorScheme.shadow.withValues(alpha: 0.6),
                 )
               : null,
           child: Row(

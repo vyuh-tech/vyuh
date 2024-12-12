@@ -16,7 +16,7 @@ final class DebugModifier extends ContentModifierConfiguration {
           right: 2,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 2),
-            color: theme.colorScheme.inverseSurface.withOpacity(0.5),
+            color: theme.colorScheme.inverseSurface.withValues(alpha: 0.5),
             child: Text(
               content.schemaType,
               style: TextStyle(

@@ -228,7 +228,8 @@ class SeriesHeroCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: f.BorderRadius.circular(theme.borderRadius.large),
         ),
-        backgroundColor: theme.colorScheme.inverseSurface.withOpacity(0.8),
+        backgroundColor:
+            theme.colorScheme.inverseSurface.withValues(alpha: 0.8),
         labelStyle: theme.tmdbTheme.labelMedium?.apply(
           color: theme.colorScheme.onPrimary,
         ),

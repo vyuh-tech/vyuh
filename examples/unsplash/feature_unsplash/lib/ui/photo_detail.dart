@@ -88,7 +88,7 @@ class _PhotoInfo extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             blurRadius: 8,
-            color: theme.colorScheme.inverseSurface.withOpacity(0.25),
+            color: theme.colorScheme.inverseSurface.withValues(alpha: 0.25),
           )
         ],
       ),
