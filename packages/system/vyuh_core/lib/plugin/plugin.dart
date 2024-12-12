@@ -28,6 +28,10 @@ mixin InitOncePlugin on Plugin {
 
   @override
   @nonVirtual
+  Future<void> dispose() => Future.value();
+
+  @override
+  @nonVirtual
   Future<void> init() {
     if (_initCompleter == null) {
       _initCompleter = Completer();

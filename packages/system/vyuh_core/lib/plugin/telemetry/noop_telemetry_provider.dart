@@ -1,12 +1,13 @@
 import 'package:flutter/widgets.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_core/plugin/telemetry/telemetry_provider.dart';
 
-/// A no-op implementation of [AnalyticsProvider].
-final class NoOpAnalyticsProvider implements AnalyticsProvider {
+import 'logger.dart';
+
+/// A no-op implementation of [TelemetryProvider].
+class NoOpTelemetryProvider implements TelemetryProvider {
   @override
-  @Deprecated("Moved to Telemetry Provider Start Trace")
-  Future<AnalyticsTrace> startTrace(String name, String operation) async =>
-      _NoOpAnalyticsTrace();
+  Future<Trace> startTrace(String name, String operation) =>
+      Future.value(_NoOpTrace());
 
   @override
   String get name => 'vyuh.analyticsProvider.noop';
@@ -29,7 +30,6 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   List<NavigatorObserver> get observers => [];
 
   @override
-  @Deprecated("Moved to Telemetry Provider Report Error")
   Future<void> reportError(exception,
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,
@@ -38,26 +38,19 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   }
 
   @override
-  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) {
-    return Future.value();
-  }
-
-  @override
-  @Deprecated("Moved to Telemetry Provider Report Flutter Error")
   Future<void> reportFlutterError(FlutterErrorDetails details,
       {bool fatal = false}) {
     return Future.value();
   }
 
   @override
-  @Deprecated("Moved to Telemetry Provider Report Message")
-  Future<void> reportMessage(String message, {Map<String, dynamic>? params}) {
+  Future<void> reportMessage(String message,
+      {required LogLevel level, Map<String, dynamic>? params}) {
     return Future.value();
   }
 }
 
-@Deprecated("Moved to Telemetry No Op Trace")
-final class _NoOpAnalyticsTrace extends AnalyticsTrace {
+final class _NoOpTrace extends Trace {
   @override
   Map<String, String> getAttributes() => {};
 
@@ -76,7 +69,10 @@ final class _NoOpAnalyticsTrace extends AnalyticsTrace {
   }
 
   @override
-  Future<AnalyticsTrace> startChild(String name, String operation) {
-    return Future.value(_NoOpAnalyticsTrace());
+  Future<Trace> startChild(String name, String operation) {
+    return Future.value(_NoOpTrace());
   }
+
+  @override
+  set exception(exception) {}
 }

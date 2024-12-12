@@ -10,38 +10,40 @@ final class PluginDescriptor {
   PluginDescriptor({
     final DIPlugin? di,
     final ContentPlugin? content,
-    final AnalyticsPlugin? analytics,
     final NetworkPlugin? network,
     final AuthPlugin? auth,
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
+    final AnalyticsPlugin? analytics,
+    final TelemetryPlugin? telemetry,
     final EventPlugin? event,
     final List<Plugin>? others,
   }) {
     _plugins.addAll([
       di ?? defaultPlugins.get<DIPlugin>(),
       content ?? defaultPlugins.get<ContentPlugin>(),
-      analytics ?? defaultPlugins.get<AnalyticsPlugin>(),
       network ?? defaultPlugins.get<NetworkPlugin>(),
       auth ?? defaultPlugins.get<AuthPlugin>(),
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
       event ?? defaultPlugins.get<EventPlugin>(),
       env ?? defaultPlugins.get<EnvPlugin>(),
+      analytics ?? defaultPlugins.get<AnalyticsPlugin>(),
+      telemetry ?? defaultPlugins.get<TelemetryPlugin>(),
     ]);
 
     _plugins.addAll(others ?? []);
   }
 
   static final defaultPlugins = PluginDescriptor(
-    di: GetItDIPlugin(),
-    content: NoOpContentPlugin(),
-    analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
-    network: HttpNetworkPlugin(),
-    auth: UnknownAuthPlugin(),
-    navigation: DefaultNavigationPlugin(),
-    env: NoOpEnvPlugin(),
-    event: DefaultEventPlugin(),
-  );
+      di: GetItDIPlugin(),
+      content: NoOpContentPlugin(),
+      network: HttpNetworkPlugin(),
+      auth: UnknownAuthPlugin(),
+      navigation: DefaultNavigationPlugin(),
+      env: NoOpEnvPlugin(),
+      event: DefaultEventPlugin(),
+      analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
+      telemetry: TelemetryPlugin(providers: [NoOpTelemetryProvider()]));
 
   Plugin get<T>() {
     return _plugins.firstWhere((element) => element is T);

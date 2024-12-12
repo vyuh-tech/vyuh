@@ -27,7 +27,7 @@ class LevelContentLoader extends StatelessWidget {
                   child: AspectRatio(
                     aspectRatio: theme.aspectRatio.oneToOne,
                     child: Container(
-                      color: Colors.grey.withOpacity(0.2),
+                      color: Colors.grey.withValues(alpha: 0.2),
                     ),
                   ),
                 ),
