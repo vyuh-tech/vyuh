@@ -43,7 +43,7 @@ final feature = FeatureDescriptor(
     );
 
     if (settings == null) {
-      vyuh.log?.w(
+      vyuh.log.warn(
         'No Settings found. Please ensure you have a settings document with identifier "$prefix"',
       );
       return [];

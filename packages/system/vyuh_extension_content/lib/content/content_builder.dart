@@ -44,7 +44,8 @@ class ContentBuilder<T extends ContentItem> {
     var layout = content.getLayout();
     if (layout == null) {
       layout = defaultLayout;
-      vyuh.log?.d('No layout found for ${content.schemaType}. Using default.');
+      vyuh.log
+          .debug('No layout found for ${content.schemaType}. Using default.');
     }
 
     try {

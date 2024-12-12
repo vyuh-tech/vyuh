@@ -38,10 +38,10 @@ abstract class VyuhPlatform {
   FutureOr<void> run();
 
   /// Initializes the plugins for the platform. Called internally by the platform and should not be invoked directly.
-  Future<void> initPlugins(AnalyticsTrace parentTrace);
+  Future<void> initPlugins(Trace parentTrace);
 
   /// Initializes the features for the platform. Called internally by the platform and should not be invoked directly.
-  Future<void> initFeatures(AnalyticsTrace parentTrace);
+  Future<void> initFeatures(Trace parentTrace);
 
   /// Used to get the specific plugin instance for the given type.
   T? getPlugin<T extends Plugin>();
@@ -56,10 +56,13 @@ extension NamedPlugins on VyuhPlatform {
   DIPlugin get di => getPlugin<DIPlugin>()!;
 
   /// The logger plugin.
-  LoggerPlugin? get log => getPlugin<LoggerPlugin>();
+  LoggerPlugin get log => getPlugin<LoggerPlugin>()!;
 
   /// The analytics plugin.
   AnalyticsPlugin get analytics => getPlugin<AnalyticsPlugin>()!;
+
+  /// The telemetry plugin.
+  TelemetryPlugin get telemetry => getPlugin<TelemetryPlugin>()!;
 
   /// The network plugin.
   NetworkPlugin get network => getPlugin<NetworkPlugin>()!;

@@ -47,12 +47,12 @@ final class OpenUrlAction extends ActionConfiguration {
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) async {
     if (url == null || url!.isEmpty) {
-      vyuh.log?.d('No url provided to open');
+      vyuh.log.debug('No url provided to open');
     }
 
     final canLaunch = await canLaunchUrlString(url!);
     if (canLaunch == false) {
-      vyuh.log?.d('Unable to launch url: $url');
+      vyuh.log.debug('Unable to launch url: $url');
       return;
     }
 

@@ -36,18 +36,18 @@ final class DrawerAction extends ActionConfiguration {
       {Map<String, dynamic>? arguments}) {
     final scaffoldState = Scaffold.maybeOf(context);
     if (scaffoldState == null) {
-      vyuh.log?.d('DrawerAction requires a Scaffold ancestor');
+      vyuh.log.debug('DrawerAction requires a Scaffold ancestor');
       return null;
     }
 
     if (isEndDrawer == false && scaffoldState.hasDrawer == false) {
-      vyuh.log
-          ?.d('DrawerAction requires an drawer to be present in your Scaffold');
+      vyuh.log.debug(
+          'DrawerAction requires an drawer to be present in your Scaffold');
       return null;
     }
 
     if (isEndDrawer && scaffoldState.hasEndDrawer == false) {
-      vyuh.log?.d(
+      vyuh.log.debug(
           'DrawerAction requires an endDrawer to be present in your Scaffold');
       return null;
     }

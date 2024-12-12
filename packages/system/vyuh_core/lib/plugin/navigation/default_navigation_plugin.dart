@@ -44,7 +44,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       routingConfig: _routingConfig,
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: kDebugMode,
-      observers: vyuh.analytics.observers,
+      observers: vyuh.telemetry.observers,
       errorBuilder: (context, state) => vyuh.widgetBuilder.routeErrorView(
         context,
         title: 'Failed to load route',
