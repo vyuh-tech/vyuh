@@ -9,32 +9,32 @@ final class ConsoleLoggerPlugin extends LoggerPlugin {
             name: 'vyuh.plugin.logger.console', title: 'Console Logger Plugin');
 
   @override
-  void d(message) {
+  void debug(message) {
     _logger.d(message);
   }
 
   @override
-  void e(message, {Object? error}) {
+  void error(message, {Object? error}) {
     _logger.e(message);
   }
 
   @override
-  void f(message, {Object? error, StackTrace? stackTrace}) {
+  void fatal(message, {Object? error, StackTrace? stackTrace}) {
     _logger.f(message);
   }
 
   @override
-  void i(message) {
+  void info(message) {
     _logger.i(message);
   }
 
   @override
-  void t(message) {
+  void trace(message) {
     _logger.t(message);
   }
 
   @override
-  void w(message) {
+  void warn(message) {
     _logger.w(message);
   }
 

@@ -1,3 +1,7 @@
+## 1.30.1
+
+ - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
+
 ## 1.30.0
 
  - **FEAT**: first cut of the ability to specify modifiers for content and category.

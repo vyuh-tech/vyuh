@@ -6,7 +6,7 @@ import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 extension WidgetBuilder on Plugin {
   Widget build(BuildContext context) {
     switch (this) {
-      case AnalyticsPlugin() || ContentPlugin():
+      case AnalyticsPlugin() || ContentPlugin() || TelemetryPlugin():
         return _PluginWithDetailsItem(plugin: this);
       default:
         return ListTile(
@@ -20,6 +20,8 @@ extension WidgetBuilder on Plugin {
     switch (this) {
       case AnalyticsPlugin():
         return Icons.show_chart;
+      case TelemetryPlugin():
+        return Icons.sensors;
       case ContentPlugin():
         return Icons.category;
       case LoggerPlugin():

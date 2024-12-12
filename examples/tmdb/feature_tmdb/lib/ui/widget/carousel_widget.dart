@@ -52,7 +52,7 @@ class CarouselWidget extends StatelessWidget {
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
                 child: Container(
-                  color: theme.colorScheme.primary.withOpacity(0.25),
+                  color: theme.colorScheme.primary.withValues(alpha: 0.25),
                   padding: EdgeInsets.symmetric(
                     horizontal: theme.spacing.s8,
                     vertical: theme.spacing.s4,

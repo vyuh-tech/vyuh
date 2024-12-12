@@ -1,3 +1,7 @@
+## 1.25.3
+
+ - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
+
 ## 1.25.2
 
  - **FIX**: refactored the way an InitOnce plugin is used. NPM package upgrades.

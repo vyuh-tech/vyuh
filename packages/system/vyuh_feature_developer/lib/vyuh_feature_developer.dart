@@ -9,6 +9,7 @@ import 'package:vyuh_feature_developer/content_extension_detail.dart';
 import 'package:vyuh_feature_developer/content_plugin_detail.dart';
 import 'package:vyuh_feature_developer/feature_detail.dart';
 import 'package:vyuh_feature_developer/plugin_and_feature_list.dart';
+import 'package:vyuh_feature_developer/telemetry_plugin_detail.dart';
 
 final feature = FeatureDescriptor(
   name: 'developer',
@@ -62,6 +63,10 @@ extension on Plugin {
       case AnalyticsPlugin():
         return AnalyticsPluginDetail(
           plugin: plugin as AnalyticsPlugin,
+        );
+      case TelemetryPlugin():
+        return TelemetryPluginDetail(
+          plugin: plugin as TelemetryPlugin,
         );
       case ContentPlugin():
         return ContentPluginDetailsView(

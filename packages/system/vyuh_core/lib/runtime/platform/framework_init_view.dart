@@ -35,7 +35,7 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
         }
 
         if (vyuh.tracker.error != null) {
-          vyuh.analytics.reportError(vyuh.tracker.error);
+          vyuh.telemetry.reportError(vyuh.tracker.error);
         }
 
         final child = status == null || status == FutureStatus.pending

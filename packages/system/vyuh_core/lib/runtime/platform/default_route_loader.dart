@@ -51,7 +51,7 @@ class _DefaultRouteLoaderState extends State<_DefaultRouteLoader> {
               widthFactor: 0.5,
               child: RepaintBoundary(
                 child: LinearProgressIndicator(
-                  backgroundColor: progressColor.withOpacity(0.25),
+                  backgroundColor: progressColor.withValues(alpha: 0.25),
                   color: progressColor,
                 ),
               ),

@@ -1,3 +1,7 @@
+## 0.0.5+3
+
+ - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
+
 ## 0.0.5+2
 
  - **FIX**: fixed an issue where the Sanity command was incorrectly treated as error.

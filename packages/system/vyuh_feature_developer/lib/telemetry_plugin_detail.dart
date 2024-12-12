@@ -3,10 +3,10 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
-class AnalyticsPluginDetail extends StatelessWidget {
-  final AnalyticsPlugin plugin;
+class TelemetryPluginDetail extends StatelessWidget {
+  final TelemetryPlugin plugin;
 
-  const AnalyticsPluginDetail({super.key, required this.plugin});
+  const TelemetryPluginDetail({super.key, required this.plugin});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class AnalyticsPluginDetail extends StatelessWidget {
                 sliver: SliverList.list(
                   children: [
                     for (final provider in plugin.providers)
-                      _AnalyticsProviderDetail(provider: provider, index: 1),
+                      _TelemetryProviderDetail(provider: provider, index: 1),
                   ],
                 ),
               ),
@@ -43,12 +43,12 @@ class AnalyticsPluginDetail extends StatelessWidget {
   }
 }
 
-class _AnalyticsProviderDetail extends StatelessWidget {
+class _TelemetryProviderDetail extends StatelessWidget {
   final int index;
 
-  final AnalyticsProvider provider;
+  final TelemetryProvider provider;
 
-  const _AnalyticsProviderDetail({
+  const _TelemetryProviderDetail({
     required this.provider,
     required this.index,
   });
@@ -74,6 +74,15 @@ class _AnalyticsProviderDetail extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text('${provider.runtimeType}'),
+        const SizedBox(height: 8),
+        Text(
+          'Observers:',
+          style: theme.textTheme.bodyMedium?.apply(fontWeightDelta: 2),
+        ),
+        ...provider.observers.map((e) => Padding(
+              padding: const EdgeInsets.only(bottom: 4.0),
+              child: Text(e.runtimeType.toString()),
+            )),
       ],
     );
   }

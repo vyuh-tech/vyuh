@@ -71,7 +71,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
               if (route == null) {
                 final exception = Exception(errorMsg);
 
-                vyuh.analytics.reportError(exception);
+                vyuh.telemetry.reportError(exception);
 
                 return vyuh.widgetBuilder.routeErrorView(
                   context,
@@ -87,7 +87,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
               );
 
             case FutureStatus.rejected:
-              vyuh.analytics.reportError(_tracker.value?.error);
+              vyuh.telemetry.reportError(_tracker.value?.error);
 
               return vyuh.widgetBuilder.routeErrorView(
                 context,
