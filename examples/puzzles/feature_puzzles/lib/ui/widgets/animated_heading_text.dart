@@ -26,7 +26,7 @@ class AnimatedHeadingText extends StatelessWidget {
         )
         .shimmer(
           duration: 1200.ms,
-          color: theme.colorScheme.primary.withOpacity(0.5),
+          color: theme.colorScheme.primary.withValues(alpha: 0.5),
         )
         .animate() // this wraps the previous Animate in another Animate
         .fadeIn(

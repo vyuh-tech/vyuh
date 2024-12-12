@@ -118,7 +118,7 @@ void showLoseDialog(
   showDialog(
     context: context,
     barrierColor:
-        Theme.of(context).colorScheme.onErrorContainer.withOpacity(0.5),
+        Theme.of(context).colorScheme.onErrorContainer.withValues(alpha: 0.5),
     builder: (context) {
       final theme = Theme.of(context);
       return AlertDialog(

@@ -152,7 +152,7 @@ class CarouselIndicator extends StatelessWidget {
       effect: ExpandingDotsEffect(
         expansionFactor: theme.sizing.s2 / 2,
         activeDotColor: color,
-        dotColor: color.withOpacity(0.5),
+        dotColor: color.withValues(alpha: 0.5),
         dotHeight: theme.sizing.s2,
         dotWidth: theme.sizing.s4,
         spacing: theme.spacing.s8,

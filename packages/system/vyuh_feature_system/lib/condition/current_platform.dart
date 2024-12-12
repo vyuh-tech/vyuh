@@ -34,8 +34,6 @@ final class CurrentPlatform extends ConditionConfiguration {
         return Future.value('linux');
       case TargetPlatform.fuchsia:
         return Future.value('fuchsia');
-      default:
-        return Future.value(null);
     }
   }
 }

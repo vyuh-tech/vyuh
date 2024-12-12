@@ -105,7 +105,7 @@ class PersonStatisticsView extends StatelessWidget {
             padding: EdgeInsets.all(theme.spacing.s16),
             width: MediaQuery.sizeOf(context).width,
             decoration: BoxDecoration(
-              color: theme.colorScheme.shadow.withOpacity(0.1),
+              color: theme.colorScheme.shadow.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Wrap(
