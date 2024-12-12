@@ -1,3 +1,7 @@
+## 1.5.0
+
+ - **FEAT**: Breaking change. Split up the AnalyticsPlugin into a focused TelemetryPlugin that only does telemetry operations like error reporting and tracing. Analytics is now focused only on User level analytics.
+
 ## 1.4.3
 
  - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
