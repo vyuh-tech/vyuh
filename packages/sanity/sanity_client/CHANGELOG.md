@@ -1,3 +1,7 @@
+## 1.4.2
+
+ - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
+
 ## 1.4.1
 
  - **FIX**: analysis fixes.

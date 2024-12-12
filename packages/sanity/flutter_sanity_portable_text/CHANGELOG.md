@@ -1,3 +1,7 @@
+## 1.5.1
+
+ - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
+
 ## 1.5.0
 
  - **FEAT**: added support for content modifiers that are configurable from the CMS.
