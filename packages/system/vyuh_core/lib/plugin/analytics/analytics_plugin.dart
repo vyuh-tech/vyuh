@@ -20,12 +20,12 @@ final class AnalyticsPlugin extends Plugin
         );
 
   @override
-  Future<void> initOnce() async {
-    await Future.wait(providers.map((e) => e.init()));
+  Future<void> initOnce() {
+    return Future.wait(providers.map((e) => e.init()));
   }
 
   @override
-  Future<void> dispose() {
+  Future<void> disposeOnce() {
     return Future.wait(providers.map((e) => e.dispose()));
   }
 

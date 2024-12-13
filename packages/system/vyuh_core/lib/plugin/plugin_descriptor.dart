@@ -18,7 +18,6 @@ final class PluginDescriptor {
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
     final EventPlugin? event,
-    final LoggerPlugin? logger,
     final List<Plugin>? others,
   }) {
     final otherPlugins = others ?? [];
@@ -32,8 +31,7 @@ final class PluginDescriptor {
             plugin is AuthPlugin ||
             plugin is NavigationPlugin ||
             plugin is EventPlugin ||
-            plugin is EnvPlugin ||
-            plugin is LoggerPlugin) {
+            plugin is EnvPlugin) {
           return false;
         }
       }
@@ -51,7 +49,6 @@ final class PluginDescriptor {
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
       event ?? defaultPlugins.get<EventPlugin>(),
       env ?? defaultPlugins.get<EnvPlugin>(),
-      logger ?? defaultPlugins.get<LoggerPlugin>(),
     ].whereNot((x) => x == null).cast<Plugin>());
 
     _plugins.addAll(others ?? []);
@@ -67,7 +64,6 @@ final class PluginDescriptor {
     NavigationPlugin,
     EnvPlugin,
     EventPlugin,
-    LoggerPlugin,
   ];
 
   static final defaultPlugins = PluginDescriptor(
@@ -80,7 +76,6 @@ final class PluginDescriptor {
     navigation: DefaultNavigationPlugin(),
     env: NoOpEnvPlugin(),
     event: DefaultEventPlugin(),
-    logger: NoOpLoggerPlugin(),
   );
 
   Plugin? get<T>() {

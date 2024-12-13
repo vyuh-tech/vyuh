@@ -4,8 +4,12 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// A no-op implementation of [TelemetryProvider].
 final class NoOpTelemetryProvider implements TelemetryProvider {
   @override
-  Future<Trace> startTrace(String name, String operation) async =>
-      _NoOpAnalyticsTrace();
+  Future<Trace> startTrace(
+    String name,
+    String operation, {
+    LogLevel? level = LogLevel.info,
+  }) async =>
+      NoOpTrace();
 
   @override
   String get name => 'vyuh.telemetryProvider.noop';
@@ -42,12 +46,16 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
   }
 
   @override
-  Future<void> reportMessage(String message, {Map<String, dynamic>? params}) {
+  Future<void> reportMessage(
+    String message, {
+    Map<String, dynamic>? params,
+    LogLevel? level = LogLevel.info,
+  }) {
     return Future.value();
   }
 }
 
-final class _NoOpAnalyticsTrace extends Trace {
+final class NoOpTrace extends Trace {
   @override
   Map<String, String> getAttributes() => {};
 
@@ -66,7 +74,11 @@ final class _NoOpAnalyticsTrace extends Trace {
   }
 
   @override
-  Future<Trace> startChild(String name, String operation) {
-    return Future.value(_NoOpAnalyticsTrace());
+  Future<Trace> startChild(
+    String name,
+    String operation, {
+    LogLevel? level = LogLevel.info,
+  }) {
+    return Future.value(NoOpTrace());
   }
 }

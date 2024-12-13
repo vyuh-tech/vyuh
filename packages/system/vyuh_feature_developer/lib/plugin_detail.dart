@@ -24,8 +24,6 @@ extension WidgetBuilder on Plugin {
         return Icons.sensors;
       case ContentPlugin():
         return Icons.category;
-      case LoggerPlugin():
-        return Icons.line_style;
       case DIPlugin():
         return Icons.insert_link;
       case NetworkPlugin():

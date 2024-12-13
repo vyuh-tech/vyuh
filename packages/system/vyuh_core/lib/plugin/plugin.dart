@@ -25,20 +25,39 @@ mixin PreloadedPlugin on Plugin {}
 /// correct time in the initialization sequence.
 mixin InitOncePlugin on Plugin {
   Completer? _initCompleter;
+  bool _initialized = false;
+
+  bool get initialized => _initialized;
 
   @override
   @nonVirtual
-  Future<void> init() {
+  Future<void> init() async {
     if (_initCompleter == null) {
       _initCompleter = Completer();
 
-      initOnce()
-          .then((final _) => _initCompleter!.complete())
-          .catchError((final e) => _initCompleter!.completeError(e));
+      initOnce().then((final _) {
+        _initCompleter!.complete();
+        _initialized = true;
+      }).catchError((final e) {
+        _initCompleter!.completeError(e);
+      });
     }
 
     return _initCompleter!.future;
   }
 
+  @override
+  Future<void> dispose() {
+    // Since we have opted into the InitOnce mixin, we should not dispose
+    // multiple times
+    if (_initialized) {
+      return Future.value();
+    }
+
+    return disposeOnce();
+  }
+
   Future<void> initOnce();
+
+  Future<void> disposeOnce();
 }

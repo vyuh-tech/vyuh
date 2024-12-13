@@ -55,9 +55,6 @@ extension NamedPlugins on VyuhPlatform {
   /// The dependency injection plugin.
   DIPlugin get di => getPlugin<DIPlugin>()!;
 
-  /// The logger plugin.
-  LoggerPlugin get log => getPlugin<LoggerPlugin>()!;
-
   /// The analytics plugin.
   AnalyticsPlugin get analytics => getPlugin<AnalyticsPlugin>()!;
 

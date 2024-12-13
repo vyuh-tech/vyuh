@@ -4,7 +4,30 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-/// The default implementation for an Analytics Plugin.
+enum LogLevel {
+  /// The log level for debug messages.
+  debug,
+
+  /// The log level for info messages. This is the default level.
+  info,
+
+  /// The log level for trace messages.
+  /// These are generally used for fine-grained debugging.
+  trace,
+
+  /// The log level for warning messages.
+  /// Use this for guiding the developer on correct usage of the concerned API.
+  warning,
+
+  /// The log level for error messages. Use this for exceptions and errors.
+  error,
+
+  /// The log level for fatal messages.
+  /// This is only for the most severe errors, generally considered irrecoverable.
+  fatal
+}
+
+/// The default implementation for a Telemetry Plugin.
 final class TelemetryPlugin extends Plugin
     with PreloadedPlugin, InitOncePlugin
     implements TelemetryProvider {
@@ -27,18 +50,22 @@ final class TelemetryPlugin extends Plugin
   }
 
   @override
-  Future<void> dispose() {
+  Future<void> disposeOnce() {
     return Future.wait(providers.map((e) => e.dispose()));
   }
 
   @override
-  Future<Trace> startTrace(String name, String operation) async {
+  Future<Trace> startTrace(
+    String name,
+    String operation, {
+    LogLevel? level = LogLevel.info,
+  }) async {
     final traceFutures = providers
-        .map((p) => p.startTrace(name, operation))
+        .map((p) => p.startTrace(name, operation, level: level))
         .toList(growable: false);
     final traces = await Future.wait(traceFutures);
 
-    return _CompositeAnalyticsTrace(traces, providers: providers);
+    return _CompositeTrace(traces, providers: providers);
   }
 
   @override
@@ -70,9 +97,10 @@ final class TelemetryPlugin extends Plugin
   }
 
   @override
-  Future<void> reportMessage(String message, {Map<String, dynamic>? params}) {
-    final futures = providers
-        .map((provider) => provider.reportMessage(message, params: params));
+  Future<void> reportMessage(String message,
+      {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) {
+    final futures = providers.map((provider) =>
+        provider.reportMessage(message, params: params, level: level));
 
     return Future.wait(futures);
   }
@@ -84,10 +112,11 @@ final class TelemetryPlugin extends Plugin
     required String operation,
     required FutureOr<T?> Function(Trace? parentTrace) fn,
     Trace? parentTrace,
+    LogLevel? level = LogLevel.info,
   }) async {
     final trace = parentTrace != null
-        ? await parentTrace.startChild(name, operation)
-        : await startTrace(name, operation);
+        ? await parentTrace.startChild(name, operation, level: level)
+        : await startTrace(name, operation, level: level);
 
     try {
       final value = fn(trace);
@@ -105,11 +134,11 @@ final class TelemetryPlugin extends Plugin
   }
 }
 
-final class _CompositeAnalyticsTrace extends Trace {
+final class _CompositeTrace extends Trace {
   final List<Trace> traces;
   final List<TelemetryProvider> providers;
 
-  _CompositeAnalyticsTrace(this.traces, {required this.providers});
+  _CompositeTrace(this.traces, {required this.providers});
 
   @override
   Map<String, String> getAttributes() {
@@ -139,11 +168,15 @@ final class _CompositeAnalyticsTrace extends Trace {
   Future<void> stop() => Future.wait(traces.map((e) => e.stop()));
 
   @override
-  Future<Trace> startChild(String name, String operation) async {
+  Future<Trace> startChild(
+    String name,
+    String operation, {
+    LogLevel? level = LogLevel.info,
+  }) async {
     final childTraceFutures =
-        traces.map((trace) => trace.startChild(name, operation));
+        traces.map((trace) => trace.startChild(name, operation, level: level));
     final childTraces = await Future.wait(childTraceFutures);
 
-    return _CompositeAnalyticsTrace(childTraces, providers: providers);
+    return _CompositeTrace(childTraces, providers: providers);
   }
 }
