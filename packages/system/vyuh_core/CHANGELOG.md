@@ -1,3 +1,7 @@
+## 1.27.1
+
+ - **FIX**: minor refactoring.
+
 ## 1.27.0
 
  - **FEAT**: LoggerPlugin has been removed and replaced with a Logger interface to the Telemetry Plugin instead.
