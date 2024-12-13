@@ -1,3 +1,7 @@
+## 1.27.2
+
+ - **FIX**: adjusting the names of telemetry and analytics providers.
+
 ## 1.27.1
 
  - **FIX**: minor refactoring.
