@@ -12,7 +12,7 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
       NoOpTrace();
 
   @override
-  String get name => 'vyuh.telemetryProvider.noop';
+  String get name => 'vyuh.plugin.telemetry.provider.noop';
 
   @override
   String get title => 'No Op Telemetry Provider';

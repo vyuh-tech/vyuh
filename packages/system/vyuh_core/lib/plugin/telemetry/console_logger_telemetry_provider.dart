@@ -6,7 +6,7 @@ final class ConsoleLoggerTelemetryProvider implements TelemetryProvider {
   Logger _logger = _createLogger();
 
   @override
-  String get name => 'vyuh.telemetryProvider.console';
+  String get name => 'vyuh.plugin.telemetry.provider.console';
 
   @override
   String get title => 'Console Logger Telemetry Provider';

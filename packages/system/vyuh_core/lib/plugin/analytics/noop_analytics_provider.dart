@@ -3,7 +3,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// A no-op implementation of [AnalyticsProvider].
 final class NoOpAnalyticsProvider implements AnalyticsProvider {
   @override
-  String get name => 'vyuh.analyticsProvider.noop';
+  String get name => 'vyuh.plugin.analytics.provider.noop';
 
   @override
   String get title => 'No Op Analytics Provider';
