@@ -49,7 +49,7 @@ final class PluginDescriptor {
       navigation ?? defaultPlugins.get<NavigationPlugin>(),
       event ?? defaultPlugins.get<EventPlugin>(),
       env ?? defaultPlugins.get<EnvPlugin>(),
-    ].whereNot((x) => x == null).cast<Plugin>());
+    ].nonNulls);
 
     _plugins.addAll(others ?? []);
   }
