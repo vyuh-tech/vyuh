@@ -1,33 +1,54 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// `DIPlugin` is an abstract class that extends the [Plugin] class.
+///
 /// It is associated with the Dependency Injection (DI) Plugin type and
 /// includes methods for registering, unregistering, retrieving, and
 /// checking the existence of instances in the DI container.
+///
+/// This class also includes lifecycle management methods and integrates
+/// functionality from the [PreloadedPlugin] mixin.
 abstract class DIPlugin extends Plugin with PreloadedPlugin {
-  /// The `DIPlugin` constructor accepts two required parameters: `name` and `title`.
+  /// Constructs a `DIPlugin` instance with the given [name] and [title].
   DIPlugin({required super.name, required super.title}) : super();
 
   /// Registers an instance of any Object type with the DI container.
+  ///
+  /// The [instance] parameter is the object to be registered. Optionally,
+  /// a [name] can be assigned to the instance for later retrieval.
   void register<T extends Object>(T instance, {String? name});
 
-  /// Registers a function that produces an instance of any Object type when called.
-  /// The instance is created lazily, i.e., it is not created until it is required.
+  /// Registers a function that produces an instance of any Object type.
+  ///
+  /// The instance produced by the [fn] function is created lazily when
+  /// it is required. Optionally, a [name] can be assigned for later retrieval.
   void registerLazy<T extends Object>(T Function() fn, {String? name});
 
-  /// Registers a factory function that produces an instance of any Object type whenever it's called.
+  /// Registers a factory function that produces a new instance each time it is called.
+  ///
+  /// The [fn] function is used to generate the instance. Optionally,
+  /// a [name] can be assigned for later retrieval.
   void registerFactory<T extends Object>(T Function() fn, {String? name});
 
-  /// Removes the instance of the specified Object type from the DI container.
+  /// Removes the instance of the specified type from the DI container.
+  ///
+  /// If a [name] is provided, it removes the named instance of the type [T].
   void unregister<T extends Object>({String? name});
 
-  /// Retrieves the registered instance of the specified Object type from the DI container.
+  /// Retrieves the registered instance of type [T] from the DI container.
+  ///
+  /// If a [name] is provided, it retrieves the named instance of the type [T].
+  /// Throws an exception if the instance does not exist.
   T get<T extends Object>({String? name});
 
-  /// Checks if the instance of the specified Object type is registered in the DI container.
+  /// Checks if an instance of the specified type is registered in the DI container.
+  ///
+  /// If a [name] is provided, it checks the named instance of the type [T].
   bool has<T extends Object>({String? name});
 
-  /// Clears all the instances registered in the DI container.
+  /// Clears all instances registered in the DI container.
+  ///
+  /// This method is asynchronous to handle potential cleanup tasks.
   Future<void> reset();
 }
 
