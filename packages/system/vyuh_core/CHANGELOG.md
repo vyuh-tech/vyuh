@@ -1,3 +1,7 @@
+## 1.27.3
+
+ - **FIX**: expanding the API docs.
+
 ## 1.27.2
 
  - **FIX**: adjusting the names of telemetry and analytics providers.
