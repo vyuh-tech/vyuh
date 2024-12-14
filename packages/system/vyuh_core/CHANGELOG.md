@@ -1,3 +1,7 @@
+## 1.28.0
+
+ - **FEAT**: added a set of tests for VyuhPlatform. Cleaned up some unnecessary properties in VyuhPlatform.
+
 ## 1.27.3
 
  - **FIX**: expanding the API docs.
