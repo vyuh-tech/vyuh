@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/plugin/plugin_descriptor.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -31,16 +30,31 @@ void runApp({
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
 }) async {
+  vyuh = createPlatform(
+    features: features,
+    plugins: plugins,
+    platformWidgetBuilder: platformWidgetBuilder,
+    initialLocation: initialLocation,
+  );
+
+  vyuh.run();
+}
+
+@visibleForTesting
+VyuhPlatform createPlatform({
+  required FeaturesBuilder features,
+  PluginDescriptor? plugins,
+  PlatformWidgetBuilder? platformWidgetBuilder,
+  String? initialLocation,
+}) {
   WidgetsFlutterBinding.ensureInitialized();
 
   final widgetBuilder = platformWidgetBuilder ?? defaultPlatformWidgetBuilder;
 
-  vyuh = _DefaultVyuhPlatform(
+  return _DefaultVyuhPlatform(
     featuresBuilder: features,
     pluginDescriptor: plugins ?? PluginDescriptor.defaultPlugins,
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
   );
-
-  vyuh.run();
 }

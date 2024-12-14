@@ -63,8 +63,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   @override
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
-  @override
-  final FeaturesBuilder featuresBuilder;
+  final FeaturesBuilder _featuresBuilder;
 
   @override
   List<Plugin> get plugins => _plugins.items;
@@ -73,11 +72,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   final PlatformWidgetBuilder widgetBuilder;
 
   _DefaultVyuhPlatform({
-    required this.featuresBuilder,
+    required FeaturesBuilder featuresBuilder,
     required PluginDescriptor pluginDescriptor,
     required this.widgetBuilder,
     this.initialLocation,
-  }) {
+  }) : _featuresBuilder = featuresBuilder {
     _plugins.addAll(pluginDescriptor.plugins);
 
     _tracker = _PlatformInitTracker(this);
@@ -141,7 +140,18 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       parentTrace: parentTrace,
       fn: (trace) async {
         _readyFeatures.clear();
-        _features = await featuresBuilder();
+        _features = await _featuresBuilder();
+
+        // Ensure feature names are unique
+        final featureNames = <String>{};
+        for (final feature in _features) {
+          if (featureNames.contains(feature.name)) {
+            throw StateError(
+                'Feature name "${feature.name}" is not unique. Ensure only uniquely named features are included.');
+          } else {
+            featureNames.add(feature.name);
+          }
+        }
 
         final initFns =
             _features.map((feature) => telemetry.trace<List<g.RouteBase>>(

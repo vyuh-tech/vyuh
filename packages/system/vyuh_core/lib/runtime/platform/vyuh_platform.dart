@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+part 'uninitialized_platform.dart';
+
 /// The platform interface for Vyuh. This tracks the instance of the platform and can be
 /// used to access various aspects of the framework.
-late final VyuhPlatform vyuh;
+VyuhPlatform vyuh = _UninitializedPlatform();
 
 /// The builder function that creates a set of features.
 typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
@@ -12,9 +14,8 @@ typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
 /// The base class for the Vyuh Platform. This class is responsible for initializing the
 /// platform and managing the lifecycle of the platform.
 abstract class VyuhPlatform {
-  /// A builder function that generates a list of [FeatureDescriptor] objects, representing
-  /// the features available in the platform. Used for dynamically registering features.
-  FeaturesBuilder get featuresBuilder;
+  /// A list of features currently registered and available on the platform.
+  List<FeatureDescriptor> get features;
 
   /// A list of plugins available to the platform. Plugins provide extended
   /// functionalities and services to the platform.
@@ -35,9 +36,6 @@ abstract class VyuhPlatform {
   ///
   /// [featureName]: The name of the feature to check for readiness.
   Future<void>? featureReady(String featureName);
-
-  /// A list of features currently registered and available on the platform.
-  List<FeatureDescriptor> get features;
 
   /// Initializes and runs the platform. This method is internally managed and should
   /// not be called directly.
