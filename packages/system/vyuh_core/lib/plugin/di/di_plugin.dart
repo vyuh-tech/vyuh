@@ -30,3 +30,68 @@ abstract class DIPlugin extends Plugin with PreloadedPlugin {
   /// Clears all the instances registered in the DI container.
   Future<void> reset();
 }
+
+/// An extension on the `DIPlugin` class to provide asynchronous lazy dependency injection.
+///
+/// This extension introduces two key functions:
+///
+/// 1. [registerAsync]:
+///    Registers an asynchronous function that initializes a dependency lazily. The function
+///    is executed only when the dependency is first requested.
+///
+/// 2. [getAsync]:
+///    Retrieves the registered asynchronous dependency.
+///
+/// Example:
+/// ```dart
+/// final diPlugin = DIPlugin();
+///
+/// // Registering an async dependency
+/// diPlugin.registerAsync<SomeService>(() async {
+///   await Future.delayed(Duration(seconds: 2));
+///   return SomeService();
+/// });
+///
+/// // Retrieving the registered dependency
+/// final serviceFuture = diPlugin.getAsync<SomeService>();
+/// serviceFuture.then((service) => print('Service initialized: $service'));
+/// ```
+extension AsyncLazyDI on DIPlugin {
+  /// Registers a lazily initialized asynchronous dependency in the dependency injection container.
+  ///
+  /// The provided function [fn] must return a `Future<T>`, where `T` is the type of the dependency.
+  /// The dependency initialization will only occur when it is first requested.
+  ///
+  /// - [T]: The type of the dependency being registered.
+  /// - [fn]: A function that returns a `Future<T>` which initializes the dependency.
+  /// - [name]: An optional string to identify the dependency. This is useful for
+  ///   distinguishing between multiple instances of the same type.
+  ///
+  /// Example:
+  /// ```dart
+  /// diPlugin.registerAsync<MyService>(() async {
+  ///   return MyService();
+  /// }, name: 'myService');
+  /// ```
+  void registerAsync<T extends Object>(
+      Future<T> Function() fn,
+      {String? name}
+      ) => registerLazy<Future<T>>(fn, name: name);
+
+  /// Retrieves an asynchronously initialized dependency from the dependency injection container.
+  ///
+  /// This function returns the registered `Future<T>` for the specified dependency type [T].
+  ///
+  /// - [T]: The type of the dependency to retrieve.
+  /// - [name]: An optional string to specify the name of the dependency.
+  ///
+  /// Returns:
+  /// A `Future<T>` representing the asynchronous dependency.
+  ///
+  /// Example:
+  /// ```dart
+  /// final myServiceFuture = diPlugin.getAsync<MyService>(name: 'myService');
+  /// myServiceFuture.then((service) => print('Service initialized: $service'));
+  /// ```
+  Future<T> getAsync<T extends Object>({String? name}) => get<Future<T>>(name: name);
+}
