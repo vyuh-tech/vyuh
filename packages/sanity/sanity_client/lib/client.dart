@@ -111,6 +111,25 @@ final class SanityClient {
     return _getQueryResult(response);
   }
 
+  /// Fetches data from Sanity by running the GROQ Query in a POST request
+  Future<SanityQueryResponse> post(String query,
+      {Map<String, String>? params}) async {
+    final uri = urlBuilder.postUrl();
+    final response = await httpClient.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        ..._requestHeaders,
+      },
+      body: jsonEncode({
+        'query': query,
+        'params': params,
+      }),
+    );
+
+    return _getQueryResult(response);
+  }
+
   /// The URL for the query
   Uri queryUrl(String query, {Map<String, String>? params}) =>
       urlBuilder.queryUrl(query, params: params);

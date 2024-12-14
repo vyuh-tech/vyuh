@@ -1,3 +1,7 @@
+## 1.4.3
+
+ - **FEAT**: sanity_client now can POST requests with GROQ body and params
+
 ## 1.4.2
 
  - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.
