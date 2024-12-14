@@ -1,3 +1,64 @@
+/// Core library for Vyuh applications.
+
+/// This library provides essential functionalities for building Vyuh apps,
+/// including a way to organize features with [FeatureDescriptor] and leveraging the [Plugin] interface
+/// for interacting with third-party integrations such as Authentication, Content Management,
+/// Networking, Dependency Injection, Analytics, etc.
+
+/// **Key Features:**
+
+/// * **Plugin System:**  A flexible plugin architecture allows extending
+///   Vyuh with custom features and integrations.  See [Plugin] for more details.
+/// * **Modular Features:**  Organize features with [FeatureDescriptor] and build Apps in a composable manner.
+/// Features are atomic, transferable between Vyuh Apps and provide a decentralized approach for building large scale Apps.
+/// * **Platform Widgets:** Provides a mechanism to supply your own Widgets for loaders, error-views and other types of visual branding.
+/// See [VyuhPlatform] and [PlatformWidgetBuilder].
+
+/// **Getting Started:**
+
+/// To use this library, import it into your Dart code:
+
+/// ```dart
+/// import 'package:vyuh_core/vyuh_core.dart';
+/// ```
+
+/// Then, you can initialize the features and plugins.
+
+/// ```dart
+///   runApp(
+///     initialLocation: '/',
+///     plugins: PluginDescriptor(
+///       content: DefaultContentPlugin(
+///         provider: SanityContentProvider.withConfig(
+///           config: SanityConfig(
+///             projectId: '<your-project-id>',
+///             dataset: 'production',
+///             perspective: Perspective.previewDrafts,
+///             useCdn: false,
+///             token: '<your-token>',
+///           ),
+///           cacheDuration: const Duration(seconds: 5),
+///         ),
+///       ),
+///       env: vc.DefaultEnvPlugin(),
+///       auth: MyCustomAuthPlugin(),
+///       telemetry:
+///           vc.TelemetryPlugin(providers: [vc.ConsoleLoggerTelemetryProvider()]),
+///     ),
+///     features: () => [
+///       // Core Vyuh features that are necessary for all apps
+///       system.feature,
+///       developer.feature,
+///
+///       // Example Features
+///       root.feature,
+///       counter.feature,
+///       onboarding.feature,
+///       auth.feature(),
+///     ],
+///   );
+/// ```
+
 library;
 
 export 'asserts.dart';

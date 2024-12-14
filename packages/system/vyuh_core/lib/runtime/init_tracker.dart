@@ -6,10 +6,10 @@ enum InitState {
   /// The system has not started initializing.
   notStarted,
 
-  /// The system has initialized the plugins.
+  /// The system has started initializing the plugins.
   plugins,
 
-  /// The system has initialized the features.
+  /// The system has started initializing the features.
   features,
 
   /// The system is ready for operation.

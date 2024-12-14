@@ -38,12 +38,47 @@
       "responseMode": null,
       "streamingMode": null,
       "streamingInterval": 0
+    },
+    {
+      "uuid": "14848f2b-1fb8-4a5e-af3d-0286c78bcea5",
+      "type": "crud",
+      "documentation": "",
+      "method": "",
+      "endpoint": "products",
+      "responses": [
+        {
+          "uuid": "e8939f1a-0ca5-45ee-a031-16d7144c8080",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "DATABUCKET",
+          "filePath": "",
+          "databucketID": "6ybv",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
     }
   ],
   "rootChildren": [
     {
       "type": "route",
       "uuid": "98bf82c0-234b-4b4a-bd45-44420695a5ad"
+    },
+    {
+      "type": "route",
+      "uuid": "14848f2b-1fb8-4a5e-af3d-0286c78bcea5"
     }
   ],
   "proxyMode": false,
@@ -89,6 +124,14 @@
       "value": ""
     }
   ],
-  "data": [],
+  "data": [
+    {
+      "uuid": "8cc826ba-9d4d-4c8f-acdd-d3595b2f924a",
+      "id": "6ybv",
+      "name": "Products",
+      "documentation": "",
+      "value": "[\n  {{#repeat 20}}\n  {\n    \"id\": \"{{faker 'string.nanoid'}}\",\n    \"image\": \"{{faker 'image.urlLoremFlickr' width=128 height=128}}\"\n  }\n  {{/repeat}}\n]"
+    }
+  ],
   "callbacks": []
 }
