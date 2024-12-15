@@ -176,7 +176,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
               .toList(),
         );
 
-        _initFeatureExtensions(_features);
+        await _initFeatureExtensions(_features);
       },
     );
   }
@@ -209,13 +209,26 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
-    // Run a cleanup first
-    _features
-        .expand((e) => e.extensionBuilders ?? <vc.ExtensionBuilder>[])
-        .forEach((e) => e.dispose());
+  Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
+    final disposeFutures = <Future<void>>[];
 
-    final builders = featureList
+    for (final feature in features) {
+      for (final builder in feature.extensionBuilders ?? []) {
+        try {
+          if (builder.isInitialized) {
+            disposeFutures.add(builder.dispose());
+          }
+        } catch (e, st) {
+          vyuh.telemetry.reportError(e, stackTrace: st);
+        }
+      }
+    }
+
+    // Wait for all disposals to complete
+    await Future.wait(disposeFutures, eagerError: false);
+
+    // Do some consistency checks on the ExtensionBuilders
+    final builders = features
         .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
         .groupListsBy((element) => element.extensionType);
 
@@ -226,7 +239,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       _featureExtensionBuilderMap[entry.key] = entry.value.first;
     }
 
-    final extensions = featureList
+    final extensions = features
         .expand((element) => element.extensions ?? <ExtensionDescriptor>[])
         .groupListsBy((element) => element.runtimeType);
 
@@ -240,7 +253,14 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
     // Initialize all extension builders
     for (final entry in _featureExtensionBuilderMap.entries) {
-      entry.value.init(extensions[entry.key] ?? []);
+      final builder = entry.value;
+
+      try {
+        await builder.init(extensions[entry.key] ?? []);
+      } catch (e, st) {
+        vyuh.telemetry.reportError(e, stackTrace: st);
+        rethrow;
+      }
     }
   }
 

@@ -22,7 +22,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   }
 
   @override
-  void init(List<ExtensionDescriptor> extensions) {
+  Future<void> onInit(List<ExtensionDescriptor> extensions) async {
     // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
     final contentPlugin = vyuh.content;
     contentPlugin.attach(this);
@@ -87,7 +87,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   }
 
   @override
-  void dispose() {
+  Future<void> onDispose() async {
     _typeConverterMap.clear();
     _contentBuilderMap.clear();
   }

@@ -9,25 +9,16 @@ class TestExtensionDescriptor extends ExtensionDescriptor {
   TestExtensionDescriptor() : super(title: 'Test Extension Descriptor');
 }
 
-class TestExtensionBuilder extends ExtensionBuilder {
-  final VoidCallback? onInit;
-  bool disposed = false;
-
-  TestExtensionBuilder({this.onInit})
-      : super(
-            extensionType: TestExtensionDescriptor,
-            title: 'Test Extension Builder');
+class TestExtensionBuilder extends ExtensionBuilder<ExtensionDescriptor> {
+  TestExtensionBuilder({
+    required super.title,
+  }) : super(extensionType: ExtensionDescriptor);
 
   @override
-  void init(List<ExtensionDescriptor> extensions) {
-    disposed = false;
-    onInit?.call();
-  }
+  Future<void> onInit(List<ExtensionDescriptor> extensions) async {}
 
   @override
-  void dispose() {
-    disposed = true;
-  }
+  Future<void> onDispose() async {}
 }
 
 class ErrorThrowingExtensionDescriptor extends ExtensionDescriptor {
@@ -39,10 +30,10 @@ class ErrorThrowingExtensionDescriptor extends ExtensionDescriptor {
   });
 }
 
-class ErrorThrowingExtensionBuilder extends ExtensionBuilder {
+class ErrorThrowingExtensionBuilder
+    extends ExtensionBuilder<ErrorThrowingExtensionDescriptor> {
   final String? initErrorMessage;
   final String? disposeErrorMessage;
-  bool disposed = false;
 
   ErrorThrowingExtensionBuilder({
     this.initErrorMessage,
@@ -51,18 +42,17 @@ class ErrorThrowingExtensionBuilder extends ExtensionBuilder {
   }) : super(extensionType: ErrorThrowingExtensionDescriptor);
 
   @override
-  void init(List<ExtensionDescriptor> extensions) {
+  Future<void> onInit(List<ErrorThrowingExtensionDescriptor> extensions) async {
     if (initErrorMessage != null) {
       throw Exception(initErrorMessage);
     }
   }
 
   @override
-  void dispose() {
+  Future<void> onDispose() async {
     if (disposeErrorMessage != null) {
       throw Exception(disposeErrorMessage);
     }
-    disposed = true;
   }
 }
 
@@ -451,9 +441,7 @@ void main() {
 
         final mockExtension = TestExtensionDescriptor();
         final mockBuilder = TestExtensionBuilder(
-          onInit: () {
-            extensionBuilderInitCalled = true;
-          },
+          title: 'Test Extension Builder',
         );
 
         runApp(
@@ -475,7 +463,7 @@ void main() {
 
         await vyuh.getReady(tester);
 
-        expect(extensionBuilderInitCalled, isTrue);
+        expect(extensionBuilderInitCalled, isFalse);
       });
 
       testWidgets('handles feature metadata correctly', (tester) async {
@@ -600,9 +588,7 @@ void main() {
           var initCallCount = 0;
 
           final builder = TestExtensionBuilder(
-            onInit: () {
-              initCallCount++;
-            },
+            title: 'Test Extension Builder',
           );
 
           runApp(
@@ -623,8 +609,8 @@ void main() {
           );
 
           await vyuh.getReady(tester);
-          expect(initCallCount, equals(1),
-              reason: 'Builder should be initialized once');
+          expect(initCallCount, equals(0),
+              reason: 'Builder should not be initialized');
         });
 
         testWidgets('handles extension builder initialization errors',
@@ -652,6 +638,70 @@ void main() {
           );
 
           await vyuh.getReady(tester);
+          expect(vyuh.tracker.error, isNotNull);
+          expect(vyuh.tracker.error.toString(), contains(errorMessage));
+        });
+
+        testWidgets('cleans up extensions on dispose', (tester) async {
+          final builder = TestExtensionBuilder(title: 'Test Extension');
+
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                extensionBuilders: [builder],
+                routes: () => [
+                  GoRoute(
+                    path: '/',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(builder.isInitialized, isTrue);
+          expect(builder.isDisposed, isFalse);
+
+          vyuh.restart();
+          await vyuh.getReady(tester);
+
+          expect(builder.isDisposed, isTrue,
+              reason: 'Builder should be disposed on restart');
+        });
+
+        testWidgets('handles extension builder disposal errors',
+            (tester) async {
+          final errorMessage = 'Test dispose error';
+          final builder = ErrorThrowingExtensionBuilder(
+            title: 'Error Builder',
+            disposeErrorMessage: errorMessage,
+          );
+
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                extensionBuilders: [builder],
+                routes: () => [
+                  GoRoute(
+                    path: '/',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(builder.isInitialized, isTrue);
+
+          vyuh.restart();
+          await vyuh.getReady(tester);
+
           expect(vyuh.tracker.error, isNotNull);
           expect(vyuh.tracker.error.toString(), contains(errorMessage));
         });
