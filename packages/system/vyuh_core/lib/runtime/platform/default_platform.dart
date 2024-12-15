@@ -230,14 +230,18 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         .expand((element) => element.extensions ?? <ExtensionDescriptor>[])
         .groupListsBy((element) => element.runtimeType);
 
+    // Ensure for every ExtensionDescriptor, there is a corresponding ExtensionBuilder registered
     extensions.forEach((runtimeType, descriptors) {
       final builder = _featureExtensionBuilderMap[runtimeType];
 
       assert(builder != null,
           'Missing FeatureExtensionBuilder for FeatureExtensionDescriptor of schemaType: $runtimeType');
-
-      builder?.init(descriptors);
     });
+
+    // Initialize all extension builders
+    for (final entry in _featureExtensionBuilderMap.entries) {
+      entry.value.init(extensions[entry.key] ?? []);
+    }
   }
 
   @override

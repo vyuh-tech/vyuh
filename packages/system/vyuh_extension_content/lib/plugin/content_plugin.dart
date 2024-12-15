@@ -34,10 +34,18 @@ final class DefaultContentPlugin extends ContentPlugin {
       final modifiers = content.getModifiers();
 
       if (modifiers != null && modifiers.isNotEmpty) {
-        return modifiers.fold<Widget>(
-          contentWidget,
-          (child, modifier) => modifier.build(context, child, content),
-        );
+        try {
+          return modifiers.fold<Widget>(
+            contentWidget,
+            (child, modifier) => modifier.build(context, child, content),
+          );
+        } catch (e) {
+          return vyuh.widgetBuilder.errorView(context,
+              error: e,
+              title: 'Failed to apply modifiers',
+              subtitle:
+                  'Modifier Chain: "${modifiers.map((m) => m.schemaType).join(' -> ')}" for Content: "${content.schemaType}"');
+        }
       }
 
       return contentWidget;

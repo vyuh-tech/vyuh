@@ -30,31 +30,16 @@ void runApp({
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
 }) async {
-  vyuh = createPlatform(
-    features: features,
-    plugins: plugins,
-    platformWidgetBuilder: platformWidgetBuilder,
-    initialLocation: initialLocation,
-  );
-
-  vyuh.run();
-}
-
-@visibleForTesting
-VyuhPlatform createPlatform({
-  required FeaturesBuilder features,
-  PluginDescriptor? plugins,
-  PlatformWidgetBuilder? platformWidgetBuilder,
-  String? initialLocation,
-}) {
   WidgetsFlutterBinding.ensureInitialized();
 
   final widgetBuilder = platformWidgetBuilder ?? defaultPlatformWidgetBuilder;
 
-  return _DefaultVyuhPlatform(
+  vyuh = _DefaultVyuhPlatform(
     featuresBuilder: features,
     pluginDescriptor: plugins ?? PluginDescriptor.defaultPlugins,
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
   );
+
+  vyuh.run();
 }

@@ -41,6 +41,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   mocktail: ^1.0.4
+  vyuh_test: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

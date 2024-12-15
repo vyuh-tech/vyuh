@@ -102,3 +102,9 @@ extension NamedPlugins on VyuhPlatform {
   /// The event plugin, for managing and emitting events within the platform.
   EventPlugin get event => getPlugin<EventPlugin>()!;
 }
+
+extension Restartable on VyuhPlatform {
+  Future<void> restart() {
+    return tracker.init();
+  }
+}

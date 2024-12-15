@@ -25,18 +25,26 @@ final class HttpNetworkConfig {
 
 final class HttpNetworkPlugin extends NetworkPlugin {
   late Client _client;
-  var _initialized = false;
+  bool _initialized = false;
 
-  late final RetryOptions _retryOptions;
-  late final HttpNetworkConfig config;
+  final RetryOptions _retryOptions;
+  final Duration _timeout;
 
-  HttpNetworkPlugin({HttpNetworkConfig? config})
-      : super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
-    this.config = config ?? HttpNetworkConfig.standard;
-    _retryOptions = RetryOptions(
-      maxAttempts: this.config.maxRetryAttempts,
-      maxDelay: this.config.maxRetryDelay,
-    );
+  HttpNetworkPlugin({
+    Client? client,
+    RetryOptions? retryOptions,
+    Duration? timeout,
+  })  : _retryOptions = retryOptions ??
+            RetryOptions(
+              maxAttempts: 3,
+              delayFactor: const Duration(milliseconds: 200),
+            ),
+        _timeout = timeout ?? const Duration(seconds: 30),
+        super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
+    if (client != null) {
+      _client = client;
+      _initialized = true;
+    }
   }
 
   @override
@@ -92,7 +100,7 @@ final class HttpNetworkPlugin extends NetworkPlugin {
           _client.patch(url, headers: headers, body: body, encoding: encoding));
 
   _withRetryAndTimeout(Future<Response> Function() fn) => _retryOptions.retry(
-        () => fn().timeout(config.timeout),
+        () => fn().timeout(_timeout),
         retryIf: (e) {
           // Use the string based to check to avoid importing dart:io.
           // This makes it easier to use this plugin in web.
