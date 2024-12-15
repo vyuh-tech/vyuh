@@ -1,3 +1,7 @@
+## 1.29.2
+
+ - **FIX**: making the extensions async for init and dispose.
+
 ## 1.29.1
 
  - **FIX**: more refactorings and tests.
