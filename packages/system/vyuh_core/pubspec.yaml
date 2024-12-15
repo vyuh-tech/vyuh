@@ -1,6 +1,6 @@
 name: vyuh_core
 description: The core library for the Vyuh framework which contains the base types and runtime.
-version: 1.28.0
+version: 1.29.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_core
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -41,7 +41,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   mocktail: ^1.0.4
-  vyuh_test: ^1.0.0
+  vyuh_test: ^1.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
