@@ -103,6 +103,7 @@ extension NamedPlugins on VyuhPlatform {
   EventPlugin get event => getPlugin<EventPlugin>()!;
 }
 
+/// Restart the platform, re-running the initialization process.
 extension Restartable on VyuhPlatform {
   Future<void> restart() {
     return tracker.init();

@@ -247,12 +247,3 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   @override
   T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
 }
-
-final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
-  RoutingConfigNotifier(List<g.RouteBase> routes)
-      : super(g.RoutingConfig(routes: routes));
-
-  void setRoutes(List<g.RouteBase> routes) {
-    value = g.RoutingConfig(routes: routes);
-  }
-}

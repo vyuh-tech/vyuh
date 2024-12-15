@@ -1,9 +1,162 @@
-import 'package:flutter/widgets.dart' hide runApp;
+import 'package:flutter/material.dart' hide runApp;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import 'package:vyuh_test/vyuh_test.dart';
+
+class TestExtensionDescriptor extends ExtensionDescriptor {
+  TestExtensionDescriptor() : super(title: 'Test Extension Descriptor');
+}
+
+class TestExtensionBuilder extends ExtensionBuilder {
+  final VoidCallback? onInit;
+  bool disposed = false;
+
+  TestExtensionBuilder({this.onInit})
+      : super(
+            extensionType: TestExtensionDescriptor,
+            title: 'Test Extension Builder');
+
+  @override
+  void init(List<ExtensionDescriptor> extensions) {
+    disposed = false;
+    onInit?.call();
+  }
+
+  @override
+  void dispose() {
+    disposed = true;
+  }
+}
+
+class ErrorThrowingExtensionDescriptor extends ExtensionDescriptor {
+  final String errorMessage;
+
+  ErrorThrowingExtensionDescriptor({
+    required this.errorMessage,
+    required super.title,
+  });
+}
+
+class ErrorThrowingExtensionBuilder extends ExtensionBuilder {
+  final String? initErrorMessage;
+  final String? disposeErrorMessage;
+  bool disposed = false;
+
+  ErrorThrowingExtensionBuilder({
+    this.initErrorMessage,
+    this.disposeErrorMessage,
+    required super.title,
+  }) : super(extensionType: ErrorThrowingExtensionDescriptor);
+
+  @override
+  void init(List<ExtensionDescriptor> extensions) {
+    if (initErrorMessage != null) {
+      throw Exception(initErrorMessage);
+    }
+  }
+
+  @override
+  void dispose() {
+    if (disposeErrorMessage != null) {
+      throw Exception(disposeErrorMessage);
+    }
+    disposed = true;
+  }
+}
+
+class MockTelemetryProvider implements TelemetryProvider {
+  @override
+  String get name => 'mock_telemetry';
+
+  @override
+  String get title => 'Mock Telemetry';
+
+  @override
+  String get description => 'Mock telemetry provider for testing';
+
+  @override
+  List<NavigatorObserver> get observers => [];
+
+  @override
+  Future<void> init() async {}
+
+  @override
+  Future<void> dispose() async {}
+
+  @override
+  Future<void> reportError(
+    dynamic error, {
+    StackTrace? stackTrace,
+    Map<String, dynamic>? properties,
+    bool fatal = false,
+    Map<String, dynamic>? params,
+  }) async {}
+
+  @override
+  Future<void> reportFlutterError(
+    FlutterErrorDetails details, {
+    Map<String, dynamic>? properties,
+    bool fatal = false,
+  }) async {}
+
+  @override
+  Future<void> reportMessage(
+    String message, {
+    Map<String, dynamic>? properties,
+    LogLevel? level = LogLevel.info,
+    Map<String, dynamic>? params,
+  }) async {}
+
+  @override
+  Future<Trace> startTrace(
+    String name,
+    String properties, {
+    Duration? timeout,
+    LogLevel? level = LogLevel.info,
+  }) async {
+    return MockTrace(name: name);
+  }
+}
+
+class MockTrace implements Trace {
+  final Map<String, String> _attributes = {};
+  final Map<String, int> _metrics = {};
+
+  final String name;
+
+  MockTrace({required this.name});
+
+  @override
+  Map<String, String> getAttributes() => _attributes;
+
+  @override
+  int getMetric(String name) => _metrics[name] ?? 0;
+
+  @override
+  void setAttributes(Map<String, String> attributes) {
+    _attributes.addAll(attributes);
+  }
+
+  @override
+  void setMetric(String name, int value) {
+    _metrics[name] = value;
+  }
+
+  @override
+  Future<void> stop() async {}
+
+  @override
+  Future<Trace> startChild(
+    String name,
+    String properties, {
+    Duration? timeout,
+    LogLevel? level = LogLevel.info,
+  }) async {
+    return MockTrace(name: name);
+  }
+}
 
 void main() {
   group(
@@ -57,7 +210,12 @@ void main() {
                 await Future.delayed(const Duration(seconds: 1));
                 featureInitCount++;
               },
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
             FeatureDescriptor(
               name: 'test 2',
@@ -66,7 +224,12 @@ void main() {
                 await Future.delayed(const Duration(seconds: 1));
                 featureInitCount++;
               },
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/test2',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
           ],
         );
@@ -85,25 +248,45 @@ void main() {
               name: 'duplicate',
               title: 'Test 1',
               init: () async {},
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
             FeatureDescriptor(
               name: 'duplicate',
               title: 'Test 2',
               init: () async {},
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/test2',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
           ],
         );
 
         await vyuh.getReady(tester);
-
         expect(vyuh.tracker.error, isStateError);
       });
 
       testWidgets('provides access to plugins via getPlugin', (tester) async {
         runApp(
-          features: () => [],
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
         );
 
         await vyuh.getReady(tester);
@@ -123,7 +306,12 @@ void main() {
                 initStarted = true;
                 await Future.delayed(const Duration(seconds: 1));
               },
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
           ],
         );
@@ -151,7 +339,12 @@ void main() {
               init: () async {
                 initCount++;
               },
-              routes: () => [],
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
             ),
           ],
         );
@@ -214,6 +407,339 @@ void main() {
 
         await vyuh.getReady(tester);
         expect(vyuh.router.instance.state?.fullPath, equals(initialPath));
+      });
+
+      testWidgets('handles feature lifecycle correctly', (tester) async {
+        var initCount = 0;
+        var disposeCount = 0;
+
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              init: () async {
+                initCount++;
+              },
+              dispose: () async {
+                disposeCount++;
+              },
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        await vyuh.getReady(tester);
+        expect(initCount, equals(1));
+        expect(disposeCount, equals(0));
+
+        // Restart should trigger dispose and init
+        vyuh.restart();
+        await vyuh.getReady(tester);
+
+        expect(initCount, equals(2));
+        expect(disposeCount, equals(1));
+      });
+
+      testWidgets('handles extensions and extension builders', (tester) async {
+        var extensionBuilderInitCalled = false;
+
+        final mockExtension = TestExtensionDescriptor();
+        final mockBuilder = TestExtensionBuilder(
+          onInit: () {
+            extensionBuilderInitCalled = true;
+          },
+        );
+
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              extensions: [mockExtension],
+              extensionBuilders: [mockBuilder],
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        await vyuh.getReady(tester);
+
+        expect(extensionBuilderInitCalled, isTrue);
+      });
+
+      testWidgets('handles feature metadata correctly', (tester) async {
+        const description = 'Test Description';
+        const icon = Icons.star;
+
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              description: description,
+              icon: icon,
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        await vyuh.getReady(tester);
+
+        final feature = vyuh.features.first;
+        expect(feature.description, equals(description));
+        expect(feature.icon, equals(icon));
+      });
+
+      testWidgets('caches route builder results', (tester) async {
+        var routeBuilderCallCount = 0;
+        final routes = [
+          GoRoute(
+            path: '/',
+            builder: (_, __) => const SizedBox(),
+          ),
+        ];
+
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              routes: () {
+                routeBuilderCallCount++;
+                return routes;
+              },
+            ),
+          ],
+        );
+
+        await vyuh.getReady(tester);
+        expect(routeBuilderCallCount, equals(1));
+
+        // Subsequent calls should use cached result
+        final result = await vyuh.features.first.routes!();
+        expect(result, equals(routes));
+        expect(routeBuilderCallCount, equals(1));
+
+        // Restart should clear cache
+        vyuh.restart();
+        await vyuh.getReady(tester);
+        expect(routeBuilderCallCount, equals(2));
+      });
+
+      testWidgets('handles feature initialization errors', (tester) async {
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              init: () async {
+                throw Exception('Test Error');
+              },
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
+        );
+
+        await vyuh.getReady(tester);
+        expect(vyuh.tracker.error, isNotNull);
+        expect(vyuh.tracker.error.toString(), contains('Test Error'));
+      });
+
+      testWidgets('handles plugin overrides', (tester) async {
+        final mockTelemetry = MockTelemetryProvider();
+
+        runApp(
+          features: () => [
+            FeatureDescriptor(
+              name: 'test',
+              title: 'Test',
+              routes: () => [
+                GoRoute(
+                  path: '/',
+                  builder: (_, __) => const SizedBox(),
+                ),
+              ],
+            ),
+          ],
+          plugins: PluginDescriptor(
+            telemetry: TelemetryPlugin(providers: [mockTelemetry]),
+          ),
+        );
+
+        await vyuh.getReady(tester);
+        expect(vyuh.telemetry.providers.first, equals(mockTelemetry));
+      });
+
+      group('Extension System', () {
+        testWidgets('handles multiple extensions of same type', (tester) async {
+          final extensions = List.generate(
+            3,
+            (i) => TestExtensionDescriptor(),
+          );
+          var initCallCount = 0;
+
+          final builder = TestExtensionBuilder(
+            onInit: () {
+              initCallCount++;
+            },
+          );
+
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                extensions: extensions,
+                extensionBuilders: [builder],
+                routes: () => [
+                  GoRoute(
+                    path: '/',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(initCallCount, equals(1),
+              reason: 'Builder should be initialized once');
+        });
+
+        testWidgets('handles extension builder initialization errors',
+            (tester) async {
+          final errorMessage = 'Test init error';
+          final builder = ErrorThrowingExtensionBuilder(
+            title: 'Error Builder',
+            initErrorMessage: errorMessage,
+          );
+
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                extensionBuilders: [builder],
+                routes: () => [
+                  GoRoute(
+                    path: '/',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(vyuh.tracker.error, isNotNull);
+          expect(vyuh.tracker.error.toString(), contains(errorMessage));
+        });
+      });
+
+      group('Error Handling', () {
+        testWidgets('handles concurrent feature initialization errors',
+            (tester) async {
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test1',
+                title: 'Test 1',
+                init: () async {
+                  await Future.delayed(const Duration(milliseconds: 100));
+                  throw Exception('Test Error 1');
+                },
+                routes: () => [
+                  GoRoute(
+                    path: '/',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+              FeatureDescriptor(
+                name: 'test2',
+                title: 'Test 2',
+                init: () async {
+                  await Future.delayed(const Duration(milliseconds: 50));
+                  throw Exception('Test Error 2');
+                },
+                routes: () => [
+                  GoRoute(
+                    path: '/test2',
+                    builder: (_, __) => const SizedBox(),
+                  ),
+                ],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(vyuh.tracker.error, isNotNull);
+          // Should capture the first error
+          expect(vyuh.tracker.error.toString(), contains('Test Error 2'));
+        });
+
+        testWidgets('handles route builder errors', (tester) async {
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                routes: () {
+                  throw Exception('Route builder error');
+                },
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(vyuh.tracker.error, isNotNull);
+          expect(
+              vyuh.tracker.error.toString(), contains('Route builder error'));
+        });
+
+        testWidgets('maintains platform stability after error', (tester) async {
+          bool throwError = true;
+
+          // First run with error
+          runApp(
+            features: () => [
+              FeatureDescriptor(
+                name: 'test',
+                title: 'Test',
+                init: () async {
+                  if (throwError) {
+                    throw Exception('Init error');
+                  }
+                },
+                routes: () => [],
+              ),
+            ],
+          );
+
+          await vyuh.getReady(tester);
+          expect(vyuh.tracker.error, isNotNull);
+        });
       });
     },
   );
