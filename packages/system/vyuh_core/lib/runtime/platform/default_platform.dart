@@ -167,16 +167,29 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
                   },
                 ));
 
-        final allRoutes = await Future.wait(initFns, eagerError: true);
-        _initRouter(
-          allRoutes
-              .where((routes) => routes != null)
-              .cast<List<g.RouteBase>>()
-              .expand((routes) => routes)
-              .toList(),
+        await telemetry.trace<void>(
+          name: 'Feature Routes',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) async {
+            final allRoutes = await Future.wait(initFns, eagerError: true);
+
+            return _initRouter(
+              allRoutes
+                  .where((routes) => routes != null)
+                  .cast<List<g.RouteBase>>()
+                  .expand((routes) => routes)
+                  .toList(),
+            );
+          },
         );
 
-        await _initFeatureExtensions(_features);
+        return telemetry.trace<void>(
+          name: 'Feature Extensions',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) => _initFeatureExtensions(_features),
+        );
       },
     );
   }
@@ -255,12 +268,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     for (final entry in _featureExtensionBuilderMap.entries) {
       final builder = entry.value;
 
-      try {
-        await builder.init(extensions[entry.key] ?? []);
-      } catch (e, st) {
-        vyuh.telemetry.reportError(e, stackTrace: st);
-        rethrow;
-      }
+      await telemetry.trace(
+        name: 'Feature Extension: ${builder.title}',
+        operation: 'Init',
+        fn: (_) => builder.init(extensions[entry.key] ?? []),
+      );
     }
   }
 
