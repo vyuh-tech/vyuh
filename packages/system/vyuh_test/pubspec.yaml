@@ -18,7 +18,7 @@ dependencies:
     sdk: flutter
   mocktail: ^1.0.1
   mobx: ^2.2.1
-  vyuh_core: ^1.30.0
+  vyuh_core: ^1.30.1
   flutter_test:
     sdk: flutter
 

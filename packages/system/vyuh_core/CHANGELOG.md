@@ -1,3 +1,7 @@
+## 1.30.1
+
+ - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.
+
 ## 1.30.0
 
  - **FIX**: tracing at the feature extension level.
