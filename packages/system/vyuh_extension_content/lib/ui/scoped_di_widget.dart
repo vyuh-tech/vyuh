@@ -13,9 +13,13 @@ final class ScopedDIWidget extends StatefulWidget {
   const ScopedDIWidget({
     super.key,
     required this.child,
+    required this.debugLabel,
   });
 
   final Widget child;
+
+  /// The debug label for the [DIPlugin]. It is useful to identify the scope.
+  final String debugLabel;
 
   /// Get the DIPlugin from the nearest DI scope. If no scope is found,
   /// it will fallback to the platform [DIPlugin].
@@ -46,7 +50,7 @@ class _ScopedDIWidgetState extends State<ScopedDIWidget> {
 
   void _initScope() {
     // Create a DIPlugin that wraps the GetIt instance
-    _scopeDI = GetItDIPlugin();
+    _scopeDI = GetItDIPlugin(debugLabel: widget.debugLabel);
   }
 
   @override

@@ -55,24 +55,39 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   @override
-  Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) =>
-      ScopedDIWidget(
-        child: RouteFutureBuilder(
-          url: url,
-          routeId: routeId,
-          fetchRoute: (context, {path, routeId}) => provider
-              .fetchRoute(path: path, routeId: routeId)
-              .then((value) async {
-            if (!context.mounted) {
-              return null;
-            }
+  Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) {
+    final label = [
+      url == null ? null : 'Url: $url',
+      routeId == null ? null : 'RouteId: $routeId',
+      'Route',
+    ].firstWhere((x) => x != null);
 
-            final finalRoute = await value?.init(context);
-            return finalRoute;
-          }),
-          buildContent: buildContent,
-        ),
-      );
+    return ScopedDIWidget(
+      debugLabel: 'Scoped DI for $label',
+      child: RouteFutureBuilder(
+        url: url,
+        routeId: routeId,
+        fetchRoute: (context, {path, routeId}) => provider
+            .fetchRoute(path: path, routeId: routeId)
+            .then((value) async {
+          if (!context.mounted) {
+            return null;
+          }
+
+          // Reset DI scope when a new route is fetched
+          await context.di.reset();
+
+          if (!context.mounted) {
+            return null;
+          }
+
+          final finalRoute = await value?.init(context);
+          return finalRoute;
+        }),
+        buildContent: buildContent,
+      ),
+    );
+  }
 
   @override
   T? fromJson<T>(Map<String, dynamic> json) {

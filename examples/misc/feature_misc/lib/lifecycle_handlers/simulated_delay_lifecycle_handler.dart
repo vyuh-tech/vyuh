@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 part 'simulated_delay_lifecycle_handler.g.dart';
@@ -28,4 +29,8 @@ final class SimulatedDelayLifecycleHandler extends RouteLifecycleConfiguration {
   Future<void> init(BuildContext context, RouteBase route) {
     return Future.delayed(Duration(seconds: delay));
   }
+}
+
+final class TestStore {
+  final Observable<int> count = 0.obs();
 }

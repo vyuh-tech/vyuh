@@ -24,7 +24,6 @@ final class DefaultProductCardLayout extends LayoutConfiguration<ProductCard> {
   @override
   Widget build(BuildContext context, ProductCard content) {
     final theme = Theme.of(context);
-
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Padding(

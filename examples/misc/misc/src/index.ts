@@ -23,7 +23,9 @@ import {
   missingRouteLayout,
 } from './content/missing.ts';
 import { showBarcode } from './action/show-barcode.ts';
-import { simulatedDelayLifecycleHandler } from './simulatedDelayLifecycleHandler.ts';
+import { simulatedDelayLifecycleHandler } from './lifecycle-handlers/simulatedDelayLifecycleHandler.ts';
+import { diRegistrationLifecycleHandler } from './lifecycle-handlers/diRegistrationLifecycleHandler.ts';
+import { diStoreCardLayout } from './content/diStore-card-layout.ts';
 
 export const misc = new FeatureDescriptor({
   name: 'misc',
@@ -39,10 +41,13 @@ export const misc = new FeatureDescriptor({
         { type: missingContent.name },
       ],
       layouts: [missingRouteLayout],
-      lifecycleHandlers: [simulatedDelayLifecycleHandler],
+      lifecycleHandlers: [
+        simulatedDelayLifecycleHandler,
+        diRegistrationLifecycleHandler,
+      ],
     }),
     new CardDescriptor({
-      layouts: [missingCardLayout],
+      layouts: [missingCardLayout, diStoreCardLayout],
     }),
     new APIContentDescriptor({
       configurations: [dummyJsonApi],
