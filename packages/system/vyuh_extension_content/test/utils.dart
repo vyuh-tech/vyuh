@@ -161,7 +161,7 @@ final class MockRoute extends RouteBase {
   }
 
   @override
-  Future<RouteBase?> init() async {
+  Future<RouteBase?> init(BuildContext context) async {
     return this;
   }
 

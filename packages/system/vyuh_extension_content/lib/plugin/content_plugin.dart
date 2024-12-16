@@ -56,16 +56,22 @@ final class DefaultContentPlugin extends ContentPlugin {
 
   @override
   Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) =>
-      RouteFutureBuilder(
-        url: url,
-        routeId: routeId,
-        fetchRoute: ({path, routeId}) => provider
-            .fetchRoute(path: path, routeId: routeId)
-            .then((value) async {
-          final finalRoute = await value?.init();
-          return finalRoute;
-        }),
-        buildContent: buildContent,
+      ScopedDIWidget(
+        child: RouteFutureBuilder(
+          url: url,
+          routeId: routeId,
+          fetchRoute: (context, {path, routeId}) => provider
+              .fetchRoute(path: path, routeId: routeId)
+              .then((value) async {
+            if (!context.mounted) {
+              return null;
+            }
+
+            final finalRoute = await value?.init(context);
+            return finalRoute;
+          }),
+          buildContent: buildContent,
+        ),
       );
 
   @override

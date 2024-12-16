@@ -23,6 +23,7 @@ import {
   missingRouteLayout,
 } from './content/missing.ts';
 import { showBarcode } from './action/show-barcode.ts';
+import { simulatedDelayLifecycleHandler } from './simulatedDelayLifecycleHandler.ts';
 
 export const misc = new FeatureDescriptor({
   name: 'misc',
@@ -38,6 +39,7 @@ export const misc = new FeatureDescriptor({
         { type: missingContent.name },
       ],
       layouts: [missingRouteLayout],
+      lifecycleHandlers: [simulatedDelayLifecycleHandler],
     }),
     new CardDescriptor({
       layouts: [missingCardLayout],

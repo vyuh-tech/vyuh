@@ -4,6 +4,7 @@ import 'package:feature_misc/content/api/dummy_json_api_content.dart';
 import 'package:feature_misc/content/product/default_layout.dart';
 import 'package:feature_misc/content/product/mini_view_layout.dart';
 import 'package:feature_misc/content/product/product_card.dart';
+import 'package:feature_misc/simulated_delay_lifecycle_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -39,6 +40,11 @@ final feature = FeatureDescriptor(
             DummyJsonApiConfiguration.typeDescriptor,
           ],
         ),
+        RouteDescriptor(
+          lifecycleHandlers: [
+            SimulatedDelayLifecycleHandler.typeDescriptor,
+          ],
+        )
       ],
       contentBuilders: [
         ProductCard.contentBuilder,

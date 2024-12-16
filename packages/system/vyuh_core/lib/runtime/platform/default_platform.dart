@@ -225,15 +225,16 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
     final disposeFutures = <Future<void>>[];
 
-    for (final feature in features) {
-      for (final builder in feature.extensionBuilders ?? []) {
-        try {
-          if (builder.isInitialized) {
-            disposeFutures.add(builder.dispose());
-          }
-        } catch (e, st) {
-          vyuh.telemetry.reportError(e, stackTrace: st);
+    final builders = features
+        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[]);
+
+    for (final builder in builders) {
+      try {
+        if (builder.isInitialized) {
+          disposeFutures.add(builder.dispose());
         }
+      } catch (e, st) {
+        vyuh.telemetry.reportError(e, stackTrace: st);
       }
     }
 
@@ -241,11 +242,10 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     await Future.wait(disposeFutures, eagerError: false);
 
     // Do some consistency checks on the ExtensionBuilders
-    final builders = features
-        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
-        .groupListsBy((element) => element.extensionType);
+    final groupedBuilders =
+        builders.groupListsBy((element) => element.extensionType);
 
-    for (final entry in builders.entries) {
+    for (final entry in groupedBuilders.entries) {
       assert(entry.value.length == 1,
           'There can be only one FeatureExtensionBuilder for a schema-type. We found ${entry.value.length} for ${entry.key}');
 
@@ -261,7 +261,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       final builder = _featureExtensionBuilderMap[runtimeType];
 
       assert(builder != null,
-          'Missing FeatureExtensionBuilder for FeatureExtensionDescriptor of schemaType: $runtimeType');
+          'Missing ExtensionBuilder for ExtensionDescriptor of schemaType: $runtimeType');
     });
 
     // Initialize all extension builders
@@ -269,7 +269,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       final builder = entry.value;
 
       await telemetry.trace(
-        name: 'Feature Extension: ${builder.title}',
+        name: 'Extension: ${builder.title}',
         operation: 'Init',
         fn: (_) => builder.init(extensions[entry.key] ?? []),
       );

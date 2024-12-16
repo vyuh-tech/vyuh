@@ -74,7 +74,11 @@ final class NavigationAction extends ActionConfiguration {
     try {
       final routeResult = await vyuh.content.provider
           .fetchRoute(path: uri?.toString(), routeId: routeId);
-      final route = await routeResult?.init();
+      if (!context.mounted) {
+        return;
+      }
+
+      final route = await routeResult?.init(context);
 
       final path = route?.path;
       if (path == null) {

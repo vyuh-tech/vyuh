@@ -51,14 +51,10 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
       throw StateError('Extension $title is already initialized');
     }
 
-    if (_isDisposed) {
-      throw StateError(
-          'Extension $title has been disposed and cannot be reinitialized');
-    }
-
     try {
       await onInit(extensions.whereType<T>().toList());
       _isInitialized = true;
+      _isDisposed = false;
     } catch (_) {
       // Let the platform handle the error
       rethrow;
