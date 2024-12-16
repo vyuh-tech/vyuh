@@ -10,7 +10,9 @@ import 'package:vyuh_core/vyuh_core.dart';
 final class GetItDIPlugin extends DIPlugin {
   final _instance = GetIt.asNewInstance();
 
-  GetItDIPlugin()
+  final String? debugLabel;
+
+  GetItDIPlugin({this.debugLabel})
       : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
 
   @override

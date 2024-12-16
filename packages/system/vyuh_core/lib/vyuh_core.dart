@@ -91,6 +91,7 @@ export 'plugin/navigation/navigation.dart';
 export 'plugin/network/http_network_plugin.dart';
 export 'plugin/network/network_plugin.dart';
 export 'plugin/plugin.dart';
+export 'plugin/plugin_descriptor.dart';
 export 'plugin/telemetry/console_logger_telemetry_provider.dart';
 export 'plugin/telemetry/logger.dart';
 export 'plugin/telemetry/noop_telemetry_provider.dart';

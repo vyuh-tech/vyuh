@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -8,7 +10,8 @@ class RouteFutureBuilder extends StatefulWidget {
   final Uri? url;
   final String? routeId;
 
-  final Future<RouteBase?> Function({String? path, String? routeId}) fetchRoute;
+  final Future<RouteBase?> Function(BuildContext context,
+      {String? path, String? routeId}) fetchRoute;
   final Widget Function(BuildContext context, ContentItem content) buildContent;
 
   RouteFutureBuilder({
@@ -34,6 +37,17 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
     _refresh();
   }
 
+  @override
+  dispose() {
+    final content = _tracker.value?.value;
+
+    if (content != null) {
+      unawaited(content.dispose());
+    }
+
+    super.dispose();
+  }
+
   Future<RouteBase?> _refresh() {
     return runInAction(() {
       final future = _fetchRoute();
@@ -45,6 +59,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
 
   ObservableFuture<RouteBase?> _fetchRoute() {
     return ObservableFuture(widget.fetchRoute(
+      context,
       path: widget.url?.toString(),
       routeId: widget.routeId,
     ));

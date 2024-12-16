@@ -58,7 +58,7 @@ final class ConditionalRoute extends RouteBase {
       _$ConditionalRouteFromJson(json);
 
   @override
-  Future<RouteBase?> init() async {
+  Future<RouteBase?> init(BuildContext context) async {
     return this;
   }
 
@@ -75,7 +75,11 @@ final class ConditionalRoute extends RouteBase {
 
     if (ref != null) {
       final route = await vyuh.content.provider.fetchRoute(routeId: ref.ref);
-      leafRoute = await route?.init();
+      if (!context.mounted) {
+        return null;
+      }
+
+      leafRoute = await route?.init(context);
     }
 
     _initializedInstance = leafRoute;

@@ -172,3 +172,12 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     );
   }
 }
+
+final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
+  RoutingConfigNotifier(List<g.RouteBase> routes)
+      : super(g.RoutingConfig(routes: routes));
+
+  void setRoutes(List<g.RouteBase> routes) {
+    value = g.RoutingConfig(routes: routes);
+  }
+}

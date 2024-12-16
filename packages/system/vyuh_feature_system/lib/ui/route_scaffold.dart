@@ -59,17 +59,14 @@ final class RouteScaffold extends StatelessWidget {
       ],
     );
 
-    return vf.RouteContainer(
-      content: content,
-      child: Scaffold(
-        appBar: appBar,
-        body: useSafeArea ? SafeArea(child: bodyContent) : bodyContent,
-        drawer:
-            drawerItems.isNotEmpty ? _buildDrawer(context, drawerItems) : null,
-        endDrawer: endDrawerItems.isNotEmpty
-            ? _buildDrawer(context, endDrawerItems)
-            : null,
-      ),
+    return Scaffold(
+      appBar: appBar,
+      body: useSafeArea ? SafeArea(child: bodyContent) : bodyContent,
+      drawer:
+          drawerItems.isNotEmpty ? _buildDrawer(context, drawerItems) : null,
+      endDrawer: endDrawerItems.isNotEmpty
+          ? _buildDrawer(context, endDrawerItems)
+          : null,
     );
   }
 

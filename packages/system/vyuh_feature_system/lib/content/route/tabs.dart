@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vt;
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'tabs.g.dart';
 
@@ -28,30 +27,27 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
   Widget build(BuildContext context, vt.RouteBase content) {
     final layout = content.layout as TabsRouteLayout;
 
-    return RouteContainer(
-      content: content,
-      child: DefaultTabController(
-        length: layout.routes.length,
-        child: Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 0,
-            bottom: TabBar(
-              tabs: layout.routes
-                  .map((e) => Tab(
-                        text: e.title,
-                        icon: e.title == null
-                            ? const Icon((Icons.question_mark))
-                            : null,
-                      ))
-                  .toList(growable: false),
-            ),
-          ),
-          body: TabBarView(
-            children: layout.routes
-                .map((e) =>
-                    vyuh.content.buildRoute(context, routeId: e.route.ref))
+    return DefaultTabController(
+      length: layout.routes.length,
+      child: Scaffold(
+        appBar: AppBar(
+          toolbarHeight: 0,
+          bottom: TabBar(
+            tabs: layout.routes
+                .map((e) => Tab(
+                      text: e.title,
+                      icon: e.title == null
+                          ? const Icon((Icons.question_mark))
+                          : null,
+                    ))
                 .toList(growable: false),
           ),
+        ),
+        body: TabBarView(
+          children: layout.routes
+              .map(
+                  (e) => vyuh.content.buildRoute(context, routeId: e.route.ref))
+              .toList(growable: false),
         ),
       ),
     );

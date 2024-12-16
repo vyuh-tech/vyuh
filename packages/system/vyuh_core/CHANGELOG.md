@@ -1,3 +1,28 @@
+## 1.30.1
+
+ - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.
+
+## 1.30.0
+
+ - **FIX**: tracing at the feature extension level.
+ - **FEAT**: introduced Scoped DI at the Route level that allows configuring DI at the route level itself. This avoid polluting the global DI scope. Also cleaned up some types that are no longer necessary.
+
+## 1.29.2
+
+ - **FIX**: making the extensions async for init and dispose.
+
+## 1.29.1
+
+ - **FIX**: more refactorings and tests.
+
+## 1.29.0
+
+ - **FEAT**: adding a Client parameter to HttpNetworkPlugin, more robust init of ExtensionBuilder even when there are no ExtensionDescriptors, extension method to restart() the platform, simplified runApp, error checking when a modifier build breaks, a vyuh_test package, tentative tests for vyuh_core and vyuh_extension_content (WIP).
+
+## 1.28.0
+
+ - **FEAT**: added a set of tests for VyuhPlatform. Cleaned up some unnecessary properties in VyuhPlatform.
+
 ## 1.27.3
 
  - **FIX**: expanding the API docs.

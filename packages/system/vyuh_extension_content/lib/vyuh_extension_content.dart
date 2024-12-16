@@ -9,3 +9,4 @@ export 'content_extension_descriptor.dart';
 export 'plugin/content_plugin.dart';
 export 'ui/route_builder.dart';
 export 'ui/route_builder_proxy.dart';
+export 'ui/scoped_di_widget.dart';

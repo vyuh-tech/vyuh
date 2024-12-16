@@ -72,9 +72,11 @@ final class NavigationAction extends ActionConfiguration {
     state.insert(entry);
 
     try {
-      final routeResult = await vyuh.content.provider
+      final route = await vyuh.content.provider
           .fetchRoute(path: uri?.toString(), routeId: routeId);
-      final route = await routeResult?.init();
+      if (!context.mounted) {
+        return;
+      }
 
       final path = route?.path;
       if (path == null) {
@@ -86,7 +88,7 @@ final class NavigationAction extends ActionConfiguration {
         return;
       }
 
-      navigationType.apply(context, path, route);
+      navigationType.apply(context, path);
     } catch (e, stackTrace) {
       vyuh.router.push('/__system_error__', extra: (e, stackTrace));
     } finally {
@@ -96,16 +98,16 @@ final class NavigationAction extends ActionConfiguration {
 }
 
 extension on NavigationType {
-  void apply(BuildContext context, String path, [vc.RouteBase? route]) {
+  void apply(BuildContext context, String path) {
     switch (this) {
       case NavigationType.go:
-        vyuh.router.go(path, extra: route);
+        vyuh.router.go(path);
         break;
       case NavigationType.push:
-        vyuh.router.push(path, extra: route);
+        vyuh.router.push(path);
         break;
       case NavigationType.replace:
-        vyuh.router.replace(path, extra: route);
+        vyuh.router.replace(path);
         break;
     }
   }

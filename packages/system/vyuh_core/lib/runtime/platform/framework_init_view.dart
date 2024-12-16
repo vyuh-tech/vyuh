@@ -28,10 +28,6 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
           loadedApp = vyuh.widgetBuilder.appBuilder(vyuh);
         }
 
-        if (vyuh.tracker.error != null) {
-          vyuh.telemetry.reportError(vyuh.tracker.error);
-        }
-
         final child = status == null || status == FutureStatus.pending
             ? vyuh.widgetBuilder.appLoader(context)
             : vyuh.widgetBuilder.routeErrorView(
