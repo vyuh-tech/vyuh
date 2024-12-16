@@ -1,6 +1,6 @@
 ## 1.4.3
 
- - **FEAT**: sanity_client now can POST requests with GROQ body and params
+ - **FEAT**: sanity_client will determine whether to GET or POST requests with GROQ body and params based on query byte size (11kb limit).
 
 ## 1.4.2
 

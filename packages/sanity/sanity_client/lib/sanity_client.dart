@@ -6,4 +6,5 @@ library;
 export 'client.dart';
 export 'exceptions.dart';
 export 'response_types.dart';
+export 'sanity_request.dart';
 export 'url_builder.dart';
