@@ -1,3 +1,7 @@
+## 1.14.0
+
+ - **FEAT**: introduced Scoped DI at the Route level that allows configuring DI at the route level itself. This avoid polluting the global DI scope. Also cleaned up some types that are no longer necessary.
+
 ## 1.13.1
 
  - **FIX**: making the extensions async for init and dispose.

@@ -1,6 +1,6 @@
 name: vyuh_feature_system
 description: Provides the essential building blocks for a CMS-driven UI
-version: 1.31.0
+version: 1.32.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_feature_system
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -28,8 +28,8 @@ dependencies:
   logger: ^2.0.2+1
   go_router: ^14.0.1
   flutter_sanity_portable_text: ^1.5.1
-  vyuh_core: ^1.29.2
-  vyuh_extension_content: ^1.13.1
+  vyuh_core: ^1.30.0
+  vyuh_extension_content: ^1.14.0
   json_path: ^0.7.1
   url_launcher: ^6.3.0
   nanoid: ^1.0.0
