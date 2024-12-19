@@ -8,7 +8,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 final class DefaultNavigationPlugin extends NavigationPlugin {
   GoRouter _router = GoRouter(routes: []);
 
-  final RoutingConfigNotifier _routingConfig = RoutingConfigNotifier([]);
+  var _routingConfig = RoutingConfigNotifier([]);
 
   DefaultNavigationPlugin()
       : super(
@@ -37,7 +37,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       required List<g.RouteBase> routes,
       required GlobalKey<NavigatorState> rootNavigatorKey}) {
     final allRoutes = _finalizeRoutes(routes);
-    _routingConfig.value = RoutingConfig(routes: allRoutes);
+    _routingConfig = RoutingConfigNotifier(allRoutes);
 
     _router = GoRouter.routingConfig(
       initialLocation: initialLocation ?? '/',

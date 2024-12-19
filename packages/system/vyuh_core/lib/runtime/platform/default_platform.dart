@@ -80,15 +80,6 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     _plugins.addAll(pluginDescriptor.plugins);
 
     _tracker = _PlatformInitTracker(this);
-
-    reaction((_) => _tracker.currentState.value == InitState.notStarted,
-        (notStarted) {
-      if (notStarted) {
-        // Ensure the navigator key is established everytime the system is restarted
-        // This avoids the error of a duplicate GlobalKey across GoRouter instances
-        _rootNavigatorKey = GlobalKey<NavigatorState>();
-      }
-    });
   }
 
   @override
@@ -213,6 +204,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   Future<void> _initRouter(List<g.RouteBase> routes) async {
+    _rootNavigatorKey = GlobalKey<NavigatorState>();
+
     router.initRouter(
       routes: routes,
       initialLocation: _userInitialLocation == '/'
