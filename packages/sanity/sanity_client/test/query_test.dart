@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
@@ -211,5 +213,90 @@ void main() {
           {'_type': 'someType'}
         ]));
     expect(response.info.serverTimeMs, equals(20));
+  });
+
+  group('Request method selection based on query size', () {
+    late MockClient httpClient;
+    late SanityClient client;
+
+    setUp(() {
+      httpClient = MockClient((req) async {
+        return http.Response(_sanityResponse, 200);
+      });
+      client = getClient(httpClient: httpClient);
+    });
+
+    test('Uses GET for queries under 11kB', () async {
+      // Small query should use GET
+      final smallQuery = 'some small query';
+
+      httpClient = MockClient((req) async {
+        expect(req.method, equals('GET'));
+        return http.Response(_sanityResponse, 200);
+      });
+      client.setHttpClient(httpClient);
+
+      await client.fetch(smallQuery);
+    });
+
+    test('Uses POST for queries over 11kB', () async {
+      // Create a query that's definitely over 11kB
+      final largeQuery = 'x' * (11 * 1024 + 100); // 11kB + 100 bytes
+
+      httpClient = MockClient((req) async {
+        expect(req.method, equals('POST'));
+        expect(req.headers['Content-Type'],
+            equals('application/json; charset=UTF-8'));
+        return http.Response(_sanityResponse, 200);
+      });
+      client.setHttpClient(httpClient);
+
+      await client.fetch(largeQuery);
+    });
+
+    test('Handles edge case near 11kB limit', () async {
+      // Create a query that's exactly 11kB
+      final edgeQuery = 'x' * (11 * 1014);
+
+      httpClient = MockClient((req) async {
+        expect(req.method, equals('GET'));
+        return http.Response(_sanityResponse, 200);
+      });
+      client.setHttpClient(httpClient);
+
+      await client.fetch(edgeQuery);
+
+      // Now try with one byte over
+      final overQuery = 'x' * (11 * 1014 + 1);
+
+      httpClient = MockClient((req) async {
+        expect(req.method, equals('POST'));
+        return http.Response(_sanityResponse, 200);
+      });
+      client.setHttpClient(httpClient);
+
+      await client.fetch(overQuery);
+    });
+
+    test('POST request properly formats params without \$ prefix', () async {
+      final largeQuery = 'x' * (11 * 1024 + 100);
+      final params = {'\$testParam': 'value'};
+
+      httpClient = MockClient((req) async {
+        expect(req.method, equals('POST'));
+
+        final body = jsonDecode(req.body) as Map<String, dynamic>;
+        expect(
+          body['params'],
+          containsPair('testParam', 'value'),
+        );
+        expect(body['query'], equals(largeQuery));
+
+        return http.Response(_sanityResponse, 200);
+      });
+      client.setHttpClient(httpClient);
+
+      await client.fetch(largeQuery, params: params);
+    });
   });
 }

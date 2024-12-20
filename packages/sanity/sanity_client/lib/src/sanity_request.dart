@@ -20,7 +20,7 @@ class SanityRequest {
   bool get requiresPost {
     final uri = getUri;
     final bytes = utf8.encode(uri.toString());
-    return bytes.lengthInBytes >= _maxGetQuerySize;
+    return bytes.lengthInBytes > _maxGetQuerySize;
   }
 
   Uri get getUri => urlBuilder.queryUrl(query, params: params);
