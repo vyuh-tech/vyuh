@@ -235,7 +235,7 @@ Follow us, stay up to date or reach out on:
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="20%"><a href="https://vyuh.tech/"><img src="https://avatars.githubusercontent.com/u/156846?v=4?s=64" width="64px;" alt="Pavan Podila"/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/vyuh-tech/vyuh/commits?author=pavanpodila" title="Code">💻</a></td>
+      <td align="center" valign="top" width="20%"><a href="https://vyuh.tech/"><img src="https://avatars.githubusercontent.com/u/156846?v=4?s=64" width="64px;" alt="Pavan Podila"/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/vyuh-tech/vyuh/commits?author=pavanpodila" title="Code">💻</a> <a href="https://github.com/vyuh-tech/vyuh/commits?author=pavanpodila" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/vishal-kr-barnwal"><img src="https://avatars.githubusercontent.com/u/29015539?v=4?s=64" width="64px;" alt="Vishal Kumar"/><br /><sub><b>Vishal Kumar</b></sub></a><br /><a href="https://github.com/vyuh-tech/vyuh/commits?author=vishal-kr-barnwal" title="Code">💻</a></td>
       <td align="center" valign="top" width="20%"><a href="https://github.com/ProjectAJ14"><img src="https://avatars.githubusercontent.com/u/35396392?v=4?s=64" width="64px;" alt="Ajay Kumar"/><br /><sub><b>Ajay Kumar</b></sub></a><br /><a href="https://github.com/vyuh-tech/vyuh/commits?author=ProjectAJ14" title="Code">💻</a> <a href="https://github.com/vyuh-tech/vyuh/commits?author=ProjectAJ14" title="Tests">⚠️</a></td>
     </tr>
