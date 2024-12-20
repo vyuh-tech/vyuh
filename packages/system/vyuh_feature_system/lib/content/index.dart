@@ -21,7 +21,6 @@ export 'portable_text/invoke_action.dart';
 export 'portable_text/portable_text.dart';
 export 'route/default_layout.dart';
 export 'route/route.dart';
-export 'route/route_container.dart';
 export 'route/route_type.dart';
 export 'route/single_item_layout.dart';
 export 'route/tabs.dart';

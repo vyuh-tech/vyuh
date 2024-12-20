@@ -1,3 +1,11 @@
+## 1.32.1
+
+ - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.
+
+## 1.32.0
+
+ - **FEAT**: introduced Scoped DI at the Route level that allows configuring DI at the route level itself. This avoid polluting the global DI scope. Also cleaned up some types that are no longer necessary.
+
 ## 1.31.0
 
  - **FEAT**: Breaking change. Split up the AnalyticsPlugin into a focused TelemetryPlugin that only does telemetry operations like error reporting and tracing. Analytics is now focused only on User level analytics.

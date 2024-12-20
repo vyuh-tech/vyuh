@@ -8,7 +8,6 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
     this.contentBuilders,
     this.actions,
     this.conditions,
-    this.lifecycleHandlers,
     this.routeTypes,
   }) : super(title: 'Content Extension');
 
@@ -17,19 +16,5 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
   final List<ContentBuilder>? contentBuilders;
   final List<TypeDescriptor<ActionConfiguration>>? actions;
   final List<TypeDescriptor<ConditionConfiguration>>? conditions;
-  final List<TypeDescriptor<RouteLifecycleConfiguration>>? lifecycleHandlers;
   final List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
-}
-
-abstract class RouteLifecycleConfiguration implements SchemaItem {
-  @override
-  final String schemaType;
-
-  final String? title;
-
-  RouteLifecycleConfiguration({this.title, required this.schemaType});
-
-  Future<void> init(RouteBase route);
-
-  Future<void> dispose();
 }

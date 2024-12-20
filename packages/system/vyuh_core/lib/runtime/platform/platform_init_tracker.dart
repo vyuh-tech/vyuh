@@ -33,6 +33,9 @@ final class _PlatformInitTracker implements SystemInitTracker {
           vyuh.event.emit(SystemReadyEvent());
         } catch (exception, trace) {
           vyuh.telemetry.reportError(exception, stackTrace: trace);
+
+          runInAction(() => currentState.value = InitState.error);
+
           rethrow;
         } finally {
           await trace.stop();
@@ -46,24 +49,23 @@ final class _PlatformInitTracker implements SystemInitTracker {
   Future<void> _initLoop(InitState initialState, Trace parentTrace) async {
     runInAction(() => currentState.value = initialState);
 
+    final nextOperation = {
+      InitState.notStarted: () async {
+        await platform.initPlugins(parentTrace);
+        runInAction(() => currentState.value = InitState.plugins);
+      },
+      InitState.plugins: () async {
+        await platform.initFeatures(parentTrace);
+        runInAction(() => currentState.value = InitState.features);
+      },
+      InitState.features: () async {
+        runInAction(() => currentState.value = InitState.ready);
+      },
+    };
+
     while (currentState.value != InitState.ready) {
-      switch (currentState.value) {
-        case InitState.notStarted:
-          runInAction(() => currentState.value = InitState.plugins);
-          break;
-
-        case InitState.plugins:
-          await platform.initPlugins(parentTrace);
-          runInAction(() => currentState.value = InitState.features);
-          break;
-
-        case InitState.features:
-          await platform.initFeatures(parentTrace);
-          runInAction(() => currentState.value = InitState.ready);
-
-        case InitState.ready:
-          break;
-      }
+      final fn = nextOperation[currentState.value]!;
+      await fn();
     }
   }
 }

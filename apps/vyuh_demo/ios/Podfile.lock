@@ -4,17 +4,15 @@ PODS:
     - Flutter
   - flutter_native_splash (2.4.3):
     - Flutter
-  - Google-Maps-iOS-Utils (6.0.0):
+  - Google-Maps-iOS-Utils (6.1.0):
     - GoogleMaps (~> 9.0)
   - google_maps_flutter_ios (0.0.1):
     - Flutter
     - Google-Maps-iOS-Utils (< 7.0, >= 5.0)
     - GoogleMaps (< 10.0, >= 8.4)
-  - GoogleMaps (9.1.1):
-    - GoogleMaps/Maps (= 9.1.1)
-  - GoogleMaps/Base (9.1.1)
-  - GoogleMaps/Maps (9.1.1):
-    - GoogleMaps/Base
+  - GoogleMaps (9.2.0):
+    - GoogleMaps/Maps (= 9.2.0)
+  - GoogleMaps/Maps (9.2.0)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -80,9 +78,9 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_native_splash: e8a1e01082d97a8099d973f919f57904c925008a
-  Google-Maps-iOS-Utils: cfe6a0239c7ca634b7e001ad059a6707143dc8dc
+  Google-Maps-iOS-Utils: 0a484b05ed21d88c9f9ebbacb007956edd508a96
   google_maps_flutter_ios: e31555a04d1986ab130f2b9f24b6cdc861acc6d3
-  GoogleMaps: 80ea184ed6bf44139f383a8b0e248ba3ec1cc8c9
+  GoogleMaps: 634ec3ca99698b31ca2253d64f017217d70cfb38
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d

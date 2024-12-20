@@ -41,7 +41,7 @@ abstract class RouteBase extends ContentItem implements RootItem {
   factory RouteBase.fromJson(Map<String, dynamic> json) =>
       vyuh.content.fromJson<ContentItem>(json) as RouteBase;
 
-  Future<RouteBase?> init();
+  Future<RouteBase?> init(BuildContext context);
 
   Future<void> dispose();
 
@@ -100,4 +100,17 @@ abstract class RouteTypeConfiguration implements SchemaItem {
   RouteTypeConfiguration({this.title, required this.schemaType});
 
   Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]);
+}
+
+abstract class RouteLifecycleConfiguration implements SchemaItem {
+  @override
+  final String schemaType;
+
+  final String? title;
+
+  RouteLifecycleConfiguration({this.title, required this.schemaType});
+
+  Future<void> init(BuildContext context, RouteBase route);
+
+  Future<void> dispose();
 }

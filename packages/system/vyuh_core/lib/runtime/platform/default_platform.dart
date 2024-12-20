@@ -63,8 +63,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   @override
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
-  @override
-  final FeaturesBuilder featuresBuilder;
+  final FeaturesBuilder _featuresBuilder;
 
   @override
   List<Plugin> get plugins => _plugins.items;
@@ -73,23 +72,14 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   final PlatformWidgetBuilder widgetBuilder;
 
   _DefaultVyuhPlatform({
-    required this.featuresBuilder,
+    required FeaturesBuilder featuresBuilder,
     required PluginDescriptor pluginDescriptor,
     required this.widgetBuilder,
     this.initialLocation,
-  }) {
+  }) : _featuresBuilder = featuresBuilder {
     _plugins.addAll(pluginDescriptor.plugins);
 
     _tracker = _PlatformInitTracker(this);
-
-    reaction((_) => _tracker.currentState.value == InitState.notStarted,
-        (notStarted) {
-      if (notStarted) {
-        // Ensure the navigator key is established everytime the system is restarted
-        // This avoids the error of a duplicate GlobalKey across GoRouter instances
-        _rootNavigatorKey = GlobalKey<NavigatorState>();
-      }
-    });
   }
 
   @override
@@ -141,7 +131,18 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       parentTrace: parentTrace,
       fn: (trace) async {
         _readyFeatures.clear();
-        _features = await featuresBuilder();
+        _features = await _featuresBuilder();
+
+        // Ensure feature names are unique
+        final featureNames = <String>{};
+        for (final feature in _features) {
+          if (featureNames.contains(feature.name)) {
+            throw StateError(
+                'Feature name "${feature.name}" is not unique. Ensure only uniquely named features are included.');
+          } else {
+            featureNames.add(feature.name);
+          }
+        }
 
         final initFns =
             _features.map((feature) => telemetry.trace<List<g.RouteBase>>(
@@ -157,16 +158,29 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
                   },
                 ));
 
-        final allRoutes = await Future.wait(initFns, eagerError: true);
-        _initRouter(
-          allRoutes
-              .where((routes) => routes != null)
-              .cast<List<g.RouteBase>>()
-              .expand((routes) => routes)
-              .toList(),
+        await telemetry.trace<void>(
+          name: 'Feature Routes',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) async {
+            final allRoutes = await Future.wait(initFns, eagerError: true);
+
+            return _initRouter(
+              allRoutes
+                  .where((routes) => routes != null)
+                  .cast<List<g.RouteBase>>()
+                  .expand((routes) => routes)
+                  .toList(),
+            );
+          },
         );
 
-        _initFeatureExtensions(_features);
+        return telemetry.trace<void>(
+          name: 'Feature Extensions',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) => _initFeatureExtensions(_features),
+        );
       },
     );
   }
@@ -190,6 +204,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   Future<void> _initRouter(List<g.RouteBase> routes) async {
+    _rootNavigatorKey = GlobalKey<NavigatorState>();
+
     router.initRouter(
       routes: routes,
       initialLocation: _userInitialLocation == '/'
@@ -199,46 +215,60 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  void _initFeatureExtensions(List<FeatureDescriptor> featureList) {
-    // Run a cleanup first
-    _features
-        .expand((e) => e.extensionBuilders ?? <vc.ExtensionBuilder>[])
-        .forEach((e) => e.dispose());
+  Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
+    final disposeFutures = <Future<void>>[];
 
-    final builders = featureList
-        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[])
-        .groupListsBy((element) => element.extensionType);
+    final builders = features
+        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[]);
 
-    for (final entry in builders.entries) {
+    for (final builder in builders) {
+      try {
+        if (builder.isInitialized) {
+          disposeFutures.add(builder.dispose());
+        }
+      } catch (e, st) {
+        vyuh.telemetry.reportError(e, stackTrace: st);
+      }
+    }
+
+    // Wait for all disposals to complete
+    await Future.wait(disposeFutures, eagerError: false);
+
+    // Do some consistency checks on the ExtensionBuilders
+    final groupedBuilders =
+        builders.groupListsBy((element) => element.extensionType);
+
+    for (final entry in groupedBuilders.entries) {
       assert(entry.value.length == 1,
           'There can be only one FeatureExtensionBuilder for a schema-type. We found ${entry.value.length} for ${entry.key}');
 
       _featureExtensionBuilderMap[entry.key] = entry.value.first;
     }
 
-    final extensions = featureList
+    final extensions = features
         .expand((element) => element.extensions ?? <ExtensionDescriptor>[])
         .groupListsBy((element) => element.runtimeType);
 
+    // Ensure for every ExtensionDescriptor, there is a corresponding ExtensionBuilder registered
     extensions.forEach((runtimeType, descriptors) {
       final builder = _featureExtensionBuilderMap[runtimeType];
 
       assert(builder != null,
-          'Missing FeatureExtensionBuilder for FeatureExtensionDescriptor of schemaType: $runtimeType');
-
-      builder?.init(descriptors);
+          'Missing ExtensionBuilder for ExtensionDescriptor of schemaType: $runtimeType');
     });
+
+    // Initialize all extension builders
+    for (final entry in _featureExtensionBuilderMap.entries) {
+      final builder = entry.value;
+
+      await telemetry.trace(
+        name: 'Extension: ${builder.title}',
+        operation: 'Init',
+        fn: (_) => builder.init(extensions[entry.key] ?? []),
+      );
+    }
   }
 
   @override
   T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
-}
-
-final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
-  RoutingConfigNotifier(List<g.RouteBase> routes)
-      : super(g.RoutingConfig(routes: routes));
-
-  void setRoutes(List<g.RouteBase> routes) {
-    value = g.RoutingConfig(routes: routes);
-  }
 }

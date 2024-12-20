@@ -34,10 +34,18 @@ final class DefaultContentPlugin extends ContentPlugin {
       final modifiers = content.getModifiers();
 
       if (modifiers != null && modifiers.isNotEmpty) {
-        return modifiers.fold<Widget>(
-          contentWidget,
-          (child, modifier) => modifier.build(context, child, content),
-        );
+        try {
+          return modifiers.fold<Widget>(
+            contentWidget,
+            (child, modifier) => modifier.build(context, child, content),
+          );
+        } catch (e) {
+          return vyuh.widgetBuilder.errorView(context,
+              error: e,
+              title: 'Failed to apply modifiers',
+              subtitle:
+                  'Modifier Chain: "${modifiers.map((m) => m.schemaType).join(' -> ')}" for Content: "${content.schemaType}"');
+        }
       }
 
       return contentWidget;
@@ -47,18 +55,39 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   @override
-  Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) =>
-      RouteFutureBuilder(
+  Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) {
+    final label = [
+      url == null ? null : 'Url: $url',
+      routeId == null ? null : 'RouteId: $routeId',
+      'Route',
+    ].firstWhere((x) => x != null);
+
+    return ScopedDIWidget(
+      debugLabel: 'Scoped DI for $label',
+      child: RouteFutureBuilder(
         url: url,
         routeId: routeId,
-        fetchRoute: ({path, routeId}) => provider
+        fetchRoute: (context, {path, routeId}) => provider
             .fetchRoute(path: path, routeId: routeId)
             .then((value) async {
-          final finalRoute = await value?.init();
+          if (!context.mounted) {
+            return null;
+          }
+
+          // Reset DI scope when a new route is fetched
+          await context.di.reset();
+
+          if (!context.mounted) {
+            return null;
+          }
+
+          final finalRoute = await value?.init(context);
           return finalRoute;
         }),
         buildContent: buildContent,
-      );
+      ),
+    );
+  }
 
   @override
   T? fromJson<T>(Map<String, dynamic> json) {

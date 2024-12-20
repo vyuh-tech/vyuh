@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -46,14 +47,14 @@ final class Route extends RouteBase {
       listFromJson<RouteLifecycleConfiguration>(json);
 
   @override
-  Future<RouteBase?> init() async {
+  Future<RouteBase?> init(BuildContext context) async {
     if (_initializedInstance != null) {
       return _initializedInstance;
     }
 
     if (lifecycleHandlers != null && lifecycleHandlers!.isNotEmpty) {
       for (final config in lifecycleHandlers!) {
-        await config.init(this);
+        await config.init(context, this);
       }
     }
 

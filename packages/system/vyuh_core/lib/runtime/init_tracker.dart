@@ -6,14 +6,18 @@ enum InitState {
   /// The system has not started initializing.
   notStarted,
 
-  /// The system has initialized the plugins.
+  /// The system has finished initializing the plugins.
   plugins,
 
-  /// The system has initialized the features.
+  /// The system has finished initializing the features.
   features,
 
   /// The system is ready for operation.
   ready,
+
+  /// The system is in error. This could be due to a failure
+  /// while initializing plugins or features.
+  error,
 }
 
 /// A tracker for the system initialization process.
