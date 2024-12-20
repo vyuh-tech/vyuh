@@ -84,6 +84,8 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
 
   @override
   Uri imageUrl(String imageRefId, {ImageOptions? options}) {
+    _assertValidImageOptions(options);
+
     final fileName = SanityUrlBuilder.imageFileName(imageRefId);
 
     final path = '${config.projectId}/${config.dataset}/$fileName';
@@ -131,6 +133,36 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
       path: '/${config.apiVersion}/data/query/${config.dataset}',
       queryParameters: queryParameters,
     );
+  }
+
+  void _assertValidImageOptions(ImageOptions? options) {
+    if (options == null) {
+      return;
+    }
+
+    final width = options.width;
+    final height = options.height;
+
+    // Assert positive width and height
+    if (width != null && width! <= 0) {
+      throw ArgumentError("Width must be a number greater than zero");
+    }
+
+    if (height != null && height! <= 0) {
+      throw ArgumentError("Height must be a number greater than zero");
+    }
+
+    // Assert positive devicePixelRatio between 1 and 5
+    final dpr = options.devicePixelRatio;
+    if (dpr != null && (dpr < 1 || dpr > 5)) {
+      throw ArgumentError("Device pixel ratio must be between 1 and 5");
+    }
+
+    // Assert quality between 0 and 100
+    final quality = options.quality;
+    if (quality != null && (quality < 0 || quality > 100)) {
+      throw ArgumentError("Quality must be between 0 and 100");
+    }
   }
 }
 

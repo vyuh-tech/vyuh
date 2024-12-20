@@ -299,4 +299,35 @@ void main() {
       await client.fetch(largeQuery, params: params);
     });
   });
+
+  group('Authentication Tests', () {
+    test('includes token in request headers', () async {
+      final client = getClient(
+        httpClient: MockClient((request) async {
+          expect(
+            request.headers['Authorization'],
+            equals('Bearer $token'),
+          );
+          return http.Response('{"ms":0,"query":"","result":{}}', 200);
+        }),
+      );
+      await client.fetch('*');
+    });
+
+    test('handles unauthorized requests', () async {
+      final client = getClient(
+        httpClient: MockClient((request) async {
+          return http.Response(
+            '{"error":{"description":"Unauthorized"}}',
+            401,
+          );
+        }),
+      );
+
+      expect(
+        () => client.fetch('*'),
+        throwsA(isA<UnauthorizedException>()),
+      );
+    });
+  });
 }
