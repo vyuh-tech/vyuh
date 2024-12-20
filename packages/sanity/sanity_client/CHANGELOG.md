@@ -1,3 +1,7 @@
+## 1.5.2
+
+ - **FIX**: fixed analysis issues.
+
 ## 1.5.1
 
  - **FIX**: adding more tests for url builder and query handling.
