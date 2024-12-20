@@ -1,3 +1,7 @@
+## 1.5.1
+
+ - **FIX**: adding more tests for url builder and query handling.
+
 ## 1.5.0
 
  - **REFACTOR**(sanity_client): remove postUri to not expose from url_builder.
