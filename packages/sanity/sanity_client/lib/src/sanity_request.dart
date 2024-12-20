@@ -25,7 +25,16 @@ class SanityRequest {
 
   Uri get getUri => urlBuilder.queryUrl(query, params: params);
 
-  Uri get postUri => urlBuilder.postUrl();
+  Uri get postUri {
+    final getUri = urlBuilder.queryUrl('', params: const {});
+
+    return getUri.replace(
+      queryParameters: <String, dynamic>{
+        'explain': getUri.queryParameters['explain'],
+        'perspective': getUri.queryParameters['perspective'],
+      },
+    );
+  }
 
   /// Strips the $-prefixes when submitting as json params via POST
   Map<String, dynamic> toPostBody() {

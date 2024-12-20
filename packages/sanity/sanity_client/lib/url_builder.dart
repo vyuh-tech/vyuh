@@ -52,9 +52,6 @@ abstract class UrlBuilder<TConfig> {
 
   /// Builds a URL for a GROQ query.
   Uri queryUrl(String query, {Map<String, String>? params});
-
-  /// Builds a URL for a GROQ query via POST request.
-  Uri postUrl();
 }
 
 /// A URL builder implementation for Sanity.
@@ -133,19 +130,6 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
       host: '${config.projectId}.${config.useCdn ? 'apicdn' : 'api'}.sanity.io',
       path: '/${config.apiVersion}/data/query/${config.dataset}',
       queryParameters: queryParameters,
-    );
-  }
-
-  @override
-  Uri postUrl() {
-    return Uri(
-      scheme: 'https',
-      host: '${config.projectId}.${config.useCdn ? 'apicdn' : 'api'}.sanity.io',
-      path: '/${config.apiVersion}/data/query/${config.dataset}',
-      queryParameters: <String, dynamic>{
-        'explain': config.explainQuery.toString(),
-        'perspective': config.perspective.name,
-      },
     );
   }
 }
