@@ -104,7 +104,7 @@ final class SanityContentProvider extends ContentProvider {
     vyuh.log.debug('Running query: $query');
     vyuh.log.debug('with params: $queryParams');
 
-    final url = _client.queryUrl(query, params: queryParams);
+    final url = _client.urlBuilder.queryUrl(query, params: queryParams);
     final response = await _cache.build(url.toString(),
         generateValue: () => _client.fetch(query, params: queryParams));
 

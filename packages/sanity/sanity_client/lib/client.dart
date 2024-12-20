@@ -125,6 +125,7 @@ final class SanityClient {
       request.getUri,
       headers: _requestHeaders,
     );
+
     return _getQueryResult(response);
   }
 
