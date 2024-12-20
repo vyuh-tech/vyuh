@@ -1,3 +1,7 @@
+## 1.30.2
+
+ - **FIX**: working tests and some simplification in the platform init.
+
 ## 1.30.1
 
  - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.

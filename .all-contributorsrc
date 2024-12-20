@@ -1,0 +1,37 @@
+{
+  "projectName": "vyuh",
+  "projectOwner": "vyuh-tech",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 64,
+  "commit": true,
+  "commitConvention": "none",
+  "contributorsPerLine": 5,
+  "skipCi": true,
+  "commitType": "docs",
+  "contributors": [
+    {
+      "login": "pavanpodila",
+      "name": "Pavan Podila",
+      "avatar_url": "https://avatars.githubusercontent.com/u/156846?v=4",
+      "profile": "https://vyuh.tech/",
+      "contributions": ["code", "doc", "test"]
+    },
+    {
+      "login": "vishal-kr-barnwal",
+      "name": "Vishal Kumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29015539?v=4",
+      "profile": "https://github.com/vishal-kr-barnwal",
+      "contributions": ["code"]
+    },
+    {
+      "login": "ProjectAJ14",
+      "name": "Ajay Kumar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35396392?v=4",
+      "profile": "https://github.com/ProjectAJ14",
+      "contributions": ["code", "test"]
+    }
+  ]
+}
+

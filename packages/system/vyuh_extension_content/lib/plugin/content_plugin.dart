@@ -81,6 +81,8 @@ final class DefaultContentPlugin extends ContentPlugin {
             return null;
           }
 
+          // Now initialize the new route, since the DI scope has been reset
+          // and we have a clean slate for new registrations
           final finalRoute = await value?.init(context);
           return finalRoute;
         }),

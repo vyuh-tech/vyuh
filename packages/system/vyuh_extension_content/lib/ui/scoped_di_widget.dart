@@ -56,7 +56,7 @@ class _ScopedDIWidgetState extends State<ScopedDIWidget> {
   @override
   void dispose() {
     // Reset the scope when disposed
-    _scopeDI.reset();
+    Future.microtask(_scopeDI.reset);
     super.dispose();
   }
 

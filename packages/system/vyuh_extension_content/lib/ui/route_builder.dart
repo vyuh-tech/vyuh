@@ -42,7 +42,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
     final content = _tracker.value?.value;
 
     if (content != null) {
-      unawaited(content.dispose());
+      Future.microtask(content.dispose);
     }
 
     super.dispose();

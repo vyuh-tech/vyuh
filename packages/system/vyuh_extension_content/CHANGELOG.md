@@ -1,3 +1,7 @@
+## 1.14.2
+
+ - **FIX**: using a microtask inside dispose.
+
 ## 1.14.1
 
  - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.
