@@ -227,6 +227,24 @@ Follow us, stay up to date or reach out on:
 
 ![Alt](https://repobeats.axiom.co/api/embed/bbe1b79c2dcbd94a9b194633e368cdde06953673.svg 'Repobeats analytics image')
 
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="20%"><a href="https://vyuh.tech/"><img src="https://avatars.githubusercontent.com/u/156846?v=4?s=64" width="64px;" alt="Pavan Podila"/><br /><sub><b>Pavan Podila</b></sub></a><br /><a href="https://github.com/vyuh-tech/vyuh/commits?author=pavanpodila" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 ## License
 
 The framework is [FSL Licensed](LICENSE).
