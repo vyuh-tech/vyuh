@@ -144,11 +144,11 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     final height = options.height;
 
     // Assert positive width and height
-    if (width != null && width! <= 0) {
+    if (width != null && width <= 0) {
       throw ArgumentError("Width must be a number greater than zero");
     }
 
-    if (height != null && height! <= 0) {
+    if (height != null && height <= 0) {
       throw ArgumentError("Height must be a number greater than zero");
     }
 
