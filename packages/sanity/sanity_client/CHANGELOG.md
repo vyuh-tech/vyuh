@@ -1,3 +1,12 @@
+## 1.5.0
+
+ - **REFACTOR**(sanity_client): remove postUri to not expose from url_builder.
+ - **REFACTOR**(sanity_client): make SanityRequest private, do not export from library.
+ - **FIX**: using the urlBuilder from client for the caching key.
+ - **FEAT**(sanity_client): add test coverage for GET/POST url queries.
+ - **FEAT**(sanity_client): add SanityRequest to handle GET vs POST.
+ - **FEAT**(sanity_client): add ability to post request.
+
 ## 1.4.3
 
  - **FEAT**: sanity_client will determine whether to GET or POST requests with GROQ body and params based on query byte size (11kb limit).

@@ -1,3 +1,7 @@
+## 1.9.1
+
+ - **FIX**: using the urlBuilder from client for the caching key.
+
 ## 1.9.0
 
  - **FEAT**: Breaking change. Split up the AnalyticsPlugin into a focused TelemetryPlugin that only does telemetry operations like error reporting and tracing. Analytics is now focused only on User level analytics.
