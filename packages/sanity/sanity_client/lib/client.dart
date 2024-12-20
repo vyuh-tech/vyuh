@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
+import 'src/sanity_request.dart';
 
 /// The various perspectives that can be used to fetch data from Sanity
 enum Perspective {
@@ -103,17 +104,41 @@ final class SanityClient {
         _requestHeaders = {'Authorization': 'Bearer ${config.token}'};
 
   /// Fetches data from Sanity by running the GROQ Query with the passed in parameters
-  Future<SanityQueryResponse> fetch(String query,
-      {Map<String, String>? params}) async {
-    final uri = queryUrl(query, params: params);
-    final response = await httpClient.get(uri, headers: _requestHeaders);
+  Future<SanityQueryResponse> fetch(
+    String query, {
+    Map<String, String>? params,
+  }) async {
+    final request = SanityRequest(
+      urlBuilder: urlBuilder,
+      query: query,
+      params: params,
+    );
 
+    if (request.requiresPost) {
+      return _executePost(request);
+    }
+    return _executeGet(request);
+  }
+
+  Future<SanityQueryResponse> _executeGet(SanityRequest request) async {
+    final response = await httpClient.get(
+      request.getUri,
+      headers: _requestHeaders,
+    );
     return _getQueryResult(response);
   }
 
-  /// The URL for the query
-  Uri queryUrl(String query, {Map<String, String>? params}) =>
-      urlBuilder.queryUrl(query, params: params);
+  Future<SanityQueryResponse> _executePost(SanityRequest request) async {
+    final response = await httpClient.post(
+      request.postUri,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        ..._requestHeaders,
+      },
+      body: jsonEncode(request.toPostBody()),
+    );
+    return _getQueryResult(response);
+  }
 
   /// Return the associated image url
   //ignore: long-parameter-list
