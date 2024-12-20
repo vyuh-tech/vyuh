@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'sanity_client.dart';
+import '../sanity_client.dart';
 
 class SanityRequest {
   static const int _maxGetQuerySize = 11 * 1024; // 11kB limit

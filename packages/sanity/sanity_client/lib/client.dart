@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
+import 'src/sanity_request.dart';
 
 /// The various perspectives that can be used to fetch data from Sanity
 enum Perspective {
