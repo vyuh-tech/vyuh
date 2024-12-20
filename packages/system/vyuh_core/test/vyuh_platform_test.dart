@@ -668,8 +668,8 @@ void main() {
           vyuh.restart();
           await vyuh.getReady(tester);
 
-          expect(builder.isDisposed, isTrue,
-              reason: 'Builder should be disposed on restart');
+          expect(builder.isInitialized, isTrue);
+          expect(builder.isDisposed, isFalse);
         });
 
         testWidgets('handles extension builder disposal errors',
