@@ -23,6 +23,7 @@ jobs:
           - vyuh_core
           - vyuh_extension_content
           - vyuh_cli
+          - vyuh_test
           - vyuh_feature_developer
           - vyuh_feature_system
           - vyuh_feature_onboarding
