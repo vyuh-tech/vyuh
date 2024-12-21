@@ -4,14 +4,19 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 class ContentBuilder<T extends ContentItem> {
   final TypeDescriptor<T> content;
-  final LayoutConfiguration<T> defaultLayout;
-  final TypeDescriptor<LayoutConfiguration> defaultLayoutDescriptor;
+  LayoutConfiguration<T> _defaultLayout;
+  TypeDescriptor<LayoutConfiguration> _defaultLayoutDescriptor;
+
+  LayoutConfiguration<T> get defaultLayout => _defaultLayout;
+  TypeDescriptor<LayoutConfiguration> get defaultLayoutDescriptor =>
+      _defaultLayoutDescriptor;
 
   ContentBuilder({
     required this.content,
-    required this.defaultLayout,
-    required this.defaultLayoutDescriptor,
-  });
+    required LayoutConfiguration<T> defaultLayout,
+    required TypeDescriptor<LayoutConfiguration> defaultLayoutDescriptor,
+  })  : _defaultLayout = defaultLayout,
+        _defaultLayoutDescriptor = defaultLayoutDescriptor;
 
   @mustCallSuper
   void init(List<ContentDescriptor> descriptors) {
@@ -57,5 +62,19 @@ class ContentBuilder<T extends ContentItem> {
           subtitle:
               'Layout: "${layout.schemaType}" for Content: "${content.schemaType}"');
     }
+  }
+
+  setDefaultLayout(LayoutConfiguration<T> layout,
+      {required FromJsonConverter<LayoutConfiguration> fromJson}) {
+    _defaultLayout = layout;
+
+    final currentLayoutSchemaType = _defaultLayoutDescriptor.schemaType;
+
+    _defaultLayoutDescriptor = TypeDescriptor<LayoutConfiguration>(
+      schemaType: currentLayoutSchemaType,
+      fromJson: fromJson,
+      title: 'Override Layout for ${content.schemaType}',
+    );
+    registerDescriptors<LayoutConfiguration>([_defaultLayoutDescriptor]);
   }
 }

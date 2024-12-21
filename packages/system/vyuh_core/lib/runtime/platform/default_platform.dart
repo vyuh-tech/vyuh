@@ -271,4 +271,9 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
+
+  @override
+  ExtensionBuilder? getExtensionBuilder<T extends ExtensionDescriptor>() {
+    return _featureExtensionBuilderMap[T];
+  }
 }

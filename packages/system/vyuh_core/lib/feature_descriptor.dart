@@ -61,6 +61,8 @@ FutureOr<T?> Function() _runOnce<T>(FutureOr<T?> Function() fn) {
   T? result;
 
   return () async {
+    // This check is needed to reset the executed flag
+    // when the feature is reinitialized
     if (vyuh.tracker.currentState.value != InitState.ready) {
       executed = false;
     }

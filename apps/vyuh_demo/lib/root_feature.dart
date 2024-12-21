@@ -1,8 +1,8 @@
 import 'package:design_system/design_system.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/service/theme_service.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(
   name: 'root',
@@ -15,6 +15,18 @@ final feature = FeatureDescriptor(
         ThemeMode.light: DesignSystem.lightTheme,
         ThemeMode.dark: DesignSystem.darkTheme,
       });
+
+      // NOTE
+      // ====
+      //
+      // By uncommenting this line, you can change the default layout for the Card ContentItem.
+      // This is useful when you switch to your own Design System with specific layouts for Card and other items.
+      //
+      // vyuh.content.setDefaultContentLayout(
+      //   schemaType: Card.schemaName,
+      //   layout: ButtonCardLayout(),
+      //   fromJson: ButtonCardLayout.fromJson,
+      // );
     });
   },
   routes: () => [

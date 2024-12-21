@@ -67,6 +67,9 @@ abstract class VyuhPlatform {
   /// }
   /// ```
   T? getPlugin<T extends Plugin>();
+
+  /// Gets the ExtensionBuilder given an extensionType
+  ExtensionBuilder? getExtensionBuilder<T extends ExtensionDescriptor>();
 }
 
 /// Provides convenient accessors for named plugins within the Vyuh platform.

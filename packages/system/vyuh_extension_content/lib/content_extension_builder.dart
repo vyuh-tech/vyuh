@@ -100,8 +100,10 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     _typeConverterMap.putIfAbsent(T, () => {});
 
     final hasKey = _typeConverterMap[T]!.containsKey(descriptor.schemaType);
-    assert(hasKey == false,
-        'A duplicate schemaType: ${descriptor.schemaType} is being registered.');
+    if (hasKey) {
+      vyuh.log.warn(
+          'A duplicate schemaType: ${descriptor.schemaType} is being registered.');
+    }
 
     _typeConverterMap[T]![descriptor.schemaType] = descriptor;
   }
