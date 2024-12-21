@@ -19,14 +19,20 @@ jobs:
         # All the packages are specified by their name and not path.
         # This is because the package is passed to the 'melos exec' command
         package:
-          - vyuh_extension_content
           - vyuh_cache
           - vyuh_core
+          - vyuh_extension_content
+          - vyuh_cli
           - vyuh_feature_developer
           - vyuh_feature_system
+          - vyuh_feature_onboarding
+          - vyuh_feature_auth
           - sanity_client
           - flutter_sanity_portable_text
         include:
+          - package: vyuh_core
+            path: packages/system
+            test: true
           - package: sanity_client
             path: packages/sanity
             test: true
