@@ -1,3 +1,7 @@
+## 1.15.0
+
+ - **FEAT**: added support to switch out the default layouts for any content item. This is useful when using your Design System that can have unique layouts for the default content items like Card, Group, Form, etc.
+
 ## 1.14.2
 
  - **FIX**: using a microtask inside dispose.
