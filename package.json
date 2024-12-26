@@ -19,6 +19,6 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@changesets/cli": "^2.27.10"
+    "@changesets/cli": "^2.27.11"
   }
 }
