@@ -4,7 +4,7 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 extension DefaultLayout on ContentPlugin {
   /// Returns the [ContentBuilder] for the [schemaType] of the [ContentItem].
   /// Returns null if it does not exist.
-  bool setDefaultContentLayout({
+  bool setDefaultLayout({
     required String schemaType,
     required LayoutConfiguration layout,
     required FromJsonConverter<LayoutConfiguration> fromJson,
