@@ -16,7 +16,7 @@ dependencies:
   collection: ^1.18.0
   vyuh_core: ^1.31.0
   vyuh_feature_system: ^1.32.1
-  vyuh_extension_content: ^1.15.0
+  vyuh_extension_content: ^1.15.1
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
   flutter_form_builder: ^9.5.0

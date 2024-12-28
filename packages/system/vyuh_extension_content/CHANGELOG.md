@@ -1,3 +1,7 @@
+## 1.15.1
+
+ - **FIX**: updating the method name for setting default layouts.
+
 ## 1.15.0
 
  - **FEAT**: added support to switch out the default layouts for any content item. This is useful when using your Design System that can have unique layouts for the default content items like Card, Group, Form, etc.
