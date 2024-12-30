@@ -14,7 +14,9 @@ Session _$SessionFromJson(Map<String, dynamic> json) => Session(
       edition: json['edition'] == null
           ? null
           : ObjectReference.fromJson(json['edition'] as Map<String, dynamic>),
-      speakers: Session.speakerList(json['speakers']),
+      speakers: (json['speakers'] as List<dynamic>?)
+          ?.map((e) => Speaker.fromJson(e as Map<String, dynamic>))
+          .toList(),
       tracks: (json['tracks'] as List<dynamic>?)
           ?.map((e) => Track.fromJson(e as Map<String, dynamic>))
           .toList(),

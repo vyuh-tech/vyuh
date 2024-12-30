@@ -19,4 +19,9 @@ export const track = defineType({
       type: 'image',
     }),
   ],
+  preview: {
+    select: {
+      title: 'name',
+    },
+  },
 });

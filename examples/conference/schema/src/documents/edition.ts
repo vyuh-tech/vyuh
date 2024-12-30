@@ -56,5 +56,53 @@ export const edition = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'sponsors',
+      title: 'Sponsors',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'sponsor',
+              title: 'Sponsor',
+              type: 'reference',
+              to: [{ type: 'conf.sponsor' }],
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'level',
+              title: 'Level',
+              description: 'Sponsorship Level',
+              type: 'string',
+              validation: (Rule) => Rule.required(),
+              options: {
+                list: [
+                  { title: 'Platinum', value: 'platinum' },
+                  { title: 'Gold', value: 'gold' },
+                  { title: 'Silver', value: 'silver' },
+                  { title: 'Bronze', value: 'bronze' },
+                ],
+              },
+            }),
+          ],
+        },
+      ],
+    }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      subtitle: 'tagline',
+      conference: 'conference.name',
+      startDate: 'startDate',
+    },
+    prepare({ title, subtitle, conference, startDate }) {
+      return {
+        title: `${conference} - ${title}`,
+        subtitle: `${subtitle} (${new Date(startDate).getFullYear()})`,
+      };
+    },
+  },
 });

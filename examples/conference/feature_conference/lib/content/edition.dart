@@ -1,9 +1,24 @@
+import 'package:feature_conference/content/sponsor.dart';
 import 'package:feature_conference/layouts/edition_layout.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'edition.g.dart';
+
+@JsonSerializable()
+class EditionSponsor {
+  final ObjectReference? sponsor;
+  final SponsorLevel level;
+
+  EditionSponsor({
+    this.sponsor,
+    this.level = SponsorLevel.bronze,
+  });
+
+  factory EditionSponsor.fromJson(Map<String, dynamic> json) =>
+      _$EditionSponsorFromJson(json);
+}
 
 @JsonSerializable()
 class Edition extends ContentItem {
@@ -32,6 +47,7 @@ class Edition extends ContentItem {
   final String? url;
   final String location;
   final ObjectReference conference;
+  final List<EditionSponsor>? sponsors;
 
   Edition({
     required this.id,
@@ -42,6 +58,7 @@ class Edition extends ContentItem {
     required this.endDate,
     required this.location,
     required this.conference,
+    this.sponsors,
     this.url,
     super.layout,
     super.modifiers,

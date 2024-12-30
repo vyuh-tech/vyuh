@@ -1,3 +1,4 @@
+import 'package:feature_conference/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -44,7 +45,7 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                      '${content.startDate.toLocal()} - ${content.endDate.toLocal()}'),
+                      '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
                   Text(content.location,
                       style: const TextStyle(fontWeight: FontWeight.bold)),
                   if (content.url != null)

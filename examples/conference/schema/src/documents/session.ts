@@ -45,4 +45,19 @@ export const session = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      speakers: 'speakers',
+      track: 'tracks[0].name',
+      duration: 'duration',
+    },
+    prepare({ title, speakers, track, duration }) {
+      const speakerCount = speakers?.length || 0;
+      return {
+        title,
+        subtitle: `${track ? `${track} - ` : ''}${speakerCount} speaker${speakerCount === 1 ? '' : 's'} (${duration} min)`,
+      };
+    },
+  },
 });

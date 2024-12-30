@@ -10,6 +10,7 @@ import { session } from './documents/session.ts';
 import { speaker } from './documents/speaker.ts';
 import { track } from './documents/track.ts';
 import { confBreak, schedule, scheduleDay } from './documents/schedule.ts';
+import { sponsor } from './documents/sponsor.ts';
 
 export const conference = new FeatureDescriptor({
   name: 'conf',
@@ -24,6 +25,7 @@ export const conference = new FeatureDescriptor({
         { type: speaker.name },
         { type: track.name },
         { type: schedule.name },
+        { type: sponsor.name },
       ],
     }),
   ],
@@ -36,6 +38,7 @@ export const conference = new FeatureDescriptor({
     new BuiltContentSchemaBuilder(schedule),
     new BuiltContentSchemaBuilder(scheduleDay),
     new BuiltContentSchemaBuilder(confBreak),
+    new BuiltContentSchemaBuilder(sponsor),
   ],
   contentSchemaModifiers: [
     new DefaultFieldsModifier({
@@ -48,6 +51,7 @@ export const conference = new FeatureDescriptor({
         { type: schedule.name },
         { type: scheduleDay.name },
         { type: confBreak.name },
+        { type: sponsor.name },
       ],
     }),
   ],

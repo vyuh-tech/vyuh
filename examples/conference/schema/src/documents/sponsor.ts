@@ -1,10 +1,10 @@
 // speaker schema
 import { defineField, defineType } from 'sanity';
-import { MdCoPresent as Icon } from 'react-icons/md';
+import { FaHandHoldingDollar as Icon } from 'react-icons/fa6';
 
-export const speaker = defineType({
-  name: 'conf.speaker',
-  title: 'Speaker',
+export const sponsor = defineType({
+  name: 'conf.sponsor',
+  title: 'Sponsor',
   type: 'document',
   icon: Icon,
   fields: [
@@ -15,14 +15,14 @@ export const speaker = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'bio',
-      title: 'Bio',
-      type: 'text',
+      name: 'url',
+      title: 'Url',
+      type: 'url',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'photo',
-      title: 'Photo',
+      name: 'logo',
+      title: 'Logo',
       type: 'image',
       validation: (Rule) => Rule.required(),
     }),
@@ -30,8 +30,15 @@ export const speaker = defineType({
   preview: {
     select: {
       title: 'name',
-      subtitle: 'bio',
-      media: 'photo',
+      subtitle: 'url',
+      media: 'logo',
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title,
+        subtitle,
+        media,
+      };
     },
   },
 });

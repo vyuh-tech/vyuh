@@ -32,22 +32,9 @@ class Session extends ContentItem {
   final int duration;
   final ObjectReference? edition;
 
-  @JsonKey(fromJson: speakerList)
   final List<Speaker>? speakers;
 
   final List<Track>? tracks;
-
-  static List<Speaker>? speakerList(dynamic json) {
-    final speakers = json is List ? json : null;
-    if (speakers == null) {
-      return null;
-    }
-
-    return speakers.nonNulls
-        .cast<Map<String, dynamic>>()
-        .map((e) => Speaker.fromJson(e))
-        .toList();
-  }
 
   Session({
     required this.id,
