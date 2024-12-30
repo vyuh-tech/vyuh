@@ -24,11 +24,11 @@ final feature = FeatureDescriptor(
       // By uncommenting this line, you can change the default layout for the Card ContentItem.
       // This is useful when you switch to your own Design System with specific layouts for Card and other items.
       //
-      vyuh.content.setDefaultLayout(
-        schemaType: Card.schemaName,
-        layout: ButtonCardLayout(),
-        fromJson: ButtonCardLayout.fromJson,
-      );
+      // vyuh.content.setDefaultLayout(
+      //   schemaType: Card.schemaName,
+      //   layout: ButtonCardLayout(),
+      //   fromJson: ButtonCardLayout.fromJson,
+      // );
     });
   },
   routes: () => [
