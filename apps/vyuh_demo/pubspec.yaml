@@ -39,6 +39,7 @@ dependencies:
   feature_misc: ^1.0.0
   feature_puzzles: ^1.0.0
   feature_unsplash: ^1.0.0
+  feature_conference: ^1.0.0
 
   # Shared Packages
   design_system: ^1.0.0
