@@ -75,7 +75,10 @@ void main() {
 
   test('Params are being sent properly', () async {
     final httpClient = MockClient((final req) async {
-      expect(req.url.query, contains('test=true'));
+      expect(
+          req.url.query,
+          contains(
+              '${Uri.encodeComponent('\$test')}=${Uri.encodeComponent('"true"')}'));
       expect(req.url.query, contains('explain=true'));
       expect(req.url.toString(), contains('api.sanity.io'));
       expect(req.url.path, contains('v2024-02-16'));

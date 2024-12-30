@@ -147,10 +147,8 @@ final class SanityContentProvider extends ContentProvider {
     debugAssertOneOfPathOrRouteId(path, routeId);
 
     if (path != null) {
-      // We have to escape the $ with \$ in order to include it as a character in the string.
-      // Since it is a string, the value has to be wrapped in quotes
       return fetchSingle<RouteBase>(_routeFromPathQuery,
-          fromJson: RouteBase.fromJson, queryParams: {'\$path': '"$path"'});
+          fromJson: RouteBase.fromJson, queryParams: {'path': path});
     }
 
     final includeDrafts =
@@ -158,7 +156,7 @@ final class SanityContentProvider extends ContentProvider {
             _client.config.perspective == Perspective.raw;
 
     return fetchSingle<RouteBase>(_routeFromIdQuery(includeDrafts),
-        fromJson: RouteBase.fromJson, queryParams: {'\$routeId': '"$routeId"'});
+        fromJson: RouteBase.fromJson, queryParams: {'routeId': '$routeId'});
   }
 
   @override
@@ -198,6 +196,6 @@ final class SanityContentProvider extends ContentProvider {
         includeDrafts: _client.config.perspective == Perspective.raw);
 
     return fetchSingle('$condition[0]',
-        queryParams: {'\$id': '"$id"'}, fromJson: fromJson);
+        queryParams: {'id': id}, fromJson: fromJson);
   }
 }

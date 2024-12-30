@@ -124,7 +124,8 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
       'query': query,
       'explain': config.explainQuery.toString(),
       'perspective': config.perspective.name,
-      if (params != null) ...params,
+      if (params != null)
+        ...params.map((key, value) => MapEntry('\$$key', '"$value"')),
     };
 
     return Uri(
