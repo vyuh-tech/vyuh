@@ -1,3 +1,7 @@
+## 1.9.2
+
+ - **FIX**: updated the url builder to auto-include the '$' prefix for query param names and also enclosing the values within double-quotes. This simplifies the usage from a developer's perspective.
+
 ## 1.9.1
 
  - **FIX**: using the urlBuilder from client for the caching key.

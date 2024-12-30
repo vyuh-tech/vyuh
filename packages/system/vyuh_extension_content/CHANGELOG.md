@@ -1,3 +1,7 @@
+## 1.15.2
+
+ - **FIX**: updated the error message when a content builder is not found.
+
 ## 1.15.1
 
  - **FIX**: updating the method name for setting default layouts.
