@@ -23,7 +23,7 @@ final class DefaultContentPlugin extends ContentPlugin {
     final builder = _extensionBuilder!.getContentBuilder(content.schemaType);
 
     assert(builder != null,
-        'Failed to retrieve builder for schemaType: ${content.schemaType}');
+        'Failed to retrieve builder for schemaType: ${content.schemaType}. Is the ContentBuilder registered for this schemaType?');
 
     final contentWidget = builder?.build(context, content);
 

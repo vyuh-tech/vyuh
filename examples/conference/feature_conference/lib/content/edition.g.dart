@@ -15,7 +15,7 @@ Edition _$EditionFromJson(Map<String, dynamic> json) => Edition(
       endDate: DateTime.parse(json['endDate'] as String),
       location: json['location'] as String,
       conference:
-          Conference.fromJson(json['conference'] as Map<String, dynamic>),
+          ObjectReference.fromJson(json['conference'] as Map<String, dynamic>),
       url: json['url'] as String?,
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),

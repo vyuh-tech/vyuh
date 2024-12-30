@@ -32,6 +32,7 @@ final class ConferenceApi {
       },
       fromJson: Edition.fromJson,
     );
+
     return editions;
   }
 
@@ -40,8 +41,8 @@ final class ConferenceApi {
       '''
       *[_type == "${Session.schemaName}" && edition._ref == \$editionId] {
         ...,
-        "speakers": speakers[]->{...},
-        "tracks": tracks[]->{...}
+        "speakers": speakers[]->,
+        "tracks": tracks[]->
       }
     ''',
       queryParams: {
@@ -49,6 +50,7 @@ final class ConferenceApi {
       },
       fromJson: Session.fromJson,
     );
+
     return sessions;
   }
 
@@ -62,6 +64,7 @@ final class ConferenceApi {
       },
       fromJson: Speaker.fromJson,
     );
+
     return speakers;
   }
 

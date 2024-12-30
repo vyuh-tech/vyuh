@@ -1,13 +1,25 @@
+import 'package:feature_conference/layouts/edition_layout.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-
-import 'conference.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'edition.g.dart';
 
 @JsonSerializable()
 class Edition extends ContentItem {
   static const schemaName = 'conf.edition';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    fromJson: Edition.fromJson,
+    title: 'Edition',
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: typeDescriptor,
+    defaultLayout: EditionLayout(),
+    defaultLayoutDescriptor: EditionLayout.typeDescriptor,
+  );
 
   @JsonKey(name: '_id')
   final String id;
@@ -19,7 +31,7 @@ class Edition extends ContentItem {
   final DateTime endDate;
   final String? url;
   final String location;
-  final Conference conference;
+  final ObjectReference conference;
 
   Edition({
     required this.id,

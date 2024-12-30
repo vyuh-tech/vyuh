@@ -12,7 +12,6 @@ export const session = defineType({
       title: 'Edition',
       type: 'reference',
       to: [{ type: 'conf.edition' }],
-      weak: true,
       validation: (Rule) => Rule.required(),
     }),
     defineField({

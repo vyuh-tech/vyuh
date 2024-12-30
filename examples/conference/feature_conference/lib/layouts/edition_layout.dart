@@ -9,8 +9,6 @@ part 'edition_layout.g.dart';
 @JsonSerializable()
 final class EditionLayout extends LayoutConfiguration<Edition> {
   static const schemaName = '${Edition.schemaName}.layout.default';
-  final String? title;
-  final String? subtitle;
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
@@ -18,37 +16,50 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
     title: 'Edition Layout',
   );
 
-  EditionLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  EditionLayout() : super(schemaType: schemaName);
 
   factory EditionLayout.fromJson(Map<String, dynamic> json) =>
       _$EditionLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, Edition content) {
-    return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            title: Text(content.title),
-            subtitle: Text(content.tagline),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                    '${content.startDate.toLocal()} - ${content.endDate.toLocal()}'),
-                Text(content.location),
-                if (content.url != null) Text(content.url!),
-              ],
+    return GestureDetector(
+      onTap: () {
+        vyuh.router.push(
+            '/conference/${content.conference.ref}/editions/${content.id}');
+      },
+      child: Card(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.event),
+              title: Text(content.title),
+              subtitle: Text(content.tagline),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                spacing: 8,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                      '${content.startDate.toLocal()} - ${content.endDate.toLocal()}'),
+                  Text(content.location,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  if (content.url != null)
+                    Row(
+                      spacing: 8,
+                      children: [
+                        Icon(Icons.link),
+                        Expanded(child: Text(content.url!)),
+                      ],
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

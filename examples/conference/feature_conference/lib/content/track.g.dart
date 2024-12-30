@@ -9,8 +9,9 @@ part of 'track.dart';
 Track _$TrackFromJson(Map<String, dynamic> json) => Track(
       id: json['_id'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
-      edition: Edition.fromJson(json['edition'] as Map<String, dynamic>),
+      icon: json['icon'] == null
+          ? null
+          : ImageReference.fromJson(json['icon'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );

@@ -7,7 +7,4 @@ part of 'speaker_layout.dart';
 // **************************************************************************
 
 SpeakerLayout _$SpeakerLayoutFromJson(Map<String, dynamic> json) =>
-    SpeakerLayout(
-      title: json['title'] as String?,
-      subtitle: json['subtitle'] as String?,
-    );
+    SpeakerLayout();

@@ -7,7 +7,4 @@ part of 'edition_layout.dart';
 // **************************************************************************
 
 EditionLayout _$EditionLayoutFromJson(Map<String, dynamic> json) =>
-    EditionLayout(
-      title: json['title'] as String?,
-      subtitle: json['subtitle'] as String?,
-    );
+    EditionLayout();

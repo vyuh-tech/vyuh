@@ -7,7 +7,4 @@ part of 'conference_layout.dart';
 // **************************************************************************
 
 ConferenceLayout _$ConferenceLayoutFromJson(Map<String, dynamic> json) =>
-    ConferenceLayout(
-      title: json['title'] as String?,
-      subtitle: json['subtitle'] as String?,
-    );
+    ConferenceLayout();

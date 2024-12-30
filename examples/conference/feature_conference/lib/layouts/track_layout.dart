@@ -9,8 +9,6 @@ part 'track_layout.g.dart';
 @JsonSerializable()
 final class TrackLayout extends LayoutConfiguration<Track> {
   static const schemaName = '${Track.schemaName}.layout.default';
-  final String? title;
-  final String? subtitle;
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
@@ -18,10 +16,7 @@ final class TrackLayout extends LayoutConfiguration<Track> {
     title: 'Track Layout',
   );
 
-  TrackLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  TrackLayout() : super(schemaType: schemaName);
 
   factory TrackLayout.fromJson(Map<String, dynamic> json) =>
       _$TrackLayoutFromJson(json);
@@ -32,7 +27,6 @@ final class TrackLayout extends LayoutConfiguration<Track> {
       child: ListTile(
         leading: const Icon(Icons.timeline),
         title: Text(content.name),
-        subtitle: Text(content.description),
       ),
     );
   }

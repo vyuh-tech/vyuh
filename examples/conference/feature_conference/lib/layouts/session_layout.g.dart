@@ -7,7 +7,4 @@ part of 'session_layout.dart';
 // **************************************************************************
 
 SessionLayout _$SessionLayoutFromJson(Map<String, dynamic> json) =>
-    SessionLayout(
-      title: json['title'] as String?,
-      subtitle: json['subtitle'] as String?,
-    );
+    SessionLayout();

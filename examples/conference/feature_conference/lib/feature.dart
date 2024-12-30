@@ -1,9 +1,16 @@
 library;
 
 import 'package:feature_conference/api/conference_api.dart';
+import 'package:feature_conference/content/edition.dart';
+import 'package:feature_conference/content/session.dart';
+import 'package:feature_conference/content/speaker.dart';
+import 'package:feature_conference/content/track.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/content_extension_descriptor.dart';
+
+import 'content/conference.dart';
 
 final feature = FeatureDescriptor(
   name: 'feature_conference',
@@ -13,36 +20,77 @@ final feature = FeatureDescriptor(
   init: () async {
     vyuh.di.register(ConferenceApi(vyuh.content.provider));
   },
+  extensions: [
+    ContentExtensionDescriptor(contentBuilders: [
+      Conference.contentBuilder,
+      Edition.contentBuilder,
+      Session.contentBuilder,
+      Speaker.contentBuilder,
+      Track.contentBuilder,
+    ]),
+  ],
   routes: () async {
     return [
       GoRoute(
-          path: '/conference',
-          builder: (context, state) {
-            return const _ConferenceRoot();
-          },
-          routes: [
-            GoRoute(
-              path: ':identifier',
-              builder: (context, state) {
-                return const _ConferenceDetail();
-              },
-            ),
-          ]),
+        path: '/conference',
+        builder: (context, state) {
+          return const _ConferenceRoot();
+        },
+      ),
+      GoRoute(
+        path: '/conference/:conferenceId',
+        builder: (context, state) {
+          return const _ConferenceDetail();
+        },
+      ),
+      GoRoute(
+        path: '/conference/:conferenceId/editions/:editionId',
+        builder: (context, state) {
+          return const _EditionDetail();
+        },
+      ),
     ];
   },
 );
 
-final class _ConferenceDetail extends StatefulWidget {
+final class _EditionDetail extends StatelessWidget {
+  const _EditionDetail();
+
+  @override
+  Widget build(BuildContext context) {
+    final identifier = GoRouterState.of(context).pathParameters['editionId']!;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Sessions')),
+      body: FutureBuilder(
+          future: vyuh.di.get<ConferenceApi>().getSessions(identifier),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final sessions = snapshot.data!;
+              return ListView.builder(
+                  itemCount: sessions.length,
+                  itemBuilder: (context, index) {
+                    final session = sessions[index];
+                    return vyuh.content.buildContent(context, session);
+                  });
+            } else if (snapshot.hasError) {
+              return vyuh.widgetBuilder.errorView(context,
+                  title: 'Failed to load Sessions', error: snapshot.error!);
+            } else {
+              return vyuh.widgetBuilder.contentLoader(context);
+            }
+          }), // ListView
+    );
+  }
+}
+
+final class _ConferenceDetail extends StatelessWidget {
   const _ConferenceDetail();
 
   @override
-  State<_ConferenceDetail> createState() => _ConferenceDetailState();
-}
-
-class _ConferenceDetailState extends State<_ConferenceDetail> {
-  @override
   Widget build(BuildContext context) {
-    final identifier = GoRouterState.of(context).pathParameters['identifier']!;
+    final identifier =
+        GoRouterState.of(context).pathParameters['conferenceId']!;
 
     return Scaffold(
       appBar: AppBar(title: const Text('Editions')),
@@ -55,14 +103,7 @@ class _ConferenceDetailState extends State<_ConferenceDetail> {
                   itemCount: editions.length,
                   itemBuilder: (context, index) {
                     final edition = editions[index];
-                    return ListTile(
-                      title: Text(edition.title),
-                      subtitle: Text(edition.identifier),
-                      onTap: () {
-                        vyuh.router.push(
-                            '/conference/$identifier/editions/${edition.identifier}');
-                      },
-                    );
+                    return vyuh.content.buildContent(context, edition);
                   });
             } else if (snapshot.hasError) {
               return vyuh.widgetBuilder.errorView(context,
@@ -75,14 +116,9 @@ class _ConferenceDetailState extends State<_ConferenceDetail> {
   }
 }
 
-final class _ConferenceRoot extends StatefulWidget {
+final class _ConferenceRoot extends StatelessWidget {
   const _ConferenceRoot();
 
-  @override
-  State<_ConferenceRoot> createState() => _ConferenceRootState();
-}
-
-class _ConferenceRootState extends State<_ConferenceRoot> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,13 +131,7 @@ class _ConferenceRootState extends State<_ConferenceRoot> {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final conference = snapshot.data![index];
-                    return ListTile(
-                      title: Text(conference.title),
-                      subtitle: Text(conference.identifier),
-                      onTap: () {
-                        vyuh.router.push('/conference/${conference.id}');
-                      },
-                    );
+                    return vyuh.content.buildContent(context, conference);
                   });
             } else {
               return vyuh.widgetBuilder.contentLoader(context);

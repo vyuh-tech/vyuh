@@ -9,8 +9,6 @@ part 'session_layout.g.dart';
 @JsonSerializable()
 final class SessionLayout extends LayoutConfiguration<Session> {
   static const schemaName = '${Session.schemaName}.layout.default';
-  final String? title;
-  final String? subtitle;
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
@@ -18,10 +16,7 @@ final class SessionLayout extends LayoutConfiguration<Session> {
     title: 'Session Layout',
   );
 
-  SessionLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  SessionLayout() : super(schemaType: schemaName);
 
   factory SessionLayout.fromJson(Map<String, dynamic> json) =>
       _$SessionLayoutFromJson(json);
@@ -37,7 +32,7 @@ final class SessionLayout extends LayoutConfiguration<Session> {
             subtitle: Text(content.description),
             trailing: Text('${content.duration} min'),
           ),
-          if (content.speakers.isNotEmpty)
+          if (content.speakers != null)
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -45,11 +40,11 @@ final class SessionLayout extends LayoutConfiguration<Session> {
                 children: [
                   Text('Speakers:',
                       style: Theme.of(context).textTheme.titleMedium),
-                  ...content.speakers.map((s) => Text(s.name)),
+                  ...content.speakers!.map((s) => Text(s.name)),
                 ],
               ),
             ),
-          if (content.tracks.isNotEmpty)
+          if (content.tracks != null)
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
@@ -57,7 +52,7 @@ final class SessionLayout extends LayoutConfiguration<Session> {
                 children: [
                   Text('Tracks:',
                       style: Theme.of(context).textTheme.titleMedium),
-                  ...content.tracks.map((t) => Text(t.name)),
+                  ...content.tracks!.map((t) => Text(t.name)),
                 ],
               ),
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/conference.dart';
 
@@ -9,8 +10,6 @@ part 'conference_layout.g.dart';
 @JsonSerializable()
 final class ConferenceLayout extends LayoutConfiguration<Conference> {
   static const schemaName = '${Conference.schemaName}.layout.default';
-  final String? title;
-  final String? subtitle;
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
@@ -18,23 +17,27 @@ final class ConferenceLayout extends LayoutConfiguration<Conference> {
     title: 'Conference Layout',
   );
 
-  ConferenceLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  ConferenceLayout() : super(schemaType: schemaName);
 
   factory ConferenceLayout.fromJson(Map<String, dynamic> json) =>
       _$ConferenceLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, Conference content) {
-    return Card(
-      child: ListTile(
-        leading: content.iconUrl != null
-            ? Image.network(content.iconUrl!)
-            : const Icon(Icons.event),
-        title: Text(content.title),
-        subtitle: Text(content.identifier),
+    return GestureDetector(
+      onTap: () {
+        vyuh.router.push('/conference/${content.id}');
+      },
+      child: Card(
+        child: Column(
+          children: [
+            ContentImage(ref: content.icon),
+            ListTile(
+              title: Text(content.title),
+              subtitle: Text(content.identifier),
+            ),
+          ],
+        ),
       ),
     );
   }

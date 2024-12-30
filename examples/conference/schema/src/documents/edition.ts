@@ -12,7 +12,6 @@ export const edition = defineType({
       title: 'Conference',
       type: 'reference',
       to: [{ type: 'conf.conference' }],
-      weak: true,
       validation: (Rule) => Rule.required(),
     }),
     defineField({
