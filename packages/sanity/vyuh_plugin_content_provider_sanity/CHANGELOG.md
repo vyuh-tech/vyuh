@@ -1,3 +1,7 @@
+## 1.9.3
+
+ - **FIX**: ensuring the images are rendered without any errors on Web.
+
 ## 1.9.2
 
  - **FIX**: updated the url builder to auto-include the '$' prefix for query param names and also enclosing the values within double-quotes. This simplifies the usage from a developer's perspective.
