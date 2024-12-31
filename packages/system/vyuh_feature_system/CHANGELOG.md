@@ -1,3 +1,7 @@
+## 1.32.4
+
+ - **FIX**: adding ignore for _controller which will be exposed in a future release.
+
 ## 1.32.3
 
  - **FIX**: setting the image render method for web correctly.
