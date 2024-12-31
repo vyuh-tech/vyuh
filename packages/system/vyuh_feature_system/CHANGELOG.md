@@ -1,3 +1,7 @@
+## 1.32.3
+
+ - **FIX**: setting the image render method for web correctly.
+
 ## 1.32.2
 
  - **FIX**: adopting the flutter_inappwebview instead of webview_flutter as it works on all platforms...it still has issues with iframe CORS on web but that's a web platform issue in general.
