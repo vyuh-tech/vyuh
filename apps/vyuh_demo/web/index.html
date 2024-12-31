@@ -97,12 +97,16 @@
   <head>
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD39KAZC-m5S33b0p1UswDjonRDX4199Vw"></script>
+
+    <!-- InAppWebView -->
+    <script type="application/javascript" src="/assets/packages/flutter_inappwebview_web/assets/web/web_support.js"
+            defer></script>
   </head>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
-      document.getElementById('splash')?.remove()
-      document.getElementById('splash-branding')?.remove()
-      document.body.style.background = 'transparent'
+      document.getElementById('splash')?.remove();
+      document.getElementById('splash-branding')?.remove();
+      document.body.style.background = 'transparent';
     }
   </script>
 </head>

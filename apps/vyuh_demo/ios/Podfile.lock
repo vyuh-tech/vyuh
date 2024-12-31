@@ -1,5 +1,12 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_inappwebview_ios (0.0.1):
+    - Flutter
+    - flutter_inappwebview_ios/Core (= 0.0.1)
+    - OrderedSet (~> 6.0.3)
+  - flutter_inappwebview_ios/Core (0.0.1):
+    - Flutter
+    - OrderedSet (~> 6.0.3)
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
   - flutter_native_splash (2.4.3):
@@ -13,6 +20,7 @@ PODS:
   - GoogleMaps (9.2.0):
     - GoogleMaps/Maps (= 9.2.0)
   - GoogleMaps/Maps (9.2.0)
+  - OrderedSet (6.0.3)
   - package_info_plus (0.4.5):
     - Flutter
   - path_provider_foundation (0.0.1):
@@ -34,6 +42,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
   - google_maps_flutter_ios (from `.symlinks/plugins/google_maps_flutter_ios/ios`)
@@ -49,10 +58,13 @@ SPEC REPOS:
   trunk:
     - Google-Maps-iOS-Utils
     - GoogleMaps
+    - OrderedSet
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  flutter_inappwebview_ios:
+    :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_native_splash:
@@ -76,17 +88,19 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
+  flutter_inappwebview_ios: 6f63631e2c62a7c350263b13fa5427aedefe81d4
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
-  flutter_native_splash: e8a1e01082d97a8099d973f919f57904c925008a
+  flutter_native_splash: f71420956eb811e6d310720fee915f1d42852e7a
   Google-Maps-iOS-Utils: 0a484b05ed21d88c9f9ebbacb007956edd508a96
   google_maps_flutter_ios: e31555a04d1986ab130f2b9f24b6cdc861acc6d3
   GoogleMaps: 634ec3ca99698b31ca2253d64f017217d70cfb38
+  OrderedSet: e539b66b644ff081c73a262d24ad552a69be3a94
   package_info_plus: c0502532a26c7662a62a356cebe2692ec5fe4ec4
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   sqflite_darwin: 5a7236e3b501866c1c9befc6771dfd73ffb8702d
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
-  wakelock_plus: 78ec7c5b202cab7761af8e2b2b3d0671be6c4ae1
+  wakelock_plus: 373cfe59b235a6dd5837d0fb88791d2f13a90d56
   webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
 
 PODFILE CHECKSUM: 9c46fd01abff66081b39f5fa5767b3f1d0b11d76

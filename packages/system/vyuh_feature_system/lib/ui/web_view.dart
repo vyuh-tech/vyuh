@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 final class WebView extends StatefulWidget {
   final Uri uri;
@@ -13,24 +13,22 @@ final class WebView extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebView> {
-  late final WebViewController _controller;
+  InAppWebViewController? _controller;
+
+  final settings = InAppWebViewSettings(
+    userAgent: 'vyuh',
+    isInspectable: kDebugMode,
+    mediaPlaybackRequiresUserGesture: false,
+    allowsInlineMediaPlayback: true,
+    iframeAllow: "camera; microphone",
+    iframeAllowFullscreen: true,
+  );
+
   int _progress = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller = WebViewController()
-      ..setUserAgent('vyuh')
-      ..setNavigationDelegate(NavigationDelegate(onProgress: (value) {
-        if (!mounted) {
-          return;
-        }
-
-        setState(() {
-          _progress = value;
-        });
-      }))
-      ..loadRequest(widget.uri);
   }
 
   @override
@@ -40,13 +38,25 @@ class _WebViewState extends State<WebView> {
         body: Stack(
           children: [
             Positioned.fill(
-                child: WebViewWidget(
-              controller: _controller,
-              gestureRecognizers: {
-                Factory<VerticalDragGestureRecognizer>(
-                    () => VerticalDragGestureRecognizer()),
-              },
-            )),
+              child: InAppWebView(
+                initialUrlRequest: URLRequest(url: WebUri.uri(widget.uri)),
+                initialSettings: settings,
+                onWebViewCreated: (controller) => _controller = controller,
+                onReceivedError: (controller, request, errorResponse) =>
+                    debugPrint(errorResponse.toString()),
+                onProgressChanged: (_, progress) {
+                  setState(() {
+                    _progress = progress;
+                  });
+                },
+                gestureRecognizers: {
+                  // This is required to allow scrolling on the page. Without this the page can't be scrolled
+                  // and the scroll happens on the outside container instead.
+                  Factory<VerticalDragGestureRecognizer>(
+                      () => VerticalDragGestureRecognizer()),
+                },
+              ),
+            ),
             if (_progress < 100)
               Positioned(
                   left: 0,
