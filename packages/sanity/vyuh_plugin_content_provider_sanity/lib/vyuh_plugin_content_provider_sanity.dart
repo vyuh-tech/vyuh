@@ -1,6 +1,7 @@
 library;
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
 import 'package:flutter/widgets.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_cache/vyuh_cache.dart';
@@ -180,7 +181,12 @@ final class SanityContentProvider extends ContentProvider {
       format: format,
     );
 
-    return CachedNetworkImageProvider(url.toString());
+    return CachedNetworkImageProvider(
+      url.toString(),
+      maxWidth: width,
+      maxHeight: height,
+      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+    );
   }
 
   @override
