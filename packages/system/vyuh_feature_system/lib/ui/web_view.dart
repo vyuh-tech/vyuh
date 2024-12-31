@@ -13,6 +13,7 @@ final class WebView extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebView> {
+  // ignore: unused_field
   InAppWebViewController? _controller;
 
   final settings = InAppWebViewSettings(
