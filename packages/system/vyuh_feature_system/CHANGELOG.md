@@ -1,3 +1,7 @@
+## 1.32.2
+
+ - **FIX**: adopting the flutter_inappwebview instead of webview_flutter as it works on all platforms...it still has issues with iframe CORS on web but that's a web platform issue in general.
+
 ## 1.32.1
 
  - **FIX**: updated the navigation action to not invoke the lifecycleHandler for Route. Fixed the DI to reset DI on refresh and when loading the route.
