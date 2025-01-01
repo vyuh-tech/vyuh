@@ -19,16 +19,32 @@ final class DefaultContentPlugin extends ContentPlugin {
       _extensionBuilder!.getTypeRegistry();
 
   @override
-  Widget buildContent(BuildContext context, ContentItem content) {
+  Widget buildContent<T extends ContentItem>(
+    BuildContext context,
+    T content, {
+    LayoutConfiguration<T>? layout,
+  }) {
     final builder = _extensionBuilder!.getContentBuilder(content.schemaType);
 
     assert(builder != null,
         'Failed to retrieve builder for schemaType: ${content.schemaType}. Is the ContentBuilder registered for this schemaType?');
 
-    final contentWidget = builder?.build(context, content);
-
-    assert(contentWidget != null,
-        'Failed to build content for schemaType: ${content.schemaType}');
+    Widget? contentWidget;
+    try {
+      contentWidget =
+          layout?.build(context, content) ?? builder?.build(context, content);
+    } catch (e) {
+      final possibleLayouts = [
+        layout?.schemaType,
+        content.layout?.schemaType,
+        builder?.defaultLayout.schemaType
+      ].nonNulls;
+      return vyuh.widgetBuilder.errorView(context,
+          error: e,
+          title: 'Failed to build layout',
+          subtitle:
+              'Possible Layouts: "${possibleLayouts.join(', ')}" for Content: "${content.schemaType}"');
+    }
 
     if (contentWidget != null) {
       final modifiers = content.getModifiers();

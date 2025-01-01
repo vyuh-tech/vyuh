@@ -8,6 +8,25 @@ import '../content/track.dart';
 
 part 'session.g.dart';
 
+enum SessionFormat {
+  intro,
+  keynote,
+  talk,
+  workshop,
+  panel,
+  lightning,
+  breakout,
+  networking,
+  outro,
+}
+
+enum SessionLevel {
+  beginner,
+  intermediate,
+  advanced,
+  all,
+}
+
 @JsonSerializable()
 class Session extends ContentItem {
   static const schemaName = 'conf.session';
@@ -30,6 +49,8 @@ class Session extends ContentItem {
   final String title;
   final String description;
   final int duration;
+  final SessionFormat format;
+  final SessionLevel level;
   final ObjectReference? edition;
 
   final List<Speaker>? speakers;
@@ -41,6 +62,8 @@ class Session extends ContentItem {
     required this.title,
     required this.description,
     required this.duration,
+    this.format = SessionFormat.talk,
+    this.level = SessionLevel.all,
     this.edition,
     this.speakers,
     this.tracks,

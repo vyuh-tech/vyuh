@@ -80,7 +80,7 @@ final class RouteScaffold extends StatelessWidget {
 }
 
 extension RegionItems on vf.Route {
-  regionItems(String regionName) {
+  List<ContentItem> regionItems(String regionName) {
     return regions
         .where((x) => x.identifier == regionName)
         .expand((elt) => elt.items)

@@ -11,6 +11,19 @@ import { speaker } from './documents/speaker.ts';
 import { track } from './documents/track.ts';
 import { confBreak, schedule, scheduleDay } from './documents/schedule.ts';
 import { sponsor } from './documents/sponsor.ts';
+import { venue } from './documents/venue.ts';
+import { room } from './documents/room.ts';
+
+export const schemaTypes = [
+  docConference,
+  edition,
+  session,
+  speaker,
+  sponsor,
+  track,
+  venue,
+  room,
+];
 
 export const conference = new FeatureDescriptor({
   name: 'conf',
@@ -26,6 +39,8 @@ export const conference = new FeatureDescriptor({
         { type: track.name },
         { type: schedule.name },
         { type: sponsor.name },
+        { type: venue.name },
+        { type: room.name },
       ],
     }),
   ],
@@ -39,6 +54,8 @@ export const conference = new FeatureDescriptor({
     new BuiltContentSchemaBuilder(scheduleDay),
     new BuiltContentSchemaBuilder(confBreak),
     new BuiltContentSchemaBuilder(sponsor),
+    new BuiltContentSchemaBuilder(venue),
+    new BuiltContentSchemaBuilder(room),
   ],
   contentSchemaModifiers: [
     new DefaultFieldsModifier({
@@ -46,12 +63,14 @@ export const conference = new FeatureDescriptor({
         { type: docConference.name },
         { type: edition.name },
         { type: session.name },
-        { type: track.name },
         { type: speaker.name },
+        { type: track.name },
         { type: schedule.name },
         { type: scheduleDay.name },
         { type: confBreak.name },
         { type: sponsor.name },
+        { type: venue.name },
+        { type: room.name },
       ],
     }),
   ],

@@ -5,6 +5,7 @@ import 'package:feature_conference/content/edition.dart';
 import 'package:feature_conference/content/session.dart';
 import 'package:feature_conference/content/speaker.dart';
 import 'package:feature_conference/content/track.dart';
+import 'package:feature_conference/layouts/speaker_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -48,6 +49,15 @@ final feature = FeatureDescriptor(
         builder: (context, state) {
           return const _EditionDetail();
         },
+        routes: [
+          GoRoute(
+            path: 'speakers',
+            builder: (context, state) {
+              final editionId = state.pathParameters['editionId']!;
+              return _Speakers(editionId: editionId);
+            },
+          ),
+        ],
       ),
     ];
   },
@@ -63,7 +73,8 @@ final class _EditionDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Sessions')),
       body: FutureBuilder(
-          future: vyuh.di.get<ConferenceApi>().getSessions(identifier),
+          future:
+              vyuh.di.get<ConferenceApi>().getSessions(editionId: identifier),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final sessions = snapshot.data!;
@@ -95,7 +106,9 @@ final class _ConferenceDetail extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Editions')),
       body: FutureBuilder(
-          future: vyuh.di.get<ConferenceApi>().getEditions(identifier),
+          future: vyuh.di
+              .get<ConferenceApi>()
+              .getEditions(conferenceId: identifier),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final editions = snapshot.data!;
@@ -137,6 +150,54 @@ final class _ConferenceRoot extends StatelessWidget {
               return vyuh.widgetBuilder.contentLoader(context);
             }
           }),
+    );
+  }
+}
+
+final class _Speakers extends StatelessWidget {
+  const _Speakers({required this.editionId});
+
+  final String editionId;
+
+  @override
+  Widget build(BuildContext context) {
+    final speakerLayout = SpeakerProfileCardLayout();
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('All Speakers'),
+      ),
+      body: FutureBuilder(
+        future: vyuh.di.get<ConferenceApi>().getSpeakers(editionId: editionId),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final speakers = snapshot.data!;
+            return GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.7,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+              ),
+              padding: const EdgeInsets.all(16),
+              itemCount: speakers.length,
+              itemBuilder: (context, index) {
+                final speaker = speakers[index];
+                return vyuh.content
+                    .buildContent(context, speaker, layout: speakerLayout);
+              },
+            );
+          } else if (snapshot.hasError) {
+            return vyuh.widgetBuilder.errorView(
+              context,
+              title: 'Failed to load Speakers',
+              error: snapshot.error!,
+            );
+          } else {
+            return vyuh.widgetBuilder.contentLoader(context);
+          }
+        },
+      ),
     );
   }
 }

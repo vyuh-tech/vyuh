@@ -22,7 +22,8 @@ final class NoOpContentPlugin extends ContentPlugin {
         );
 
   @override
-  Widget buildContent(BuildContext context, ContentItem content) {
+  Widget buildContent<T extends ContentItem>(BuildContext context, T content,
+      {LayoutConfiguration<T>? layout}) {
     return vyuh.widgetBuilder.errorView(
       context,
       title: messages['title']!(''),

@@ -16,8 +16,10 @@ abstract class ContentPlugin extends Plugin {
   /// The type registry that maps types to their descriptors
   Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
 
-  /// Builds a Widget for the given content
-  Widget buildContent(BuildContext context, ContentItem content);
+  /// Builds a Widget for the given content. You can pass in an optional [layout]
+  /// to override the default layout
+  Widget buildContent<T extends ContentItem>(BuildContext context, T content,
+      {LayoutConfiguration<T>? layout});
 
   /// Builds a Widget for the given route url or id. This is used for top-level documents called routes.
   /// These could represent a page, dialog or a conditional-route.

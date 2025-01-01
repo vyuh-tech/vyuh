@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
@@ -24,13 +25,129 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
 
   @override
   Widget build(BuildContext context, Speaker content) {
+    final theme = Theme.of(context);
+
     return Card(
-      child: ListTile(
-        leading: content.photo != null
-            ? CircleAvatar(child: ContentImage(ref: content.photo))
-            : const CircleAvatar(child: Icon(Icons.person)),
-        title: Text(content.name),
-        subtitle: Text(content.bio),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (content.photo != null)
+            AspectRatio(
+              aspectRatio: 1,
+              child: ContentImage(
+                ref: content.photo!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ListTile(
+            title: Text(content.name),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (content.tagline != null) ...[
+                  Text(
+                    content.tagline!,
+                    style: theme.textTheme.titleSmall,
+                  ),
+                  const SizedBox(height: 8),
+                ],
+                if (content.bio != null) Text(content.bio!),
+              ],
+            ),
+          ),
+          if (content.social != null)
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Wrap(
+                spacing: 16,
+                children: [
+                  if (content.social!.twitter != null)
+                    IconButton(
+                      icon: const Icon(Icons.flutter_dash),
+                      onPressed: () =>
+                          launchUrlString(content.social!.twitterUrl!),
+                      tooltip: 'Twitter',
+                    ),
+                  if (content.social!.github != null)
+                    IconButton(
+                      icon: const Icon(Icons.code),
+                      onPressed: () =>
+                          launchUrlString(content.social!.githubUrl!),
+                      tooltip: 'GitHub',
+                    ),
+                  if (content.social!.linkedin != null)
+                    IconButton(
+                      icon: const Icon(Icons.work),
+                      onPressed: () =>
+                          launchUrlString(content.social!.linkedinUrl!),
+                      tooltip: 'LinkedIn',
+                    ),
+                  if (content.social!.website != null)
+                    IconButton(
+                      icon: const Icon(Icons.language),
+                      onPressed: () =>
+                          launchUrlString(content.social!.website!),
+                      tooltip: 'Website',
+                    ),
+                ],
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+@JsonSerializable()
+final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
+  static const schemaName = '${Speaker.schemaName}.layout.profile_card';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    fromJson: SpeakerProfileCardLayout.fromJson,
+    title: 'Speaker Profile Card Layout',
+  );
+
+  SpeakerProfileCardLayout() : super(schemaType: schemaName);
+
+  factory SpeakerProfileCardLayout.fromJson(Map<String, dynamic> json) =>
+      _$SpeakerProfileCardLayoutFromJson(json);
+
+  @override
+  Widget build(BuildContext context, Speaker content) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (content.photo != null)
+            AspectRatio(
+              aspectRatio: 1,
+              child: ContentImage(
+                ref: content.photo!,
+                fit: BoxFit.cover,
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 8,
+              children: [
+                Text(
+                  content.name,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                if (content.tagline != null) ...[
+                  Text(
+                    content.tagline!,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

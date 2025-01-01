@@ -6,23 +6,21 @@ import '../content/session.dart';
 import '../content/speaker.dart';
 import '../content/track.dart';
 
-final class ConferenceApi {
+class ConferenceApi {
   final ContentProvider _provider;
 
   ConferenceApi(this._provider);
 
   Future<List<Conference>?> getConferences() async {
     final conferences = await _provider.fetchMultiple(
-      '''
-      *[_type == "${Conference.schemaName}"]
-      ''',
+      '*[_type == "${Conference.schemaName}"]',
       fromJson: Conference.fromJson,
     );
 
     return conferences;
   }
 
-  Future<List<Edition>?> getEditions(String conferenceId) async {
+  Future<List<Edition>?> getEditions({required String conferenceId}) async {
     final editions = await _provider.fetchMultiple(
       '''
       *[_type == "${Edition.schemaName}" && conference._ref == \$conferenceId]
@@ -36,7 +34,7 @@ final class ConferenceApi {
     return editions;
   }
 
-  Future<List<Session>?> getSessions(String editionId) async {
+  Future<List<Session>?> getSessions({required String editionId}) async {
     final sessions = await _provider.fetchMultiple(
       '''
       *[_type == "${Session.schemaName}" && edition._ref == \$editionId] {
@@ -54,13 +52,18 @@ final class ConferenceApi {
     return sessions;
   }
 
-  Future<List<Speaker>?> getSpeakers(String sessionId) async {
+  Future<List<Speaker>?> getSpeakers({required String editionId}) async {
     final speakers = await _provider.fetchMultiple(
       '''
-      *[_type == "${Speaker.schemaName}" && references(\$sessionId)]
+*[_type == "conf.speaker" && _id in array::unique(
+    *[_type == "conf.session" && edition._ref == \$editionId] {
+      "speakers": speakers[]->{_id}._id,
+    }.speakers[]
+  )
+]
     ''',
       queryParams: {
-        'sessionId': sessionId,
+        'editionId': editionId,
       },
       fromJson: Speaker.fromJson,
     );
@@ -68,7 +71,7 @@ final class ConferenceApi {
     return speakers;
   }
 
-  Future<List<Track>?> getTracks(String editionId) async {
+  Future<List<Track>?> getTracks({required String editionId}) async {
     final tracks = await _provider.fetchMultiple(
       '''
       *[_type == "${Track.schemaName}" && edition._ref == \$editionId]
@@ -78,10 +81,11 @@ final class ConferenceApi {
       },
       fromJson: Track.fromJson,
     );
+
     return tracks;
   }
 
-  Future<Conference?> getConference(String id) async {
+  Future<Conference?> getConference({required String id}) async {
     final conference = await _provider.fetchSingle('''
       *[_type == "${Conference.schemaName}" && _id == \$id][0]
     ''', queryParams: {
@@ -90,7 +94,7 @@ final class ConferenceApi {
     return conference;
   }
 
-  Future<Edition?> getEdition(String id) async {
+  Future<Edition?> getEdition({required String id}) async {
     final edition = await _provider.fetchSingle('''
       *[_type == "${Edition.schemaName}" && _id == \$id][0]
     ''', queryParams: {
@@ -99,7 +103,7 @@ final class ConferenceApi {
     return edition;
   }
 
-  Future<Session?> getSession(String id) async {
+  Future<Session?> getSession({required String id}) async {
     final session = await _provider.fetchSingle('''
       *[_type == "${Session.schemaName}" && _id == \$id][0] {
         ...,
@@ -112,7 +116,7 @@ final class ConferenceApi {
     return session;
   }
 
-  Future<Speaker?> getSpeaker(String id) async {
+  Future<Speaker?> getSpeaker({required String id}) async {
     final speaker = await _provider.fetchSingle('''
       *[_type == "${Speaker.schemaName}" && _id == \$id][0]
     ''', queryParams: {
@@ -121,7 +125,7 @@ final class ConferenceApi {
     return speaker;
   }
 
-  Future<Track?> getTrack(String id) async {
+  Future<Track?> getTrack({required String id}) async {
     final track = await _provider.fetchSingle('''
       *[_type == "${Track.schemaName}" && _id == "\$id"][0]
     ''', queryParams: {

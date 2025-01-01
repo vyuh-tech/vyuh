@@ -1,5 +1,6 @@
 import 'package:feature_conference/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -58,6 +59,26 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                     ),
                 ],
               ),
+            ),
+            OverflowBar(
+              children: [
+                TextButton.icon(
+                  onPressed: () {
+                    context.push(
+                        '/conference/${content.conference.ref}/editions/${content.id}/speakers');
+                  },
+                  icon: const Icon(Icons.people),
+                  label: const Text('Speakers'),
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    context.push(
+                        '/conference/${content.conference.ref}/editions/${content.id}/tracks');
+                  },
+                  icon: const Icon(Icons.view_column),
+                  label: const Text('Tracks'),
+                ),
+              ],
             ),
           ],
         ),
