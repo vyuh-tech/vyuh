@@ -8,7 +8,8 @@ part of 'track.dart';
 
 Track _$TrackFromJson(Map<String, dynamic> json) => Track(
       id: json['_id'] as String,
-      name: json['name'] as String,
+      title: json['title'] as String,
+      slug: json['slug'] as String,
       icon: json['icon'] == null
           ? null
           : ImageReference.fromJson(json['icon'] as Map<String, dynamic>),

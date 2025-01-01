@@ -57,6 +57,13 @@ final feature = FeatureDescriptor(
               return _Speakers(editionId: editionId);
             },
           ),
+          GoRoute(
+            path: 'tracks',
+            builder: (context, state) {
+              final editionId = state.pathParameters['editionId']!;
+              return _Tracks(editionId: editionId);
+            },
+          ),
         ],
       ),
     ];
@@ -191,6 +198,45 @@ final class _Speakers extends StatelessWidget {
             return vyuh.widgetBuilder.errorView(
               context,
               title: 'Failed to load Speakers',
+              error: snapshot.error!,
+            );
+          } else {
+            return vyuh.widgetBuilder.contentLoader(context);
+          }
+        },
+      ),
+    );
+  }
+}
+
+final class _Tracks extends StatelessWidget {
+  const _Tracks({required this.editionId});
+
+  final String editionId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Tracks'),
+      ),
+      body: FutureBuilder(
+        future: vyuh.di.get<ConferenceApi>().getTracks(editionId: editionId),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final tracks = snapshot.data!;
+            return ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: tracks.length,
+              itemBuilder: (context, index) {
+                final track = tracks[index];
+                return vyuh.content.buildContent(context, track);
+              },
+            );
+          } else if (snapshot.hasError) {
+            return vyuh.widgetBuilder.errorView(
+              context,
+              title: 'Failed to load Tracks',
               error: snapshot.error!,
             );
           } else {

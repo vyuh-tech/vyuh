@@ -40,7 +40,7 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
               ),
             ),
           ListTile(
-            title: Text(content.name),
+            title: Text(content.title),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,7 +48,7 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
                   Text(content.description!),
                   const SizedBox(height: 8),
                 ],
-                Text(content.address.formatted),
+                if (content.address != null) Text(content.address!.formatted),
                 if (content.website != null ||
                     content.phone != null ||
                     content.email != null) ...[

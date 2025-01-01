@@ -15,6 +15,16 @@ export const speaker = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'name',
+        maxLength: 64,
+      },
+    }),
+    defineField({
       name: 'tagline',
       title: 'Tagline',
       type: 'string',
@@ -73,13 +83,13 @@ export const speaker = defineType({
   preview: {
     select: {
       title: 'name',
-      tagline: 'tagline',
+      subtitle: 'tagline',
       media: 'photo',
     },
-    prepare({ title, tagline, media }) {
+    prepare({ title, subtitle, media }) {
       return {
         title,
-        subtitle: tagline,
+        subtitle,
         media,
       };
     },

@@ -1,35 +1,7 @@
 // schedule schema
 import { defineField, defineType } from 'sanity';
-import { BsTable as ScheduleIcon } from 'react-icons/bs';
 import { IoTodayOutline as DayIcon } from 'react-icons/io5';
 import { HiOutlinePause as BreakIcon } from 'react-icons/hi2';
-
-export const schedule = defineType({
-  name: 'conf.schedule',
-  title: 'Schedule',
-  type: 'document',
-  icon: ScheduleIcon,
-  fields: [
-    defineField({
-      name: 'name',
-      title: 'Name',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'startDate',
-      title: 'Start Date',
-      type: 'date',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'days',
-      title: 'Days',
-      type: 'array',
-      of: [{ type: 'conf.schedule.day' }],
-    }),
-  ],
-});
 
 export const scheduleDay = defineType({
   name: 'conf.schedule.day',
@@ -38,29 +10,48 @@ export const scheduleDay = defineType({
   icon: DayIcon,
   fields: [
     defineField({
-      name: 'date',
-      title: 'Date',
-      type: 'date',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'startTime',
       title: 'Start Time',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
+      options: {
+        dateFormat: 'YYYY-MMM-DD',
+        timeFormat: 'HH:mm',
+        timeStep: 15,
+      },
     }),
     defineField({
-      name: 'sessions',
-      title: 'Sessions',
+      name: 'items',
+      title: 'Items',
       type: 'array',
       of: [
         {
           type: 'reference',
-          to: [{ type: 'conf.session' }, { type: 'conf.schedule.break' }],
+          to: [{ type: 'conf.session' }],
         },
+        { type: 'conf.schedule.break' }
       ],
     }),
   ],
+  preview: {
+    select: {
+      startTime: 'startTime',
+      items: 'items',
+    },
+    prepare({ startTime, items = [] }) {
+      const date = new Date(startTime);
+      return {
+        title: date.toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        }),
+        subtitle: `${items.length} items`,
+        media: DayIcon,
+      };
+    },
+  },
 });
 
 export const confBreak = defineType({
@@ -82,4 +73,17 @@ export const confBreak = defineType({
       validation: (Rule) => Rule.required(),
     }),
   ],
+  preview: {
+    select: {
+      title: 'title',
+      duration: 'duration',
+    },
+    prepare({ title, duration }) {
+      return {
+        title,
+        subtitle: `${duration} minutes`,
+        media: BreakIcon,
+      };
+    },
+  },
 });

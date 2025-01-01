@@ -15,15 +15,25 @@ export const sponsor = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'url',
-      title: 'Url',
-      type: 'url',
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
       validation: (Rule) => Rule.required(),
+      options: {
+        source: 'name',
+        maxLength: 64,
+      },
     }),
     defineField({
       name: 'logo',
       title: 'Logo',
       type: 'image',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'url',
+      title: 'Url',
+      type: 'url',
       validation: (Rule) => Rule.required(),
     }),
   ],

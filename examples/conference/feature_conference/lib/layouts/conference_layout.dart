@@ -31,10 +31,10 @@ final class ConferenceLayout extends LayoutConfiguration<Conference> {
       child: Card(
         child: Column(
           children: [
-            ContentImage(ref: content.icon),
+            ContentImage(ref: content.logo),
             ListTile(
               title: Text(content.title),
-              subtitle: Text(content.identifier),
+              subtitle: Text(content.slug),
             ),
           ],
         ),

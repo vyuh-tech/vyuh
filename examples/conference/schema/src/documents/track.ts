@@ -8,10 +8,20 @@ export const track = defineType({
   icon: Icon,
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 64,
+      },
     }),
     defineField({
       name: 'icon',
@@ -21,7 +31,16 @@ export const track = defineType({
   ],
   preview: {
     select: {
-      title: 'name',
+      title: 'title',
+      slug: 'slug.current',
+      media: 'icon',
+    },
+    prepare({ title, slug, media }) {
+      return {
+        title,
+        subtitle: slug,
+        media,
+      };
     },
   },
 });

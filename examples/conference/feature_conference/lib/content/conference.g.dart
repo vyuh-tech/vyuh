@@ -8,11 +8,11 @@ part of 'conference.dart';
 
 Conference _$ConferenceFromJson(Map<String, dynamic> json) => Conference(
       id: json['_id'] as String,
-      identifier: json['identifier'] as String,
       title: json['title'] as String,
-      icon: json['icon'] == null
+      slug: json['slug'] as String,
+      logo: json['logo'] == null
           ? null
-          : ImageReference.fromJson(json['icon'] as Map<String, dynamic>),
+          : ImageReference.fromJson(json['logo'] as Map<String, dynamic>),
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );

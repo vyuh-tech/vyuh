@@ -27,12 +27,15 @@ class Sponsor extends ContentItem {
   final String id;
 
   final String name;
+  @JsonKey(name: 'slug.current')
+  final String slug;
   final ImageReference? logo;
   final String? url;
 
   Sponsor({
     required this.id,
     required this.name,
+    required this.slug,
     this.logo,
     this.url,
     super.layout,

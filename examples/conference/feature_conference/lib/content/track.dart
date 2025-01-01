@@ -24,12 +24,14 @@ class Track extends ContentItem {
   @JsonKey(name: '_id')
   final String id;
 
-  final String name;
+  final String title;
+  final String slug;
   final ImageReference? icon;
 
   Track({
     required this.id,
-    required this.name,
+    required this.title,
+    required this.slug,
     this.icon,
     super.layout,
     super.modifiers,

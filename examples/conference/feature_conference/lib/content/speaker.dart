@@ -23,9 +23,11 @@ class SpeakerSocial {
   factory SpeakerSocial.fromJson(Map<String, dynamic> json) =>
       _$SpeakerSocialFromJson(json);
 
-  String? get twitterUrl => twitter != null ? 'https://twitter.com/$twitter' : null;
+  String? get twitterUrl =>
+      twitter != null ? 'https://twitter.com/$twitter' : null;
   String? get githubUrl => github != null ? 'https://github.com/$github' : null;
-  String? get linkedinUrl => linkedin != null ? 'https://linkedin.com/in/$linkedin' : null;
+  String? get linkedinUrl =>
+      linkedin != null ? 'https://linkedin.com/in/$linkedin' : null;
 }
 
 @JsonSerializable()
@@ -48,6 +50,7 @@ class Speaker extends ContentItem {
   final String id;
 
   final String name;
+  final String? slug;
   final String? tagline;
   final String? bio;
   final ImageReference? photo;
@@ -56,6 +59,7 @@ class Speaker extends ContentItem {
   Speaker({
     required this.id,
     required this.name,
+    this.slug,
     this.tagline,
     this.bio,
     this.photo,
@@ -64,5 +68,6 @@ class Speaker extends ContentItem {
     super.modifiers,
   }) : super(schemaType: schemaName);
 
-  factory Speaker.fromJson(Map<String, dynamic> json) => _$SpeakerFromJson(json);
+  factory Speaker.fromJson(Map<String, dynamic> json) =>
+      _$SpeakerFromJson(json);
 }

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity';
+import { defineType } from 'sanity';
 import { HiOutlineUserGroup as Icon } from 'react-icons/hi2';
 
 export const conference = defineType({
@@ -7,29 +7,38 @@ export const conference = defineType({
   type: 'document',
   icon: Icon,
   fields: [
-    defineField({
-      name: 'identifier',
-      title: 'Identifier',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
+    {
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'icon',
-      title: 'Icon',
-      type: 'image',
+    },
+    {
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
       validation: (Rule) => Rule.required(),
-    }),
+      options: {
+        source: 'title',
+        maxLength: 64,
+      },
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+    },
+    {
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+    },
   ],
   preview: {
     select: {
       title: 'title',
-      subtitle: 'identifier',
+      subtitle: 'description',
+      media: 'logo',
     },
   },
 });

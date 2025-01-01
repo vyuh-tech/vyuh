@@ -24,15 +24,15 @@ class Conference extends ContentItem {
   @JsonKey(name: '_id')
   final String id;
 
-  final String identifier;
   final String title;
-  final ImageReference? icon;
+  final String slug;
+  final ImageReference? logo;
 
   Conference({
     required this.id,
-    required this.identifier,
     required this.title,
-    this.icon,
+    required this.slug,
+    this.logo,
     super.layout,
     super.modifiers,
   }) : super(schemaType: schemaName);

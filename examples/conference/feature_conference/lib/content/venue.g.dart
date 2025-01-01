@@ -22,11 +22,16 @@ VenueCoordinates _$VenueCoordinatesFromJson(Map<String, dynamic> json) =>
 
 Venue _$VenueFromJson(Map<String, dynamic> json) => Venue(
       id: json['_id'] as String,
-      name: json['name'] as String? ?? 'Conference Center',
+      title: json['title'] as String? ?? 'Conference Center',
+      slug: json['slug'] as String,
       description: json['description'] as String?,
-      address: VenueAddress.fromJson(json['address'] as Map<String, dynamic>),
-      coordinates: VenueCoordinates.fromJson(
-          json['coordinates'] as Map<String, dynamic>),
+      address: json['address'] == null
+          ? null
+          : VenueAddress.fromJson(json['address'] as Map<String, dynamic>),
+      coordinates: json['coordinates'] == null
+          ? null
+          : VenueCoordinates.fromJson(
+              json['coordinates'] as Map<String, dynamic>),
       website: json['website'] as String?,
       phone: json['phone'] as String?,
       email: json['email'] as String?,
@@ -44,13 +49,29 @@ Venue _$VenueFromJson(Map<String, dynamic> json) => Venue(
     );
 
 const _$VenueAmenityEnumMap = {
-  VenueAmenity.parking: 'parking',
+  VenueAmenity.freeWifi: 'free-wifi',
+  VenueAmenity.paidWifi: 'paid-wifi',
+  VenueAmenity.freeParking: 'free-parking',
+  VenueAmenity.paidParking: 'paid-parking',
+  VenueAmenity.foodCourt: 'food-court',
+  VenueAmenity.cafeteria: 'cafeteria',
   VenueAmenity.restaurant: 'restaurant',
-  VenueAmenity.cafe: 'cafe',
-  VenueAmenity.business: 'business',
-  VenueAmenity.firstaid: 'firstaid',
+  VenueAmenity.coffeeShop: 'coffee-shop',
+  VenueAmenity.businessCenter: 'business-center',
+  VenueAmenity.fitnessCenter: 'fitness-center',
+  VenueAmenity.swimmingPool: 'swimming-pool',
+  VenueAmenity.spa: 'spa',
+  VenueAmenity.atm: 'atm',
+  VenueAmenity.currencyExchange: 'currency-exchange',
+  VenueAmenity.giftShop: 'gift-shop',
+  VenueAmenity.laundryService: 'laundry-service',
+  VenueAmenity.concierge: 'concierge',
+  VenueAmenity.valetParking: 'valet-parking',
+  VenueAmenity.luggageStorage: 'luggage-storage',
+  VenueAmenity.roomService: 'room-service',
+  VenueAmenity.firstAid: 'first-aid',
   VenueAmenity.security: 'security',
-  VenueAmenity.coatcheck: 'coatcheck',
-  VenueAmenity.prayer: 'prayer',
+  VenueAmenity.coatCheck: 'coat-check',
+  VenueAmenity.prayerRoom: 'prayer-room',
   VenueAmenity.lounge: 'lounge',
 };

@@ -8,17 +8,20 @@ export const session = defineType({
   icon: Icon,
   fields: [
     defineField({
-      name: 'edition',
-      title: 'Edition',
-      type: 'reference',
-      to: [{ type: 'conf.edition' }],
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 64,
+      },
     }),
     defineField({
       name: 'description',
@@ -78,6 +81,13 @@ export const session = defineType({
           { title: 'All Levels', value: 'all' },
         ],
       },
+    }),
+    defineField({
+      name: 'edition',
+      title: 'Edition',
+      type: 'reference',
+      to: [{ type: 'conf.edition' }],
+      validation: (Rule) => Rule.required(),
     }),
   ],
   preview: {

@@ -28,16 +28,18 @@ enum RoomFacility {
 
 @JsonSerializable()
 final class Room {
-  final String name;
+  final String title;
+  final String slug;
   final String? description;
   final int capacity;
   final int floor;
   final List<RoomFacility>? facilities;
 
   Room({
-    this.name = 'Room',
+    required this.title,
+    required this.slug,
     this.description,
-    this.capacity = 50,
+    required this.capacity,
     this.floor = 1,
     this.facilities,
   });

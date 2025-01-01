@@ -17,6 +17,7 @@ SpeakerSocial _$SpeakerSocialFromJson(Map<String, dynamic> json) =>
 Speaker _$SpeakerFromJson(Map<String, dynamic> json) => Speaker(
       id: json['_id'] as String,
       name: json['name'] as String,
+      slug: json['slug'] as String?,
       tagline: json['tagline'] as String?,
       bio: json['bio'] as String?,
       photo: json['photo'] == null

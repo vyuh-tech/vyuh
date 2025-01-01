@@ -15,16 +15,25 @@ export const edition = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'identifier',
-      title: 'Identifier',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 64,
+      },
+    }),
+    defineField({
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
     }),
     defineField({
       name: 'tagline',
@@ -51,9 +60,10 @@ export const edition = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'location',
-      title: 'Location',
-      type: 'string',
+      name: 'venue',
+      title: 'Venue',
+      type: 'reference',
+      to: [{ type: 'conf.venue' }],
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -90,18 +100,26 @@ export const edition = defineType({
         },
       ],
     }),
+    defineField({
+      name: 'schedule',
+      title: 'Schedule',
+      type: 'array',
+      of: [{type: 'conf.schedule.day'}],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {
       title: 'title',
       subtitle: 'tagline',
-      conference: 'conference.name',
       startDate: 'startDate',
+      media: 'logo',
     },
-    prepare({ title, subtitle, conference, startDate }) {
+    prepare({ title, subtitle, startDate, media }) {
       return {
-        title: `${conference} - ${title}`,
+        title: `${title ?? '---'}`,
         subtitle: `${subtitle} (${new Date(startDate).getFullYear()})`,
+        media,
       };
     },
   },

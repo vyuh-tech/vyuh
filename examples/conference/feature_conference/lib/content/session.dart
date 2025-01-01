@@ -47,6 +47,7 @@ class Session extends ContentItem {
   final String id;
 
   final String title;
+  final String? slug;
   final String description;
   final int duration;
   final SessionFormat format;
@@ -60,6 +61,7 @@ class Session extends ContentItem {
   Session({
     required this.id,
     required this.title,
+    this.slug,
     required this.description,
     required this.duration,
     this.format = SessionFormat.talk,

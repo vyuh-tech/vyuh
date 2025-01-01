@@ -25,9 +25,8 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
 
   @override
   Widget build(BuildContext context, Speaker content) {
-    final theme = Theme.of(context);
-
     return Card(
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -39,59 +38,67 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
                 fit: BoxFit.cover,
               ),
             ),
-          ListTile(
-            title: Text(content.name),
-            subtitle: Column(
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  content.name,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
                 if (content.tagline != null) ...[
+                  const SizedBox(height: 8),
                   Text(
                     content.tagline!,
-                    style: theme.textTheme.titleSmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  const SizedBox(height: 8),
                 ],
-                if (content.bio != null) Text(content.bio!),
+                if (content.bio != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    content.bio!,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                ],
+                if (content.social != null) ...[
+                  const SizedBox(height: 8),
+                  Row(
+                    children: [
+                      if (content.social!.twitter != null)
+                        IconButton(
+                          icon: const Icon(Icons.flutter_dash),
+                          onPressed: () =>
+                              launchUrlString(content.social!.twitterUrl!),
+                          tooltip: 'Twitter',
+                        ),
+                      if (content.social!.github != null)
+                        IconButton(
+                          icon: const Icon(Icons.code),
+                          onPressed: () =>
+                              launchUrlString(content.social!.githubUrl!),
+                          tooltip: 'GitHub',
+                        ),
+                      if (content.social!.linkedin != null)
+                        IconButton(
+                          icon: const Icon(Icons.work),
+                          onPressed: () =>
+                              launchUrlString(content.social!.linkedinUrl!),
+                          tooltip: 'LinkedIn',
+                        ),
+                      if (content.social!.website != null)
+                        IconButton(
+                          icon: const Icon(Icons.language),
+                          onPressed: () =>
+                              launchUrlString(content.social!.website!),
+                          tooltip: 'Website',
+                        ),
+                    ],
+                  ),
+                ],
               ],
             ),
           ),
-          if (content.social != null)
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Wrap(
-                spacing: 16,
-                children: [
-                  if (content.social!.twitter != null)
-                    IconButton(
-                      icon: const Icon(Icons.flutter_dash),
-                      onPressed: () =>
-                          launchUrlString(content.social!.twitterUrl!),
-                      tooltip: 'Twitter',
-                    ),
-                  if (content.social!.github != null)
-                    IconButton(
-                      icon: const Icon(Icons.code),
-                      onPressed: () =>
-                          launchUrlString(content.social!.githubUrl!),
-                      tooltip: 'GitHub',
-                    ),
-                  if (content.social!.linkedin != null)
-                    IconButton(
-                      icon: const Icon(Icons.work),
-                      onPressed: () =>
-                          launchUrlString(content.social!.linkedinUrl!),
-                      tooltip: 'LinkedIn',
-                    ),
-                  if (content.social!.website != null)
-                    IconButton(
-                      icon: const Icon(Icons.language),
-                      onPressed: () =>
-                          launchUrlString(content.social!.website!),
-                      tooltip: 'Website',
-                    ),
-                ],
-              ),
-            ),
         ],
       ),
     );
@@ -115,6 +122,8 @@ final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
 
   @override
   Widget build(BuildContext context, Speaker content) {
+    final theme = Theme.of(context);
+
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -136,14 +145,13 @@ final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
               children: [
                 Text(
                   content.name,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: theme.textTheme.titleMedium,
                 ),
-                if (content.tagline != null) ...[
+                if (content.tagline != null)
                   Text(
                     content.tagline!,
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: theme.textTheme.bodySmall,
                   ),
-                ],
               ],
             ),
           ),

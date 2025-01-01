@@ -19,7 +19,7 @@ class RoomLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ListTile(
-            title: Text(room.name),
+            title: Text(room.title),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

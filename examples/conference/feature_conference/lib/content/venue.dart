@@ -8,33 +8,99 @@ import 'room.dart';
 part 'venue.g.dart';
 
 enum VenueAmenity {
-  parking,
+  @JsonValue('free-wifi')
+  freeWifi,
+  @JsonValue('paid-wifi')
+  paidWifi,
+  @JsonValue('free-parking')
+  freeParking,
+  @JsonValue('paid-parking')
+  paidParking,
+  @JsonValue('food-court')
+  foodCourt,
+  cafeteria,
   restaurant,
-  cafe,
-  business,
-  firstaid,
+  @JsonValue('coffee-shop')
+  coffeeShop,
+  @JsonValue('business-center')
+  businessCenter,
+  @JsonValue('fitness-center')
+  fitnessCenter,
+  @JsonValue('swimming-pool')
+  swimmingPool,
+  spa,
+  atm,
+  @JsonValue('currency-exchange')
+  currencyExchange,
+  @JsonValue('gift-shop')
+  giftShop,
+  @JsonValue('laundry-service')
+  laundryService,
+  concierge,
+  @JsonValue('valet-parking')
+  valetParking,
+  @JsonValue('luggage-storage')
+  luggageStorage,
+  @JsonValue('room-service')
+  roomService,
+  @JsonValue('first-aid')
+  firstAid,
   security,
-  coatcheck,
-  prayer,
+  @JsonValue('coat-check')
+  coatCheck,
+  @JsonValue('prayer-room')
+  prayerRoom,
   lounge;
 
   String get displayName {
     switch (this) {
-      case VenueAmenity.parking:
+      case VenueAmenity.freeWifi:
+        return 'Free Wi-Fi';
+      case VenueAmenity.paidWifi:
+        return 'Paid Wi-Fi';
+      case VenueAmenity.freeParking:
         return 'Free Parking';
+      case VenueAmenity.paidParking:
+        return 'Paid Parking';
+      case VenueAmenity.foodCourt:
+        return 'Food Court';
+      case VenueAmenity.cafeteria:
+        return 'Cafeteria';
       case VenueAmenity.restaurant:
         return 'Restaurant';
-      case VenueAmenity.cafe:
-        return 'Cafe';
-      case VenueAmenity.business:
+      case VenueAmenity.coffeeShop:
+        return 'Coffee Shop';
+      case VenueAmenity.businessCenter:
         return 'Business Center';
-      case VenueAmenity.firstaid:
+      case VenueAmenity.fitnessCenter:
+        return 'Fitness Center';
+      case VenueAmenity.swimmingPool:
+        return 'Swimming Pool';
+      case VenueAmenity.spa:
+        return 'Spa';
+      case VenueAmenity.atm:
+        return 'ATM';
+      case VenueAmenity.currencyExchange:
+        return 'Currency Exchange';
+      case VenueAmenity.giftShop:
+        return 'Gift Shop';
+      case VenueAmenity.laundryService:
+        return 'Laundry Service';
+      case VenueAmenity.concierge:
+        return 'Concierge';
+      case VenueAmenity.valetParking:
+        return 'Valet Parking';
+      case VenueAmenity.luggageStorage:
+        return 'Luggage Storage';
+      case VenueAmenity.roomService:
+        return 'Room Service';
+      case VenueAmenity.firstAid:
         return 'First Aid';
       case VenueAmenity.security:
         return 'Security';
-      case VenueAmenity.coatcheck:
+      case VenueAmenity.coatCheck:
         return 'Coat Check';
-      case VenueAmenity.prayer:
+      case VenueAmenity.prayerRoom:
         return 'Prayer Room';
       case VenueAmenity.lounge:
         return 'Lounge';
@@ -61,8 +127,7 @@ class VenueAddress {
   factory VenueAddress.fromJson(Map<String, dynamic> json) =>
       _$VenueAddressFromJson(json);
 
-  String get formatted =>
-      '$street, $city, $state $postalCode, $country';
+  String get formatted => '$street, $city, $state $postalCode, $country';
 }
 
 @JsonSerializable()
@@ -98,10 +163,11 @@ class Venue extends ContentItem {
   @JsonKey(name: '_id')
   final String id;
 
-  final String name;
+  final String title;
+  final String slug;
   final String? description;
-  final VenueAddress address;
-  final VenueCoordinates coordinates;
+  final VenueAddress? address;
+  final VenueCoordinates? coordinates;
   final String? website;
   final String? phone;
   final String? email;
@@ -111,10 +177,11 @@ class Venue extends ContentItem {
 
   Venue({
     required this.id,
-    this.name = 'Conference Center',
+    this.title = 'Conference Center',
+    required this.slug,
     this.description,
-    required this.address,
-    required this.coordinates,
+    this.address,
+    this.coordinates,
     this.website,
     this.phone,
     this.email,

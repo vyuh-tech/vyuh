@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/track.dart';
 
@@ -23,10 +24,29 @@ final class TrackLayout extends LayoutConfiguration<Track> {
 
   @override
   Widget build(BuildContext context, Track content) {
+    final theme = Theme.of(context);
+
     return Card(
-      child: ListTile(
-        leading: const Icon(Icons.timeline),
-        title: Text(content.name),
+      clipBehavior: Clip.antiAlias,
+      child: Row(
+        spacing: 8,
+        children: [
+          if (content.icon != null)
+            SizedBox(
+              width: 64,
+              height: 64,
+              child: ContentImage(
+                ref: content.icon!,
+                fit: BoxFit.contain,
+              ),
+            ),
+          Expanded(
+            child: Text(
+              content.title,
+              style: theme.textTheme.titleMedium,
+            ),
+          ),
+        ],
       ),
     );
   }

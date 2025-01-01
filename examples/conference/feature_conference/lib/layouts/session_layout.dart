@@ -146,7 +146,7 @@ final class SessionLayout extends LayoutConfiguration<Session> {
                       for (final track in content.tracks!)
                         Chip(
                           backgroundColor: theme.colorScheme.primaryContainer,
-                          label: Text(track.name),
+                          label: Text(track.title),
                           labelStyle: TextStyle(
                               fontSize: 12,
                               fontWeight: FontWeight.bold,

@@ -1,10 +1,11 @@
-import 'package:feature_conference/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/edition.dart';
+import '../utils.dart';
 
 part 'edition_layout.g.dart';
 
@@ -34,6 +35,13 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            if (content.logo != null)
+              ContentImage(
+                ref: content.logo,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ListTile(
               leading: const Icon(Icons.event),
               title: Text(content.title),
@@ -47,13 +55,14 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                 children: [
                   Text(
                       '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
-                  Text(content.location,
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  if (content.venue != null)
+                    Text(content.venue!.title,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
                   if (content.url != null)
                     Row(
                       spacing: 8,
                       children: [
-                        Icon(Icons.link),
+                        const Icon(Icons.link),
                         Expanded(child: Text(content.url!)),
                       ],
                     ),

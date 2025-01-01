@@ -9,6 +9,7 @@ part of 'session.dart';
 Session _$SessionFromJson(Map<String, dynamic> json) => Session(
       id: json['_id'] as String,
       title: json['title'] as String,
+      slug: json['slug'] as String?,
       description: json['description'] as String,
       duration: (json['duration'] as num).toInt(),
       format: $enumDecodeNullable(_$SessionFormatEnumMap, json['format']) ??

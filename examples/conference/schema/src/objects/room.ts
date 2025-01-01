@@ -6,11 +6,21 @@ export const room = defineType({
   type: 'object',
   fields: [
     defineField({
-      name: 'name',
-      title: 'Name',
+      name: 'title',
+      title: 'Title',
       type: 'string',
       validation: (Rule) => Rule.required(),
       initialValue: 'Room',
+    }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title',
+        maxLength: 64,
+      },
     }),
     defineField({
       name: 'description',
