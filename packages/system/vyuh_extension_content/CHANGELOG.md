@@ -1,3 +1,7 @@
+## 1.16.0
+
+ - **FEAT**: added the ability to supply a layout when calling buildContent() of the ContentPlugin.
+
 ## 1.15.2
 
  - **FIX**: updated the error message when a content builder is not found.

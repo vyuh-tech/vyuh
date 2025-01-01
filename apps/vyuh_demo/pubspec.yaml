@@ -22,9 +22,9 @@ dependencies:
   flutter_sanity_portable_text: ^1.5.1
 
   # Vyuh Framework
-  vyuh_core: ^1.31.0
-  vyuh_extension_content: ^1.15.2
-  vyuh_feature_system: ^1.32.4
+  vyuh_core: ^1.32.0
+  vyuh_extension_content: ^1.16.0
+  vyuh_feature_system: ^1.33.0
   vyuh_feature_developer: ^1.6.0
   vyuh_plugin_content_provider_sanity: ^1.9.3
   vyuh_feature_auth: ^1.15.1

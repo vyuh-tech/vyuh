@@ -1,3 +1,7 @@
+## 1.33.0
+
+ - **FEAT**: added the ability to supply a layout when calling buildContent() of the ContentPlugin.
+
 ## 1.32.4
 
  - **FIX**: adding ignore for _controller which will be exposed in a future release.
