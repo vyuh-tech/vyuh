@@ -31,7 +31,7 @@ class ConferenceApi {
   Future<List<Edition>?> getEditions({required String conferenceId}) async {
     final editions = await _provider.fetchMultiple(
       '''
-      *[_type == "${Edition.schemaName}" && conference._ref == \$conferenceId]{
+      *[_type == "${Edition.schemaName}" && references(\$conferenceId)]{
         ...,
         "slug": slug.current,
         "venue": venue->{
@@ -42,7 +42,7 @@ class ConferenceApi {
             "slug": slug.current
           }
         }
-      }
+      } | order(startDate desc)
     ''',
       queryParams: {
         'conferenceId': conferenceId,
@@ -53,24 +53,35 @@ class ConferenceApi {
     return editions;
   }
 
-  Future<List<Session>?> getSessions({required String editionId}) async {
+  Future<List<Session>?> getSessions({
+    required String editionId,
+    String? trackId,
+    String? speakerId,
+  }) async {
     final sessions = await _provider.fetchMultiple(
       '''
-      *[_type == "${Session.schemaName}" && edition._ref == \$editionId]{
+      *[
+        _type == "${Session.schemaName}" 
+        && references(\$editionId)
+        ${trackId != null ? '&& references(\$trackId)' : ''}
+        ${speakerId != null ? '&& references(\$speakerId)' : ''}
+      ]{
         ...,
         "slug": slug.current,
         "speakers": speakers[]->{
           ...,
-          "slug": slug.current
+          "slug": slug.current,
         },
         "tracks": tracks[]->{
           ...,
-          "slug": slug.current
-        },
-      }
+          "slug": slug.current,
+        }
+      } | order(startDate desc)
       ''',
       queryParams: {
         'editionId': editionId,
+        if (trackId != null) 'trackId': trackId,
+        if (speakerId != null) 'speakerId': speakerId,
       },
       fromJson: Session.fromJson,
     );
@@ -82,7 +93,7 @@ class ConferenceApi {
     final speakers = await _provider.fetchMultiple(
       '''
 *[_type == "${Speaker.schemaName}" && _id in array::unique(
-    *[_type == "${Session.schemaName}" && edition._ref == \$editionId] {
+    *[_type == "${Session.schemaName}" && references(\$editionId)] {
       "speakers": speakers[]->{_id}._id,
     }.speakers[]
   )
@@ -104,7 +115,7 @@ class ConferenceApi {
     final tracks = await _provider.fetchMultiple(
       '''
 *[_type == "${Track.schemaName}" && _id in array::unique(
-    *[_type == "${Session.schemaName}" && edition._ref == \$editionId] {
+    *[_type == "${Session.schemaName}" && references(\$editionId)] {
       "tracks": tracks[]->{_id}._id,
     }.tracks[]
   )
@@ -137,20 +148,6 @@ class ConferenceApi {
     );
 
     return sponsors;
-  }
-
-  Future<List<Venue>?> getVenues() async {
-    final venues = await _provider.fetchMultiple(
-      '''
-      *[_type == "${Venue.schemaName}"]{
-        ...,
-        "slug": slug.current
-      }
-      ''',
-      fromJson: Venue.fromJson,
-    );
-
-    return venues;
   }
 
   Future<Conference?> getConference({required String conferenceId}) async {
@@ -197,27 +194,35 @@ class ConferenceApi {
   }
 
   Future<Speaker?> getSpeaker({required String id}) async {
-    final speaker = await _provider.fetchSingle('''
+    final speaker = await _provider.fetchSingle(
+      '''
       *[_type == "${Speaker.schemaName}" && _id == \$id][0] {
         ...,
-        "slug": slug.current
+        "slug": slug.current,
       }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Speaker.fromJson);
+      ''',
+      queryParams: {'id': id},
+      fromJson: Speaker.fromJson,
+    );
+
     return speaker;
   }
 
   Future<Track?> getTrack({required String id}) async {
-    final track = await _provider.fetchSingle('''
-      *[_type == "${Track.schemaName}" && _id == \$id][0] {
-        ...,
-        "slug": slug.current
-      }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Track.fromJson);
-    return track;
+    final response = await _provider.fetchSingle(
+      '''
+        *[_type == "conf.track" && _id == \$trackId][0] {
+          _id,
+          title,
+          description,
+          "slug": slug.current,
+        }
+      ''',
+      queryParams: {'trackId': id},
+      fromJson: Track.fromJson,
+    );
+
+    return response;
   }
 
   Future<List<Room>?> getRooms({required String venueId}) async {

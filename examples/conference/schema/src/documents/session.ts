@@ -8,6 +8,13 @@ export const session = defineType({
   icon: Icon,
   fields: [
     defineField({
+      name: 'edition',
+      title: 'Edition',
+      type: 'reference',
+      to: [{ type: 'conf.edition' }],
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -82,13 +89,6 @@ export const session = defineType({
         ],
       },
     }),
-    defineField({
-      name: 'edition',
-      title: 'Edition',
-      type: 'reference',
-      to: [{ type: 'conf.edition' }],
-      validation: (Rule) => Rule.required(),
-    }),
   ],
   preview: {
     select: {
@@ -97,7 +97,7 @@ export const session = defineType({
       track: 'tracks[0].name',
       duration: 'duration',
     },
-    prepare({ title, speakers, track, duration}) {
+    prepare({ title, speakers, track, duration }) {
       const speakerCount = speakers?.length || 0;
       return {
         title,

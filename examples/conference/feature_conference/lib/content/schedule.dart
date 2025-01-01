@@ -1,4 +1,3 @@
-import 'package:feature_conference/content/session.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/plugin/content/reference.dart';
 

@@ -1,52 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/session.dart';
 import '../content/speaker.dart';
+import '../content/track.dart';
 
 part 'session_layout.g.dart';
-
-extension on SessionFormat {
-  Color get color {
-    switch (this) {
-      case SessionFormat.intro:
-        return Colors.green.shade600;
-      case SessionFormat.keynote:
-        return Colors.purple.shade600;
-      case SessionFormat.talk:
-        return Colors.blue.shade600;
-      case SessionFormat.workshop:
-        return Colors.orange.shade600;
-      case SessionFormat.panel:
-        return Colors.teal.shade600;
-      case SessionFormat.lightning:
-        return Colors.red.shade600;
-      case SessionFormat.breakout:
-        return Colors.indigo.shade600;
-      case SessionFormat.networking:
-        return Colors.pink.shade600;
-      case SessionFormat.outro:
-        return Colors.green.shade600;
-    }
-  }
-}
-
-extension on SessionLevel {
-  Color get color {
-    switch (this) {
-      case SessionLevel.beginner:
-        return Colors.green.shade600;
-      case SessionLevel.intermediate:
-        return Colors.orange.shade600;
-      case SessionLevel.advanced:
-        return Colors.red.shade600;
-      case SessionLevel.all:
-        return Colors.blue.shade600;
-    }
-  }
-}
 
 @JsonSerializable()
 final class SessionLayout extends LayoutConfiguration<Session> {
@@ -65,127 +27,199 @@ final class SessionLayout extends LayoutConfiguration<Session> {
 
   @override
   Widget build(BuildContext context, Session content) {
-    final theme = Theme.of(context);
-
     return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ListTile(
-            title: Text(content.title),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          spacing: 16,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _SessionHeader(content: content),
+            _SessionDetails(content: content),
+            if (content.speakers?.isNotEmpty ?? false)
+              _SpeakersList(speakers: content.speakers!),
+            if (content.tracks?.isNotEmpty ?? false)
+              _TracksList(tracks: content.tracks!),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SessionHeader extends StatelessWidget {
+  final Session content;
+
+  const _SessionHeader({required this.content});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: 8,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          content.title,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+        Row(
+          spacing: 16,
+          children: [
+            Row(
+              spacing: 4,
               children: [
-                Text(content.description),
-                const SizedBox(height: 8),
-                Wrap(
-                  spacing: 8,
-                  children: [
-                    Chip(
-                      label: Text(
-                        content.format.name.toUpperCase(),
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      backgroundColor: content.format.color,
-                    ),
-                    Chip(
-                      label: Text(
-                        content.level.name.toUpperCase(),
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      backgroundColor: content.level.color,
-                    ),
-                    Chip(
-                      avatar: Icon(
-                        Icons.timer,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        '${content.duration} min',
-                        style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
-                        ),
-                      ),
-                      backgroundColor: Colors.grey.shade700,
-                    ),
-                  ],
+                Icon(
+                  Icons.timer_outlined,
+                  size: 16,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
+                Text('${content.duration} minutes'),
               ],
             ),
-          ),
-          if (content.speakers != null)
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                spacing: 8,
-                children: [
-                  Text('Speakers',
-                      style: Theme.of(context).textTheme.titleMedium),
-                  ...content.speakers!.map((s) => _SpeakerWidget(s)),
-                ],
+            Chip(
+              avatar: Icon(
+                Icons.format_list_bulleted,
+                size: 16,
+                color: Theme.of(context).colorScheme.secondary,
               ),
+              label: Text(content.format.name),
             ),
-          if (content.tracks != null)
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text('Tracks',
-                      style: Theme.of(context).textTheme.titleMedium),
-                  Wrap(
-                    spacing: 8,
-                    alignment: WrapAlignment.start,
-                    direction: Axis.horizontal,
-                    children: [
-                      for (final track in content.tracks!)
-                        Chip(
-                          backgroundColor: theme.colorScheme.primaryContainer,
-                          label: Text(track.title),
-                          labelStyle: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
-                              color: theme.colorScheme.onPrimaryContainer),
-                          visualDensity: VisualDensity.compact,
-                          padding: EdgeInsets.zero,
-                        ),
-                    ],
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _SessionDetails extends StatelessWidget {
+  final Session content;
+
+  const _SessionDetails({required this.content});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(content.description);
+  }
+}
+
+class _SpeakersList extends StatelessWidget {
+  final List<Speaker> speakers;
+
+  const _SpeakersList({required this.speakers});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      spacing: 8,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Speakers',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: speakers
+              .map((speaker) => _SpeakerChip(speaker: speaker))
+              .toList(),
+        ),
+      ],
+    );
+  }
+}
+
+class _SpeakerChip extends StatelessWidget {
+  final Speaker speaker;
+
+  const _SpeakerChip({required this.speaker});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        final editionId =
+            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId =
+            GoRouterState.of(context).pathParameters['conferenceId']!;
+
+        vyuh.router.push(
+            '/conference/$conferenceId/editions/$editionId/speakers/${speaker.id}');
+      },
+      child: Row(
+        spacing: 4,
+        children: [
+          speaker.photo != null
+              ? ClipOval(
+                  child: ContentImage(
+                    ref: speaker.photo,
+                    width: 48,
+                    height: 48,
                   ),
-                ],
-              ),
-            ),
+                )
+              : ClipOval(
+                  child: SizedBox(
+                    width: 48,
+                    height: 48,
+                    child: Text(
+                      speaker.name[0],
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                  ),
+                ),
+          Text(speaker.name),
         ],
       ),
     );
   }
 }
 
-class _SpeakerWidget extends StatelessWidget {
-  final Speaker speaker;
+class _TracksList extends StatelessWidget {
+  final List<Track> tracks;
 
-  const _SpeakerWidget(this.speaker);
+  const _TracksList({required this.tracks});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       spacing: 8,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (speaker.photo != null)
-          ClipOval(
-            child: ContentImage(
-              ref: speaker.photo,
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            ),
-          ),
-        Text(speaker.name),
+        Text(
+          'Tracks',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: tracks.map((track) => _TrackChip(track: track)).toList(),
+        ),
       ],
+    );
+  }
+}
+
+class _TrackChip extends StatelessWidget {
+  final Track track;
+
+  const _TrackChip({required this.track});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        final editionId =
+            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId =
+            GoRouterState.of(context).pathParameters['conferenceId']!;
+
+        vyuh.router.push(
+            '/conference/$conferenceId/editions/$editionId/tracks/${track.id}');
+      },
+      child: Chip(
+        avatar: const Icon(Icons.view_column),
+        label: Text(track.title),
+      ),
     );
   }
 }

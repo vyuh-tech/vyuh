@@ -26,6 +26,8 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
 
   @override
   Widget build(BuildContext context, Edition content) {
+    final theme = Theme.of(context);
+
     return GestureDetector(
       onTap: () {
         vyuh.router.push(
@@ -56,8 +58,16 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                   Text(
                       '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
                   if (content.venue != null)
-                    Text(content.venue!.title,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Column(
+                      spacing: 4,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(content.venue!.title,
+                            style: theme.textTheme.titleMedium),
+                        if (content.venue!.address != null)
+                          Text(content.venue!.address!.state),
+                      ],
+                    ),
                   if (content.url != null)
                     Row(
                       spacing: 8,

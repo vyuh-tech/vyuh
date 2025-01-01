@@ -27,7 +27,8 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
   Widget build(BuildContext context, Venue content) {
     final theme = Theme.of(context);
 
-    return Card(
+    return Card.outlined(
+      clipBehavior: Clip.antiAlias,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

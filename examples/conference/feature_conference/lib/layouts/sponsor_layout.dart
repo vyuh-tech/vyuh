@@ -6,21 +6,6 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 part 'sponsor_layout.g.dart';
 
-extension on SponsorLevel {
-  Color get color {
-    switch (this) {
-      case SponsorLevel.platinum:
-        return Colors.grey.shade700;
-      case SponsorLevel.gold:
-        return Colors.amber.shade700;
-      case SponsorLevel.silver:
-        return Colors.grey.shade500;
-      case SponsorLevel.bronze:
-        return Colors.brown.shade400;
-    }
-  }
-}
-
 @JsonSerializable()
 final class SponsorLayout extends LayoutConfiguration<Sponsor> {
   static const schemaName = '${Sponsor.schemaName}.layout.default';
