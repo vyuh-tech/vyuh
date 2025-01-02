@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-class ConferenceRouteScaffold<T> extends StatelessWidget {
-  final Future<T?> future;
+class ConferenceRouteScaffold<T> extends StatefulWidget {
+  final Future<T?> Function() future;
   final Widget Function(BuildContext context, T data) builder;
   final String errorTitle;
 
@@ -14,17 +14,41 @@ class ConferenceRouteScaffold<T> extends StatelessWidget {
   });
 
   @override
+  State<ConferenceRouteScaffold<T>> createState() =>
+      _ConferenceRouteScaffoldState<T>();
+}
+
+class _ConferenceRouteScaffoldState<T>
+    extends State<ConferenceRouteScaffold<T>> {
+  Future<T?>? _future;
+  @override
+  void initState() {
+    super.initState();
+
+    _future = widget.future();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        mini: true,
+        onPressed: () {
+          setState(() {
+            _future = widget.future();
+          });
+        },
+        child: Icon(Icons.refresh),
+      ),
       body: FutureBuilder<T?>(
-        future: future,
+        future: _future,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return builder(context, snapshot.data as T);
+            return widget.builder(context, snapshot.data as T);
           } else if (snapshot.hasError) {
             return vyuh.widgetBuilder.errorView(
               context,
-              title: errorTitle,
+              title: widget.errorTitle,
               error: snapshot.error!,
             );
           } else {

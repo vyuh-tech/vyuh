@@ -129,10 +129,17 @@ final class _ConferenceRoot extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Conference>>(
       errorTitle: 'Failed to load Conferences',
-      future: vyuh.di.get<ConferenceApi>().getConferences(),
+      future: () => vyuh.di.get<ConferenceApi>().getConferences(),
       builder: (context, conferences) {
         return ConferenceRouteCustomScrollView(
           title: 'Conferences',
+          appBarActions: [
+            IconButton(
+                onPressed: () {
+                  vyuh.router.go('/chakra');
+                },
+                icon: Icon(Icons.home))
+          ],
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
@@ -159,7 +166,7 @@ final class _ConferenceDetail extends StatelessWidget {
 
     return ConferenceRouteScaffold<List<Edition>>(
       errorTitle: 'Failed to load Editions',
-      future:
+      future: () =>
           vyuh.di.get<ConferenceApi>().getEditions(conferenceId: identifier),
       builder: (context, editions) {
         return ConferenceRouteCustomScrollView(
@@ -233,7 +240,7 @@ final class _EditionDetail extends StatelessWidget {
 
     return ConferenceRouteScaffold<Edition>(
       errorTitle: 'Failed to load Edition',
-      future: vyuh.di.get<ConferenceApi>().getEdition(id: editionId),
+      future: () => vyuh.di.get<ConferenceApi>().getEdition(id: editionId),
       builder: (context, edition) {
         return ConferenceRouteCustomScrollView(
           title: 'Edition',
@@ -266,7 +273,8 @@ final class _Sessions extends StatelessWidget {
 
     return ConferenceRouteScaffold<List<Session>>(
       errorTitle: 'Failed to load Sessions',
-      future: vyuh.di.get<ConferenceApi>().getSessions(editionId: editionId),
+      future: () =>
+          vyuh.di.get<ConferenceApi>().getSessions(editionId: editionId),
       builder: (context, sessions) {
         return ConferenceRouteCustomScrollView(
           title: 'Sessions (${sessions.length})',
@@ -314,7 +322,7 @@ final class _SessionDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<Session>(
       errorTitle: 'Failed to load Session',
-      future: vyuh.di.get<ConferenceApi>().getSession(id: sessionId),
+      future: () => vyuh.di.get<ConferenceApi>().getSession(id: sessionId),
       builder: (context, session) {
         return ConferenceRouteCustomScrollView(
           title: 'Session',
@@ -340,7 +348,8 @@ final class _Speakers extends StatelessWidget {
 
     return ConferenceRouteScaffold<List<Speaker>>(
       errorTitle: 'Failed to load Speakers',
-      future: vyuh.di.get<ConferenceApi>().getSpeakers(editionId: editionId),
+      future: () =>
+          vyuh.di.get<ConferenceApi>().getSpeakers(editionId: editionId),
       builder: (context, speakers) {
         return ConferenceRouteCustomScrollView(
           title: 'All Speakers',
@@ -397,7 +406,7 @@ final class _SpeakerDetail extends StatelessWidget {
 
     return ConferenceRouteScaffold<List>(
       errorTitle: 'Failed to load Speaker Details',
-      future: Future.wait([
+      future: () => Future.wait([
         vyuh.di.get<ConferenceApi>().getSpeaker(id: speakerId),
         vyuh.di
             .get<ConferenceApi>()
@@ -465,7 +474,8 @@ final class _Tracks extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Track>>(
       errorTitle: 'Failed to load Tracks',
-      future: vyuh.di.get<ConferenceApi>().getTracks(editionId: editionId),
+      future: () =>
+          vyuh.di.get<ConferenceApi>().getTracks(editionId: editionId),
       builder: (context, tracks) {
         return ConferenceRouteCustomScrollView(
           title: 'Tracks',
@@ -514,7 +524,7 @@ final class _TrackDetail extends StatelessWidget {
 
     return ConferenceRouteScaffold<List>(
       errorTitle: 'Failed to load Track Details',
-      future: Future.wait([
+      future: () => Future.wait([
         vyuh.di.get<ConferenceApi>().getTrack(id: trackId),
         vyuh.di
             .get<ConferenceApi>()
