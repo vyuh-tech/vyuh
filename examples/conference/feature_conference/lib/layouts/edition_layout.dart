@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
@@ -28,80 +27,92 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
   Widget build(BuildContext context, Edition content) {
     final theme = Theme.of(context);
 
-    return GestureDetector(
-      onTap: () {
-        vyuh.router.push(
-            '/conference/${content.conference.ref}/editions/${content.id}');
-      },
-      child: Card(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 16,
+      children: [
+        if (content.logo != null)
+          ContentImage(
+            ref: content.logo,
+            height: 200,
+            width: double.infinity,
+            fit: BoxFit.cover,
+          ),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(content.title),
+          titleTextStyle: theme.textTheme.headlineSmall,
+          subtitle: Text(content.tagline),
+        ),
+        Row(
+          spacing: 8,
           children: [
-            if (content.logo != null)
-              ContentImage(
-                ref: content.logo,
-                height: 200,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ListTile(
-              leading: const Icon(Icons.event),
-              title: Text(content.title),
-              subtitle: Text(content.tagline),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                spacing: 8,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                      '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
-                  if (content.venue != null)
-                    Column(
-                      spacing: 4,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(content.venue!.title,
-                            style: theme.textTheme.titleMedium),
-                        if (content.venue!.address != null)
-                          Text(content.venue!.address!.state),
-                      ],
-                    ),
-                  if (content.url != null)
-                    Row(
-                      spacing: 8,
-                      children: [
-                        const Icon(Icons.link),
-                        Expanded(child: Text(content.url!)),
-                      ],
-                    ),
-                ],
-              ),
-            ),
-            OverflowBar(
-              children: [
-                TextButton.icon(
-                  onPressed: () {
-                    context.push(
-                        '/conference/${content.conference.ref}/editions/${content.id}/speakers');
-                  },
-                  icon: const Icon(Icons.people),
-                  label: const Text('Speakers'),
-                ),
-                TextButton.icon(
-                  onPressed: () {
-                    context.push(
-                        '/conference/${content.conference.ref}/editions/${content.id}/tracks');
-                  },
-                  icon: const Icon(Icons.view_column),
-                  label: const Text('Tracks'),
-                ),
-              ],
-            ),
+            const Icon(Icons.event),
+            Text(
+                '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
           ],
         ),
-      ),
+        if (content.url != null)
+          Row(
+            spacing: 8,
+            children: [
+              const Icon(Icons.link),
+              Expanded(child: Text(content.url!)),
+            ],
+          ),
+        if (content.venue != null) ...[
+          Text('Venue', style: theme.textTheme.titleLarge),
+          vyuh.content.buildContent(context, content.venue!),
+        ],
+        if (content.sponsors?.isNotEmpty ?? false) ...[
+          Text('Sponsors', style: theme.textTheme.titleLarge),
+          GridView.builder(
+            padding: EdgeInsets.zero,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 1,
+            ),
+            itemCount: content.sponsors!.length,
+            itemBuilder: (context, index) {
+              final sponsor = content.sponsors![index];
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    spacing: 4,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ContentImage(
+                        ref: sponsor.sponsor?.logo,
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.contain,
+                      ),
+                      Text(
+                        sponsor.sponsor?.name ?? 'Sponsor',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Text(
+                        sponsor.level.name.toUpperCase(),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: theme.textTheme.labelMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ],
     );
   }
 }

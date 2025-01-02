@@ -1,5 +1,6 @@
 import 'package:chakra_shared/chakra_plugin_auth.dart';
 import 'package:design_system/design_system.dart';
+import 'package:feature_conference/feature_conference.dart' as conference;
 import 'package:feature_counter/feature_counter.dart' as counter;
 import 'package:feature_food/feature_food.dart' as food;
 import 'package:feature_misc/feature_misc.dart' as misc;
@@ -42,6 +43,7 @@ void main() async {
       unsplash.feature,
       onboarding.feature,
       auth.feature(),
+      conference.feature,
     ],
     platformWidgetBuilder:
         vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {

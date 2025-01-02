@@ -9,7 +9,7 @@ part of 'sponsor.dart';
 Sponsor _$SponsorFromJson(Map<String, dynamic> json) => Sponsor(
       id: json['_id'] as String,
       name: json['name'] as String,
-      slug: json['slug.current'] as String,
+      slug: json['slug'] as String,
       logo: json['logo'] == null
           ? null
           : ImageReference.fromJson(json['logo'] as Map<String, dynamic>),

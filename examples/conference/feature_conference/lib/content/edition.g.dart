@@ -10,7 +10,7 @@ EditionSponsor _$EditionSponsorFromJson(Map<String, dynamic> json) =>
     EditionSponsor(
       sponsor: json['sponsor'] == null
           ? null
-          : ObjectReference.fromJson(json['sponsor'] as Map<String, dynamic>),
+          : Sponsor.fromJson(json['sponsor'] as Map<String, dynamic>),
       level: $enumDecodeNullable(_$SponsorLevelEnumMap, json['level']) ??
           SponsorLevel.bronze,
     );

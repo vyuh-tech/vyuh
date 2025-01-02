@@ -27,22 +27,17 @@ final class SessionLayout extends LayoutConfiguration<Session> {
 
   @override
   Widget build(BuildContext context, Session content) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          spacing: 16,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _SessionHeader(content: content),
-            _SessionDetails(content: content),
-            if (content.speakers?.isNotEmpty ?? false)
-              _SpeakersList(speakers: content.speakers!),
-            if (content.tracks?.isNotEmpty ?? false)
-              _TracksList(tracks: content.tracks!),
-          ],
-        ),
-      ),
+    return Column(
+      spacing: 16,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _SessionHeader(content: content),
+        _SessionDetails(content: content),
+        if (content.speakers?.isNotEmpty ?? false)
+          _SpeakersList(speakers: content.speakers!),
+        if (content.tracks?.isNotEmpty ?? false)
+          _TracksList(tracks: content.tracks!),
+      ],
     );
   }
 }

@@ -58,7 +58,7 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
                   const SizedBox(height: 8),
                   Text(
                     content.bio!,
-                    style: Theme.of(context).textTheme.bodySmall,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
                 if (content.social != null) ...[

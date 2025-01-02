@@ -10,7 +10,7 @@ part 'edition.g.dart';
 
 @JsonSerializable()
 class EditionSponsor {
-  final ObjectReference? sponsor;
+  final Sponsor? sponsor;
   final SponsorLevel level;
 
   EditionSponsor({

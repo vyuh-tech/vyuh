@@ -25,15 +25,17 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
           backgroundColor: Colors.white30,
         ),
     contentLoader: (_) => const Center(
-            child: Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              RepaintBoundary(child: CircularProgressIndicator()),
-              PoweredByWidget(),
-            ],
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                RepaintBoundary(child: CircularProgressIndicator()),
+                PoweredByWidget(),
+              ],
+            ),
           ),
-        )),
+        ),
     imagePlaceholder: (_, {width, height}) => Container(
           width: width,
           height: height,
@@ -55,13 +57,15 @@ final defaultPlatformWidgetBuilder = PlatformWidgetBuilder(
       stackTrace,
       showRestart = true,
     }) =>
-        _ErrorView(
-          title: title,
-          subtitle: subtitle,
-          error: error,
-          stackTrace: stackTrace,
-          retryLabel: retryLabel,
-          onRetry: onRetry,
+        Center(
+          child: _ErrorView(
+            title: title,
+            subtitle: subtitle,
+            error: error,
+            stackTrace: stackTrace,
+            retryLabel: retryLabel,
+            onRetry: onRetry,
+          ),
         ),
     routeErrorView: (
       _, {

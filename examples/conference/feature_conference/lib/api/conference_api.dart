@@ -28,20 +28,35 @@ class ConferenceApi {
     return conferences;
   }
 
+  Future<Conference?> getConference({required String conferenceId}) async {
+    final conference = await _provider.fetchSingle(
+      '''
+      *[_type == "${Conference.schemaName}" && _id == \$conferenceId]{
+        ...,
+        "slug": slug.current
+      }[0]
+      ''',
+      queryParams: {
+        'conferenceId': conferenceId,
+      },
+      fromJson: Conference.fromJson,
+    );
+
+    return conference;
+  }
+
   Future<List<Edition>?> getEditions({required String conferenceId}) async {
     final editions = await _provider.fetchMultiple(
       '''
       *[_type == "${Edition.schemaName}" && references(\$conferenceId)]{
         ...,
         "slug": slug.current,
+        "sponsors": null,
         "venue": venue->{
-          ...,
+          _id,
+          title,
           "slug": slug.current,
-          "rooms": rooms[]->{
-            ...,
-            "slug": slug.current
-          }
-        }
+        },
       } | order(startDate desc)
     ''',
       queryParams: {
@@ -51,6 +66,33 @@ class ConferenceApi {
     );
 
     return editions;
+  }
+
+  Future<Edition?> getEdition({required String id}) async {
+    final edition = await _provider.fetchSingle('''
+      *[_type == "${Edition.schemaName}" && _id == \$id][0] {
+        ...,
+        "slug": slug.current,
+        "venue": venue->{
+          ...,
+          "slug": slug.current,
+          "rooms": rooms[]->{
+            ...,
+            "slug": slug.current
+          }
+        },
+        "sponsors": sponsors[]{
+          ...,
+          "sponsor": sponsor->{
+            ...,
+            "slug": slug.current
+          },
+        }
+      }
+    ''', queryParams: {
+      'id': id,
+    }, fromJson: Edition.fromJson);
+    return edition;
   }
 
   Future<List<Session>?> getSessions({
@@ -89,6 +131,27 @@ class ConferenceApi {
     return sessions;
   }
 
+  Future<Session?> getSession({required String id}) async {
+    final session = await _provider.fetchSingle('''
+      *[_type == "${Session.schemaName}" && _id == \$id][0] {
+        ...,
+        "slug": slug.current,
+        "slug": slug.current,
+        "speakers": speakers[]->{
+          ...,
+          "slug": slug.current,
+        },
+        "tracks": tracks[]->{
+          ...,
+          "slug": slug.current,
+        }
+      }
+    ''', queryParams: {
+      'id': id,
+    }, fromJson: Session.fromJson);
+    return session;
+  }
+
   Future<List<Speaker>?> getSpeakers({required String editionId}) async {
     final speakers = await _provider.fetchMultiple(
       '''
@@ -109,6 +172,21 @@ class ConferenceApi {
     );
 
     return speakers;
+  }
+
+  Future<Speaker?> getSpeaker({required String id}) async {
+    final speaker = await _provider.fetchSingle(
+      '''
+      *[_type == "${Speaker.schemaName}" && _id == \$id][0] {
+        ...,
+        "slug": slug.current,
+      }
+      ''',
+      queryParams: {'id': id},
+      fromJson: Speaker.fromJson,
+    );
+
+    return speaker;
   }
 
   Future<List<Track>?> getTracks({required String editionId}) async {
@@ -133,81 +211,6 @@ class ConferenceApi {
     return tracks;
   }
 
-  Future<List<Sponsor>?> getSponsors({required String editionId}) async {
-    final sponsors = await _provider.fetchMultiple(
-      '''
-      *[_type == "${Sponsor.schemaName}" && references(\$editionId)]{
-        ...,
-        "slug": slug.current
-      }
-      ''',
-      queryParams: {
-        'editionId': editionId,
-      },
-      fromJson: Sponsor.fromJson,
-    );
-
-    return sponsors;
-  }
-
-  Future<Conference?> getConference({required String conferenceId}) async {
-    final conference = await _provider.fetchSingle(
-      '''
-      *[_type == "${Conference.schemaName}" && _id == \$conferenceId]{
-        ...,
-        "slug": slug.current
-      }[0]
-      ''',
-      queryParams: {
-        'conferenceId': conferenceId,
-      },
-      fromJson: Conference.fromJson,
-    );
-
-    return conference;
-  }
-
-  Future<Edition?> getEdition({required String id}) async {
-    final edition = await _provider.fetchSingle('''
-      *[_type == "${Edition.schemaName}" && _id == \$id][0] {
-        ...,
-        "slug": slug.current
-      }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Edition.fromJson);
-    return edition;
-  }
-
-  Future<Session?> getSession({required String id}) async {
-    final session = await _provider.fetchSingle('''
-      *[_type == "${Session.schemaName}" && _id == \$id][0] {
-        ...,
-        "slug": slug.current,
-        "speakers": speakers[]->,
-        "tracks": tracks[]->
-      }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Session.fromJson);
-    return session;
-  }
-
-  Future<Speaker?> getSpeaker({required String id}) async {
-    final speaker = await _provider.fetchSingle(
-      '''
-      *[_type == "${Speaker.schemaName}" && _id == \$id][0] {
-        ...,
-        "slug": slug.current,
-      }
-      ''',
-      queryParams: {'id': id},
-      fromJson: Speaker.fromJson,
-    );
-
-    return speaker;
-  }
-
   Future<Track?> getTrack({required String id}) async {
     final response = await _provider.fetchSingle(
       '''
@@ -223,6 +226,23 @@ class ConferenceApi {
     );
 
     return response;
+  }
+
+  Future<List<Sponsor>?> getSponsors({required String editionId}) async {
+    final sponsors = await _provider.fetchMultiple(
+      '''
+      *[_type == "${Sponsor.schemaName}" && references(\$editionId)]{
+        ...,
+        "slug": slug.current
+      }
+      ''',
+      queryParams: {
+        'editionId': editionId,
+      },
+      fromJson: Sponsor.fromJson,
+    );
+
+    return sponsors;
   }
 
   Future<List<Room>?> getRooms({required String venueId}) async {
