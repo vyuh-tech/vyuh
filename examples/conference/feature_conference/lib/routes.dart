@@ -188,8 +188,20 @@ final class _Speakers extends StatelessWidget {
               itemCount: speakers.length,
               itemBuilder: (context, index) {
                 final speaker = speakers[index];
-                return vyuh.content
-                    .buildContent(context, speaker, layout: speakerLayout);
+                return GestureDetector(
+                  onTap: () {
+                    final conferenceId = GoRouterState.of(context)
+                        .pathParameters['conferenceId']!;
+                    final editionId =
+                        GoRouterState.of(context).pathParameters['editionId']!;
+
+                    vyuh.router.push(
+                      '/conference/$conferenceId/editions/$editionId/speakers/${speaker.id}',
+                    );
+                  },
+                  child: vyuh.content
+                      .buildContent(context, speaker, layout: speakerLayout),
+                );
               },
             );
           } else if (snapshot.hasError) {
@@ -228,7 +240,19 @@ final class _Tracks extends StatelessWidget {
               itemCount: tracks.length,
               itemBuilder: (context, index) {
                 final track = tracks[index];
-                return vyuh.content.buildContent(context, track);
+                return GestureDetector(
+                  onTap: () {
+                    final conferenceId = GoRouterState.of(context)
+                        .pathParameters['conferenceId']!;
+                    final editionId =
+                        GoRouterState.of(context).pathParameters['editionId']!;
+
+                    vyuh.router.push(
+                      '/conference/$conferenceId/editions/$editionId/tracks/${track.id}',
+                    );
+                  },
+                  child: vyuh.content.buildContent(context, track),
+                );
               },
             );
           } else if (snapshot.hasError) {
