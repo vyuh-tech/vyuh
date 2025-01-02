@@ -1,3 +1,7 @@
+## 1.32.1
+
+ - **FIX**: centering the contentLoader inside its container.
+
 ## 1.32.0
 
  - **FEAT**: added the ability to supply a layout when calling buildContent() of the ContentPlugin.
