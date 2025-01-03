@@ -39,7 +39,7 @@ final class Room {
     required this.title,
     required this.slug,
     this.description,
-    required this.capacity,
+    this.capacity = 50,
     this.floor = 1,
     this.facilities,
   });

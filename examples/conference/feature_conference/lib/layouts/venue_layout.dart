@@ -104,33 +104,11 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
+                spacing: 8,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Rooms',
-                          style: Theme.of(context).textTheme.titleMedium),
-                      Chip(
-                        avatar: Icon(
-                          Icons.meeting_room,
-                          color: Colors.white,
-                          size: 16,
-                        ),
-                        label: Text(
-                          '${content.rooms!.length}',
-                          style: theme.textTheme.labelSmall?.copyWith(
-                            color: Colors.white,
-                          ),
-                        ),
-                        backgroundColor: Colors.blue.shade600,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  ...content.rooms!.map((r) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8.0),
-                        child: RoomLayout(room: r),
-                      )),
+                  Text('Rooms (${content.rooms!.length})',
+                      style: Theme.of(context).textTheme.titleMedium),
+                  ...content.rooms!.map((r) => RoomLayout(room: r)),
                 ],
               ),
             ),

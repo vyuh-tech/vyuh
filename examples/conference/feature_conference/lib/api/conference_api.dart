@@ -76,9 +76,9 @@ class ConferenceApi {
         "venue": venue->{
           ...,
           "slug": slug.current,
-          "rooms": rooms[]->{
+          "rooms": rooms[]{
             ...,
-            "slug": slug.current
+            "slug": slug.current,
           }
         },
         "sponsors": sponsors[]{

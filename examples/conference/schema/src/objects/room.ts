@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from 'sanity';
 
 export const room = defineType({
   name: 'conf.room',
@@ -18,7 +18,10 @@ export const room = defineType({
       type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
-        source: 'title',
+        source: (doc, options) => {
+          // @ts-ignore
+          return options.parent.title || '';
+        }, // eslint-disable-line no-unused-vars
         maxLength: 64,
       },
     }),
@@ -45,20 +48,20 @@ export const room = defineType({
       name: 'facilities',
       title: 'Facilities',
       type: 'array',
-      of: [{type: 'string'}],
+      of: [{ type: 'string' }],
       options: {
         list: [
-          {title: 'Audio System', value: 'audio'},
-          {title: 'Video Projector', value: 'projector'},
-          {title: 'Whiteboard', value: 'whiteboard'},
-          {title: 'Internet/WiFi', value: 'wifi'},
-          {title: 'Video Recording', value: 'recording'},
-          {title: 'Live Streaming', value: 'streaming'},
-          {title: 'Wheelchair Accessible', value: 'accessible'},
-          {title: 'Power Outlets', value: 'power'},
-          {title: 'Air Conditioning', value: 'ac'},
+          { title: 'Audio System', value: 'audio' },
+          { title: 'Video Projector', value: 'projector' },
+          { title: 'Whiteboard', value: 'whiteboard' },
+          { title: 'Internet/WiFi', value: 'wifi' },
+          { title: 'Video Recording', value: 'recording' },
+          { title: 'Live Streaming', value: 'streaming' },
+          { title: 'Wheelchair Accessible', value: 'accessible' },
+          { title: 'Power Outlets', value: 'power' },
+          { title: 'Air Conditioning', value: 'ac' },
         ],
       },
     }),
   ],
-})
+});

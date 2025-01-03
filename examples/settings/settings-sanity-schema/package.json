@@ -3,8 +3,8 @@
   "main": "index.tsx",
   "private": true,
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^1.33.2",
-    "@vyuh/sanity-schema-system": "^1.33.2",
+    "@vyuh/sanity-schema-core": "^1.33.3",
+    "@vyuh/sanity-schema-system": "^1.33.3",
     "react": "^18.3.1",
     "react-icons": "^5.4.0",
     "sanity": "^3.68.3"
