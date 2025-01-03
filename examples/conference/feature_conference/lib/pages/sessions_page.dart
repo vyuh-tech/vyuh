@@ -15,7 +15,7 @@ final class SessionsPage extends StatelessWidget {
     return ConferenceRouteScaffold<List<Session>>(
       errorTitle: 'Failed to load Sessions',
       future: () =>
-          vyuh.di.get<ConferenceApi>().getSessions(editionId: editionId),
+          vyuh.di.get<ConferenceApi>().sessions(editionId: editionId),
       builder: (context, sessions) {
         return ConferenceRouteCustomScrollView(
           title: 'Sessions',

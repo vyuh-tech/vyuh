@@ -22,9 +22,9 @@ final class TrackDetailPage extends StatelessWidget {
       errorTitle: 'Failed to load Track',
       future: () async {
         final api = vyuh.di.get<ConferenceApi>();
-        final track = await api.getTrack(id: trackId);
+        final track = await api.track(id: trackId);
         final sessions =
-            await api.getSessions(editionId: editionId, trackId: trackId);
+            await api.sessions(editionId: editionId, trackId: trackId);
 
         return (track!, sessions);
       },

@@ -17,7 +17,7 @@ final class ConferenceDetailPage extends StatelessWidget {
     return ConferenceRouteScaffold<List<Edition>>(
       errorTitle: 'Failed to load Editions',
       future: () =>
-          vyuh.di.get<ConferenceApi>().getEditions(conferenceId: identifier),
+          vyuh.di.get<ConferenceApi>().editions(conferenceId: identifier),
       builder: (context, editions) {
         return ConferenceRouteCustomScrollView(
           title: 'Editions',

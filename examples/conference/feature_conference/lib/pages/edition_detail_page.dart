@@ -14,7 +14,7 @@ final class EditionDetailPage extends StatelessWidget {
 
     return ConferenceRouteScaffold<Edition>(
       errorTitle: 'Failed to load Edition',
-      future: () => vyuh.di.get<ConferenceApi>().getEdition(id: identifier),
+      future: () => vyuh.di.get<ConferenceApi>().edition(id: identifier),
       builder: (context, edition) {
         final theme = Theme.of(context);
 

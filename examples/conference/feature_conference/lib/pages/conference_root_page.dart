@@ -11,7 +11,7 @@ final class ConferenceRootPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Conference>>(
       errorTitle: 'Failed to load Conferences',
-      future: () => vyuh.di.get<ConferenceApi>().getConferences(),
+      future: () => vyuh.di.get<ConferenceApi>().conferences(),
       builder: (context, conferences) {
         return ConferenceRouteCustomScrollView(
           title: 'Conferences',

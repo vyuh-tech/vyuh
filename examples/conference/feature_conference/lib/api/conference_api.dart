@@ -14,7 +14,7 @@ class ConferenceApi {
 
   ConferenceApi(this._provider);
 
-  Future<List<Conference>?> getConferences() async {
+  Future<List<Conference>> conferences() async {
     final conferences = await _provider.fetchMultiple(
       '''
 *[_type == "${Conference.schemaName}"]{
@@ -25,10 +25,10 @@ class ConferenceApi {
       fromJson: Conference.fromJson,
     );
 
-    return conferences;
+    return conferences ?? [];
   }
 
-  Future<Conference?> getConference({required String conferenceId}) async {
+  Future<Conference?> conference({required String conferenceId}) async {
     final conference = await _provider.fetchSingle(
       '''
       *[_type == "${Conference.schemaName}" && _id == \$conferenceId]{
@@ -45,7 +45,7 @@ class ConferenceApi {
     return conference;
   }
 
-  Future<List<Edition>> getEditions({required String conferenceId}) async {
+  Future<List<Edition>> editions({required String conferenceId}) async {
     final editions = await _provider.fetchMultiple(
       '''
       *[_type == "${Edition.schemaName}" && references(\$conferenceId)]{
@@ -68,7 +68,7 @@ class ConferenceApi {
     return editions ?? [];
   }
 
-  Future<Edition?> getEdition({required String id}) async {
+  Future<Edition?> edition({required String id}) async {
     final edition = await _provider.fetchSingle('''
       *[_type == "${Edition.schemaName}" && _id == \$id][0] {
         ...,
@@ -95,7 +95,7 @@ class ConferenceApi {
     return edition;
   }
 
-  Future<List<Session>> getSessions({
+  Future<List<Session>> sessions({
     required String editionId,
     String? trackId,
     String? speakerId,
@@ -131,7 +131,7 @@ class ConferenceApi {
     return sessions ?? [];
   }
 
-  Future<Session?> getSession({required String id}) async {
+  Future<Session?> session({required String id}) async {
     final session = await _provider.fetchSingle('''
       *[_type == "${Session.schemaName}" && _id == \$id][0] {
         ...,
@@ -153,7 +153,7 @@ class ConferenceApi {
     return session;
   }
 
-  Future<List<Speaker>> getSpeakers({required String editionId}) async {
+  Future<List<Speaker>> speakers({required String editionId}) async {
     final speakers = await _provider.fetchMultiple(
       '''
 *[_type == "${Speaker.schemaName}" && _id in array::unique(
@@ -175,7 +175,7 @@ class ConferenceApi {
     return speakers ?? [];
   }
 
-  Future<Speaker?> getSpeaker({required String id}) async {
+  Future<Speaker?> speaker({required String id}) async {
     final speaker = await _provider.fetchSingle(
       '''
       *[_type == "${Speaker.schemaName}" && _id == \$id][0] {
@@ -190,7 +190,7 @@ class ConferenceApi {
     return speaker;
   }
 
-  Future<List<Track>> getTracks({required String editionId}) async {
+  Future<List<Track>> tracks({required String editionId}) async {
     final tracks = await _provider.fetchMultiple(
       '''
 *[_type == "${Track.schemaName}" && _id in array::unique(
@@ -200,9 +200,9 @@ class ConferenceApi {
   )
 ]{
   ...,
-  "slug": slug.current
+  "slug": slug.current,
 }
-      ''',
+    ''',
       queryParams: {
         'editionId': editionId,
       },
@@ -212,24 +212,22 @@ class ConferenceApi {
     return tracks ?? [];
   }
 
-  Future<Track?> getTrack({required String id}) async {
-    final response = await _provider.fetchSingle(
+  Future<Track?> track({required String id}) async {
+    final track = await _provider.fetchSingle(
       '''
-        *[_type == "conf.track" && _id == \$trackId][0] {
-          _id,
-          title,
-          description,
-          "slug": slug.current,
-        }
+      *[_type == "${Track.schemaName}" && _id == \$id][0] {
+        ...,
+        "slug": slug.current,
+      }
       ''',
-      queryParams: {'trackId': id},
+      queryParams: {'id': id},
       fromJson: Track.fromJson,
     );
 
-    return response;
+    return track;
   }
 
-  Future<List<Sponsor>>? getSponsors({required String editionId}) async {
+  Future<List<Sponsor>>? sponsors({required String editionId}) async {
     final sponsors = await _provider.fetchMultiple(
       '''
       *[_type == "${Sponsor.schemaName}" && references(\$editionId)]{
@@ -246,7 +244,7 @@ class ConferenceApi {
     return sponsors ?? [];
   }
 
-  Future<List<Room>> getRooms({required String venueId}) async {
+  Future<List<Room>> rooms({required String venueId}) async {
     final rooms = await _provider.fetchMultiple(
       '''
       *[_type == "${Venue.schemaName}" && _id == \$venueId]{

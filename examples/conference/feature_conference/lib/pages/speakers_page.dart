@@ -15,7 +15,7 @@ final class SpeakersPage extends StatelessWidget {
     return ConferenceRouteScaffold<List<Speaker>>(
       errorTitle: 'Failed to load Speakers',
       future: () =>
-          vyuh.di.get<ConferenceApi>().getSpeakers(editionId: editionId),
+          vyuh.di.get<ConferenceApi>().speakers(editionId: editionId),
       builder: (context, speakers) {
         return ConferenceRouteCustomScrollView(
           title: 'Speakers',

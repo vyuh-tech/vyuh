@@ -22,9 +22,9 @@ final class SpeakerDetailPage extends StatelessWidget {
       errorTitle: 'Failed to load Speaker',
       future: () async {
         final api = vyuh.di.get<ConferenceApi>();
-        final speaker = await api.getSpeaker(id: speakerId);
+        final speaker = await api.speaker(id: speakerId);
         final sessions =
-            await api.getSessions(editionId: editionId, speakerId: speakerId);
+            await api.sessions(editionId: editionId, speakerId: speakerId);
 
         return (speaker!, sessions);
       },

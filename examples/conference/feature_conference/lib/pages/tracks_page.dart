@@ -14,7 +14,7 @@ final class TracksPage extends StatelessWidget {
     return ConferenceRouteScaffold<List<Track>>(
       errorTitle: 'Failed to load Tracks',
       future: () =>
-          vyuh.di.get<ConferenceApi>().getTracks(editionId: editionId),
+          vyuh.di.get<ConferenceApi>().tracks(editionId: editionId),
       builder: (context, tracks) {
         return ConferenceRouteCustomScrollView(
           title: 'Tracks',
