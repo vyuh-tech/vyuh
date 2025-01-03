@@ -17,6 +17,7 @@ final class SessionDetailPage extends StatelessWidget {
       builder: (context, session) {
         return ConferenceRouteCustomScrollView(
           title: 'Session',
+          subtitle: session.title,
           sliver: SliverToBoxAdapter(
             child: vyuh.content.buildContent(context, session),
           ),

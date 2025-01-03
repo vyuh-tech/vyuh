@@ -52,7 +52,7 @@ class _ConferenceRouteScaffoldState<T>
               error: snapshot.error!,
             );
           } else {
-            return vyuh.widgetBuilder.contentLoader(context);
+            return vyuh.widgetBuilder.routeLoader(context);
           }
         },
       ),

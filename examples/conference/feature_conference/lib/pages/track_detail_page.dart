@@ -29,21 +29,19 @@ final class TrackDetailPage extends StatelessWidget {
         return (track!, sessions);
       },
       builder: (context, data) {
+        final theme = Theme.of(context);
         final (track, sessions) = data;
 
         return ConferenceRouteCustomScrollView(
-          title: track.title,
+          title: 'Track',
+          subtitle: track.title,
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              vyuh.content.buildContent(context, track),
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: Text(
-                  'Sessions',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  'Sessions (${sessions.length})',
+                  style: theme.textTheme.titleMedium,
                 ),
               ),
               ...sessions.map(

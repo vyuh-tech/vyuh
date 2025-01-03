@@ -59,11 +59,11 @@ Future<List<RouteBase>> routes() async {
     GoRoute(
       path: '/conferences/:conferenceId/editions/:editionId',
       redirect: (context, state) {
-        final expectedSegments = ['overview', 'sessions', 'speakers', 'tracks'];
+        final suffixes = ['overview', 'sessions', 'speakers', 'tracks'];
 
-        // Potential paths will be .../[expectedSegment] OR .../[expectedSegment]/:id
-        if (expectedSegments.contains(state.uri.pathSegments.last) ||
-            expectedSegments.contains(state.uri.pathSegments
+        // Potential paths will be .../[suffix] OR .../[suffix]/:id
+        if (suffixes.contains(state.uri.pathSegments.last) ||
+            suffixes.contains(state.uri.pathSegments
                 .elementAt(state.uri.pathSegments.length - 2))) {
           return state.uri.toString();
         }

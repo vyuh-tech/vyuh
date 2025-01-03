@@ -1,8 +1,8 @@
+import 'package:feature_conference/layouts/speaker_chip_layout.dart';
+import 'package:feature_conference/layouts/track_chip_layout.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/session.dart';
 import '../content/speaker.dart';
@@ -55,7 +55,7 @@ class _SessionHeader extends StatelessWidget {
       children: [
         Text(
           content.title,
-          style: Theme.of(context).textTheme.titleLarge,
+          style: Theme.of(context).textTheme.headlineSmall,
         ),
         Row(
           spacing: 16,
@@ -105,7 +105,7 @@ class _SpeakersList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 8,
+      spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -113,58 +113,17 @@ class _SpeakersList extends StatelessWidget {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         Wrap(
-          spacing: 8,
-          runSpacing: 8,
+          spacing: 16,
+          runSpacing: 16,
           children: speakers
-              .map((speaker) => _SpeakerChip(speaker: speaker))
+              .map((speaker) => vyuh.content.buildContent(
+                    context,
+                    speaker,
+                    layout: SpeakerChipLayout(),
+                  ))
               .toList(),
         ),
       ],
-    );
-  }
-}
-
-class _SpeakerChip extends StatelessWidget {
-  final Speaker speaker;
-
-  const _SpeakerChip({required this.speaker});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-
-        vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/speakers/${speaker.id}');
-      },
-      child: Row(
-        spacing: 4,
-        children: [
-          speaker.photo != null
-              ? ClipOval(
-                  child: ContentImage(
-                    ref: speaker.photo,
-                    width: 48,
-                    height: 48,
-                  ),
-                )
-              : ClipOval(
-                  child: SizedBox(
-                    width: 48,
-                    height: 48,
-                    child: Text(
-                      speaker.name[0],
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                ),
-          Text(speaker.name),
-        ],
-      ),
     );
   }
 }
@@ -177,7 +136,7 @@ class _TracksList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      spacing: 8,
+      spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -187,34 +146,15 @@ class _TracksList extends StatelessWidget {
         Wrap(
           spacing: 8,
           runSpacing: 8,
-          children: tracks.map((track) => _TrackChip(track: track)).toList(),
+          children: tracks
+              .map((track) => vyuh.content.buildContent(
+                    context,
+                    track,
+                    layout: TrackChipLayout(),
+                  ))
+              .toList(),
         ),
       ],
-    );
-  }
-}
-
-class _TrackChip extends StatelessWidget {
-  final Track track;
-
-  const _TrackChip({required this.track});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-
-        vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/tracks/${track.id}');
-      },
-      child: Chip(
-        avatar: const Icon(Icons.view_column),
-        label: Text(track.title),
-      ),
     );
   }
 }

@@ -23,39 +23,24 @@ final class SponsorLayout extends LayoutConfiguration<Sponsor> {
 
   @override
   Widget build(BuildContext context, Sponsor content) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (content.logo != null)
-              Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: ContentImage(
-                  ref: content.logo!,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.contain,
-                ),
-              ),
-            Text(
-              content.name,
-              style: Theme.of(context).textTheme.headlineSmall,
-            ),
-            const SizedBox(height: 8),
-            if (content.url != null) ...[
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {
-                  // Add url launch functionality
-                },
-                child: Text('Visit Website'),
-              ),
-            ],
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      spacing: 8,
+      children: [
+        if (content.logo != null)
+          ContentImage(
+            ref: content.logo!,
+            width: 100,
+            height: 100,
+            fit: BoxFit.contain,
+          ),
+        Text(
+          content.name,
+          style: Theme.of(context).textTheme.titleSmall,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
-      ),
+      ],
     );
   }
 }

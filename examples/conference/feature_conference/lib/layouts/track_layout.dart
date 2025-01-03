@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/ui/content_image.dart';
 
 import '../content/track.dart';
 
@@ -32,6 +33,7 @@ final class TrackLayout extends LayoutConfiguration<Track> {
             GoRouterState.of(context).pathParameters['conferenceId']!;
         final editionId =
             GoRouterState.of(context).pathParameters['editionId']!;
+
         vyuh.router.push(
             '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}');
       },
@@ -39,12 +41,23 @@ final class TrackLayout extends LayoutConfiguration<Track> {
         clipBehavior: Clip.antiAlias,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            spacing: 16,
             children: [
-              Text(
-                content.title,
-                style: theme.textTheme.titleLarge,
+              ClipOval(
+                clipBehavior: Clip.antiAlias,
+                child: ContentImage(
+                  ref: content.icon,
+                  height: 48,
+                  width: 48,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  content.title,
+                  style: theme.textTheme.titleLarge,
+                ),
               ),
             ],
           ),

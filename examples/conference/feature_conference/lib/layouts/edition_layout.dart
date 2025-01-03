@@ -1,3 +1,4 @@
+import 'package:feature_conference/content/sponsor.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -7,6 +8,17 @@ import '../content/edition.dart';
 import '../utils.dart';
 
 part 'edition_layout.g.dart';
+
+extension on SponsorLevel {
+  Color get color {
+    return switch (this) {
+      SponsorLevel.platinum => Colors.black,
+      SponsorLevel.gold => Colors.amber,
+      SponsorLevel.silver => Colors.grey.shade400,
+      SponsorLevel.bronze => Colors.brown.shade300,
+    };
+  }
+}
 
 @JsonSerializable()
 final class EditionLayout extends LayoutConfiguration<Edition> {
@@ -86,24 +98,25 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                     spacing: 4,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      ContentImage(
-                        ref: sponsor.sponsor?.logo,
-                        width: 100,
-                        height: 100,
-                        fit: BoxFit.contain,
-                      ),
-                      Text(
-                        sponsor.sponsor?.name ?? 'Sponsor',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        sponsor.level.name.toUpperCase(),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      vyuh.content.buildContent(context, sponsor.sponsor!),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        spacing: 4,
+                        children: [
+                          Icon(
+                            Icons.star,
+                            size: 16,
+                            color: sponsor.level.color,
+                          ),
+                          Text(
+                            sponsor.level.name.toUpperCase(),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: theme.textTheme.labelMedium?.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

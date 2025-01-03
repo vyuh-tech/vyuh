@@ -38,10 +38,10 @@ class RoomLayout extends StatelessWidget {
                       label: Text(
                         '${room.capacity}',
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
+                          color: theme.colorScheme.onSecondary,
                         ),
                       ),
-                      backgroundColor: Colors.blue.shade600,
+                      backgroundColor: theme.colorScheme.secondary,
                     ),
                     Chip(
                       avatar: Icon(
@@ -51,10 +51,10 @@ class RoomLayout extends StatelessWidget {
                       label: Text(
                         'Floor ${room.floor}',
                         style: theme.textTheme.labelSmall?.copyWith(
-                          color: Colors.white,
+                          color: theme.colorScheme.onSecondary,
                         ),
                       ),
-                      backgroundColor: Colors.teal.shade600,
+                      backgroundColor: theme.colorScheme.secondary,
                     ),
                   ],
                 ),

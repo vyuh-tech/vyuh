@@ -3,7 +3,6 @@ import 'package:feature_conference/content/speaker.dart';
 import 'package:feature_conference/layouts/speaker_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class SpeakersPage extends StatelessWidget {
@@ -20,6 +19,7 @@ final class SpeakersPage extends StatelessWidget {
       builder: (context, speakers) {
         return ConferenceRouteCustomScrollView(
           title: 'Speakers',
+          subtitle: '(${speakers.length})',
           sliver: SliverGrid(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,

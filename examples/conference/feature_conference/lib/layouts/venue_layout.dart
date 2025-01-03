@@ -32,11 +32,14 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
       spacing: 16,
       children: [
         if (content.image != null)
-          AspectRatio(
-            aspectRatio: 16 / 9,
-            child: ContentImage(
-              ref: content.image!,
-              fit: BoxFit.cover,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: AspectRatio(
+              aspectRatio: 16 / 9,
+              child: ContentImage(
+                ref: content.image!,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ListTile(

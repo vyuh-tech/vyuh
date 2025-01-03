@@ -32,14 +32,15 @@ final class SpeakerDetailPage extends StatelessWidget {
         final (speaker, sessions) = data;
 
         return ConferenceRouteCustomScrollView(
-          title: speaker.name,
+          title: 'Speaker',
+          subtitle: speaker.name,
           sliver: SliverList(
             delegate: SliverChildListDelegate([
               vyuh.content.buildContent(context, speaker),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
-                  'Sessions',
+                  'Sessions (${sessions.length})',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

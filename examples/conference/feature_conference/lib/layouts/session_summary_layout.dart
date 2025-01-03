@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/session.dart';
-import '../content/speaker.dart';
-import '../content/track.dart';
+import '../layouts/speaker_chip_layout.dart';
+import '../layouts/track_chip_layout.dart';
 
 part 'session_summary_layout.g.dart';
 
@@ -31,9 +30,13 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId = GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId = GoRouterState.of(context).pathParameters['editionId']!;
-        vyuh.router.push('/conferences/$conferenceId/editions/$editionId/sessions/${content.id}');
+        final conferenceId =
+            GoRouterState.of(context).pathParameters['conferenceId']!;
+        final editionId =
+            GoRouterState.of(context).pathParameters['editionId']!;
+
+        vyuh.router.push(
+            '/conferences/$conferenceId/editions/$editionId/sessions/${content.id}');
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -47,122 +50,33 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
                 content.title,
                 style: theme.textTheme.titleMedium,
               ),
-              if (content.speakers?.isNotEmpty ?? false) ...[
-                _SpeakersList(speakers: content.speakers!),
-              ],
+              if (content.speakers?.isNotEmpty ?? false)
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 8,
+                  children: content.speakers!
+                      .map((speaker) => vyuh.content.buildContent(
+                            context,
+                            speaker,
+                            layout: SpeakerChipLayout(mini: true),
+                          ))
+                      .toList(),
+                ),
               if (content.tracks?.isNotEmpty ?? false)
-                _TracksList(tracks: content.tracks!),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: content.tracks!
+                      .map((track) => vyuh.content.buildContent(
+                            context,
+                            track,
+                            layout: TrackChipLayout(),
+                          ))
+                      .toList(),
+                ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _SpeakersList extends StatelessWidget {
-  final List<Speaker> speakers;
-
-  const _SpeakersList({required this.speakers});
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 16,
-      runSpacing: 8,
-      children:
-          speakers.map((speaker) => _SpeakerChip(speaker: speaker)).toList(),
-    );
-  }
-}
-
-class _SpeakerChip extends StatelessWidget {
-  final Speaker speaker;
-
-  const _SpeakerChip({required this.speaker});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: () {
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-
-        vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/speakers/${speaker.id}');
-      },
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (speaker.photo != null)
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: ClipOval(
-                child: ContentImage(
-                  ref: speaker.photo,
-                  width: 32,
-                  height: 32,
-                ),
-              ),
-            )
-          else
-            Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: Icon(Icons.person,
-                  size: 32, color: theme.colorScheme.secondary),
-            ),
-          Text(speaker.name),
-        ],
-      ),
-    );
-  }
-}
-
-class _TracksList extends StatelessWidget {
-  final List<Track> tracks;
-
-  const _TracksList({required this.tracks});
-
-  @override
-  Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 8,
-      runSpacing: 8,
-      children: tracks.map((track) => _TrackChip(track: track)).toList(),
-    );
-  }
-}
-
-class _TrackChip extends StatelessWidget {
-  final Track track;
-
-  const _TrackChip({required this.track});
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return GestureDetector(
-      onTap: () {
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-
-        vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/tracks/${track.id}');
-      },
-      child: Chip(
-        visualDensity: VisualDensity.compact,
-        backgroundColor: theme.colorScheme.surfaceDim,
-        side: BorderSide.none,
-        label: Text(track.title),
-        padding: EdgeInsets.zero,
-        labelStyle: TextStyle(color: theme.colorScheme.onSurface),
       ),
     );
   }

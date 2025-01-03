@@ -16,8 +16,17 @@ final class EditionDetailPage extends StatelessWidget {
       errorTitle: 'Failed to load Edition',
       future: () => vyuh.di.get<ConferenceApi>().getEdition(id: identifier),
       builder: (context, edition) {
+        final theme = Theme.of(context);
+
         return ConferenceRouteCustomScrollView(
-          title: edition.title,
+          title: 'Edition',
+          subtitle: edition.title,
+          appBarActions: [
+            IconButton(
+              icon: Icon(Icons.home, color: theme.colorScheme.onPrimary),
+              onPressed: () => context.go('/conferences'),
+            ),
+          ],
           sliver: SliverToBoxAdapter(
             child: vyuh.content.buildContent(context, edition),
           ),

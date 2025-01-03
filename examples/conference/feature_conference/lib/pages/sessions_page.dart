@@ -3,7 +3,6 @@ import 'package:feature_conference/content/session.dart';
 import 'package:feature_conference/layouts/session_summary_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class SessionsPage extends StatelessWidget {
@@ -20,6 +19,7 @@ final class SessionsPage extends StatelessWidget {
       builder: (context, sessions) {
         return ConferenceRouteCustomScrollView(
           title: 'Sessions',
+          subtitle: '(${sessions.length})',
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {

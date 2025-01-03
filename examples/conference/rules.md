@@ -128,7 +128,14 @@
    ```dart
    @JsonSerializable()
    class MyLayout extends LayoutConfiguration {
-     const MyLayout();
+     static const schemaName = '${MyContent.schemaName}.layout.default';
+     static final typeDescriptor = TypeDescriptor(
+       schemaType: schemaName,
+       fromJson: MyLayout.fromJson,
+       title: 'My Layout',
+     );
+
+     MyLayout() : super(schemaType: schemaName);
      
      factory MyLayout.fromJson(Map<String, dynamic> json) => 
        _$MyLayoutFromJson(json);
@@ -140,10 +147,19 @@
    }
    ```
 
-2. **Layout Guidelines**
+2. **Layout Rules**
+   - Never use const constructors for layouts
+   - Never include toJson methods
+   - Always use ContentImage widget for ImageReference
+   - Always include static schemaName and typeDescriptor fields
+   - Pass schemaType with schemaName value in constructor
+   - TypeDescriptor must include schemaType, fromJson, and title parameters
+   - Schema names must follow pattern: `${ContentItem.schemaName}.layout.[variant]`
+     where variant is 'default', 'chip', etc.
+
+3. **Layout Guidelines**
    - Extend `LayoutConfiguration`
    - Keep layouts focused on presentation
-   - Use `ContentImage` for image references
    - Implement responsive layouts using Flutter's layout system
    - Use theme colors and text styles for consistency
 
@@ -199,41 +215,12 @@
 
 ### State Management
 1. **Scaffold Pattern**
-   ```dart
-   MyRouteScaffold<T>(
-     errorTitle: 'Error Message',
-     future: () => api.getData(),
-     builder: (context, data) => widget,
-   )
-   ```
+   - Use `ScaffoldMessenger` for snackbars and bottom sheets
+   - Maintain state at appropriate widget level
+   - Implement proper loading and error states
 
-2. **Data Loading**
-   - Use `FutureBuilder` for async data
-   - Provide proper error handling
-   - Show loading indicators
-   - Enable refresh functionality
-
-### Best Practices
-1. **Code Organization**
-   - Keep files focused and single-purpose
-   - Use proper naming conventions
-   - Implement proper error handling
-   - Follow Flutter's style guide
-
-2. **Performance**
-   - Minimize unnecessary rebuilds
-   - Use const constructors where possible
-   - Implement pagination for large lists
-   - Cache network resources appropriately
-
-3. **Accessibility**
-   - Use semantic labels
-   - Ensure proper contrast
-   - Support screen readers
-   - Handle different text scales
-
-4. **Testing**
-   - Write unit tests for models
-   - Write widget tests for layouts
-   - Test error scenarios
-   - Test navigation flows
+2. **Error Handling**
+   - Display user-friendly error messages
+   - Log errors appropriately
+   - Provide recovery options where possible
+   - Handle network errors gracefully

@@ -2,6 +2,7 @@ import 'package:feature_conference/api/conference_api.dart';
 import 'package:feature_conference/content/edition.dart';
 import 'package:feature_conference/content/session.dart';
 import 'package:feature_conference/content/speaker.dart';
+import 'package:feature_conference/content/sponsor.dart';
 import 'package:feature_conference/content/track.dart';
 import 'package:feature_conference/content/venue.dart';
 import 'package:feature_conference/routes.dart';
@@ -27,6 +28,7 @@ final feature = FeatureDescriptor(
       Speaker.contentBuilder,
       Track.contentBuilder,
       Venue.contentBuilder,
+      Sponsor.contentBuilder,
     ]),
   ],
   routes: routes,
