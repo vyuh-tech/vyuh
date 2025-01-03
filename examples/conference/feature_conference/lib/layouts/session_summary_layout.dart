@@ -29,24 +29,31 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
   Widget build(BuildContext context, Session content) {
     final theme = Theme.of(context);
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          spacing: 16,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              content.title,
-              style: theme.textTheme.titleMedium,
-            ),
-            if (content.speakers?.isNotEmpty ?? false) ...[
-              _SpeakersList(speakers: content.speakers!),
+    return GestureDetector(
+      onTap: () {
+        final conferenceId = GoRouterState.of(context).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(context).pathParameters['editionId']!;
+        vyuh.router.push('/conferences/$conferenceId/editions/$editionId/sessions/${content.id}');
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            spacing: 16,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                content.title,
+                style: theme.textTheme.titleMedium,
+              ),
+              if (content.speakers?.isNotEmpty ?? false) ...[
+                _SpeakersList(speakers: content.speakers!),
+              ],
+              if (content.tracks?.isNotEmpty ?? false)
+                _TracksList(tracks: content.tracks!),
             ],
-            if (content.tracks?.isNotEmpty ?? false)
-              _TracksList(tracks: content.tracks!),
-          ],
+          ),
         ),
       ),
     );
@@ -86,7 +93,7 @@ class _SpeakerChip extends StatelessWidget {
             GoRouterState.of(context).pathParameters['conferenceId']!;
 
         vyuh.router.push(
-            '/conference/$conferenceId/editions/$editionId/speakers/${speaker.id}');
+            '/conferences/$conferenceId/editions/$editionId/speakers/${speaker.id}');
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -147,7 +154,7 @@ class _TrackChip extends StatelessWidget {
             GoRouterState.of(context).pathParameters['conferenceId']!;
 
         vyuh.router.push(
-            '/conference/$conferenceId/editions/$editionId/tracks/${track.id}');
+            '/conferences/$conferenceId/editions/$editionId/tracks/${track.id}');
       },
       child: Chip(
         visualDensity: VisualDensity.compact,

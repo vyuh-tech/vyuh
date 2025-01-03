@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/track.dart';
 
@@ -26,27 +26,29 @@ final class TrackLayout extends LayoutConfiguration<Track> {
   Widget build(BuildContext context, Track content) {
     final theme = Theme.of(context);
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Row(
-        spacing: 8,
-        children: [
-          if (content.icon != null)
-            SizedBox(
-              width: 64,
-              height: 64,
-              child: ContentImage(
-                ref: content.icon!,
-                fit: BoxFit.contain,
+    return GestureDetector(
+      onTap: () {
+        final conferenceId =
+            GoRouterState.of(context).pathParameters['conferenceId']!;
+        final editionId =
+            GoRouterState.of(context).pathParameters['editionId']!;
+        vyuh.router.push(
+            '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}');
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                content.title,
+                style: theme.textTheme.titleLarge,
               ),
-            ),
-          Expanded(
-            child: Text(
-              content.title,
-              style: theme.textTheme.titleMedium,
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

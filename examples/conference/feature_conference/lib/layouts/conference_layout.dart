@@ -26,7 +26,7 @@ final class ConferenceLayout extends LayoutConfiguration<Conference> {
   Widget build(BuildContext context, Conference content) {
     return GestureDetector(
       onTap: () {
-        vyuh.router.push('/conference/${content.id}');
+        vyuh.router.push('/conferences/${content.id}');
       },
       child: Card(
         child: Column(

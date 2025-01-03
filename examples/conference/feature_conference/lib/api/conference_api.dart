@@ -45,7 +45,7 @@ class ConferenceApi {
     return conference;
   }
 
-  Future<List<Edition>?> getEditions({required String conferenceId}) async {
+  Future<List<Edition>> getEditions({required String conferenceId}) async {
     final editions = await _provider.fetchMultiple(
       '''
       *[_type == "${Edition.schemaName}" && references(\$conferenceId)]{
@@ -65,7 +65,7 @@ class ConferenceApi {
       fromJson: Edition.fromJson,
     );
 
-    return editions;
+    return editions ?? [];
   }
 
   Future<Edition?> getEdition({required String id}) async {
@@ -95,7 +95,7 @@ class ConferenceApi {
     return edition;
   }
 
-  Future<List<Session>?> getSessions({
+  Future<List<Session>> getSessions({
     required String editionId,
     String? trackId,
     String? speakerId,
@@ -128,7 +128,7 @@ class ConferenceApi {
       fromJson: Session.fromJson,
     );
 
-    return sessions;
+    return sessions ?? [];
   }
 
   Future<Session?> getSession({required String id}) async {
@@ -149,10 +149,11 @@ class ConferenceApi {
     ''', queryParams: {
       'id': id,
     }, fromJson: Session.fromJson);
+
     return session;
   }
 
-  Future<List<Speaker>?> getSpeakers({required String editionId}) async {
+  Future<List<Speaker>> getSpeakers({required String editionId}) async {
     final speakers = await _provider.fetchMultiple(
       '''
 *[_type == "${Speaker.schemaName}" && _id in array::unique(
@@ -171,7 +172,7 @@ class ConferenceApi {
       fromJson: Speaker.fromJson,
     );
 
-    return speakers;
+    return speakers ?? [];
   }
 
   Future<Speaker?> getSpeaker({required String id}) async {
@@ -189,7 +190,7 @@ class ConferenceApi {
     return speaker;
   }
 
-  Future<List<Track>?> getTracks({required String editionId}) async {
+  Future<List<Track>> getTracks({required String editionId}) async {
     final tracks = await _provider.fetchMultiple(
       '''
 *[_type == "${Track.schemaName}" && _id in array::unique(
@@ -208,7 +209,7 @@ class ConferenceApi {
       fromJson: Track.fromJson,
     );
 
-    return tracks;
+    return tracks ?? [];
   }
 
   Future<Track?> getTrack({required String id}) async {
@@ -228,7 +229,7 @@ class ConferenceApi {
     return response;
   }
 
-  Future<List<Sponsor>?> getSponsors({required String editionId}) async {
+  Future<List<Sponsor>>? getSponsors({required String editionId}) async {
     final sponsors = await _provider.fetchMultiple(
       '''
       *[_type == "${Sponsor.schemaName}" && references(\$editionId)]{
@@ -242,10 +243,10 @@ class ConferenceApi {
       fromJson: Sponsor.fromJson,
     );
 
-    return sponsors;
+    return sponsors ?? [];
   }
 
-  Future<List<Room>?> getRooms({required String venueId}) async {
+  Future<List<Room>> getRooms({required String venueId}) async {
     final rooms = await _provider.fetchMultiple(
       '''
       *[_type == "${Venue.schemaName}" && _id == \$venueId]{
@@ -258,6 +259,6 @@ class ConferenceApi {
       fromJson: Room.fromJson,
     );
 
-    return rooms;
+    return rooms ?? [];
   }
 }

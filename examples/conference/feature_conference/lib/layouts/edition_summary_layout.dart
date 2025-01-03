@@ -28,7 +28,7 @@ final class EditionSummaryLayout extends LayoutConfiguration<Edition> {
       onTap: () {
         final conferenceId =
             GoRouterState.of(context).pathParameters['conferenceId']!;
-        vyuh.router.go('/conference/$conferenceId/editions/${content.id}');
+        vyuh.router.go('/conferences/$conferenceId/editions/${content.id}');
       },
       child: Card(
         child: Padding(

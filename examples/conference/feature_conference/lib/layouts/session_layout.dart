@@ -139,7 +139,7 @@ class _SpeakerChip extends StatelessWidget {
             GoRouterState.of(context).pathParameters['conferenceId']!;
 
         vyuh.router.push(
-            '/conference/$conferenceId/editions/$editionId/speakers/${speaker.id}');
+            '/conferences/$conferenceId/editions/$editionId/speakers/${speaker.id}');
       },
       child: Row(
         spacing: 4,
@@ -209,7 +209,7 @@ class _TrackChip extends StatelessWidget {
             GoRouterState.of(context).pathParameters['conferenceId']!;
 
         vyuh.router.push(
-            '/conference/$conferenceId/editions/$editionId/tracks/${track.id}');
+            '/conferences/$conferenceId/editions/$editionId/tracks/${track.id}');
       },
       child: Chip(
         avatar: const Icon(Icons.view_column),

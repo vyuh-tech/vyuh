@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -25,82 +26,71 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
 
   @override
   Widget build(BuildContext context, Speaker content) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (content.photo != null)
-            AspectRatio(
-              aspectRatio: 1,
-              child: ContentImage(
-                ref: content.photo!,
-                fit: BoxFit.cover,
-              ),
-            ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  content.name,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                if (content.tagline != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    content.tagline!,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-                if (content.bio != null) ...[
-                  const SizedBox(height: 8),
-                  Text(
-                    content.bio!,
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-                if (content.social != null) ...[
-                  const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      if (content.social!.twitter != null)
-                        IconButton(
-                          icon: const Icon(Icons.flutter_dash),
-                          onPressed: () =>
-                              launchUrlString(content.social!.twitterUrl!),
-                          tooltip: 'Twitter',
-                        ),
-                      if (content.social!.github != null)
-                        IconButton(
-                          icon: const Icon(Icons.code),
-                          onPressed: () =>
-                              launchUrlString(content.social!.githubUrl!),
-                          tooltip: 'GitHub',
-                        ),
-                      if (content.social!.linkedin != null)
-                        IconButton(
-                          icon: const Icon(Icons.work),
-                          onPressed: () =>
-                              launchUrlString(content.social!.linkedinUrl!),
-                          tooltip: 'LinkedIn',
-                        ),
-                      if (content.social!.website != null)
-                        IconButton(
-                          icon: const Icon(Icons.language),
-                          onPressed: () =>
-                              launchUrlString(content.social!.website!),
-                          tooltip: 'Website',
-                        ),
-                    ],
-                  ),
-                ],
-              ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: 16,
+      children: [
+        if (content.photo != null)
+          AspectRatio(
+            aspectRatio: 1,
+            child: ContentImage(
+              ref: content.photo!,
+              fit: BoxFit.cover,
             ),
           ),
-        ],
-      ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              content.name,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
+            if (content.tagline != null)
+              Text(
+                content.tagline!,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            if (content.bio != null)
+              Text(
+                content.bio!,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            if (content.social != null)
+              Row(
+                children: [
+                  if (content.social!.twitter != null)
+                    IconButton(
+                      icon: const Icon(Icons.flutter_dash),
+                      onPressed: () =>
+                          launchUrlString(content.social!.twitterUrl!),
+                      tooltip: 'Twitter',
+                    ),
+                  if (content.social!.github != null)
+                    IconButton(
+                      icon: const Icon(Icons.code),
+                      onPressed: () =>
+                          launchUrlString(content.social!.githubUrl!),
+                      tooltip: 'GitHub',
+                    ),
+                  if (content.social!.linkedin != null)
+                    IconButton(
+                      icon: const Icon(Icons.work),
+                      onPressed: () =>
+                          launchUrlString(content.social!.linkedinUrl!),
+                      tooltip: 'LinkedIn',
+                    ),
+                  if (content.social!.website != null)
+                    IconButton(
+                      icon: const Icon(Icons.language),
+                      onPressed: () =>
+                          launchUrlString(content.social!.website!),
+                      tooltip: 'Website',
+                    ),
+                ],
+              ),
+          ],
+        ),
+      ],
     );
   }
 }
@@ -124,38 +114,46 @@ final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
   Widget build(BuildContext context, Speaker content) {
     final theme = Theme.of(context);
 
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (content.photo != null)
-            AspectRatio(
-              aspectRatio: 1,
-              child: ContentImage(
-                ref: content.photo!,
-                fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        final conferenceId =
+            GoRouterState.of(context).pathParameters['conferenceId']!;
+        final editionId =
+            GoRouterState.of(context).pathParameters['editionId']!;
+
+        vyuh.router.push(
+            '/conferences/$conferenceId/editions/$editionId/speakers/${content.id}');
+      },
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (content.photo != null)
+              AspectRatio(
+                aspectRatio: 1,
+                child: ContentImage(
+                  ref: content.photo!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 8,
+                children: [
+                  Text(
+                    content.name,
+                    style: theme.textTheme.titleMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
               ),
             ),
-          Padding(
-            padding: const EdgeInsets.all(8),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              spacing: 8,
-              children: [
-                Text(
-                  content.name,
-                  style: theme.textTheme.titleMedium,
-                ),
-                if (content.tagline != null)
-                  Text(
-                    content.tagline!,
-                    style: theme.textTheme.bodySmall,
-                  ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
