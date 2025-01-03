@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-auth",
-  "version": "1.28.1",
+  "version": "1.28.2",
   "description": "Schemas for configuring Authentication on Sanity CMS when using the Vyuh Framework",
   "homepage": "https://vyuh.tech",
   "repository": {
@@ -36,9 +36,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^1.33.3",
-    "@vyuh/sanity-schema-forms": "^1.33.3",
-    "@vyuh/sanity-schema-system": "^1.33.3",
+    "@vyuh/sanity-schema-core": "^1.33.4",
+    "@vyuh/sanity-schema-forms": "^1.33.4",
+    "@vyuh/sanity-schema-system": "^1.33.4",
     "lodash-es": "^4.17.21",
     "react-icons": "^5.4.0",
     "sanity": "^3.68.3"

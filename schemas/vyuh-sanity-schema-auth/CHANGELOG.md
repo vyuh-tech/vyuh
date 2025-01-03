@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.28.2
+
+### Patch Changes
+
+- package updates
+
 ## 1.28.1
 
 ### Patch Changes
