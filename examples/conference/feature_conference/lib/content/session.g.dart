@@ -10,7 +10,10 @@ Session _$SessionFromJson(Map<String, dynamic> json) => Session(
       id: json['_id'] as String,
       title: json['title'] as String,
       slug: json['slug'] as String?,
-      description: json['description'] as String,
+      description: json['description'] == null
+          ? null
+          : PortableTextContent.fromJson(
+              json['description'] as Map<String, dynamic>),
       duration: (json['duration'] as num).toInt(),
       format: $enumDecodeNullable(_$SessionFormatEnumMap, json['format']) ??
           SessionFormat.talk,

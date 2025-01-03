@@ -2,6 +2,7 @@ import 'package:feature_conference/layouts/session_layout.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/content/index.dart';
 
 import '../content/speaker.dart';
 import '../content/track.dart';
@@ -48,7 +49,7 @@ class Session extends ContentItem {
 
   final String title;
   final String? slug;
-  final String description;
+  final PortableTextContent? description;
   final int duration;
   final SessionFormat format;
   final SessionLevel level;
@@ -62,7 +63,7 @@ class Session extends ContentItem {
     required this.id,
     required this.title,
     this.slug,
-    required this.description,
+    this.description,
     required this.duration,
     this.format = SessionFormat.talk,
     this.level = SessionLevel.all,

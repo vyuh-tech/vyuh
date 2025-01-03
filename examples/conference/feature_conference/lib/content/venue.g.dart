@@ -6,25 +6,14 @@ part of 'venue.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VenueAddress _$VenueAddressFromJson(Map<String, dynamic> json) => VenueAddress(
-      street: json['street'] as String,
-      city: json['city'] as String,
-      state: json['state'] as String,
-      country: json['country'] as String,
-      postalCode: json['postalCode'] as String,
-    );
-
-VenueCoordinates _$VenueCoordinatesFromJson(Map<String, dynamic> json) =>
-    VenueCoordinates(
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-    );
-
 Venue _$VenueFromJson(Map<String, dynamic> json) => Venue(
       id: json['_id'] as String,
       title: json['title'] as String? ?? 'Conference Center',
       slug: json['slug'] as String,
-      description: json['description'] as String?,
+      description: json['description'] == null
+          ? null
+          : PortableTextContent.fromJson(
+              json['description'] as Map<String, dynamic>),
       address: json['address'] == null
           ? null
           : VenueAddress.fromJson(json['address'] as Map<String, dynamic>),
@@ -75,3 +64,17 @@ const _$VenueAmenityEnumMap = {
   VenueAmenity.prayerRoom: 'prayer-room',
   VenueAmenity.lounge: 'lounge',
 };
+
+VenueAddress _$VenueAddressFromJson(Map<String, dynamic> json) => VenueAddress(
+      street: json['street'] as String,
+      city: json['city'] as String,
+      state: json['state'] as String,
+      country: json['country'] as String,
+      postalCode: json['postalCode'] as String,
+    );
+
+VenueCoordinates _$VenueCoordinatesFromJson(Map<String, dynamic> json) =>
+    VenueCoordinates(
+      latitude: (json['latitude'] as num).toDouble(),
+      longitude: (json['longitude'] as num).toDouble(),
+    );

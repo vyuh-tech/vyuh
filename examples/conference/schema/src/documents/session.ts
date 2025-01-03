@@ -33,7 +33,7 @@ export const session = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'vyuh.portableText',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

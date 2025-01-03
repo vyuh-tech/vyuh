@@ -19,7 +19,7 @@ class ConferenceApi {
       '''
 *[_type == "${Conference.schemaName}"]{
   ...,
-  "slug": slug.current
+  "slug": slug.current,
 }
 ''',
       fromJson: Conference.fromJson,

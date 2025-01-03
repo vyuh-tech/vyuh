@@ -49,9 +49,8 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 8,
             children: [
-              if (content.description != null) ...[
-                Text(content.description!),
-              ],
+              if (content.description != null)
+                vyuh.content.buildContent(context, content.description!),
               if (content.address != null) Text(content.address!.formatted),
               if (content.website != null ||
                   content.phone != null ||

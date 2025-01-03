@@ -93,7 +93,9 @@ class _SessionDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(content.description);
+    return content.description != null
+        ? vyuh.content.buildContent(context, content.description!)
+        : SizedBox.shrink();
   }
 }
 

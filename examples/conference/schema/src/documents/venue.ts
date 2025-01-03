@@ -25,7 +25,7 @@ export const venue = defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'vyuh.portableText',
     }),
     defineField({
       name: 'image',

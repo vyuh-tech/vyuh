@@ -5,6 +5,7 @@ import 'package:feature_conference/layouts/session_summary_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/ui/content_image.dart';
 
 final class TrackDetailPage extends StatelessWidget {
   final String trackId;
@@ -37,8 +38,14 @@ final class TrackDetailPage extends StatelessWidget {
           subtitle: track.title,
           sliver: SliverList(
             delegate: SliverChildListDelegate([
+              if (track.icon != null)
+                Card(
+                    clipBehavior: Clip.antiAlias,
+                    child:
+                        ContentImage(ref: track.icon, height: 150, width: 150)),
+              Text(track.title, style: theme.textTheme.headlineSmall),
               Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
                   'Sessions (${sessions.length})',
                   style: theme.textTheme.titleMedium,

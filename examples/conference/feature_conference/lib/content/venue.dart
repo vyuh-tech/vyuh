@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 import '../layouts/venue_layout.dart';
 import 'room.dart';
@@ -109,6 +110,57 @@ enum VenueAmenity {
 }
 
 @JsonSerializable()
+class Venue extends ContentItem {
+  static const schemaName = 'conf.venue';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    fromJson: Venue.fromJson,
+    title: 'Venue',
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: typeDescriptor,
+    defaultLayout: VenueLayout(),
+    defaultLayoutDescriptor: VenueLayout.typeDescriptor,
+  );
+
+  @JsonKey(name: '_id')
+  final String id;
+
+  final String title;
+  final String slug;
+  final PortableTextContent? description;
+  final VenueAddress? address;
+  final VenueCoordinates? coordinates;
+  final String? website;
+  final String? phone;
+  final String? email;
+  final List<Room>? rooms;
+  final List<VenueAmenity>? amenities;
+  final ImageReference? image;
+
+  Venue({
+    required this.id,
+    this.title = 'Conference Center',
+    required this.slug,
+    this.description,
+    this.address,
+    this.coordinates,
+    this.website,
+    this.phone,
+    this.email,
+    this.rooms,
+    this.amenities,
+    this.image,
+    super.layout,
+    super.modifiers,
+  }) : super(schemaType: schemaName);
+
+  factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
+}
+
+@JsonSerializable()
 class VenueAddress {
   final String street;
   final String city;
@@ -142,55 +194,4 @@ class VenueCoordinates {
 
   factory VenueCoordinates.fromJson(Map<String, dynamic> json) =>
       _$VenueCoordinatesFromJson(json);
-}
-
-@JsonSerializable()
-class Venue extends ContentItem {
-  static const schemaName = 'conf.venue';
-
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    fromJson: Venue.fromJson,
-    title: 'Venue',
-  );
-
-  static final contentBuilder = ContentBuilder(
-    content: typeDescriptor,
-    defaultLayout: VenueLayout(),
-    defaultLayoutDescriptor: VenueLayout.typeDescriptor,
-  );
-
-  @JsonKey(name: '_id')
-  final String id;
-
-  final String title;
-  final String slug;
-  final String? description;
-  final VenueAddress? address;
-  final VenueCoordinates? coordinates;
-  final String? website;
-  final String? phone;
-  final String? email;
-  final List<Room>? rooms;
-  final List<VenueAmenity>? amenities;
-  final ImageReference? image;
-
-  Venue({
-    required this.id,
-    this.title = 'Conference Center',
-    required this.slug,
-    this.description,
-    this.address,
-    this.coordinates,
-    this.website,
-    this.phone,
-    this.email,
-    this.rooms,
-    this.amenities,
-    this.image,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
-
-  factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
 }

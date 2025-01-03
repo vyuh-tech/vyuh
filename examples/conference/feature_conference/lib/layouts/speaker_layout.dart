@@ -38,6 +38,7 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
               fit: BoxFit.cover,
             ),
           ),
+        if (content.social != null) _SocialBar(social: content.social!),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -55,41 +56,47 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
                 content.bio!,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
-            if (content.social != null)
-              Row(
-                children: [
-                  if (content.social!.twitter != null)
-                    IconButton(
-                      icon: const Icon(Icons.flutter_dash),
-                      onPressed: () =>
-                          launchUrlString(content.social!.twitterUrl!),
-                      tooltip: 'Twitter',
-                    ),
-                  if (content.social!.github != null)
-                    IconButton(
-                      icon: const Icon(Icons.code),
-                      onPressed: () =>
-                          launchUrlString(content.social!.githubUrl!),
-                      tooltip: 'GitHub',
-                    ),
-                  if (content.social!.linkedin != null)
-                    IconButton(
-                      icon: const Icon(Icons.work),
-                      onPressed: () =>
-                          launchUrlString(content.social!.linkedinUrl!),
-                      tooltip: 'LinkedIn',
-                    ),
-                  if (content.social!.website != null)
-                    IconButton(
-                      icon: const Icon(Icons.language),
-                      onPressed: () =>
-                          launchUrlString(content.social!.website!),
-                      tooltip: 'Website',
-                    ),
-                ],
-              ),
           ],
         ),
+      ],
+    );
+  }
+}
+
+class _SocialBar extends StatelessWidget {
+  const _SocialBar({required this.social});
+
+  final SpeakerSocial social;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        if (social.twitter != null)
+          IconButton(
+            icon: const Icon(Icons.flutter_dash),
+            onPressed: () => launchUrlString(social.twitterUrl!),
+            tooltip: 'Twitter',
+          ),
+        if (social.github != null)
+          IconButton(
+            icon: const Icon(Icons.code),
+            onPressed: () => launchUrlString(social.githubUrl!),
+            tooltip: 'GitHub',
+          ),
+        if (social.linkedin != null)
+          IconButton(
+            icon: const Icon(Icons.work),
+            onPressed: () => launchUrlString(social.linkedinUrl!),
+            tooltip: 'LinkedIn',
+          ),
+        if (social.website != null)
+          IconButton(
+            icon: const Icon(Icons.language),
+            onPressed: () => launchUrlString(social.website!),
+            tooltip: 'Website',
+          ),
       ],
     );
   }

@@ -24,21 +24,22 @@ final class ConferenceLayout extends LayoutConfiguration<Conference> {
 
   @override
   Widget build(BuildContext context, Conference content) {
-    return GestureDetector(
-      onTap: () {
-        vyuh.router.push('/conferences/${content.id}');
-      },
-      child: Card(
-        child: Column(
-          children: [
-            ContentImage(ref: content.logo),
-            ListTile(
-              title: Text(content.title),
-              subtitle: Text(content.slug),
-            ),
-          ],
-        ),
-      ),
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      spacing: 16,
+      children: [
+        if (content.logo != null)
+          ContentImage(
+            ref: content.logo,
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+        Text(content.title, style: theme.textTheme.headlineMedium),
+        if (content.description != null)
+          vyuh.content.buildContent(context, content.description!),
+      ],
     );
   }
 }

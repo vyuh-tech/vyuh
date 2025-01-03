@@ -26,7 +26,7 @@ export const conference = defineType({
     {
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'vyuh.portableText',
     },
     {
       name: 'logo',

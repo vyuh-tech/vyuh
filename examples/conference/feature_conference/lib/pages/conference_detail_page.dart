@@ -1,4 +1,5 @@
 import 'package:feature_conference/api/conference_api.dart';
+import 'package:feature_conference/content/conference.dart';
 import 'package:feature_conference/content/edition.dart';
 import 'package:feature_conference/layouts/edition_summary_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
@@ -11,27 +12,41 @@ final class ConferenceDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final identifier = GoRouterState.of(context).pathParameters['conferenceId']!;
+    final conferenceId =
+        GoRouterState.of(context).pathParameters['conferenceId']!;
     final editionLayout = EditionSummaryLayout();
 
-    return ConferenceRouteScaffold<List<Edition>>(
+    return ConferenceRouteScaffold<(Conference, List<Edition>)>(
       errorTitle: 'Failed to load Editions',
-      future: () =>
-          vyuh.di.get<ConferenceApi>().editions(conferenceId: identifier),
-      builder: (context, editions) {
+      future: () async {
+        final [conference as Conference, editions as List<Edition>] =
+            await Future.wait([
+          vyuh.di.get<ConferenceApi>().conference(conferenceId: conferenceId),
+          vyuh.di.get<ConferenceApi>().editions(conferenceId: conferenceId),
+        ]);
+
+        return (conference, editions);
+      },
+      builder: (context, data) {
+        final theme = Theme.of(context);
+        final (conference, editions) = data;
+
         return ConferenceRouteCustomScrollView(
-          title: 'Editions',
+          title: 'Conference',
+          subtitle: conference.title,
           sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final edition = editions[index];
-                return vyuh.content.buildContent(
-                  context,
-                  edition,
-                  layout: editionLayout,
-                );
-              },
-              childCount: editions.length,
+            delegate: SliverChildListDelegate(
+              [
+                vyuh.content.buildContent(context, conference),
+                Text('Editions (${editions.length})',
+                    style: theme.textTheme.titleMedium),
+                for (final edition in editions)
+                  vyuh.content.buildContent(
+                    context,
+                    edition,
+                    layout: editionLayout,
+                  ),
+              ],
             ),
           ),
         );
