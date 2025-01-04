@@ -1,3 +1,7 @@
+## 1.16.1
+
+ - **FIX**: readme updates to vyuh_extension_content.
+
 ## 1.16.0
 
  - **FEAT**: added the ability to supply a layout when calling buildContent() of the ContentPlugin.
