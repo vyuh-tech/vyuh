@@ -100,6 +100,79 @@ PluginDescriptor _getPlugins() {
 }
 ```
 
+### Custom Content Types
+
+First, define your content type:
+
+```dart
+import 'package:json_annotation/json_annotation.dart';
+import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+
+part 'my_card.g.dart';
+
+@JsonSerializable()
+final class MyCard extends ContentItem {
+  static const schemaName = 'myCard';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'My Card',
+    fromJson: MyCard.fromJson,
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: typeDescriptor,
+    defaultLayout: CustomCardLayout(),
+    defaultLayoutDescriptor: CustomCardLayout.typeDescriptor,
+  );
+
+  final String title;
+  final ImageReference? image;
+  final String description;
+  final List<Action> actions;
+
+  MyCard({
+    required super.id,
+    required this.title,
+    this.image,
+    required this.description,
+    this.actions = const [],
+  }) : super(schemaType: schemaName);
+
+  factory MyCard.fromJson(Map<String, dynamic> json) => _$MyCardFromJson(json);
+}
+```
+
+### Custom Content Layout
+
+Create a custom layout for your content:
+
+```dart
+@JsonSerializable()
+final class CustomCardLayout extends LayoutConfiguration<MyCard> {
+  static const schemaName = '${MyCard.schemaName}.layout.custom';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    title: 'Custom Layout',
+    fromJson: CustomCardLayout.fromJson,
+  );
+
+  CustomCardLayout() : super(schemaType: schemaName);
+
+  @override
+  Widget build(BuildContext context, MyCard content) {
+    return Card(
+      child: Column(
+        children: [
+          Text(content.title),
+          ContentImage(ref: content.image),
+        ],
+      ),
+    );
+  }
+}
+```
+
 ### Navigation
 Vyuh provides a simple yet powerful navigation system built on top of GoRouter. The router is globally accessible through `vyuh.router`, making it easy to navigate between routes from anywhere in your app.
 
