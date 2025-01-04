@@ -1,3 +1,7 @@
+## 1.32.2
+
+ - **FIX**: updates to vyuh_core readme.
+
 ## 1.32.1
 
  - **FIX**: centering the contentLoader inside its container.
