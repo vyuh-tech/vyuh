@@ -1,3 +1,7 @@
+## 1.32.3
+
+ - **FIX**: updates to vyuh_core readme and vyuh_feature_system README.md.
+
 ## 1.32.2
 
  - **FIX**: updates to vyuh_core readme.

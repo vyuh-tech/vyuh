@@ -1,3 +1,7 @@
+## 1.33.1
+
+ - **FIX**: updates to vyuh_core readme and vyuh_feature_system README.md.
+
 ## 1.33.0
 
  - **FEAT**: added the ability to supply a layout when calling buildContent() of the ContentPlugin.
