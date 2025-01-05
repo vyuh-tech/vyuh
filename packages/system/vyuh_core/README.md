@@ -2,23 +2,23 @@
 
 The core library for the Vyuh framework, providing essential building blocks and runtime functionality for building modular, scalable, CMS-driven Flutter applications. This package is the foundation of the Vyuh ecosystem, offering a robust plugin architecture, modular features, and an optional CMS-driven UI via the extension mechanism.
 
-## Features
+## Features ✨
 
-- **Feature-based Architecture**: Build modular applications by breaking them into independent features, each encapsulating its own routes, UI, and business logic. Compose your app by assembling these features together.
-- **Plugin Architecture**: Extensible plugin system for features like navigation, networking, telemetry, and content management
-- **Content Management**: Modular content provider system for handling different content types. Default support is for [Sanity.io CMS](https://www.sanity.io/). The Provider interface can also be used to add support for other CMS integrations.
-- **Navigation**: Advanced routing capabilities using Go Router
-- **State Management**: Integrated MobX for reactive state management. You are also free to use your own State Management solution.
-- **Networking**: Flexible HTTP client with retry capabilities
-- **Telemetry**: Configurable telemetry system for logging and error tracking
-- **Analytics**: Built-in analytics system for tracking user interactions and app usage
-- **Dependency Injection**: Simple yet powerful DI system for managing dependencies
-- **Event System**: Pub/sub event system for decoupled communication
-- **Storage**: Persistent storage capabilities for local data
-- **Environment Variables**: Flexible configuration system for managing environment-specific settings
-- **Platform Widgets**: Customizable widgets for common UI patterns like loaders and error views
+- **Feature-based Architecture** 🏗️: Build modular applications by breaking them into independent features, each encapsulating its own routes, UI, and business logic. Compose your app by assembling these features together.
+- **Plugin Architecture** 🔌: Extensible plugin system for features like navigation, networking, telemetry, and content management
+- **Content Management** 📝: Modular content provider system for handling different content types. Default support is for [Sanity.io CMS](https://www.sanity.io/). The Provider interface can also be used to add support for other CMS integrations.
+- **Navigation** 🧭: Advanced routing capabilities using Go Router
+- **State Management** 💫: Integrated MobX for reactive state management. You are also free to use your own State Management solution.
+- **Networking** 🌐: Flexible HTTP client with retry capabilities
+- **Telemetry** 📊: Configurable telemetry system for logging and error tracking
+- **Analytics** 📊: Built-in analytics system for tracking user interactions and app usage
+- **Dependency Injection** 💉: Simple yet powerful DI system for managing dependencies
+- **Event System** 📡: Pub/sub event system for decoupled communication
+- **Storage** 💾: Persistent storage capabilities for local data
+- **Environment Variables** 🔧: Flexible configuration system for managing environment-specific settings
+- **Platform Widgets** 🎨: Customizable widgets for common UI patterns like loaders and error views
 
-## Installation
+## Installation 📦
 
 Add this to your package's `pubspec.yaml` file:
 
@@ -27,7 +27,7 @@ dependencies:
   vyuh_core: any
 ```
 
-## Usage
+## Usage 💡
 
 ### Basic App Setup
 The entry point of your Vyuh application. Here you configure the initial route, register your features, and set up any custom plugins. Features are assembled as an array, making it easy to add or remove functionality.
@@ -100,7 +100,7 @@ PluginDescriptor _getPlugins() {
 }
 ```
 
-### Custom Content Types
+### Custom Content Types 📝
 
 A Content type represents a specific type of content that can be managed by the content management system. You can create custom content types and layouts for your app.
 
@@ -143,7 +143,7 @@ final class MyCard extends ContentItem {
 }
 ```
 
-### Custom Content Layout
+### Custom Content Layout 🎨
 
 Layouts are used to configure the visual layout of a content item. You can have a default layout and also create custom layouts for your content types.
 
@@ -173,7 +173,7 @@ final class CustomCardLayout extends LayoutConfiguration<MyCard> {
 }
 ```
 
-### Analytics
+### Analytics 📊
 
 Track events and user interactions using the analytics plugin:
 
@@ -203,7 +203,8 @@ final analyticsPlugin = AnalyticsPlugin(
 );
 ```
 
-### Navigation
+### Navigation 🧭
+
 Vyuh provides a simple yet powerful navigation system built on top of GoRouter. The router is globally accessible through `vyuh.router`, making it easy to navigate between routes from anywhere in your app.
 
 For more information about GoRouter, visit the [pub package](https://pub.dev/packages/go_router).
@@ -228,7 +229,8 @@ vyuh.router.go('/your-route');
 vyuh.router.pop();
 ```
 
-### State Management with MobX
+### State Management with MobX 💫
+
 Vyuh comes with built-in support for MobX, providing reactive state management out of the box. MobX's simple yet powerful approach makes it easy to manage application state with minimal boilerplate.
 
 ```dart
@@ -253,7 +255,8 @@ Column(
 );
 ```
 
-### Dependency Injection
+### Dependency Injection 💉
+
 A simple yet powerful dependency injection system for managing your app's dependencies.
 
 ```dart
@@ -266,7 +269,8 @@ vyuh.di.register<MyService>(() => MyServiceImpl());
 final service = vyuh.di.get<MyService>();
 ```
 
-### Event System
+### Event System 📡
+
 Use the event system for decoupled communication between different parts of your app.
 
 ```dart
@@ -281,7 +285,8 @@ vyuh.events.on<UserLoggedIn>((event) {
 vyuh.events.emit(UserLoggedIn(userId: '123'));
 ```
 
-### Storage
+### Storage 💾
+
 Persist data locally using the storage plugin.
 
 ```dart
@@ -294,7 +299,8 @@ await vyuh.storage.set('key', 'value');
 final value = await vyuh.storage.get('key');
 ```
 
-### Environment Variables
+### Environment Variables 🔧
+
 Manage environment-specific configuration with the env plugin.
 
 ```dart
@@ -305,7 +311,8 @@ final apiKey = vyuh.env.get('API_KEY');
 final isDev = vyuh.env.get('IS_DEV', defaultValue: false);
 ```
 
-### Platform Widgets
+### Platform Widgets 🎨
+
 Customize the app's root widget and other platform-specific UI components. The `defaultPlatformWidgetBuilder` provides default implementations that you can customize using `copyWith`:
 
 ```dart
@@ -381,12 +388,12 @@ The platform widget builder allows you to customize:
 
 Each of these has a default implementation that you can override as needed.
 
-## Learn More
+## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
 - Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## License
+## License 📄
 
 This project is licensed under the terms specified in the LICENSE file.

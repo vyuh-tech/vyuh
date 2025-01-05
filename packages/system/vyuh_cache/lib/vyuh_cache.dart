@@ -69,16 +69,28 @@ final class Cache<V> {
     return entry?.value;
   }
 
+  Future<bool> has(String key) async {
+    final entry = await config.storage.get(key);
+    if (entry == null) return false;
+
+    if (entry.isExpired) {
+      await remove(key);
+      return false;
+    }
+
+    return true;
+  }
+
   Future<void> set(String key, V value) async {
     await config.storage.set(key, CacheEntry(value, config.ttl));
   }
 
-  void remove(String key) {
-    config.storage.delete(key);
+  Future<void> remove(String key) {
+    return config.storage.delete(key);
   }
 
-  void clear() {
-    config.storage.clear();
+  Future<void> clear() {
+    return config.storage.clear();
   }
 }
 

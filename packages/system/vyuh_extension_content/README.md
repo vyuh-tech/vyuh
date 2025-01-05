@@ -5,33 +5,33 @@ that can be leveraged by specific CMS integrations. Works in conjunction with th
 `ContentPlugin` from the `vyuh_core` package to enable content management features
 in your application.
 
-## Overview
+## Overview ✨
 
 The content extension provides a flexible architecture for managing CMS-driven content in your application:
 
-1. **Content Types** define the structure of your content using Dart classes that extend `ContentItem`. Each type has:
+1. **Content Types** 📝 define the structure of your content using Dart classes that extend `ContentItem`. Each type has:
    - A unique schema name matching your CMS schema
    - A type descriptor for registration and serialization
    - A content builder for creating instances with layouts
 
-2. **Content Builders** handle the creation and configuration of content instances:
+2. **Content Builders** 🏗️ handle the creation and configuration of content instances:
    - Map CMS data to Dart objects
    - Configure default and custom layouts
    - Handle content validation and transformation
 
-3. **Layout System** manages how content is rendered:
+3. **Layout System** 🎨 manages how content is rendered:
    - Layouts are configured per content type
    - Default layouts handle common use cases
    - Custom layouts provide full control over rendering
 
-4. **Content Descriptors** allow extending the content system:
+4. **Content Descriptors** 📋 allow extending the content system:
    - Add custom layouts for some Content Items
 
 This architecture enables you to seamlessly integrate CMS content into your application while maintaining type safety and clean separation of concerns.
 
-## Features
+## Features 🚀
 
-### Content Types
+### Content Types 📝
 
 - **ContentItem**: Base class for all content types
   - Schema type identification
@@ -79,7 +79,7 @@ This architecture enables you to seamlessly integrate CMS content into your appl
   - Platform-specific changes
   - Conditional content
 
-## Installation
+## Installation 📦
 
 Add this to your package's `pubspec.yaml` file:
 
@@ -172,12 +172,12 @@ final feature = FeatureDescriptor(
 );
 ```
 
-## Learn More
+## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
 - Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## License
+## License 📄
 
 This project is licensed under the terms specified in the LICENSE file.

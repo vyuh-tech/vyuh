@@ -2,13 +2,11 @@
 
 The system feature package for Vyuh framework, providing essential content types, actions, conditions, and services for building CMS-driven Flutter applications.
 
-## Features
+## Features ✨
 
-### Content Types
+### Content Types 📝
 
-The system feature provides several built-in content types and layouts:
-
-#### Routes
+#### Routes 🧭
 - **Page Routes**: Full-screen pages with various layouts
   - Default page layout with app bar and body
   - Tabs layout for sectioned content
@@ -19,13 +17,13 @@ The system feature provides several built-in content types and layouts:
   - Default dialog layout
   - Custom dialog layouts
 
-#### Cards
+#### Cards 🎴
 - **Default Card**: Standard card layout with title, content, and actions
 - **List Item Card**: Compact layout for list views
 - **Button Card**: Interactive card with action triggers
 - **Conditional Card**: Dynamic layout based on conditions
 
-#### Groups
+#### Groups 📦
 - **Carousel**: Horizontal scrolling group of items
   - Auto-play support
   - Navigation controls
@@ -41,7 +39,7 @@ The system feature provides several built-in content types and layouts:
   - Dividers support
   - Custom item layouts
 
-#### Other Items
+#### Other Items 🔧
 - **Portable Text**: Rich text content with custom marks
   - Action invocation marks
   - Link marks with custom styling
@@ -52,29 +50,28 @@ The system feature provides several built-in content types and layouts:
 
 Each content type can be extended with custom layouts by implementing `LayoutConfiguration<T>` and registering the layout in your feature descriptor.
 
-### Actions
+### Actions 🎯
 
 The system feature provides several built-in actions for navigation, UI control, and system operations:
 
-#### Navigation Actions
+#### Navigation Actions 🧭
 - **NavigateAction**: Navigate to a new route with optional query parameters
 - **NavigateBackAction**: Return to the previous route in history
 - **NavigateReplaceAction**: Replace current route with a new one
 - **OpenUrlAction**: Open external URLs in browser or app
 
-#### UI Actions
+#### UI Actions 🎨
 - **AlertAction**: Display snackbar messages with different types (success, error, info)
 - **DrawerAction**: Show or hide the navigation drawer
 - **OpenInDialogAction**: Display content in a modal dialog
 - **ToggleThemeAction**: Switch between light and dark themes
 
-#### System Actions
+#### System Actions ⚙️
 - **DelayAction**: Add a timed delay between action executions
 - **RouteRefreshAction**: Refresh the current route's content
 - **RestartAction**: Restart the entire application
 
-### Conditions
-
+### Conditions 🔄
 - **Boolean**: Simple boolean conditions
 - **Feature Flag**: Toggle features based on conditions
 - **Screen Size**: Responsive layouts based on screen size
@@ -112,7 +109,7 @@ final apiConfig = JsonPathApiConfiguration(
 );
 ```
 
-### Services
+### Services 🛠️
 
 #### Breakpoint Service
 
@@ -208,7 +205,7 @@ The system feature provides built-in routes:
 
 These routes are registered automatically when using the system feature and provide consistent error handling and navigation behavior across your app.
 
-## Installation
+## Installation 📦
 
 Add this to your package's `pubspec.yaml` file:
 
@@ -217,12 +214,12 @@ dependencies:
   vyuh_feature_system: any
 ```
 
-## Learn More
+## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
 - Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## License
+## License 📄
 
 This project is licensed under the terms specified in the LICENSE file.
