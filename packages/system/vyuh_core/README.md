@@ -1,16 +1,16 @@
 # Vyuh Core
 
-The core library for the Vyuh framework, providing essential building blocks and runtime functionality for building modern Flutter applications. This package is the foundation of the Vyuh ecosystem, offering a robust plugin architecture, navigation system, and state management capabilities.
+The core library for the Vyuh framework, providing essential building blocks and runtime functionality for building modular, scalable, CMS-driven Flutter applications. This package is the foundation of the Vyuh ecosystem, offering a robust plugin architecture, modular features, and an optional CMS-driven UI via the extension mechanism.
 
 ## Features
 
-- **Plugin Architecture**: Extensible plugin system for features like navigation, networking, telemetry, and content management
 - **Feature-based Architecture**: Build modular applications by breaking them into independent features, each encapsulating its own routes, UI, and business logic. Compose your app by assembling these features together.
+- **Plugin Architecture**: Extensible plugin system for features like navigation, networking, telemetry, and content management
+- **Content Management**: Modular content provider system for handling different content types. Default support is for [Sanity.io CMS](https://www.sanity.io/). The Provider interface can also be used to add support for other CMS integrations.
 - **Navigation**: Advanced routing capabilities using Go Router
 - **State Management**: Integrated MobX for reactive state management. You are also free to use your own State Management solution.
 - **Networking**: Flexible HTTP client with retry capabilities
 - **Telemetry**: Configurable telemetry system for logging and error tracking
-- **Content Management**: Modular content provider system for handling different content types. Default support is for [Sanity.io CMS](https://www.sanity.io/). The Provider interface can also be used to add support for other CMS integrations.
 - **Analytics**: Built-in analytics system for tracking user interactions and app usage
 - **Dependency Injection**: Simple yet powerful DI system for managing dependencies
 - **Event System**: Pub/sub event system for decoupled communication
@@ -102,7 +102,7 @@ PluginDescriptor _getPlugins() {
 
 ### Custom Content Types
 
-First, define your content type:
+A Content type represents a specific type of content that can be managed by the content management system. You can create custom content types and layouts for your app.
 
 ```dart
 import 'package:json_annotation/json_annotation.dart';
@@ -145,7 +145,7 @@ final class MyCard extends ContentItem {
 
 ### Custom Content Layout
 
-Create a custom layout for your content:
+Layouts are used to configure the visual layout of a content item. You can have a default layout and also create custom layouts for your content types.
 
 ```dart
 @JsonSerializable()
@@ -171,6 +171,36 @@ final class CustomCardLayout extends LayoutConfiguration<MyCard> {
     );
   }
 }
+```
+
+### Analytics
+
+Track events and user interactions using the analytics plugin:
+
+```dart
+// Get analytics plugin
+final analytics = vyuh.di.get<AnalyticsPlugin>();
+
+// Track a simple event
+analytics.reportEvent('page_view');
+
+// Track event with parameters
+analytics.reportEvent(
+  'button_click',
+  params: {
+    'button_id': 'submit',
+    'screen': 'checkout',
+  },
+);
+
+// Configure multiple providers
+final analyticsPlugin = AnalyticsPlugin(
+  providers: [
+    GoogleAnalyticsProvider(),
+    MixpanelProvider(),
+    CustomAnalyticsProvider(),
+  ],
+);
 ```
 
 ### Navigation
@@ -223,22 +253,6 @@ Column(
 );
 ```
 
-### Analytics
-Track user interactions and app usage with the built-in analytics system.
-
-```dart
-import 'package:vyuh_core/vyuh_core.dart' as vyuh;
-
-// Track events
-vyuh.analytics.trackEvent('user_action', {
-  'action': 'button_click',
-  'component': 'login_button'
-});
-
-// Track screen views
-vyuh.analytics.trackScreen('home_screen');
-```
-
 ### Dependency Injection
 A simple yet powerful dependency injection system for managing your app's dependencies.
 
@@ -264,7 +278,7 @@ vyuh.events.on<UserLoggedIn>((event) {
 });
 
 // Publish events
-vyuh.events.publish(UserLoggedIn(userId: '123'));
+vyuh.events.emit(UserLoggedIn(userId: '123'));
 ```
 
 ### Storage
