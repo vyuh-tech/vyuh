@@ -21,13 +21,6 @@ final class ConferenceRootPage extends StatelessWidget {
         return ConferenceRouteCustomScrollView(
           title: 'Conferences',
           subtitle: '(${conferences.length})',
-          appBarActions: [
-            IconButton(
-                onPressed: () {
-                  context.push('/conferences/settings');
-                },
-                icon: const Icon(Icons.settings))
-          ],
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {

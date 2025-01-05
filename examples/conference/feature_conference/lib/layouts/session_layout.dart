@@ -112,7 +112,7 @@ class _SpeakersList extends StatelessWidget {
       children: [
         Text(
           'Speakers',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Wrap(
           spacing: 16,
@@ -143,7 +143,7 @@ class _TracksList extends StatelessWidget {
       children: [
         Text(
           'Tracks',
-          style: Theme.of(context).textTheme.titleMedium,
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         Wrap(
           spacing: 8,

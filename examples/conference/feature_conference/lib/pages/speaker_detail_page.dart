@@ -30,6 +30,7 @@ final class SpeakerDetailPage extends StatelessWidget {
       },
       builder: (context, data) {
         final (speaker, sessions) = data;
+        final theme = Theme.of(context);
 
         return ConferenceRouteCustomScrollView(
           title: 'Speaker',
@@ -41,10 +42,7 @@ final class SpeakerDetailPage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
                   'Sessions (${sessions.length})',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: theme.textTheme.titleLarge,
                 ),
               ),
               ...sessions.map(

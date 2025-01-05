@@ -43,12 +43,16 @@ final class TrackDetailPage extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     child:
                         ContentImage(ref: track.icon, height: 150, width: 150)),
-              Text(track.title, style: theme.textTheme.headlineSmall),
+              Text(
+                track.title,
+                style: theme.textTheme.headlineMedium,
+                textAlign: TextAlign.center,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
                   'Sessions (${sessions.length})',
-                  style: theme.textTheme.titleMedium,
+                  style: theme.textTheme.titleLarge,
                 ),
               ),
               ...sessions.map(
