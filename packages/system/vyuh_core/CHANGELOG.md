@@ -1,3 +1,7 @@
+## 1.32.4
+
+ - **FIX**: readme updates to fix some apis which were incorrect.
+
 ## 1.32.3
 
  - **FIX**: updates to vyuh_core readme and vyuh_feature_system README.md.

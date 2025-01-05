@@ -1,3 +1,7 @@
+## 1.16.2
+
+ - **FIX**: readme updates to fix some apis which were incorrect.
+
 ## 1.16.1
 
  - **FIX**: readme updates to vyuh_extension_content.
