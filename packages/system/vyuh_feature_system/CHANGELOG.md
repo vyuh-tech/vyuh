@@ -1,3 +1,7 @@
+## 1.33.2
+
+ - **FIX**: more readme updates to include emojis...added readme for vyuh_cache as well.
+
 ## 1.33.1
 
  - **FIX**: updates to vyuh_core readme and vyuh_feature_system README.md.

@@ -1,3 +1,7 @@
+## 1.4.1
+
+ - **FIX**: more readme updates to include emojis...added readme for vyuh_cache as well.
+
 ## 1.4.0
 
  - **FEAT**: introducing a simpler way to load from a CMS document and rendering with various sections.
