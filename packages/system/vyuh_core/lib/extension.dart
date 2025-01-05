@@ -6,6 +6,10 @@ abstract class ExtensionDescriptor {
   /// The title of the extension.
   final String title;
 
+  /// The name of the feature which this extension belongs to.
+  /// This is set by the Vyuh bootstrapping process
+  String? sourceFeature;
+
   /// Creates a new ExtensionDescriptor.
   ExtensionDescriptor({
     required this.title,
@@ -35,6 +39,10 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
 
   /// Whether the extension has been disposed.
   bool get isDisposed => _isDisposed;
+
+  /// The name of the feature which this extension belongs to.
+  /// This is set by the bootstrapping process of Vyuh.
+  String? sourceFeature;
 
   /// Protected method for subclasses to implement initialization logic.
   @protected

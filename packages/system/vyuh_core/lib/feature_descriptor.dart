@@ -53,7 +53,17 @@ final class FeatureDescriptor {
     required RouteBuilderFunction routes,
     this.extensions,
     this.extensionBuilders,
-  }) : _routes = _runOnce(routes);
+  }) : _routes = _runOnce(routes) {
+    // Set the source feature in all extension builders
+    for (final extensionBuilder in extensionBuilders ?? []) {
+      extensionBuilder.sourceFeature = name;
+    }
+
+    // Set the source feature in all extensions
+    for (final extension in extensions ?? <ExtensionDescriptor>[]) {
+      extension.sourceFeature = name;
+    }
+  }
 }
 
 FutureOr<T?> Function() _runOnce<T>(FutureOr<T?> Function() fn) {
