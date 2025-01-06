@@ -11,13 +11,14 @@ abstract class ContentDescriptor {
     required this.layouts,
   });
 
-  /// A simplified approach to creating a [ContentDescriptor] that follows the standard conventions
+  /// A simplified approach to creating a [ContentDescriptor] that follows the standard conventions.
   /// This eliminates the need to create a new `<Item>ContentDescriptor`.
+  ///
   /// [schemaType] is ContentItem's schemaType.
   /// [title] of the descriptor.
   ///
   /// Returns a function that takes in a list of [TypeDescriptor]<[LayoutConfiguration]>. This is the function
-  /// that will be used by consuming features ot pass in new layouts for the [ContentItem].
+  /// that will be used by consuming features to pass in new layouts for the [ContentItem].
   static createDefault({required String schemaType, required String title}) {
     return ({List<TypeDescriptor<LayoutConfiguration>>? layouts}) =>
         _DefaultContentDescriptor(
