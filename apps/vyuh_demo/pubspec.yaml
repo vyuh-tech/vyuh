@@ -23,8 +23,8 @@ dependencies:
 
   # Vyuh Framework
   vyuh_core: ^1.32.6
-  vyuh_extension_content: ^1.16.4
-  vyuh_feature_system: ^1.33.2
+  vyuh_extension_content: ^1.16.5
+  vyuh_feature_system: ^1.33.3
   vyuh_feature_developer: ^1.6.0
   vyuh_plugin_content_provider_sanity: ^1.9.3
   vyuh_feature_auth: ^1.15.1
