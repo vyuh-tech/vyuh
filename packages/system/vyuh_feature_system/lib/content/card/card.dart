@@ -20,6 +20,11 @@ class Card extends ContentItem implements PortableBlockItem {
     defaultLayoutDescriptor: DefaultCardLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: Card.schemaName,
+    title: 'Card Descriptor',
+  );
+
   // Required to support Blocks inside Portable Text
   @override
   String get blockType => schemaName;

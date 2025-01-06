@@ -68,7 +68,7 @@ final feature = FeatureDescriptor(
           SingleItemLayout.typeDescriptor,
           RouteConditionalLayout.typeDescriptor,
         ]),
-        CardDescriptor(layouts: [
+        Card.descriptor(layouts: [
           DefaultCardLayout.typeDescriptor,
           ListItemCardLayout.typeDescriptor,
           ButtonCardLayout.typeDescriptor,
