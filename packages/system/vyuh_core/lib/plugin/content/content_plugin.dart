@@ -35,8 +35,8 @@ abstract class ContentPlugin extends Plugin {
   /// Registers the given type descriptor
   register<T>(TypeDescriptor<T> descriptor);
 
-  /// Checks if the given type descriptor is registered
-  isRegistered<T>(TypeDescriptor<T> descriptor);
+  /// Checks if the given schema type is registered for type T
+  bool isRegistered<T>(String schemaType);
 }
 
 enum FieldName {

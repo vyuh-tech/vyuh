@@ -28,7 +28,7 @@ class ContentBuilder<T extends ContentItem> {
     // Default layout could be registered explicitly by the ContentItem,
     // in which case, we don't do it again.
     if (!vyuh.content
-        .isRegistered<LayoutConfiguration>(defaultLayoutDescriptor)) {
+        .isRegistered<LayoutConfiguration>(defaultLayoutDescriptor.schemaType)) {
       registerDescriptors<LayoutConfiguration>([defaultLayoutDescriptor]);
     }
   }
@@ -37,7 +37,7 @@ class ContentBuilder<T extends ContentItem> {
   void registerDescriptors<U>(Iterable<TypeDescriptor<U>> descriptors,
       {bool checkUnique = false}) {
     for (var element in descriptors) {
-      if (checkUnique && vyuh.content.isRegistered<U>(element)) {
+      if (checkUnique && vyuh.content.isRegistered<U>(element.schemaType)) {
         return;
       }
 

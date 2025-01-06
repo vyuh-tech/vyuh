@@ -68,7 +68,7 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor), isTrue);
+      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType), isTrue);
     });
 
     testWidgets('_build collects content builders correctly', (tester) async {
@@ -190,9 +190,9 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(builder.isRegistered(modifier), isTrue);
-      expect(builder.isRegistered(action), isTrue);
-      expect(builder.isRegistered(condition), isTrue);
+      expect(builder.isRegistered(modifier.schemaType), isTrue);
+      expect(builder.isRegistered(action.schemaType), isTrue);
+      expect(builder.isRegistered(condition.schemaType), isTrue);
     });
   });
 }

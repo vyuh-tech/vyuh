@@ -6,9 +6,18 @@ abstract class ExtensionDescriptor {
   /// The title of the extension.
   final String title;
 
+  String? _sourceFeature;
+
   /// The name of the feature which this extension belongs to.
   /// This is set by the Vyuh bootstrapping process
-  String? sourceFeature;
+  String? get sourceFeature => _sourceFeature;
+
+  /// Sets the source feature for this extension.
+  /// This is called by the Vyuh bootstrapping process.
+  @mustCallSuper
+  void setSourceFeature(String featureName) {
+    _sourceFeature = featureName;
+  }
 
   /// Creates a new ExtensionDescriptor.
   ExtensionDescriptor({
@@ -28,6 +37,19 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
   bool _isInitialized = false;
   bool _isDisposed = false;
 
+  String? _sourceFeature;
+
+  /// The name of the feature which this extension belongs to.
+  /// This is set by the bootstrapping process of Vyuh.
+  String? get sourceFeature => _sourceFeature;
+
+  /// Sets the source feature for this extension builder.
+  /// This is called by the Vyuh bootstrapping process.
+  @mustCallSuper
+  void setSourceFeature(String featureName) {
+    _sourceFeature = featureName;
+  }
+
   /// Creates a new ExtensionBuilder.
   ExtensionBuilder({
     required this.extensionType,
@@ -39,10 +61,6 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
 
   /// Whether the extension has been disposed.
   bool get isDisposed => _isDisposed;
-
-  /// The name of the feature which this extension belongs to.
-  /// This is set by the bootstrapping process of Vyuh.
-  String? sourceFeature;
 
   /// Protected method for subclasses to implement initialization logic.
   @protected

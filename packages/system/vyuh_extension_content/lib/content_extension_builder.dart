@@ -108,11 +108,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     _typeConverterMap[T]![descriptor.schemaType] = descriptor;
   }
 
-  isRegistered<T>(TypeDescriptor<T> descriptor) {
-    final hasKey =
-        _typeConverterMap[T]?.containsKey(descriptor.schemaType) == true;
-
-    return hasKey;
+  bool isRegistered<T>(String schemaType) {
+    return _typeConverterMap[T]?.containsKey(schemaType) == true;
   }
 
   void _initTypeRegistrations<T>(List<ContentExtensionDescriptor> descriptors,

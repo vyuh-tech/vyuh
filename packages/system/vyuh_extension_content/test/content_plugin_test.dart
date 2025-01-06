@@ -48,8 +48,8 @@ void main() {
     testWidgets('registers type descriptors', (tester) async {
       await vyuh.getReady(tester);
 
-      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor), isTrue);
-      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor), isTrue);
+      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType), isTrue);
+      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType), isTrue);
     });
 
     testWidgets('creates content item from json', (tester) async {

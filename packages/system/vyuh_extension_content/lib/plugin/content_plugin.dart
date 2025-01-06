@@ -118,8 +118,8 @@ final class DefaultContentPlugin extends ContentPlugin {
       _extensionBuilder!.register<T>(descriptor);
 
   @override
-  isRegistered<T>(TypeDescriptor<T> descriptor) =>
-      _extensionBuilder!.isRegistered<T>(descriptor);
+  bool isRegistered<T>(String schemaType) =>
+      _extensionBuilder!.isRegistered<T>(schemaType);
 
   @override
   Future<void> dispose() async {

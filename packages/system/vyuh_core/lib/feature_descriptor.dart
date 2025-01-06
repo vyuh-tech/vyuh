@@ -56,12 +56,12 @@ final class FeatureDescriptor {
   }) : _routes = _runOnce(routes) {
     // Set the source feature in all extension builders
     for (final extensionBuilder in extensionBuilders ?? []) {
-      extensionBuilder.sourceFeature = name;
+      extensionBuilder.setSourceFeature(name);
     }
 
     // Set the source feature in all extensions
     for (final extension in extensions ?? <ExtensionDescriptor>[]) {
-      extension.sourceFeature = name;
+      extension.setSourceFeature(name);
     }
   }
 }

@@ -51,7 +51,7 @@ final class NoOpContentPlugin extends ContentPlugin {
   Future<void> init() async {}
 
   @override
-  isRegistered<T>(TypeDescriptor<T> descriptor) {
+  bool isRegistered<T>(String schemaType) {
     return false;
   }
 
