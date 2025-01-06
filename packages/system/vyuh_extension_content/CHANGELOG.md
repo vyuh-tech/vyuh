@@ -1,3 +1,7 @@
+## 1.16.6
+
+ - **FIX**: typo fixes in api docs.
+
 ## 1.16.5
 
  - **FIX**: added a simpler way to create a ContentDescriptor for a ContentItem without the need to extend ContentDescriptor.
