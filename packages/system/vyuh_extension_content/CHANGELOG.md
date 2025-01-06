@@ -1,3 +1,7 @@
+## 1.16.4
+
+ - **FIX**: simplified the use of `isRegistered<T>` method.
+
 ## 1.16.3
 
  - **FIX**: more readme updates to include emojis...added readme for vyuh_cache as well.
