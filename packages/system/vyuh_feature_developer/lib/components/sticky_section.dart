@@ -7,7 +7,10 @@ class StickySection extends StatelessWidget {
 
   final Widget? sliver;
 
-  const StickySection({super.key, required this.title, required this.sliver});
+  final Color? headerColor;
+
+  const StickySection(
+      {super.key, required this.title, required this.sliver, this.headerColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class StickySection extends StatelessWidget {
 
     return SliverStickyHeader(
       header: Container(
-        color: theme.colorScheme.inverseSurface,
+        color: headerColor ?? theme.colorScheme.inverseSurface,
         padding: const EdgeInsets.all(8),
         margin: const EdgeInsets.only(bottom: 2),
         child: Text(title,
