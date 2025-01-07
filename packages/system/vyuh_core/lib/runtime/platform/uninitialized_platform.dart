@@ -29,7 +29,7 @@ final class _UninitializedPlatform extends VyuhPlatform {
 
   @override
   ExtensionBuilder<ExtensionDescriptor>?
-      getExtensionBuilder<T extends ExtensionDescriptor>() => _error();
+      extensionBuilder<T extends ExtensionDescriptor>() => _error();
 
   @override
   GlobalKey<NavigatorState> get rootNavigatorKey => throw _error();

@@ -68,7 +68,8 @@ final class ConditionalRoute extends RouteBase {
     }
 
     final value = (await condition?.execute(context)) ?? defaultCase;
-    final caseItem = (cases ?? []).firstWhereOrNull((x) => x.value == value);
+    final caseItem =
+        (cases ?? <CaseRouteItem>[]).firstWhereOrNull((x) => x.value == value);
 
     final ref = caseItem?.item;
     RouteBase? leafRoute;

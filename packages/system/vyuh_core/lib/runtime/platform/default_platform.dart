@@ -264,7 +264,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       await telemetry.trace(
         name: 'Extension: ${builder.title}',
         operation: 'Init',
-        fn: (_) => builder.init(extensions[entry.key] ?? []),
+        fn: (_) =>
+            builder.init(extensions[entry.key] ?? <ExtensionDescriptor>[]),
       );
     }
   }
@@ -273,7 +274,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
 
   @override
-  ExtensionBuilder? getExtensionBuilder<T extends ExtensionDescriptor>() {
+  ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>() {
     return _featureExtensionBuilderMap[T];
   }
 }

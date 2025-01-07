@@ -68,7 +68,9 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType), isTrue);
+      expect(
+          vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType),
+          isTrue);
     });
 
     testWidgets('_build collects content builders correctly', (tester) async {
@@ -100,9 +102,9 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(builder.getContentBuilder(TestContentItem.schemaName),
+      expect(builder.contentBuilder(TestContentItem.schemaName),
           equals(contentBuilder1));
-      expect(builder.getContentBuilder(MockRoute.schemaName),
+      expect(builder.contentBuilder(MockRoute.schemaName),
           equals(contentBuilder2));
     });
 

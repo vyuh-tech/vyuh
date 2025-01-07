@@ -117,7 +117,8 @@ class _ContentDescriptorTile extends StatelessWidget {
           child: Text('Layouts [${item.layouts?.length ?? 0}]',
               style: theme.textTheme.labelMedium),
         ),
-        for (final layout in item.layouts ?? [])
+        for (final layout
+            in item.layouts ?? <TypeDescriptor<LayoutConfiguration>>[])
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -13,7 +13,9 @@ abstract class ContentPlugin extends Plugin {
     required super.title,
   }) : super();
 
-  /// The type registry that maps types to their descriptors
+  /// The type registry that maps types to their descriptors.
+  /// This stores the descriptors for LayoutConfiguration, ActionConfiguration, ConditionConfiguration and
+  /// possibly others in the future.
   Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
 
   /// Builds a Widget for the given content. You can pass in an optional [layout]

@@ -134,32 +134,31 @@ final feature = FeatureDescriptor(
           ],
           blocks: [
             BlockItemDescriptor(
-              schemaType: Unknown.schemaName,
-              fromJson: Unknown.fromJson,
+              type: Unknown.typeDescriptor,
               builder: (context, content) =>
                   vyuh.content.buildContent(context, content as Unknown),
             ),
             BlockItemDescriptor(
-              schemaType: TextBlockItem.schemaName,
-              fromJson: TextBlockItem.fromJson,
+              type: TypeDescriptor(
+                schemaType: TextBlockItem.schemaName,
+                fromJson: TextBlockItem.fromJson,
+                title: 'Text Block',
+              ),
               builder: (_, content) =>
                   PortableTextBlock(model: content as TextBlockItem),
             ),
             BlockItemDescriptor(
-              schemaType: Card.schemaName,
-              fromJson: Card.fromJson,
+              type: Card.typeDescriptor,
               builder: (context, content) =>
                   vyuh.content.buildContent(context, content as Card),
             ),
             BlockItemDescriptor(
-              schemaType: Group.schemaName,
-              fromJson: Group.fromJson,
+              type: Group.typeDescriptor,
               builder: (context, content) =>
                   vyuh.content.buildContent(context, content as Group),
             ),
             BlockItemDescriptor(
-              schemaType: Divider.schemaName,
-              fromJson: Divider.fromJson,
+              type: Divider.typeDescriptor,
               builder: (context, content) =>
                   vyuh.content.buildContent(context, content as Divider),
             ),
@@ -191,7 +190,11 @@ final feature = FeatureDescriptor(
         Group.contentBuilder,
         Conditional.contentBuilder,
         ConditionalRoute.contentBuilder,
+
+        // This is defined explicitly because the ContentBuilder type is defined
+        // in vyuh_extension_content and not in vyuh_core
         UnknownContentBuilder(),
+
         Empty.contentBuilder,
         PortableTextContent.contentBuilder,
         Divider.contentBuilder,

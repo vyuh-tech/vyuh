@@ -20,7 +20,7 @@ final class PluginDescriptor {
     final EventPlugin? event,
     final List<Plugin>? others,
   }) {
-    final otherPlugins = others ?? [];
+    final otherPlugins = others ?? <Plugin>[];
     assert(() {
       for (final plugin in otherPlugins) {
         if (plugin is DIPlugin ||
@@ -51,7 +51,7 @@ final class PluginDescriptor {
       env ?? defaultPlugins.get<EnvPlugin>(),
     ].nonNulls);
 
-    _plugins.addAll(others ?? []);
+    _plugins.addAll(others ?? <Plugin>[]);
   }
 
   static final defaultPluginTypes = [

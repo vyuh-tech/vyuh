@@ -88,8 +88,10 @@ abstract class LayoutConfiguration<T extends ContentItem>
   @override
   final String schemaType;
 
+  final Type contentType;
+
   /// Creates an instance of [LayoutConfiguration].
-  LayoutConfiguration({required this.schemaType});
+  LayoutConfiguration({required this.schemaType}) : contentType = T;
 
   /// Converts the JSON representation of the layout configuration to an instance of [LayoutConfiguration].
   factory LayoutConfiguration.fromJson(Map<String, dynamic> json) =>

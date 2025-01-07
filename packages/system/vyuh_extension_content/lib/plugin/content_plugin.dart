@@ -16,7 +16,7 @@ final class DefaultContentPlugin extends ContentPlugin {
 
   @override
   Map<Type, Map<String, TypeDescriptor>> get typeRegistry =>
-      _extensionBuilder!.getTypeRegistry();
+      _extensionBuilder!.typeRegistry();
 
   @override
   Widget buildContent<T extends ContentItem>(
@@ -24,7 +24,7 @@ final class DefaultContentPlugin extends ContentPlugin {
     T content, {
     LayoutConfiguration<T>? layout,
   }) {
-    final builder = _extensionBuilder!.getContentBuilder(content.schemaType);
+    final builder = _extensionBuilder!.contentBuilder(content.schemaType);
 
     assert(builder != null,
         'Failed to retrieve builder for schemaType: ${content.schemaType}. Is the ContentBuilder registered for this schemaType?');

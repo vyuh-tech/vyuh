@@ -26,9 +26,9 @@ class PortableTextContent extends ContentItem {
     super.layout,
     super.modifiers,
   }) : super(schemaType: PortableTextContent.schemaName) {
-    final items = (blocks ?? []).whereType<ContentItem>();
+    final items = (blocks ?? <ContentItem>[]).whereType<ContentItem>();
     setParent(items);
-    _setListItemIndexes(blocks ?? []);
+    _setListItemIndexes(blocks ?? <PortableBlockItem>[]);
   }
 
   factory PortableTextContent.fromJson(Map<String, dynamic> json) =>
@@ -53,7 +53,7 @@ class PortableTextContent extends ContentItem {
                 : null;
           }
 
-          return itemDescriptor.fromJson(e);
+          return itemDescriptor.type.fromJson(e);
         })
         .where((element) => element != null)
         .cast<PortableBlockItem>()
@@ -97,14 +97,14 @@ class PortableTextContent extends ContentItem {
   }
 }
 
-final class BlockItemDescriptor extends TypeDescriptor<PortableBlockItem> {
+final class BlockItemDescriptor {
+  final TypeDescriptor<PortableBlockItem> type;
   final BlockWidgetBuilder builder;
 
   BlockItemDescriptor({
-    required super.schemaType,
-    required super.fromJson,
+    required this.type,
     required this.builder,
-  }) : super(title: 'Block Item');
+  });
 }
 
 class PortableTextDescriptor extends ContentDescriptor {
@@ -140,9 +140,10 @@ final class _PortableTextContentBuilder
     final pDescriptors = descriptors.cast<PortableTextDescriptor>();
 
     // Blocks
-    pDescriptors.expand((element) => element.blocks ?? []).fold(blockMap,
-        (previous, descriptor) {
-      previous[descriptor.schemaType] = descriptor;
+    pDescriptors
+        .expand((element) => element.blocks ?? <BlockItemDescriptor>[])
+        .fold(blockMap, (previous, descriptor) {
+      previous[descriptor.type.schemaType] = descriptor;
       return previous;
     });
 
@@ -183,7 +184,7 @@ class DefaultPortableTextContentLayout
 
   @override
   Widget build(BuildContext context, PortableTextContent content) {
-    final child = PortableText(blocks: content.blocks ?? []);
+    final child = PortableText(blocks: content.blocks ?? <PortableBlockItem>[]);
 
     if (content.parent is vc.RouteBase) {
       return Padding(

@@ -12,14 +12,17 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
           title: 'Content Extension Builder',
         );
 
-  Map<Type, Map<String, TypeDescriptor>> getTypeRegistry() {
+  Map<Type, Map<String, TypeDescriptor>> typeRegistry() {
     return Map<Type, Map<String, TypeDescriptor>>.unmodifiable(
         _typeConverterMap);
   }
 
-  ContentBuilder<ContentItem>? getContentBuilder(String schemaType) {
+  ContentBuilder<ContentItem>? contentBuilder(String schemaType) {
     return _contentBuilderMap[schemaType];
   }
+
+  List<ContentBuilder> contentBuilders() =>
+      List.unmodifiable(_contentBuilderMap.values);
 
   @override
   Future<void> onInit(List<ExtensionDescriptor> extensions) async {
@@ -62,7 +65,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     for (final entry in _contentBuilderMap.entries) {
       final schemaType = entry.key;
       final builder = entry.value;
-      final descriptors = contents[schemaType] ?? [];
+      final descriptors = contents[schemaType] ?? <ContentDescriptor>[];
 
       builder.init(descriptors);
     }

@@ -5,16 +5,19 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 class ContentBuilder<T extends ContentItem> {
   final TypeDescriptor<T> content;
   LayoutConfiguration<T> _defaultLayout;
-  TypeDescriptor<LayoutConfiguration> _defaultLayoutDescriptor;
+  TypeDescriptor<LayoutConfiguration<T>> _defaultLayoutDescriptor;
 
   LayoutConfiguration<T> get defaultLayout => _defaultLayout;
-  TypeDescriptor<LayoutConfiguration> get defaultLayoutDescriptor =>
+  TypeDescriptor<LayoutConfiguration<T>> get defaultLayoutDescriptor =>
       _defaultLayoutDescriptor;
+
+  final List<TypeDescriptor<LayoutConfiguration>> _layouts = [];
+  List<TypeDescriptor<LayoutConfiguration>> get layouts => _layouts;
 
   ContentBuilder({
     required this.content,
     required LayoutConfiguration<T> defaultLayout,
-    required TypeDescriptor<LayoutConfiguration> defaultLayoutDescriptor,
+    required TypeDescriptor<LayoutConfiguration<T>> defaultLayoutDescriptor,
   })  : _defaultLayout = defaultLayout,
         _defaultLayoutDescriptor = defaultLayoutDescriptor;
 
@@ -22,15 +25,18 @@ class ContentBuilder<T extends ContentItem> {
   void init(List<ContentDescriptor> descriptors) {
     vyuh.content.register<ContentItem>(content);
 
-    registerDescriptors<LayoutConfiguration>(descriptors.expand((element) =>
-        element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]));
+    final userLayouts = descriptors.expand((element) =>
+        element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]);
+    final layouts = <TypeDescriptor<LayoutConfiguration>>{
+      defaultLayoutDescriptor,
+      ...userLayouts,
+    }.toList(growable: false);
 
-    // Default layout could be registered explicitly by the ContentItem,
-    // in which case, we don't do it again.
-    if (!vyuh.content
-        .isRegistered<LayoutConfiguration>(defaultLayoutDescriptor.schemaType)) {
-      registerDescriptors<LayoutConfiguration>([defaultLayoutDescriptor]);
-    }
+    _layouts
+      ..clear()
+      ..addAll(layouts);
+
+    registerDescriptors<LayoutConfiguration>(layouts);
   }
 
   @protected
@@ -38,7 +44,7 @@ class ContentBuilder<T extends ContentItem> {
       {bool checkUnique = false}) {
     for (var element in descriptors) {
       if (checkUnique && vyuh.content.isRegistered<U>(element.schemaType)) {
-        return;
+        continue;
       }
 
       vyuh.content.register<U>(element);
@@ -57,16 +63,20 @@ class ContentBuilder<T extends ContentItem> {
   }
 
   setDefaultLayout(LayoutConfiguration<T> layout,
-      {required FromJsonConverter<LayoutConfiguration> fromJson}) {
+      {required FromJsonConverter<LayoutConfiguration<T>> fromJson}) {
     _defaultLayout = layout;
 
     final currentLayoutSchemaType = _defaultLayoutDescriptor.schemaType;
 
-    _defaultLayoutDescriptor = TypeDescriptor<LayoutConfiguration>(
+    _defaultLayoutDescriptor = TypeDescriptor<LayoutConfiguration<T>>(
       schemaType: currentLayoutSchemaType,
       fromJson: fromJson,
       title: 'Override Layout for ${content.schemaType}',
     );
+
     registerDescriptors<LayoutConfiguration>([_defaultLayoutDescriptor]);
+
+    _layouts.removeWhere((td) => td.schemaType == currentLayoutSchemaType);
+    _layouts.insert(0, _defaultLayoutDescriptor);
   }
 }

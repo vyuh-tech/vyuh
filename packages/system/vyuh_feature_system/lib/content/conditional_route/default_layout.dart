@@ -99,7 +99,7 @@ class _ConditionalRouteDebugView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    for (var item in content.cases ?? [])
+                    for (var item in content.cases ?? <CaseRouteItem>[])
                       Padding(
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: Text.rich(TextSpan(

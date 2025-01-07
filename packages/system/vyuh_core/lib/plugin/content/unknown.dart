@@ -7,6 +7,11 @@ part 'unknown.g.dart';
 @JsonSerializable()
 class Unknown extends ContentItem implements PortableBlockItem {
   static const schemaName = 'vyuh.unknown';
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: Unknown.schemaName,
+    fromJson: Unknown.fromJson,
+    title: 'Unknown',
+  );
 
   final String missingSchemaType;
   final String description;

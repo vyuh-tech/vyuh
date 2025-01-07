@@ -5,9 +5,31 @@ class TypeDescriptor<T> {
   final String schemaType;
   final FromJsonConverter<T> fromJson;
 
+  final Type type;
+
   TypeDescriptor({
     required this.schemaType,
     required this.fromJson,
     required this.title,
-  });
+  }) : type = T;
+
+  @override
+  bool operator ==(Object other) {
+    if (other is! TypeDescriptor<T>) {
+      return false;
+    }
+
+    if (other.schemaType != schemaType) {
+      return false;
+    }
+
+    if (other.fromJson != fromJson) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @override
+  int get hashCode => Object.hash(schemaType, fromJson);
 }
