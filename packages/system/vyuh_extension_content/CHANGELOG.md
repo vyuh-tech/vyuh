@@ -1,3 +1,7 @@
+## 1.17.0
+
+ - **FEAT**: tracking layouts per ContentBuilder.
+
 ## 1.16.6
 
  - **FIX**: typo fixes in api docs.

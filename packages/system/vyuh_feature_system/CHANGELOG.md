@@ -1,3 +1,7 @@
+## 1.34.0
+
+ - **FEAT**: tracking layouts per ContentBuilder.
+
 ## 1.33.3
 
  - **FIX**: added a simpler way to create a ContentDescriptor for a ContentItem without the need to extend ContentDescriptor.

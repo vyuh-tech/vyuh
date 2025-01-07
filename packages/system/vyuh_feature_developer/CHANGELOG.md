@@ -1,3 +1,7 @@
+## 1.7.0
+
+ - **FEAT**: tracking layouts per ContentBuilder.
+
 ## 1.6.0
 
  - **FEAT**: LoggerPlugin has been removed and replaced with a Logger interface to the Telemetry Plugin instead.

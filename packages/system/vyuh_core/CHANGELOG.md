@@ -1,3 +1,7 @@
+## 1.33.0
+
+ - **FEAT**: tracking layouts per ContentBuilder.
+
 ## 1.32.6
 
  - **FIX**: simplified the use of `isRegistered<T>` method.
