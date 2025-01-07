@@ -46,6 +46,11 @@ class Speaker extends ContentItem {
     defaultLayoutDescriptor: SpeakerLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Speaker',
+  );
+
   @JsonKey(name: '_id')
   final String id;
 

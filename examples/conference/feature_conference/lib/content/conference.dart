@@ -22,6 +22,11 @@ class Conference extends ContentItem {
     defaultLayoutDescriptor: ConferenceLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Conference',
+  );
+
   @JsonKey(name: '_id')
   final String id;
 

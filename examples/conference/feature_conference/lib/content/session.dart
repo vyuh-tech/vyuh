@@ -44,6 +44,11 @@ class Session extends ContentItem {
     defaultLayoutDescriptor: SessionLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Session',
+  );
+
   @JsonKey(name: '_id')
   final String id;
 

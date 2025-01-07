@@ -38,6 +38,11 @@ class Edition extends ContentItem {
     defaultLayoutDescriptor: EditionLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Edition',
+  );
+
   @JsonKey(name: '_id')
   final String id;
 

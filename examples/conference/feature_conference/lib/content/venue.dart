@@ -8,6 +8,98 @@ import 'room.dart';
 
 part 'venue.g.dart';
 
+@JsonSerializable()
+class Venue extends ContentItem {
+  static const schemaName = 'conf.venue';
+
+  static final typeDescriptor = TypeDescriptor(
+    schemaType: schemaName,
+    fromJson: Venue.fromJson,
+    title: 'Venue',
+  );
+
+  static final contentBuilder = ContentBuilder(
+    content: typeDescriptor,
+    defaultLayout: VenueLayout(),
+    defaultLayoutDescriptor: VenueLayout.typeDescriptor,
+  );
+
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Venue',
+  );
+
+  @JsonKey(name: '_id')
+  final String id;
+
+  final String title;
+  final String slug;
+  final PortableTextContent? description;
+  final VenueAddress? address;
+  final VenueCoordinates? coordinates;
+  final String? website;
+  final String? phone;
+  final String? email;
+  final List<Room>? rooms;
+  final List<VenueAmenity>? amenities;
+  final ImageReference? image;
+
+  Venue({
+    required this.id,
+    this.title = 'Conference Center',
+    required this.slug,
+    this.description,
+    this.address,
+    this.coordinates,
+    this.website,
+    this.phone,
+    this.email,
+    this.rooms,
+    this.amenities,
+    this.image,
+    super.layout,
+    super.modifiers,
+  }) : super(schemaType: schemaName);
+
+  factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
+}
+
+@JsonSerializable()
+class VenueAddress {
+  final String street;
+  final String city;
+  final String state;
+  final String country;
+  final String postalCode;
+
+  VenueAddress({
+    required this.street,
+    required this.city,
+    required this.state,
+    required this.country,
+    required this.postalCode,
+  });
+
+  factory VenueAddress.fromJson(Map<String, dynamic> json) =>
+      _$VenueAddressFromJson(json);
+
+  String get formatted => '$street, $city, $state $postalCode, $country';
+}
+
+@JsonSerializable()
+class VenueCoordinates {
+  final double latitude;
+  final double longitude;
+
+  VenueCoordinates({
+    required this.latitude,
+    required this.longitude,
+  });
+
+  factory VenueCoordinates.fromJson(Map<String, dynamic> json) =>
+      _$VenueCoordinatesFromJson(json);
+}
+
 enum VenueAmenity {
   @JsonValue('free-wifi')
   freeWifi,
@@ -107,91 +199,4 @@ enum VenueAmenity {
         return 'Lounge';
     }
   }
-}
-
-@JsonSerializable()
-class Venue extends ContentItem {
-  static const schemaName = 'conf.venue';
-
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    fromJson: Venue.fromJson,
-    title: 'Venue',
-  );
-
-  static final contentBuilder = ContentBuilder(
-    content: typeDescriptor,
-    defaultLayout: VenueLayout(),
-    defaultLayoutDescriptor: VenueLayout.typeDescriptor,
-  );
-
-  @JsonKey(name: '_id')
-  final String id;
-
-  final String title;
-  final String slug;
-  final PortableTextContent? description;
-  final VenueAddress? address;
-  final VenueCoordinates? coordinates;
-  final String? website;
-  final String? phone;
-  final String? email;
-  final List<Room>? rooms;
-  final List<VenueAmenity>? amenities;
-  final ImageReference? image;
-
-  Venue({
-    required this.id,
-    this.title = 'Conference Center',
-    required this.slug,
-    this.description,
-    this.address,
-    this.coordinates,
-    this.website,
-    this.phone,
-    this.email,
-    this.rooms,
-    this.amenities,
-    this.image,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
-
-  factory Venue.fromJson(Map<String, dynamic> json) => _$VenueFromJson(json);
-}
-
-@JsonSerializable()
-class VenueAddress {
-  final String street;
-  final String city;
-  final String state;
-  final String country;
-  final String postalCode;
-
-  VenueAddress({
-    required this.street,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.postalCode,
-  });
-
-  factory VenueAddress.fromJson(Map<String, dynamic> json) =>
-      _$VenueAddressFromJson(json);
-
-  String get formatted => '$street, $city, $state $postalCode, $country';
-}
-
-@JsonSerializable()
-class VenueCoordinates {
-  final double latitude;
-  final double longitude;
-
-  VenueCoordinates({
-    required this.latitude,
-    required this.longitude,
-  });
-
-  factory VenueCoordinates.fromJson(Map<String, dynamic> json) =>
-      _$VenueCoordinatesFromJson(json);
 }

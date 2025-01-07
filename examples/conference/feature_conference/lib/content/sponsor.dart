@@ -23,6 +23,12 @@ class Sponsor extends ContentItem {
     defaultLayoutDescriptor: SponsorLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Sponsor',
+  );
+
+
   @JsonKey(name: '_id')
   final String id;
 

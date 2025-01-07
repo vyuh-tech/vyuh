@@ -21,6 +21,11 @@ class Track extends ContentItem {
     defaultLayoutDescriptor: TrackLayout.typeDescriptor,
   );
 
+  static final descriptor = ContentDescriptor.createDefault(
+    schemaType: schemaName,
+    title: 'Track',
+  );
+
   @JsonKey(name: '_id')
   final String id;
 
