@@ -1,3 +1,7 @@
+## 1.8.0
+
+ - **FEAT**: shows the content builders and their associated layouts collected across all features.
+
 ## 1.7.0
 
  - **FEAT**: tracking layouts per ContentBuilder.
