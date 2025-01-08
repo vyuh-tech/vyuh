@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -51,11 +52,16 @@ final class OnboardingContent extends ContentItem {
 final class OnboardingStep {
   final String title;
   final PortableTextContent? description;
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  final Widget? icon;
+
   final ImageReference? image;
 
   OnboardingStep({
     this.title = '',
     this.description,
+    this.icon,
     this.image,
   });
 

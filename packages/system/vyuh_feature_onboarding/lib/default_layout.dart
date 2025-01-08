@@ -25,39 +25,73 @@ final class DefaultOnboardingLayout
 
   @override
   Widget build(BuildContext context, OnboardingContent content) {
+    final theme = Theme.of(context);
+    
     final pages = content.steps.map((step) {
       return PageViewModel(
-          title: step.title,
-          body: step.description == null ? '' : null,
-          bodyWidget: step.description != null
-              ? vyuh.content.buildContent(context, step.description!)
-              : null,
-          image: step.image != null
-              ? ContentImage(
-                  ref: step.image!,
-                  fit: BoxFit.cover,
-                )
-              : null,
-          decoration: const PageDecoration(
-            pageMargin: EdgeInsets.all(0),
-            titlePadding: EdgeInsets.symmetric(vertical: 8),
-            imagePadding: EdgeInsets.only(bottom: 8),
-            contentMargin: EdgeInsets.all(8),
-          ));
+        title: step.title,
+        bodyWidget: step.description != null
+            ? vyuh.content.buildContent(context, step.description!)
+            : null,
+        image: _buildImage(step, theme),
+        decoration: const PageDecoration(
+          pageMargin: EdgeInsets.all(0),
+          titlePadding: EdgeInsets.symmetric(vertical: 16),
+          bodyPadding: EdgeInsets.symmetric(horizontal: 16),
+          imagePadding: EdgeInsets.only(bottom: 24),
+          contentMargin: EdgeInsets.all(16),
+        ),
+      );
     }).toList();
 
-    return LimitedBox(
-      maxHeight: 400,
-      child: IntroductionScreen(
-        pages: pages,
-        onDone: () => content.doneAction?.execute(context),
-        onSkip: () => content.doneAction?.execute(context),
-        next: const Icon(Icons.navigate_next),
-        done: const Text('Done'),
-        skip: const Text('Skip'),
-        showNextButton: true,
-        showSkipButton: true,
+    return IntroductionScreen(
+      pages: pages,
+      showSkipButton: true,
+      skip: Text('Skip', style: theme.textTheme.labelMedium),
+      next: Text('Next', style: theme.textTheme.labelMedium),
+      done: Text('Done', style: theme.textTheme.labelMedium),
+      onDone: () {
+        if (content.doneAction != null) {
+          content.doneAction!.execute(context);
+        }
+      },
+      onSkip: () {
+        if (content.doneAction != null) {
+          content.doneAction!.execute(context);
+        }
+      },
+      dotsDecorator: DotsDecorator(
+        size: const Size(10.0, 10.0),
+        color: theme.colorScheme.surfaceContainer,
+        activeSize: const Size(22.0, 10.0),
+        activeColor: theme.colorScheme.primary,
+        activeShape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        ),
       ),
     );
+  }
+
+  Widget _buildImage(OnboardingStep step, ThemeData theme) {
+    if (step.image != null) {
+      return ContentImage(
+        ref: step.image!,
+        fit: BoxFit.cover,
+      );
+    }
+
+    if (step.icon != null) {
+      return Container(
+        width: 200,
+        height: 200,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: theme.colorScheme.surfaceContainer.withValues(alpha: 0.1),
+        ),
+        child: Center(child: step.icon!),
+      );
+    }
+
+    return const SizedBox.shrink();
   }
 }

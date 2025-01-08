@@ -142,7 +142,8 @@
      
      @override
      Widget build(BuildContext context, MyContent content) {
-       // Layout implementation
+       final theme = Theme.of(context);
+       // Layout implementation using theme
      }
    }
    ```
@@ -162,6 +163,21 @@
    - Keep layouts focused on presentation
    - Implement responsive layouts using Flutter's layout system
    - Use theme colors and text styles for consistency
+   - Always store theme in a variable in build method
+   - Use non-deprecated Flutter APIs:
+     - Use `surfaceContainer` instead of `surfaceVariant`
+     - Use `withValues(alpha: value)` instead of `withOpacity` or `withAlpha`
+     - Use current text styles (e.g., `labelMedium` instead of `labelLarge`)
+
+4. **Content Handling**
+   - Use `PortableTextContent` for rich text content
+   - Use `ImageReference` for images, not raw Widget types
+   - Execute actions using `action.execute(context)` directly
+   - Properly annotate JSON serialization:
+     ```dart
+     @JsonKey(includeFromJson: false, includeToJson: false)
+     final Widget? uiElement;
+     ```
 
 ### UI Component Structure
 1. **Widget Hierarchy**
