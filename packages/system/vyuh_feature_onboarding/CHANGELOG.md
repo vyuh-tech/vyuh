@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: exposing more items from onboarding feature and the auth feature.
+
 ## 1.2.1
 
  - **FIX**: version upgrades.
