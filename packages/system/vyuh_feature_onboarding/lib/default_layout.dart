@@ -26,7 +26,7 @@ final class DefaultOnboardingLayout
   @override
   Widget build(BuildContext context, OnboardingContent content) {
     final theme = Theme.of(context);
-    
+
     final pages = content.steps.map((step) {
       return PageViewModel(
         title: step.title,
@@ -47,9 +47,9 @@ final class DefaultOnboardingLayout
     return IntroductionScreen(
       pages: pages,
       showSkipButton: true,
-      skip: Text('Skip', style: theme.textTheme.labelMedium),
-      next: Text('Next', style: theme.textTheme.labelMedium),
-      done: Text('Done', style: theme.textTheme.labelMedium),
+      skip: Text('Skip'),
+      next: Text('Next'),
+      done: Text('Done'),
       onDone: () {
         if (content.doneAction != null) {
           content.doneAction!.execute(context);
@@ -61,12 +61,13 @@ final class DefaultOnboardingLayout
         }
       },
       dotsDecorator: DotsDecorator(
-        size: const Size(10.0, 10.0),
-        color: theme.colorScheme.surfaceContainer,
-        activeSize: const Size(22.0, 10.0),
+        size: const Size(8.0, 8.0),
+        spacing: const EdgeInsets.symmetric(horizontal: 4.0),
+        color: theme.colorScheme.primary.withValues(alpha: 0.25),
+        activeSize: const Size(16.0, 8.0),
         activeColor: theme.colorScheme.primary,
         activeShape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          borderRadius: BorderRadius.all(Radius.circular(4.0)),
         ),
       ),
     );

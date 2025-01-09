@@ -14,6 +14,15 @@ class ContentBuilder<T extends ContentItem> {
   final List<TypeDescriptor<LayoutConfiguration>> _layouts = [];
   List<TypeDescriptor<LayoutConfiguration>> get layouts => _layouts;
 
+  String? _sourceFeature;
+  String? get sourceFeature => _sourceFeature;
+
+  setSourceFeature(String? featureName) {
+    _sourceFeature = featureName;
+
+    defaultLayoutDescriptor.setSourceFeature(featureName);
+  }
+
   ContentBuilder({
     required this.content,
     required LayoutConfiguration<T> defaultLayout,
@@ -62,8 +71,11 @@ class ContentBuilder<T extends ContentItem> {
     return layout.build(context, content);
   }
 
-  setDefaultLayout(LayoutConfiguration<T> layout,
-      {required FromJsonConverter<LayoutConfiguration<T>> fromJson}) {
+  setDefaultLayout(
+    LayoutConfiguration<T> layout, {
+    required FromJsonConverter<LayoutConfiguration<T>> fromJson,
+    String? sourceFeatureName,
+  }) {
     _defaultLayout = layout;
 
     final currentLayoutSchemaType = _defaultLayoutDescriptor.schemaType;
@@ -73,6 +85,7 @@ class ContentBuilder<T extends ContentItem> {
       fromJson: fromJson,
       title: 'Override Layout for ${content.schemaType}',
     );
+    _defaultLayoutDescriptor.setSourceFeature(sourceFeatureName);
 
     registerDescriptors<LayoutConfiguration>([_defaultLayoutDescriptor]);
 

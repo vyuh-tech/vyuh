@@ -7,6 +7,13 @@ class TypeDescriptor<T> {
 
   final Type type;
 
+  String? _sourceFeature;
+  String? get sourceFeature => _sourceFeature;
+
+  setSourceFeature(String? featureName) {
+    _sourceFeature = featureName;
+  }
+
   TypeDescriptor({
     required this.schemaType,
     required this.fromJson,

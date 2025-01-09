@@ -5,6 +5,11 @@ abstract class ContentDescriptor {
   final String schemaType;
   final List<TypeDescriptor<LayoutConfiguration>>? layouts;
 
+  String? _sourceFeature;
+
+  /// The feature that this content descriptor was registered by.
+  String? get sourceFeature => _sourceFeature;
+
   ContentDescriptor({
     required this.schemaType,
     required this.title,
@@ -27,6 +32,8 @@ abstract class ContentDescriptor {
           layouts: layouts,
         );
   }
+
+  void setSourceFeature(String? featureName) => _sourceFeature = featureName;
 }
 
 final class _DefaultContentDescriptor extends ContentDescriptor {

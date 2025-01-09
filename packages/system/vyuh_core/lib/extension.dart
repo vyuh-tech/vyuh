@@ -14,15 +14,18 @@ abstract class ExtensionDescriptor {
 
   /// Sets the source feature for this extension.
   /// This is called by the Vyuh bootstrapping process.
-  @mustCallSuper
   void setSourceFeature(String featureName) {
     _sourceFeature = featureName;
+
+    onSourceFeatureUpdated();
   }
 
   /// Creates a new ExtensionDescriptor.
   ExtensionDescriptor({
     required this.title,
   });
+
+  onSourceFeatureUpdated();
 }
 
 /// The base type for all extension builders. An extension builder is responsible for building an extension,

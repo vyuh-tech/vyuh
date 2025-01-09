@@ -18,4 +18,32 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
     this.conditions,
     this.routeTypes,
   }) : super(title: 'Content Extension');
+
+  @override
+  onSourceFeatureUpdated() {
+    for (final td in actions ?? <TypeDescriptor<ActionConfiguration>>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+
+    for (final td in conditions ?? <TypeDescriptor<ConditionConfiguration>>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+
+    for (final td in routeTypes ?? <TypeDescriptor<RouteTypeConfiguration>>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+
+    for (final td in contentModifiers ??
+        <TypeDescriptor<ContentModifierConfiguration>>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+
+    for (final td in contentBuilders ?? <ContentBuilder>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+
+    for (final td in contents ?? <ContentDescriptor>[]) {
+      td.setSourceFeature(sourceFeature);
+    }
+  }
 }

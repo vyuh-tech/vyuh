@@ -7,6 +7,9 @@ import 'package:vyuh_test/vyuh_test.dart';
 
 class TestExtensionDescriptor extends ExtensionDescriptor {
   TestExtensionDescriptor() : super(title: 'Test Extension Descriptor');
+
+  @override
+  onSourceFeatureUpdated() {}
 }
 
 class TestExtensionBuilder extends ExtensionBuilder<ExtensionDescriptor> {
@@ -28,6 +31,9 @@ class ErrorThrowingExtensionDescriptor extends ExtensionDescriptor {
     required this.errorMessage,
     required super.title,
   });
+
+  @override
+  onSourceFeatureUpdated() {}
 }
 
 class ErrorThrowingExtensionBuilder
