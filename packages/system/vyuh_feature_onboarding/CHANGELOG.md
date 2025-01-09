@@ -1,3 +1,7 @@
+## 1.4.0
+
+ - **FEAT**: added lineage of features for all typedescriptors and content builders.
+
 ## 1.3.0
 
  - **FEAT**: exposing more items from onboarding feature and the auth feature.

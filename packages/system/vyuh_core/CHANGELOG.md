@@ -1,3 +1,7 @@
+## 1.34.0
+
+ - **FEAT**: added lineage of features for all typedescriptors and content builders.
+
 ## 1.33.0
 
  - **FEAT**: tracking layouts per ContentBuilder.
