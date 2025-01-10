@@ -179,7 +179,7 @@ void main() {
         plugins: PluginDescriptor(
           network: HttpNetworkPlugin(
             client: mockClient,
-            timeout: Duration(milliseconds: 100),
+            timeout: const Duration(milliseconds: 100),
           ),
         ),
       );
@@ -187,7 +187,7 @@ void main() {
 
       when(() => mockClient.get(any())).thenAnswer(
         (_) async {
-          await Future.delayed(Duration(milliseconds: 200));
+          await Future.delayed(const Duration(milliseconds: 200));
           return Response('', 200);
         },
       );

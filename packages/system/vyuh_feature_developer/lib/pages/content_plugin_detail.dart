@@ -66,10 +66,10 @@ class ContentPluginDetailsView extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
                                             horizontal: 8.0),
-                                        child: const Text('↳'),
+                                        child: Text('↳'),
                                       ),
                                       Expanded(
                                         child: Column(

@@ -35,9 +35,9 @@ final class HttpNetworkPlugin extends NetworkPlugin {
     RetryOptions? retryOptions,
     Duration? timeout,
   })  : _retryOptions = retryOptions ??
-            RetryOptions(
+            const RetryOptions(
               maxAttempts: 3,
-              delayFactor: const Duration(milliseconds: 200),
+              delayFactor: Duration(milliseconds: 200),
             ),
         _timeout = timeout ?? const Duration(seconds: 30),
         super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {

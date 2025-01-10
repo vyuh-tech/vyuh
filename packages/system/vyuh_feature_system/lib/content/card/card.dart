@@ -13,6 +13,11 @@ class Card extends ContentItem implements PortableBlockItem {
     schemaType: schemaName,
     title: 'Card',
     fromJson: Card.fromJson,
+    preview: () => Card(
+      title: 'Title for the Card',
+      description: 'A description for the card',
+      imageUrl: Uri.parse('https://picsum.photos/300/200'),
+    ),
   );
   static final contentBuilder = ContentBuilder(
     content: Card.typeDescriptor,

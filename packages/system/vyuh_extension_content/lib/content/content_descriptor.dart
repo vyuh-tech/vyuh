@@ -33,7 +33,13 @@ abstract class ContentDescriptor {
         );
   }
 
-  void setSourceFeature(String? featureName) => _sourceFeature = featureName;
+  void setSourceFeature(String? featureName) {
+    _sourceFeature = featureName;
+
+    for (final layout in layouts ?? <TypeDescriptor<LayoutConfiguration>>[]) {
+      layout.setSourceFeature(featureName);
+    }
+  }
 }
 
 final class _DefaultContentDescriptor extends ContentDescriptor {

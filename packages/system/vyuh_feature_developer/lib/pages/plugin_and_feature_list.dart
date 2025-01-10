@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
-import 'package:vyuh_feature_developer/feature_detail.dart';
-import 'package:vyuh_feature_developer/plugin_detail.dart';
+import 'package:vyuh_feature_developer/pages/feature_detail.dart';
+import 'package:vyuh_feature_developer/pages/plugin_detail.dart';
 
 class PluginAndFeatureList extends StatelessWidget {
   const PluginAndFeatureList({
@@ -18,6 +18,15 @@ class PluginAndFeatureList extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: true,
         title: const Text('Developer'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.local_play_outlined),
+            tooltip: 'Content Playground',
+            onPressed: () {
+              vyuh.router.push('/developer/playground');
+            },
+          ),
+        ],
       ),
       body: SafeArea(
         child: CustomScrollView(

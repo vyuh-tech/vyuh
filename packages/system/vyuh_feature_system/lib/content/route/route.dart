@@ -13,6 +13,17 @@ final class Route extends RouteBase {
     schemaType: schemaName,
     title: 'Route',
     fromJson: Route.fromJson,
+    preview: () => Route(
+      title: 'Preview Route',
+      routeType: PageRouteType(),
+      path: '/preview',
+      regions: [
+        Region(identifier: 'body', title: 'Body', items: []),
+      ],
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+      id: 'preview-id',
+    ),
   );
   static final contentBuilder = _RouteContentBuilder();
 
@@ -103,10 +114,7 @@ final class RouteDescriptor extends ContentDescriptor {
 final class _RouteContentBuilder extends ContentBuilder<Route> {
   _RouteContentBuilder()
       : super(
-          content: TypeDescriptor(
-              schemaType: Route.schemaName,
-              title: 'Route',
-              fromJson: Route.fromJson),
+          content: Route.typeDescriptor,
           defaultLayout: DefaultRouteLayout(),
           defaultLayoutDescriptor: DefaultRouteLayout.typeDescriptor,
         );

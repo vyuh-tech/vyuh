@@ -31,7 +31,7 @@ class RoomLayout extends StatelessWidget {
                   spacing: 8,
                   children: [
                     Chip(
-                      avatar: Icon(
+                      avatar: const Icon(
                         Icons.people,
                         color: Colors.white,
                       ),
@@ -44,7 +44,7 @@ class RoomLayout extends StatelessWidget {
                       backgroundColor: theme.colorScheme.secondary,
                     ),
                     Chip(
-                      avatar: Icon(
+                      avatar: const Icon(
                         Icons.stairs,
                         color: Colors.white,
                       ),

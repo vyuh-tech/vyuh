@@ -25,7 +25,7 @@ import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider
 
 void main() async {
   vc.runApp(
-    initialLocation: '/chakra',
+    initialLocation: '/developer',
     plugins: _getPlugins(),
     features: () => [
       // Core Vyuh features that are necessary for all apps

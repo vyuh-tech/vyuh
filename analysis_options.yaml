@@ -9,4 +9,5 @@ analyzer:
 linter:
   rules:
     - directives_ordering
+    - prefer_const_constructors
 

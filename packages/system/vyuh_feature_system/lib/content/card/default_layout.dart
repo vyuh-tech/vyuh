@@ -20,6 +20,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
     schemaType: schemaName,
     title: 'Default Card Layout',
     fromJson: DefaultCardLayout.fromJson,
+    preview: () => DefaultCardLayout(title: 'Default'),
   );
 
   @JsonKey(defaultValue: '')

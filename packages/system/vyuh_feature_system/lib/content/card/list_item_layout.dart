@@ -12,6 +12,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
     schemaType: schemaName,
     title: 'List Item Card Layout',
     fromJson: ListItemCardLayout.fromJson,
+    preview: () => ListItemCardLayout(title: 'List Item'),
   );
 
   @JsonKey(defaultValue: '')

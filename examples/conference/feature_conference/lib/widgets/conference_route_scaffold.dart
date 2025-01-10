@@ -38,7 +38,7 @@ class _ConferenceRouteScaffoldState<T>
             _future = widget.future();
           });
         },
-        child: Icon(Icons.refresh),
+        child: const Icon(Icons.refresh),
       ),
       body: FutureBuilder<T?>(
         future: _future,

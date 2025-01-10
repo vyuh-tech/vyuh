@@ -5,6 +5,8 @@ class TypeDescriptor<T> {
   final String schemaType;
   final FromJsonConverter<T> fromJson;
 
+  final T Function()? preview;
+
   final Type type;
 
   String? _sourceFeature;
@@ -18,6 +20,7 @@ class TypeDescriptor<T> {
     required this.schemaType,
     required this.fromJson,
     required this.title,
+    this.preview,
   }) : type = T;
 
   @override

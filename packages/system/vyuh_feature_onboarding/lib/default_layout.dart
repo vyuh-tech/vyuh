@@ -47,9 +47,9 @@ final class DefaultOnboardingLayout
     return IntroductionScreen(
       pages: pages,
       showSkipButton: true,
-      skip: Text('Skip'),
-      next: Text('Next'),
-      done: Text('Done'),
+      skip: const Text('Skip'),
+      next: const Text('Next'),
+      done: const Text('Done'),
       onDone: () {
         if (content.doneAction != null) {
           content.doneAction!.execute(context);

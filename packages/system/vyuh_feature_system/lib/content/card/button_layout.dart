@@ -18,6 +18,7 @@ final class ButtonCardLayout extends LayoutConfiguration<Card> {
     schemaType: schemaName,
     title: 'Button Layout',
     fromJson: ButtonCardLayout.fromJson,
+    preview: () => ButtonCardLayout(),
   );
 
   final ButtonType buttonType;

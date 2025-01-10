@@ -38,7 +38,7 @@ final class ConferenceDetailPage extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 vyuh.content.buildContent(context, conference),
-                Divider(),
+                const Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: Text('Editions (${editions.length})',

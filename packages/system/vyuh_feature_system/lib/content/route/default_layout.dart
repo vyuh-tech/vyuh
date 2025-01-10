@@ -46,6 +46,7 @@ class DefaultRouteLayout extends LayoutConfiguration<Route> {
     schemaType: schemaName,
     title: 'Default Route Layout',
     fromJson: DefaultRouteLayout.fromJson,
+    preview: () => DefaultRouteLayout(),
   );
 
   final bool showAppBar;

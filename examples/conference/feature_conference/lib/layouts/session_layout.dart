@@ -95,7 +95,7 @@ class _SessionDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return content.description != null
         ? vyuh.content.buildContent(context, content.description!)
-        : SizedBox.shrink();
+        : const SizedBox.shrink();
   }
 }
 
