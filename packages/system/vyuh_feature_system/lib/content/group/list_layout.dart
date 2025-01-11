@@ -14,6 +14,7 @@ final class ListGroupLayout extends LayoutConfiguration<Group> {
     schemaType: schemaName,
     fromJson: ListGroupLayout.fromJson,
     title: 'List layout',
+    preview: () => ListGroupLayout(),
   );
 
   final double percentHeight;
@@ -25,19 +26,14 @@ final class ListGroupLayout extends LayoutConfiguration<Group> {
 
   @override
   Widget build(BuildContext context, Group content) {
-    final theme = Theme.of(context);
     final maxScreenHeight = MediaQuery.sizeOf(context).height * percentHeight;
 
     return GroupLayoutContainer(
       content: content,
-      body: Container(
-        height: maxScreenHeight,
-        padding: const EdgeInsets.all(4.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4),
-          border: Border.all(color: theme.colorScheme.outlineVariant),
-        ),
+      body: LimitedBox(
+        maxHeight: maxScreenHeight,
         child: ListView.builder(
+          padding: const EdgeInsets.all(4.0),
           itemCount: content.items.length,
           itemBuilder: (context, index) =>
               vyuh.content.buildContent(context, content.items[index]),

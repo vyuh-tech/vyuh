@@ -13,6 +13,7 @@ final class CarouselGroupLayout extends LayoutConfiguration<Group> {
     schemaType: schemaName,
     title: 'Carousel Group Layout',
     fromJson: CarouselGroupLayout.fromJson,
+    preview: () => CarouselGroupLayout(),
   );
 
   final double viewportFraction;

@@ -18,7 +18,10 @@ final class Route extends RouteBase {
       routeType: PageRouteType(),
       path: '/preview',
       regions: [
-        Region(identifier: 'body', title: 'Body', items: []),
+        Region(identifier: 'body', title: 'Body', items: [
+          Card.typeDescriptor.preview!.call(),
+          Group.typeDescriptor.preview!.call(),
+        ]),
       ],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),

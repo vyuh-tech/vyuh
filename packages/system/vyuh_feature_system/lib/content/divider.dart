@@ -10,11 +10,14 @@ part 'divider.g.dart';
 @JsonSerializable()
 class Divider extends ContentItem implements PortableBlockItem {
   static const schemaName = 'vyuh.divider';
+
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Divider',
     fromJson: Divider.fromJson,
+    preview: () => Divider(),
   );
+
   static final contentBuilder = ContentBuilder(
     content: Divider.typeDescriptor,
     defaultLayout: DefaultDividerLayout(),
@@ -49,6 +52,7 @@ final class DefaultDividerLayout extends LayoutConfiguration<Divider> {
     schemaType: schemaName,
     title: 'Default Divider Layout',
     fromJson: DefaultDividerLayout.fromJson,
+    preview: () => DefaultDividerLayout(),
   );
 
   DefaultDividerLayout()

@@ -8,8 +8,8 @@ import 'package:vyuh_feature_developer/pages/telemetry_plugin_detail.dart';
 import 'package:vyuh_feature_developer/routes.dart';
 
 import 'pages/content_extension_detail.dart';
-import 'pages/content_playground.dart';
 import 'pages/feature_detail.dart';
+import 'pages/playground/content_playground.dart';
 import 'pages/plugin_and_feature_list.dart';
 
 List<GoRoute> routes() {

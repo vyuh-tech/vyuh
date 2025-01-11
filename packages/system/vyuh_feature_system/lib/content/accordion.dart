@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -10,11 +10,29 @@ part 'accordion.g.dart';
 @JsonSerializable()
 final class Accordion extends ContentItem {
   static const schemaName = 'vyuh.accordion';
+
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Accordion',
     fromJson: Accordion.fromJson,
+    preview: () => Accordion(
+      items: [
+        AccordionItem(
+          title: 'First',
+          content: Card.typeDescriptor.preview!.call(),
+        ),
+        AccordionItem(
+          title: 'Second',
+          content: Group.typeDescriptor.preview!.call(),
+        ),
+        AccordionItem(
+          title: 'Third',
+          content: PortableTextContent.typeDescriptor.preview!.call(),
+        ),
+      ],
+    ),
   );
+
   static final contentBuilder = ContentBuilder(
     content: Accordion.typeDescriptor,
     defaultLayout: DefaultAccordionLayout(),
@@ -70,6 +88,7 @@ final class DefaultAccordionLayout extends LayoutConfiguration<Accordion> {
     schemaType: schemaName,
     title: 'Default Accordion Layout',
     fromJson: DefaultAccordionLayout.fromJson,
+    preview: () => DefaultAccordionLayout(),
   );
 
   DefaultAccordionLayout() : super(schemaType: schemaName);

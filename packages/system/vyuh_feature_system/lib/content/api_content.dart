@@ -14,6 +14,7 @@ final class APIContent extends ContentItem {
     schemaType: schemaName,
     title: 'API Content',
     fromJson: APIContent.fromJson,
+    preview: () => APIContent(showPending: true, showError: true),
   );
   static final contentBuilder = _APIContentBuilder();
 
@@ -84,6 +85,7 @@ final class _DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
     schemaType: schemaName,
     title: 'Default APIContent Layout',
     fromJson: _DefaultAPIContentLayout.fromJson,
+    preview: () => _DefaultAPIContentLayout(),
   );
 
   _DefaultAPIContentLayout() : super(schemaType: schemaName);

@@ -17,6 +17,23 @@ class Group extends ContentItem implements PortableBlockItem, ContainerItem {
     schemaType: Group.schemaName,
     title: 'Group',
     fromJson: Group.fromJson,
+    preview: () => Group(items: [
+      Card(
+        title: 'One',
+        description: 'The first card',
+        imageUrl: Uri.parse('https://picsum.photos/200/150'),
+      ),
+      Card(
+        title: 'Two',
+        description: 'The second card',
+        imageUrl: Uri.parse('https://picsum.photos/200/150'),
+      ),
+      Card(
+        title: 'Three',
+        description: 'The third card',
+        imageUrl: Uri.parse('https://picsum.photos/200/150'),
+      ),
+    ]),
   );
 
   static final contentBuilder = ContentBuilder(

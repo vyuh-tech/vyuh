@@ -14,6 +14,12 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
     schemaType: schemaName,
     title: 'Tabs Route Layout',
     fromJson: TabsRouteLayout.fromJson,
+    preview: () => TabsRouteLayout(routes: [
+      LinkedRoute(
+          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id')),
+      LinkedRoute(
+          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id')),
+    ]),
   );
 
   final List<LinkedRoute> routes;
@@ -25,15 +31,13 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
 
   @override
   Widget build(BuildContext context, vt.RouteBase content) {
-    final layout = content.layout as TabsRouteLayout;
-
     return DefaultTabController(
-      length: layout.routes.length,
+      length: routes.length,
       child: Scaffold(
         appBar: AppBar(
           toolbarHeight: 0,
           bottom: TabBar(
-            tabs: layout.routes
+            tabs: routes
                 .map((e) => Tab(
                       text: e.title,
                       icon: e.title == null
@@ -44,7 +48,7 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
           ),
         ),
         body: TabBarView(
-          children: layout.routes
+          children: routes
               .map(
                   (e) => vyuh.content.buildRoute(context, routeId: e.route.ref))
               .toList(growable: false),

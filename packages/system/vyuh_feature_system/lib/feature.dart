@@ -82,7 +82,6 @@ final feature = FeatureDescriptor(
         ]),
         ConditionalDescriptor(),
         ConditionalRouteDescriptor(),
-        UnknownDescriptor(),
         EmptyDescriptor(),
         PortableTextDescriptor(
           markDefs: [

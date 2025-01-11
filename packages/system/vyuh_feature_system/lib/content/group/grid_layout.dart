@@ -13,6 +13,7 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
     schemaType: schemaName,
     title: 'Grid Layout',
     fromJson: GridGroupLayout.fromJson,
+    preview: () => GridGroupLayout(),
   );
 
   @JsonKey(defaultValue: 2)

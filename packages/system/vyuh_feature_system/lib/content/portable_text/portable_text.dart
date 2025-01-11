@@ -12,10 +12,23 @@ part 'portable_text.g.dart';
 class PortableTextContent extends ContentItem {
   static const schemaName = 'vyuh.portableText';
   static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    title: 'Portable Text',
-    fromJson: PortableTextContent.fromJson,
-  );
+      schemaType: schemaName,
+      title: 'Portable Text',
+      fromJson: PortableTextContent.fromJson,
+      preview: () => PortableTextContent(
+            blocks: [
+              TextBlockItem(children: [
+                Span(text: 'Italic Text, ', marks: ['em']),
+                Span(text: 'Bold Text, ', marks: ['strong']),
+                Span(
+                    text: 'Bold, Italic, Underline Text',
+                    marks: ['em', 'strong', 'underline']),
+              ]),
+              TextBlockItem(children: [
+                Span(text: 'class SomeDartClass {}', marks: ['code']),
+              ]),
+            ],
+          ));
   static final contentBuilder = _PortableTextContentBuilder();
 
   @JsonKey(defaultValue: [], fromJson: blockItemsFromJson)
@@ -174,6 +187,7 @@ class DefaultPortableTextContentLayout
     schemaType: schemaName,
     title: 'Default Portable Text Layout',
     fromJson: DefaultPortableTextContentLayout.fromJson,
+    preview: () => DefaultPortableTextContentLayout(),
   );
 
   DefaultPortableTextContentLayout() : super(schemaType: schemaName);

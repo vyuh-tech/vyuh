@@ -11,6 +11,8 @@ class Unknown extends ContentItem implements PortableBlockItem {
     schemaType: Unknown.schemaName,
     fromJson: Unknown.fromJson,
     title: 'Unknown',
+    preview: () =>
+        Unknown(missingSchemaType: 'missing.type', description: 'Unknown Item'),
   );
 
   final String missingSchemaType;

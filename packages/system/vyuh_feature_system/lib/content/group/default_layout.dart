@@ -14,6 +14,7 @@ final class DefaultGroupLayout extends LayoutConfiguration<Group> {
     schemaType: schemaName,
     title: 'Default Group Layout',
     fromJson: DefaultGroupLayout.fromJson,
+    preview: () => DefaultGroupLayout(),
   );
 
   DefaultGroupLayout() : super(schemaType: schemaName);

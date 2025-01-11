@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 enum KnownRegionType {
@@ -59,7 +60,7 @@ final class RouteScaffold extends StatelessWidget {
       ],
     );
 
-    return Scaffold(
+    final scaffold = Scaffold(
       appBar: appBar,
       body: useSafeArea ? SafeArea(child: bodyContent) : bodyContent,
       drawer:
@@ -68,6 +69,17 @@ final class RouteScaffold extends StatelessWidget {
           ? _buildDrawer(context, endDrawerItems)
           : null,
     );
+
+    final isInsidePreview = PreviewContext.of(context) != null;
+
+    if (isInsidePreview) {
+      return LimitedBox(
+        maxHeight: MediaQuery.sizeOf(context).height * 0.5,
+        child: scaffold,
+      );
+    }
+
+    return scaffold;
   }
 
   _buildDrawer(BuildContext context, List<ContentItem> items) {

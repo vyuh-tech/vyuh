@@ -13,6 +13,10 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     schemaType: schemaName,
     title: 'Single Item Layout',
     fromJson: SingleItemLayout.fromJson,
+    preview: () => SingleItemLayout(
+        showAppBar: true,
+        useSafeArea: true,
+        actions: [MenuAction(icon: MenuIconType.settings)]),
   );
 
   final bool showAppBar;

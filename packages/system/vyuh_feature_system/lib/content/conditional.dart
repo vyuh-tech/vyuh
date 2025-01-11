@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Card;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -12,11 +12,28 @@ part 'conditional.g.dart';
 @JsonSerializable()
 class Conditional extends ContentItem {
   static const schemaName = 'vyuh.conditional';
+
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     title: 'Conditional',
     fromJson: Conditional.fromJson,
+    preview: () => Conditional(
+        showPending: true,
+        condition: Condition(
+          configuration:
+              BooleanCondition(value: true, evaluationDelayInSeconds: 1),
+        ),
+        defaultCase: 'false',
+        cases: [
+          CaseItem(
+              value: 'true',
+              item: Card(title: 'True', description: 'true Card')),
+          CaseItem(
+              value: 'false',
+              item: Card(title: 'False', description: 'false Card')),
+        ]),
   );
+
   static final contentBuilder = ContentBuilder(
     content: Conditional.typeDescriptor,
     defaultLayout: DefaultConditionalLayout(),
@@ -76,6 +93,7 @@ final class DefaultConditionalLayout extends LayoutConfiguration<Conditional> {
     schemaType: schemaName,
     title: 'Default Conditional Layout',
     fromJson: DefaultConditionalLayout.fromJson,
+    preview: () => DefaultConditionalLayout(),
   );
 
   DefaultConditionalLayout() : super(schemaType: schemaName);
