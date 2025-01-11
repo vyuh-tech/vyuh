@@ -2,8 +2,8 @@ name: vyuh
 repository: https://github.com/vyuh-tech/vyuh
 
 packages:
-  - packages/{sanity,system,}/*
-  - packages/{sanity,system,}/*/example
+  - packages/{sanity,system,plugins,}/*
+  - packages/{sanity,system,plugins,}/*/example
   - examples/*
   - examples/*/*
   - apps/*
