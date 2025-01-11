@@ -1,3 +1,7 @@
+## 1.36.0
+
+ - **FEAT**: introducing a hive storage plugin.
+
 ## 1.35.0
 
  - **FEAT**: added lineage of features for all typedescriptors and content builders, added the Content Playground for the developer tool and fixed a bunch of analysis issues.
