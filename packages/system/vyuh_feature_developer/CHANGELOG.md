@@ -1,3 +1,7 @@
+## 1.10.0
+
+ - **FEAT**: adding support for previews of items ..
+
 ## 1.9.0
 
  - **FEAT**: added lineage of features for all typedescriptors and content builders, added the Content Playground for the developer tool and fixed a bunch of analysis issues.

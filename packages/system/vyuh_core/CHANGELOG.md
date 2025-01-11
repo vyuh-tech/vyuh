@@ -1,3 +1,7 @@
+## 1.37.0
+
+ - **FEAT**: adding support for previews of items ..
+
 ## 1.36.0
 
  - **FEAT**: introducing a hive storage plugin.
