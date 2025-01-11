@@ -1,11 +1,14 @@
 # Vyuh Hive Storage Plugin 📦
 
-A storage plugin for Vyuh using Hive as the backend. This plugin provides a simple yet powerful key-value storage solution that integrates seamlessly with the Vyuh framework.
+A storage plugin for Vyuh using Hive as the backend. This plugin provides a
+simple yet powerful key-value storage solution that integrates seamlessly with
+the Vyuh framework.
 
 ## Features ✨
 
 - **Key-value Storage** 🔑: Simple and fast storage using Hive
-- **Configurable Box Name** 📝: Customize storage location for different use cases
+- **Configurable Box Name** 📝: Customize storage location for different use
+  cases
 - **Auto-initialization** 🚀: Automatic setup and cleanup
 - **Type Safety** 🛡️: Full type safety for stored values
 - **Persistence** 💾: Data persists across app restarts
@@ -50,7 +53,7 @@ Access and manipulate stored data:
 
 ```dart
 // Get the storage plugin
-final storage = vyuh.plugins.get<StoragePlugin>();
+final storage = vyuh.getPlugin<StoragePlugin>();
 
 // Write data ✍️
 await storage.write('key', 'value');
@@ -68,7 +71,8 @@ await storage.delete('key');
 ## Implementation Details 🛠️
 
 - **Hive Backend** 📊: Uses Hive's `Box` for efficient storage
-- **Custom Storage** 🗄️: Data stored in configurable box (defaults to 'vyuh_storage')
+- **Custom Storage** 🗄️: Data stored in configurable box (defaults to
+  'vyuh_storage')
 - **Flutter Support** 📱: Automatic Hive initialization for Flutter
 - **Resource Management** 🧹: Proper cleanup on plugin disposal
 
@@ -88,6 +92,7 @@ vc.runApp(
 ```
 
 This configuration enables:
+
 - 🔀 Multiple storage boxes for different purposes
 - 🔒 Data isolation between features
 - 🤝 Data sharing across app components
@@ -95,7 +100,8 @@ This configuration enables:
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄
