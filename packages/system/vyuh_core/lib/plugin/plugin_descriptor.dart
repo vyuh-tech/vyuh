@@ -18,6 +18,7 @@ final class PluginDescriptor {
     final NavigationPlugin? navigation,
     final EnvPlugin? env,
     final EventPlugin? event,
+    final StoragePlugin? storage,
     final List<Plugin>? others,
   }) {
     final otherPlugins = others ?? <Plugin>[];
@@ -31,6 +32,7 @@ final class PluginDescriptor {
             plugin is AuthPlugin ||
             plugin is NavigationPlugin ||
             plugin is EventPlugin ||
+            plugin is StoragePlugin ||
             plugin is EnvPlugin) {
           return false;
         }
