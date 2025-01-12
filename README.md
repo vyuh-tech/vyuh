@@ -15,8 +15,6 @@
 [![Publish Action](https://img.shields.io/github/actions/workflow/status/vyuh-tech/vyuh/publish.yml?label=Publish&logo=github&style=for-the-badge)](https://github.com/vyuh-tech/vyuh/actions/workflows/publish.yml)
 &nbsp;
 [![Discord](https://img.shields.io/discord/1198906057502769252?style=for-the-badge&logo=discord)](https://discord.gg/b49sbjqszG)
-&nbsp;
-[![AI-Code Agent](https://img.shields.io/badge/AI-Code%20Agent-EB9FDA?style=for-the-badge)](https://app.commanddash.io/agent/github_vyuh-tech_vyuh)
 
 | Packages                                                                                                                                                                                                                                                        |
 | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -29,9 +27,11 @@
 | [![vyuh_plugin_content_provider_sanity](https://img.shields.io/pub/v/vyuh_plugin_content_provider_sanity.svg?label=vyuh_plugin_content_provider_sanity&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_content_provider_sanity) |
 | [![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)                                                                                                     |
 | [![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)                                                                 |
-| [![vyuh_feature_developer](https://img.shields.io/pub/v/vyuh_feature_developer.svg?label=vyuh_feature_developer&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_developer)                                                     |
 | [![vyuh_feature_auth](https://img.shields.io/pub/v/vyuh_feature_auth.svg?label=vyuh_feature_auth&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_auth)                                                                         |
 | [![vyuh_feature_onboarding](https://img.shields.io/pub/v/vyuh_feature_onboarding.svg?label=vyuh_feature_onboarding&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_onboarding)                                                 |
+| _Developer Tools_                                                                                                                                                                                                                                               |
+| [![vyuh_feature_developer](https://img.shields.io/pub/v/vyuh_feature_developer.svg?label=vyuh_feature_developer&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_developer)                                                     |
+| [![vyuh_widgetbook](https://img.shields.io/pub/v/vyuh_widgetbook.svg?label=vyuh_widgetbook&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_widgetbook)                                                                                 |
 | _NPM_                                                                                                                                                                                                                                                           |
 | [![@vyuh/sanity-schema-core](https://img.shields.io/npm/v/%40vyuh%2Fsanity-schema-core.svg?logo=npm&label=%40vyuh%2Fsanity-schema-core&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/sanity-schema-core)                               |
 | [![@vyuh/sanity-schema-system](https://img.shields.io/npm/v/%40vyuh%2Fsanity-schema-system.svg?logo=npm&label=%40vyuh%2Fsanity-schema-system&style=for-the-badge&color=cb3837)](https://www.npmjs.com/package/@vyuh/sanity-schema-system)                       |

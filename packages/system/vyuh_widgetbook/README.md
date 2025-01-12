@@ -4,10 +4,6 @@ A powerful widgetbook implementation for previewing Vyuh content and components.
 
 ![Vyuh Widgetbook showing content previews](doc/images/widgetbook.png)
 
-[![pub package](https://img.shields.io/pub/v/vyuh_widgetbook.svg)](https://pub.dev/packages/vyuh_widgetbook)
-[![likes](https://img.shields.io/pub/likes/vyuh_widgetbook)](https://pub.dev/packages/vyuh_widgetbook/score)
-[![popularity](https://img.shields.io/pub/popularity/vyuh_widgetbook)](https://pub.dev/packages/vyuh_widgetbook/score)
-
 ## ✨ Features
 
 - 📱 Preview content types in different sizes
