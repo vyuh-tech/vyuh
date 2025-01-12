@@ -1,3 +1,7 @@
+## 1.1.3
+
+ - **FIX**: updated version constraints.
+
 ## 1.1.2
 
  - **FIX**: added screenshot.
