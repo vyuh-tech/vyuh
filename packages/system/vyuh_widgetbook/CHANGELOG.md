@@ -1,3 +1,7 @@
+## 1.1.4
+
+ - **FIX**: readme updates.
+
 ## 1.1.3
 
  - **FIX**: updated version constraints.
