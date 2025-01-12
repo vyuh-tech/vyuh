@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/plugin/content/content_item.dart';
 
+/// A widget that displays a card indicating no preview is available for a content item or layout.
+///
+/// This widget is used in the Vyuh Widgetbook to show a placeholder when a preview
+/// cannot be generated for a specific content type or layout configuration.
 final class NoPreviewCard extends StatelessWidget {
   final String title;
   final ContentItem? content;
