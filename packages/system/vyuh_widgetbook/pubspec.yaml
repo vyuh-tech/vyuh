@@ -1,0 +1,28 @@
+name: vyuh_widgetbook
+description: Widgetbook implementation for Vyuh content previews
+version: 1.0.0
+homepage: https://vyuh.tech
+repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_widgetbook
+issue_tracker: https://github.com/vyuh-tech/vyuh/issues
+
+topics:
+  - vyuh
+  - widgetbook
+  - content
+  - preview
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  vyuh_core: ^1.0.0
+  vyuh_extension_content: ^1.0.0
+
+  widgetbook: ^3.10.2
+
+dev_dependencies:
+  flutter_lints: ^5.0.0

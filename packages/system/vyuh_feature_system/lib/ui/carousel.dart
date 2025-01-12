@@ -29,7 +29,7 @@ class _CarouselState extends State<Carousel> {
     final theme = Theme.of(context);
 
     return ConstrainedBox(
-      constraints: const BoxConstraints(minHeight: 100, maxHeight: 200),
+      constraints: const BoxConstraints(minHeight: 100, maxHeight: 250),
       child: Column(
         children: [
           Expanded(

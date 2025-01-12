@@ -18,7 +18,7 @@ final class ContentList extends StatelessWidget {
     final width = MediaQuery.sizeOf(context).width;
 
     return SizedBox(
-      width: width * 0.4,
+      width: width * 0.45,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

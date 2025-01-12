@@ -60,6 +60,7 @@ final class GroupLayoutContainer extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisSize: MainAxisSize.min,
         children: [
           if (content.title != null && content.title!.isNotEmpty)
             Text(
