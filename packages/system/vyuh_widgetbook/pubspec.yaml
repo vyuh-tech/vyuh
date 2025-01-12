@@ -1,6 +1,6 @@
 name: vyuh_widgetbook
 description: Widgetbook implementation for Vyuh content previews
-version: 1.0.0
+version: 1.1.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_widgetbook
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues

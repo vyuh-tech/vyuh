@@ -1,3 +1,7 @@
+## 1.11.0
+
+ - **FEAT**: adding widgetbook support (WIP).
+
 ## 1.10.0
 
  - **FEAT**: adding support for previews of items ..
