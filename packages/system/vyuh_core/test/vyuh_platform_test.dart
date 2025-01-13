@@ -73,9 +73,6 @@ class MockTelemetryProvider implements TelemetryProvider {
   String get description => 'Mock telemetry provider for testing';
 
   @override
-  List<NavigatorObserver> get observers => [];
-
-  @override
   Future<void> init() async {}
 
   @override

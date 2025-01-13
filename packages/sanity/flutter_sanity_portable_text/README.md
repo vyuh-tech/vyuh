@@ -1,28 +1,39 @@
-# Flutter Widget for rendering Sanity's Portable Text
+# Flutter Widget for rendering Sanity's Portable Text 📄
 
 [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text)
 
-Renders the [Portable Text format](https://github.com/portabletext/portabletext)
-in Flutter.
+A Flutter widget for rendering [Portable Text format](https://github.com/portabletext/portabletext) content from Sanity.io. This package is part of the Vyuh framework but can be used independently in any Flutter application.
 
 <img
 src="https://raw.githubusercontent.com/vyuh-tech/vyuh/main/packages/sanity/flutter_sanity_portable_text/example/screenshot.png"
 width="300"
 alt="Screenshot of the rendered Portable Text" />
 
-## Features
+## Features ✨
 
-- [x] Renders all standard styles and marks
-- [x] Renders multiple blocks of text
-- [x] Includes support for custom blocks and block containers
-- [x] Supports custom styles and marks including complex annotations
-- [x] Ability to customize all the default styles, blocks and containers
-- [x] Shows inline errors for unregistered blocks, marks and styles. This is
-      useful during debugging and development.
+- **Complete Portable Text Support** 📝: Renders all standard styles and marks
+- **Block Rendering** 🧱: Support for multiple blocks with different styles
+- **Customization** 🎨: 
+  - Custom blocks and block containers
+  - Custom styles and marks including complex annotations
+  - Customize all default styles, blocks and containers
+- **Developer Experience** 🛠️:
+  - Shows inline errors for unregistered blocks, marks and styles
+  - Helpful error messages during debugging
+  - Type-safe API
 
-## Usage
+## Installation 📦
 
-The below samples show the various ways of using the `PortableText` widget.
+Add this to your package's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  flutter_sanity_portable_text: ^1.0.0
+```
+
+## Usage 💡
+
+The below samples show the various ways of using the `PortableText` widget:
 
 - [With a simple TextBlockItem](#with-a-simple-textblockitem)
 - [Rendered directly from JSON](#rendered-directly-from-json)
@@ -522,3 +533,17 @@ above, such as:
 
 You can look at the properties of `PortableConfig` for more customization
 opportunities.
+
+## Contributing 🤝
+
+Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## Learn More 📚
+
+- Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
+
+## License 📄
+
+This project is licensed under the terms specified in the LICENSE file.

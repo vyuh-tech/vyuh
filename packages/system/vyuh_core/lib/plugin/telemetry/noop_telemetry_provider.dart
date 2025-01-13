@@ -29,9 +29,6 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
   Future<void> init() => Future.value();
 
   @override
-  List<NavigatorObserver> get observers => [];
-
-  @override
   Future<void> reportError(exception,
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,

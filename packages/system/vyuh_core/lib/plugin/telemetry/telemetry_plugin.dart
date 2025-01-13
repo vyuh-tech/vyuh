@@ -69,10 +69,6 @@ final class TelemetryPlugin extends Plugin
   }
 
   @override
-  List<NavigatorObserver> get observers =>
-      providers.expand((element) => element.observers).toList(growable: false);
-
-  @override
   Future<void> reportError(exception,
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,

@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A no-op implementation of [AnalyticsProvider].
@@ -20,7 +21,15 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   Future<void> init() => Future.value();
 
   @override
-  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) {
-    return Future.value();
-  }
+  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) async {}
+
+  @override
+  Future<void> identifyUser(String userId,
+      {Map<String, dynamic>? traits}) async {}
+
+  @override
+  Future<void> resetUser() async {}
+
+  @override
+  List<NavigatorObserver> get observers => [];
 }

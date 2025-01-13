@@ -1,0 +1,18 @@
+name: vyuh_plugin_telemetry_provider_console
+description: Console logger telemetry provider for Vyuh
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  vyuh_core: ^1.37.0
+  logger: ^2.5.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0

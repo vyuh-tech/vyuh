@@ -74,15 +74,6 @@ class _TelemetryProviderDetail extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text('${provider.runtimeType}'),
-        const SizedBox(height: 8),
-        Text(
-          'Observers:',
-          style: theme.textTheme.bodyMedium?.apply(fontWeightDelta: 2),
-        ),
-        ...provider.observers.map((e) => Padding(
-              padding: const EdgeInsets.only(bottom: 4.0),
-              child: Text(e.runtimeType.toString()),
-            )),
       ],
     );
   }

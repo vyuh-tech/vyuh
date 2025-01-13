@@ -22,6 +22,7 @@ import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart'
     as onboarding;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider_sanity.dart';
+import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
 
 void main() async {
   vc.runApp(
@@ -89,6 +90,6 @@ _getPlugins() {
     env: vc.DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
     telemetry:
-        vc.TelemetryPlugin(providers: [vc.ConsoleLoggerTelemetryProvider()]),
+        vc.TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
   );
 }

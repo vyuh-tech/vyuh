@@ -17,3 +17,6 @@ mason-lock.json
 *.lock
 devtools_options.yaml
 pnpm-lock.yaml
+
+# windsurf rules
+.windsurfrules

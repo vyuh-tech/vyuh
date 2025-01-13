@@ -6,10 +6,6 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// The base interface for an Telemetry Provider. The provider is responsible for
 /// reporting telemetry events, errors, and messages.
 abstract interface class TelemetryProvider {
-  /// The list of observers for the provider.
-  /// These are added to the navigator, as part of the router setup.
-  List<NavigatorObserver> get observers;
-
   /// The name of the provider.
   String get name;
 

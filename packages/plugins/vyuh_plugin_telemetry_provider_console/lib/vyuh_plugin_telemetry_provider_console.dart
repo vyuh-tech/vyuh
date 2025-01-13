@@ -1,7 +1,10 @@
+library;
+
 import 'package:flutter/widgets.dart';
 import 'package:logger/logger.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide Logger;
 
+/// A telemetry provider that logs to the console using the logger package.
 final class ConsoleLoggerTelemetryProvider implements TelemetryProvider {
   Logger _logger = _createLogger();
 
@@ -31,9 +34,6 @@ final class ConsoleLoggerTelemetryProvider implements TelemetryProvider {
       _logger = _createLogger();
     });
   }
-
-  @override
-  List<NavigatorObserver> get observers => [];
 
   @override
   Future<void> reportError(exception,
