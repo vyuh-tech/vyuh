@@ -151,16 +151,16 @@ The core building blocks that enable all of this include:
       <td>
         <img src="_images/example-counter.png" height="200">
         <br>
-        <a href="examples/feature_sample/lib/features/feature_counter.dart">Counter</a>
+        <a href="examples/feature_counter">Counter</a>
         <br>
         The classic counter example from Flutter, as a Vyuh Feature.
       </td>
       <td>
-        <img src="_images/example-settings.png" height="200">
+        <img src="_images/example-conference.png" height="200">
         <br>
-        <a href="examples/feature_sample/lib/features/feature_settings.dart">Theme Settings</a>
+        <a href="examples/conference">Conference</a>
         <br>
-        Toggle between the light & dark themes.
+        A Conference App feature with a list of sessions and speakers.
       </td>
     </tr>
     <tr>
