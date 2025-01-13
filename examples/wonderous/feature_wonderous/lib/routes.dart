@@ -5,8 +5,18 @@ import 'package:vyuh_core/vyuh_core.dart' hide RouteBase;
 Future<List<RouteBase>> routes() async {
   return [
     CMSRoute(path: '/wonderous'),
-    CMSRoute(
+    GoRoute(
       path: '/wonderous/wonder/:wonder([^/]+)',
+      redirect: (params, state) {
+        final part = state.uri.pathSegments.last;
+        final wonder = state.pathParameters['wonder'];
+
+        if (['details', 'events', 'photos'].contains(part)) {
+          return '/wonderous/wonder/$wonder/$part';
+        }
+
+        return '/wonderous/wonder/$wonder/details';
+      },
       routes: [
         StatefulShellRoute.indexedStack(
           branches: [

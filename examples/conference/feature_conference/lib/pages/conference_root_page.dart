@@ -20,6 +20,12 @@ final class ConferenceRootPage extends StatelessWidget {
         return ConferenceRouteCustomScrollView(
           title: 'Conferences',
           subtitle: '(${conferences.length})',
+          appBarActions: [
+            IconButton(
+              icon: const Icon(Icons.home),
+              onPressed: () => vyuh.router.go('/chakra'),
+            ),
+          ],
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
