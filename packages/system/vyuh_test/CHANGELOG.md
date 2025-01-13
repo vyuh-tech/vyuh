@@ -1,3 +1,7 @@
+## 1.1.2
+
+ - **FIX**: readme updates to make it more consistent.
+
 ## 1.1.1
 
  - **FIX**: making the extensions async for init and dispose.

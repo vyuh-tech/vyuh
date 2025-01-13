@@ -1,3 +1,7 @@
+## 1.4.2
+
+ - **FIX**: readme updates to make it more consistent.
+
 ## 1.4.1
 
  - **FIX**: more readme updates to include emojis...added readme for vyuh_cache as well.

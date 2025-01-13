@@ -1,3 +1,7 @@
+## 1.20.1
+
+ - **FIX**: readme updates to make it more consistent.
+
 ## 1.20.0
 
  - **FEAT**: adding support for previews of items ..

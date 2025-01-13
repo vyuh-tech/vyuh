@@ -1,3 +1,7 @@
+## 1.37.1
+
+ - **FIX**: readme updates to make it more consistent.
+
 ## 1.37.0
 
  - **FEAT**: adding widgetbook support (WIP).
