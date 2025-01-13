@@ -1,4 +1,6 @@
-# Vyuh Core
+# Vyuh Core 🚀
+
+[![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)
 
 The core library for the Vyuh framework, providing essential building blocks and runtime functionality for building modular, scalable, CMS-driven Flutter applications. This package is the foundation of the Vyuh ecosystem, offering a robust plugin architecture, modular features, and an optional CMS-driven UI via the extension mechanism.
 

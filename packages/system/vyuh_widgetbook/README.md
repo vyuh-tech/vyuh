@@ -1,4 +1,6 @@
-# 🎨 Vyuh Widgetbook
+# Vyuh Widgetbook 📚
+
+[![vyuh_widgetbook](https://img.shields.io/pub/v/vyuh_widgetbook.svg?label=vyuh_widgetbook&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_widgetbook)
 
 A powerful widgetbook implementation for previewing Vyuh content and components. Built on top of [widgetbook](https://pub.dev/packages/widgetbook), this package provides a seamless way to preview and test your Vyuh content types in isolation.
 

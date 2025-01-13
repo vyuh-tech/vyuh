@@ -1,5 +1,7 @@
 # Vyuh Hive Storage Plugin 📦
 
+[![vyuh_plugin_storage_hive](https://img.shields.io/pub/v/vyuh_plugin_storage_hive.svg?label=vyuh_plugin_storage_hive&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_storage_hive)
+
 A storage plugin for Vyuh using Hive as the backend. This plugin provides a
 simple yet powerful key-value storage solution that integrates seamlessly with
 the Vyuh framework.

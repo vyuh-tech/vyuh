@@ -1,4 +1,6 @@
-# Vyuh Console Telemetry Provider
+# Vyuh Console Telemetry Provider 📊
+
+[![vyuh_plugin_telemetry_provider_console](https://img.shields.io/pub/v/vyuh_plugin_telemetry_provider_console.svg?label=vyuh_plugin_telemetry_provider_console&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console)
 
 A simple console-based telemetry provider for the Vyuh framework that logs telemetry events, errors, and messages to the console using the [logger](https://pub.dev/packages/logger) package. This provider is ideal for development and debugging scenarios where you need to monitor application events and errors in real-time through the console.
 

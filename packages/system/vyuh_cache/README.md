@@ -1,4 +1,6 @@
-# Vyuh Cache
+# Vyuh Cache 💾
+
+[![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)
 
 A lightweight, flexible caching solution for Vyuh-framework applications. Provides time-based caching with pluggable storage backends. Perfect for reducing API calls, improving app performance, and managing temporary data.
 

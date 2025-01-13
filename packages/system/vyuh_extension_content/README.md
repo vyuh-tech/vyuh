@@ -1,4 +1,6 @@
-# Vyuh Extension for Content
+# Vyuh Extension Content 📦
+
+[![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)
 
 An extension for integrating CMS. This package provides the core building blocks
 that can be leveraged by specific CMS integrations. Works in conjunction with the

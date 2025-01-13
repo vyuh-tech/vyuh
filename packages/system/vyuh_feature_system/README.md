@@ -1,4 +1,6 @@
-# Vyuh Feature System
+# Vyuh Feature System 🔧
+
+[![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)
 
 The system feature package for Vyuh framework, providing essential content types, actions, conditions, and services for building CMS-driven Flutter applications.
 

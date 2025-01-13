@@ -1,5 +1,7 @@
 # Vyuh Feature Auth 🔐
 
+[![vyuh_feature_auth](https://img.shields.io/pub/v/vyuh_feature_auth.svg?label=vyuh_feature_auth&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_auth)
+
 Authentication feature for Vyuh applications, providing flexible and customizable authentication flows. This package includes various authentication methods like email/password, phone OTP, and OAuth, with content-driven UI components that can be customized through Sanity.io CMS.
 
 ## Features ✨

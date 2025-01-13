@@ -1,5 +1,7 @@
 # Vyuh Feature Onboarding 🎯
 
+[![vyuh_feature_onboarding](https://img.shields.io/pub/v/vyuh_feature_onboarding.svg?label=vyuh_feature_onboarding&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_onboarding)
+
 Onboarding feature for Vyuh applications, providing a flexible and customizable onboarding experience. This package includes content-driven onboarding screens with step-by-step guidance, rich text descriptions, and image support.
 
 ## Features ✨
