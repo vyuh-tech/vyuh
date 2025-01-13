@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.5.3
 
  - **FIX**: updated the url builder to auto-include the '$' prefix for query param names and also enclosing the values within double-quotes. This simplifies the usage from a developer's perspective.

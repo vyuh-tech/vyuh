@@ -1,3 +1,7 @@
+## 1.10.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.9.3
 
  - **FIX**: ensuring the images are rendered without any errors on Web.

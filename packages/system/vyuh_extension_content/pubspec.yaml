@@ -22,8 +22,8 @@ dependencies:
   flutter_mobx: ^2.2.0+2
   mobx: ^2.3.0+1
   json_annotation: ^4.9.0
-  vyuh_core: ^1.37.0
-  flutter_sanity_portable_text: ^1.5.1
+  vyuh_core: ^1.38.0
+  flutter_sanity_portable_text: ^1.6.0
 
 dev_dependencies:
   flutter_test:

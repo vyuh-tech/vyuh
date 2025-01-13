@@ -22,7 +22,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  vyuh_core: ^1.37.0
+  vyuh_core: ^1.38.0
   vyuh_extension_content: ^1.20.0
 
   widgetbook: ^3.10.2

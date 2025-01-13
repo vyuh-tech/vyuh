@@ -1,3 +1,7 @@
+## 1.12.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.11.0
 
  - **FEAT**: adding widgetbook support (WIP).

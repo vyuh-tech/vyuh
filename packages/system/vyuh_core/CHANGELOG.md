@@ -1,3 +1,7 @@
+## 1.38.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.37.0
 
  - **FEAT**: adding support for previews of items ..

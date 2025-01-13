@@ -1,3 +1,7 @@
+## 1.17.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.16.0
 
  - **FEAT**: exposing more items from onboarding feature and the auth feature.

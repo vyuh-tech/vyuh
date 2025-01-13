@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
+
 ## 1.5.1
 
  - **FIX**: fixed analysis errors when upgrading to flutter 3.27 and also fixing a few errors.

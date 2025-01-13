@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
 
   # vyuh packages
-  vyuh_core: ^1.37.0
+  vyuh_core: ^1.38.0
   vyuh_feature_system: ^1.37.0
   youtube_player_iframe: ^5.1.3
   html: ^0.15.4
