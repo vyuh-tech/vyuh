@@ -7,6 +7,26 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'divider.g.dart';
 
+/// A content item that renders a horizontal dividing line.
+///
+/// Features:
+/// * Customizable thickness
+/// * Configurable padding/indent
+/// * Can be used in portable text blocks
+/// * Supports theme-based styling
+///
+/// Example:
+/// ```dart
+/// final divider = Divider(
+///   thickness: 2.0,
+///   indent: 16.0,
+/// );
+/// ```
+///
+/// The divider can be used:
+/// * Between content sections
+/// * Inside portable text blocks
+/// * As a visual separator in layouts
 @JsonSerializable()
 class Divider extends ContentItem implements PortableBlockItem {
   static const schemaName = 'vyuh.divider';
@@ -41,11 +61,36 @@ class Divider extends ContentItem implements PortableBlockItem {
   String get blockType => Divider.schemaName;
 }
 
+/// Descriptor for configuring divider content type in the system.
+///
+/// Allows configuring:
+/// * Available layouts for dividers
+/// * Custom layouts for specific use cases
+///
+/// Example:
+/// ```dart
+/// final descriptor = DividerDescriptor(
+///   layouts: [
+///     DefaultDividerLayout.typeDescriptor,
+///   ],
+/// );
+/// ```
 class DividerDescriptor extends ContentDescriptor {
   DividerDescriptor({super.layouts})
       : super(schemaType: Divider.schemaName, title: 'Divider');
 }
 
+/// Default layout for divider content.
+///
+/// Features:
+/// * Renders a horizontal line with configurable thickness
+/// * Applies optional padding/indent
+/// * Uses theme colors for the divider
+///
+/// Example:
+/// ```dart
+/// final layout = DefaultDividerLayout();
+/// ```
 final class DefaultDividerLayout extends LayoutConfiguration<Divider> {
   static const schemaName = '${Divider.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(

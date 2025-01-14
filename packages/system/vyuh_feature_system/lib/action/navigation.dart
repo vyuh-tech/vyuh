@@ -6,10 +6,51 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'navigation.g.dart';
 
+/// The type of navigation operation to perform.
+///
+/// * [go] - Navigate to a route, replacing the entire history stack
+/// * [push] - Add a new route to the navigation stack
+/// * [replace] - Replace the current route with a new one
 enum NavigationType { go, push, replace }
 
+/// The type of destination to navigate to.
+///
+/// * [url] - Navigate to a URL (local or external)
+/// * [route] - Navigate to a route by its ID (from CMS)
 enum LinkType { url, route }
 
+/// An action configuration for handling navigation within the application.
+///
+/// Features:
+/// * Local route navigation
+/// * External URL handling
+/// * CMS route navigation
+/// * Different navigation types (push, replace, go)
+/// * Loading states during navigation
+/// * Error handling
+///
+/// Example:
+/// ```dart
+/// // Navigate to a local route
+/// final action = NavigationAction(
+///   linkType: LinkType.url,
+///   url: '/home',
+///   navigationType: NavigationType.push,
+/// );
+///
+/// // Navigate to a CMS route
+/// final action = NavigationAction(
+///   linkType: LinkType.route,
+///   route: ObjectReference('route-id'),
+///   navigationType: NavigationType.replace,
+/// );
+///
+/// // Navigate to external URL
+/// final action = NavigationAction(
+///   linkType: LinkType.url,
+///   url: 'https://example.com',
+/// );
+/// ```
 @JsonSerializable()
 final class NavigationAction extends ActionConfiguration {
   static const schemaName = 'vyuh.action.navigation';
@@ -97,6 +138,12 @@ final class NavigationAction extends ActionConfiguration {
   }
 }
 
+/// Extension to apply different navigation types using the router.
+///
+/// Each navigation type has a different effect on the navigation stack:
+/// * [go] - Replaces entire history
+/// * [push] - Adds to history
+/// * [replace] - Replaces current route
 extension on NavigationType {
   void apply(BuildContext context, String path) {
     switch (this) {

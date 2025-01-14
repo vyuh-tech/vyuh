@@ -1,3 +1,11 @@
+/// The system feature package for Vyuh framework, providing essential content types,
+/// actions, conditions, and services for building CMS-driven Flutter applications.
+///
+/// This package includes:
+/// * Content Types: Routes, Cards, Groups, Portable Text, etc.
+/// * Actions: Navigation, UI control, system operations
+/// * Conditions: Feature flags, screen size, platform, theme mode
+/// * Services: Breakpoint detection, theme management
 library;
 
 export 'action/conditional_action.dart';

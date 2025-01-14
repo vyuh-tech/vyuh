@@ -7,6 +7,50 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'boolean.g.dart';
 
+/// A simple boolean condition configuration with optional evaluation delay.
+///
+/// Features:
+/// * Basic true/false evaluation
+/// * Configurable evaluation delay
+/// * String value conversion
+/// * Asynchronous evaluation
+///
+/// Example:
+/// ```dart
+/// // Simple boolean condition
+/// final condition = BooleanCondition(
+///   value: true,
+/// );
+///
+/// // With evaluation delay
+/// final condition = BooleanCondition(
+///   value: true,
+///   evaluationDelayInSeconds: 2,
+/// );
+///
+/// // In a conditional content
+/// final conditional = Conditional(
+///   condition: Condition(
+///     configuration: BooleanCondition(value: true),
+///   ),
+///   cases: [
+///     CaseItem(
+///       value: 'true',
+///       item: EnabledContent(),
+///     ),
+///     CaseItem(
+///       value: 'false',
+///       item: DisabledContent(),
+///     ),
+///   ],
+///   defaultCase: 'false',
+/// );
+/// ```
+///
+/// The condition:
+/// * Returns 'true' or 'false' as strings
+/// * Can delay evaluation for testing/simulation
+/// * Useful for simple toggles and flags
 @JsonSerializable()
 final class BooleanCondition extends ConditionConfiguration {
   static const schemaName = 'vyuh.condition.boolean';

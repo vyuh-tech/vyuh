@@ -3,6 +3,39 @@ import 'package:cached_network_image_platform_interface/cached_network_image_pla
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// A widget for displaying images from various sources with advanced features.
+///
+/// Features:
+/// * Network image caching
+/// * CMS image reference support
+/// * Responsive sizing
+/// * Loading and error states
+/// * Image format control
+/// * Color blending options
+///
+/// Example:
+/// ```dart
+/// // Network image
+/// ContentImage(
+///   url: 'https://example.com/image.jpg',
+///   width: 300,
+///   height: 200,
+///   fit: BoxFit.cover,
+/// )
+///
+/// // CMS image reference
+/// ContentImage(
+///   ref: imageReference,
+///   format: 'webp',
+///   fit: BoxFit.contain,
+/// )
+/// ```
+///
+/// The widget automatically:
+/// * Handles device pixel ratio for optimal quality
+/// * Rounds dimensions for better caching
+/// * Provides fallback for missing images
+/// * Shows loading indicators
 class ContentImage extends StatelessWidget {
   final String? url;
   final ImageReference? ref;
@@ -12,6 +45,8 @@ class ContentImage extends StatelessWidget {
   final BoxFit fit;
   final String? format;
 
+  /// The size multiple to round dimensions to for better caching performance.
+  /// For example, a width of 123 would be rounded to 120.
   static const int nearestSize = 10;
 
   final Color? color;
@@ -111,6 +146,10 @@ class ContentImage extends StatelessWidget {
   }
 }
 
+/// Extension to round numbers to the nearest multiple for image sizing.
+///
+/// Used internally by [ContentImage] to optimize image dimensions for caching.
+/// For example, 123.0 rounded to nearest 10 becomes 120.
 extension on double {
   int roundedTo(final int multiple) {
     final value = toInt();

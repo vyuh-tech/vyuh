@@ -9,6 +9,34 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'conditional.g.dart';
 
+/// A content item that conditionally renders different content based on a condition.
+///
+/// Features:
+/// * Dynamic content switching based on conditions
+/// * Multiple case handling with default fallback
+/// * Optional loading indicator during evaluation
+/// * Support for any content type in cases
+///
+/// Example:
+/// ```dart
+/// final conditional = Conditional(
+///   condition: Condition(
+///     configuration: ScreenSize(),
+///   ),
+///   cases: [
+///     CaseItem(
+///       value: 'mobile',
+///       item: Card(title: 'Mobile View'),
+///     ),
+///     CaseItem(
+///       value: 'desktop',
+///       item: Card(title: 'Desktop View'),
+///     ),
+///   ],
+///   defaultCase: 'mobile',
+///   showPending: true,
+/// );
+/// ```
 @JsonSerializable()
 class Conditional extends ContentItem {
   static const schemaName = 'vyuh.conditional';
@@ -69,6 +97,18 @@ class Conditional extends ContentItem {
   }
 }
 
+/// A case item that pairs a condition value with its corresponding content.
+///
+/// Used within [Conditional] to define what content should be shown for each
+/// condition value.
+///
+/// Example:
+/// ```dart
+/// final case = CaseItem(
+///   value: 'mobile',
+///   item: Card(title: 'Mobile View'),
+/// );
+/// ```
 @JsonSerializable()
 final class CaseItem<T extends SchemaItem> {
   final String? value;
@@ -82,11 +122,37 @@ final class CaseItem<T extends SchemaItem> {
       _$CaseItemFromJson(json);
 }
 
+/// Descriptor for configuring conditional content type in the system.
+///
+/// Allows configuring:
+/// * Available layouts for conditional content
+/// * Custom layouts for specific use cases
+///
+/// Example:
+/// ```dart
+/// final descriptor = ConditionalDescriptor(
+///   layouts: [
+///     DefaultConditionalLayout.typeDescriptor,
+///   ],
+/// );
+/// ```
 class ConditionalDescriptor extends ContentDescriptor {
   ConditionalDescriptor({super.layouts})
       : super(schemaType: Conditional.schemaName, title: 'Conditional');
 }
 
+/// Default layout for conditional content.
+///
+/// Features:
+/// * Handles condition evaluation
+/// * Shows loading state when configured
+/// * Renders selected content
+/// * Handles empty states
+///
+/// Example:
+/// ```dart
+/// final layout = DefaultConditionalLayout();
+/// ```
 final class DefaultConditionalLayout extends LayoutConfiguration<Conditional> {
   static const schemaName = '${Conditional.schemaName}.layout.default';
   static final typeDescriptor = TypeDescriptor(

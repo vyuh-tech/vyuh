@@ -5,6 +5,42 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'theme_modifier.g.dart';
 
+/// A content modifier that applies theme data to a content subtree.
+///
+/// Features:
+/// * Theme mode specification
+/// * Integration with [ThemeService]
+/// * Subtree theme overrides
+/// * Fallback handling
+///
+/// Example:
+/// ```dart
+/// // Apply light theme to content
+/// final content = Card(
+///   title: 'My Card',
+///   modifiers: [
+///     ContentModifier(
+///       configuration: ThemeModifier(mode: ThemeMode.light),
+///     ),
+///   ],
+/// );
+///
+/// // Apply dark theme to content
+/// final content = Group(
+///   items: [myCard, myDivider],
+///   modifiers: [
+///     ContentModifier(
+///       configuration: ThemeModifier(mode: ThemeMode.dark),
+///     ),
+///   ],
+/// );
+/// ```
+///
+/// The modifier:
+/// * Gets theme data from [ThemeService]
+/// * Wraps content in a [Theme] widget
+/// * Falls back to original content if no theme data
+/// * Affects all descendants of the modified content
 @JsonSerializable()
 final class ThemeModifier extends ContentModifierConfiguration {
   static const schemaName = 'vyuh.content.modifier.theme';

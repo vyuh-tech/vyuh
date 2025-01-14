@@ -6,6 +6,32 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'route.g.dart';
 
+/// A route represents a page or screen in the application with configurable regions
+/// and lifecycle handlers.
+///
+/// Routes can be:
+/// * Pages with different layouts (default, tabs, single item)
+/// * Dialog routes for modal content
+/// * Conditional routes that adapt based on conditions
+///
+/// Example:
+/// ```dart
+/// final route = Route(
+///   title: 'Home',
+///   routeType: PageRouteType(),
+///   path: '/home',
+///   regions: [
+///     Region(
+///       identifier: 'body',
+///       title: 'Body',
+///       items: [myCard, myGroup],
+///     ),
+///   ],
+///   createdAt: DateTime.now(),
+///   updatedAt: DateTime.now(),
+///   id: 'home-route',
+/// );
+/// ```
 @JsonSerializable()
 final class Route extends RouteBase {
   static const schemaName = 'vyuh.route';
@@ -86,6 +112,21 @@ final class Route extends RouteBase {
   }
 }
 
+/// A section of a route that can contain content items.
+///
+/// Regions help organize content within a route, for example:
+/// * Header region for navigation and branding
+/// * Body region for main content
+/// * Footer region for additional information
+///
+/// Example:
+/// ```dart
+/// final region = Region(
+///   identifier: 'body',
+///   title: 'Body Content',
+///   items: [myCard, myGroup],
+/// );
+/// ```
 @JsonSerializable()
 final class Region {
   final String identifier;
@@ -103,6 +144,21 @@ final class Region {
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
 }
 
+/// Descriptor for configuring route content type in the system.
+///
+/// Allows configuring:
+/// * Lifecycle handlers for route initialization and cleanup
+/// * Route types (page, dialog)
+/// * Available layouts for routes
+///
+/// Example:
+/// ```dart
+/// final descriptor = RouteDescriptor(
+///   lifecycleHandlers: [myHandler],
+///   routeTypes: [PageRouteType.typeDescriptor],
+///   layouts: [DefaultRouteLayout.typeDescriptor],
+/// );
+/// ```
 final class RouteDescriptor extends ContentDescriptor {
   List<TypeDescriptor<RouteLifecycleConfiguration>>? lifecycleHandlers;
   List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
@@ -144,6 +200,27 @@ final class _RouteContentBuilder extends ContentBuilder<Route> {
   }
 }
 
+/// A conditional layout for routes that adapts based on specified conditions.
+///
+/// Allows defining different layouts for routes based on conditions like:
+/// * Screen size
+/// * Platform
+/// * Theme mode
+/// * Authentication state
+///
+/// Example:
+/// ```dart
+/// final layout = RouteConditionalLayout(
+///   cases: [
+///     LayoutCase(
+///       condition: ScreenSize(),
+///       layout: MobileLayout(),
+///     ),
+///   ],
+///   defaultCase: DesktopLayout(),
+///   condition: ScreenSize(),
+/// );
+/// ```
 @JsonSerializable()
 final class RouteConditionalLayout extends ConditionalLayout<Route> {
   static const schemaName = '${Route.schemaName}.layout.conditional';

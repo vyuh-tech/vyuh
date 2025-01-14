@@ -8,8 +8,33 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'video_player.g.dart';
 
+/// The type of video source to be played.
+///
+/// * [url] - Video from a network URL
+/// * [file] - Video from a file reference (e.g., from CMS)
 enum VideoLinkType { url, file }
 
+/// A content item that plays video content from various sources.
+///
+/// Features:
+/// * Network video playback
+/// * File reference video playback (e.g., from CMS)
+/// * Autoplay, loop, and mute controls
+/// * Optional title/caption
+/// * Full-screen support
+/// * Playback controls
+///
+/// Example:
+/// ```dart
+/// final player = VideoPlayerItem(
+///   title: 'My Video',
+///   linkType: VideoLinkType.url,
+///   url: 'https://example.com/video.mp4',
+///   autoplay: true,
+///   loop: true,
+///   muted: false,
+/// );
+/// ```
 @JsonSerializable()
 final class VideoPlayerItem extends ContentItem {
   static const schemaName = 'vyuh.videoPlayer';
@@ -63,6 +88,19 @@ final class VideoPlayerItem extends ContentItem {
 }
 
 /// LayoutConfiguration for the default VideoPlayer layout.
+/// Default layout for video player content.
+///
+/// Features:
+/// * Responsive aspect ratio
+/// * Rounded corners
+/// * Optional title/caption display
+/// * Loading and error states
+/// * Playback controls overlay
+///
+/// Example:
+/// ```dart
+/// final layout = VideoPlayerDefaultLayout();
+/// ```
 @JsonSerializable()
 final class VideoPlayerDefaultLayout
     extends LayoutConfiguration<VideoPlayerItem> {
@@ -85,6 +123,14 @@ final class VideoPlayerDefaultLayout
   }
 }
 
+/// Widget that handles video playback using the Chewie player.
+///
+/// Features:
+/// * Video initialization and cleanup
+/// * Playback controls
+/// * Error handling
+/// * Loading states
+/// * Aspect ratio management
 final class VideoPlayerWidget extends StatefulWidget {
   final VideoPlayerItem content;
 

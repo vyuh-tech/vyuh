@@ -8,6 +8,30 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'portable_text.g.dart';
 
+/// A content item that renders rich text content using the Portable Text format.
+///
+/// Portable Text supports:
+/// * Basic text formatting (bold, italic, underline)
+/// * Code blocks with syntax highlighting
+/// * Lists (ordered and unordered)
+/// * Custom blocks (cards, groups, dividers)
+/// * Custom marks with interactive behavior
+///
+/// Example:
+/// ```dart
+/// final content = PortableTextContent(
+///   blocks: [
+///     TextBlockItem(children: [
+///       Span(text: 'Italic Text, ', marks: ['em']),
+///       Span(text: 'Bold Text, ', marks: ['strong']),
+///     ]),
+///     Card(title: 'Embedded Card'),
+///     TextBlockItem(children: [
+///       Span(text: 'Code: ', marks: ['code']),
+///     ]),
+///   ],
+/// );
+/// ```
 @JsonSerializable()
 class PortableTextContent extends ContentItem {
   static const schemaName = 'vyuh.portableText';
@@ -110,6 +134,20 @@ class PortableTextContent extends ContentItem {
   }
 }
 
+/// Descriptor for configuring block types that can be used within portable text.
+///
+/// Each block type needs:
+/// * A type descriptor for serialization
+/// * A builder function to render the block
+///
+/// Example:
+/// ```dart
+/// final cardBlock = BlockItemDescriptor(
+///   type: Card.typeDescriptor,
+///   builder: (context, content) =>
+///     vyuh.content.buildContent(context, content as Card),
+/// );
+/// ```
 final class BlockItemDescriptor {
   final TypeDescriptor<PortableBlockItem> type;
   final BlockWidgetBuilder builder;
@@ -120,6 +158,37 @@ final class BlockItemDescriptor {
   });
 }
 
+/// Descriptor for configuring portable text content type in the system.
+///
+/// Allows configuring:
+/// * Custom block types (cards, groups, etc.)
+/// * Custom mark definitions for interactive text
+/// * Text style builders for different text styles
+///
+/// Example:
+/// ```dart
+/// final descriptor = PortableTextDescriptor(
+///   blocks: [
+///     BlockItemDescriptor(
+///       type: Card.typeDescriptor,
+///       builder: (context, content) =>
+///         vyuh.content.buildContent(context, content as Card),
+///     ),
+///   ],
+///   markDefs: [
+///     MarkDefDescriptor(
+///       schemaType: 'link',
+///       fromJson: LinkMarkDef.fromJson,
+///       styleBuilder: (context, def, style) =>
+///         style.copyWith(color: Colors.blue),
+///     ),
+///   ],
+///   textStyleBuilders: {
+///     'h1': (context, style) =>
+///       style.copyWith(fontSize: 24, fontWeight: FontWeight.bold),
+///   },
+/// );
+/// ```
 class PortableTextDescriptor extends ContentDescriptor {
   final List<BlockItemDescriptor>? blocks;
   final List<MarkDefDescriptor>? markDefs;
@@ -179,6 +248,17 @@ final class _PortableTextContentBuilder
   }
 }
 
+/// Default layout for portable text content.
+///
+/// Features:
+/// * Renders blocks in a vertical flow
+/// * Adds padding when used directly in a route
+/// * Supports all portable text block types
+///
+/// Example:
+/// ```dart
+/// final layout = DefaultPortableTextContentLayout();
+/// ```
 @JsonSerializable()
 class DefaultPortableTextContentLayout
     extends LayoutConfiguration<PortableTextContent> {

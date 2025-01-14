@@ -6,6 +6,37 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'card.g.dart';
 
+/// A card content item that can display various types of content in a card format.
+///
+/// Cards can include:
+/// * Title and description
+/// * Images (via URL or ImageReference)
+/// * Rich text content (PortableText)
+/// * Up to three actions (primary, secondary, tertiary) that can be configured
+///   with multiple action configurations
+///
+/// Example:
+/// ```dart
+/// final card = Card(
+///   title: 'My Card',
+///   description: 'Card description',
+///   imageUrl: Uri.parse('https://example.com/image.jpg'),
+///   action: Action(
+///     configurations: [
+///       NavigationAction(
+///         linkType: LinkType.route,
+///         route: ObjectReference('route-id'),
+///       ),
+///       DelayAction(duration: Duration(milliseconds: 300)),
+///     ],
+///   ),
+/// );
+/// ```
+///
+/// Cards can be used:
+/// * As standalone content items
+/// * Within groups or lists
+/// * Inside portable text blocks
 @JsonSerializable()
 class Card extends ContentItem implements PortableBlockItem {
   static const schemaName = 'vyuh.card';
@@ -64,11 +95,50 @@ class Card extends ContentItem implements PortableBlockItem {
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
 }
 
+/// Descriptor for configuring card content type in the system.
+///
+/// Allows configuring:
+/// * Available layouts for cards (default, list item, button)
+/// * Custom layouts for specific use cases
+///
+/// Example:
+/// ```dart
+/// final descriptor = CardDescriptor(
+///   layouts: [
+///     DefaultCardLayout.typeDescriptor,
+///     ListItemCardLayout.typeDescriptor,
+///   ],
+/// );
+/// ```
 class CardDescriptor extends ContentDescriptor {
   CardDescriptor({super.layouts})
       : super(schemaType: Card.schemaName, title: 'Card');
 }
 
+/// A conditional layout for cards that adapts based on specified conditions.
+///
+/// Allows defining different layouts for cards based on conditions like:
+/// * Screen size (compact vs expanded layouts)
+/// * Theme mode (light/dark specific layouts)
+/// * Content properties (image presence, action count)
+///
+/// Example:
+/// ```dart
+/// final layout = CardConditionalLayout(
+///   cases: [
+///     LayoutCaseItem(
+///       value: 'mobile',
+///       item: CompactCardLayout(),
+///     ),
+///     LayoutCaseItem(
+///       value: 'desktop',
+///       item: ExpandedCardLayout(),
+///     ),
+///   ],
+///   defaultCase: 'desktop',
+///   condition: ScreenSize(),
+/// );
+/// ```
 @JsonSerializable()
 final class CardConditionalLayout extends ConditionalLayout<Card> {
   static const schemaName = '${Card.schemaName}.layout.conditional';

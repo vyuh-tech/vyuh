@@ -9,6 +9,11 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'open_url.g.dart';
 
+/// The mode to use when launching a URL.
+///
+/// * [inApp] - Open URL in an in-app web view
+/// * [externalApp] - Open URL in an external application (e.g., browser)
+/// * [platformDefault] - Use the platform's default behavior
 enum UrlLaunchMode {
   inApp,
   externalApp,
@@ -21,6 +26,41 @@ enum UrlLaunchMode {
       };
 }
 
+/// An action configuration for opening URLs in various ways.
+///
+/// Features:
+/// * In-app web view support
+/// * External app launching
+/// * Platform-specific behavior
+/// * URL validation
+/// * Error handling
+///
+/// Example:
+/// ```dart
+/// // Open in in-app web view
+/// final action = OpenUrlAction(
+///   url: 'https://example.com',
+///   mode: UrlLaunchMode.inApp,
+/// );
+///
+/// // Open in external browser
+/// final action = OpenUrlAction(
+///   url: 'https://example.com',
+///   mode: UrlLaunchMode.externalApp,
+/// );
+///
+/// // Use platform default
+/// final action = OpenUrlAction(
+///   url: 'https://example.com',
+///   mode: UrlLaunchMode.platformDefault,
+/// );
+/// ```
+///
+/// The action will:
+/// * Validate the URL before launching
+/// * Check if the URL can be launched
+/// * Handle launch failures gracefully
+/// * Log debug information
 @JsonSerializable()
 final class OpenUrlAction extends ActionConfiguration {
   static const schemaName = 'vyuh.action.openUrl';

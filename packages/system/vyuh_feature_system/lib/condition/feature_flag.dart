@@ -8,6 +8,50 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'feature_flag.g.dart';
 
+/// A condition configuration that evaluates feature flags for dynamic behavior.
+///
+/// Features:
+/// * Multiple data type support (string, number, boolean, JSON)
+/// * Integration with feature flag service
+/// * Asynchronous evaluation
+/// * Type-safe value handling
+///
+/// Example:
+/// ```dart
+/// // String flag
+/// final condition = FeatureFlagCondition(
+///   flagName: 'app.theme',
+///   dataType: FlagDataType.string,
+/// );
+///
+/// // Boolean flag
+/// final condition = FeatureFlagCondition(
+///   flagName: 'feature.enabled',
+///   dataType: FlagDataType.boolean,
+/// );
+///
+/// // In a conditional content
+/// final conditional = Conditional(
+///   condition: Condition(
+///     configuration: FeatureFlagCondition(
+///       flagName: 'feature.enabled',
+///       dataType: FlagDataType.boolean,
+///     ),
+///   ),
+///   cases: [
+///     CaseItem(
+///       value: 'true',
+///       item: FeatureContent(),
+///     ),
+///   ],
+///   defaultCase: 'false',
+/// );
+/// ```
+///
+/// The condition:
+/// * Returns null if flag name is empty
+/// * Converts all values to strings for case matching
+/// * Handles JSON values by encoding them
 @JsonSerializable()
 final class FeatureFlagCondition extends ConditionConfiguration {
   static const schemaName = 'vyuh.condition.featureFlag';
@@ -51,6 +95,12 @@ final class FeatureFlagCondition extends ConditionConfiguration {
   }
 }
 
+/// The data type of a feature flag value.
+///
+/// * [string] - String values (default)
+/// * [number] - Integer values
+/// * [boolean] - Boolean values
+/// * [json] - JSON object values
 enum FlagDataType {
   string,
   number,

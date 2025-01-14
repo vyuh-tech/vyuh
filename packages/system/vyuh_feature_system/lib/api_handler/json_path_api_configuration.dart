@@ -10,6 +10,21 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'json_path_api_configuration.g.dart';
 
+/// Maps JSON fields to card display fields using JSON Path expressions.
+///
+/// Features:
+/// * Title field mapping
+/// * Description field mapping
+/// * Image URL field mapping
+///
+/// Example:
+/// ```dart
+/// final fieldMap = DisplayFieldMap(
+///   title: JSONPath('$.name'),
+///   description: JSONPath('$.details'),
+///   imageUrl: JSONPath('$.image.url'),
+/// );
+/// ```
 @JsonSerializable()
 final class DisplayFieldMap {
   final JSONPath? title;
@@ -22,10 +37,46 @@ final class DisplayFieldMap {
       _$DisplayFieldMapFromJson(json);
 }
 
+/// A strongly-typed wrapper around JSON Path expressions.
+///
+/// JSON Path allows querying JSON data using path expressions similar to XPath.
+/// For example:
+/// * `$.store.book[0].title` - First book's title
+/// * `$.store.book[*].author` - All authors of all books
+/// * `$.store.book[?(@.price < 10)]` - All books less than 10
 extension type const JSONPath(String path) {
   factory JSONPath.fromJson(dynamic value) => JSONPath(value);
 }
 
+/// Configuration for fetching and transforming API data using JSON Path.
+///
+/// Features:
+/// * HTTP request configuration (URL, headers, body)
+/// * JSON data extraction using JSON Path
+/// * Field mapping to card properties
+/// * List and single item handling
+/// * Error handling and fallbacks
+///
+/// Example:
+/// ```dart
+/// final config = JsonPathApiConfiguration(
+///   url: 'https://api.example.com/items',
+///   headers: {'Authorization': 'Bearer token'},
+///   rootField: JSONPath('$.data.items'),
+///   fieldMap: DisplayFieldMap(
+///     title: JSONPath('$.name'),
+///     description: JSONPath('$.details'),
+///     imageUrl: JSONPath('$.image.url'),
+///   ),
+/// );
+/// ```
+///
+/// The configuration will:
+/// * Fetch data from the specified URL
+/// * Extract items using the root field path
+/// * Map JSON fields to card properties
+/// * Handle both array and single object responses
+/// * Create a list of cards with consistent layout
 @JsonSerializable()
 final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
   static const schemaName = 'vyuh.apiContent.configuration.jsonPath';
