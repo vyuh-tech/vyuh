@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vyuh_core: ^1.38.2
+  vyuh_core: ^1.38.3
   logger: ^2.5.0
 
 dev_dependencies:

@@ -1,3 +1,7 @@
+## 1.20.3
+
+ - **FIX**: updating api docs.
+
 ## 1.20.2
 
  - **FIX**: readme updates.
