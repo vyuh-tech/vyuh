@@ -19,7 +19,7 @@ dependencies:
   design_system: ^1.0.0
 
   # Vyuh Features
-  vyuh_feature_system: ^1.37.2
+  vyuh_feature_system: ^1.37.3
   vyuh_feature_auth: ^1.17.2
   vyuh_feature_onboarding: ^1.6.2
 

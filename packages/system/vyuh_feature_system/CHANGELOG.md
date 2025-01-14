@@ -1,3 +1,7 @@
+## 1.37.3
+
+ - **FIX**: api docs for the top classes of the framework.
+
 ## 1.37.2
 
  - **FIX**: readme updates.
