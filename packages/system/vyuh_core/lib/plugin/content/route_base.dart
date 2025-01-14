@@ -6,22 +6,43 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 part 'route_base.g.dart';
 
+/// Base class for all route content items in Vyuh.
+/// 
+/// Routes represent navigable content in a Vyuh application. They combine
+/// content from the CMS with routing configuration to create dynamic,
+/// content-driven navigation.
+/// 
+/// Key features:
+/// - Content-driven routing using CMS data
+/// - Customizable route types and transitions
+/// - Category-based organization
+/// - Lifecycle management
 abstract class RouteBase extends ContentItem implements RootItem {
+  /// The title of the route, displayed in navigation UI.
   @JsonKey(defaultValue: 'Untitled')
   final String title;
 
+  /// The URL path for this route.
+  /// This is used to match URLs and generate links.
   final String path;
+
+  /// Optional category for organizing routes.
   final Category? category;
 
+  /// Configuration for how this route should be presented.
+  /// Defines transitions, animations, and other route-specific behavior.
   @JsonKey(fromJson: typeFromFirstOfListJson<RouteTypeConfiguration>)
   final RouteTypeConfiguration? routeType;
 
+  /// Unique identifier for this route.
   @JsonKey(readValue: readValue)
   final String id;
 
+  /// When this route was last updated in the CMS.
   @JsonKey(readValue: readValue)
   final DateTime updatedAt;
 
+  /// When this route was created in the CMS.
   @JsonKey(readValue: readValue)
   final DateTime createdAt;
 
@@ -41,10 +62,24 @@ abstract class RouteBase extends ContentItem implements RootItem {
   factory RouteBase.fromJson(Map<String, dynamic> json) =>
       vyuh.content.fromJson<ContentItem>(json) as RouteBase;
 
+  /// Initialize the route when it becomes active.
+  /// 
+  /// This is called when the route is first navigated to.
+  /// Use this to set up any route-specific state or resources.
+  /// Return null to prevent the route from being shown.
   Future<RouteBase?> init(BuildContext context);
 
+  /// Clean up the route when it is no longer active.
+  /// 
+  /// This is called when navigating away from the route.
+  /// Use this to clean up any resources initialized in [init].
   Future<void> dispose();
 
+  /// Create a Flutter page for this route.
+  /// 
+  /// This method combines the route's content with its configuration
+  /// to create a Flutter page that can be used in navigation.
+  /// The [pageKey] is used for Flutter's page-based navigation system.
   Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey]) {
     final child = vyuh.content.buildRoute(context, routeId: id);
 
@@ -63,8 +98,24 @@ abstract class RouteBase extends ContentItem implements RootItem {
   }
 }
 
+/// A category for organizing routes.
+/// 
+/// Categories help structure routes in a hierarchical manner.
+/// They can be used to:
+/// - Group related routes
+/// - Create navigation menus
+/// - Filter and sort routes
+/// 
+/// Example:
+/// ```dart
+/// final category = Category(
+///   title: 'Blog',
+///   description: 'Blog posts and articles',
+///   icon: Icons.article,
+/// );
+/// ```
 @JsonSerializable()
-final class Category implements SchemaItem {
+class Category implements SchemaItem {
   @override
   String get schemaType => 'vyuh.category';
 
@@ -91,6 +142,26 @@ final class Category implements SchemaItem {
       _$CategoryFromJson(json);
 }
 
+/// Configuration for how a route should be presented.
+/// 
+/// Route type configurations define the visual and behavioral aspects
+/// of route transitions. They control:
+/// - Page transitions and animations
+/// - Route presentation mode (full-screen, modal, etc.)
+/// - Route-specific UI elements
+/// 
+/// Example:
+/// ```dart
+/// class FadeRouteType extends RouteTypeConfiguration {
+///   @override
+///   Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]) {
+///     return FadePage(
+///       child: child,
+///       key: pageKey,
+///     );
+///   }
+/// }
+/// ```
 abstract class RouteTypeConfiguration implements SchemaItem {
   final String? title;
 
@@ -102,6 +173,29 @@ abstract class RouteTypeConfiguration implements SchemaItem {
   Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]);
 }
 
+/// Configuration for managing route lifecycle events.
+/// 
+/// Route lifecycle configurations handle the initialization and cleanup
+/// of route-specific resources. They can:
+/// - Load route-specific data
+/// - Set up route state
+/// - Clean up resources
+/// - Handle route-specific events
+/// 
+/// Example:
+/// ```dart
+/// class BlogLifecycle extends RouteLifecycleConfiguration {
+///   @override
+///   Future<void> init(BuildContext context, RouteBase route) async {
+///     await loadBlogData();
+///   }
+///   
+///   @override
+///   Future<void> dispose() async {
+///     await saveBlogState();
+///   }
+/// }
+/// ```
 abstract class RouteLifecycleConfiguration implements SchemaItem {
   @override
   final String schemaType;

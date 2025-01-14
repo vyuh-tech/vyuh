@@ -3,6 +3,41 @@ import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
 import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// A descriptor for configuring the plugin system in a Vyuh application.
+/// 
+/// The [PluginDescriptor] manages the registration and initialization of all plugins
+/// in the application. It ensures that plugins are loaded in the correct order and
+/// provides type-safe access to plugin instances.
+/// 
+/// Plugins are organized into several categories:
+/// - Core System Plugins:
+///   - [DIPlugin]: Dependency injection
+///   - [ContentPlugin]: Content management
+///   - [AnalyticsPlugin]: User analytics
+///   - [TelemetryPlugin]: Application telemetry
+///   - [NetworkPlugin]: Network communication
+///   - [AuthPlugin]: Authentication
+///   - [NavigationPlugin]: Routing and navigation
+///   - [EnvPlugin]: Environment configuration
+///   - [EventPlugin]: Event system
+///   - [StoragePlugin]: Data persistence
+/// - Custom Plugins: Additional plugins via [others]
+/// 
+/// Each plugin type has a default implementation that is used if not explicitly
+/// provided. Custom implementations can be provided for any plugin type.
+/// 
+/// Example:
+/// ```dart
+/// final plugins = PluginDescriptor(
+///   analytics: MyCustomAnalyticsPlugin(),
+///   auth: MyCustomAuthPlugin(),
+///   others: [MyCustomPlugin()],
+/// );
+/// ```
+/// 
+/// The initialization order of plugins is managed automatically based on their
+/// dependencies. Core system plugins are initialized first, followed by custom
+/// plugins in the order they are provided.
 final class PluginDescriptor {
   final Set<Plugin> _plugins = {};
 

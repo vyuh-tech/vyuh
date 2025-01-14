@@ -1,7 +1,24 @@
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-/// A no-op implementation of [TelemetryProvider].
+/// A no-op implementation of [TelemetryProvider] that can be used for development
+/// or testing purposes.
+///
+/// This provider implements all telemetry operations as no-ops, meaning they do
+/// nothing when called. This is useful for:
+/// - Development environments where telemetry is not needed
+/// - Testing where telemetry should be disabled
+/// - Prototyping before implementing a real telemetry provider
+///
+/// Example:
+/// ```dart
+/// final plugins = PluginDescriptor(
+///   telemetry: TelemetryPlugin(providers: [NoOpTelemetryProvider()]),
+/// );
+/// ```
+///
+/// WARNING: Do not use this provider in production. Replace it with a real
+/// telemetry provider that can properly track errors and performance.
 final class NoOpTelemetryProvider implements TelemetryProvider {
   @override
   Future<Trace> startTrace(
@@ -52,6 +69,24 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
   }
 }
 
+/// A no-op implementation of [Trace] that can be used for development or testing.
+///
+/// This trace implementation does nothing when its methods are called. It is
+/// returned by [NoOpTelemetryProvider] when starting a trace.
+///
+/// All operations are implemented as no-ops:
+/// - [getAttributes] returns an empty map
+/// - [getMetric] returns 0
+/// - [setAttributes] and [setMetric] do nothing
+/// - [stop] returns immediately
+/// - [startChild] returns a new [NoOpTrace]
+///
+/// Example:
+/// ```dart
+/// final trace = await telemetry.startTrace('MyOperation', 'Start');
+/// await doSomething();
+/// await trace.stop(); // Does nothing with NoOpTrace
+/// ```
 final class NoOpTrace extends Trace {
   @override
   Map<String, String> getAttributes() => {};
