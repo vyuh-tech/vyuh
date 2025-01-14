@@ -1,15 +1,34 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Feature Auth 🔐
 
 [![vyuh_feature_auth](https://img.shields.io/pub/v/vyuh_feature_auth.svg?label=vyuh_feature_auth&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_auth)
 
-Authentication feature for Vyuh applications, providing flexible and customizable authentication flows. This package includes various authentication methods like email/password, phone OTP, and OAuth, with content-driven UI components that can be customized through Sanity.io CMS.
+Authentication feature for Vyuh applications, providing flexible and
+customizable authentication flows. This package includes various authentication
+methods like email/password, phone OTP, and OAuth, with content-driven UI
+components that can be customized through Sanity.io CMS.
 
 ## Features ✨
 
-- **Multiple Auth Methods** 🔑: Support for email/password, phone OTP, and OAuth authentication
-- **Content-driven Forms** 📝: Customizable authentication forms using Sanity.io CMS
-- **Flexible Layouts** 🎨: Multiple layout options for different presentation styles
-- **Action Integration** 🔄: Built-in actions for auth flows like sign in, sign up, and password reset
+- **Multiple Auth Methods** 🔑: Support for email/password, phone OTP, and OAuth
+  authentication
+- **Content-driven Forms** 📝: Customizable authentication forms using Sanity.io
+  CMS
+- **Flexible Layouts** 🎨: Multiple layout options for different presentation
+  styles
+- **Action Integration** 🔄: Built-in actions for auth flows like sign in, sign
+  up, and password reset
 - **Error Handling** ⚠️: Comprehensive error handling and user feedback
 
 ## Installation 📦
@@ -24,6 +43,7 @@ dependencies:
 ## Usage 💡
 
 ### Feature Registration
+
 Register the auth feature in your Vyuh application setup:
 
 ```dart
@@ -45,6 +65,7 @@ void main() {
 ### Content Examples 🎯
 
 #### Email/Password Form 📧
+
 ```dart
 import 'package:vyuh_core/vyuh_core.dart' as vyuh;
 import 'package:vyuh_feature_auth/vyuh_feature_auth.dart' as auth;
@@ -89,6 +110,7 @@ class SignInPage extends StatelessWidget {
 ```
 
 #### Phone OTP Form 📱
+
 ```dart
 // Create and render a phone OTP form
 final form = auth.PhoneOtpForm(
@@ -113,6 +135,7 @@ vyuh.content.buildContent(context, form);
 ```
 
 #### OAuth Sign In 🔗
+
 ```dart
 // Create and render OAuth sign in options
 final oauth = auth.OAuthSignIn(
@@ -153,6 +176,7 @@ vyuh.content.buildContent(context, oauth);
 ```
 
 #### Hint Action Text 💭
+
 ```dart
 // Create and render a hint text with action
 final hint = auth.HintActionText(
@@ -184,12 +208,14 @@ The auth feature provides the following content types:
 - `auth.forgotPasswordForm` 🔑: Password reset form
 - `auth.hintActionText` 💭: Helper text with action link
 
-Each content type comes with its own layout configuration and can be customized through Sanity.io CMS.
+Each content type comes with its own layout configuration and can be customized
+through Sanity.io CMS.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄

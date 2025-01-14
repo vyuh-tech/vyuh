@@ -1,19 +1,37 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Console Telemetry Provider 📊
 
 [![vyuh_plugin_telemetry_provider_console](https://img.shields.io/pub/v/vyuh_plugin_telemetry_provider_console.svg?label=vyuh_plugin_telemetry_provider_console&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console)
 
-A simple console-based telemetry provider for the Vyuh framework that logs telemetry events, errors, and messages to the console using the [logger](https://pub.dev/packages/logger) package. This provider is ideal for development and debugging scenarios where you need to monitor application events and errors in real-time through the console.
+A simple console-based telemetry provider for the Vyuh framework that logs
+telemetry events, errors, and messages to the console using the
+[logger](https://pub.dev/packages/logger) package. This provider is ideal for
+development and debugging scenarios where you need to monitor application events
+and errors in real-time through the console.
 
-## Features 
+## Features
 
-- **Console Logging** : Log telemetry events directly to the console with pretty formatting
+- **Console Logging** : Log telemetry events directly to the console with pretty
+  formatting
 - **Error Tracking** : Detailed error logging with stack traces
 - **Flutter Error Support** : Special handling for Flutter-specific errors
-- **Log Levels** : Support for multiple log levels (fatal, error, warning, info, debug, trace)
+- **Log Levels** : Support for multiple log levels (fatal, error, warning, info,
+  debug, trace)
 - **Pretty Printing** : Formatted output for better readability
 - **No External Dependencies** : Only requires the logger package
 
-## Installation 
+## Installation
 
 Add this to your package's `pubspec.yaml` file:
 
@@ -77,7 +95,7 @@ FlutterError.onError = (details) {
 };
 ```
 
-## Configuration 
+## Configuration
 
 The console logger is configured with sensible defaults:
 
@@ -86,7 +104,7 @@ The console logger is configured with sensible defaults:
 - Method count set to 0 to reduce noise
 - Line length of 80 characters
 
-## Log Levels 
+## Log Levels
 
 The provider supports the following log levels:
 
@@ -99,12 +117,14 @@ The provider supports the following log levels:
 
 ## Contributing 🤝
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request. For major
+changes, please open an issue first to discuss what you would like to change.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄

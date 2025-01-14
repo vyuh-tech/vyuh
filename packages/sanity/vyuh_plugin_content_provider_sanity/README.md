@@ -1,24 +1,42 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Content Provider for Sanity 🔌
 
 [![vyuh_plugin_content_provider_sanity](https://img.shields.io/pub/v/vyuh_plugin_content_provider_sanity.svg?label=vyuh_plugin_content_provider_sanity&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_content_provider_sanity)
 
-A powerful content provider plugin that seamlessly integrates [Sanity.io](https://www.sanity.io) with the Vyuh framework. This plugin enables your Vyuh application to fetch, cache, and manage content from Sanity.io with minimal configuration.
+A powerful content provider plugin that seamlessly integrates
+[Sanity.io](https://www.sanity.io) with the Vyuh framework. This plugin enables
+your Vyuh application to fetch, cache, and manage content from Sanity.io with
+minimal configuration.
 
 ## Features ✨
 
 - **Content Management** 📝
+
   - Fetch single or multiple documents
   - Support for all Sanity content types
   - Automatic content type mapping
   - Built-in caching with configurable duration
 
 - **Asset Support** 🖼️
+
   - Image assets with transformations
   - File assets with metadata
   - Reference handling
   - Asset caching
 
 - **Routing Integration** 🛣️
+
   - Automatic route generation from content
   - Support for Vyuh framework schema
   - Dynamic route parameters
@@ -148,18 +166,18 @@ final provider = SanityContentProvider.withConfig(
   config: SanityConfig(
     projectId: '<project-id>',
     dataset: 'production',
-    
+
     // Content delivery options
     useCdn: true,                    // Use CDN for better performance
     perspective: Perspective.published, // Content perspective
-    
+
     // Cache configuration
     cacheDuration: Duration(minutes: 5),
-    
+
     // Optional authentication
     token: '<your-token>',           // For accessing private datasets
   ),
-  
+
   // Additional options
   debug: true,                       // Enable debug logging
   retryOptions: RetryOptions(        // Configure retry behavior
@@ -204,12 +222,14 @@ try {
 
 ## Contributing 🤝
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request. For major
+changes, please open an issue first to discuss what you would like to change.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 - Learn more about [Sanity.io](https://www.sanity.io/docs)
 

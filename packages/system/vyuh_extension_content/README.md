@@ -1,27 +1,45 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Extension Content 📦
 
 [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)
 
 An extension for integrating CMS. This package provides the core building blocks
-that can be leveraged by specific CMS integrations. Works in conjunction with the
-`ContentPlugin` from the `vyuh_core` package to enable content management features
-in your application.
+that can be leveraged by specific CMS integrations. Works in conjunction with
+the `ContentPlugin` from the `vyuh_core` package to enable content management
+features in your application.
 
 ## Overview ✨
 
-The content extension provides a flexible architecture for managing CMS-driven content in your application:
+The content extension provides a flexible architecture for managing CMS-driven
+content in your application:
 
-1. **Content Types** 📝 define the structure of your content using Dart classes that extend `ContentItem`. Each type has:
+1. **Content Types** 📝 define the structure of your content using Dart classes
+   that extend `ContentItem`. Each type has:
+
    - A unique schema name matching your CMS schema
    - A type descriptor for registration and serialization
    - A content builder for creating instances with layouts
 
-2. **Content Builders** 🏗️ handle the creation and configuration of content instances:
+2. **Content Builders** 🏗️ handle the creation and configuration of content
+   instances:
+
    - Map CMS data to Dart objects
    - Configure default and custom layouts
    - Handle content validation and transformation
 
 3. **Layout System** 🎨 manages how content is rendered:
+
    - Layouts are configured per content type
    - Default layouts handle common use cases
    - Custom layouts provide full control over rendering
@@ -29,18 +47,21 @@ The content extension provides a flexible architecture for managing CMS-driven c
 4. **Content Descriptors** 📋 allow extending the content system:
    - Add custom layouts for some Content Items
 
-This architecture enables you to seamlessly integrate CMS content into your application while maintaining type safety and clean separation of concerns.
+This architecture enables you to seamlessly integrate CMS content into your
+application while maintaining type safety and clean separation of concerns.
 
 ## Features 🚀
 
 ### Content Types 📝
 
 - **ContentItem**: Base class for all content types
+
   - Schema type identification
   - JSON serialization support
   - Content builder registration
 
 - **ImageReference**: Reference to CMS-managed images
+
   - URL and dimensions
   - Asset metadata
   - Hot spot and crop information
@@ -53,6 +74,7 @@ This architecture enables you to seamlessly integrate CMS content into your appl
 ### Content Building
 
 - **ContentBuilder**: Factory for creating content instances
+
   - Type-safe content creation
   - Layout configuration
   - Content validation
@@ -72,6 +94,7 @@ This architecture enables you to seamlessly integrate CMS content into your appl
 ### Content Extensions
 
 - **ContentExtension**: Framework for extending content functionality
+
   - Custom content types
   - Layout registration
   - Content modifiers
@@ -123,7 +146,7 @@ final class Article extends ContentItem {
     this.image,
   }) : super(schemaType: schemaName);
 
-  factory Article.fromJson(Map<String, dynamic> json) => 
+  factory Article.fromJson(Map<String, dynamic> json) =>
     _$ArticleFromJson(json);
 }
 ```
@@ -177,7 +200,8 @@ final feature = FeatureDescriptor(
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄

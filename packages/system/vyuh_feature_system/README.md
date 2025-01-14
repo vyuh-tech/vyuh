@@ -1,15 +1,31 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Feature System 🔧
 
 [![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)
 
-The system feature package for Vyuh framework, providing essential content types, actions, conditions, and services for building CMS-driven Flutter applications.
+The system feature package for Vyuh framework, providing essential content
+types, actions, conditions, and services for building CMS-driven Flutter
+applications.
 
 ## Features ✨
 
 ### Content Types 📝
 
 #### Routes 🧭
+
 - **Page Routes**: Full-screen pages with various layouts
+
   - Default page layout with app bar and body
   - Tabs layout for sectioned content
   - Single item layout for focused content
@@ -20,18 +36,22 @@ The system feature package for Vyuh framework, providing essential content types
   - Custom dialog layouts
 
 #### Cards 🎴
+
 - **Default Card**: Standard card layout with title, content, and actions
 - **List Item Card**: Compact layout for list views
 - **Button Card**: Interactive card with action triggers
 - **Conditional Card**: Dynamic layout based on conditions
 
 #### Groups 📦
+
 - **Carousel**: Horizontal scrolling group of items
+
   - Auto-play support
   - Navigation controls
   - Custom transitions
 
 - **Grid**: Responsive grid layout
+
   - Configurable columns
   - Responsive breakpoints
   - Custom item spacing
@@ -42,6 +62,7 @@ The system feature package for Vyuh framework, providing essential content types
   - Custom item layouts
 
 #### Other Items 🔧
+
 - **Portable Text**: Rich text content with custom marks
   - Action invocation marks
   - Link marks with custom styling
@@ -50,30 +71,37 @@ The system feature package for Vyuh framework, providing essential content types
 - **Unknown**: Fallback for unknown content types
 - **Conditional**: Content based on conditions
 
-Each content type can be extended with custom layouts by implementing `LayoutConfiguration<T>` and registering the layout in your feature descriptor.
+Each content type can be extended with custom layouts by implementing
+`LayoutConfiguration<T>` and registering the layout in your feature descriptor.
 
 ### Actions 🎯
 
-The system feature provides several built-in actions for navigation, UI control, and system operations:
+The system feature provides several built-in actions for navigation, UI control,
+and system operations:
 
 #### Navigation Actions 🧭
+
 - **NavigateAction**: Navigate to a new route with optional query parameters
 - **NavigateBackAction**: Return to the previous route in history
 - **NavigateReplaceAction**: Replace current route with a new one
 - **OpenUrlAction**: Open external URLs in browser or app
 
 #### UI Actions 🎨
-- **AlertAction**: Display snackbar messages with different types (success, error, info)
+
+- **AlertAction**: Display snackbar messages with different types (success,
+  error, info)
 - **DrawerAction**: Show or hide the navigation drawer
 - **OpenInDialogAction**: Display content in a modal dialog
 - **ToggleThemeAction**: Switch between light and dark themes
 
 #### System Actions ⚙️
+
 - **DelayAction**: Add a timed delay between action executions
 - **RouteRefreshAction**: Refresh the current route's content
 - **RestartAction**: Restart the entire application
 
 ### Conditions 🔄
+
 - **Boolean**: Simple boolean conditions
 - **Feature Flag**: Toggle features based on conditions
 - **Screen Size**: Responsive layouts based on screen size
@@ -196,16 +224,19 @@ final feature = FeatureDescriptor(
 The system feature provides built-in routes:
 
 #### Error Route
+
 - Path: `/__system_error__`
 - Purpose: Displays system errors with stack trace
 - Usage: Automatically used by the framework for error handling
 
 #### Navigation Route
+
 - Path: `/__system_navigate__`
 - Purpose: Handles external navigation (URLs, deep links)
 - Usage: Automatically used by navigation actions
 
-These routes are registered automatically when using the system feature and provide consistent error handling and navigation behavior across your app.
+These routes are registered automatically when using the system feature and
+provide consistent error handling and navigation behavior across your app.
 
 ## Installation 📦
 
@@ -219,7 +250,8 @@ dependencies:
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄

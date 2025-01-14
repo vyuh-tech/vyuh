@@ -1,13 +1,29 @@
+<p align="center">
+  <a href="https://vyuh.tech">
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
+  </a>
+  <h1 align="center">Vyuh Framework</h1>
+  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">
+    <a href="https://docs.vyuh.tech">Docs</a> |
+    <a href="https://vyuh.tech">Website</a>
+  </p>
+</p>
+
 # Vyuh Feature Onboarding 🎯
 
 [![vyuh_feature_onboarding](https://img.shields.io/pub/v/vyuh_feature_onboarding.svg?label=vyuh_feature_onboarding&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_onboarding)
 
-Onboarding feature for Vyuh applications, providing a flexible and customizable onboarding experience. This package includes content-driven onboarding screens with step-by-step guidance, rich text descriptions, and image support.
+Onboarding feature for Vyuh applications, providing a flexible and customizable
+onboarding experience. This package includes content-driven onboarding screens
+with step-by-step guidance, rich text descriptions, and image support.
 
 ## Features ✨
 
-- **Content-driven Onboarding** 📝: Customizable onboarding content using Sanity.io CMS
-- **Step-by-step Flow** 🔄: Support for multiple onboarding steps with navigation
+- **Content-driven Onboarding** 📝: Customizable onboarding content using
+  Sanity.io CMS
+- **Step-by-step Flow** 🔄: Support for multiple onboarding steps with
+  navigation
 - **Rich Text Support** 📖: Markdown-style rich text for step descriptions
 - **Image Integration** 🖼️: Support for images in onboarding steps
 - **Action Integration** 🔗: Built-in actions for navigation and completion
@@ -24,6 +40,7 @@ dependencies:
 ## Usage 💡
 
 ### Feature Registration
+
 Register the onboarding feature in your Vyuh application setup:
 
 ```dart
@@ -45,6 +62,7 @@ void main() {
 ### Content Examples 🎯
 
 #### Basic Onboarding
+
 ```dart
 import 'package:vyuh_core/vyuh_core.dart' as vyuh;
 import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart' as onboarding;
@@ -111,6 +129,7 @@ class OnboardingPage extends StatelessWidget {
 ```
 
 #### Custom Layout
+
 ```dart
 import 'package:vyuh_core/vyuh_core.dart' as vyuh;
 import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart' as onboarding;
@@ -142,14 +161,17 @@ vyuh.content.buildContent(context, content);
 
 The onboarding feature provides the following content types:
 
-- `vyuh.content.onboarding` 🎯: Main onboarding content type with steps and navigation
+- `vyuh.content.onboarding` 🎯: Main onboarding content type with steps and
+  navigation
 
-Each content type comes with its own layout configuration and can be customized through Sanity.io CMS.
+Each content type comes with its own layout configuration and can be customized
+through Sanity.io CMS.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
 ## License 📄
