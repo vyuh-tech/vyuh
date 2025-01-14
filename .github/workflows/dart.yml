@@ -24,6 +24,10 @@ jobs:
           - vyuh_extension_content
           - vyuh_cli
           - vyuh_test
+          - vyuh_widgetbook
+          - vyuh_plugin_content_provider_sanity
+          - vyuh_plugin_storage_hive
+          - vyuh_plugin_telemetry_provider_console
           - vyuh_feature_developer
           - vyuh_feature_system
           - vyuh_feature_onboarding
