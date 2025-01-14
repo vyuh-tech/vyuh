@@ -22,14 +22,14 @@ dependencies:
   flutter_sanity_portable_text: ^1.6.0
 
   # Vyuh Framework
-  vyuh_core: ^1.38.1
-  vyuh_extension_content: ^1.20.1
-  vyuh_feature_system: ^1.37.1
-  vyuh_feature_developer: ^1.12.0
-  vyuh_plugin_content_provider_sanity: ^1.10.0
-  vyuh_feature_auth: ^1.17.1
-  vyuh_feature_onboarding: ^1.6.1
-  vyuh_plugin_telemetry_provider_console: ^1.1.1
+  vyuh_core: ^1.38.2
+  vyuh_extension_content: ^1.20.2
+  vyuh_feature_system: ^1.37.2
+  vyuh_feature_developer: ^1.12.1
+  vyuh_plugin_content_provider_sanity: ^1.10.1
+  vyuh_feature_auth: ^1.17.2
+  vyuh_feature_onboarding: ^1.6.2
+  vyuh_plugin_telemetry_provider_console: ^1.1.2
 
   # Example Features
   feature_counter: ^1.0.0

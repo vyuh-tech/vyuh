@@ -1,3 +1,7 @@
+## 1.20.2
+
+ - **FIX**: readme updates.
+
 ## 1.20.1
 
  - **FIX**: readme updates to make it more consistent.
