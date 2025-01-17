@@ -37,7 +37,7 @@ export const conference = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'description',
+      subtitle: 'slug.current',
       media: 'logo',
     },
   },
