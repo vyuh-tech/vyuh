@@ -28,8 +28,8 @@
     "url": "https://vyuh.tech"
   },
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^1.33.6",
-    "@vyuh/sanity-schema-system": "^1.33.6",
+    "@vyuh/sanity-schema-core": "^1.33.8",
+    "@vyuh/sanity-schema-system": "^1.33.8",
     "react-icons": "^5.4.0",
     "sanity": "^3.70.0"
   },

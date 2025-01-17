@@ -13,11 +13,11 @@
       "type": "http",
       "documentation": "",
       "method": "get",
-      "endpoint": "users/:id",
+      "endpoint": "users",
       "responses": [
         {
           "uuid": "6272a2eb-bafa-494e-a137-af0f1017e827",
-          "body": "{\n  \"data\": [\n    {{#repeat 10}}\n    {\n      \"id\": \"{{urlParam 'id'}}\"\n      \"token\": \"{{faker \"internet.jwt\"}}\"\n    }\n    {{/repeat}}\n    ]\n}",
+          "body": "{\n  \"data\": [\n    {{#repeat 10}}\n    {\n      \"username\": \"{{faker 'person.fullName'}}\",\n      \"id\": \"{{faker 'string.uuid'}}\",\n      \"url\": \"{{faker 'image.avatar' }}\"\n    }\n    {{/repeat}}\n    ]\n}",
           "latency": 0,
           "statusCode": 200,
           "label": "",
