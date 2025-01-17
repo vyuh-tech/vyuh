@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-onboarding",
-  "version": "1.28.2",
+  "version": "1.28.3",
   "description": "Sanity schemas for creating onboarding content when using the Vyuh Framework",
   "homepage": "https://vyuh.tech",
   "license": "MIT",
@@ -28,10 +28,10 @@
     "url": "https://vyuh.tech"
   },
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^1.33.4",
-    "@vyuh/sanity-schema-system": "^1.33.4",
+    "@vyuh/sanity-schema-core": "^1.33.5",
+    "@vyuh/sanity-schema-system": "^1.33.5",
     "react-icons": "^5.4.0",
-    "sanity": "^3.68.3"
+    "sanity": "^3.70.0"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",
@@ -39,7 +39,7 @@
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
     "tsup": "^8.3.5",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.3"
   },
   "peerDependencies": {
     "react": "^18.3.1",
