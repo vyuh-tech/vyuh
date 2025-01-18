@@ -21,6 +21,8 @@ class ConferenceRouteScaffold<T> extends StatefulWidget {
 class _ConferenceRouteScaffoldState<T>
     extends State<ConferenceRouteScaffold<T>> {
   Future<T?>? _future;
+  final _heroTag = UniqueKey();
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +35,7 @@ class _ConferenceRouteScaffoldState<T>
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         mini: true,
+        heroTag: _heroTag,
         onPressed: () {
           setState(() {
             _future = widget.future();

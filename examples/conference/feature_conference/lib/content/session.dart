@@ -69,7 +69,7 @@ class Session extends ContentItem {
     required this.title,
     this.slug,
     this.description,
-    required this.duration,
+    this.duration = 0,
     this.format = SessionFormat.talk,
     this.level = SessionLevel.all,
     this.edition,

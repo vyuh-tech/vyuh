@@ -42,34 +42,30 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
               ),
             ),
           ),
-        ListTile(
-          title: Text(content.title),
-          contentPadding: EdgeInsets.zero,
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 8,
-            children: [
-              if (content.description != null)
-                vyuh.content.buildContent(context, content.description!),
-              if (content.address != null) Text(content.address!.formatted),
-              if (content.website != null ||
-                  content.phone != null ||
-                  content.email != null) ...[
-                Wrap(
-                  spacing: 16,
-                  children: [
-                    if (content.website != null)
-                      Text(content.website!,
-                          style: theme.textTheme.labelMedium),
-                    if (content.phone != null)
-                      Text(content.phone!, style: theme.textTheme.labelMedium),
-                    if (content.email != null)
-                      Text(content.email!, style: theme.textTheme.labelMedium),
-                  ],
-                ),
-              ],
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 8,
+          children: [
+            Text(content.title, style: theme.textTheme.titleMedium),
+            if (content.description != null)
+              vyuh.content.buildContent(context, content.description!),
+            if (content.address != null) Text(content.address!.formatted),
+            if (content.website != null ||
+                content.phone != null ||
+                content.email != null) ...[
+              Wrap(
+                spacing: 16,
+                children: [
+                  if (content.website != null)
+                    Text(content.website!, style: theme.textTheme.labelMedium),
+                  if (content.phone != null)
+                    Text(content.phone!, style: theme.textTheme.labelMedium),
+                  if (content.email != null)
+                    Text(content.email!, style: theme.textTheme.labelMedium),
+                ],
+              ),
             ],
-          ),
+          ],
         ),
         if (content.amenities != null && content.amenities!.isNotEmpty)
           Column(

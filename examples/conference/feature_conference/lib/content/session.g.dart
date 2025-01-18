@@ -14,7 +14,7 @@ Session _$SessionFromJson(Map<String, dynamic> json) => Session(
           ? null
           : PortableTextContent.fromJson(
               json['description'] as Map<String, dynamic>),
-      duration: (json['duration'] as num).toInt(),
+      duration: (json['duration'] as num?)?.toInt() ?? 0,
       format: $enumDecodeNullable(_$SessionFormatEnumMap, json['format']) ??
           SessionFormat.talk,
       level: $enumDecodeNullable(_$SessionLevelEnumMap, json['level']) ??
