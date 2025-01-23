@@ -12,19 +12,14 @@ class SanityValidator extends DoctorValidator {
       if (result.exitCode != 0) {
         return ValidationResult(
           ValidationType.missing,
-          [],
-        );
-      }
-      final loggedIn = await _isLoggedIn();
-      if (!loggedIn) {
-        return ValidationResult(
-          ValidationType.partial,
           [
-            const ValidationMessage.warning(
-              'Run `pnpm sanity login` to log in to Sanity',
+            ValidationMessage.warning(
+              'Install $title from https://www.sanity.io/docs/installation',
+            ),
+            ValidationMessage.error(
+              'exitCode:${result.exitCode} ${result.stdout}',
             ),
           ],
-          statusInfo: '${_extractVersion(result)} is installed',
         );
       }
 
@@ -47,18 +42,6 @@ class SanityValidator extends DoctorValidator {
       );
     } catch (e, stackTrace) {
       return ValidationResult.crash(e, stackTrace);
-    }
-  }
-
-  Future<bool> _isLoggedIn() async {
-    try {
-      final result = Process.runSync('pnpm', ['sanity', 'login', '--check']);
-
-      // If exit code is 0, user is logged in
-      // If exit code is non-zero, user is not logged in
-      return result.exitCode == 0;
-    } catch (e) {
-      return false;
     }
   }
 
