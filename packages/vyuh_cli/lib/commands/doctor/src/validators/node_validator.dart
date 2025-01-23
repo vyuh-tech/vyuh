@@ -16,6 +16,9 @@ class NodeValidator extends DoctorValidator {
             ValidationMessage(
               'Install $title from https://nodejs.org/en/download',
             ),
+            ValidationMessage.error(
+              'Exit Code:${result.exitCode} ${result.stdout}',
+            ),
           ],
         );
       }

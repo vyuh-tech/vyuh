@@ -16,6 +16,9 @@ class MelosValidator extends DoctorValidator {
             ValidationMessage.warning(
               'Install $title using dart: dart pub global activate melos',
             ),
+            ValidationMessage.error(
+              'Exit Code:${result.exitCode} ${result.stdout}',
+            ),
           ],
         );
       }

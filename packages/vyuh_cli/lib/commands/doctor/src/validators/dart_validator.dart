@@ -16,6 +16,9 @@ class DartValidator extends DoctorValidator {
             ValidationMessage.warning(
               'Install $title from https://dart.dev/get-dart',
             ),
+            ValidationMessage.error(
+              'Exit Code:${result.exitCode} ${result.stdout}',
+            ),
           ],
         );
       }

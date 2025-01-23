@@ -16,6 +16,9 @@ class FlutterValidator extends DoctorValidator {
             ValidationMessage.warning(
               'Install $title from https://flutter.dev/docs/get-started/install.',
             ),
+            ValidationMessage.error(
+              'Exit Code:${result.exitCode} ${result.stdout}',
+            ),
           ],
         );
       }

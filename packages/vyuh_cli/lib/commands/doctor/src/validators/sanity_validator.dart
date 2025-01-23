@@ -17,7 +17,7 @@ class SanityValidator extends DoctorValidator {
               'Install $title from https://www.sanity.io/docs/installation',
             ),
             ValidationMessage.error(
-              'exitCode:${result.exitCode} ${result.stdout}',
+              'Exit Code:${result.exitCode} ${result.stdout}',
             ),
           ],
         );

@@ -16,6 +16,9 @@ class PnPmValidator extends DoctorValidator {
             ValidationMessage(
               'Install $title from https://pnpm.io/installation',
             ),
+            ValidationMessage.error(
+              'Exit Code:${result.exitCode} ${result.stdout}',
+            ),
           ],
         );
       }
