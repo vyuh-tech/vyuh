@@ -7,6 +7,8 @@ import 'package:vyuh_cli/commands/create/command.dart';
 import 'package:vyuh_cli/commands/update/command.dart';
 import 'package:vyuh_cli/version.dart';
 
+import 'commands/doctor/command.dart';
+
 const executableName = 'vyuh';
 const packageName = 'vyuh_cli';
 const description =
@@ -41,6 +43,7 @@ class VyuhCliCommandRunner extends CompletionCommandRunner<int> {
       );
 
     // Add sub commands
+    addCommand(DoctorCommand(logger: _logger));
     addCommand(CreateCommand(logger: _logger));
     addCommand(UpdateCommand(logger: _logger, pubUpdater: _pubUpdater));
   }
