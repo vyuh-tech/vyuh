@@ -17,6 +17,7 @@ class Doctor {
     MelosValidator(),
     NodeValidator(),
     PnPmValidator(),
+    SanityValidator(),
   ];
 
   Future<bool> diagnose() async {

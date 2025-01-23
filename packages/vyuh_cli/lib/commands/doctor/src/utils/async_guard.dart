@@ -27,7 +27,7 @@ Future<T> asyncGuard<T>(Future<T> Function() fn, {Function? onError}) {
     }
   }
 
-  runZoned<void>(
+  runZonedGuarded<void>(
     () async {
       try {
         final T result = await fn();
@@ -41,7 +41,7 @@ Future<T> asyncGuard<T>(Future<T> Function() fn, {Function? onError}) {
         handleError(e, s);
       }
     },
-    onError: (Object e, StackTrace s) {
+    (Object e, StackTrace s) {
       handleError(e, s);
     },
   );
@@ -51,4 +51,6 @@ Future<T> asyncGuard<T>(Future<T> Function() fn, {Function? onError}) {
 
 typedef _UnaryOnError<T> = FutureOr<T> Function(Object error);
 typedef _BinaryOnError<T> = FutureOr<T> Function(
-    Object error, StackTrace stackTrace);
+  Object error,
+  StackTrace stackTrace,
+);

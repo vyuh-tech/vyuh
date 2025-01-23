@@ -25,6 +25,18 @@ class MelosValidator extends DoctorValidator {
         [],
         statusInfo: '${_extractVersion(result)} is installed',
       );
+    } on ProcessException catch (e) {
+      return ValidationResult(
+        ValidationType.missing,
+        [
+          ValidationMessage(
+            'Install $title using dart: dart pub global activate melos',
+          ),
+          ValidationMessage.error(
+            'Error running $title: ${e.message}',
+          ),
+        ],
+      );
     } catch (e, stackTrace) {
       return ValidationResult.crash(e, stackTrace);
     }

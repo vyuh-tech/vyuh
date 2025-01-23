@@ -25,6 +25,18 @@ class FlutterValidator extends DoctorValidator {
         [],
         statusInfo: '${_extractVersion(result)} is installed',
       );
+    } on ProcessException catch (e) {
+      return ValidationResult(
+        ValidationType.missing,
+        [
+          ValidationMessage(
+            'Install $title from https://flutter.dev/docs/get-started/install.',
+          ),
+          ValidationMessage.error(
+            'Error running $title: ${e.message}',
+          ),
+        ],
+      );
     } catch (e, stackTrace) {
       return ValidationResult.crash(e, stackTrace);
     }

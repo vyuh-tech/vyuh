@@ -12,7 +12,11 @@ class PnPmValidator extends DoctorValidator {
       if (result.exitCode != 0) {
         return ValidationResult(
           ValidationType.missing,
-          [],
+          [
+            ValidationMessage(
+              'Install $title from https://pnpm.io/installation',
+            ),
+          ],
         );
       }
 
@@ -20,6 +24,18 @@ class PnPmValidator extends DoctorValidator {
         ValidationType.success,
         [],
         statusInfo: '${_extractVersion(result)} is installed',
+      );
+    } on ProcessException catch (e) {
+      return ValidationResult(
+        ValidationType.missing,
+        [
+          ValidationMessage(
+            'Install $title from https://pnpm.io/installation',
+          ),
+          ValidationMessage.error(
+            'Error running $title: ${e.message}',
+          ),
+        ],
       );
     } catch (e, stackTrace) {
       return ValidationResult.crash(e, stackTrace);
