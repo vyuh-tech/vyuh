@@ -6,19 +6,21 @@ class FlutterValidator extends DoctorValidator {
   FlutterValidator() : super('Flutter');
 
   @override
-  Future<ValidationResult> validateImpl() async {
+  String get installHelp => 'https://flutter.dev/docs/get-started/install';
+
+  @override
+  Future<ValidationResult> validate() async {
     try {
       final result = Process.runSync('flutter', ['--version']);
       if (result.exitCode != 0) {
         return ValidationResult(
           ValidationType.missing,
           [
-            ValidationMessage.warning(
-              'Install $title from https://flutter.dev/docs/get-started/install.',
-            ),
-            ValidationMessage.error(
-              'Exit Code:${result.exitCode} ${result.stdout}',
-            ),
+            const ValidationMessage(''),
+            const ValidationMessage.error(UserMessages.commandNotFound),
+            ValidationMessage.warning('${result.stdout}'),
+            ValidationMessage(installInstructions),
+            const ValidationMessage(''),
           ],
         );
       }
@@ -26,18 +28,18 @@ class FlutterValidator extends DoctorValidator {
       return ValidationResult(
         ValidationType.success,
         [],
-        statusInfo: '${_extractVersion(result)} is installed',
+        statusInfo: UserMessages.isInstalledMessage(
+          extractVersion('${result.stdout}'.trim()),
+        ),
       );
     } on ProcessException catch (e) {
       return ValidationResult(
         ValidationType.missing,
         [
-          ValidationMessage(
-            'Install $title from https://flutter.dev/docs/get-started/install.',
-          ),
-          ValidationMessage.error(
-            'Error running $title: ${e.message}',
-          ),
+          const ValidationMessage(''),
+          ValidationMessage.error(UserMessages.exceptionMessage(e)),
+          ValidationMessage(installInstructions),
+          const ValidationMessage(''),
         ],
       );
     } catch (e, stackTrace) {
@@ -45,9 +47,10 @@ class FlutterValidator extends DoctorValidator {
     }
   }
 
-  String _extractVersion(ProcessResult result) {
+  @override
+  String extractVersion(String output) {
     final versionRegex = RegExp(r'Flutter (\d+\.\d+\.\d+)');
-    final match = versionRegex.firstMatch(result.stdout);
+    final match = versionRegex.firstMatch(output);
     return match?.group(1) ?? 'Unknown';
   }
 }

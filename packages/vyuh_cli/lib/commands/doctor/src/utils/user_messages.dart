@@ -1,3 +1,5 @@
+import 'dart:io';
+
 sealed class UserMessages {
   static const String vyuhToolBugInstructions =
       'Please report a bug at https://github.com/vyuh-tech/vyuh/issues';
@@ -16,6 +18,16 @@ sealed class UserMessages {
     return '❗ Doctor found issues in $issues categor${issues > 1 ? "ies" : "y"}.';
   }
 
-  static const String slowWarning =
-      'This is taking an unexpectedly long time...';
+  static String isInstalledMessage(String version) => '$version is installed';
+
+  static const commandNotFound = 'Command not found';
+
+  static String exceptionMessage(Exception e) {
+    switch (e) {
+      case ProcessException _:
+        return '$commandNotFound: [${e.errorCode}] ${e.message}';
+      default:
+        return commandNotFound;
+    }
+  }
 }

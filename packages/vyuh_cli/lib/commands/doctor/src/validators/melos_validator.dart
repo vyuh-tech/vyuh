@@ -6,19 +6,21 @@ class MelosValidator extends DoctorValidator {
   MelosValidator() : super('Melos');
 
   @override
-  Future<ValidationResult> validateImpl() async {
+  String get installHelp => 'https://melos.invertase.dev/~melos-latest/getting-started';
+
+  @override
+  Future<ValidationResult> validate() async {
     try {
       final result = Process.runSync('melos', ['--version']);
       if (result.exitCode != 0) {
         return ValidationResult(
           ValidationType.missing,
           [
-            ValidationMessage.warning(
-              'Install $title using dart: dart pub global activate melos',
-            ),
-            ValidationMessage.error(
-              'Exit Code:${result.exitCode} ${result.stdout}',
-            ),
+            const ValidationMessage(''),
+            const ValidationMessage.error(UserMessages.commandNotFound),
+            ValidationMessage.warning('${result.stdout}'),
+            ValidationMessage(installInstructions),
+            const ValidationMessage(''),
           ],
         );
       }
@@ -26,18 +28,18 @@ class MelosValidator extends DoctorValidator {
       return ValidationResult(
         ValidationType.success,
         [],
-        statusInfo: '${_extractVersion(result)} is installed',
+        statusInfo: UserMessages.isInstalledMessage(
+          extractVersion('${result.stdout}'.trim()),
+        ),
       );
     } on ProcessException catch (e) {
       return ValidationResult(
         ValidationType.missing,
         [
-          ValidationMessage(
-            'Install $title using dart: dart pub global activate melos',
-          ),
-          ValidationMessage.error(
-            'Error running $title: ${e.message}',
-          ),
+          const ValidationMessage(''),
+          ValidationMessage.error(UserMessages.exceptionMessage(e)),
+          ValidationMessage(installInstructions),
+          const ValidationMessage(''),
         ],
       );
     } catch (e, stackTrace) {
@@ -45,9 +47,10 @@ class MelosValidator extends DoctorValidator {
     }
   }
 
-  String _extractVersion(ProcessResult result) {
+  @override
+  String extractVersion(String output) {
     final versionRegex = RegExp(r'^(\d+\.\d+\.\d+)');
-    final match = versionRegex.firstMatch(result.stdout);
+    final match = versionRegex.firstMatch(output);
     return match?.group(1) ?? 'Unknown';
   }
 }

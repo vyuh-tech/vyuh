@@ -10,22 +10,13 @@ abstract class DoctorValidator {
 
   final String title;
 
-  String get slowWarning => UserMessages.slowWarning;
+  String get installHelp;
 
-  static const Duration _slowWarningDuration = Duration(seconds: 10);
+  String get installInstructions => 'Install $title from $installHelp';
 
-  /// Duration before the spinner should display [slowWarning].
-  Duration get slowWarningDuration => _slowWarningDuration;
+  Future<ValidationResult> validate();
 
-  Future<ValidationResult> validate() async {
-    final Stopwatch stopwatch = Stopwatch()..start();
-    final ValidationResult result = await validateImpl();
-    stopwatch.stop();
-    result._executionTime = stopwatch.elapsed;
-    return result;
-  }
-
-  Future<ValidationResult> validateImpl();
+  String extractVersion(String output);
 }
 
 class ValidationResult {
@@ -62,10 +53,6 @@ class ValidationResult {
         ValidationType.notAvailable || ValidationType.partial => '⌛',
       };
 
-  /// The time taken to perform the validation, set by [DoctorValidator.validate].
-  Duration? get executionTime => _executionTime;
-  Duration? _executionTime;
-
   /// The string representation of the type.
   String get typeStr => switch (type) {
         ValidationType.crash => 'crash',
@@ -96,7 +83,7 @@ class ValidationMessage {
 
   bool get isError => type == ValidationMessageType.error;
 
-  bool get isHint => type == ValidationMessageType.warning;
+  bool get isWarning => type == ValidationMessageType.warning;
 
   bool get isInformation => type == ValidationMessageType.information;
 
@@ -107,7 +94,7 @@ class ValidationMessage {
       };
 
   @override
-  String toString() => '$indicator $message';
+  String toString() => message.isNotEmpty ? '   $indicator $message' : message;
 
   @override
   bool operator ==(Object other) {
