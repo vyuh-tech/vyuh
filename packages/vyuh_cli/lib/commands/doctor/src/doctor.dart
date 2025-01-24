@@ -1,8 +1,6 @@
 import 'package:mason_logger/mason_logger.dart';
-import 'package:vyuh_cli/commands/doctor/src/utils/doctor_validator.dart';
-
-import 'utils/user_messages.dart';
-import 'validators/validators.dart';
+import 'package:vyuh_cli/commands/doctor/src/utils/utils.dart';
+import 'package:vyuh_cli/commands/doctor/src/validators/validators.dart';
 
 class Doctor {
   final Logger _logger;

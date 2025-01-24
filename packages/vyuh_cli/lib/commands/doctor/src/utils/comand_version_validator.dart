@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:vyuh_cli/commands/doctor/src/utils/user_messages.dart';
-
-import 'doctor_validator.dart';
+import 'package:vyuh_cli/commands/doctor/src/utils/utils.dart';
 
 Future<ValidationResult> commandVersionValidator(
   DoctorValidator validator, {
