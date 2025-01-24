@@ -44,12 +44,22 @@ dart pub global run vyuh_cli:vyuh <command> <args>
 
 # Commands ✨
 
+## `vyuh doctor`
+Vyuh Doctor is a command-line tool that helps developers set up and troubleshoot their Vyuh development environment.
+- Ensure that the required software is installed
+- Diagnose issues and provide recommendations
+
+```sh
+vyuh doctor
+```
+<img width="678" alt="vyuh doctor" src="_images/vyuh_cli_doctor.png">
+
 ## `vyuh create`
 
 Create a Vyuh project in seconds based on the predefined template. Each template has a corresponding sub-command (
 e.g.,`vyuh create project`).
 
-<img width="851" alt="image" src="https://raw.githubusercontent.com/vyuh-tech/bricks/main/vyuh_cli/_images/vyuh_cli.png">
+<img width="851" alt="vyuh create project super_app" src="_images/vyuh_cli.png">
 
 ```sh
 Creates Vyuh projects, features, and CMS schemas.

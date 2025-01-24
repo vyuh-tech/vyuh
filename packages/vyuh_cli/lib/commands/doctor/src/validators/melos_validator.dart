@@ -6,7 +6,8 @@ class MelosValidator extends DoctorValidator {
   MelosValidator() : super('Melos');
 
   @override
-  String get installHelp => 'https://melos.invertase.dev/~melos-latest/getting-started';
+  String get installHelp =>
+      'https://melos.invertase.dev/~melos-latest/getting-started';
 
   @override
   Future<ValidationResult> validate() async {
