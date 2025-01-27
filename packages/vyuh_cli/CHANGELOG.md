@@ -1,3 +1,7 @@
+## 0.0.8
+
+ - Adding the doctor command to analyze system for proper usage
+
 ## 0.0.7
 
  - **FEAT**: LoggerPlugin has been removed and replaced with a Logger interface to the Telemetry Plugin instead.
