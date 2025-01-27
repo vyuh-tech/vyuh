@@ -48,8 +48,10 @@ class CacheConfig<V> {
 ///
 typedef CacheValueBuilder<T> = Future<T> Function();
 
-/// A cache implementation. It holds the cache configuration and provides methods
-/// to build, get, set, remove, and clear the cache.
+/// A generic cache implementation that manages data of type [V].
+/// Provides comprehensive cache management functionality including
+/// configuration, storage operations (get, set, remove),and cache
+/// maintenance (build, clear).
 ///
 final class Cache<V> {
   /// The cache configuration.
@@ -63,14 +65,14 @@ final class Cache<V> {
   /// Build a value for the cache.
   ///
   /// If the value is already in the cache and not expired, it will be returned.
-  /// If the value is expired, it will be deleted from the cache.
-  /// If the value is not in the cache, it will be generated and stored in the cache.
+  /// If the value is expired, it will be deleted from the cache. If the value
+  /// is not in the cache, it will be generated and stored in the cache.
   ///
-  /// If the value is not found in the cache and the generateValue function is provided,
-  /// it will be used to generate the value.
+  /// If the value is not found in the cache and the generateValue function is
+  /// provided, it will be used to generate the value.
   ///
-  /// If the value is not found in the cache and the generateValue function is not provided,
-  /// it will return null.
+  /// If the value is not found in the cache and the generateValue function is
+  /// not provided, it will return null.
   ///
   Future<V?> build(String key, {CacheValueBuilder<V>? generateValue}) async {
     try {
@@ -153,10 +155,15 @@ final class Cache<V> {
   }
 }
 
-/// A cache entry. It holds the value and the time to live for the cache entry.
-/// It also holds the creation time of the cache entry.
-/// The cache entry is considered expired if the current time is greater than
-/// the creation time plus the time to live.
+/// A cache entry that encapsulates a value with time-based expiration.
+///
+/// Each entry contains:
+/// * A value of type [V]
+/// * A time-to-live (TTL) duration
+/// * An internal creation timestamp
+///
+/// An entry is considered expired when the elapsed time since creation exceeds
+/// its TTL.
 ///
 final class CacheEntry<V> {
   /// The value of the cache entry.
