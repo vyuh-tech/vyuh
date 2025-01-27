@@ -5,9 +5,15 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
+/// A view to display details of a content plugin.
+///
 class ContentPluginDetailsView extends StatelessWidget {
+  /// The plugin to display details for.
+  ///
   final ContentPlugin plugin;
 
+  /// Creates a new content plugin detail view.
+  ///
   const ContentPluginDetailsView({super.key, required this.plugin});
 
   @override

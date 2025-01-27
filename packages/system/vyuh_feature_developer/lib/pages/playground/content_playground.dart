@@ -4,13 +4,19 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import 'widgets/widgets.dart';
 
+/// A view to display a playground for content.
+///
 final class ContentPlayground extends StatefulWidget {
+  /// Creates a new content playground view.
+  ///
   const ContentPlayground({super.key});
 
   @override
   State<ContentPlayground> createState() => ContentPlaygroundState();
 }
 
+/// The state for the content playground view.
+///
 final class ContentPlaygroundState extends State<ContentPlayground> {
   ContentBuilder? _selectedBuilder;
   TypeDescriptor<LayoutConfiguration>? _selectedLayout;

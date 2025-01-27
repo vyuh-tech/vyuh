@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ItemTile extends StatelessWidget {
+/// A widget to display a list item for an item.
+///
+final class ItemTile extends StatelessWidget {
+  /// The title of the item.
+  ///
   final String title;
+
+  /// The description of the item.
+  ///
   final String? description;
+
+  /// The callback to invoke when the item is tapped.
+  ///
   final Function()? onTap;
 
+  /// Creates a new item tile widget.
+  ///
   const ItemTile({
     super.key,
     required this.title,
@@ -38,7 +50,11 @@ class ItemTile extends StatelessWidget {
   }
 }
 
-class EmptyItemTile extends StatelessWidget {
+/// A widget to display an empty item tile.
+///
+final class EmptyItemTile extends StatelessWidget {
+  /// Creates a new empty item tile widget.
+  ///
   const EmptyItemTile({super.key});
 
   @override

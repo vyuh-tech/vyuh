@@ -14,13 +14,16 @@ bundle-all: bundle-init bundle-feature bundle-feature-sanity-schema
 # Bundle vyuh_project template
 bundle-init:
     mason bundle bricks/vyuh_project -t dart -o lib/commands/create/project
+    dart format lib/commands/create/project/vyuh_project_bundle.dart
 
 # Bundle vyuh_feature template
 bundle-feature:
     mason bundle bricks/vyuh_feature -t dart -o lib/commands/create/feature
+    dart format lib/commands/create/feature/vyuh_feature_bundle.dart
 
 # Bundle vyuh_feature_sanity_schema template
 bundle-feature-sanity-schema:
     mason bundle bricks/vyuh_feature_sanity_schema -t dart -o lib/commands/create/schema
+    dart format lib/commands/create/schema/vyuh_feature_sanity_schema_bundle.dart
 
 
