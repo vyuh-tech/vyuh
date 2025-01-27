@@ -7,8 +7,15 @@ import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 
-class RoutesList extends StatefulWidget {
+/// A widget to display a list of routes.
+///
+final class RoutesList extends StatefulWidget {
+  /// The feature descriptor to display routes for.
+  ///
   final FeatureDescriptor feature;
+
+  /// Creates a new routes list widget.
+  ///
   const RoutesList({super.key, required this.feature});
 
   @override

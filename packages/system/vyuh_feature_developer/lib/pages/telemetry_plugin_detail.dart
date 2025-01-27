@@ -3,9 +3,15 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
+/// A view to display details of a telemetry plugin.
+///
 class TelemetryPluginDetail extends StatelessWidget {
+  /// The plugin to display details for.
+  ///
   final TelemetryPlugin plugin;
 
+  /// Creates a new telemetry plugin detail view.
+  ///
   const TelemetryPluginDetail({super.key, required this.plugin});
 
   @override

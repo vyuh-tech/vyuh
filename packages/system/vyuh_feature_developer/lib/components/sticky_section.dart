@@ -2,13 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 
-class StickySection extends StatelessWidget {
+/// A widget to display a sticky section.
+///
+final class StickySection extends StatelessWidget {
+  /// The title of the sticky section.
+  ///
   final String title;
 
+  /// The sliver to display in the sticky section.
+  ///
   final Widget? sliver;
 
+  /// The color of the header.
+  ///
   final Color? headerColor;
 
+  /// Creates a new sticky section widget.
+  ///
   const StickySection(
       {super.key, required this.title, required this.sliver, this.headerColor});
 

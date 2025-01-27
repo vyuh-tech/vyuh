@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
 
+/// A widget to display a list item for a content item.
+///
 final class ContentListItem extends StatelessWidget {
+  /// The title of the content item.
+  ///
   final String title;
+
+  /// Whether the content item is selected.
+  ///
   final bool isSelected;
+
+  /// Whether the content item is special.
+  ///
   final bool isSpecial;
+
+  /// The callback to invoke when the content item is tapped.
+  ///
   final VoidCallback? onTap;
 
+  /// Creates a new content list item widget.
+  ///
   const ContentListItem({
     super.key,
     required this.title,

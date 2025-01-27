@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 
+/// Extension to build ListTile widget of Plugin instances
+///
 extension WidgetBuilder on Plugin {
+  /// Builds a ListTile widget of the plugin.
+  ///
   Widget build(BuildContext context) {
     switch (this) {
       case AnalyticsPlugin() || ContentPlugin() || TelemetryPlugin():
@@ -15,6 +19,8 @@ extension WidgetBuilder on Plugin {
     }
   }
 
+  /// Returns the icon for the plugin.
+  ///
   IconData get icon {
     switch (this) {
       case AnalyticsPlugin():

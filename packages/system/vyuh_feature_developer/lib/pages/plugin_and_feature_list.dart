@@ -4,7 +4,11 @@ import 'package:vyuh_feature_developer/components/sticky_section.dart';
 import 'package:vyuh_feature_developer/pages/feature_detail.dart';
 import 'package:vyuh_feature_developer/pages/plugin_detail.dart';
 
+/// A view to display a list of plugins and features.
+///
 class PluginAndFeatureList extends StatelessWidget {
+  /// Creates a new plugin and feature list view.
+  ///
   const PluginAndFeatureList({
     super.key,
   });
