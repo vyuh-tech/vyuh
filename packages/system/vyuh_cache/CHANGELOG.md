@@ -1,3 +1,10 @@
+## 1.4.4
+
+ - **DOCS**(vyuh_cache): Updated `description` in pubspec.yaml.
+ - **DOCS**(vyuh_cache): Updated docs for `Cache<V>`.
+ - **DOCS**(vyuh_cache): Added example.
+ - **DOCS**(vyuh_cache): Added `public_member_api_docs` for `vyuh_cache`.
+
 ## 1.4.3
 
  - **FIX**: readme updates.

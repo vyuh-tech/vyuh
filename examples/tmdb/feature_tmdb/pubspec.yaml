@@ -22,7 +22,7 @@ dependencies:
   vyuh_core: ^1.38.4
   vyuh_feature_system: ^1.37.3
   vyuh_extension_content: ^1.20.3
-  vyuh_cache: ^1.4.3
+  vyuh_cache: ^1.4.4
   photo_view: ^0.15.0
   html: ^0.15.4
 
