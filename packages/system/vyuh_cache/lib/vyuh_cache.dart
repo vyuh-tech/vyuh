@@ -48,7 +48,8 @@ class CacheConfig<V> {
 ///
 typedef CacheValueBuilder<T> = Future<T> Function();
 
-/// A cache implementation.
+/// A cache implementation. It holds the cache configuration and provides methods
+/// to build, get, set, remove, and clear the cache.
 ///
 final class Cache<V> {
   /// The cache configuration.
