@@ -1,3 +1,7 @@
+## 1.12.2
+
+ - Improving pub scores
+
 ## 1.12.1
 
  - **FIX**: readme updates.
