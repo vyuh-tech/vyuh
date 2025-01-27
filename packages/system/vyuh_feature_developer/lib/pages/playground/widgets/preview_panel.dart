@@ -5,11 +5,23 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import 'preview.dart';
 
+/// A widget to display a preview of a content item.
+///
 final class PreviewPanel extends StatelessWidget {
+  /// The content builder to preview.
+  ///
   final ContentBuilder? builder;
+
+  /// The layout to preview.
+  ///
   final TypeDescriptor<LayoutConfiguration>? layout;
+
+  /// The feature to preview.
+  ///
   final FeatureDescriptor? feature;
 
+  /// Creates a new preview panel widget.
+  ///
   const PreviewPanel({
     super.key,
     this.builder,

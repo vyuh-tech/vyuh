@@ -5,12 +5,18 @@ import 'package:vyuh_feature_developer/components/items.dart';
 import 'package:vyuh_feature_developer/components/route_list.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
+/// A widget to display a feature.
+///
 class FeatureItem extends StatelessWidget {
+  /// Creates a new feature item.
+  ///
   const FeatureItem({
     super.key,
     required this.feature,
   });
 
+  /// The feature to display.
+  ///
   final FeatureDescriptor feature;
 
   @override
@@ -57,9 +63,15 @@ class FeatureItem extends StatelessWidget {
   }
 }
 
+/// A view to display details of a feature.
+///
 class FeatureDetail extends StatelessWidget {
+  /// The feature to display details for.
+  ///
   final FeatureDescriptor feature;
 
+  /// Creates a new feature detail view.
+  ///
   const FeatureDetail({super.key, required this.feature});
 
   @override
@@ -107,12 +119,18 @@ class FeatureDetail extends StatelessWidget {
   }
 }
 
+/// A widget to display a hero card for a feature.
+///
 class FeatureHeroCard extends StatelessWidget {
+  /// Creates a new feature hero card.
+  ///
   const FeatureHeroCard({
     super.key,
     required this.feature,
   });
 
+  /// The feature to display.
+  ///
   final FeatureDescriptor feature;
 
   @override
@@ -155,7 +173,11 @@ class FeatureHeroCard extends StatelessWidget {
   }
 }
 
+/// Extension to build widget representations of ExtensionDescriptor instances
+///
 extension WidgetBuilder on ExtensionDescriptor {
+  /// Builds a widget representation of the extension descriptor.
+  ///
   Widget build(BuildContext context) {
     switch (this) {
       case ContentExtensionDescriptor():

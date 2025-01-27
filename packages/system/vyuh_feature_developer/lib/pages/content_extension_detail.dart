@@ -4,9 +4,15 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 
+/// A view to display details of a content extension.
+///
 class ContentExtensionDetail extends StatelessWidget {
+  /// The extension to display details for.
+  ///
   final ContentExtensionDescriptor extension;
 
+  /// Creates a new content extension detail view.
+  ///
   const ContentExtensionDetail({super.key, required this.extension});
 
   @override

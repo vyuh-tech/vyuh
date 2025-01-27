@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-class StandardPluginItem extends StatelessWidget {
+/// A widget to display a standard plugin item.
+///
+final class StandardPluginItem extends StatelessWidget {
+  /// The plugin to display.
+  ///
   final Plugin plugin;
 
+  /// Creates a new standard plugin item widget.
+  ///
   const StandardPluginItem({super.key, required this.plugin});
 
   @override
