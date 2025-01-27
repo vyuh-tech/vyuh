@@ -399,7 +399,7 @@ void main() {
         );
 
         await vyuh.getReady(tester);
-        expect(vyuh.router.instance.state.fullPath, equals(initialPath));
+        expect(vyuh.router.instance.state?.fullPath, equals(initialPath));
       });
 
       testWidgets('handles feature lifecycle correctly', (tester) async {
