@@ -1,5 +1,5 @@
 name: vyuh_cache
-description: A flexible caching solution for Vyuh-framework apps, offering time-based caching with pluggable storage backends to reduce API calls and boost performance.
+description: A flexible caching solution for Vyuh Framework Apps, offering time-based caching with pluggable storage backends to reduce API calls and boost performance.
 version: 1.4.3
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_cache
