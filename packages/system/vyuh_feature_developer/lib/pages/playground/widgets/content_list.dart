@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 
+/// A widget to display a list of content items.
+///
 final class ContentList extends StatelessWidget {
+  /// The title of the content list.
+  ///
   final String title;
+
+  /// The list of content items to display.
+  ///
   final List<Widget> items;
+
+  /// The widget to display when the list is empty.
+  ///
   final Widget? emptyStateWidget;
 
+  /// Creates a new content list widget.
+  ///
   const ContentList({
     super.key,
     required this.title,

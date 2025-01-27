@@ -12,6 +12,8 @@ import 'pages/feature_detail.dart';
 import 'pages/playground/content_playground.dart';
 import 'pages/plugin_and_feature_list.dart';
 
+/// routes for the developer feature
+///
 List<GoRoute> routes() {
   return [
     GoRoute(
@@ -56,7 +58,11 @@ List<GoRoute> routes() {
   ];
 }
 
+/// Extension on Plugin to show details view based on the plugin type
+///
 extension PluginDetailsView on Plugin {
+  /// Returns the details view based on the plugin type
+  ///
   Widget detailsView(BuildContext context) {
     final plugin = vyuh.plugins.firstWhere((element) => element == this);
 
