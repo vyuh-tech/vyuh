@@ -8,12 +8,70 @@ part 'uninitialized_platform.dart';
 /// used to access various aspects of the framework.
 VyuhPlatform vyuh = _UninitializedPlatform();
 
+/// Registry to manage multiple Vyuh platform instances.
+class _VyuhPlatformRegistry {
+  final _registry = <String, VyuhPlatform>{};
+
+  /// Register a platform instance with a unique ID.
+  /// Throws if a platform with the same ID already exists.
+  VyuhPlatform register(String id, VyuhPlatform platform) {
+    if (_registry.containsKey(id)) {
+      throw StateError('A VyuhPlatform with ID "$id" is already registered.');
+    }
+
+    _registry[id] = platform;
+    return platform;
+  }
+
+  /// Get a platform instance by ID.
+  /// If id is null, returns null (caller should handle default instance).
+  /// If id is provided but no platform exists, returns null.
+  VyuhPlatform? get(String? id) {
+    if (id == null) {
+      return null;
+    }
+
+    return _registry[id];
+  }
+
+  /// Remove a platform instance by ID.
+  /// Safe to call even if the platform doesn't exist.
+  void remove(String id) {
+    _registry.remove(id);
+  }
+
+  /// Check if a platform instance with the given ID exists.
+  bool has(String id) => _registry.containsKey(id);
+}
+
 /// The builder function that creates a set of features.
 typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
 
 /// The base class for the Vyuh Platform. This class is responsible for initializing the
 /// platform and managing the lifecycle of the platform.
 abstract class VyuhPlatform {
+  static final _registry = _VyuhPlatformRegistry();
+
+  /// Register a platform instance with a unique ID.
+  static VyuhPlatform register(String id, VyuhPlatform platform) {
+    assert(
+      !_registry.has(id),
+      'A VyuhPlatform with ID "$id" is already registered.',
+    );
+
+    return _registry.register(id, platform);
+  }
+
+  /// Get a platform instance by ID.
+  static VyuhPlatform? get(String? id) {
+    return _registry.get(id);
+  }
+
+  /// Remove a platform instance by ID.
+  static void remove(String id) {
+    _registry.remove(id);
+  }
+
   /// A list of features currently registered and available on the platform.
   List<FeatureDescriptor> get features;
 
@@ -36,10 +94,6 @@ abstract class VyuhPlatform {
   ///
   /// [featureName]: The name of the feature to check for readiness.
   Future<void>? featureReady(String featureName);
-
-  /// Initializes and runs the platform. This method is internally managed and should
-  /// not be called directly.
-  Future<void> run();
 
   /// Initializes the registered plugins for the platform. This method is internally
   /// managed and should not be called directly.
@@ -70,6 +124,29 @@ abstract class VyuhPlatform {
 
   /// Gets the ExtensionBuilder given an extensionType
   ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>();
+
+  /// Returns an instance of the VyuhPlatform that matches the given [id].
+  /// This style of invoking the vyuh platform is useful when you have multiple
+  /// [VyuhWidget] instances with different ids.
+  ///
+  /// If [id] is null, it returns the default instance of the VyuhPlatform.
+  ///
+  /// Otherwise, it returns the instance of the VyuhPlatform that matches the
+  /// given [id]. If no instance is found, throws a StateError.
+  VyuhPlatform call(String? id) {
+    if (id == null) {
+      return this;
+    }
+
+    final platform = VyuhPlatform.get(id);
+    if (platform == null) {
+      throw StateError(
+        'No VyuhPlatform found with ID "$id". Make sure to create a VyuhWidget with this ID.',
+      );
+    }
+
+    return platform;
+  }
 }
 
 /// Provides convenient accessors for named plugins within the Vyuh platform.

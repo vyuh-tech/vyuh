@@ -1,11 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart' as flutter;
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:vyuh_core/vyuh_core.dart';
 
-import 'framework_init_widget.dart';
 import 'platform_init_tracker.dart';
 
 class _PluginInstanceCache {
@@ -91,34 +89,31 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  Future<void> run() async {
+  Future<void> initPlugins(Trace parentTrace) {
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
-    flutter.runApp(FrameworkInitWidget(platform: this));
-  }
+    return telemetry.trace(
+        name: 'Plugins',
+        operation: 'Init',
+        parentTrace: parentTrace,
+        fn: (trace) async {
+          // Run a cleanup first
+          final disposeFns = plugins.map((e) => e.dispose());
+          await Future.wait(disposeFns, eagerError: true);
 
-  @override
-  Future<void> initPlugins(Trace parentTrace) => telemetry.trace(
-      name: 'Plugins',
-      operation: 'Init',
-      parentTrace: parentTrace,
-      fn: (trace) async {
-        // Run a cleanup first
-        final disposeFns = plugins.map((e) => e.dispose());
-        await Future.wait(disposeFns, eagerError: true);
+          // Check
+          final initFns = plugins.map((e) {
+            return telemetry.trace<void>(
+              name: 'Plugin: ${e.title}',
+              operation: 'Init',
+              parentTrace: trace,
+              fn: (_) => e.init(),
+            );
+          });
 
-        // Check
-        final initFns = plugins.map((e) {
-          return telemetry.trace<void>(
-            name: 'Plugin: ${e.title}',
-            operation: 'Init',
-            parentTrace: trace,
-            fn: (_) => e.init(),
-          );
+          await Future.wait(initFns, eagerError: true);
         });
-
-        await Future.wait(initFns, eagerError: true);
-      });
+  }
 
   @override
   Future<void> initFeatures(Trace parentTrace) async {

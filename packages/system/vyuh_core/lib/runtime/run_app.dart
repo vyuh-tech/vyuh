@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as flutter;
+import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-
-import 'platform/default_platform.dart';
 
 /// The main entry point to kick off the Vyuh Application.
 /// This function should be called from the main function of the application.
@@ -16,15 +15,15 @@ void runApp({
   PluginDescriptor? plugins,
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
-}) async {
+}) {
   WidgetsFlutterBinding.ensureInitialized();
 
-  vyuh = DefaultVyuhPlatform(
-    featuresBuilder: features,
-    pluginDescriptor: plugins ?? PluginDescriptor.defaultPlugins,
-    widgetBuilder: platformWidgetBuilder ?? defaultPlatformWidgetBuilder,
-    initialLocation: initialLocation,
+  flutter.runApp(
+    VyuhWidget.mainApp(
+      features: features,
+      plugins: plugins,
+      widgetBuilder: platformWidgetBuilder,
+      initialLocation: initialLocation,
+    ),
   );
-
-  vyuh.run();
 }

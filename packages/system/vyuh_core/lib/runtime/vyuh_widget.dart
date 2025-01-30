@@ -20,20 +20,39 @@ class VyuhWidget extends StatefulWidget {
   /// Optional. The initial location to open in the app.
   final String? initialLocation;
 
+  /// Unique identifier for this VyuhWidget instance.
+  /// This is required to support multiple VyuhWidget instances in the same app.
+  /// When using runApp(), this is automatically set to [VyuhWidget.mainAppId].
+  final String id;
+
+  /// The ID used for the main Vyuh app when using runApp().
+  static const mainAppId = '_vyuh_main_app_';
+
   const VyuhWidget({
     super.key,
+    required this.id,
     required this.features,
     this.plugins,
     this.widgetBuilder,
     this.initialLocation,
   });
 
+  /// Creates a VyuhWidget instance for use as the main app.
+  /// This is used internally by runApp() and should not be used directly.
+  const VyuhWidget.mainApp({
+    super.key,
+    required this.features,
+    this.plugins,
+    this.widgetBuilder,
+    this.initialLocation,
+  }) : id = mainAppId;
+
   @override
   State<VyuhWidget> createState() => _VyuhWidgetState();
 }
 
 class _VyuhWidgetState extends State<VyuhWidget> {
-  late VyuhPlatform _platform;
+  late final VyuhPlatform _platform;
 
   @override
   void initState() {
@@ -42,6 +61,7 @@ class _VyuhWidgetState extends State<VyuhWidget> {
   }
 
   void _initVyuh() {
+    // Create platform instance
     _platform = DefaultVyuhPlatform(
       featuresBuilder: widget.features,
       pluginDescriptor: widget.plugins ?? PluginDescriptor.defaultPlugins,
@@ -49,7 +69,20 @@ class _VyuhWidgetState extends State<VyuhWidget> {
       initialLocation: widget.initialLocation,
     );
 
-    unawaited(_platform.run());
+    // Register platform with its ID
+    VyuhPlatform.register(widget.id, _platform);
+
+    if (widget.id == VyuhWidget.mainAppId) {
+      // Set default instance, which is applicable when running in App mode
+      vyuh = _platform;
+    }
+  }
+
+  @override
+  void dispose() {
+    // Unregister platform
+    VyuhPlatform.remove(widget.id);
+    super.dispose();
   }
 
   @override

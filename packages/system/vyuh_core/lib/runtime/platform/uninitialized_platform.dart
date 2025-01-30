@@ -35,18 +35,20 @@ final class _UninitializedPlatform extends VyuhPlatform {
   GlobalKey<NavigatorState> get rootNavigatorKey => throw _error();
 
   @override
-  Future<void> run() {
-    throw _error();
-  }
-
-  @override
   SystemInitTracker get tracker => throw _error();
 
   @override
   PlatformWidgetBuilder get widgetBuilder => throw _error();
+
+  @override
+  VyuhPlatform call(String? id) => throw _error();
 }
 
 _error() =>
     StateError('''You are using an uninitialized instance of the VyuhPlatform. 
-    Please call runApp() in vyuh_core to get a correct instance.
+    You have to initialize the platform before using it. Please call 
+    - runApp() to create a Vyuh App OR
+    - create a VyuhWidget inside your Widget tree
+    
+    Either of these approaches will retrieve the correct instance.
     ''');
