@@ -1,19 +1,24 @@
-part of '../run_app.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
 /// Sets up the root view that loads the entire app. It waits for the platform to init and then loads the main App. During
 /// the load, a splash screen is shown, which can be customized.
-class _FrameworkInitView extends StatefulWidget {
-  const _FrameworkInitView();
+class FrameworkInitWidget extends StatefulWidget {
+  final VyuhPlatform platform;
+
+  const FrameworkInitWidget({super.key, required this.platform});
 
   @override
-  State<_FrameworkInitView> createState() => _FrameworkInitViewState();
+  State<FrameworkInitWidget> createState() => _FrameworkInitWidgetState();
 }
 
-class _FrameworkInitViewState extends State<_FrameworkInitView> {
+class _FrameworkInitWidgetState extends State<FrameworkInitWidget> {
   @override
   void initState() {
     super.initState();
-    vyuh.tracker.init();
+    widget.platform.tracker.init();
   }
 
   @override
@@ -21,20 +26,21 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
     return Observer(
       name: 'Framework Init',
       builder: (context) {
-        final status = vyuh.tracker.status;
+        final status = widget.platform.tracker.status;
 
         Widget? loadedApp;
         if (status == FutureStatus.fulfilled) {
-          loadedApp = vyuh.widgetBuilder.appBuilder(vyuh);
+          loadedApp = widget.platform.widgetBuilder.appBuilder(vyuh);
         }
 
         final child = status == null || status == FutureStatus.pending
-            ? vyuh.widgetBuilder.appLoader(context)
-            : vyuh.widgetBuilder.routeErrorView(
+            ? widget.platform.widgetBuilder.appLoader(context)
+            : widget.platform.widgetBuilder.routeErrorView(
                 context,
                 title: 'Failed to load app',
-                error: vyuh.tracker.error,
+                error: widget.platform.tracker.error,
               );
+
         final pendingApp = MaterialApp(home: child);
 
         return AnimatedSwitcher(

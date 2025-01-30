@@ -1,4 +1,12 @@
-part of '../run_app.dart';
+import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart' as flutter;
+import 'package:flutter/widgets.dart';
+import 'package:go_router/go_router.dart' as g;
+import 'package:vyuh_core/vyuh_core.dart';
+
+import 'framework_init_widget.dart';
+import 'platform_init_tracker.dart';
 
 class _PluginInstanceCache {
   final Set<Plugin> _plugins = {};
@@ -31,7 +39,7 @@ class _PluginInstanceCache {
   List<Plugin> get items => List.unmodifiable(_plugins);
 }
 
-final class _DefaultVyuhPlatform extends VyuhPlatform {
+final class DefaultVyuhPlatform extends VyuhPlatform {
   final _PluginInstanceCache _plugins = _PluginInstanceCache();
 
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
@@ -56,7 +64,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   List<FeatureDescriptor> _features = [];
 
   @override
-  List<vc.FeatureDescriptor> get features => _features;
+  List<FeatureDescriptor> get features => _features;
 
   final Map<String, Future<void>> _readyFeatures = {};
 
@@ -71,7 +79,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   @override
   final PlatformWidgetBuilder widgetBuilder;
 
-  _DefaultVyuhPlatform({
+  DefaultVyuhPlatform({
     required FeaturesBuilder featuresBuilder,
     required PluginDescriptor pluginDescriptor,
     required this.widgetBuilder,
@@ -79,24 +87,18 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }) : _featuresBuilder = featuresBuilder {
     _plugins.addAll(pluginDescriptor.plugins);
 
-    _tracker = _PlatformInitTracker(this);
+    _tracker = PlatformInitTracker(this);
   }
 
   @override
   Future<void> run() async {
-    final preLoadedPlugins = plugins.whereType<vc.PreloadedPlugin>();
-
-    for (final plugin in preLoadedPlugins) {
-      await plugin.init();
-    }
-
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
-    flutter.runApp(const _FrameworkInitView());
+    flutter.runApp(FrameworkInitWidget(platform: this));
   }
 
   @override
-  Future<void> initPlugins(vc.Trace parentTrace) => telemetry.trace(
+  Future<void> initPlugins(Trace parentTrace) => telemetry.trace(
       name: 'Plugins',
       operation: 'Init',
       parentTrace: parentTrace,
@@ -119,7 +121,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       });
 
   @override
-  Future<void> initFeatures(vc.Trace parentTrace) async {
+  Future<void> initFeatures(Trace parentTrace) async {
     // Run a cleanup first
     final disposeFns =
         _features.where((e) => e.dispose != null).map((e) => e.dispose!());
@@ -186,7 +188,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   Future<List<g.RouteBase>> _initFeature(
-      FeatureDescriptor feature, vc.Trace? parentTrace) async {
+      FeatureDescriptor feature, Trace? parentTrace) async {
     await feature.init?.call();
 
     if (feature.routes == null) {
@@ -271,7 +273,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
-  T? getPlugin<T extends vc.Plugin>() => _plugins.getPlugin<T>();
+  T? getPlugin<T extends Plugin>() => _plugins.getPlugin<T>();
 
   @override
   ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>() {

@@ -1,6 +1,7 @@
-part of '../run_app.dart';
+import 'package:mobx/mobx.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
-final class _PlatformInitTracker implements SystemInitTracker {
+final class PlatformInitTracker implements SystemInitTracker {
   @override
   final VyuhPlatform platform;
 
@@ -15,24 +16,36 @@ final class _PlatformInitTracker implements SystemInitTracker {
   @override
   dynamic get error => _loader.value?.error;
 
-  _PlatformInitTracker(this.platform);
+  bool _isFirstRun = true;
+
+  PlatformInitTracker(this.platform);
 
   @override
-  Future<void> init([InitState initialState = InitState.notStarted]) {
-    return runInAction(() {
+  Future<void> init([InitState initialState = InitState.notStarted]) async {
+    if (_isFirstRun) {
+      final preLoadedPlugins = platform.plugins.whereType<PreloadedPlugin>();
+
+      for (final plugin in preLoadedPlugins) {
+        await plugin.init();
+      }
+
+      _isFirstRun = false;
+    }
+
+    await runInAction(() {
       /// The loader is being created with a Future<void> first just to set the value.
       /// This happens very early in the bootstrapping process.
       /// There could be plugins that can depend on the platform getting
       /// ready before they do their work.
       _loader.value = ObservableFuture(Future.value()).then((_) async {
-        final trace = await vyuh.telemetry.startTrace('Platform', 'Init');
+        final trace = await platform.telemetry.startTrace('Platform', 'Init');
 
         try {
           await _initLoop(initialState, trace);
 
-          vyuh.event.emit(SystemReadyEvent());
+          platform.event.emit(SystemReadyEvent());
         } catch (exception, trace) {
-          vyuh.telemetry.reportError(exception, stackTrace: trace);
+          platform.telemetry.reportError(exception, stackTrace: trace);
 
           runInAction(() => currentState.value = InitState.error);
 

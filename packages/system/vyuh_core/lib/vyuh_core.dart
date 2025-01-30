@@ -104,3 +104,4 @@ export 'runtime/platform/events.dart';
 export 'runtime/platform/vyuh_platform.dart';
 export 'runtime/platform_widget_builder.dart';
 export 'runtime/run_app.dart';
+export 'runtime/vyuh_widget.dart';
