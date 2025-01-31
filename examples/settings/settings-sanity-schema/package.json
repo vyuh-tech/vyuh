@@ -7,7 +7,7 @@
     "@vyuh/sanity-schema-system": "^1.34.0",
     "react": "^18.3.1",
     "react-icons": "^5.4.0",
-    "sanity": "^3.71.2"
+    "sanity": "^3.72.1"
   },
   "devDependencies": {
     "@types/react": "^18.3.18",

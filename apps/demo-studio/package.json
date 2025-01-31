@@ -27,7 +27,7 @@
     "puzzles-sanity-schema": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.71.2",
+    "sanity": "^3.72.1",
     "settings-sanity-schema": "workspace:*",
     "styled-components": "^6.1.14",
     "tmdb-sanity-schema": "workspace:*",
