@@ -6,8 +6,13 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   final Map<Type, Map<String, TypeDescriptor>> _typeConverterMap = {};
   final Map<String, ContentBuilder> _contentBuilderMap = {};
 
-  ContentExtensionBuilder()
-      : super(
+  final ContentPlugin Function() getPlugin;
+
+  static ContentPlugin _defaultContentPlugin() => vyuh.content;
+
+  ContentExtensionBuilder({
+    this.getPlugin = _defaultContentPlugin,
+  }) : super(
           extensionType: ContentExtensionDescriptor,
           title: 'Content Extension Builder',
         );
@@ -27,8 +32,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   @override
   Future<void> onInit(List<ExtensionDescriptor> extensions) async {
     // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
-    final contentPlugin = vyuh.content;
-    contentPlugin.attach(this);
+    final plugin = getPlugin();
+    plugin.attach(this);
 
     _build(extensions);
   }
