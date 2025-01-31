@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
 
 /// The base type for all extension descriptors.
 /// An ExtensionDescriptor provides configurability for an extension.
@@ -42,6 +43,8 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
 
   String? _sourceFeature;
 
+  late final VyuhPlatform platform;
+
   /// The name of the feature which this extension belongs to.
   /// This is set by the bootstrapping process of Vyuh.
   String? get sourceFeature => _sourceFeature;
@@ -75,12 +78,14 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
 
   /// Initializes the extension.
   @nonVirtual
-  Future<void> init(List<ExtensionDescriptor> extensions) async {
+  Future<void> init(
+      List<ExtensionDescriptor> extensions, VyuhPlatform platform) async {
     if (_isInitialized) {
       throw StateError('Extension $title is already initialized');
     }
 
     try {
+      this.platform = platform;
       await onInit(extensions.whereType<T>().toList());
       _isInitialized = true;
       _isDisposed = false;

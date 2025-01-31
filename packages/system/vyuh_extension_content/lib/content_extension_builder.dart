@@ -27,7 +27,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   @override
   Future<void> onInit(List<ExtensionDescriptor> extensions) async {
     // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
-    final contentPlugin = vyuh.content;
+    final contentPlugin = platform.content;
     contentPlugin.attach(this);
 
     _build(extensions);

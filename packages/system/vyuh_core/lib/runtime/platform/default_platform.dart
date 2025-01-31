@@ -268,8 +268,8 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
       await telemetry.trace(
         name: 'Extension: ${builder.title}',
         operation: 'Init',
-        fn: (_) =>
-            builder.init(extensions[entry.key] ?? <ExtensionDescriptor>[]),
+        fn: (_) => builder.init(
+            extensions[entry.key] ?? <ExtensionDescriptor>[], this),
       );
     }
   }
