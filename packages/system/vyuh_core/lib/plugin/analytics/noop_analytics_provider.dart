@@ -18,7 +18,7 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   Future<void> dispose() => Future.value();
 
   @override
-  Future<void> init() => Future.value();
+  Future<void> init(_) => Future.value();
 
   @override
   Future<void> reportEvent(String name, {Map<String, dynamic>? params}) async {}

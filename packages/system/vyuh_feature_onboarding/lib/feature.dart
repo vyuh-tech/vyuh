@@ -13,5 +13,5 @@ final feature = FeatureDescriptor(
       contentBuilders: [OnboardingContentBuilder()],
     )
   ],
-  routes: () => [],
+  routes: (_) => [],
 );

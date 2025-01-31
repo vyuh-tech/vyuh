@@ -41,14 +41,14 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (platform) async {
                 events.add('feature init');
 
-                vyuh.event.once<SystemReadyEvent>((event) {
+                platform.event.once<SystemReadyEvent>((event) {
                   events.add('platform ready');
                 });
               },
-              routes: () {
+              routes: (_) {
                 events.add('routes init');
                 return [];
               },

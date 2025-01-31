@@ -15,7 +15,7 @@ class MockContentProvider extends Mock implements ContentProvider {
   }
 
   @override
-  Future<void> init() async {}
+  Future<void> init(_) async {}
 
   @override
   Future<void> dispose() async {}

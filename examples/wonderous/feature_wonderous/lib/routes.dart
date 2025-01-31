@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide RouteBase;
 
-Future<List<RouteBase>> routes() async {
+Future<List<RouteBase>> routes(platform) async {
   return [
     CMSRoute(path: '/wonderous'),
     GoRoute(
@@ -41,7 +41,7 @@ Future<List<RouteBase>> routes() async {
               appBar: AppBar(
                 actions: [
                   IconButton(
-                    onPressed: () => vyuh.router.go('/wonderous'),
+                    onPressed: () => platform.router.go('/wonderous'),
                     icon: const Icon(Icons.home),
                   ),
                 ],

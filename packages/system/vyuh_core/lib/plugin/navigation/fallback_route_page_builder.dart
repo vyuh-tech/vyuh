@@ -9,7 +9,7 @@ Page<dynamic> fallbackRoutePageBuilder(
   return MaterialPage(
     child: _FallbackRouteNotifier(
       path: state.matchedLocation,
-      child: vyuh.content
+      child: context.vyuh.content
           .buildRoute(context, url: Uri.parse(state.matchedLocation)),
     ),
   );

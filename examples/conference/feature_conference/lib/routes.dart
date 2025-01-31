@@ -10,7 +10,7 @@ import 'package:feature_conference/pages/track_detail_page.dart';
 import 'package:feature_conference/pages/tracks_page.dart';
 import 'package:go_router/go_router.dart';
 
-Future<List<RouteBase>> routes() async {
+Future<List<RouteBase>> routes(_) async {
   final sharedRoutes = [
     GoRoute(
       path: 'sessions/:sessionId',

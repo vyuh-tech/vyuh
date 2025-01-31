@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart' as go;
 import 'package:vyuh_core/runtime/cms_route.dart';
 
-List<go.GoRoute> routes() {
+List<go.GoRoute> routes(_) {
   return [
     FoodPath.menu,
     FoodPath.menuItem,

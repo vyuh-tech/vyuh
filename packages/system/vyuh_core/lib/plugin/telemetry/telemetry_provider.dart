@@ -16,7 +16,7 @@ abstract interface class TelemetryProvider {
   String get description;
 
   /// Initializes the provider.
-  Future<void> init();
+  Future<void> init(VyuhPlatform platform);
 
   /// Disposes the provider.
   Future<void> dispose();

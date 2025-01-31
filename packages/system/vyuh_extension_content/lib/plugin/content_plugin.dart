@@ -128,8 +128,10 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   @override
-  Future<void> init() {
-    return provider.init();
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
+    return provider.init(platform);
   }
 
   @override

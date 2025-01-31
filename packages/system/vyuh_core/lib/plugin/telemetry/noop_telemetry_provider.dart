@@ -43,7 +43,7 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
   Future<void> dispose() => Future.value();
 
   @override
-  Future<void> init() => Future.value();
+  Future<void> init(VyuhPlatform platform) => Future.value();
 
   @override
   Future<void> reportError(exception,

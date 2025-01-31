@@ -1,14 +1,28 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
 
 abstract class Plugin {
   final String name;
   final String title;
 
+  late final VyuhPlatform _platform;
+  VyuhPlatform get platform => _platform;
+
+  bool _platformInitialized = false;
+
   Plugin({required this.name, required this.title});
 
-  Future<void> init();
+  @mustCallSuper
+  Future<void> init(VyuhPlatform platform) async {
+    if (_platformInitialized) {
+      return;
+    }
+
+    _platform = platform;
+    _platformInitialized = true;
+  }
 
   Future<void> dispose();
 }
@@ -31,7 +45,9 @@ mixin InitOncePlugin on Plugin {
 
   @override
   @nonVirtual
-  Future<void> init() async {
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
     if (_initCompleter == null) {
       _initCompleter = Completer();
 

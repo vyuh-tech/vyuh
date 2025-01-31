@@ -54,7 +54,7 @@ Page<dynamic> defaultRoutePageBuilder(
 
   if (transitionsBuilder == null) {
     return MaterialPage(
-      child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
+      child: context.vyuh.content.buildRoute(context, url: Uri.parse(path)),
       name: state.matchedLocation,
       key: state.pageKey,
     );
@@ -62,7 +62,7 @@ Page<dynamic> defaultRoutePageBuilder(
 
   return CustomTransitionPage<dynamic>(
     key: state.pageKey,
-    child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
+    child: context.vyuh.content.buildRoute(context, url: Uri.parse(path)),
     transitionsBuilder: transitionsBuilder,
     transitionDuration: transitionDuration ??
         const Duration(milliseconds: 300), // Increase the duration here

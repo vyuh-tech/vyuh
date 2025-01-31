@@ -11,7 +11,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 final _homeKey = GlobalKey<NavigatorState>();
 final _searchKey = GlobalKey<NavigatorState>();
 
-List<go.RouteBase> routes() {
+List<go.RouteBase> routes(VyuhPlatform platform) {
   return [
     StatefulShellRoute.indexedStack(
       branches: [
@@ -67,7 +67,7 @@ List<go.RouteBase> routes() {
             title: const Text('Unsplash'),
             actions: [
               IconButton(
-                  onPressed: () => vyuh.router.go('/chakra'),
+                  onPressed: () => platform.router.go('/chakra'),
                   icon: const Icon(Icons.home))
             ],
           ),

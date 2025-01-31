@@ -24,7 +24,7 @@ final class NoOpContentPlugin extends ContentPlugin {
   @override
   Widget buildContent<T extends ContentItem>(BuildContext context, T content,
       {LayoutConfiguration<T>? layout}) {
-    return vyuh.widgetBuilder.errorView(
+    return platform.widgetBuilder.errorView(
       context,
       title: messages['title']!(''),
       error: messages['error']!(content.schemaType),
@@ -37,7 +37,7 @@ final class NoOpContentPlugin extends ContentPlugin {
       if (url != null) 'Url: $url',
       if (routeId != null) 'RouteId: $routeId',
     ].join('');
-    return vyuh.widgetBuilder.routeErrorView(
+    return platform.widgetBuilder.routeErrorView(
       context,
       title: messages['title']!(''),
       error: messages['error']!(routeDetail),
@@ -46,9 +46,6 @@ final class NoOpContentPlugin extends ContentPlugin {
 
   @override
   Future<void> dispose() async {}
-
-  @override
-  Future<void> init() async {}
 
   @override
   bool isRegistered<T>(String schemaType) {

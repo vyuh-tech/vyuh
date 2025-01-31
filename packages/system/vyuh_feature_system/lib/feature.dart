@@ -22,18 +22,18 @@ final feature = FeatureDescriptor(
   title: 'System',
   description: 'The core building blocks of the framework',
   icon: Icons.hub,
-  init: () async {
-    vyuh.di.register(ThemeService());
-    vyuh.di.register(BreakpointService());
+  init: (platform) async {
+    platform.di.register(ThemeService());
+    platform.di.register(BreakpointService());
   },
-  routes: () => [
+  routes: (platform) => [
     GoRoute(
       path: '/__system_error__',
       pageBuilder: (context, state) {
         final exception = state.extra as (dynamic, StackTrace);
 
         return MaterialPage(
-          child: vyuh.widgetBuilder.routeErrorView(
+          child: platform.widgetBuilder.routeErrorView(
             context,
             title: 'System error',
             error: exception.$1.toString(),
@@ -134,8 +134,8 @@ final feature = FeatureDescriptor(
           blocks: [
             BlockItemDescriptor(
               type: Unknown.typeDescriptor,
-              builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as Unknown),
+              builder: (context, content) => context.vyuh.content
+                  .buildContent(context, content as Unknown),
             ),
             BlockItemDescriptor(
               type: TypeDescriptor(
@@ -149,17 +149,17 @@ final feature = FeatureDescriptor(
             BlockItemDescriptor(
               type: Card.typeDescriptor,
               builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as Card),
+                  context.vyuh.content.buildContent(context, content as Card),
             ),
             BlockItemDescriptor(
               type: Group.typeDescriptor,
               builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as Group),
+                  context.vyuh.content.buildContent(context, content as Group),
             ),
             BlockItemDescriptor(
               type: Divider.typeDescriptor,
-              builder: (context, content) =>
-                  vyuh.content.buildContent(context, content as Divider),
+              builder: (context, content) => context.vyuh.content
+                  .buildContent(context, content as Divider),
             ),
           ],
         ),

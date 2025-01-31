@@ -18,7 +18,7 @@ final feature = FeatureDescriptor(
   description:
       'Miscellaneous feature showing all capabilities of the Vyuh Framework.',
   icon: Icons.miscellaneous_services_outlined,
-  routes: () async {
+  routes: (_) async {
     return [
       CMSRoute(
         path: '/misc',

@@ -15,7 +15,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () async => [],
+            routes: (_) async => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [

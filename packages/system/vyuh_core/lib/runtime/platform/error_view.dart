@@ -92,7 +92,7 @@ class _ErrorViewScaffold extends StatelessWidget {
                         style: theme.textTheme.bodyMedium
                             ?.copyWith(color: textColor)),
                     onPressed: () {
-                      vyuh.tracker.init();
+                      context.vyuh.tracker.init();
                     }),
               const PoweredByWidget(),
             ],

@@ -44,14 +44,14 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       routingConfig: _routingConfig,
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: kDebugMode,
-      observers: vyuh.analytics.observers,
-      errorBuilder: (context, state) => vyuh.widgetBuilder.routeErrorView(
+      observers: platform.analytics.observers,
+      errorBuilder: (context, state) => platform.widgetBuilder.routeErrorView(
         context,
         title: 'Failed to load route',
         subtitle: state.matchedLocation,
         error: state.error,
         onRetry: () {
-          vyuh.tracker.init(vyuh.tracker.currentState.value);
+          platform.tracker.init(platform.tracker.currentState.value);
         },
       ),
     );
@@ -85,7 +85,9 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   }
 
   @override
-  Future<void> init() {
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
     return Future.value();
   }
 

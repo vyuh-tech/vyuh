@@ -35,7 +35,7 @@ class _RoutesListState extends State<RoutesList> {
   // The return-type is necessary here otherwise Dart will treat this as
   // as Future<dynamic> and cause a CastException
   Future<List<_PathInfo>> _fetchRoutes() async {
-    final routes = await widget.feature.routes?.call();
+    final routes = await widget.feature.routes?.call(context.vyuh);
 
     final List<_PathInfo> paths = [];
     if (routes != null) {

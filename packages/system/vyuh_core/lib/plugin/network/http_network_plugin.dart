@@ -48,10 +48,12 @@ final class HttpNetworkPlugin extends NetworkPlugin {
   }
 
   @override
-  Future<void> init() async {
+  Future<void> init(VyuhPlatform platform) async {
     if (_initialized) {
       return;
     }
+
+    await super.init(platform);
 
     _client = Client();
     _initialized = true;

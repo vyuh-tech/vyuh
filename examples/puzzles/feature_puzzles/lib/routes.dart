@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart' as go;
 import 'package:vyuh_core/vyuh_core.dart' hide RouteBase;
 
-Future<List<go.RouteBase>> routes() async {
+Future<List<go.RouteBase>> routes(_) async {
   return [
     CMSRoute(path: PuzzlesPath.puzzles),
     CMSRoute(

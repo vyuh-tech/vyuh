@@ -8,9 +8,9 @@ final feature = FeatureDescriptor(
   name: 'root',
   title: 'Vyuh Root Feature',
   description: 'The root feature for the Vyuh Demo app',
-  init: () async {
-    vyuh.event.once<SystemReadyEvent>((event) {
-      final themeService = vyuh.di.get<ThemeService>();
+  init: (platform) async {
+    platform.event.once<SystemReadyEvent>((event) {
+      final themeService = platform.di.get<ThemeService>();
       themeService.setThemes({
         ThemeMode.light: DesignSystem.lightTheme,
         ThemeMode.dark: DesignSystem.darkTheme,
@@ -29,7 +29,7 @@ final feature = FeatureDescriptor(
       // );
     });
   },
-  routes: () => [
+  routes: (_) => [
     GoRoute(path: '/chakra', pageBuilder: defaultRoutePageBuilder),
   ],
 );

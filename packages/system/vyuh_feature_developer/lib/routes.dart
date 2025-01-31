@@ -14,7 +14,7 @@ import 'pages/plugin_and_feature_list.dart';
 
 /// routes for the developer feature
 ///
-List<GoRoute> routes() {
+List<GoRoute> routes(_) {
   return [
     GoRoute(
         path: '/developer',
@@ -37,13 +37,13 @@ List<GoRoute> routes() {
           GoRoute(
             path: 'features/:name',
             builder: (context, state) => FeatureDetail(
-                feature: vyuh.features.firstWhere(
+                feature: context.vyuh.features.firstWhere(
                     (element) => element.name == state.pathParameters['name'])),
           ),
           GoRoute(
             path: 'plugins/:name',
             builder: (context, state) {
-              final plugin = vyuh.plugins.firstWhere(
+              final plugin = context.vyuh.plugins.firstWhere(
                   (element) => element.name == state.pathParameters['name']);
 
               return plugin.detailsView(context);
@@ -64,7 +64,8 @@ extension PluginDetailsView on Plugin {
   /// Returns the details view based on the plugin type
   ///
   Widget detailsView(BuildContext context) {
-    final plugin = vyuh.plugins.firstWhere((element) => element == this);
+    final plugin =
+        context.vyuh.plugins.firstWhere((element) => element == this);
 
     switch (this) {
       case AnalyticsPlugin():

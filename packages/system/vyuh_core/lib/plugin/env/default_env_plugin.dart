@@ -1,5 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:vyuh_core/plugin/env/env_plugin.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
 final class DefaultEnvPlugin extends EnvPlugin {
   final String fileName;
@@ -9,7 +9,9 @@ final class DefaultEnvPlugin extends EnvPlugin {
       : super(name: 'vyuh.env.default', title: 'Default Environment Plugin');
 
   @override
-  Future<void> init() async {
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
     await dotenv.load(fileName: fileName, mergeWith: defaults);
   }
 

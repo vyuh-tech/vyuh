@@ -4,11 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:vyuh_core/vyuh_core.dart';
 
-/// A function that returns a void Future.
-typedef VoidFutureFunction = Future<void> Function();
-
 /// A function that returns a list of routes.
-typedef RouteBuilderFunction = FutureOr<List<g.RouteBase>?> Function();
+typedef RouteBuilderFunction = FutureOr<List<g.RouteBase>?> Function(
+    VyuhPlatform platform);
 
 /// The essential descriptor for a feature. A feature descriptor provides
 /// the necessary information to register a feature within the framework.
@@ -26,10 +24,10 @@ final class FeatureDescriptor {
   final IconData? icon;
 
   /// The function to initialize the feature.
-  final VoidFutureFunction? init;
+  final Future<void> Function(VyuhPlatform)? init;
 
   /// The function to dispose the feature.
-  final VoidFutureFunction? dispose;
+  final Future<void> Function()? dispose;
 
   /// The list of extensions for the feature.
   final List<ExtensionDescriptor>? extensions;
@@ -66,14 +64,15 @@ final class FeatureDescriptor {
   }
 }
 
-FutureOr<T?> Function() _runOnce<T>(FutureOr<T?> Function() fn) {
+FutureOr<T?> Function(VyuhPlatform) _runOnce<T>(
+    FutureOr<T?> Function(VyuhPlatform) fn) {
   var executed = false;
   T? result;
 
-  return () async {
+  return (VyuhPlatform platform) async {
     // This check is needed to reset the executed flag
     // when the feature is reinitialized
-    if (vyuh.tracker.currentState.value != InitState.ready) {
+    if (platform.tracker.currentState.value != InitState.ready) {
       executed = false;
     }
 
@@ -81,7 +80,7 @@ FutureOr<T?> Function() _runOnce<T>(FutureOr<T?> Function() fn) {
       return result;
     }
 
-    result = await fn();
+    result = await fn(platform);
 
     // Mark as executed only upon successful completion
     executed = true;

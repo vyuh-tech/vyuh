@@ -49,8 +49,10 @@ final class SanityContentProvider extends ContentProvider {
   String schemaType(Map<String, dynamic> json) => fieldValue('type', json);
 
   @override
-  Future<void> init() async {
-    _client.setHttpClient(vyuh.network);
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
+    _client.setHttpClient(platform.network);
   }
 
   @override
@@ -102,15 +104,15 @@ final class SanityContentProvider extends ContentProvider {
 
   Future<SanityQueryResponse?> _runQuery(String query,
       [Map<String, String>? queryParams]) async {
-    vyuh.log.debug('Running query: $query');
-    vyuh.log.debug('with params: $queryParams');
+    platform.log.debug('Running query: $query');
+    platform.log.debug('with params: $queryParams');
 
     final url = _client.urlBuilder.queryUrl(query, params: queryParams);
     final response = await _cache.build(url.toString(),
         generateValue: () => _client.fetch(query, params: queryParams));
 
     if (response != null) {
-      vyuh.log.debug(
+      platform.log.debug(
           'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms');
     }
 

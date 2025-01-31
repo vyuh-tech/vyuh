@@ -8,11 +8,11 @@ final feature = FeatureDescriptor(
   title: 'Unsplash',
   description: 'View photos, collections and users on Unsplash',
   icon: Icons.photo_camera,
-  init: () async {
-    final accessKey = vyuh.env.get('UNSPLASH_ACCESS_KEY');
-    final secretKey = vyuh.env.get('UNSPLASH_SECRET_KEY');
+  init: (platform) async {
+    final accessKey = platform.env.get('UNSPLASH_ACCESS_KEY');
+    final secretKey = platform.env.get('UNSPLASH_SECRET_KEY');
 
-    vyuh.di.register(
+    platform.di.register(
       UnsplashStore(
         accessKey: accessKey,
         secretKey: secretKey,

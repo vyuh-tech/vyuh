@@ -10,11 +10,18 @@ abstract class ContentProvider {
     required this.title,
   });
 
+  late final VyuhPlatform _platform;
+  VyuhPlatform get platform => _platform;
+
   String fieldValue(String key, Map<String, dynamic> json);
 
   String schemaType(Map<String, dynamic> json);
 
-  Future<void> init();
+  @mustCallSuper
+  Future<void> init(VyuhPlatform platform) async {
+    _platform = platform;
+  }
+
   Future<void> dispose();
 
   ImageProvider? image(

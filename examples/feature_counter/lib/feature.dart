@@ -9,7 +9,7 @@ final feature = FeatureDescriptor(
   title: 'Feature Counter',
   description: 'Describe your feature in more detail here.',
   icon: Icons.add_circle_outlined,
-  routes: () async {
+  routes: (_) async {
     return [
       GoRoute(
           path: '/counter',

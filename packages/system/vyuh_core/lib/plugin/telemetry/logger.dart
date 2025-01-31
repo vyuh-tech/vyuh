@@ -15,39 +15,50 @@ abstract interface class Logger {
 }
 
 final class _DefaultLogger implements Logger {
+  late final VyuhPlatform platform;
+
+  bool initialized = false;
+
   @override
   void trace(dynamic message) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.trace);
+    platform.telemetry.reportMessage(message, level: LogLevel.trace);
   }
 
   @override
   void debug(dynamic message) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.debug);
+    platform.telemetry.reportMessage(message, level: LogLevel.debug);
   }
 
   @override
   void info(dynamic message) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.info);
+    platform.telemetry.reportMessage(message, level: LogLevel.info);
   }
 
   @override
   void warn(dynamic message) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.warning);
+    platform.telemetry.reportMessage(message, level: LogLevel.warning);
   }
 
   @override
   void error(dynamic message, {Object? error}) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.error);
+    platform.telemetry.reportMessage(message, level: LogLevel.error);
   }
 
   @override
   void fatal(dynamic message, {Object? error, StackTrace? stackTrace}) {
-    vyuh.telemetry.reportMessage(message, level: LogLevel.fatal);
+    platform.telemetry.reportMessage(message, level: LogLevel.fatal);
   }
 }
 
 /// A convenience wrapper to provide a Logger interface to the Telemetry reportMessage() calls.
 extension LoggerInterface on VyuhPlatform {
   static final _logger = _DefaultLogger();
-  Logger get log => _logger;
+  Logger get log {
+    if (!_logger.initialized) {
+      _logger.platform = this;
+      _logger.initialized = true;
+    }
+
+    return _logger;
+  }
 }

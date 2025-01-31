@@ -13,8 +13,8 @@ final feature = FeatureDescriptor(
   title: 'Puzzles',
   description: 'A puzzle game crafted with Vyuh.',
   icon: Icons.videogame_asset,
-  init: () async {
-    vyuh.di.register(PuzzleClient());
+  init: (platform) async {
+    platform.di.register(PuzzleClient());
   },
   routes: routes,
   extensions: [

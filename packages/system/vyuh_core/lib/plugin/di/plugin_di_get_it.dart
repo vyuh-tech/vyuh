@@ -16,7 +16,11 @@ final class GetItDIPlugin extends DIPlugin {
       : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
 
   @override
-  Future<void> init() => _instance.reset();
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
+    return _instance.reset();
+  }
 
   @override
   Future<void> dispose() async {}

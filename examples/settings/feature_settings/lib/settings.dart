@@ -22,14 +22,14 @@ class Settings {
 }
 
 extension FetchSettingsByProvider on Settings {
-  static Future<Settings?> fetchByProvider(
+  static Future<Settings?> fetchByProvider(VyuhPlatform platform,
       {required String identifier, required String documentId}) async {
-    final settings = await (vyuh.content.provider.name
+    final settings = await (platform.content.provider.name
             .toLowerCase()
             .contains('localsanity')
-        ? vyuh.content.provider
+        ? platform.content.provider
             .fetchById(documentId, fromJson: Settings.fromJson)
-        : vyuh.content.provider.fetchSingle(
+        : platform.content.provider.fetchSingle(
             '*[_type == "${Settings.schemaName}" && identifier == "$identifier"][0]',
             fromJson: Settings.fromJson));
 

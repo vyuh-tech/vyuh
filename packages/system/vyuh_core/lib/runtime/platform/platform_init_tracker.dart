@@ -26,7 +26,7 @@ final class PlatformInitTracker implements SystemInitTracker {
       final preLoadedPlugins = platform.plugins.whereType<PreloadedPlugin>();
 
       for (final plugin in preLoadedPlugins) {
-        await plugin.init();
+        await plugin.init(platform);
       }
 
       _isFirstRun = false;

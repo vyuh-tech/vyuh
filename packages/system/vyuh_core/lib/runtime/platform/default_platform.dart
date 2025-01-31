@@ -35,6 +35,13 @@ class _PluginInstanceCache {
 
   // Get the list
   List<Plugin> get items => List.unmodifiable(_plugins);
+
+  Future<void> dispose() async {
+    await Future.wait(_plugins.map((e) => e.dispose()));
+
+    _plugins.clear();
+    _pluginsMap.clear();
+  }
 }
 
 final class DefaultVyuhPlatform extends VyuhPlatform {
@@ -107,7 +114,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
               name: 'Plugin: ${e.title}',
               operation: 'Init',
               parentTrace: trace,
-              fn: (_) => e.init(),
+              fn: (_) => e.init(this),
             );
           });
 
@@ -184,7 +191,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
 
   Future<List<g.RouteBase>> _initFeature(
       FeatureDescriptor feature, Trace? parentTrace) async {
-    await feature.init?.call();
+    await feature.init?.call(this);
 
     if (feature.routes == null) {
       return [];
@@ -194,7 +201,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
       name: 'Routes: ${feature.title}',
       operation: 'Init',
       parentTrace: parentTrace,
-      fn: (_) => feature.routes!(),
+      fn: (_) => feature.routes!(this),
     );
 
     return featureRoutes ?? [];
@@ -224,7 +231,7 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
           disposeFutures.add(builder.dispose());
         }
       } catch (e, st) {
-        vyuh.telemetry.reportError(e, stackTrace: st);
+        telemetry.reportError(e, stackTrace: st);
       }
     }
 
@@ -273,5 +280,22 @@ final class DefaultVyuhPlatform extends VyuhPlatform {
   @override
   ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>() {
     return _featureExtensionBuilderMap[T];
+  }
+
+  @override
+  Future<void> dispose() async {
+    // Dispose all features
+    await Future.wait(
+        _features.where((f) => f.dispose != null).map((f) => f.dispose!.call()),
+        eagerError: true);
+
+    // Dispose all plugins
+    await _plugins.dispose();
+
+    await router.dispose();
+
+    _features.clear();
+    _readyFeatures.clear();
+    _featureExtensionBuilderMap.clear();
   }
 }

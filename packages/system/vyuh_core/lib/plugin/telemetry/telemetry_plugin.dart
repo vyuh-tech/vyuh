@@ -46,7 +46,7 @@ final class TelemetryPlugin extends Plugin
 
   @override
   Future<void> initOnce() async {
-    await Future.wait(providers.map((e) => e.init()));
+    await Future.wait(providers.map((e) => e.init(platform)));
   }
 
   @override

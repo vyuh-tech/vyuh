@@ -18,11 +18,11 @@ final feature = FeatureDescriptor(
   title: 'Wonderous',
   description: 'The Wonderous app as a Vyuh Feature',
   icon: Icons.castle_outlined,
-  init: () async {
-    final accessKey = vyuh.env.get('UNSPLASH_ACCESS_KEY');
-    final secretKey = vyuh.env.get('UNSPLASH_SECRET_KEY');
+  init: (platform) async {
+    final accessKey = platform.env.get('UNSPLASH_ACCESS_KEY');
+    final secretKey = platform.env.get('UNSPLASH_SECRET_KEY');
 
-    vyuh.di.register(
+    platform.di.register(
       WonderClient(
         unsplashAccessKey: accessKey,
         unsplashSecretKey: secretKey,

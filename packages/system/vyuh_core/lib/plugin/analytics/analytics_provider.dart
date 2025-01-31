@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
+import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
 
 /// The base interface for an Analytics Provider. The provider is responsible for
 /// reporting analytics events, errors, and messages.
@@ -19,7 +20,7 @@ abstract interface class AnalyticsProvider {
   String get description;
 
   /// Initializes the provider.
-  Future<void> init();
+  Future<void> init(VyuhPlatform platform);
 
   /// Disposes the provider.
   Future<void> dispose();

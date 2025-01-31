@@ -29,10 +29,11 @@ feature({List<go.RouteBase> Function()? routes}) => FeatureDescriptor(
           HintActionText.contentBuilder,
         ])
       ],
-      routes: routes ??
-          () => [
-                CMSRoute(path: '/login'),
-                CMSRoute(path: '/signup'),
-                CMSRoute(path: '/forgot-password'),
-              ],
+      routes: (_) =>
+          routes?.call() ??
+          [
+            CMSRoute(path: '/login'),
+            CMSRoute(path: '/signup'),
+            CMSRoute(path: '/forgot-password'),
+          ],
     );

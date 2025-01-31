@@ -8,9 +8,6 @@ final class NoOpEnvPlugin extends EnvPlugin {
       : super(name: 'vyuh.env.noop', title: 'No-Op Environment Plugin');
 
   @override
-  Future<void> init() async {}
-
-  @override
   Map<String, String> all() => const {};
 
   @override

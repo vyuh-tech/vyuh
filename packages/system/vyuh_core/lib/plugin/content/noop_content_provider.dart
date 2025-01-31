@@ -41,9 +41,6 @@ final class NoOpContentProvider extends ContentProvider {
       throw UnimplementedError();
 
   @override
-  Future<void> init() => Future.value();
-
-  @override
   String schemaType(Map<String, dynamic> json) => throw UnimplementedError();
 
   @override

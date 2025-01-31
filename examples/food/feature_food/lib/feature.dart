@@ -11,10 +11,10 @@ final feature = FeatureDescriptor(
   title: 'Food',
   description: 'Food feature to showcase food menu items.',
   icon: Icons.fastfood,
-  init: () async {
-    vyuh.di.register(FoodApiClient());
+  init: (platform) async {
+    platform.di.register(FoodApiClient());
   },
-  routes: () => routes(),
+  routes: routes,
   extensions: [
     ContentExtensionDescriptor(
       contentBuilders: [

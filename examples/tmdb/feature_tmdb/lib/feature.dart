@@ -29,21 +29,22 @@ final feature = FeatureDescriptor(
   description:
       'Uses the TMDB API to show details of movies with ability to favorite and add to watchlists',
   icon: Icons.movie_creation_outlined,
-  init: () async {
-    vyuh.di.register(TMDBClient(vyuh.env.get('TMDB_API_KEY')));
-    vyuh.di.register(TMDBStore());
-    vyuh.di.register(TmdbSearchStore());
+  init: (platform) async {
+    platform.di.register(TMDBClient(platform.env.get('TMDB_API_KEY')));
+    platform.di.register(TMDBStore());
+    platform.di.register(TmdbSearchStore());
   },
-  routes: () async {
+  routes: (platform) async {
     const prefix = 'tmdb';
 
     final settings = await FetchSettingsByProvider.fetchByProvider(
+      platform,
       identifier: prefix,
       documentId: 'drafts.a9a1a05c-76a9-449b-bfe8-e970bcb5e8db',
     );
 
     if (settings == null) {
-      vyuh.log.warn(
+      platform.log.warn(
         'No Settings found. Please ensure you have a settings document with identifier "$prefix"',
       );
       return [];

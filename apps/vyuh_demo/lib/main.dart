@@ -11,8 +11,7 @@ import 'package:feature_wonderous/feature_wonderous.dart' as wonderous;
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:sanity_client/sanity_client.dart';
-import 'package:vyuh_core/plugin/plugin_descriptor.dart';
-import 'package:vyuh_core/vyuh_core.dart' as vc;
+import 'package:vyuh_core/vyuh_core.dart' hide runApp;
 import 'package:vyuh_demo/root_feature.dart' as root;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_auth/vyuh_feature_auth.dart' as auth;
@@ -25,53 +24,73 @@ import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider
 import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
 
 void main() async {
-  vc.runApp(
-    initialLocation: '/chakra',
-    plugins: _getPlugins(),
-    features: () => [
-      // Core Vyuh features that are necessary for all apps
-      system.feature,
-      developer.feature,
+  final plugins = _getPlugins();
+  final features = <FeatureDescriptor>[
+    // Core Vyuh features that are necessary for all apps
+    system.feature,
+    developer.feature,
 
-      // Example Features
-      root.feature,
-      counter.feature,
-      tmdb.feature,
-      food.feature,
-      wonderous.feature,
-      puzzles.feature,
-      misc.feature,
-      unsplash.feature,
-      onboarding.feature,
-      auth.feature(),
-      conference.feature,
-    ],
-    platformWidgetBuilder:
-        vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
-      return Observer(
-        builder: (_) {
-          var mode = platform.di.get<system.ThemeService>().currentMode.value;
+    // Example Features
+    root.feature,
+    counter.feature,
+    tmdb.feature,
+    food.feature,
+    wonderous.feature,
+    puzzles.feature,
+    misc.feature,
+    unsplash.feature,
+    onboarding.feature,
+    auth.feature(),
+    conference.feature,
+  ];
 
-          return MaterialApp.router(
-            title: 'Vyuh Demo',
-            themeMode: mode,
-            debugShowCheckedModeBanner: false,
-            theme: DesignSystem.lightTheme,
-            darkTheme: DesignSystem.darkTheme,
-            routerConfig: platform.router.instance,
-          );
-        },
-      );
-    }),
-  );
+  final widgetBuilder =
+      defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
+    return Observer(
+      builder: (_) {
+        var mode = platform.di.get<system.ThemeService>().currentMode.value;
+
+        return MaterialApp.router(
+          title: 'Vyuh Demo',
+          themeMode: mode,
+          debugShowCheckedModeBanner: false,
+          theme: DesignSystem.lightTheme,
+          darkTheme: DesignSystem.darkTheme,
+          routerConfig: platform.router.instance,
+        );
+      },
+    );
+  });
+
+  // Run App with two Vyuh Widgets
+  runApp(MaterialApp(
+    home: Column(children: [
+      Expanded(
+        child: VyuhWidget(
+          id: 'first',
+          plugins: plugins,
+          features: () => features,
+          widgetBuilder: widgetBuilder,
+        ),
+      ),
+      Expanded(
+        child: VyuhWidget(
+          id: 'second',
+          plugins: plugins,
+          features: () => features,
+          widgetBuilder: widgetBuilder,
+        ),
+      ),
+    ]),
+  ));
 }
 
 _getPlugins() {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Ensure all imperatively navigated URLs are shown in the URL bar
-  vc.DefaultNavigationPlugin.enableURLReflectsImperativeAPIs();
-  vc.DefaultNavigationPlugin.usePathStrategy();
+  DefaultNavigationPlugin.enableURLReflectsImperativeAPIs();
+  DefaultNavigationPlugin.usePathStrategy();
 
   return PluginDescriptor(
     content: DefaultContentPlugin(
@@ -87,9 +106,8 @@ _getPlugins() {
         cacheDuration: const Duration(seconds: 5),
       ),
     ),
-    env: vc.DefaultEnvPlugin(),
+    env: DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
-    telemetry:
-        vc.TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
+    telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
   );
 }

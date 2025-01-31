@@ -25,7 +25,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () => [],
+            routes: (_) => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [TestContentItem.contentBuilder],
@@ -51,7 +51,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () async => [],
+            routes: (_) async => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [TestContentItem.contentBuilder],
@@ -82,7 +82,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () async => [],
+            routes: (_) async => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [contentBuilder1, contentBuilder2],
@@ -119,7 +119,7 @@ void main() {
             FeatureDescriptor(
               name: 'test_feature',
               title: 'Test Feature',
-              routes: () async => [],
+              routes: (_) async => [],
               extensions: [
                 ContentExtensionDescriptor(
                   contentBuilders: [contentBuilder1, contentBuilder2],
@@ -144,7 +144,7 @@ void main() {
             FeatureDescriptor(
               name: 'test_feature',
               title: 'Test Feature',
-              routes: () async => [],
+              routes: (_) async => [],
               extensions: [
                 ContentExtensionDescriptor(
                   contentBuilders: [],
@@ -172,7 +172,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () async => [],
+            routes: (_) async => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [TestContentItem.contentBuilder],

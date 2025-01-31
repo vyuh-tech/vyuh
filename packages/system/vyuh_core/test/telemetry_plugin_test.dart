@@ -18,7 +18,7 @@ class MockTelemetryProvider implements TelemetryProvider {
   String get description => 'A mock telemetry provider for testing';
 
   @override
-  Future<void> init() async {}
+  Future<void> init(_) async {}
 
   @override
   Future<void> dispose() async {}

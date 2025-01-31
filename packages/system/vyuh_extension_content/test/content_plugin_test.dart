@@ -21,7 +21,7 @@ void main() {
           FeatureDescriptor(
             name: 'test_feature',
             title: 'Test Feature',
-            routes: () => [],
+            routes: (_) => [],
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [TestContentItem.contentBuilder],
@@ -48,8 +48,11 @@ void main() {
     testWidgets('registers type descriptors', (tester) async {
       await vyuh.getReady(tester);
 
-      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType), isTrue);
-      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType), isTrue);
+      expect(
+          vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType),
+          isTrue);
+      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType),
+          isTrue);
     });
 
     testWidgets('creates content item from json', (tester) async {

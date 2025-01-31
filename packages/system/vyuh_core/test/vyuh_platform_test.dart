@@ -73,7 +73,7 @@ class MockTelemetryProvider implements TelemetryProvider {
   String get description => 'Mock telemetry provider for testing';
 
   @override
-  Future<void> init() async {}
+  Future<void> init(_) async {}
 
   @override
   Future<void> dispose() async {}
@@ -199,11 +199,11 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (_) async {
                 await Future.delayed(const Duration(seconds: 1));
                 featureInitCount++;
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -213,11 +213,11 @@ void main() {
             FeatureDescriptor(
               name: 'test 2',
               title: 'Test 2',
-              init: () async {
+              init: (_) async {
                 await Future.delayed(const Duration(seconds: 1));
                 featureInitCount++;
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/test2',
                   builder: (_, __) => const SizedBox(),
@@ -240,8 +240,8 @@ void main() {
             FeatureDescriptor(
               name: 'duplicate',
               title: 'Test 1',
-              init: () async {},
-              routes: () => [
+              init: (_) async {},
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -251,8 +251,8 @@ void main() {
             FeatureDescriptor(
               name: 'duplicate',
               title: 'Test 2',
-              init: () async {},
-              routes: () => [
+              init: (_) async {},
+              routes: (_) => [
                 GoRoute(
                   path: '/test2',
                   builder: (_, __) => const SizedBox(),
@@ -272,7 +272,7 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -295,11 +295,11 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (_) async {
                 initStarted = true;
                 await Future.delayed(const Duration(seconds: 1));
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -329,10 +329,10 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (_) async {
                 initCount++;
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -362,7 +362,7 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              routes: () {
+              routes: (_) {
                 routeBuilderCalled = true;
                 return [
                   GoRoute(
@@ -387,7 +387,7 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: initialPath,
                   builder: (_, __) => const SizedBox(),
@@ -411,13 +411,13 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (_) async {
                 initCount++;
               },
               dispose: () async {
                 disposeCount++;
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -454,7 +454,7 @@ void main() {
               title: 'Test',
               extensions: [mockExtension],
               extensionBuilders: [mockBuilder],
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -480,7 +480,7 @@ void main() {
               title: 'Test',
               description: description,
               icon: icon,
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -511,7 +511,7 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              routes: () {
+              routes: (_) {
                 routeBuilderCallCount++;
                 return routes;
               },
@@ -523,7 +523,7 @@ void main() {
         expect(routeBuilderCallCount, equals(1));
 
         // Subsequent calls should use cached result
-        final result = await vyuh.features.first.routes!();
+        final result = await vyuh.features.first.routes!(vyuh);
         expect(result, equals(routes));
         expect(routeBuilderCallCount, equals(1));
 
@@ -539,10 +539,10 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              init: () async {
+              init: (_) async {
                 throw Exception('Test Error');
               },
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -565,7 +565,7 @@ void main() {
             FeatureDescriptor(
               name: 'test',
               title: 'Test',
-              routes: () => [
+              routes: (_) => [
                 GoRoute(
                   path: '/',
                   builder: (_, __) => const SizedBox(),
@@ -601,7 +601,7 @@ void main() {
                 title: 'Test',
                 extensions: extensions,
                 extensionBuilders: [builder],
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/',
                     builder: (_, __) => const SizedBox(),
@@ -630,7 +630,7 @@ void main() {
                 name: 'test',
                 title: 'Test',
                 extensionBuilders: [builder],
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/',
                     builder: (_, __) => const SizedBox(),
@@ -654,7 +654,7 @@ void main() {
                 name: 'test',
                 title: 'Test',
                 extensionBuilders: [builder],
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/',
                     builder: (_, __) => const SizedBox(),
@@ -689,7 +689,7 @@ void main() {
                 name: 'test',
                 title: 'Test',
                 extensionBuilders: [builder],
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/',
                     builder: (_, __) => const SizedBox(),
@@ -718,11 +718,11 @@ void main() {
               FeatureDescriptor(
                 name: 'test1',
                 title: 'Test 1',
-                init: () async {
+                init: (_) async {
                   await Future.delayed(const Duration(milliseconds: 100));
                   throw Exception('Test Error 1');
                 },
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/',
                     builder: (_, __) => const SizedBox(),
@@ -732,11 +732,11 @@ void main() {
               FeatureDescriptor(
                 name: 'test2',
                 title: 'Test 2',
-                init: () async {
+                init: (_) async {
                   await Future.delayed(const Duration(milliseconds: 50));
                   throw Exception('Test Error 2');
                 },
-                routes: () => [
+                routes: (_) => [
                   GoRoute(
                     path: '/test2',
                     builder: (_, __) => const SizedBox(),
@@ -758,7 +758,7 @@ void main() {
               FeatureDescriptor(
                 name: 'test',
                 title: 'Test',
-                routes: () {
+                routes: (_) {
                   throw Exception('Route builder error');
                 },
               ),
@@ -780,12 +780,12 @@ void main() {
               FeatureDescriptor(
                 name: 'test',
                 title: 'Test',
-                init: () async {
+                init: (_) async {
                   if (throwError) {
                     throw Exception('Init error');
                   }
                 },
-                routes: () => [],
+                routes: (_) => [],
               ),
             ],
           );

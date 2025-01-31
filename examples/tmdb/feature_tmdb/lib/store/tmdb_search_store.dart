@@ -3,10 +3,8 @@ import 'package:feature_tmdb/ui/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 
 final class TmdbSearchStore<T> {
-  final client = vyuh.di.get<TMDBClient>();
   final bool isLoading = false;
   List<ChipItem> chips = [];
   ListResponse<T>? data;

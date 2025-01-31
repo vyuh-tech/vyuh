@@ -45,7 +45,9 @@ abstract class AuthPlugin extends Plugin {
 
   @override
   @mustCallSuper
-  Future<void> init() async {
+  Future<void> init(VyuhPlatform platform) async {
+    await super.init(platform);
+
     if (_initialized) {
       return;
     }

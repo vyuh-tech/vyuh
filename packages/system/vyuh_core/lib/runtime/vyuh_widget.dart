@@ -1,10 +1,34 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import 'platform/default_platform.dart';
 import 'platform/framework_init_widget.dart';
+
+class VyuhPlatformScope extends InheritedWidget {
+  final VyuhPlatform platform;
+
+  const VyuhPlatformScope({
+    super.key,
+    required this.platform,
+    required super.child,
+  });
+
+  static VyuhPlatform of(BuildContext context) {
+    return context
+        .dependOnInheritedWidgetOfExactType<VyuhPlatformScope>()!
+        .platform;
+  }
+
+  @override
+  bool updateShouldNotify(VyuhPlatformScope oldWidget) =>
+      platform != oldWidget.platform;
+}
+
+/// A widget that provides a [VyuhPlatform] to its children.
+/// Used to access the current platform instance.
+extension VyuhContextExtensions on BuildContext {
+  VyuhPlatform get vyuh => VyuhPlatformScope.of(this);
+}
 
 /// A widget that encapsulates the Vyuh framework and can be used within a Flutter widget tree.
 class VyuhWidget extends StatefulWidget {
@@ -87,6 +111,9 @@ class _VyuhWidgetState extends State<VyuhWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FrameworkInitWidget(platform: _platform);
+    return VyuhPlatformScope(
+      platform: _platform,
+      child: FrameworkInitWidget(platform: _platform),
+    );
   }
 }

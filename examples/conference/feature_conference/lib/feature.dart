@@ -30,8 +30,8 @@ final feature = FeatureDescriptor(
   title: 'Feature Conference',
   description: 'Describe your feature in more detail here.',
   icon: Icons.add_circle_outlined,
-  init: () async {
-    vyuh.di.register(ConferenceApi(vyuh.content.provider));
+  init: (platform) async {
+    platform.di.register(ConferenceApi(platform.content.provider));
   },
   extensions: [
     ContentExtensionDescriptor(

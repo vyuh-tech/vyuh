@@ -25,7 +25,7 @@ final class ConsoleLoggerTelemetryProvider implements TelemetryProvider {
   }
 
   @override
-  Future<void> init() {
+  Future<void> init(VyuhPlatform platform) {
     return Future.sync(() {
       if (_logger.isClosed() == false) {
         _logger.close();

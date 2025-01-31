@@ -68,7 +68,8 @@ abstract class VyuhPlatform {
   }
 
   /// Remove a platform instance by ID.
-  static void remove(String id) {
+  static Future<void> remove(String id) async {
+    await get(id)?.dispose();
     _registry.remove(id);
   }
 
@@ -106,6 +107,16 @@ abstract class VyuhPlatform {
   ///
   /// [parentTrace]: A trace object for tracking the feature initialization process.
   Future<void> initFeatures(Trace parentTrace);
+
+  /// Disposes of all plugins and features that have been registered.
+  ///
+  /// This is a finalizer method that is called when the platform is no longer
+  /// needed. It is responsible for cleaning up any resources that were allocated
+  /// by the platform and its plugins.
+  ///
+  /// This method is automatically called when the top-level widget is disposed,
+  /// and should not be called manually.
+  Future<void> dispose() async {}
 
   /// Retrieves a specific plugin instance based on the requested type [T]. Returns
   /// null if no plugin of the specified type is registered. There are named extensions
