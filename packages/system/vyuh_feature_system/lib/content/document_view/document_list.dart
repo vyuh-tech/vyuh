@@ -9,7 +9,7 @@ part 'document_list.g.dart';
 
 @JsonSerializable()
 final class DocumentListView extends ContentItem {
-  static const schemaName = '${DocumentView.schemaName}.list';
+  static const schemaName = 'vyuh.document.list';
 
   @JsonKey(fromJson: typeFromFirstOfListJson<QueryConfiguration>)
   final QueryConfiguration? query;

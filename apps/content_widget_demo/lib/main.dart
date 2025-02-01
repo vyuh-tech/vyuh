@@ -24,6 +24,7 @@ void main() async {
     plugin: DefaultContentPlugin(provider: sanityProvider),
     descriptors: [
       system.extensionDescriptor,
+      conf.extensionDescriptor,
     ],
     onReady: (binding) async {
       binding.di.register(system.ThemeService());
@@ -52,28 +53,15 @@ class MyApp extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                  child: VyuhContentWidget(
-                    query: Queries.route.query,
-                    fromJson: Queries.route.fromJson,
-                    singleBuilder: (context, content) {
-                      final card = (content as system.Route)
-                          .regions
-                          .first
-                          .items
-                          .first as system.Card;
-
-                      return MyWidget(
-                          title: card.title!,
-                          subtitle: card.description!,
-                          onTap: () {});
-                    },
+                  child: VyuhContentWidget.fromDocument(
+                    identifier: 'first-words',
                   ),
                 ),
                 Expanded(
                   child: VyuhContentWidget(
                     query: Queries.conference.query,
                     fromJson: Queries.conference.fromJson,
-                    singleBuilder: (context, content) {
+                    builder: (context, content) {
                       return SingleChildScrollView(
                         child: VyuhContentBinding.content
                             .buildContent(context, content),

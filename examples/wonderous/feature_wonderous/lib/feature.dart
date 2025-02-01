@@ -8,9 +8,9 @@ import 'package:feature_wonderous/ui/page_view_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/content/document_view/document.dart';
 import 'package:vyuh_feature_system/content/document_view/document_list.dart';
 import 'package:vyuh_feature_system/content/document_view/document_section.dart';
+import 'package:vyuh_feature_system/content/document_view/document_view.dart';
 import 'package:vyuh_feature_system/content/group/group.dart';
 
 final feature = FeatureDescriptor(

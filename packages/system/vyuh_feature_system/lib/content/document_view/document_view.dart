@@ -4,7 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
-part 'document.g.dart';
+part 'document_view.g.dart';
 
 enum DocumentLoadStrategy {
   reference,
@@ -22,7 +22,7 @@ final class DocumentView extends ContentItem {
   @JsonKey(fromJson: typeFromFirstOfListJson<QueryConfiguration>)
   final QueryConfiguration? query;
 
-  static const schemaName = 'vyuh.document';
+  static const schemaName = 'vyuh.document.view';
 
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,

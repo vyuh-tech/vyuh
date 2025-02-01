@@ -8,7 +8,7 @@ part 'document_section.g.dart';
 
 @JsonSerializable()
 final class DocumentSectionView extends ContentItem {
-  static const schemaName = '${DocumentView.schemaName}.section';
+  static const schemaName = 'vyuh.document.section';
 
   @JsonKey(fromJson: typeFromFirstOfListJson<DocumentItemConfiguration>)
   final DocumentItemConfiguration? configuration;

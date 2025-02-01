@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 /// A versatile content widget that handles both single and list content items.
 /// It interacts with the ContentPlugin (either directly or via VyuhBinding) to fetch content from the CMS.
@@ -8,7 +9,7 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
   final Map<String, String>? queryParams;
   final FromJsonConverter<T> fromJson;
 
-  final Widget Function(BuildContext, T)? singleBuilder;
+  final Widget Function(BuildContext, T)? builder;
   final Widget Function(BuildContext, List<T>)? listBuilder;
 
   const VyuhContentWidget({
@@ -16,12 +17,32 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
     required this.query,
     required this.fromJson,
     this.queryParams,
-    this.singleBuilder,
+    this.builder,
     this.listBuilder,
   }) : assert(
-          (singleBuilder != null) ^ (listBuilder != null),
-          'Must provide exactly one of singleBuilder or listBuilder',
+          (builder != null) ^ (listBuilder != null),
+          'Must provide exactly one of builder or listBuilder',
         );
+
+  factory VyuhContentWidget.fromDocument({
+    required String identifier,
+    Widget Function(BuildContext, Document)? builder,
+  }) {
+    return VyuhContentWidget<Document>(
+      query:
+          '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
+      queryParams: {
+        'identifier': identifier,
+      },
+      fromJson: Document.fromJson,
+      builder: builder ?? _defaultDocumentBuilder,
+    ) as VyuhContentWidget<T>;
+  }
+
+  static Widget _defaultDocumentBuilder(
+      BuildContext context, Document content) {
+    return VyuhContentBinding.content.buildContent(context, content);
+  }
 
   @override
   State<VyuhContentWidget<T>> createState() => _VyuhContentWidgetState<T>();
@@ -51,8 +72,11 @@ class _VyuhContentWidgetState<T extends ContentItem>
           return VyuhBinding.instance.widgetBuilder.errorView(
             context,
             title: 'Failed to load content',
-            subtitle:
-                'Query: "${widget.query}" • Params: ${widget.queryParams}',
+            subtitle: '''
+Query: "${widget.query}"
+
+Params: ${widget.queryParams}
+''',
             error: snapshot.error,
             stackTrace: snapshot.stackTrace,
             onRetry: () {
@@ -82,7 +106,7 @@ class _VyuhContentWidgetState<T extends ContentItem>
 
     // Wait for the environment to be ready before fetching content
     _contentFuture = VyuhBinding.instance.widgetReady.then((_) {
-      return widget.singleBuilder != null
+      return widget.builder != null
           ? plugin.provider.fetchSingle<T>(
               widget.query,
               fromJson: widget.fromJson,
@@ -97,14 +121,18 @@ class _VyuhContentWidgetState<T extends ContentItem>
   }
 
   Widget _buildContent(BuildContext context, dynamic data) {
-    if (widget.singleBuilder != null) {
+    if (widget.builder != null) {
       final content = data as T?;
       return content != null
-          ? widget.singleBuilder!(context, content)
+          ? widget.builder!(context, content)
           : VyuhBinding.instance.widgetBuilder.errorView(
               context,
               title: 'No Content found',
-              subtitle: 'Query: ${widget.query}',
+              subtitle: '''
+Query: ${widget.query}
+
+Params: ${widget.queryParams}
+''',
             );
     } else {
       final contentList = data as List<T>?;

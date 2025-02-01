@@ -9,13 +9,27 @@ final class VyuhContentBinding {
     Future<void> Function(VyuhBinding)? onReady,
   }) {
     VyuhBinding.instance.widgetInit(
-      plugins: PluginDescriptor(content: plugin),
+      plugins: PluginDescriptor(
+        content: plugin,
+      ),
       widgetBuilder: widgetBuilder,
       extensionBuilder: ContentExtensionBuilder(),
-      extensionDescriptors: descriptors,
+      extensionDescriptors: [
+        ...descriptors,
+        _standardExtensionDescriptor,
+      ],
       onReady: onReady,
     );
   }
 
   static ContentPlugin get content => VyuhBinding.instance.content;
 }
+
+final _standardExtensionDescriptor = ContentExtensionDescriptor(
+  contents: [
+    Document.descriptor(),
+  ],
+  contentBuilders: [
+    Document.contentBuilder,
+  ],
+);

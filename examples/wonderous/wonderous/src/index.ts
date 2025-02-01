@@ -4,7 +4,7 @@ import {
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
 import {
-  DocumentDescriptor,
+  DocumentViewDescriptor,
   DocumentListDescriptor,
   DocumentSectionDescriptor,
   GroupDescriptor,
@@ -23,7 +23,7 @@ export const wonderous = new FeatureDescriptor({
     new GroupDescriptor({
       layouts: [pageViewGroupLayout],
     }),
-    new DocumentDescriptor({
+    new DocumentViewDescriptor({
       documentTypes: [
         {
           type: wonder.name,
