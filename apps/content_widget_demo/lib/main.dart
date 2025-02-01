@@ -1,3 +1,4 @@
+import 'package:content_widget_demo/my_widget.dart';
 import 'package:feature_conference/feature_conference.dart' as conf;
 import 'package:flutter/material.dart';
 import 'package:sanity_client/sanity_client.dart';
@@ -23,7 +24,6 @@ void main() async {
     plugin: DefaultContentPlugin(provider: sanityProvider),
     descriptors: [
       system.extensionDescriptor,
-      conf.extensionDescriptor,
     ],
     onReady: (binding) async {
       binding.di.register(system.ThemeService());
@@ -47,11 +47,42 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: const Text('Content-driven UI')),
         body: SafeArea(
-          child: VyuhContentWidget(
-            query: Queries.conference.query,
-            fromJson: Queries.conference.fromJson,
-            singleBuilder: (context, content) =>
-                VyuhContentBinding.content.buildContent(context, content),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Expanded(
+                  child: VyuhContentWidget(
+                    query: Queries.route.query,
+                    fromJson: Queries.route.fromJson,
+                    singleBuilder: (context, content) {
+                      final card = (content as system.Route)
+                          .regions
+                          .first
+                          .items
+                          .first as system.Card;
+
+                      return MyWidget(
+                          title: card.title!,
+                          subtitle: card.description!,
+                          onTap: () {});
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: VyuhContentWidget(
+                    query: Queries.conference.query,
+                    fromJson: Queries.conference.fromJson,
+                    singleBuilder: (context, content) {
+                      return SingleChildScrollView(
+                        child: VyuhContentBinding.content
+                            .buildContent(context, content),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -64,7 +95,7 @@ typedef ContentItemFromJson = ContentItem Function(Map<String, dynamic> json);
 enum Queries {
   route(
     query: '''
-*[_type == "vyuh.route" && path == "/chakra"][0]{
+*[_type == "vyuh.route" && path == "/devrel"][0]{
   ...,
   category->,
   regions[] {
@@ -78,7 +109,7 @@ enum Queries {
 
   conference(
     query: '''
-*[_type == "conf.conference"][0]{
+*[_type == "conf.conference" && slug.current == "flutter-conference"][0]{
   ...,
   "slug": slug.current,
 }
@@ -94,3 +125,11 @@ enum Queries {
     required this.fromJson,
   });
 }
+
+/*
+
+- single content item as document (vyuh.document schema)
+- add factory method for simple usage (VyuhContentWidget.document(identifier: ""))
+- refresh button during debug mode
+- Typed argument T for the VyuhContentWidget
+ */
