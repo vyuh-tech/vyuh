@@ -39,7 +39,7 @@ final class DefaultContentPlugin extends ContentPlugin {
         content.layout?.schemaType,
         builder?.defaultLayout.schemaType
       ].nonNulls;
-      return vyuh.widgetBuilder.errorView(context,
+      return VyuhBinding.instance.widgetBuilder.errorView(context,
           error: e,
           title: 'Failed to build layout',
           subtitle:
@@ -56,7 +56,7 @@ final class DefaultContentPlugin extends ContentPlugin {
             (child, modifier) => modifier.build(context, child, content),
           );
         } catch (e) {
-          return vyuh.widgetBuilder.errorView(context,
+          return VyuhBinding.instance.widgetBuilder.errorView(context,
               error: e,
               title: 'Failed to apply modifiers',
               subtitle:

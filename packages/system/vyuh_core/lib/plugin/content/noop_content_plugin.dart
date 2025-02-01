@@ -24,7 +24,7 @@ final class NoOpContentPlugin extends ContentPlugin {
   @override
   Widget buildContent<T extends ContentItem>(BuildContext context, T content,
       {LayoutConfiguration<T>? layout}) {
-    return vyuh.widgetBuilder.errorView(
+    return VyuhBinding.instance.widgetBuilder.errorView(
       context,
       title: messages['title']!(''),
       error: messages['error']!(content.schemaType),
@@ -37,7 +37,7 @@ final class NoOpContentPlugin extends ContentPlugin {
       if (url != null) 'Url: $url',
       if (routeId != null) 'RouteId: $routeId',
     ].join('');
-    return vyuh.widgetBuilder.routeErrorView(
+    return VyuhBinding.instance.widgetBuilder.routeErrorView(
       context,
       title: messages['title']!(''),
       error: messages['error']!(routeDetail),

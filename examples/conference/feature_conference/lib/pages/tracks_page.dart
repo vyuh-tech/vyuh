@@ -13,8 +13,7 @@ final class TracksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Track>>(
       errorTitle: 'Failed to load Tracks',
-      future: () =>
-          vyuh.di.get<ConferenceApi>().tracks(editionId: editionId),
+      future: () => vyuh.di.get<ConferenceApi>().tracks(editionId: editionId),
       builder: (context, tracks) {
         return ConferenceRouteCustomScrollView(
           title: 'Tracks',
@@ -23,7 +22,8 @@ final class TracksPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final track = tracks[index];
-                return vyuh.content.buildContent(context, track);
+                return VyuhBinding.instance.content
+                    .buildContent(context, track);
               },
               childCount: tracks.length,
             ),

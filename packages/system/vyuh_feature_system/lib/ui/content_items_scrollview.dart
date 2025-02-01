@@ -17,7 +17,7 @@ class ContentItemsScrollView extends StatelessWidget {
       slivers: [
         SliverList.builder(
           itemBuilder: (context, index) =>
-              vyuh.content.buildContent(context, items[index]),
+              VyuhBinding.instance.content.buildContent(context, items[index]),
           itemCount: items.length,
         )
       ],

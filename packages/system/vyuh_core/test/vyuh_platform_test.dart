@@ -188,7 +188,7 @@ void main() {
         expect(vyuh.featureFlag, isNull);
 
         expect(vyuh.plugins.length,
-            equals(PluginDescriptor.defaultPlugins.plugins.length));
+            equals(PluginDescriptor.system.plugins.length));
       });
 
       testWidgets('initializes with single feature', (tester) async {

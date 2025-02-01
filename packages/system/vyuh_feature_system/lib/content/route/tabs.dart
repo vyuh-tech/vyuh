@@ -49,8 +49,8 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
         ),
         body: TabBarView(
           children: routes
-              .map(
-                  (e) => vyuh.content.buildRoute(context, routeId: e.route.ref))
+              .map((e) => VyuhBinding.instance.content
+                  .buildRoute(context, routeId: e.route.ref))
               .toList(growable: false),
         ),
       ),

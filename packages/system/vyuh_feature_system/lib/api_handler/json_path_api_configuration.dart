@@ -108,7 +108,7 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
 
   @override
   Future<List<vf.Card>?> invoke(BuildContext context) async {
-    final response = await vyuh.network.get(Uri.parse(url));
+    final response = await VyuhBinding.instance.network.get(Uri.parse(url));
     final json = jsonDecode(response.body);
 
     final rootItem = JsonPath(rootField.path).read(json);
@@ -153,14 +153,14 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
 
   _buildCardList(BuildContext context, List<vf.Card> data) {
     if (data.isEmpty) {
-      return vyuh.content.buildContent(
+      return VyuhBinding.instance.content.buildContent(
           context,
           vf.Card(
               title: 'No Data',
               description: 'We could not find any data for the url: $url'));
     }
 
-    final list = vyuh.content.buildContent(
+    final list = VyuhBinding.instance.content.buildContent(
         context,
         vf.Group(
             title: title,

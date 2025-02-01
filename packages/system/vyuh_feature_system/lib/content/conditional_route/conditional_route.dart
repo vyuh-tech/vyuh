@@ -75,7 +75,8 @@ final class ConditionalRoute extends RouteBase {
     RouteBase? leafRoute;
 
     if (ref != null) {
-      final route = await vyuh.content.provider.fetchRoute(routeId: ref.ref);
+      final route = await VyuhBinding.instance.content.provider
+          .fetchRoute(routeId: ref.ref);
       if (!context.mounted) {
         return null;
       }

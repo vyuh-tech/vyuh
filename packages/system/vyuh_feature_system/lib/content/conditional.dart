@@ -187,11 +187,11 @@ class _ConditionalBuilder extends StatelessWidget {
               final item = snapshot.data;
               return item == null
                   ? empty
-                  : vyuh.content.buildContent(context, item);
+                  : VyuhBinding.instance.content.buildContent(context, item);
 
             default:
               return conditional.showPending
-                  ? vyuh.widgetBuilder.contentLoader(context)
+                  ? VyuhBinding.instance.widgetBuilder.contentLoader(context)
                   : empty;
           }
         });

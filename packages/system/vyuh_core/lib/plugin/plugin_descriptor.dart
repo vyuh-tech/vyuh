@@ -4,11 +4,11 @@ import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A descriptor for configuring the plugin system in a Vyuh application.
-/// 
+///
 /// The [PluginDescriptor] manages the registration and initialization of all plugins
 /// in the application. It ensures that plugins are loaded in the correct order and
 /// provides type-safe access to plugin instances.
-/// 
+///
 /// Plugins are organized into several categories:
 /// - Core System Plugins:
 ///   - [DIPlugin]: Dependency injection
@@ -22,10 +22,10 @@ import 'package:vyuh_core/vyuh_core.dart';
 ///   - [EventPlugin]: Event system
 ///   - [StoragePlugin]: Data persistence
 /// - Custom Plugins: Additional plugins via [others]
-/// 
+///
 /// Each plugin type has a default implementation that is used if not explicitly
 /// provided. Custom implementations can be provided for any plugin type.
-/// 
+///
 /// Example:
 /// ```dart
 /// final plugins = PluginDescriptor(
@@ -34,12 +34,13 @@ import 'package:vyuh_core/vyuh_core.dart';
 ///   others: [MyCustomPlugin()],
 /// );
 /// ```
-/// 
+///
 /// The initialization order of plugins is managed automatically based on their
 /// dependencies. Core system plugins are initialized first, followed by custom
 /// plugins in the order they are provided.
 final class PluginDescriptor {
   final Set<Plugin> _plugins = {};
+  final Map<Type, Plugin?> _pluginsMap = {};
 
   List<Plugin> get plugins => List.unmodifiable(_plugins);
 
@@ -74,24 +75,24 @@ final class PluginDescriptor {
       }
       return true;
     }(),
-        'Other Plugins should not contain an instance of ${defaultPluginTypes.join(' | ')}');
+        'Other Plugins should not contain an instance of ${systemPluginTypes.join(' | ')}');
 
     _plugins.addAll([
-      di ?? defaultPlugins.get<DIPlugin>(),
-      content ?? defaultPlugins.get<ContentPlugin>(),
-      analytics ?? defaultPlugins.get<AnalyticsPlugin>(),
-      telemetry ?? defaultPlugins.get<TelemetryPlugin>(),
-      network ?? defaultPlugins.get<NetworkPlugin>(),
-      auth ?? defaultPlugins.get<AuthPlugin>(),
-      navigation ?? defaultPlugins.get<NavigationPlugin>(),
-      event ?? defaultPlugins.get<EventPlugin>(),
-      env ?? defaultPlugins.get<EnvPlugin>(),
+      di ?? system.get<DIPlugin>(),
+      content ?? system.get<ContentPlugin>(),
+      analytics ?? system.get<AnalyticsPlugin>(),
+      telemetry ?? system.get<TelemetryPlugin>(),
+      network ?? system.get<NetworkPlugin>(),
+      auth ?? system.get<AuthPlugin>(),
+      navigation ?? system.get<NavigationPlugin>(),
+      event ?? system.get<EventPlugin>(),
+      env ?? system.get<EnvPlugin>(),
     ].nonNulls);
 
     _plugins.addAll(others ?? <Plugin>[]);
   }
 
-  static final defaultPluginTypes = [
+  static final systemPluginTypes = [
     DIPlugin,
     ContentPlugin,
     AnalyticsPlugin,
@@ -103,7 +104,7 @@ final class PluginDescriptor {
     EventPlugin,
   ];
 
-  static final defaultPlugins = PluginDescriptor(
+  static final system = PluginDescriptor(
     di: GetItDIPlugin(),
     content: NoOpContentPlugin(),
     analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
@@ -115,7 +116,15 @@ final class PluginDescriptor {
     event: DefaultEventPlugin(),
   );
 
-  Plugin? get<T>() {
-    return _plugins.firstWhereOrNull((element) => element is T);
+  T? get<T extends Plugin>() {
+    if (_pluginsMap.containsKey(T)) {
+      return _pluginsMap[T] as T?;
+    }
+
+    final plugin = _plugins.firstWhereOrNull((final plugin) => plugin is T);
+
+    _pluginsMap[T] = plugin;
+
+    return plugin as T?;
   }
 }

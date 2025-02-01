@@ -109,11 +109,12 @@ final class NavigationAction extends ActionConfiguration {
   _performNavigation(BuildContext context, {Uri? uri, String? routeId}) async {
     final state = Overlay.of(context);
     final entry = OverlayEntry(
-        builder: (_) => vyuh.widgetBuilder.routeLoader(context, uri, routeId));
+        builder: (_) => VyuhBinding.instance.widgetBuilder
+            .routeLoader(context, uri, routeId));
     state.insert(entry);
 
     try {
-      final route = await vyuh.content.provider
+      final route = await VyuhBinding.instance.content.provider
           .fetchRoute(path: uri?.toString(), routeId: routeId);
       if (!context.mounted) {
         return;

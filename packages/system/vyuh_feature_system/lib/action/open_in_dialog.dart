@@ -86,7 +86,7 @@ final class OpenInDialogAction extends ActionConfiguration {
         return WebView(uri: finalUrl);
       }
 
-      return vyuh.content.buildRoute(
+      return VyuhBinding.instance.content.buildRoute(
         context,
         url: finalUrl,
       );
@@ -94,7 +94,7 @@ final class OpenInDialogAction extends ActionConfiguration {
 
     final routeId = route?.ref;
 
-    return vyuh.content.buildRoute(
+    return VyuhBinding.instance.content.buildRoute(
       context,
       routeId: routeId,
     );

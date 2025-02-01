@@ -28,7 +28,7 @@ final class DefaultDocumentSectionViewLayout
   @override
   Widget build(BuildContext context, DocumentSectionView content) {
     if (content.configuration == null) {
-      return vyuh.widgetBuilder.errorView(
+      return VyuhBinding.instance.widgetBuilder.errorView(
         context,
         title: 'Cannot render section',
         error: 'No configuration found for this document section',
@@ -41,11 +41,11 @@ final class DefaultDocumentSectionViewLayout
       final snapshot = docWidgetState.document<DocumentItem>();
 
       if (snapshot.status == FutureStatus.pending) {
-        return vyuh.widgetBuilder.contentLoader(context);
+        return VyuhBinding.instance.widgetBuilder.contentLoader(context);
       }
 
       if (snapshot.result == FutureStatus.rejected) {
-        return vyuh.widgetBuilder.errorView(
+        return VyuhBinding.instance.widgetBuilder.errorView(
           context,
           title: 'No document found',
           error: snapshot.error,

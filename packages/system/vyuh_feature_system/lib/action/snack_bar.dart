@@ -36,7 +36,8 @@ final class ShowSnackBarAction extends ActionConfiguration {
       {Map<String, dynamic>? arguments}) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     if (messenger == null) {
-      vyuh.log.debug('No ScaffoldMessenger found in the widget tree');
+      VyuhBinding.instance.log
+          .debug('No ScaffoldMessenger found in the widget tree');
       return null;
     }
 
@@ -76,7 +77,8 @@ final class HideSnackBarAction extends ActionConfiguration {
       {Map<String, dynamic>? arguments}) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     if (messenger == null) {
-      vyuh.log.debug('No ScaffoldMessenger found in the widget tree');
+      VyuhBinding.instance.log
+          .debug('No ScaffoldMessenger found in the widget tree');
       return null;
     }
 

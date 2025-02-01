@@ -74,7 +74,7 @@ final class _APIContentBuilder extends ContentBuilder<APIContent> {
         element.configurations ?? <TypeDescriptor<ApiConfiguration>>[]);
 
     for (final config in configs) {
-      vyuh.content.register<ApiConfiguration>(config);
+      VyuhBinding.instance.content.register<ApiConfiguration>(config);
     }
   }
 }
@@ -96,7 +96,7 @@ final class _DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
   @override
   Widget build(BuildContext context, APIContent content) {
     if (content.configuration == null) {
-      return vyuh.widgetBuilder.errorView(
+      return VyuhBinding.instance.widgetBuilder.errorView(
         context,
         title: 'Missing API Configuration',
         subtitle:
@@ -112,12 +112,12 @@ final class _DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
             (snapshot.connectionState == ConnectionState.waiting ||
                 snapshot.connectionState == ConnectionState.active)) {
           // Showing a loading spinner during API call
-          return vyuh.widgetBuilder.contentLoader(context);
+          return VyuhBinding.instance.widgetBuilder.contentLoader(context);
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             // Show error if API call resulted in an error
             return content.showError
-                ? vyuh.widgetBuilder.errorView(
+                ? VyuhBinding.instance.widgetBuilder.errorView(
                     context,
                     title:
                         'API Error${content.configuration?.title != null ? ': ${content.configuration!.title}' : ''}',

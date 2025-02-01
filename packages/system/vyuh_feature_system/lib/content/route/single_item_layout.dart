@@ -37,8 +37,9 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     final first =
         content.regions.expand((element) => element.items).firstOrNull;
 
-    final child =
-        first == null ? vf.empty : vyuh.content.buildContent(context, first);
+    final child = first == null
+        ? vf.empty
+        : VyuhBinding.instance.content.buildContent(context, first);
 
     return vf.RouteScaffold(
       content: content,

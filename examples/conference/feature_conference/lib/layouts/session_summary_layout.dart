@@ -55,7 +55,8 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
                   spacing: 16,
                   runSpacing: 8,
                   children: content.speakers!
-                      .map((speaker) => vyuh.content.buildContent(
+                      .map((speaker) =>
+                          VyuhBinding.instance.content.buildContent(
                             context,
                             speaker,
                             layout: SpeakerChipLayout(mini: true),
@@ -67,7 +68,7 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
                   spacing: 8,
                   runSpacing: 8,
                   children: content.tracks!
-                      .map((track) => vyuh.content.buildContent(
+                      .map((track) => VyuhBinding.instance.content.buildContent(
                             context,
                             track,
                             layout: TrackChipLayout(),

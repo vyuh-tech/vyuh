@@ -81,15 +81,15 @@ final class FeatureFlagCondition extends ConditionConfiguration {
 
     switch (dataType) {
       case FlagDataType.string:
-        return vyuh.featureFlag?.getString(flagName);
+        return VyuhBinding.instance.featureFlag?.getString(flagName);
       case FlagDataType.number:
-        final value = await vyuh.featureFlag?.getInt(flagName);
+        final value = await VyuhBinding.instance.featureFlag?.getInt(flagName);
         return value.toString();
       case FlagDataType.boolean:
-        final value = await vyuh.featureFlag?.getBool(flagName);
+        final value = await VyuhBinding.instance.featureFlag?.getBool(flagName);
         return value.toString();
       case FlagDataType.json:
-        final value = await vyuh.featureFlag?.getJson(flagName);
+        final value = await VyuhBinding.instance.featureFlag?.getJson(flagName);
         return jsonEncode(value);
     }
   }

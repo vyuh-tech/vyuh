@@ -10,7 +10,7 @@ void main() async {
       developer.feature,
     ],
     platformWidgetBuilder:
-        vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
+        vc.PlatformWidgetBuilder.system.copyWith(appBuilder: (platform) {
       return MaterialApp.router(
         title: 'Vyuh Demo',
         debugShowCheckedModeBanner: false,

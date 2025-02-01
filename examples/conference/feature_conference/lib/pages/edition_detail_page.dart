@@ -28,7 +28,7 @@ final class EditionDetailPage extends StatelessWidget {
             ),
           ],
           sliver: SliverToBoxAdapter(
-            child: vyuh.content.buildContent(context, edition),
+            child: VyuhBinding.instance.content.buildContent(context, edition),
           ),
         );
       },

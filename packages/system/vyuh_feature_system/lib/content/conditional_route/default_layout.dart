@@ -37,16 +37,17 @@ class _ConditionalRouteLayoutView extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return kDebugMode
                 ? _ConditionalRouteDebugView(content: content)
-                : vyuh.widgetBuilder.routeLoader(context);
+                : VyuhBinding.instance.widgetBuilder.routeLoader(context);
           }
 
           if (snapshot.hasError || snapshot.hasData == false) {
-            return vyuh.widgetBuilder.routeErrorView(context,
+            return VyuhBinding.instance.widgetBuilder.routeErrorView(context,
                 error: snapshot.error,
                 title: 'Failed to load Conditional Route');
           }
 
-          return vyuh.content.buildContent(context, snapshot.data!);
+          return VyuhBinding.instance.content
+              .buildContent(context, snapshot.data!);
         });
   }
 }

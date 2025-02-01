@@ -67,7 +67,8 @@ final class ScreenSize extends ConditionConfiguration {
 
   @override
   Future<String?> execute(BuildContext context) {
-    final bp = vyuh.di.get<BreakpointService>().getBreakpoint(context);
+    final bp =
+        VyuhBinding.instance.di.get<BreakpointService>().getBreakpoint(context);
 
     return Future.value(bp.name);
   }

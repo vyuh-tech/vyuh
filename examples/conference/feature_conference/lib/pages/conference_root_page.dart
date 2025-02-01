@@ -30,7 +30,7 @@ final class ConferenceRootPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final conference = conferences[index];
-                return vyuh.content.buildContent(
+                return VyuhBinding.instance.content.buildContent(
                   context,
                   conference,
                   layout: layout,

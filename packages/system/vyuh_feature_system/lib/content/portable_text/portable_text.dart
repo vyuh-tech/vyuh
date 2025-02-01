@@ -78,7 +78,7 @@ class PortableTextContent extends ContentItem {
 
     return value
         .map((e) {
-          final type = vyuh.content.provider.schemaType(e);
+          final type = VyuhBinding.instance.content.provider.schemaType(e);
           final itemDescriptor = _PortableTextContentBuilder.blockMap[type];
 
           if (itemDescriptor == null) {

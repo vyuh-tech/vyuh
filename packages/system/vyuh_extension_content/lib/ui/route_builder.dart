@@ -78,7 +78,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
 
           switch (status) {
             case null || FutureStatus.pending:
-              return vyuh.widgetBuilder.routeLoader(context);
+              return VyuhBinding.instance.widgetBuilder.routeLoader(context);
 
             case FutureStatus.fulfilled:
               final route = _tracker.value?.value;
@@ -86,9 +86,9 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
               if (route == null) {
                 final exception = Exception(errorMsg);
 
-                vyuh.telemetry.reportError(exception);
+                VyuhBinding.instance.telemetry.reportError(exception);
 
-                return vyuh.widgetBuilder.routeErrorView(
+                return VyuhBinding.instance.widgetBuilder.routeErrorView(
                   context,
                   title: 'Failed to load route from CMS',
                   error: exception,
@@ -102,9 +102,9 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
               );
 
             case FutureStatus.rejected:
-              vyuh.telemetry.reportError(_tracker.value?.error);
+              VyuhBinding.instance.telemetry.reportError(_tracker.value?.error);
 
-              return vyuh.widgetBuilder.routeErrorView(
+              return VyuhBinding.instance.widgetBuilder.routeErrorView(
                 context,
                 title: errorMsg,
                 error: _tracker.value?.error,

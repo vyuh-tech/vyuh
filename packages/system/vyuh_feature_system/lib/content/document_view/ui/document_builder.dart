@@ -63,8 +63,8 @@ class DocumentViewBuilderState extends State<DocumentViewBuilder> {
               'Document ID is null for document type: ${content.schemaType}'));
         }
 
-        return vyuh.content.provider.fetchById(documentId,
-            fromJson: vyuh.content.fromJson<DocumentItem>);
+        return VyuhBinding.instance.content.provider.fetchById(documentId,
+            fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>);
 
       case DocumentLoadStrategy.query:
         final query = content.query?.buildQuery(context);
@@ -74,8 +74,8 @@ class DocumentViewBuilderState extends State<DocumentViewBuilder> {
               'Document query is null for document type: ${content.schemaType}'));
         }
 
-        return vyuh.content.provider
-            .fetchSingle(query, fromJson: vyuh.content.fromJson<DocumentItem>);
+        return VyuhBinding.instance.content.provider.fetchSingle(query,
+            fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>);
     }
   }
 }

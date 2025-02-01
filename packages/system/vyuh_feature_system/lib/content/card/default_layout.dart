@@ -98,8 +98,8 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   ),
                 if (hasBlockContent)
                   Flexible(
-                      child:
-                          vyuh.content.buildContent(context, content.content!)),
+                      child: VyuhBinding.instance.content
+                          .buildContent(context, content.content!)),
               ],
             ),
           ),
@@ -148,8 +148,8 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   ),
                 if (hasBlockContent)
                   Flexible(
-                      child:
-                          vyuh.content.buildContent(context, content.content!)),
+                      child: VyuhBinding.instance.content
+                          .buildContent(context, content.content!)),
               ],
             ),
           ),

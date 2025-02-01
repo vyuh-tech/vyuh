@@ -66,7 +66,7 @@ final class CurrentThemeMode extends ConditionConfiguration {
 
   @override
   Future<String?> execute(BuildContext context) {
-    final mode = vyuh.di.get<ThemeService>().currentMode.value;
+    final mode = VyuhBinding.instance.di.get<ThemeService>().currentMode.value;
 
     return Future.value(mode.name);
   }

@@ -41,7 +41,7 @@ void runWidgetBook({
       content: DefaultContentPlugin(provider: NoOpContentProvider()),
       env: DefaultEnvPlugin(),
     ),
-    platformWidgetBuilder: defaultPlatformWidgetBuilder.copyWith(
+    platformWidgetBuilder: PlatformWidgetBuilder.system.copyWith(
       appBuilder: (platform) => WidgetBookShell(
         features: platform.features,
         lightTheme: lightTheme,

@@ -31,7 +31,7 @@ abstract class ContentPlugin extends Plugin {
   /// The plugin relies on the ContentExtensionBuilder to do its work.
   void attach(ExtensionBuilder extBuilder);
 
-  /// Converts the given json to a content item of type T
+  /// Converts the given json to an item of type T
   T? fromJson<T>(Map<String, dynamic> json);
 
   /// Registers the given type descriptor
