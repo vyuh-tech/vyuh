@@ -48,7 +48,8 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
           children: [
             Text(content.title, style: theme.textTheme.titleMedium),
             if (content.description != null)
-              vyuh.content.buildContent(context, content.description!),
+              VyuhBinding.instance.content
+                  .buildContent(context, content.description!),
             if (content.address != null) Text(content.address!.formatted),
             if (content.website != null ||
                 content.phone != null ||

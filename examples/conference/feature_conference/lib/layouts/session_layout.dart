@@ -94,7 +94,8 @@ class _SessionDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return content.description != null
-        ? vyuh.content.buildContent(context, content.description!)
+        ? VyuhBinding.instance.content
+            .buildContent(context, content.description!)
         : const SizedBox.shrink();
   }
 }
@@ -118,7 +119,7 @@ class _SpeakersList extends StatelessWidget {
           spacing: 16,
           runSpacing: 16,
           children: speakers
-              .map((speaker) => vyuh.content.buildContent(
+              .map((speaker) => VyuhBinding.instance.content.buildContent(
                     context,
                     speaker,
                     layout: SpeakerChipLayout(),
@@ -149,7 +150,7 @@ class _TracksList extends StatelessWidget {
           spacing: 8,
           runSpacing: 8,
           children: tracks
-              .map((track) => vyuh.content.buildContent(
+              .map((track) => VyuhBinding.instance.content.buildContent(
                     context,
                     track,
                     layout: TrackChipLayout(),

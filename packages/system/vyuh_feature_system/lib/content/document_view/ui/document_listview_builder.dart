@@ -34,13 +34,13 @@ class _DocumentListViewBuilderState extends State<DocumentListViewBuilder> {
     return Observer(builder: (context) {
       final snapshot = _documentFuture.value;
       if (snapshot.status == FutureStatus.pending) {
-        return vyuh.widgetBuilder.contentLoader(context);
+        return VyuhBinding.instance.widgetBuilder.contentLoader(context);
       }
 
       if (snapshot.result == FutureStatus.rejected ||
           (snapshot.status == FutureStatus.fulfilled &&
               (snapshot.result == null || snapshot.result!.isEmpty))) {
-        return vyuh.widgetBuilder.errorView(
+        return VyuhBinding.instance.widgetBuilder.errorView(
           context,
           title: 'No documents found',
           error: snapshot.error,
@@ -67,7 +67,7 @@ class _DocumentListViewBuilderState extends State<DocumentListViewBuilder> {
           'Document query is null for document list type: ${widget.list.schemaType}'));
     }
 
-    return vyuh.content.provider
-        .fetchMultiple(query, fromJson: vyuh.content.fromJson<DocumentItem>);
+    return VyuhBinding.instance.content.provider.fetchMultiple(query,
+        fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>);
   }
 }

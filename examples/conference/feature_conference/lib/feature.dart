@@ -31,62 +31,64 @@ final feature = FeatureDescriptor(
   description: 'Describe your feature in more detail here.',
   icon: Icons.add_circle_outlined,
   init: () async {
-    vyuh.di.register(ConferenceApi(vyuh.content.provider));
+    vyuh.di.register(ConferenceApi(VyuhBinding.instance.content.provider));
   },
   extensions: [
-    ContentExtensionDescriptor(
-      contents: [
-        Conference.descriptor(
-          layouts: [
-            ConferenceLayout.typeDescriptor,
-            ConferenceCardLayout.typeDescriptor,
-          ],
-        ),
-        Edition.descriptor(
-          layouts: [
-            EditionLayout.typeDescriptor,
-            EditionSummaryLayout.typeDescriptor,
-          ],
-        ),
-        Session.descriptor(
-          layouts: [
-            SessionLayout.typeDescriptor,
-            SessionSummaryLayout.typeDescriptor,
-          ],
-        ),
-        Speaker.descriptor(
-          layouts: [
-            SpeakerLayout.typeDescriptor,
-            SpeakerChipLayout.typeDescriptor,
-          ],
-        ),
-        Track.descriptor(
-          layouts: [
-            TrackLayout.typeDescriptor,
-            TrackChipLayout.typeDescriptor,
-          ],
-        ),
-        Venue.descriptor(
-          layouts: [
-            VenueLayout.typeDescriptor,
-          ],
-        ),
-        Sponsor.descriptor(
-          layouts: [
-            SponsorLayout.typeDescriptor,
-          ],
-        ),
+    extensionDescriptor,
+  ],
+  routes: routes,
+);
+
+final extensionDescriptor = ContentExtensionDescriptor(
+  contents: [
+    Conference.descriptor(
+      layouts: [
+        ConferenceLayout.typeDescriptor,
+        ConferenceCardLayout.typeDescriptor,
       ],
-      contentBuilders: [
-        Conference.contentBuilder,
-        Edition.contentBuilder,
-        Session.contentBuilder,
-        Speaker.contentBuilder,
-        Track.contentBuilder,
-        Venue.contentBuilder,
-        Sponsor.contentBuilder,
+    ),
+    Edition.descriptor(
+      layouts: [
+        EditionLayout.typeDescriptor,
+        EditionSummaryLayout.typeDescriptor,
+      ],
+    ),
+    Session.descriptor(
+      layouts: [
+        SessionLayout.typeDescriptor,
+        SessionSummaryLayout.typeDescriptor,
+      ],
+    ),
+    Speaker.descriptor(
+      layouts: [
+        SpeakerLayout.typeDescriptor,
+        SpeakerChipLayout.typeDescriptor,
+      ],
+    ),
+    Track.descriptor(
+      layouts: [
+        TrackLayout.typeDescriptor,
+        TrackChipLayout.typeDescriptor,
+      ],
+    ),
+    Venue.descriptor(
+      layouts: [
+        VenueLayout.typeDescriptor,
+      ],
+    ),
+    Sponsor.descriptor(
+      layouts: [
+        SponsorLayout.typeDescriptor,
       ],
     ),
   ],
-  routes: routes,
+  contentBuilders: [
+    Conference.contentBuilder,
+    Edition.contentBuilder,
+    Session.contentBuilder,
+    Speaker.contentBuilder,
+    Track.contentBuilder,
+    Venue.contentBuilder,
+    Sponsor.contentBuilder,
+  ],
 );

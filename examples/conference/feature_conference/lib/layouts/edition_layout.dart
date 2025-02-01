@@ -74,7 +74,7 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
           ),
         if (content.venue != null) ...[
           Text('Venue', style: theme.textTheme.titleLarge),
-          vyuh.content.buildContent(context, content.venue!),
+          VyuhBinding.instance.content.buildContent(context, content.venue!),
         ],
         if (content.sponsors?.isNotEmpty ?? false) ...[
           Text('Sponsors', style: theme.textTheme.titleLarge),
@@ -98,7 +98,8 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                     spacing: 4,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      vyuh.content.buildContent(context, sponsor.sponsor!),
+                      VyuhBinding.instance.content
+                          .buildContent(context, sponsor.sponsor!),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: 4,

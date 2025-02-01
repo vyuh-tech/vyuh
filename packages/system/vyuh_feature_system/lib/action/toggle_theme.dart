@@ -26,6 +26,6 @@ final class ToggleThemeAction extends ActionConfiguration {
   @override
   FutureOr<void> execute(BuildContext context,
       {Map<String, dynamic>? arguments}) {
-    vyuh.di.get<ThemeService>().toggleTheme();
+    VyuhBinding.instance.di.get<ThemeService>().toggleTheme();
   }
 }

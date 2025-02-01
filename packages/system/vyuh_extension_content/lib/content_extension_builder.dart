@@ -6,13 +6,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   final Map<Type, Map<String, TypeDescriptor>> _typeConverterMap = {};
   final Map<String, ContentBuilder> _contentBuilderMap = {};
 
-  final ContentPlugin Function() getPlugin;
-
-  static ContentPlugin _defaultContentPlugin() => vyuh.content;
-
-  ContentExtensionBuilder({
-    this.getPlugin = _defaultContentPlugin,
-  }) : super(
+  ContentExtensionBuilder()
+      : super(
           extensionType: ContentExtensionDescriptor,
           title: 'Content Extension Builder',
         );
@@ -32,8 +27,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   @override
   Future<void> onInit(List<ExtensionDescriptor> extensions) async {
     // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
-    final plugin = getPlugin();
-    plugin.attach(this);
+    VyuhBinding.instance.content.attach(this);
 
     _build(extensions);
   }
@@ -109,7 +103,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
     final hasKey = _typeConverterMap[T]!.containsKey(descriptor.schemaType);
     if (hasKey) {
-      vyuh.log.warn(
+      VyuhBinding.instance.log.warn(
           'A duplicate schemaType: ${descriptor.schemaType} is being registered.');
     }
 

@@ -1,4 +1,4 @@
-part of 'default_platform_widget_builder.dart';
+part of '../platform_widget_builder.dart';
 
 class _DefaultRouteLoader extends StatefulWidget {
   final Duration delay;

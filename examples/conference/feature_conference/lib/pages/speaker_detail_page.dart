@@ -37,7 +37,7 @@ final class SpeakerDetailPage extends StatelessWidget {
           subtitle: speaker.name,
           sliver: SliverList(
             delegate: SliverChildListDelegate([
-              vyuh.content.buildContent(context, speaker),
+              VyuhBinding.instance.content.buildContent(context, speaker),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Text(
@@ -46,7 +46,7 @@ final class SpeakerDetailPage extends StatelessWidget {
                 ),
               ),
               ...sessions.map(
-                (session) => vyuh.content.buildContent(
+                (session) => VyuhBinding.instance.content.buildContent(
                   context,
                   session,
                   layout: SessionSummaryLayout(),

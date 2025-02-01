@@ -51,12 +51,12 @@ final class RouteScaffold extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         for (final headerItem in headerItems)
-          vyuh.content.buildContent(context, headerItem),
+          VyuhBinding.instance.content.buildContent(context, headerItem),
         Expanded(
           child: body ?? vf.ContentItemsScrollView(items: bodyItems),
         ),
         for (final footerItem in footerItems)
-          vyuh.content.buildContent(context, footerItem),
+          VyuhBinding.instance.content.buildContent(context, footerItem),
       ],
     );
 
@@ -85,7 +85,8 @@ final class RouteScaffold extends StatelessWidget {
   _buildDrawer(BuildContext context, List<ContentItem> items) {
     return NavigationDrawer(
       children: [
-        for (final item in items) vyuh.content.buildContent(context, item),
+        for (final item in items)
+          VyuhBinding.instance.content.buildContent(context, item),
       ],
     );
   }

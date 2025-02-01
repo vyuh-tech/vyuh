@@ -19,7 +19,7 @@ final class SessionDetailPage extends StatelessWidget {
           title: 'Session',
           subtitle: session.title,
           sliver: SliverToBoxAdapter(
-            child: vyuh.content.buildContent(context, session),
+            child: VyuhBinding.instance.content.buildContent(context, session),
           ),
         );
       },

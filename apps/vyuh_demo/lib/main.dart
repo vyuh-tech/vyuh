@@ -47,7 +47,7 @@ void main() async {
       conference.feature,
     ],
     platformWidgetBuilder:
-        vc.defaultPlatformWidgetBuilder.copyWith(appBuilder: (platform) {
+        vc.PlatformWidgetBuilder.system.copyWith(appBuilder: (platform) {
       return Observer(
         builder: (_) {
           var mode = platform.di.get<system.ThemeService>().currentMode.value;

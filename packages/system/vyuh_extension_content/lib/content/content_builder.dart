@@ -99,7 +99,7 @@ class ContentBuilder<T extends ContentItem> {
   /// Must be called before using the builder.
   @mustCallSuper
   void init(List<ContentDescriptor> descriptors) {
-    vyuh.content.register<ContentItem>(content);
+    VyuhBinding.instance.content.register<ContentItem>(content);
 
     final userLayouts = descriptors.expand((element) =>
         element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]);
@@ -123,11 +123,12 @@ class ContentBuilder<T extends ContentItem> {
   void registerDescriptors<U>(Iterable<TypeDescriptor<U>> descriptors,
       {bool checkUnique = false}) {
     for (var element in descriptors) {
-      if (checkUnique && vyuh.content.isRegistered<U>(element.schemaType)) {
+      if (checkUnique &&
+          VyuhBinding.instance.content.isRegistered<U>(element.schemaType)) {
         continue;
       }
 
-      vyuh.content.register<U>(element);
+      VyuhBinding.instance.content.register<U>(element);
     }
   }
 
@@ -141,7 +142,7 @@ class ContentBuilder<T extends ContentItem> {
     var layout = content.getLayout();
     if (layout == null) {
       layout = defaultLayout;
-      vyuh.log
+      VyuhBinding.instance.log
           .debug('No layout found for ${content.schemaType}. Using default.');
     }
 

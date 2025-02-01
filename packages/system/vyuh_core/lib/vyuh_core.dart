@@ -99,7 +99,6 @@ export 'plugin/telemetry/telemetry_plugin.dart';
 export 'plugin/telemetry/telemetry_provider.dart';
 export 'runtime/cms_route.dart';
 export 'runtime/init_tracker.dart';
-export 'runtime/platform/default_platform_widget_builder.dart';
 export 'runtime/platform/events.dart';
 export 'runtime/platform/vyuh_platform.dart';
 export 'runtime/platform_widget_builder.dart';

@@ -93,7 +93,7 @@ class ContentImage extends StatelessWidget {
         final imageHeight = height ?? roundedHeight?.toDouble();
 
         final provider = (ref != null)
-            ? vyuh.content.provider.image(
+            ? VyuhBinding.instance.content.provider.image(
                 ref!,
                 width: roundedWidth,
                 height: roundedHeight,
@@ -113,7 +113,7 @@ class ContentImage extends StatelessWidget {
         if (provider == null) {
           return ClipRect(
             clipBehavior: Clip.hardEdge,
-            child: vyuh.widgetBuilder.imagePlaceholder(
+            child: VyuhBinding.instance.widgetBuilder.imagePlaceholder(
               context,
               width: imageWidth,
               height: imageHeight,
@@ -126,7 +126,8 @@ class ContentImage extends StatelessWidget {
                 (final context, final child, final loadingProgress) {
               return loadingProgress == null
                   ? child
-                  : vyuh.widgetBuilder.imagePlaceholder(context);
+                  : VyuhBinding.instance.widgetBuilder
+                      .imagePlaceholder(context);
             },
             errorBuilder: (final context, final error, final stackTrace) =>
                 const ClipRect(

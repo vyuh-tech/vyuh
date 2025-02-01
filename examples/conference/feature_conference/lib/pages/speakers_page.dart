@@ -14,8 +14,7 @@ final class SpeakersPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Speaker>>(
       errorTitle: 'Failed to load Speakers',
-      future: () =>
-          vyuh.di.get<ConferenceApi>().speakers(editionId: editionId),
+      future: () => vyuh.di.get<ConferenceApi>().speakers(editionId: editionId),
       builder: (context, speakers) {
         return ConferenceRouteCustomScrollView(
           title: 'Speakers',
@@ -30,7 +29,7 @@ final class SpeakersPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final speaker = speakers[index];
-                return vyuh.content.buildContent(
+                return VyuhBinding.instance.content.buildContent(
                   context,
                   speaker,
                   layout: SpeakerProfileCardLayout(),

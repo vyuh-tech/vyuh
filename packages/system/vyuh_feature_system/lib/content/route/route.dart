@@ -188,14 +188,15 @@ final class _RouteContentBuilder extends ContentBuilder<Route> {
         <TypeDescriptor<RouteLifecycleConfiguration>>[]);
 
     for (final config in initConfigs) {
-      vyuh.content.register<RouteLifecycleConfiguration>(config);
+      VyuhBinding.instance.content
+          .register<RouteLifecycleConfiguration>(config);
     }
 
     final routeTypes = rtDescriptors.expand((element) =>
         element.routeTypes ?? <TypeDescriptor<RouteTypeConfiguration>>[]);
 
     for (final config in routeTypes) {
-      vyuh.content.register<RouteTypeConfiguration>(config);
+      VyuhBinding.instance.content.register<RouteTypeConfiguration>(config);
     }
   }
 }

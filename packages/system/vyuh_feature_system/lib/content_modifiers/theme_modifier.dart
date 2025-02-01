@@ -60,7 +60,7 @@ final class ThemeModifier extends ContentModifierConfiguration {
 
   @override
   Widget build(BuildContext context, Widget child, ContentItem content) {
-    final service = vyuh.di.get<ThemeService>();
+    final service = VyuhBinding.instance.di.get<ThemeService>();
     final themeData = service.theme(mode);
 
     return themeData != null ? Theme(data: themeData, child: child) : child;

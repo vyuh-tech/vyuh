@@ -35,8 +35,8 @@ final class ListGroupLayout extends LayoutConfiguration<Group> {
         child: ListView.builder(
           padding: const EdgeInsets.all(4.0),
           itemCount: content.items.length,
-          itemBuilder: (context, index) =>
-              vyuh.content.buildContent(context, content.items[index]),
+          itemBuilder: (context, index) => VyuhBinding.instance.content
+              .buildContent(context, content.items[index]),
         ),
       ),
     );

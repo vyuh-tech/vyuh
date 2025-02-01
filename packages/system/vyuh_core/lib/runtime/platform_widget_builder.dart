@@ -1,11 +1,18 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'platform/powered_by_widget.dart';
+
+part 'platform/default_route_loader.dart';
+part 'platform/error_view.dart';
 
 /// A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.
-/// 
+///
 /// This builder is called once during app initialization to create the root widget.
 /// The [platform] parameter provides access to the Vyuh platform instance.
-/// 
+///
 /// Example:
 /// ```dart
 /// AppBuilder builder = (platform) => MaterialApp(
@@ -16,11 +23,11 @@ import 'package:vyuh_core/vyuh_core.dart';
 typedef AppBuilder = Widget Function(VyuhPlatform platform);
 
 /// A builder for a widget that is shown when the app is loading.
-/// 
+///
 /// This builder is called to create a loading indicator during app initialization
 /// or when loading content. The [context] parameter provides access to the
 /// current build context.
-/// 
+///
 /// Example:
 /// ```dart
 /// Loader loader = (context) => const Center(
@@ -30,11 +37,11 @@ typedef AppBuilder = Widget Function(VyuhPlatform platform);
 typedef Loader = Widget Function(BuildContext context);
 
 /// A builder for a widget that is shown when a route is loading.
-/// 
+///
 /// This builder is called when navigating between routes. The [url] parameter
 /// contains the destination URL, and [routeId] contains the unique identifier
 /// for the route.
-/// 
+///
 /// Example:
 /// ```dart
 /// RouteLoader loader = (context, url, routeId) => Center(
@@ -45,11 +52,11 @@ typedef RouteLoader = Widget Function(BuildContext context,
     [Uri? url, String? routeId]);
 
 /// A builder for an image placeholder widget.
-/// 
+///
 /// This builder is called to create a placeholder widget while an image is loading.
 /// The [width] and [height] parameters specify the desired dimensions of the
 /// placeholder.
-/// 
+///
 /// Example:
 /// ```dart
 /// ImagePlaceholderBuilder builder = (context, {width, height}) => Container(
@@ -62,10 +69,10 @@ typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
     {double? width, double? height});
 
 /// A builder for a route error view widget.
-/// 
+///
 /// This builder is called when an error occurs during route navigation.
 /// It provides detailed error information and optional retry functionality.
-/// 
+///
 /// Example:
 /// ```dart
 /// RouteErrorViewBuilder builder = (
@@ -93,10 +100,10 @@ typedef RouteErrorViewBuilder = Widget Function(
 });
 
 /// A builder for an error view widget.
-/// 
+///
 /// This builder is called when an error occurs in the application.
 /// It provides detailed error information and optional retry/restart functionality.
-/// 
+///
 /// Example:
 /// ```dart
 /// ErrorViewBuilder builder = (
@@ -127,14 +134,14 @@ typedef ErrorViewBuilder = Widget Function(
 });
 
 /// A builder for platform-specific widgets used throughout the Vyuh application.
-/// 
+///
 /// This class provides a centralized way to customize the appearance and behavior
 /// of common UI components in a Vyuh application. It includes builders for:
 /// - App root widget ([appBuilder])
 /// - Loading indicators ([appLoader], [contentLoader], [routeLoader])
 /// - Error views ([errorView], [routeErrorView])
 /// - Image placeholders ([imagePlaceholder])
-/// 
+///
 /// Use [copyWith] to create a modified version of an existing builder:
 /// ```dart
 /// final customBuilder = defaultPlatformWidgetBuilder.copyWith(
@@ -195,4 +202,82 @@ final class PlatformWidgetBuilder {
         routeErrorView: routeErrorView ?? this.routeErrorView,
         imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder);
   }
+
+  static final system = PlatformWidgetBuilder(
+      appBuilder: (platform) {
+        return MaterialApp.router(
+          theme: ThemeData.light(useMaterial3: true),
+          routerConfig: platform.router.instance,
+        );
+      },
+      appLoader: (_) => const _DefaultRouteLoader(
+            delay: Duration(milliseconds: 0),
+            backgroundColor: Colors.black,
+            progressColor: Colors.white,
+          ),
+      routeLoader: (_, [__, ___]) => const _DefaultRouteLoader(
+            delay: Duration(milliseconds: 0),
+            backgroundColor: Colors.white30,
+          ),
+      contentLoader: (_) => const Center(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  RepaintBoundary(child: CircularProgressIndicator()),
+                  PoweredByWidget(),
+                ],
+              ),
+            ),
+          ),
+      imagePlaceholder: (_, {width, height}) => Container(
+            width: width,
+            height: height,
+            decoration: const BoxDecoration(color: Colors.black12),
+            padding: const EdgeInsets.all(20.0),
+            child: const Icon(
+              Icons.image_not_supported_rounded,
+              color: Colors.grey,
+              size: 32,
+            ),
+          ),
+      errorView: (
+        _, {
+        required title,
+        retryLabel,
+        onRetry,
+        subtitle,
+        error,
+        stackTrace,
+        showRestart = true,
+      }) =>
+          Center(
+            child: _ErrorView(
+              title: title,
+              subtitle: subtitle,
+              error: error,
+              stackTrace: stackTrace,
+              retryLabel: retryLabel,
+              onRetry: onRetry,
+            ),
+          ),
+      routeErrorView: (
+        _, {
+        required title,
+        onRetry,
+        retryLabel,
+        subtitle,
+        error,
+        stackTrace,
+      }) =>
+          _ErrorViewScaffold(
+            title: title,
+            subtitle: subtitle,
+            error: error,
+            stackTrace: stackTrace,
+            onRetry: onRetry,
+            retryLabel: retryLabel,
+            showRestart: true,
+          ));
 }

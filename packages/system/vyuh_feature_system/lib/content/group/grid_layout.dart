@@ -44,8 +44,8 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
         crossAxisSpacing: 4,
         mainAxisSpacing: 4,
       ),
-      itemBuilder: (context, index) =>
-          vyuh.content.buildContent(context, content.items[index]),
+      itemBuilder: (context, index) => VyuhBinding.instance.content
+          .buildContent(context, content.items[index]),
       itemCount: content.items.length,
     );
 

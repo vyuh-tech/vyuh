@@ -38,7 +38,8 @@ final class ConferenceLayout extends LayoutConfiguration<Conference> {
           ),
         Text(content.title, style: theme.textTheme.headlineMedium),
         if (content.description != null)
-          vyuh.content.buildContent(context, content.description!),
+          VyuhBinding.instance.content
+              .buildContent(context, content.description!),
       ],
     );
   }

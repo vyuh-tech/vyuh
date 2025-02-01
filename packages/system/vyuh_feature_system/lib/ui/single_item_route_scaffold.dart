@@ -42,7 +42,7 @@ final class SingleItemRouteScaffold extends StatelessWidget {
 
     final child = firstItem == null
         ? vf.empty
-        : vyuh.content.buildContent(context, firstItem);
+        : VyuhBinding.instance.content.buildContent(context, firstItem);
 
     return vf.RouteScaffold(
       content: content,

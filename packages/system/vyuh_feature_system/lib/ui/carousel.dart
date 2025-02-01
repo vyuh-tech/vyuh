@@ -39,7 +39,8 @@ class _CarouselState extends State<Carousel> {
               pageSnapping: true,
               scrollDirection: Axis.horizontal,
               children: widget.content.items
-                  .map((e) => vyuh.content.buildContent(context, e))
+                  .map((e) =>
+                      VyuhBinding.instance.content.buildContent(context, e))
                   .toList(growable: false),
             ),
           ),

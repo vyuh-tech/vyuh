@@ -35,10 +35,11 @@ abstract class ConditionalLayout<T extends ContentItem>
   });
 
   factory ConditionalLayout.fromJson(Map<String, dynamic> json) {
-    final type = vyuh.content.provider.schemaType(json);
+    final type = VyuhBinding.instance.content.provider.schemaType(json);
 
-    final layout = vyuh.content.fromJson<LayoutConfiguration>(json) ??
-        UnknownConditionalLayout(missingSchemaType: type);
+    final layout =
+        VyuhBinding.instance.content.fromJson<LayoutConfiguration>(json) ??
+            UnknownConditionalLayout(missingSchemaType: type);
 
     return layout as ConditionalLayout<T>;
   }
@@ -51,7 +52,7 @@ abstract class ConditionalLayout<T extends ContentItem>
           switch (snapshot.connectionState) {
             case ConnectionState.active || ConnectionState.done:
               if (snapshot.hasError) {
-                return vyuh.widgetBuilder.errorView(
+                return VyuhBinding.instance.widgetBuilder.errorView(
                   context,
                   error: snapshot.error,
                   title:
@@ -65,12 +66,12 @@ abstract class ConditionalLayout<T extends ContentItem>
                   cases.firstWhereOrNull((element) => element.value == value);
 
               return caseItem?.item?.build(context, content) ??
-                  vyuh.widgetBuilder.errorView(context,
+                  VyuhBinding.instance.widgetBuilder.errorView(context,
                       title:
                           'No LayoutConfiguration for content with schemaType: ${content.schemaType}.',
                       subtitle: 'Condition evaluated to: $value.');
             default:
-              return vyuh.widgetBuilder.contentLoader(context);
+              return VyuhBinding.instance.widgetBuilder.contentLoader(context);
           }
         });
   }
@@ -95,6 +96,6 @@ final class UnknownConditionalLayout<T extends ContentItem>
         description:
             'This is due to a missing ConditionalLayout with schemaType: $missingSchemaType.');
 
-    return vyuh.content.buildContent(context, unknown);
+    return VyuhBinding.instance.content.buildContent(context, unknown);
   }
 }

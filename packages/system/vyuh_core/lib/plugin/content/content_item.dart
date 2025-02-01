@@ -80,8 +80,8 @@ abstract class ContentItem implements SchemaItem {
 
   /// Converts the JSON representation of the content item to an instance of [ContentItem].
   factory ContentItem.fromJson(Map<String, dynamic> json) {
-    final type = vyuh.content.provider.schemaType(json);
-    return vyuh.content.fromJson<ContentItem>(json) ??
+    final type = VyuhBinding.instance.content.provider.schemaType(json);
+    return VyuhBinding.instance.content.fromJson<ContentItem>(json) ??
         Unknown(
             missingSchemaType: type,
             description:

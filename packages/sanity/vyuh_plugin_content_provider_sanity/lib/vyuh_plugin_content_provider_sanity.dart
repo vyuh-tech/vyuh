@@ -22,19 +22,23 @@ final Map<String, String> fieldMap = {
 final class SanityContentProvider extends ContentProvider {
   final SanityClient _client;
   final Duration cacheDuration;
+
   final Cache<SanityQueryResponse> _cache;
 
-  SanityContentProvider(SanityClient client,
-      {this.cacheDuration = const Duration(minutes: 5)})
-      : _client = client,
+  SanityContentProvider(
+    SanityClient client, {
+    this.cacheDuration = const Duration(minutes: 5),
+  })  : _client = client,
         _cache = Cache(
             CacheConfig(storage: MemoryCacheStorage(), ttl: cacheDuration)),
         super(
             name: 'vyuh.content.provider.sanity',
             title: 'Sanity Content Provider');
 
-  factory SanityContentProvider.withConfig(
-      {required SanityConfig config, required Duration cacheDuration}) {
+  factory SanityContentProvider.withConfig({
+    required SanityConfig config,
+    required Duration cacheDuration,
+  }) {
     return SanityContentProvider(
       SanityClient(config),
       cacheDuration: cacheDuration,
@@ -50,7 +54,7 @@ final class SanityContentProvider extends ContentProvider {
 
   @override
   Future<void> init() async {
-    _client.setHttpClient(vyuh.network);
+    _client.setHttpClient(VyuhBinding.instance.network);
   }
 
   @override
@@ -102,15 +106,15 @@ final class SanityContentProvider extends ContentProvider {
 
   Future<SanityQueryResponse?> _runQuery(String query,
       [Map<String, String>? queryParams]) async {
-    vyuh.log.debug('Running query: $query');
-    vyuh.log.debug('with params: $queryParams');
+    _log('Running query: $query');
+    _log('with params: $queryParams');
 
     final url = _client.urlBuilder.queryUrl(query, params: queryParams);
     final response = await _cache.build(url.toString(),
         generateValue: () => _client.fetch(query, params: queryParams));
 
     if (response != null) {
-      vyuh.log.debug(
+      _log(
           'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms');
     }
 
@@ -138,7 +142,7 @@ final class SanityContentProvider extends ContentProvider {
   "regions": regions[] {
     "identifier": region->identifier, 
     "title": region->title,
-    "items": items
+    items,
   },
 }[0]
   ''';
@@ -203,5 +207,9 @@ final class SanityContentProvider extends ContentProvider {
 
     return fetchSingle('$condition[0]',
         queryParams: {'id': id}, fromJson: fromJson);
+  }
+
+  _log(String message) {
+    VyuhBinding.instance.log.debug(message);
   }
 }

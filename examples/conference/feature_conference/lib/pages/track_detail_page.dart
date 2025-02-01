@@ -56,7 +56,7 @@ final class TrackDetailPage extends StatelessWidget {
                 ),
               ),
               ...sessions.map(
-                (session) => vyuh.content.buildContent(
+                (session) => VyuhBinding.instance.content.buildContent(
                   context,
                   session,
                   layout: SessionSummaryLayout(),

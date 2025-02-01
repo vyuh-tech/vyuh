@@ -14,8 +14,7 @@ final class SessionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConferenceRouteScaffold<List<Session>>(
       errorTitle: 'Failed to load Sessions',
-      future: () =>
-          vyuh.di.get<ConferenceApi>().sessions(editionId: editionId),
+      future: () => vyuh.di.get<ConferenceApi>().sessions(editionId: editionId),
       builder: (context, sessions) {
         return ConferenceRouteCustomScrollView(
           title: 'Sessions',
@@ -24,7 +23,7 @@ final class SessionsPage extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final session = sessions[index];
-                return vyuh.content.buildContent(
+                return VyuhBinding.instance.content.buildContent(
                   context,
                   session,
                   layout: SessionSummaryLayout(),

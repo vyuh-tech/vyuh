@@ -158,7 +158,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   Future<void> _initPlayer() async {
     final videoUrl = widget.content.linkType == VideoLinkType.file
         ? widget.content.file != null
-            ? vyuh.content.provider.fileUrl(widget.content.file!)
+            ? VyuhBinding.instance.content.provider
+                .fileUrl(widget.content.file!)
             : null
         : widget.content.url != null
             ? Uri.parse(widget.content.url!)
@@ -197,7 +198,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   Widget build(BuildContext context) {
     if (_error != null) {
-      return vyuh.widgetBuilder
+      return VyuhBinding.instance.widgetBuilder
           .errorView(context, error: _error, title: 'Failed to load video');
     }
 
@@ -239,7 +240,7 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
               ],
             ),
           )
-        : vyuh.widgetBuilder.contentLoader(context);
+        : VyuhBinding.instance.widgetBuilder.contentLoader(context);
   }
 
   _buildChewie(BuildContext context, video.VideoPlayerController controller) {
@@ -249,9 +250,9 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
         looping: widget.content.loop,
         hideControlsTimer: const Duration(seconds: 1),
-        placeholder: vyuh.widgetBuilder.contentLoader(context),
+        placeholder: VyuhBinding.instance.widgetBuilder.contentLoader(context),
         errorBuilder: (context, errorMessage) {
-          return vyuh.widgetBuilder.errorView(context,
+          return VyuhBinding.instance.widgetBuilder.errorView(context,
               title: 'Failed to play video', error: errorMessage);
         });
   }

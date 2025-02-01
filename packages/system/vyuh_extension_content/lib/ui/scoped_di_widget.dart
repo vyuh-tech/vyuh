@@ -29,7 +29,7 @@ final class ScopedDIWidget extends StatefulWidget {
 
     if (scopeDI == null) {
       // Fallback to platform DI
-      return vyuh.di;
+      return VyuhBinding.instance.di;
     }
 
     return scopeDI;

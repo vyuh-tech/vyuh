@@ -168,7 +168,7 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
                         ),
                     body: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: vyuh.content
+                      child: VyuhBinding.instance.content
                           .buildContent(context, item.content ?? Empty()),
                     )))
                 .toList(growable: false),
