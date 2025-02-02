@@ -3,7 +3,7 @@
     <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
   </a>
   <h1 align="center">Vyuh Content Widget</h1>
-  <p align="center">Build Content-driven UIs with Vyuh and Sanity.io</p>
+  <p align="center">Build Content-driven UIs with Vyuh and your CMS provider</p>
   <p align="center">
     <a href="https://docs.vyuh.tech">Docs</a> |
     <a href="https://vyuh.tech">Website</a>
