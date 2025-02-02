@@ -1,3 +1,7 @@
+## 1.1.2
+
+ - **FIX**: format fixes in readme.
+
 ## 1.1.1
 
  - **FIX**: readme updates.
