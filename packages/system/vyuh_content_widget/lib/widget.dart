@@ -1,16 +1,25 @@
+library;
+
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+
+import 'document.dart';
+import 'vyuh_content_binding.dart';
+
+typedef DocumentBuilder<T extends ContentItem> = Widget Function(
+    BuildContext, T);
+typedef DocumentListBuilder<T extends ContentItem> = Widget Function(
+    BuildContext, List<T>);
 
 /// A versatile content widget that handles both single and list content items.
-/// It interacts with the ContentPlugin (either directly or via VyuhBinding) to fetch content from the CMS.
+/// It interacts with the [ContentPlugin] (either directly or via [VyuhBinding]) to fetch content from the CMS.
 class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
   final String query;
   final Map<String, String>? queryParams;
   final FromJsonConverter<T> fromJson;
 
-  final Widget Function(BuildContext, T)? builder;
-  final Widget Function(BuildContext, List<T>)? listBuilder;
+  final DocumentBuilder<T>? builder;
+  final DocumentListBuilder<T>? listBuilder;
 
   const VyuhContentWidget({
     super.key,
@@ -24,23 +33,29 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
           'Must provide exactly one of builder or listBuilder',
         );
 
-  factory VyuhContentWidget.fromDocument({
+  /// Creates a [VyuhContentWidget] that loads a single [Document] from the CMS.
+  /// If a query is not provided, it will default to a Sanity GROQ query.
+  /// This assumes that you have setup a SanityContentProvider for the [ContentPlugin].
+  VyuhContentWidget.fromDocument({
+    Key? key,
     required String identifier,
+    String? query,
+    Map<String, String>? queryParams,
     Widget Function(BuildContext, Document)? builder,
-  }) {
-    return VyuhContentWidget<Document>(
-      query:
-          '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
-      queryParams: {
-        'identifier': identifier,
-      },
-      fromJson: Document.fromJson,
-      builder: builder ?? _defaultDocumentBuilder,
-    ) as VyuhContentWidget<T>;
-  }
+  }) : this(
+          key: key,
+          query: query ??
+              '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
+          queryParams: queryParams ??
+              {
+                'identifier': identifier,
+              },
+          fromJson: Document.fromJson as FromJsonConverter<T>,
+          builder: (builder ?? _defaultDocumentBuilder) as DocumentBuilder<T>,
+        );
 
   static Widget _defaultDocumentBuilder(
-      BuildContext context, Document content) {
+      BuildContext context, ContentItem content) {
     return VyuhContentBinding.content.buildContent(context, content);
   }
 

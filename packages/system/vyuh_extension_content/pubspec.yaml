@@ -32,5 +32,4 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   mocktail: ^1.0.0
-  vyuh_test:
-    path: ../vyuh_test
+  vyuh_test: ^1.1.3

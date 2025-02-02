@@ -2,10 +2,12 @@ import 'package:content_widget_demo/my_widget.dart';
 import 'package:feature_conference/feature_conference.dart' as conf;
 import 'package:flutter/material.dart';
 import 'package:sanity_client/sanity_client.dart';
+import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide runApp;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider_sanity.dart';
+import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
 
 final sanityProvider = SanityContentProvider.withConfig(
   config: SanityConfig(
@@ -21,14 +23,10 @@ final sanityProvider = SanityContentProvider.withConfig(
 
 void main() async {
   VyuhContentBinding.init(
-    plugin: DefaultContentPlugin(provider: sanityProvider),
-    descriptors: [
-      system.extensionDescriptor,
-      conf.extensionDescriptor,
-    ],
-    onReady: (binding) async {
-      binding.di.register(system.ThemeService());
-    },
+    plugins: PluginDescriptor(
+      content: DefaultContentPlugin(provider: sanityProvider),
+      telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
+    ),
   );
 
   runApp(const MyApp());
@@ -58,14 +56,14 @@ class MyApp extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: VyuhContentWidget(
+                  child: VyuhContentWidget<conf.Conference>(
                     query: Queries.conference.query,
                     fromJson: Queries.conference.fromJson,
                     builder: (context, content) {
-                      return SingleChildScrollView(
-                        child: VyuhContentBinding.content
-                            .buildContent(context, content),
-                      );
+                      return MyWidget(
+                          title: content.title,
+                          subtitle: content.slug,
+                          onTap: () {});
                     },
                   ),
                 ),
@@ -78,9 +76,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-typedef ContentItemFromJson = ContentItem Function(Map<String, dynamic> json);
-
-enum Queries {
+enum Queries<T extends ContentItem> {
   route(
     query: '''
 *[_type == "vyuh.route" && path == "/devrel"][0]{
@@ -106,7 +102,7 @@ enum Queries {
   );
 
   final String query;
-  final ContentItemFromJson fromJson;
+  final FromJsonConverter<T> fromJson;
 
   const Queries({
     required this.query,

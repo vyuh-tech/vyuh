@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 

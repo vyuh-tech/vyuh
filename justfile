@@ -6,6 +6,9 @@ gen-flutter_sanity_portable_text: (_generate-json "packages/sanity/flutter_sanit
 gen-sanity_client: (_generate-json "packages/sanity/sanity_client" "watch")
 gen-vyuh_core: (_generate-json "packages/system/vyuh_core" "watch")
 gen-vyuh_extension_content: (_generate-json "packages/system/vyuh_extension_content" "watch")
+gen-vyuh_content_widget: (_generate-json "packages/system/vyuh_content_widget" "watch")
+
+# Vyuh Features
 gen-vyuh_feature_system: (_generate-json "packages/system/vyuh_feature_system" "watch")
 gen-feature_onboarding: (_generate-json "packages/system/vyuh_feature_onboarding" "watch")
 gen-vyuh_feature_auth: (_generate-json "packages/system/vyuh_feature_auth" "watch")
