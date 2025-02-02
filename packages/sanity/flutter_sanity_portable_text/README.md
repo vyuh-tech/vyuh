@@ -544,6 +544,3 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 - Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## License 📄
-
-This project is licensed under the terms specified in the LICENSE file.
