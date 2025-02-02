@@ -1,3 +1,7 @@
+## 1.1.6
+
+ - **FIX**: added example and the widgetBuilder parameter to VyuhContentBinding.
+
 ## 1.1.5
 
  - **FIX**: added an example for vyuh_content_widget.
