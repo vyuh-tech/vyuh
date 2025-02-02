@@ -1,3 +1,7 @@
+## 1.1.5
+
+ - **FIX**: added an example for vyuh_content_widget.
+
 ## 1.1.4
 
  - **FIX**: format fixes in readme.
