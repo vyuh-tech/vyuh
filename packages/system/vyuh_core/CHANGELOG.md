@@ -1,3 +1,7 @@
+## 1.39.1
+
+ - **FIX**: format fixes in readme.
+
 ## 1.39.0
 
  - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.

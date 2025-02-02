@@ -1,3 +1,7 @@
+## 1.21.1
+
+ - **FIX**: format fixes in readme.
+
 ## 1.21.0
 
  - **FEAT**: moving to a new package: vyuh_content_widget.
