@@ -111,13 +111,6 @@ This configuration enables:
 - 🔒 Data isolation between features
 - 🤝 Data sharing across app components
 
-## Learn More 📚
-
-- Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
-  source code
-- Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
-
 ---
 
 <p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

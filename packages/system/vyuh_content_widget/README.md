@@ -176,29 +176,10 @@ Used to initialize the content widget system.
    - Implement pagination for large lists
    - Cache content when appropriate
 
-## Contributing
+## Contributing 🤝
 
 Contributions are welcome! Please read our contributing guidelines before
 submitting pull requests.
-
-## License
-
-This package is licensed under the MIT License. See the LICENSE file for
-details.
-
-## Additional Information
-
-### 📚 Documentation
-
-For detailed documentation and guides, visit:
-
-- [Vyuh Documentation](https://docs.vyuh.tech)
-- [API Reference](https://pub.dev/documentation/vyuh_content_widget/latest/)
-
-### 🔗 Links
-
-- [Website](https://vyuh.tech)
-- [Documentation](https://docs.vyuh.tech)
 
 ---
 
