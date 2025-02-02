@@ -21,6 +21,9 @@ final class VyuhContentBinding {
 
   static ContentPlugin get content => VyuhBinding.instance.content;
 
+  static PlatformWidgetBuilder get widgetBuilder =>
+      VyuhBinding.instance.widgetBuilder;
+
   static final standardDescriptors = [
     system.extensionDescriptor,
     ContentExtensionDescriptor(

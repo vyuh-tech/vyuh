@@ -38,11 +38,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
       home: Scaffold(
         appBar: AppBar(title: const Text('Content-driven UI')),
         body: SafeArea(
@@ -50,21 +45,27 @@ class MyApp extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                // Expanded(
+                //   child: VyuhContentWidget.fromDocument(
+                //     identifier: 'hello-world',
+                //   ),
+                // ),
                 Expanded(
-                  child: VyuhContentWidget.fromDocument(
-                    identifier: 'first-words',
-                  ),
-                ),
-                Expanded(
-                  child: VyuhContentWidget<conf.Conference>(
-                    query: Queries.conference.query,
-                    fromJson: Queries.conference.fromJson,
-                    builder: (context, content) {
-                      return MyWidget(
-                          title: content.title,
-                          subtitle: content.slug,
-                          onTap: () {});
-                    },
+                  child: VyuhContentWidget(
+                    query: Queries.conferences.query,
+                    fromJson: Queries.conferences.fromJson,
+                    listBuilder: (context, conferences) => ListView.builder(
+                      itemCount: conferences.length,
+                      itemBuilder: (context, index) => ListTile(
+                        leading: system.ContentImage(
+                          ref: conferences[index].logo,
+                          width: 48,
+                          height: 48,
+                        ),
+                        title: Text(conferences[index].title),
+                        subtitle: Text(conferences[index].slug),
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -91,9 +92,9 @@ enum Queries<T extends ContentItem> {
     fromJson: system.Route.fromJson,
   ),
 
-  conference(
+  conferences(
     query: '''
-*[_type == "conf.conference" && slug.current == "flutter-conference"][0]{
+*[_type == "conf.conference"]{
   ...,
   "slug": slug.current,
 }
