@@ -55,36 +55,35 @@ void main() {
 
 ```dart
 // Fetch a single document by identifier
-VyuhContentWidget.fromDocument
-(
-identifier: 'document-id',
+VyuhContentWidget.fromDocument(
+  identifier: 'document-id',
 )
 
 // Fetch content using a GROQ query
 VyuhContentWidget<Conference>(
-query: '*[_type == "conference"][0]',
-fromJson: Conference.fromJson,
-builder: (context, content) {
-return Text(content.title);
-},
+  query: '*[_type == "conference"][0]',
+  fromJson: Conference.fromJson,
+  builder: (context, content) {
+    return Text(content.title);
+  },
 )
 
 // Fetch a list of documents
 VyuhContentWidget<Conference>(
-query: '*[_type == "conference"]',
-fromJson: Conference.fromJson,
-listBuilder: (context, items) {
-return ListView.builder(
-itemCount: items.length,
-itemBuilder: (context, index) {
-final item = items[index];
-return ListTile(
-title: Text(item.title),
-subtitle: Text(item.description),
-);
-},
-);
-},
+  query: '*[_type == "conference"]',
+  fromJson: Conference.fromJson,
+  listBuilder: (context, items) {
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        final item = items[index];
+        return ListTile(
+          title: Text(item.title),
+          subtitle: Text(item.description),
+        );
+      },
+    );
+  },
 )
 ```
 
@@ -93,42 +92,40 @@ subtitle: Text(item.description),
 ### Single Document View
 
 ```dart
-VyuhContentWidget<Article>
-(
-query: '*[_type == "article" && slug.current == $slug][0]',
-queryParams: {'slug': 'my-article'},
-fromJson: Article.fromJson,
-builder: (context, article) {
-return Column(
-children: [
-Text(article.title, style: Theme.of(context).textTheme.headlineMedium),
-Text(article.content),
-],
-);
-},
+VyuhContentWidget<Article>(
+  query: '*[_type == "article" && slug.current == $slug][0]',
+  queryParams: {'slug': 'my-article'},
+  fromJson: Article.fromJson,
+  builder: (context, article) {
+    return Column(
+      children: [
+        Text(article.title, style: Theme.of(context).textTheme.headlineMedium),
+        Text(article.content),
+      ],
+    );
+  },
 )
 ```
 
 ### Document List View
 
 ```dart
-VyuhContentWidget<Product>
-(
-query: '*[_type == "product"] | order(price asc)',
-fromJson: Product.fromJson,
-listBuilder: (context, products) {
-return GridView.builder(
-gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-crossAxisCount: 2,
-childAspectRatio: 0.75,
-),
-itemCount: products.length,
-itemBuilder: (context, index) {
-final product = products[index];
-return ProductCard(product: product);
-},
-);
-},
+VyuhContentWidget<Product>(
+  query: '*[_type == "product"] | order(price asc)',
+  fromJson: Product.fromJson,
+  listBuilder: (context, products) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.75,
+      ),
+      itemCount: products.length,
+      itemBuilder: (context, index) {
+        final product = products[index];
+        return ProductCard(product: product);
+      },
+    );
+  },
 )
 ```
 
