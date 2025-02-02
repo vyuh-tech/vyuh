@@ -85,6 +85,6 @@ to get started.
   source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## 📄 License
+---
 
-This project is licensed under the terms specified in the LICENSE file.
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

@@ -2,7 +2,10 @@
 
 [![flutter_sanity_portable_text](https://img.shields.io/pub/v/flutter_sanity_portable_text.svg?label=flutter_sanity_portable_text&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/flutter_sanity_portable_text)
 
-A Flutter widget for rendering [Portable Text format](https://github.com/portabletext/portabletext) content from Sanity.io. This package is part of the Vyuh framework but can be used independently in any Flutter application.
+A Flutter widget for rendering
+[Portable Text format](https://github.com/portabletext/portabletext) content
+from Sanity.io. This package is part of the Vyuh framework but can be used
+independently in any Flutter application.
 
 <img
 src="https://raw.githubusercontent.com/vyuh-tech/vyuh/main/packages/sanity/flutter_sanity_portable_text/example/screenshot.png"
@@ -13,7 +16,7 @@ alt="Screenshot of the rendered Portable Text" />
 
 - **Complete Portable Text Support** 📝: Renders all standard styles and marks
 - **Block Rendering** 🧱: Support for multiple blocks with different styles
-- **Customization** 🎨: 
+- **Customization** 🎨:
   - Custom blocks and block containers
   - Custom styles and marks including complex annotations
   - Customize all default styles, blocks and containers
@@ -536,11 +539,16 @@ opportunities.
 
 ## Contributing 🤝
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request. For major
+changes, please open an issue first to discuss what you would like to change.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
+---
+
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

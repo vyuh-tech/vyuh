@@ -2,7 +2,10 @@
 
 [![sanity_client](https://img.shields.io/pub/v/sanity_client.svg?label=sanity_client&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/sanity_client)
 
-A powerful Dart client for connecting to [Sanity.io](https://www.sanity.io) projects and executing GROQ queries. This package provides a type-safe and efficient way to interact with Sanity's HTTP API, making it easy to fetch and manage content in your Dart and Flutter applications.
+A powerful Dart client for connecting to [Sanity.io](https://www.sanity.io)
+projects and executing GROQ queries. This package provides a type-safe and
+efficient way to interact with Sanity's HTTP API, making it easy to fetch and
+manage content in your Dart and Flutter applications.
 
 ## Features ✨
 
@@ -113,14 +116,14 @@ The `SanityConfig` class supports various options:
 final config = SanityConfig(
   projectId: 'your_project_id',
   dataset: 'your_dataset',
-  
+
   // Authentication (optional)
   token: 'your_token',  // For accessing private datasets
-  
+
   // Content delivery options
   useCdn: true,         // Use CDN for better performance
   perspective: Perspective.published,  // switching perspectives for query execution
-  
+
   // API options
   apiVersion: 'v2024-02-16',
   explainQuery: false,  // Get query explanations for debugging
@@ -146,15 +149,17 @@ try {
 
 ## Contributing 🤝
 
-Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+Contributions are welcome! Please feel free to submit a Pull Request. For major
+changes, please open an issue first to discuss what you would like to change.
 
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for source code
+- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
+  source code
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 - Learn more about [Sanity.io](https://www.sanity.io/docs)
 
-## License 📄
+---
 
-This project is licensed under the terms specified in the LICENSE file.
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

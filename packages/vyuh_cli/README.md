@@ -14,7 +14,8 @@
 
 [![vyuh_cli](https://img.shields.io/pub/v/vyuh_cli.svg?label=vyuh_cli&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cli)
 
-A command-line interface for the Vyuh Framework to generate Vyuh projects from predefined templates.
+A command-line interface for the Vyuh Framework to generate Vyuh projects from
+predefined templates.
 
 # Documentation 📝
 
@@ -28,13 +29,15 @@ For official documentation, please visit https://docs.vyuh.tech/
 dart pub global activate vyuh_cli
 ```
 
-Or install a [specific version](https://pub.dev/packages/vyuh_cli/versions) using:
+Or install a [specific version](https://pub.dev/packages/vyuh_cli/versions)
+using:
 
 ```sh
 dart pub global activate vyuh_cli <version>
 ```
 
-> If you haven't already, you might need to [set up your path](https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path).
+> If you haven't already, you might need to
+> [set up your path](https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path).
 
 When that is not possible (eg: CI environments), run `vyuh` commands via:
 
@@ -45,19 +48,23 @@ dart pub global run vyuh_cli:vyuh <command> <args>
 # Commands ✨
 
 ## `vyuh doctor`
-Vyuh Doctor is a command-line tool that helps developers set up and troubleshoot their Vyuh development environment.
+
+Vyuh Doctor is a command-line tool that helps developers set up and troubleshoot
+their Vyuh development environment.
+
 - Ensure that the required software is installed
 - Diagnose issues and provide recommendations
 
 ```sh
 vyuh doctor
 ```
+
 <img width="678" alt="vyuh doctor" src="_images/vyuh_cli_doctor.png">
 
 ## `vyuh create`
 
-Create a Vyuh project in seconds based on the predefined template. Each template has a corresponding sub-command (
-e.g.,`vyuh create project`).
+Create a Vyuh project in seconds based on the predefined template. Each template
+has a corresponding sub-command ( e.g.,`vyuh create project`).
 
 <img width="851" alt="vyuh create project super_app" src="_images/vyuh_cli.png">
 
@@ -144,8 +151,8 @@ Follow us, stay up to date or reach out on:
 - [Discord](https://discord.gg/b49sbjqszG)
 - [Email](mailto:ask@vyuh.tech)
 
-## License
+---
 
-[FSL Licensed](LICENSE).
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>
 
 [docs_link]: https://docs.vyuh.tech/

@@ -118,6 +118,6 @@ class RedisStorage<T> implements CacheStorage<T> {
 - Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh)
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 
-## License 📄
+---
 
-This project is licensed under the terms specified in the LICENSE file.
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

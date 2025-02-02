@@ -233,6 +233,6 @@ changes, please open an issue first to discuss what you would like to change.
 - Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 - Learn more about [Sanity.io](https://www.sanity.io/docs)
 
-## License 📄
+---
 
-This project is licensed under the terms specified in the LICENSE file.
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>
