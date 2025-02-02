@@ -18,7 +18,7 @@ dependencies:
   cached_network_image: ^3.3.1
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
-  flutter_sanity_portable_text: ^1.6.0
+  flutter_sanity_portable_text: ^1.6.1
   vyuh_core: ^1.39.0
   vyuh_feature_system: ^1.38.0
   vyuh_extension_content: ^1.21.0

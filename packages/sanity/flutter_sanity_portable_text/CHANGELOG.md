@@ -1,3 +1,7 @@
+## 1.6.1
+
+ - **FIX**: readme updates.
+
 ## 1.6.0
 
  - **FEAT**: moving the navigation observers to analytics plugin, readme updates for packages,.
