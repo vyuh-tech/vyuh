@@ -1,3 +1,7 @@
+## 0.0.8+2
+
+ - **FIX**: format fixes in readme.
+
 ## 0.0.8+1
 
  - **FIX**: format fixes in readme.
