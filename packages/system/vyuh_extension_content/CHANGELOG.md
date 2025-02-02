@@ -1,3 +1,8 @@
+## 1.21.0
+
+ - **FEAT**: moving to a new package: vyuh_content_widget.
+ - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.
+
 ## 1.20.3
 
  - **FIX**: updating api docs.

@@ -1,3 +1,7 @@
+## 1.38.0
+
+ - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.
+
 ## 1.37.3
 
  - **FIX**: api docs for the top classes of the framework.

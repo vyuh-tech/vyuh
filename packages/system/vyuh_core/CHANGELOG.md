@@ -1,3 +1,7 @@
+## 1.39.0
+
+ - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.
+
 ## 1.38.4
 
  - **FIX**: fixed analysis issue.

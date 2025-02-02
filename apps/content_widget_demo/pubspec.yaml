@@ -12,15 +12,15 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
-  vyuh_core: ^1.0.0
-  vyuh_content_widget: ^1.0.0
-  vyuh_extension_content: ^1.0.0
+  vyuh_core: ^1.39.0
+  vyuh_content_widget: ^1.1.0
+  vyuh_extension_content: ^1.21.0
   sanity_client: ^1.6.0
-  vyuh_plugin_content_provider_sanity: ^1.10.1
+  vyuh_plugin_content_provider_sanity: ^1.11.0
   vyuh_plugin_telemetry_provider_console: ^1.1.2
 
   feature_conference: ^1.0.0
-  vyuh_feature_system: ^1.0.0
+  vyuh_feature_system: ^1.38.0
 
 dev_dependencies:
   flutter_test:

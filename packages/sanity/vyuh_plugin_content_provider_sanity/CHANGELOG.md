@@ -1,3 +1,7 @@
+## 1.11.0
+
+ - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.
+
 ## 1.10.1
 
  - **FIX**: readme updates.

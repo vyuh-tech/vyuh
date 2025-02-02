@@ -1,3 +1,7 @@
+## 1.13.0
+
+ - **FEAT**: adapted some features to be compatible with the VyuhContentWidget.
+
 ## 1.12.2
 
  - Improving pub scores
