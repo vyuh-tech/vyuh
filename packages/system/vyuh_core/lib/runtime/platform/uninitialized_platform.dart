@@ -35,7 +35,12 @@ final class _UninitializedPlatform extends VyuhPlatform {
   GlobalKey<NavigatorState> get rootNavigatorKey => throw _error();
 
   @override
-  FutureOr<void> run() {
+  Future<void> run() {
+    throw _error();
+  }
+
+  @override
+  Future<void> dispose() {
     throw _error();
   }
 

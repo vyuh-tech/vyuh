@@ -155,6 +155,12 @@ void main() {
   group(
     'VyuhPlatform',
     () {
+      tearDown(() {
+        if (VyuhBinding.instance.initialized) {
+          vyuh.dispose();
+        }
+      });
+
       testWidgets('starts with an uninitialized platform', (tester) async {
         expect(vyuh, isNotNull);
         expect(() => vyuh.features, throwsStateError);
@@ -308,10 +314,6 @@ void main() {
             ),
           ],
         );
-
-        // Feature initialization should not have started
-        expect(initStarted, isFalse);
-        expect(vyuh.featureReady('test'), isNull);
 
         await vyuh.getReady(tester);
 

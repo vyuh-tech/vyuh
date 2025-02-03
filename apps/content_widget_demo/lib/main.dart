@@ -1,4 +1,3 @@
-import 'package:content_widget_demo/my_widget.dart';
 import 'package:feature_conference/feature_conference.dart' as conf;
 import 'package:flutter/material.dart';
 import 'package:sanity_client/sanity_client.dart';

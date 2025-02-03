@@ -39,7 +39,7 @@ abstract class VyuhPlatform {
 
   /// Initializes and runs the platform. This method is internally managed and should
   /// not be called directly.
-  FutureOr<void> run();
+  Future<void> run();
 
   /// Initializes the registered plugins for the platform. This method is internally
   /// managed and should not be called directly.
@@ -70,6 +70,8 @@ abstract class VyuhPlatform {
 
   /// Gets the ExtensionBuilder given an extensionType
   ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>();
+
+  Future<void> dispose();
 }
 
 /// Provides convenient accessors for named plugins within the Vyuh platform.

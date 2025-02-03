@@ -3,7 +3,8 @@ part of 'run_app.dart';
 final class VyuhBinding {
   VyuhBinding._();
 
-  static final instance = VyuhBinding._();
+  static VyuhBinding _instance = VyuhBinding._();
+  static VyuhBinding get instance => _instance;
 
   late final PluginDescriptor _pluginDescriptor;
   List<Plugin> get plugins => _pluginDescriptor.plugins;
@@ -14,7 +15,11 @@ final class VyuhBinding {
 
   late final Future<void> widgetReady;
 
+  bool _initInvoked = false;
+  bool get initInvoked => _initInvoked;
+
   bool _initialized = false;
+  bool get initialized => _initialized;
 
   /// Purely meant to be called with running Vyuh in widget-mode, using `VyuhContentWidget`.
   /// There is a convenience API inside `vyuh_extension_content` to make this easier.
@@ -35,6 +40,8 @@ final class VyuhBinding {
     if (_initialized) {
       return;
     }
+
+    _initInvoked = true;
 
     this.widgetBuilder = widgetBuilder ?? PlatformWidgetBuilder.system;
 
@@ -83,6 +90,13 @@ final class VyuhBinding {
     }
 
     _initialized = true;
+  }
+
+  Future<void> _appDispose() async {
+    _initialized = false;
+    await Future.wait(_pluginDescriptor.plugins.map((p) => p.dispose()));
+
+    _instance = VyuhBinding._();
   }
 
   T? get<T extends Plugin>() => _pluginDescriptor.get<T>();

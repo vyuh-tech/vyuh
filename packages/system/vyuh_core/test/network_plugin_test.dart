@@ -26,6 +26,8 @@ void main() {
       await pumpEventQueue();
     });
 
+    tearDown(() => vyuh.dispose());
+
     test('initializes correctly', () {
       expect(vyuh.network, isNotNull);
     });
@@ -174,6 +176,10 @@ void main() {
     });
 
     test('respects custom timeout', () async {
+      // Explicitly dispose previous instance as it is being
+      // created in the setUp()
+      await vyuh.dispose();
+
       runApp(
         features: () => [],
         plugins: PluginDescriptor(

@@ -66,6 +66,20 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   @override
+  Future<void> dispose() async {
+    if (!VyuhBinding.instance.initialized) {
+      return;
+    }
+
+    await VyuhBinding.instance._appDispose();
+
+    _features.clear();
+    _readyFeatures.clear();
+    _featureExtensionBuilderMap.clear();
+    _userInitialLocation = '';
+  }
+
+  @override
   Future<void> initPlugins(Trace parentTrace) => telemetry.trace(
       name: 'Plugins',
       operation: 'Init',

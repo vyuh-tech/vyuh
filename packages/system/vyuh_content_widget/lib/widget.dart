@@ -71,6 +71,9 @@ class _VyuhContentWidgetState<T extends ContentItem>
   void initState() {
     super.initState();
 
+    assert(VyuhBinding.instance.initInvoked,
+        'You must call VyuhContentBinding.init() before using this widget.');
+
     _fetchContent();
   }
 
@@ -80,11 +83,11 @@ class _VyuhContentWidgetState<T extends ContentItem>
       future: _contentFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return VyuhBinding.instance.widgetBuilder.contentLoader(context);
+          return VyuhContentBinding.widgetBuilder.contentLoader(context);
         }
 
         if (snapshot.hasError) {
-          return VyuhBinding.instance.widgetBuilder.errorView(
+          return VyuhContentBinding.widgetBuilder.errorView(
             context,
             title: 'Failed to load content',
             subtitle: '''
@@ -117,7 +120,7 @@ Params: ${widget.queryParams}
   }
 
   void _fetchContent() {
-    final plugin = VyuhBinding.instance.content;
+    final plugin = VyuhContentBinding.content;
 
     // Wait for the environment to be ready before fetching content
     _contentFuture = VyuhBinding.instance.widgetReady.then((_) {
@@ -140,7 +143,7 @@ Params: ${widget.queryParams}
       final content = data as T?;
       return content != null
           ? widget.builder!(context, content)
-          : VyuhBinding.instance.widgetBuilder.errorView(
+          : VyuhContentBinding.widgetBuilder.errorView(
               context,
               title: 'No Content found',
               subtitle: '''
@@ -153,7 +156,7 @@ Params: ${widget.queryParams}
       final contentList = data as List<T>?;
       return contentList != null
           ? widget.listBuilder!(context, contentList)
-          : VyuhBinding.instance.widgetBuilder.errorView(
+          : VyuhContentBinding.widgetBuilder.errorView(
               context,
               title: 'No Content found',
               subtitle: 'Query: ${widget.query}',
