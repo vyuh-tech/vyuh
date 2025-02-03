@@ -1,3 +1,7 @@
+## 1.39.2
+
+ - **FIX**: fixed tests in vyuh_core, added check for init on VyuhContentBinding.
+
 ## 1.39.1
 
  - **FIX**: format fixes in readme.

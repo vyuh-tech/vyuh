@@ -1,3 +1,7 @@
+## 1.1.7
+
+ - **FIX**: fixed tests in vyuh_core, added check for init on VyuhContentBinding.
+
 ## 1.1.6
 
  - **FIX**: added example and the widgetBuilder parameter to VyuhContentBinding.
