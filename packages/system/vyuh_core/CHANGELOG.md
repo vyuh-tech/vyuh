@@ -1,3 +1,7 @@
+## 1.39.3
+
+ - **FIX**: added some tests (still failing), api docs and some cleanup methods.
+
 ## 1.39.2
 
  - **FIX**: fixed tests in vyuh_core, added check for init on VyuhContentBinding.
