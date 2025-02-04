@@ -71,7 +71,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       return;
     }
 
-    await VyuhBinding.instance._appDispose();
+    await VyuhBinding.instance.dispose();
 
     _features.clear();
     _readyFeatures.clear();

@@ -6,21 +6,38 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'document.dart';
 import 'vyuh_content_binding.dart';
 
+/// A widget that renders a [Document] from the CMS.
+///
+/// It can display the document in a variety of ways, from a simple text
+/// representation to a fully custom layout.
+///
+/// If the document is not found, the widget will display a "Not Found" message.
 typedef DocumentBuilder<T extends ContentItem> = Widget Function(
     BuildContext, T);
+
+/// A widget that renders a list of [Document]s from the CMS.
 typedef DocumentListBuilder<T extends ContentItem> = Widget Function(
     BuildContext, List<T>);
 
 /// A versatile content widget that handles both single and list content items.
 /// It interacts with the [ContentPlugin] (either directly or via [VyuhBinding]) to fetch content from the CMS.
 class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
+  /// The query to fetch content from the CMS.
   final String query;
+
+  /// The query parameters to pass to the CMS.
   final Map<String, String>? queryParams;
+
+  /// The converter to use when converting the raw JSON data from the CMS into a [ContentItem].
   final FromJsonConverter<T> fromJson;
 
+  /// The builder to use when the widget is displaying a single content item.
   final DocumentBuilder<T>? builder;
+
+  /// The builder to use when the widget is displaying a list of content items.
   final DocumentListBuilder<T>? listBuilder;
 
+  /// Creates a [VyuhContentWidget] with the given parameters.
   const VyuhContentWidget({
     super.key,
     required this.query,
@@ -65,6 +82,7 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
 
 class _VyuhContentWidgetState<T extends ContentItem>
     extends State<VyuhContentWidget<T>> {
+  /// The future that resolves when the content is loaded.
   Future<dynamic>? _contentFuture;
 
   @override
@@ -119,6 +137,7 @@ Params: ${widget.queryParams}
     }
   }
 
+  /// Fetches the content from the CMS.
   void _fetchContent() {
     final plugin = VyuhContentBinding.content;
 
@@ -138,6 +157,7 @@ Params: ${widget.queryParams}
     });
   }
 
+  /// Builds the widget based on the loaded content.
   Widget _buildContent(BuildContext context, dynamic data) {
     if (widget.builder != null) {
       final content = data as T?;

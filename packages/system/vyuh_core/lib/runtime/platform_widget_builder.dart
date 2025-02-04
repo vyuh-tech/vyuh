@@ -149,7 +149,7 @@ typedef ErrorViewBuilder = Widget Function(
 ///   errorView: (context, {title, error}) => MyCustomErrorView(title: title),
 /// );
 /// ```
-final class PlatformWidgetBuilder {
+class PlatformWidgetBuilder {
   /// A builder for the app widget. This becomes the root of the widget tree.
   /// Typically this would return a [MaterialApp] or [CupertinoApp].
   final AppBuilder appBuilder;

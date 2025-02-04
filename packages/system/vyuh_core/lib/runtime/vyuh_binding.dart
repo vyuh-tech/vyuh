@@ -92,9 +92,14 @@ final class VyuhBinding {
     _initialized = true;
   }
 
-  Future<void> _appDispose() async {
+  Future<void> dispose() async {
+    if (!_initialized) {
+      return;
+    }
+
     _initialized = false;
     await Future.wait(_pluginDescriptor.plugins.map((p) => p.dispose()));
+    await _extensionBuilder.dispose();
 
     _instance = VyuhBinding._();
   }
