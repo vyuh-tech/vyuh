@@ -14,7 +14,7 @@ dependencies:
   go_router: ^14.7.2
 
   vyuh_core: ^1.39.3
-  vyuh_content_widget: ^1.1.8
+  vyuh_content_widget: ^1.1.9
   vyuh_extension_content: ^1.21.1
   sanity_client: ^1.6.1
   vyuh_plugin_content_provider_sanity: ^1.11.1
