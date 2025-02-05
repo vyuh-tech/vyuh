@@ -14,6 +14,10 @@ void main() {
     setUp(() {
       mockContentPlugin = MockContentPlugin();
 
+      when(() => mockContentPlugin.init()).thenAnswer((_) async {});
+      when(() => mockContentPlugin.attach(any())).thenReturn(null);
+      when(() => mockContentPlugin.dispose()).thenAnswer((_) async {});
+
       // Set up default mock behavior
       when(() => mockContentPlugin.fetchSingle<Document>(
             any(),

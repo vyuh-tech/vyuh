@@ -1,12 +1,13 @@
-import 'package:feature_conference/feature_conference.dart' as conf;
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide runApp;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider_sanity.dart';
 import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
+
+import 'example.dart';
 
 final sanityProvider = SanityContentProvider.withConfig(
   config: SanityConfig(
@@ -36,39 +37,46 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Content-driven UI')),
-        body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                // Expanded(
-                //   child: VyuhContentWidget.fromDocument(
-                //     identifier: 'hello-world',
-                //   ),
-                // ),
-                Expanded(
-                  child: VyuhContentWidget(
-                    query: Queries.conferences.query,
-                    fromJson: Queries.conferences.fromJson,
-                    listBuilder: (context, conferences) => ListView.builder(
-                      itemCount: conferences.length,
-                      itemBuilder: (context, index) => ListTile(
-                        leading: system.ContentImage(
-                          ref: conferences[index].logo,
-                          width: 48,
-                          height: 48,
-                        ),
-                        title: Text(conferences[index].title),
-                        subtitle: Text(conferences[index].slug),
-                      ),
-                    ),
+    return MaterialApp.router(
+      routerConfig: GoRouter(
+        routes: [
+          GoRoute(
+            path: '/',
+            builder: (context, state) => const DashboardPage(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Content-driven UI')),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ListView.builder(
+            itemCount: allExamples.length,
+            itemBuilder: (_, index) {
+              final ex = allExamples[index];
+
+              return ListTile(
+                title: Text(ex.title),
+                subtitle: Text(ex.description),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ExampleContent(example: ex),
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
@@ -76,38 +84,27 @@ class MyApp extends StatelessWidget {
   }
 }
 
-enum Queries<T extends ContentItem> {
-  route(
-    query: '''
-*[_type == "vyuh.route" && path == "/devrel"][0]{
-  ...,
-  category->,
-  regions[] {
-    "identifier": region->identifier,
-    "title": region->title,
-    items
-  },
-}''',
-    fromJson: system.Route.fromJson,
-  ),
+class ExampleContent extends StatelessWidget {
+  final Example example;
 
-  conferences(
-    query: '''
-*[_type == "conf.conference"]{
-  ...,
-  "slug": slug.current,
-}
-  ''',
-    fromJson: conf.Conference.fromJson,
-  );
+  const ExampleContent({super.key, required this.example});
 
-  final String query;
-  final FromJsonConverter<T> fromJson;
-
-  const Queries({
-    required this.query,
-    required this.fromJson,
-  });
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(example.title),
+      ),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(example.description),
+            Expanded(child: example.builder(context)),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 /*

@@ -1,5 +1,6 @@
 library;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -53,26 +54,27 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
   /// Creates a [VyuhContentWidget] that loads a single [Document] from the CMS.
   /// If a query is not provided, it will default to a Sanity GROQ query.
   /// This assumes that you have setup a SanityContentProvider for the [ContentPlugin].
-  VyuhContentWidget.fromDocument({
+  factory VyuhContentWidget.fromDocument({
     Key? key,
     required String identifier,
     String? query,
     Map<String, String>? queryParams,
     Widget Function(BuildContext, Document)? builder,
-  }) : this(
-          key: key,
-          query: query ??
-              '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
-          queryParams: queryParams ??
-              {
-                'identifier': identifier,
-              },
-          fromJson: Document.fromJson as FromJsonConverter<T>,
-          builder: (builder ?? _defaultDocumentBuilder) as DocumentBuilder<T>,
-        );
+  }) =>
+      VyuhContentWidget<Document>(
+        key: key,
+        query: query ??
+            '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
+        queryParams: queryParams ??
+            {
+              'identifier': identifier,
+            },
+        fromJson: Document.fromJson,
+        builder: builder ?? _defaultDocumentBuilder,
+      ) as VyuhContentWidget<T>;
 
   static Widget _defaultDocumentBuilder(
-      BuildContext context, ContentItem content) {
+      BuildContext context, Document content) {
     return VyuhContentBinding.content.buildContent(context, content);
   }
 
@@ -162,7 +164,12 @@ Params: ${widget.queryParams}
     if (widget.builder != null) {
       final content = data as T?;
       return content != null
-          ? widget.builder!(context, content)
+          ? _ContentViewWithRefresh(
+              onRefresh: () => setState(() {
+                _fetchContent();
+              }),
+              child: widget.builder!(context, content),
+            )
           : VyuhContentBinding.widgetBuilder.errorView(
               context,
               title: 'No Content found',
@@ -175,12 +182,45 @@ Params: ${widget.queryParams}
     } else {
       final contentList = data as List<T>?;
       return contentList != null
-          ? widget.listBuilder!(context, contentList)
+          ? _ContentViewWithRefresh(
+              onRefresh: () => setState(() {
+                _fetchContent();
+              }),
+              child: widget.listBuilder!(context, contentList),
+            )
           : VyuhContentBinding.widgetBuilder.errorView(
               context,
               title: 'No Content found',
               subtitle: 'Query: ${widget.query}',
             );
     }
+  }
+}
+
+class _ContentViewWithRefresh extends StatelessWidget {
+  final Widget child;
+
+  final void Function()? onRefresh;
+
+  const _ContentViewWithRefresh({required this.child, this.onRefresh});
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Positioned.fill(child: child),
+        if (kDebugMode && onRefresh != null)
+          Positioned(
+            bottom: 8,
+            right: 8,
+            child: FloatingActionButton(
+              mini: true,
+              onPressed: onRefresh,
+              child: const Icon(Icons.refresh),
+            ),
+          ),
+      ],
+    );
   }
 }

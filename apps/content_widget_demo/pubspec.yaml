@@ -11,6 +11,7 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  go_router: ^14.7.2
 
   vyuh_core: ^1.39.3
   vyuh_content_widget: ^1.1.8
