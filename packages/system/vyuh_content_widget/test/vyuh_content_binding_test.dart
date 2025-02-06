@@ -20,10 +20,10 @@ void main() {
 
       registerFallbackValue(MockExtensionBuilder());
 
-      when<Future<void>>(() => mockContentPlugin.init())
-          .thenAnswer((_) => Future<void>.value());
-      when(() => mockContentPlugin.attach(any())).thenReturn(null);
       when(() => mockContentPlugin.dispose()).thenAnswer((_) async {});
+      when<Future<void>>(() => mockContentPlugin.init())
+          .thenAnswer((_) async {});
+      when(() => mockContentPlugin.attach(any())).thenReturn(null);
     });
 
     tearDown(() async {
@@ -41,9 +41,8 @@ void main() {
         },
       );
 
-      VyuhBinding.instance.widgetReady.then((_) {
-        expect(readyCallbackInvoked, isTrue);
-      });
+      await VyuhBinding.instance.widgetReady;
+      expect(readyCallbackInvoked, isTrue);
 
       expect(VyuhBinding.instance.initInvoked, isTrue);
       expect(VyuhBinding.instance.content, equals(mockContentPlugin));
@@ -74,6 +73,8 @@ void main() {
         descriptors: [],
       );
 
+      await VyuhBinding.instance.widgetReady;
+
       expect(VyuhContentBinding.content, equals(mockContentPlugin));
     });
 
@@ -83,6 +84,8 @@ void main() {
         widgetBuilder: mockWidgetBuilder,
         descriptors: [],
       );
+
+      await VyuhBinding.instance.widgetReady;
 
       expect(VyuhContentBinding.widgetBuilder, equals(mockWidgetBuilder));
     });

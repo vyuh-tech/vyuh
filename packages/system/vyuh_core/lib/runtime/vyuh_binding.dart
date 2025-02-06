@@ -97,11 +97,11 @@ final class VyuhBinding {
       return;
     }
 
-    _initialized = false;
     await Future.wait(_pluginDescriptor.plugins.map((p) => p.dispose()));
     await _extensionBuilder.dispose();
 
     _instance = VyuhBinding._();
+    _initialized = false;
   }
 
   T? get<T extends Plugin>() => _pluginDescriptor.get<T>();

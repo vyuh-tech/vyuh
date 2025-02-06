@@ -45,4 +45,8 @@ final class VyuhContentBinding {
       ],
     )
   ];
+
+  static Future<void> dispose() {
+    return VyuhBinding.instance.dispose();
+  }
 }
