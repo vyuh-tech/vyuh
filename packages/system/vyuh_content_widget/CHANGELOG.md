@@ -1,3 +1,7 @@
+## 1.1.10
+
+ - **FIX**: adding support for single and list mode of rendering.
+
 ## 1.1.9
 
  - **FIX**: adding examples to the demo and fixed a type issue with fromDocument factory. tests still failing and need some investigation.
