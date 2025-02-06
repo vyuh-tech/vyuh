@@ -17,8 +17,9 @@ final customWidget = Example(
               Text(doc.title ?? '---',
                   style: Theme.of(context).textTheme.titleMedium),
               Text(doc.description ?? '---'),
-              if (doc.item != null)
-                VyuhContentBinding.content.buildContent(context, doc.item!),
+              if (doc.items != null && doc.items!.isNotEmpty)
+                VyuhContentBinding.content
+                    .buildContent(context, doc.items!.first),
             ]),
           ),
         );

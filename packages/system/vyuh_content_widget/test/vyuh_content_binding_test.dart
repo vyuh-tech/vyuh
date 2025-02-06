@@ -7,7 +7,7 @@ class MockContentPlugin extends Mock implements ContentPlugin {}
 
 class MockWidgetBuilder extends Mock implements PlatformWidgetBuilder {}
 
-class FakeExtensionBuilder extends Fake implements ExtensionBuilder {}
+class MockExtensionBuilder extends Mock implements ExtensionBuilder {}
 
 void main() {
   group('VyuhContentBinding', () {
@@ -18,7 +18,9 @@ void main() {
       mockContentPlugin = MockContentPlugin();
       mockWidgetBuilder = MockWidgetBuilder();
 
-      when(() => mockContentPlugin.init())
+      registerFallbackValue(MockExtensionBuilder());
+
+      when<Future<void>>(() => mockContentPlugin.init())
           .thenAnswer((_) => Future<void>.value());
       when(() => mockContentPlugin.attach(any())).thenReturn(null);
       when(() => mockContentPlugin.dispose()).thenAnswer((_) async {});
@@ -39,9 +41,9 @@ void main() {
         },
       );
 
-      // VyuhBinding.instance.widgetReady.then((_) {
-      //   expect(readyCallbackInvoked, isTrue);
-      // });
+      VyuhBinding.instance.widgetReady.then((_) {
+        expect(readyCallbackInvoked, isTrue);
+      });
 
       expect(VyuhBinding.instance.initInvoked, isTrue);
       expect(VyuhBinding.instance.content, equals(mockContentPlugin));

@@ -106,11 +106,3 @@ class ExampleContent extends StatelessWidget {
     );
   }
 }
-
-/*
-
-- single content item as document (vyuh.document schema)
-- add factory method for simple usage (VyuhContentWidget.document(identifier: ""))
-- refresh button during debug mode
-- Typed argument T for the VyuhContentWidget
- */

@@ -2,7 +2,6 @@ import 'package:content_widget_demo/example.dart';
 import 'package:feature_conference/feature_conference.dart' as conf;
 import 'package:flutter/material.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 
 final conferences = Example(

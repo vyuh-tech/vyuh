@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/ui/content_items_scrollview.dart';
 
 part 'document.g.dart';
 
@@ -46,14 +47,17 @@ final class Document extends ContentItem {
   /// This is the actual content of the document.
   /// The content is typically displayed in the document's body.
   ///
-  @JsonKey(fromJson: typeFromFirstOfListJson<ContentItem>)
-  final ContentItem? item;
+  @JsonKey(fromJson: itemsList)
+  final List<ContentItem>? items;
+
+  static List<ContentItem>? itemsList(dynamic json) =>
+      listFromJson<ContentItem>(json);
 
   /// Creates a new document with the given title, description, and content.
   Document({
     this.title,
     this.description,
-    this.item,
+    this.items,
     super.layout,
     super.modifiers,
   }) : super(schemaType: schemaName);
@@ -61,6 +65,8 @@ final class Document extends ContentItem {
   factory Document.fromJson(Map<String, dynamic> json) =>
       _$DocumentFromJson(json);
 }
+
+enum DocumentRenderMode { single, list }
 
 /// The default layout for documents.
 /// It shows a column view of title, description, and content.
@@ -74,7 +80,9 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
     title: 'Document Default Layout',
   );
 
-  DocumentDefaultLayout() : super(schemaType: schemaName);
+  final DocumentRenderMode mode;
+  DocumentDefaultLayout({this.mode = DocumentRenderMode.single})
+      : super(schemaType: schemaName);
 
   factory DocumentDefaultLayout.fromJson(Map<String, dynamic> json) =>
       _$DocumentDefaultLayoutFromJson(json);
@@ -82,6 +90,8 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
   @override
   Widget build(BuildContext context, Document content) {
     final theme = Theme.of(context);
+    final mode = (content.layout as DocumentDefaultLayout?)?.mode ??
+        DocumentRenderMode.single;
 
     return Column(
       spacing: 4,
@@ -89,11 +99,13 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
         if (content.title != null)
           Text(content.title!, style: theme.textTheme.titleMedium),
         if (content.description != null) Text(content.description!),
-        if (content.item != null)
+        if (content.items != null && content.items!.isNotEmpty)
           Expanded(
-            child:
-                VyuhContentBinding.content.buildContent(context, content.item!),
-          ),
+              child: switch (mode) {
+            DocumentRenderMode.single => VyuhContentBinding.content
+                .buildContent(context, content.items!.first),
+            _ => ContentItemsScrollView(items: content.items!)
+          }),
       ],
     );
   }
