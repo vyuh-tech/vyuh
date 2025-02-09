@@ -1,10 +1,17 @@
 part of 'run_app.dart';
 
+enum _RunMode {
+  app,
+  widget;
+}
+
 final class VyuhBinding {
   VyuhBinding._();
 
   static VyuhBinding _instance = VyuhBinding._();
   static VyuhBinding get instance => _instance;
+
+  late final _RunMode _mode;
 
   late final PluginDescriptor _pluginDescriptor;
   List<Plugin> get plugins => _pluginDescriptor.plugins;
@@ -42,6 +49,7 @@ final class VyuhBinding {
     }
 
     _initInvoked = true;
+    _mode = _RunMode.widget;
 
     this.widgetBuilder = widgetBuilder ?? PlatformWidgetBuilder.system;
 
@@ -64,7 +72,6 @@ final class VyuhBinding {
       // Time to associate the ContentPlugin with the ContentExtensionBuilder. This keeps
       // track of the type registry and helps in building ContentItems
       await _extensionBuilder.init(extensionDescriptors);
-      content.attach(_extensionBuilder);
 
       await onReady?.call(VyuhBinding.instance);
     });
@@ -77,6 +84,8 @@ final class VyuhBinding {
     if (_initialized) {
       return;
     }
+
+    _mode = _RunMode.app;
 
     this.widgetBuilder = widgetBuilder ?? PlatformWidgetBuilder.system;
 
@@ -98,7 +107,10 @@ final class VyuhBinding {
     }
 
     await Future.wait(_pluginDescriptor.plugins.map((p) => p.dispose()));
-    await _extensionBuilder.dispose();
+
+    if (_mode == _RunMode.widget) {
+      await _extensionBuilder.dispose();
+    }
 
     _instance = VyuhBinding._();
     _initialized = false;

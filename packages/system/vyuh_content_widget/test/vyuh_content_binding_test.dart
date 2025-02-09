@@ -1,13 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-class MockContentPlugin extends Mock implements ContentPlugin {}
-
-class MockWidgetBuilder extends Mock implements PlatformWidgetBuilder {}
-
-class MockExtensionBuilder extends Mock implements ExtensionBuilder {}
+import 'utils.dart';
 
 void main() {
   group('VyuhContentBinding', () {
@@ -15,15 +10,9 @@ void main() {
     late MockWidgetBuilder mockWidgetBuilder;
 
     setUp(() {
-      mockContentPlugin = MockContentPlugin();
+      final mock = setupMock();
+      mockContentPlugin = mock.$1;
       mockWidgetBuilder = MockWidgetBuilder();
-
-      registerFallbackValue(MockExtensionBuilder());
-
-      when(() => mockContentPlugin.dispose()).thenAnswer((_) async {});
-      when<Future<void>>(() => mockContentPlugin.init())
-          .thenAnswer((_) async {});
-      when(() => mockContentPlugin.attach(any())).thenReturn(null);
     });
 
     tearDown(() async {
