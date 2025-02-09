@@ -38,17 +38,20 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
   /// The builder to use when the widget is displaying a list of content items.
   final DocumentListBuilder<T>? listBuilder;
 
+  static const _defaultSanityQuery =
+      '*[_type == "${Document.schemaName}" && identifier.current == \$identifier][0]';
+
   /// Creates a [VyuhContentWidget] with the given parameters.
   const VyuhContentWidget({
     super.key,
-    required this.query,
+    this.query = _defaultSanityQuery,
     required this.fromJson,
     this.queryParams,
     this.builder,
     this.listBuilder,
   }) : assert(
           (builder != null) ^ (listBuilder != null),
-          'Must provide exactly one of builder or listBuilder',
+          'Provide either a builder for a single content item or a listBuilder for a list of content items, but not both.',
         );
 
   /// Creates a [VyuhContentWidget] that loads a single [Document] from the CMS.
@@ -63,8 +66,7 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
   }) =>
       VyuhContentWidget<Document>(
         key: key,
-        query: query ??
-            '*[_type == "vyuh.document" && identifier.current == \$identifier][0]',
+        query: query ?? _defaultSanityQuery,
         queryParams: queryParams ??
             {
               'identifier': identifier,
