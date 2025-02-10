@@ -1,3 +1,10 @@
+## 1.1.11
+
+ - **FIX**: refactoring to remove feature_system as a dependency, making it cleaner.
+ - **FIX**: refactoring the widget for more idiomatic usage.
+ - **FIX**: tests ... wip ... added runmode to distinguish between app and widget mode.
+ - **FIX**: working tests for vyuh content binding.
+
 ## 1.1.10
 
  - **FIX**: adding support for single and list mode of rendering.

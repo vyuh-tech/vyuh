@@ -1,3 +1,8 @@
+## 1.39.4
+
+ - **FIX**: tests ... wip ... added runmode to distinguish between app and widget mode.
+ - **FIX**: working tests for vyuh content binding.
+
 ## 1.39.3
 
  - **FIX**: added some tests (still failing), api docs and some cleanup methods.
