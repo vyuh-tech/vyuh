@@ -4,6 +4,7 @@ import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide runApp;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider_sanity.dart';
 import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
 
@@ -23,11 +24,12 @@ final sanityProvider = SanityContentProvider.withConfig(
 
 void main() async {
   VyuhContentBinding.init(
-    plugins: PluginDescriptor(
-      content: DefaultContentPlugin(provider: sanityProvider),
-      telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
-    ),
-  );
+      plugins: PluginDescriptor(
+        content: DefaultContentPlugin(provider: sanityProvider),
+        telemetry:
+            TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
+      ),
+      descriptors: [system.extensionDescriptor]);
 
   runApp(const MyApp());
 }

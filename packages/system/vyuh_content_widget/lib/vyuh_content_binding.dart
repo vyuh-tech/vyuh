@@ -1,7 +1,6 @@
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 
 /// The binding layer for the [VyuhContentWidget]. It provides access to various plugins, including the content plugin.
 /// You can also customize the default widget builders for showing loaders and errors.
@@ -20,7 +19,7 @@ final class VyuhContentBinding {
       plugins: plugins,
       widgetBuilder: widgetBuilder,
       extensionBuilder: ContentExtensionBuilder(),
-      extensionDescriptors: descriptors ?? standardDescriptors,
+      extensionDescriptors: standardDescriptors + (descriptors ?? []),
       onReady: onReady,
     );
   }
@@ -35,7 +34,6 @@ final class VyuhContentBinding {
   /// The default descriptors used by the [VyuhContentWidget]. It includes the Document type and several
   /// content-types from the vyuh_feature_system package.
   static final standardDescriptors = [
-    system.extensionDescriptor,
     ContentExtensionDescriptor(
       contents: [
         Document.descriptor(),

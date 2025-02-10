@@ -3,7 +3,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-import 'package:vyuh_feature_system/ui/content_items_scrollview.dart';
 
 part 'document.g.dart';
 
@@ -104,7 +103,18 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
               child: switch (mode) {
             DocumentRenderMode.single => VyuhContentBinding.content
                 .buildContent(context, content.items!.first),
-            _ => ContentItemsScrollView(items: content.items!)
+            DocumentRenderMode.list => CustomScrollView(
+                cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
+                primary: true,
+                slivers: [
+                  SliverList.builder(
+                    itemBuilder: (context, index) => VyuhBinding
+                        .instance.content
+                        .buildContent(context, content.items![index]),
+                    itemCount: content.items!.length,
+                  )
+                ],
+              )
           }),
       ],
     );

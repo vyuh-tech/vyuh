@@ -23,7 +23,6 @@ dependencies:
 
   vyuh_core: ^1.39.3
   vyuh_extension_content: ^1.21.1
-  vyuh_feature_system: ^1.38.1
 
 dev_dependencies:
   flutter_test:
