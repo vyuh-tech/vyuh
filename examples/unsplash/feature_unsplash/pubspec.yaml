@@ -16,7 +16,7 @@ dependencies:
   flutter_mobx: ^2.2.0+2
   flutter_sanity_portable_text: ^1.6.2
   vyuh_core: ^1.39.4
-  vyuh_feature_system: ^1.38.1
+  vyuh_feature_system: ^1.38.2
   vyuh_extension_content: ^1.21.1
   unsplash_client: ^2.2.0
   flutter_blurhash: ^0.8.2

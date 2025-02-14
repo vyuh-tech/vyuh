@@ -1,3 +1,7 @@
+## 1.38.2
+
+ - **FIX**: renaming extensionDescriptor => descriptor.
+
 ## 1.38.1
 
  - **FIX**: format fixes in readme.
