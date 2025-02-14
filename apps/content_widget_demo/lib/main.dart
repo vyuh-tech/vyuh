@@ -1,3 +1,7 @@
+import 'package:content_widget_demo/examples/conferences.dart';
+import 'package:content_widget_demo/examples/custom_widget.dart';
+import 'package:content_widget_demo/examples/hello_world.dart';
+import 'package:content_widget_demo/examples/route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sanity_client/sanity_client.dart';
@@ -9,6 +13,13 @@ import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider
 import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_provider_console.dart';
 
 import 'example.dart';
+
+final allExamples = [
+  helloWorld,
+  conferences,
+  customWidget,
+  route,
+];
 
 final sanityProvider = SanityContentProvider.withConfig(
   config: SanityConfig(
@@ -29,7 +40,7 @@ void main() async {
         telemetry:
             TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
       ),
-      descriptors: [system.extensionDescriptor]);
+      descriptors: [system.descriptor]);
 
   runApp(const MyApp());
 }
@@ -52,9 +63,14 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
 
+  @override
+  State<DashboardPage> createState() => _DashboardPageState();
+}
+
+class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,29 +96,6 @@ class DashboardPage extends StatelessWidget {
               );
             },
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ExampleContent extends StatelessWidget {
-  final Example example;
-
-  const ExampleContent({super.key, required this.example});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(example.title),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            Text(example.description),
-            Expanded(child: example.builder(context)),
-          ],
         ),
       ),
     );

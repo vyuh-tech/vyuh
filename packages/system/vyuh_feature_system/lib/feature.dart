@@ -28,14 +28,14 @@ final feature = FeatureDescriptor(
   },
   routes: () => _routes,
   extensions: [
-    extensionDescriptor,
+    descriptor,
   ],
   extensionBuilders: [
     ContentExtensionBuilder(),
   ],
 );
 
-final extensionDescriptor = ContentExtensionDescriptor(
+final descriptor = ContentExtensionDescriptor(
   contents: [
     RouteDescriptor(routeTypes: [
       PageRouteType.typeDescriptor,
