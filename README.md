@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://vyuh.tech">
-    <img src="_images/logo.png" alt="Vyuh Logo" height="128" />
+    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
   </a>
   <h1 align="center">Vyuh Framework</h1>
   <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
@@ -24,6 +24,7 @@
 | _Vyuh_                                                                                                                                                                                                                                                          |
 | [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)                                                                                                         |
 | [![vyuh_extension_content](https://img.shields.io/pub/v/vyuh_extension_content.svg?label=vyuh_extension_content&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_extension_content)                                                     |
+| [![vyuh_content_widget](https://img.shields.io/pub/v/vyuh_content_widget.svg?label=vyuh_content_widget&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_content_widget)                                                                 |
 | [![vyuh_plugin_content_provider_sanity](https://img.shields.io/pub/v/vyuh_plugin_content_provider_sanity.svg?label=vyuh_plugin_content_provider_sanity&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_plugin_content_provider_sanity) |
 | [![vyuh_cache](https://img.shields.io/pub/v/vyuh_cache.svg?label=vyuh_cache&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cache)                                                                                                     |
 | [![vyuh_feature_system](https://img.shields.io/pub/v/vyuh_feature_system.svg?label=vyuh_feature_system&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_feature_system)                                                                 |
@@ -107,6 +108,11 @@ The **Vyuh** framework has some powerful built-in capabilities such as:
 - [x] Creating a family of apps with reusable features.
 - [x] A growing set of integrations (aka building blocks) to make app
       development faster.
+
+> [!NOTE]
+>
+> You can either use the full Framework for your app or start small with the
+> [vyuh_content_widget](https://pub.dev/packages/vyuh_content_widget) package.
 
 ## 🔩 The Building Blocks
 
