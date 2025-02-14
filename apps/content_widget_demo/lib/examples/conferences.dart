@@ -4,29 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 
-final conferences = Example(
-  title: 'Conferences',
-  description:
-      'Shows a list of conferences from the CMS, using the listBuilder',
-  builder: (context) => VyuhContentWidget(
-    query: '''
+final class ConferencesExample extends ExampleWidget {
+  const ConferencesExample({super.key})
+      : super(
+          title: 'Conferences',
+          description:
+              'Shows a list of conferences from the CMS, using the listBuilder',
+        );
+
+  @override
+  Widget build(BuildContext context) {
+    return VyuhContentWidget(
+      query: '''
 *[_type == "conf.conference"]{
   ...,
   "slug": slug.current,
 }
   ''',
-    fromJson: conf.Conference.fromJson,
-    listBuilder: (context, conferences) => ListView.builder(
-      itemCount: conferences.length,
-      itemBuilder: (context, index) => ListTile(
-        leading: system.ContentImage(
-          ref: conferences[index].logo,
-          width: 48,
-          height: 48,
+      fromJson: conf.Conference.fromJson,
+      listBuilder: (context, conferences) => ListView.builder(
+        itemCount: conferences.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: system.ContentImage(
+            ref: conferences[index].logo,
+            width: 48,
+            height: 48,
+          ),
+          title: Text(conferences[index].title),
+          subtitle: Text(conferences[index].slug),
         ),
-        title: Text(conferences[index].title),
-        subtitle: Text(conferences[index].slug),
       ),
-    ),
-  ),
-);
+    );
+  }
+}

@@ -14,11 +14,11 @@ import 'package:vyuh_plugin_telemetry_provider_console/vyuh_plugin_telemetry_pro
 
 import 'example.dart';
 
-final allExamples = [
-  helloWorld,
-  conferences,
-  customWidget,
-  route,
+final examples = [
+  const HelloWorldExample(),
+  const CustomWidgetExample(),
+  const ConferencesExample(),
+  const RouteExample(),
 ];
 
 final sanityProvider = SanityContentProvider.withConfig(
@@ -30,32 +30,43 @@ final sanityProvider = SanityContentProvider.withConfig(
     token:
         'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
   ),
-  cacheDuration: const Duration(seconds: 5),
+  cacheDuration: const Duration(seconds: 1),
 );
 
 void main() async {
   VyuhContentBinding.init(
-      plugins: PluginDescriptor(
-        content: DefaultContentPlugin(provider: sanityProvider),
-        telemetry:
-            TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
-      ),
-      descriptors: [system.descriptor]);
+    plugins: PluginDescriptor(
+      content: DefaultContentPlugin(provider: sanityProvider),
+      telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
+    ),
+    descriptors: [system.descriptor],
+  );
 
-  runApp(const MyApp());
+  runApp(MyApp(examples: examples));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final List<ExampleWidget> examples;
+
+  const MyApp({super.key, required this.examples});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
       routerConfig: GoRouter(
         routes: [
           GoRoute(
             path: '/',
-            builder: (context, state) => const DashboardPage(),
+            builder: (context, state) => DashboardPage(examples: examples),
+          ),
+          GoRoute(
+            path: '/:index',
+            builder: (context, state) {
+              final index = int.parse(state.pathParameters['index']!);
+
+              return ExampleContent(example: examples[index]);
+            },
           ),
         ],
       ),
@@ -63,14 +74,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class DashboardPage extends StatefulWidget {
-  const DashboardPage({super.key});
+class DashboardPage extends StatelessWidget {
+  final List<ExampleWidget> examples;
+  const DashboardPage({super.key, required this.examples});
 
-  @override
-  State<DashboardPage> createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,20 +86,15 @@ class _DashboardPageState extends State<DashboardPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListView.builder(
-            itemCount: allExamples.length,
+            itemCount: examples.length,
             itemBuilder: (_, index) {
-              final ex = allExamples[index];
+              final ex = examples[index];
 
               return ListTile(
                 title: Text(ex.title),
                 subtitle: Text(ex.description),
                 trailing: const Icon(Icons.chevron_right),
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ExampleContent(example: ex),
-                  ),
-                ),
+                onTap: () => context.push('/$index'),
               );
             },
           ),

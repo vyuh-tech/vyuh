@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-final class Example {
+abstract base class ExampleWidget extends StatelessWidget {
   final String title;
   final String description;
-  final Widget Function(BuildContext) builder;
 
-  Example({
+  const ExampleWidget({
+    super.key,
     required this.title,
     required this.description,
-    required this.builder,
   });
 }
 
 final class ExampleContent extends StatelessWidget {
-  final Example example;
+  final ExampleWidget example;
 
   const ExampleContent({super.key, required this.example});
 
@@ -50,7 +49,7 @@ final class ExampleContent extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8),
-              Expanded(child: example.builder(context)),
+              Expanded(child: example),
             ],
           ),
         ),
