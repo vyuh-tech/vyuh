@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../sanity_client.dart';
+import 'sanity_client.dart';
 
 class SanityRequest {
   static const int _maxGetQuerySize = 11 * 1024; // 11kB limit
@@ -8,11 +8,13 @@ class SanityRequest {
   final UrlBuilder urlBuilder;
   final String query;
   final Map<String, String>? params;
+  final bool live;
 
   SanityRequest({
     required this.urlBuilder,
     required this.query,
     this.params,
+    this.live = false,
   });
 
   /// Queries longer than 11kB can’t be submitted using the GET method,
@@ -23,10 +25,10 @@ class SanityRequest {
     return bytes.lengthInBytes > _maxGetQuerySize;
   }
 
-  Uri get getUri => urlBuilder.queryUrl(query, params: params);
+  Uri get getUri => urlBuilder.queryUrl(query, params: params, live: live);
 
   Uri get postUri {
-    final getUri = urlBuilder.queryUrl('', params: const {});
+    final getUri = urlBuilder.queryUrl('', params: const {}, live: live);
 
     return getUri.replace(
       queryParameters: <String, dynamic>{

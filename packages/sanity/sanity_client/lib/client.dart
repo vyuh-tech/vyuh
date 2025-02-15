@@ -1,9 +1,11 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:eventflux/eventflux.dart';
 import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
-import 'src/sanity_request.dart';
+import 'sanity_request.dart';
 
 /// The various perspectives that can be used to fetch data from Sanity
 enum Perspective {
@@ -19,6 +21,22 @@ enum Perspective {
 
   /// Fetch only the published documents
   published,
+}
+
+enum LiveEventType {
+  welcome,
+  restart,
+  error,
+  keepAlive,
+  message;
+
+  static LiveEventType fromString(String event) => switch (event) {
+        'welcome' => LiveEventType.welcome,
+        'restart' => LiveEventType.restart,
+        'error' => LiveEventType.error,
+        'message' => LiveEventType.message,
+        _ => LiveEventType.keepAlive,
+      };
 }
 
 /// Configuration for the Sanity client
@@ -99,9 +117,17 @@ final class SanityClient {
     this.config, {
     final http.Client? httpClient,
     final UrlBuilder? urlBuilder,
-  })  : httpClient = httpClient ?? http.Client(),
-        urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
-        _requestHeaders = {'Authorization': 'Bearer ${config.token}'};
+  })  : urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
+        httpClient = httpClient ?? http.Client(),
+        _requestHeaders = {
+          'Authorization': 'Bearer ${config.token}',
+          'Accept': 'application/json',
+        };
+
+  /// Set the HTTP client to use for fetching data
+  setHttpClient(http.Client client) {
+    httpClient = client;
+  }
 
   /// Fetches data from Sanity by running the GROQ Query with the passed in parameters
   Future<SanityQueryResponse> fetch(
@@ -118,6 +144,102 @@ final class SanityClient {
       return _executePost(request);
     }
     return _executeGet(request);
+  }
+
+  /// Fetches data from Sanity using Server-Sent Events (SSE) for live updates.
+  Stream<SanityQueryResponse> fetchLive(
+    String query, {
+    Map<String, String>? params,
+  }) {
+    final sanityRequest = SanityRequest(
+      urlBuilder: urlBuilder,
+      query: query,
+      params: params,
+      live: true,
+    );
+
+    final uri = sanityRequest.getUri;
+
+    final headers = Map<String, String>.from(_requestHeaders);
+    headers['Accept'] = 'text/event-stream';
+
+    final controller = StreamController<SanityQueryResponse>();
+
+    EventFlux.instance.connect(
+      EventFluxConnectionType.get,
+      uri.toString(),
+      autoReconnect: true,
+      reconnectConfig: ReconnectConfig(
+        mode: ReconnectMode.exponential,
+        maxAttempts: 5,
+      ),
+      header: headers,
+      httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
+      tag: query,
+      onSuccessCallback: (response) {
+        if (response == null || response.stream == null) {
+          throw LiveConnectException('With query: $query, params: $params');
+        }
+
+        _onLiveConnectCallback(controller, query, params, response.stream!);
+      },
+      onError: (error) {
+        throw LiveConnectException('With query: $query, params: $params');
+      },
+    );
+
+    return controller.stream;
+  }
+
+  void _onLiveConnectCallback(
+    StreamController<SanityQueryResponse> controller,
+    String query,
+    Map<String, String>? params,
+    Stream<EventFluxData> stream,
+  ) async {
+    late final StreamSubscription<EventFluxData> subscription;
+    subscription = stream.listen((event) async {
+      if (controller.isClosed) {
+        subscription.cancel();
+        return;
+      }
+
+      final eventType = LiveEventType.fromString(event.event);
+
+      switch (eventType) {
+        case LiveEventType.error:
+          controller.addError('Live Data error');
+          break;
+
+        case LiveEventType.message:
+          // Handle query invalidation based on tags
+          final eventData = jsonDecode(event.data);
+          if (eventData != null && eventData['tags'] != null) {
+            try {
+              final response = await fetch(query, params: params);
+              controller.add(response);
+            } catch (e, stackTrace) {
+              controller.addError(e, stackTrace);
+            }
+          }
+          break;
+
+        default:
+          // For welcome, restart, mutation, keepAlive - fetch latest data
+          try {
+            final response = await fetch(query, params: params);
+            controller.add(response);
+          } catch (e, stackTrace) {
+            controller.addError(e, stackTrace);
+          }
+          break;
+      }
+    });
+
+    controller.onCancel = () {
+      subscription.cancel();
+      EventFlux.instance.disconnect();
+    };
   }
 
   Future<SanityQueryResponse> _executeGet(SanityRequest request) async {
@@ -138,11 +260,12 @@ final class SanityClient {
       },
       body: jsonEncode(request.toPostBody()),
     );
+
     return _getQueryResult(response);
   }
 
-  /// Return the associated image url
   //ignore: long-parameter-list
+  /// Return the associated image url
   Uri imageUrl(
     final String imageRefId, {
     final int? width,
@@ -178,11 +301,6 @@ final class SanityClient {
         .toList(growable: false);
 
     return datasets;
-  }
-
-  /// Set the HTTP client to use for fetching data
-  setHttpClient(http.Client client) {
-    httpClient = client;
   }
 
   SanityQueryResponse _getQueryResult(final http.Response response) {
@@ -229,4 +347,14 @@ final class SanityClient {
       shard
     );
   }
+}
+
+final class _EventFluxHttpClientAdapter implements HttpClientAdapter {
+  final http.Client httpClient;
+
+  _EventFluxHttpClientAdapter({required this.httpClient});
+
+  @override
+  Future<http.StreamedResponse> send(http.BaseRequest request) =>
+      httpClient.send(request);
 }

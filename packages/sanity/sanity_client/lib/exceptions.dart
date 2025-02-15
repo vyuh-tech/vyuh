@@ -41,3 +41,10 @@ final class InvalidReferenceException extends SanityException {
   InvalidReferenceException([final String? message])
       : super(message, 'Invalid reference: ');
 }
+
+/// Exception when connecting to the live subscription.
+final class LiveConnectException extends SanityException {
+  /// Creates a new live connect exception.
+  LiveConnectException([final String? message])
+      : super(message, 'Error connecting to live subscription: ');
+}

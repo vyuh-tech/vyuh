@@ -51,7 +51,7 @@ abstract class UrlBuilder<TConfig> {
   Uri imageUrl(String imageRefId, {ImageOptions? options});
 
   /// Builds a URL for a GROQ query.
-  Uri queryUrl(String query, {Map<String, String>? params});
+  Uri queryUrl(String query, {Map<String, String>? params, bool live = false});
 }
 
 /// A URL builder implementation for Sanity.
@@ -119,7 +119,8 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
   }
 
   @override
-  Uri queryUrl(String query, {Map<String, dynamic>? params}) {
+  Uri queryUrl(String query,
+      {Map<String, dynamic>? params, bool live = false}) {
     final queryParameters = <String, dynamic>{
       'query': query,
       'explain': config.explainQuery.toString(),
@@ -128,10 +129,15 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
         ...params.map((key, value) => MapEntry('\$$key', '"$value"')),
     };
 
+    final host =
+        '${config.projectId}.${config.useCdn && !live ? 'apicdn' : 'api'}.sanity.io';
+    final path =
+        '/${live ? 'vX' : config.apiVersion}/data/${live ? 'live/events' : 'query'}/${config.dataset}';
+
     return Uri(
       scheme: 'https',
-      host: '${config.projectId}.${config.useCdn ? 'apicdn' : 'api'}.sanity.io',
-      path: '/${config.apiVersion}/data/query/${config.dataset}',
+      host: host,
+      path: path,
       queryParameters: queryParameters,
     );
   }
