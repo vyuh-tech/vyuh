@@ -1,3 +1,7 @@
+## 1.7.1
+
+ - **FIX**: tests in sanity client, adding readme for secure storage plugin.
+
 ## 1.7.0
 
  - **FIX**: trying a few things.

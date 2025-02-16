@@ -1,6 +1,6 @@
 name: sanity_client
 description: Native Dart client to run GROQ queries and fetch documents from Sanity.io
-version: 1.7.0
+version: 1.7.1
 
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/sanity/sanity_client
