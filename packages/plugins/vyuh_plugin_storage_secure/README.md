@@ -57,7 +57,7 @@ import 'package:vyuh_plugin_storage_secure/vyuh_plugin_storage_secure.dart';
 void main() {
   vyuh.runApp(
     plugins: PluginDescriptor(
-      storage: FlutterSecureStoragePlugin(
+      secureStorage: FlutterSecureStoragePlugin(
         androidOptions: const AndroidOptions(
           encryptedSharedPreferences: true,
         ),
@@ -74,7 +74,7 @@ void main() {
 Access the secure storage plugin:
 
 ```dart
-final storage = vyuh.platform.getPlugin<StoragePlugin>();
+final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
 
 // Store sensitive data
 await storage.write('auth.token', 'your-secure-token');
@@ -104,7 +104,7 @@ Configure platform-specific options when creating the plugin:
 void main() {
   vyuh.runApp(
     plugins: PluginDescriptor(
-      storage: FlutterSecureStoragePlugin(
+      secureStorage: FlutterSecureStoragePlugin(
         androidOptions: const AndroidOptions(
           encryptedSharedPreferences: true,
         ),
@@ -134,3 +134,7 @@ void main() {
 Contributions are welcome! Please read our
 [contributing guidelines](https://github.com/vyuh-tech/vyuh/blob/main/CONTRIBUTING.md)
 to get started.
+
+---
+
+<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>

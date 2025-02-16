@@ -1,6 +1,8 @@
 import 'package:collection/collection.dart';
 import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
 import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
+import 'package:vyuh_core/plugin/storage/in_memory_secure_storage_plugin.dart';
+import 'package:vyuh_core/plugin/storage/in_memory_storage_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A descriptor for configuring the plugin system in a Vyuh application.
@@ -21,6 +23,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 ///   - [EnvPlugin]: Environment configuration
 ///   - [EventPlugin]: Event system
 ///   - [StoragePlugin]: Data persistence
+///   - [SecureStoragePlugin]: Secure Data persistence
 /// - Custom Plugins: Additional plugins via [others]
 ///
 /// Each plugin type has a default implementation that is used if not explicitly
@@ -55,6 +58,7 @@ final class PluginDescriptor {
     final EnvPlugin? env,
     final EventPlugin? event,
     final StoragePlugin? storage,
+    final SecureStoragePlugin? secureStorage,
     final List<Plugin>? others,
   }) {
     final otherPlugins = others ?? <Plugin>[];
@@ -69,6 +73,7 @@ final class PluginDescriptor {
             plugin is NavigationPlugin ||
             plugin is EventPlugin ||
             plugin is StoragePlugin ||
+            plugin is SecureStoragePlugin ||
             plugin is EnvPlugin) {
           return false;
         }
@@ -87,6 +92,8 @@ final class PluginDescriptor {
       navigation ?? system.get<NavigationPlugin>(),
       event ?? system.get<EventPlugin>(),
       env ?? system.get<EnvPlugin>(),
+      storage ?? system.get<StoragePlugin>(),
+      secureStorage ?? system.get<SecureStoragePlugin>(),
     ].nonNulls);
 
     _plugins.addAll(others ?? <Plugin>[]);
@@ -102,6 +109,8 @@ final class PluginDescriptor {
     NavigationPlugin,
     EnvPlugin,
     EventPlugin,
+    StoragePlugin,
+    SecureStoragePlugin,
   ];
 
   static final system = PluginDescriptor(
@@ -114,6 +123,8 @@ final class PluginDescriptor {
     navigation: DefaultNavigationPlugin(),
     env: NoOpEnvPlugin(),
     event: DefaultEventPlugin(),
+    storage: InMemoryStoragePlugin(),
+    secureStorage: InMemorySecureStoragePlugin(),
   );
 
   T? get<T extends Plugin>() {

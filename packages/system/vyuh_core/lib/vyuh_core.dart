@@ -92,7 +92,7 @@ export 'plugin/network/http_network_plugin.dart';
 export 'plugin/network/network_plugin.dart';
 export 'plugin/plugin.dart';
 export 'plugin/plugin_descriptor.dart';
-export 'plugin/storage_plugin.dart';
+export 'plugin/storage/storage_plugin.dart';
 export 'plugin/telemetry/logger.dart';
 export 'plugin/telemetry/noop_telemetry_provider.dart';
 export 'plugin/telemetry/telemetry_plugin.dart';

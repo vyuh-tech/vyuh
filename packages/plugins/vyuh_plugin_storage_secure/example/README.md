@@ -24,7 +24,7 @@ void main() {
   // Configure the app with secure storage plugin
   vyuh.runApp(
     plugins: PluginDescriptor(
-      storage: FlutterSecureStoragePlugin(
+      secureStorage: FlutterSecureStoragePlugin(
         // Platform-specific options
         androidOptions: const AndroidOptions(
           encryptedSharedPreferences: true,
@@ -58,13 +58,13 @@ class SecureStorageExample extends StatefulWidget {
 }
 
 class _SecureStorageExampleState extends State<SecureStorageExample> {
-  late final StoragePlugin _storage;
+  late final SecureStoragePlugin _storage;
   String? _storedValue;
 
   @override
   void initState() {
     super.initState();
-    _storage = vyuh.platform.getPlugin<StoragePlugin>();
+    _storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
     _loadStoredValue();
   }
 
@@ -111,7 +111,7 @@ class _SecureStorageExampleState extends State<SecureStorageExample> {
 ```dart
 // Store multiple values
 Future<void> storeUserData(String userId, String token, String email) async {
-  final storage = vyuh.platform.getPlugin<StoragePlugin>();
+  final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
   
   await Future.wait([
     storage.write('user.id', userId),
@@ -122,14 +122,14 @@ Future<void> storeUserData(String userId, String token, String email) async {
 
 // Check if values exist
 Future<bool> isUserLoggedIn() async {
-  final storage = vyuh.platform.getPlugin<StoragePlugin>();
+  final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
   
   return await storage.has('user.token');
 }
 
 // Clear user data
 Future<void> logout() async {
-  final storage = vyuh.platform.getPlugin<StoragePlugin>();
+  final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
   
   await Future.wait([
     storage.delete('user.id'),
@@ -144,11 +144,10 @@ Future<void> logout() async {
 ```dart
 Future<String?> safeRead(String key) async {
   try {
-    final storage = vyuh.platform.getPlugin<StoragePlugin>();
+    final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
     return await storage.read(key);
   } catch (e) {
     print('Error reading from secure storage: $e');
     return null;
   }
 }
-```
