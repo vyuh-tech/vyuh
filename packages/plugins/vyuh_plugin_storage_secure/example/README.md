@@ -8,7 +8,7 @@ First, add the plugin to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  vyuh_core: ^1.0.0
+  vyuh_core: ^1.39.4
   vyuh_plugin_storage_secure: ^1.1.1
 ```
 
@@ -152,27 +152,3 @@ Future<String?> safeRead(String key) async {
   }
 }
 ```
-
-## Platform-Specific Considerations
-
-### Android
-- Uses EncryptedSharedPreferences for secure storage
-- Keys and values are encrypted using AES-256
-- Requires Android 6.0 (API level 23) or higher
-
-### iOS/macOS
-- Uses Keychain for secure storage
-- Data persists even after app uninstall
-- Supports iCloud sync with `synchronizable: true`
-
-### Linux
-- Uses Secret Service API
-- Requires a running D-Bus session
-
-### Windows
-- Uses Windows Data Protection API (DPAPI)
-- Data is tied to the current user account
-
-### Web
-- Uses localStorage with additional encryption
-- Note: Web storage is inherently less secure
