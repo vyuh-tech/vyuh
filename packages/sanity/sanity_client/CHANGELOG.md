@@ -1,3 +1,8 @@
+## 1.7.0
+
+ - **FIX**: trying a few things.
+ - **FEAT**: draft approach to live content queries.
+
 ## 1.6.1
 
  - **FIX**: format fixes in readme.
