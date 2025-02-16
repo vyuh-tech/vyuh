@@ -16,20 +16,20 @@
     "sanity"
   ],
   "dependencies": {
-    "@vyuh/sanity-plugin-structure": "^1.34.0",
+    "@vyuh/sanity-plugin-structure": "^1.37.0",
     "@vyuh/sanity-schema-auth": "^1.28.3",
-    "@vyuh/sanity-schema-core": "^1.34.0",
+    "@vyuh/sanity-schema-core": "^1.37.0",
     "@vyuh/sanity-schema-onboarding": "^1.28.3",
-    "@vyuh/sanity-schema-system": "^1.34.0",
+    "@vyuh/sanity-schema-system": "^1.37.0",
     "conference-sanity-schema": "workspace:*",
     "food-sanity-schema": "workspace:*",
     "misc-sanity-schema": "workspace:*",
     "puzzles-sanity-schema": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.72.1",
+    "sanity": "^3.75.1",
     "settings-sanity-schema": "workspace:*",
-    "styled-components": "^6.1.14",
+    "styled-components": "^6.1.15",
     "tmdb-sanity-schema": "workspace:*",
     "wonderous-sanity-schema": "workspace:*"
   },
@@ -39,7 +39,7 @@
     "@types/react": "^18.3.18",
     "eslint": "^8.57.1",
     "lodash-es": "^4.17.21",
-    "nanoid": "^5.0.9",
+    "nanoid": "^5.1.0",
     "typescript": "^5.7.3"
   }
 }
