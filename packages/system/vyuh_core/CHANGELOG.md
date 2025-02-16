@@ -1,3 +1,7 @@
+## 1.40.0
+
+ - **FEAT**: adding default implementations for storage and secure storage plugins, updated readmes.
+
 ## 1.39.4
 
  - **FIX**: tests ... wip ... added runmode to distinguish between app and widget mode.

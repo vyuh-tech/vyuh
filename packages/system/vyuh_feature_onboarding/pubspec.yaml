@@ -16,7 +16,7 @@ dependencies:
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
   flutter_sanity_portable_text: ^1.6.2
-  vyuh_core: ^1.39.4
+  vyuh_core: ^1.40.0
   vyuh_feature_system: ^1.38.2
   vyuh_extension_content: ^1.21.1
   introduction_screen: ^3.1.14

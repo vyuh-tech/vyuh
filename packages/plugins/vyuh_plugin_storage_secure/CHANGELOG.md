@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: adding default implementations for storage and secure storage plugins, updated readmes.
+
 ## 1.1.2
 
  - **FIX**: adding example and docs, dep versions for better scores.

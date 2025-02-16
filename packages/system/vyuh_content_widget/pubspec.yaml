@@ -21,7 +21,7 @@ dependencies:
 
   json_annotation: ^4.9.0
 
-  vyuh_core: ^1.39.4
+  vyuh_core: ^1.40.0
   vyuh_extension_content: ^1.21.1
 
 dev_dependencies:
