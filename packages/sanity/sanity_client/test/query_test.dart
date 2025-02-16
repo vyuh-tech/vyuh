@@ -270,7 +270,7 @@ void main() {
       await client.fetch(edgeQuery);
 
       // Now try with one byte over
-      final overQuery = 'x' * (11 * 1014 + 1);
+      final overQuery = 'x' * (11 * 1024 + 1);
 
       httpClient = MockClient((req) async {
         expect(req.method, equals('POST'));
