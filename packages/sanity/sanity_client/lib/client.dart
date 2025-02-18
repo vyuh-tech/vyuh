@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'sanity_client.dart';
 import 'sanity_request.dart';
 
+part 'live.dart';
+
 /// The various perspectives that can be used to fetch data from Sanity
 enum Perspective {
   /// Fetch all documents including drafts
@@ -21,22 +23,6 @@ enum Perspective {
 
   /// Fetch only the published documents
   published,
-}
-
-enum LiveEventType {
-  welcome,
-  restart,
-  error,
-  keepAlive,
-  message;
-
-  static LiveEventType fromString(String event) => switch (event) {
-        'welcome' => LiveEventType.welcome,
-        'restart' => LiveEventType.restart,
-        'error' => LiveEventType.error,
-        'message' => LiveEventType.message,
-        _ => LiveEventType.keepAlive,
-      };
 }
 
 /// Configuration for the Sanity client
@@ -146,102 +132,6 @@ final class SanityClient {
     return _executeGet(request);
   }
 
-  /// Fetches data from Sanity using Server-Sent Events (SSE) for live updates.
-  Stream<SanityQueryResponse> fetchLive(
-    String query, {
-    Map<String, String>? params,
-  }) {
-    final sanityRequest = SanityRequest(
-      urlBuilder: urlBuilder,
-      query: query,
-      params: params,
-      live: true,
-    );
-
-    final uri = sanityRequest.getUri;
-
-    final headers = Map<String, String>.from(_requestHeaders);
-    headers['Accept'] = 'text/event-stream';
-
-    final controller = StreamController<SanityQueryResponse>();
-
-    EventFlux.instance.connect(
-      EventFluxConnectionType.get,
-      uri.toString(),
-      autoReconnect: true,
-      reconnectConfig: ReconnectConfig(
-        mode: ReconnectMode.exponential,
-        maxAttempts: 5,
-      ),
-      header: headers,
-      httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
-      tag: query,
-      onSuccessCallback: (response) {
-        if (response == null || response.stream == null) {
-          throw LiveConnectException('With query: $query, params: $params');
-        }
-
-        _onLiveConnectCallback(controller, query, params, response.stream!);
-      },
-      onError: (error) {
-        throw LiveConnectException('With query: $query, params: $params');
-      },
-    );
-
-    return controller.stream;
-  }
-
-  void _onLiveConnectCallback(
-    StreamController<SanityQueryResponse> controller,
-    String query,
-    Map<String, String>? params,
-    Stream<EventFluxData> stream,
-  ) async {
-    late final StreamSubscription<EventFluxData> subscription;
-    subscription = stream.listen((event) async {
-      if (controller.isClosed) {
-        subscription.cancel();
-        return;
-      }
-
-      final eventType = LiveEventType.fromString(event.event);
-
-      switch (eventType) {
-        case LiveEventType.error:
-          controller.addError('Live Data error');
-          break;
-
-        case LiveEventType.message:
-          // Handle query invalidation based on tags
-          final eventData = jsonDecode(event.data);
-          if (eventData != null && eventData['tags'] != null) {
-            try {
-              final response = await fetch(query, params: params);
-              controller.add(response);
-            } catch (e, stackTrace) {
-              controller.addError(e, stackTrace);
-            }
-          }
-          break;
-
-        default:
-          // For welcome, restart, mutation, keepAlive - fetch latest data
-          try {
-            final response = await fetch(query, params: params);
-            controller.add(response);
-          } catch (e, stackTrace) {
-            controller.addError(e, stackTrace);
-          }
-          break;
-      }
-    });
-
-    controller.onCancel = () {
-      subscription.cancel();
-      EventFlux.instance.disconnect();
-    };
-  }
-
   Future<SanityQueryResponse> _executeGet(SanityRequest request) async {
     final response = await httpClient.get(
       request.getUri,
@@ -347,14 +237,4 @@ final class SanityClient {
       shard
     );
   }
-}
-
-final class _EventFluxHttpClientAdapter implements HttpClientAdapter {
-  final http.Client httpClient;
-
-  _EventFluxHttpClientAdapter({required this.httpClient});
-
-  @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) =>
-      httpClient.send(request);
 }
