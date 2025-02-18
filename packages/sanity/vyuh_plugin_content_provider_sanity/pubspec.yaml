@@ -20,8 +20,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sanity_client: ^1.7.1
-  vyuh_core: ^1.40.0
+  sanity_client: ^1.7.2
+  vyuh_core: ^1.40.1
   vyuh_cache: ^1.4.5
   cached_network_image: ^3.3.1
   cached_network_image_platform_interface: ^4.1.1

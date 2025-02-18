@@ -1,3 +1,7 @@
+## 1.7.2
+
+ - **FIX**: improved listener for live events and some linting fixes.
+
 ## 1.7.1
 
  - **FIX**: tests in sanity client, adding readme for secure storage plugin.

@@ -1,3 +1,7 @@
+## 1.40.1
+
+ - **FIX**: improved listener for live events and some linting fixes.
+
 ## 1.40.0
 
  - **FEAT**: adding default implementations for storage and secure storage plugins, updated readmes.
