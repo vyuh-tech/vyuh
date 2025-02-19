@@ -141,22 +141,32 @@ class _LogoutButtonState extends State<_LogoutButton> {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       if (_future.value.status == FutureStatus.pending) {
-        return const CircularProgressIndicator();
+        return vyuh.widgetBuilder.contentLoader(context);
       }
 
-      return OutlinedButton(
-        onPressed: () async {
-          runInAction(
-              () => _future.value = ObservableFuture(vyuh.auth.logout()));
-        },
-        child: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.logout),
-            SizedBox(width: 8),
-            Text('Logout'),
-          ],
-        ),
+      return Column(
+        children: [
+          OutlinedButton(
+            onPressed: () async {
+              runInAction(
+                  () => _future.value = ObservableFuture(vyuh.auth.logout()));
+            },
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.logout),
+                SizedBox(width: 8),
+                Text('Logout'),
+              ],
+            ),
+          ),
+          if (_future.value.status == FutureStatus.rejected)
+            vyuh.widgetBuilder.errorView(
+              context,
+              error: _future.value.error,
+              title: 'Failed to logout',
+            )
+        ],
       );
     });
   }

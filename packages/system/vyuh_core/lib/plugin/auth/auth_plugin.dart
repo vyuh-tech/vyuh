@@ -58,56 +58,47 @@ abstract class AuthPlugin extends Plugin {
     return '$methodName is not implemented. Configure the Auth Plugin to support this method.';
   }
 
-  Future<void> loginAnonymously() {
-    throw UnimplementedError(_errorMessage('loginAnonymously()'));
-  }
+  Future<void> loginAnonymously() =>
+      Future.error(UnimplementedError(_errorMessage('loginAnonymously()')));
 
-  Future<void> sendOtp({required String phoneNumber}) {
-    throw UnimplementedError(_errorMessage('sendOtp()'));
-  }
+  Future<void> sendOtp({required String phoneNumber}) =>
+      Future.error(UnimplementedError(_errorMessage('sendOtp()')));
 
   Future<void> loginWithPhoneOtp(
-      {required String phoneNumber, required String otp}) {
-    throw UnimplementedError(_errorMessage('loginWithPhoneOtp()'));
-  }
+          {required String phoneNumber, required String otp}) =>
+      Future.error(UnimplementedError(_errorMessage('loginWithPhoneOtp()')));
 
   Future<void> loginWithEmailPassword(
-      {required String email, required String password}) {
-    throw UnimplementedError(_errorMessage('loginWithEmailPassword()'));
-  }
+          {required String email, required String password}) =>
+      Future.error(
+          UnimplementedError(_errorMessage('loginWithEmailPassword()')));
 
   Future<void> registerWithEmailPassword(
-      {required String email, required String password}) {
-    throw UnimplementedError(_errorMessage('registerWithEmailPassword()'));
-  }
+          {required String email, required String password}) =>
+      Future.error(
+          UnimplementedError(_errorMessage('registerWithEmailPassword()')));
 
   Future<void> sendEmailLink(
-      {required String email, required String clientId}) {
-    throw UnimplementedError(_errorMessage('sendEmailLink()'));
-  }
+          {required String email, required String clientId}) =>
+      Future.error(UnimplementedError(_errorMessage('sendEmailLink()')));
 
-  Future<void> sendPasswordResetEmail({required String email}) {
-    throw UnimplementedError(_errorMessage('sendPasswordResetEmail()'));
-  }
+  Future<void> sendPasswordResetEmail({required String email}) => Future.error(
+      UnimplementedError(_errorMessage('sendPasswordResetEmail()')));
 
   Future<void> loginWithEmailLink(
-      {required String email, required String link}) {
-    throw UnimplementedError(_errorMessage('loginWithEmailLink()'));
-  }
+          {required String email, required String link}) =>
+      Future.error(UnimplementedError(_errorMessage('loginWithEmailLink()')));
 
-  Future<void> loginWithOAuth(OAuthType type) {
-    throw UnimplementedError(_errorMessage('loginWithOAuth()'));
-  }
+  Future<void> loginWithOAuth(OAuthType type) =>
+      Future.error(UnimplementedError(_errorMessage('loginWithOAuth()')));
 
   /// Logs out the current user.
-  Future<void> logout() {
-    throw UnimplementedError(_errorMessage('logout()'));
-  }
+  Future<void> logout() =>
+      Future.error(UnimplementedError(_errorMessage('logout()')));
 
   /// Deletes the current user account.
-  Future<void> deleteAccount() {
-    throw UnimplementedError(_errorMessage('deleteAccount()'));
-  }
+  Future<void> deleteAccount() =>
+      Future.error(UnimplementedError(_errorMessage('deleteAccount()')));
 }
 
 enum OAuthType {
