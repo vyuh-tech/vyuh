@@ -1,3 +1,7 @@
+## 1.17.4
+
+ - **FIX**: handling errors in the auth user card layout correctly and displaying it, including the auth plugin to return Future.error().
+
 ## 1.17.3
 
  - **FIX**: format fixes in readme.

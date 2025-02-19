@@ -1,3 +1,7 @@
+## 1.40.3
+
+ - **FIX**: handling errors in the auth user card layout correctly and displaying it, including the auth plugin to return Future.error().
+
 ## 1.40.2
 
  - **FIX**: ensuring there are no duplicate fallback routes, fixed the boxfit of images in onboarding screen.
