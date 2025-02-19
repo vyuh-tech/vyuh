@@ -1,3 +1,7 @@
+## 1.40.2
+
+ - **FIX**: ensuring there are no duplicate fallback routes, fixed the boxfit of images in onboarding screen.
+
 ## 1.40.1
 
  - **FIX**: improved listener for live events and some linting fixes.
