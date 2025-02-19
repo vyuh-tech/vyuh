@@ -76,7 +76,19 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   }
 
   List<g.RouteBase> _finalizeRoutes(List<g.RouteBase> routes) {
-    routes.removeWhere((r) => r == NavigationPlugin.fallbackRoute);
+    final fallbackRoutes = routes.where((r) {
+      return r == NavigationPlugin.fallbackRoute ||
+          (r as GoRoute?)?.path == NavigationPlugin.fallbackRoute.path;
+    }).toList(growable: false);
+
+    if (fallbackRoutes.isNotEmpty) {
+      vyuh.log.warn(
+          ('We found one or more fallback Routes "/:path(.*)", which will be removed'));
+    }
+
+    for (final route in fallbackRoutes) {
+      routes.remove(route);
+    }
 
     return [
       ...routes,

@@ -77,7 +77,7 @@ final class DefaultOnboardingLayout
     if (step.image != null) {
       return ContentImage(
         ref: step.image!,
-        fit: BoxFit.cover,
+        fit: BoxFit.contain,
       );
     }
 
