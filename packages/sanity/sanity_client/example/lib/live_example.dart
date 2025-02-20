@@ -23,8 +23,8 @@ Future<void> main() async {
   final stream = client.fetchLive(query);
 
   await for (var response in stream) {
-    final json = JsonEncoder.withIndent('\t').convert(response.result);
+    final json = const JsonEncoder.withIndent('\t').convert(response.result);
     // ignore: avoid_print
-    print(json + '\n-------------------');
+    print('$json\n-------------------');
   }
 }

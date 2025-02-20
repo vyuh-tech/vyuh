@@ -67,7 +67,7 @@ final vyuhFeatureBundle = MasonBundle.fromJson(<String, dynamic>{
     {
       "path": "pubspec.yaml",
       "data":
-          "bmFtZTogbWFzb25faG9va3MKCmVudmlyb25tZW50OgogIHNkazogJz49My4wLjAgPDQuMC4wJwoKZGVwZW5kZW5jaWVzOgogIG1hc29uOiBeMC4xLjAtZGV2LjU5Cg==",
+          "bmFtZTogbWFzb25faG9va3MKCmVudmlyb25tZW50OgogIHNkazogJz49My4wLjAgPDQuMC4wJwoKZGVwZW5kZW5jaWVzOgogIG1hc29uOiBeMC4xLjAK",
       "type": "text"
     }
   ],

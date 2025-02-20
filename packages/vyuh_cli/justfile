@@ -8,11 +8,11 @@ watch:
     watchexec  --watch ./bricks just bundle-all
 
 # Bundle all templates
-bundle-all: bundle-init bundle-feature bundle-feature-sanity-schema
+bundle-all: bundle-project bundle-feature bundle-feature-sanity-schema
     @echo "All templates have been bundled successfully!"
 
 # Bundle vyuh_project template
-bundle-init:
+bundle-project:
     mason bundle bricks/vyuh_project -t dart -o lib/commands/create/project
     dart format lib/commands/create/project/vyuh_project_bundle.dart
 
