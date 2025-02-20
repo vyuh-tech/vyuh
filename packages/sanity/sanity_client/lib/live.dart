@@ -70,6 +70,7 @@ extension LiveConnect on SanityClient {
     Stream<EventFluxData> stream,
   ) async {
     late final StreamSubscription<EventFluxData> subscription;
+    String? lastEventId;
     List<String> syncTags = [];
 
     controller.onCancel = () {
@@ -79,7 +80,12 @@ extension LiveConnect on SanityClient {
 
     fetchQuery() async {
       try {
-        final response = await fetch(query, params: params);
+        final allParams = {
+          if (params != null) ...params,
+          'lastLiveEventId': lastEventId ?? '',
+        };
+
+        final response = await fetch(query, params: allParams);
 
         // Track the syncTags to check with an update
         syncTags = response.syncTags;
@@ -100,6 +106,7 @@ extension LiveConnect on SanityClient {
 
       switch (eventType) {
         case _LiveEventType.welcome || _LiveEventType.restart:
+          lastEventId = event.id;
           fetchQuery();
           break;
 
