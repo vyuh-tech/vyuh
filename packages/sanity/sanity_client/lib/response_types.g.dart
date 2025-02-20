@@ -17,4 +17,8 @@ ServerResponse _$ServerResponseFromJson(Map<String, dynamic> json) =>
       result: json['result'],
       ms: (json['ms'] as num).toInt(),
       query: json['query'] as String,
+      syncTags: (json['syncTags'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
     );

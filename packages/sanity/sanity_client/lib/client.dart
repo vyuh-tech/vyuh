@@ -203,6 +203,7 @@ final class SanityClient {
 
         return SanityQueryResponse(
           result: serverResponse.result,
+          syncTags: serverResponse.syncTags,
           info: PerformanceInfo(
             age: age ?? -1,
             clientTimeMs: clientTimeMs ?? -1,

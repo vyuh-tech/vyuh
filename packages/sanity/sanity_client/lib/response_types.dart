@@ -39,11 +39,14 @@ class ServerResponse {
   /// The query that was sent to the server.
   final String query;
 
+  final List<String> syncTags;
+
   /// Creates a new server response with the given result, time and query.
   ServerResponse({
     required this.result,
     required this.ms,
     required this.query,
+    this.syncTags = const [],
   });
 
   /// Creates a new server response from a JSON map.
@@ -85,9 +88,16 @@ final class SanityQueryResponse {
   /// The result of the query, which can be a null, object or array.
   final dynamic result;
 
+  /// Sync Tags of the query, which will be used in case of a Live Fetch Query
+  final List<String> syncTags;
+
   /// The performance information of the query.
   final PerformanceInfo info;
 
   /// Creates a new Sanity query response with the given result and performance information.
-  SanityQueryResponse({required this.result, required this.info});
+  SanityQueryResponse({
+    required this.result,
+    required this.info,
+    this.syncTags = const [],
+  });
 }

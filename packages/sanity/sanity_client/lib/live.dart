@@ -26,12 +26,7 @@ extension LiveConnect on SanityClient {
   }) {
     final sanityRequest = SanityRequest(
       urlBuilder: urlBuilder,
-      query: query,
-      params: {
-        if (params != null) ...params,
-        if (config.perspective == Perspective.previewDrafts)
-          'includeDrafts': 'true',
-      },
+      query: '',
       live: true,
     );
 
@@ -75,6 +70,7 @@ extension LiveConnect on SanityClient {
     Stream<EventFluxData> stream,
   ) async {
     late final StreamSubscription<EventFluxData> subscription;
+    List<String> syncTags = [];
 
     controller.onCancel = () {
       subscription.cancel();
@@ -84,6 +80,10 @@ extension LiveConnect on SanityClient {
     fetchQuery() async {
       try {
         final response = await fetch(query, params: params);
+
+        // Track the syncTags to check with an update
+        syncTags = response.syncTags;
+
         controller.add(response);
       } catch (e, stackTrace) {
         controller.addError(e, stackTrace);
@@ -105,9 +105,13 @@ extension LiveConnect on SanityClient {
 
         case _LiveEventType.message:
           final eventData = jsonDecode(event.data);
-          if (eventData != null && eventData['tags'] != null) {
+          final tags = (eventData?['tags'] as List?)?.cast<String>();
+
+          final canUpdate = tags?.any((tag) => syncTags.contains(tag)) ?? false;
+          if (canUpdate) {
             fetchQuery();
           }
+
           break;
 
         case _LiveEventType.error:

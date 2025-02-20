@@ -122,7 +122,7 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
   Uri queryUrl(String query,
       {Map<String, dynamic>? params, bool live = false}) {
     final queryParameters = <String, dynamic>{
-      'query': query,
+      if (query.trim().isNotEmpty) 'query': query,
       'explain': config.explainQuery.toString(),
       if (config.useCdn == false) 'perspective': config.perspective.name,
       if (params != null)
@@ -130,7 +130,7 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     };
 
     final host =
-        '${config.projectId}.${config.useCdn && !live ? 'apicdn' : 'api'}.sanity.io';
+        '${config.projectId}.${live ? 'api' : (config.useCdn ? 'apicdn' : 'api')}.sanity.io';
     final path =
         '/${live ? 'vX' : config.apiVersion}/data/${live ? 'live/events' : 'query'}/${config.dataset}';
 
