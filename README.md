@@ -254,6 +254,33 @@ Follow us, stay up to date or reach out on:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
+## Want to Contribute? 🤗
+
+We welcome contributions from the community! Please check out our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute to the Vyuh Framework.
+
+### Setup
+
+1. We use [melos](https://melos.invertase.dev/) for managing our monorepo and [pnpm](https://pnpm.io/) for package management. Make sure you have both installed.
+
+2. Clone the repository and run `pnpm install` to install dependencies.
+
+3. Run `melos bootstrap` to set up the workspace.
+
+### Running the Demo
+
+To run the Vyuh Demo:
+
+1. Navigate to the `apps/vyuh_demo` directory.
+2. Follow the setup instructions in the [Vyuh Demo README](apps/vyuh_demo/README.md).
+3. Run `flutter run` to launch the demo app.
+
+### Launching Sanity Studio
+
+To start the Sanity Studio:
+
+1. Navigate to the `apps/demo-studio` directory.
+2. Run `pnpm run dev` to start the Sanity Studio development server.
+
 ## License
 
 The framework is [FSL Licensed](LICENSE).
