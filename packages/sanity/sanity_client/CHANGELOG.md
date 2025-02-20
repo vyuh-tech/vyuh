@@ -1,3 +1,9 @@
+## 1.7.3
+
+ - **FIX**: added support for launch icons, launch images in "vyuh create project", lint fixes.
+ - **FIX**: added lastLiveEventId in refetches.
+ - **FIX**: added tracking for syncTags and using that for live requery.
+
 ## 1.7.2
 
  - **FIX**: improved listener for live events and some linting fixes.

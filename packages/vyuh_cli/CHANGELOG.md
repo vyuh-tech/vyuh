@@ -1,3 +1,7 @@
+## 0.0.8+3
+
+ - **FIX**: added support for launch icons, launch images in "vyuh create project", lint fixes.
+
 ## 0.0.8+2
 
  - **FIX**: format fixes in readme.

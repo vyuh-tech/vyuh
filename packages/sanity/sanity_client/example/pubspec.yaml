@@ -8,7 +8,7 @@ environment:
 
 # Add regular dependencies here.
 dependencies:
-  sanity_client: ^1.7.2
+  sanity_client: ^1.7.3
 
 dev_dependencies:
   lints: ^5.1.1
