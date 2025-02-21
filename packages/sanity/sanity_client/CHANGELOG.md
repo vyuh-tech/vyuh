@@ -1,3 +1,7 @@
+## 1.7.4
+
+ - **FIX**: fixed the stale responses in live query. It was because the lastEventId changes for every message and should be tracked.
+
 ## 1.7.3
 
  - **FIX**: added support for launch icons, launch images in "vyuh create project", lint fixes.
