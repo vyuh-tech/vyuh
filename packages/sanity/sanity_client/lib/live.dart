@@ -111,6 +111,7 @@ extension LiveConnect on SanityClient {
           break;
 
         case _LiveEventType.message:
+          lastEventId = event.id;
           final eventData = jsonDecode(event.data);
           final tags = (eventData?['tags'] as List?)?.cast<String>();
 
