@@ -1,3 +1,7 @@
+## 0.0.8+4
+
+ - **FIX**: adding the missing .env file to project brick.
+
 ## 0.0.8+3
 
  - **FIX**: added support for launch icons, launch images in "vyuh create project", lint fixes.
