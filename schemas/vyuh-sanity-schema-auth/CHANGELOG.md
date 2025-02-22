@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-auth
 
+## 1.28.4
+
+### Patch Changes
+
+- Adding support for axis direction for oauth default layout
+
 ## 1.28.3
 
 ### Patch Changes

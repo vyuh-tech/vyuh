@@ -90,6 +90,18 @@ export const defaultOAuthSignInLayout = defineType({
         ],
       },
     }),
+    defineField({
+      name: 'direction',
+      title: 'Axis Direction',
+      type: 'string',
+      initialValue: 'vertical',
+      options: {
+        list: [
+          { title: 'Vertical', value: 'vertical' },
+          { title: 'Horizontal', value: 'horizontal' },
+        ],
+      },
+    }),
   ],
   preview: {
     select: {
