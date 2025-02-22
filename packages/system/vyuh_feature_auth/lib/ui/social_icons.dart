@@ -1,17 +1,14 @@
 import 'package:flutter/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SocialIcons {
   SocialIcons._();
 
-  static const _fontFamily = 'SocialIcons';
-  static const _fontPackage = 'vyuh_feature_auth';
-
-  static const IconData twitter =
-      IconData(0xf099, fontFamily: _fontFamily, fontPackage: _fontPackage);
-  static const IconData facebook =
-      IconData(0xf09a, fontFamily: _fontFamily, fontPackage: _fontPackage);
-  static const IconData apple =
-      IconData(0xf179, fontFamily: _fontFamily, fontPackage: _fontPackage);
-  static const IconData google =
-      IconData(0xf1a0, fontFamily: _fontFamily, fontPackage: _fontPackage);
+  static const IconData twitter = FontAwesomeIcons.xTwitter;
+  static const IconData meta = FontAwesomeIcons.meta;
+  static const IconData apple = FontAwesomeIcons.apple;
+  static const IconData google = FontAwesomeIcons.google;
+  static const IconData github = FontAwesomeIcons.github;
+  static const IconData microsoft = FontAwesomeIcons.microsoft;
+  static const IconData linkedIn = FontAwesomeIcons.linkedin;
 }

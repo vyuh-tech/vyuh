@@ -22,7 +22,10 @@ final class OAuthSignInLayout extends LayoutConfiguration<OAuthSignIn> {
   );
 
   final OAuthLayoutType type;
-  OAuthSignInLayout({this.type = OAuthLayoutType.iconText})
+  final Axis direction;
+
+  OAuthSignInLayout(
+      {this.type = OAuthLayoutType.iconText, this.direction = Axis.vertical})
       : super(schemaType: schemaName);
 
   factory OAuthSignInLayout.fromJson(Map<String, dynamic> json) =>

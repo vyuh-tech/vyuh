@@ -14,21 +14,7 @@ feature({List<go.RouteBase> Function()? routes}) => FeatureDescriptor(
       name: 'auth',
       title: 'Authentication UI',
       icon: Icons.account_circle_outlined,
-      extensions: [
-        ContentExtensionDescriptor(contents: [
-          CardDescriptor(
-            layouts: [
-              AuthUserCardLayout.typeDescriptor,
-            ],
-          ),
-        ], contentBuilders: [
-          EmailPasswordForm.contentBuilder,
-          ForgotPasswordForm.contentBuilder,
-          OAuthSignIn.contentBuilder,
-          PhoneOtpForm.contentBuilder,
-          HintActionText.contentBuilder,
-        ])
-      ],
+      extensions: [descriptor],
       routes: routes ??
           () => [
                 CMSRoute(path: '/login'),
@@ -36,3 +22,17 @@ feature({List<go.RouteBase> Function()? routes}) => FeatureDescriptor(
                 CMSRoute(path: '/forgot-password'),
               ],
     );
+
+final descriptor = ContentExtensionDescriptor(contents: [
+  CardDescriptor(
+    layouts: [
+      AuthUserCardLayout.typeDescriptor,
+    ],
+  ),
+], contentBuilders: [
+  EmailPasswordForm.contentBuilder,
+  ForgotPasswordForm.contentBuilder,
+  OAuthSignIn.contentBuilder,
+  PhoneOtpForm.contentBuilder,
+  HintActionText.contentBuilder,
+]);

@@ -197,9 +197,12 @@ class HintAction extends StatelessWidget {
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           hintLabel,
-          GestureDetector(
-            onTap: () => onTap(context),
-            child: actionLabel,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => onTap(context),
+              child: actionLabel,
+            ),
           ),
         ],
       ),
@@ -214,6 +217,7 @@ final class AuthActionButton extends StatelessWidget {
   final ButtonStyle? buttonStyle;
   final AuthFlowScope scope;
   final bool showError;
+  final Axis direction;
 
   const AuthActionButton({
     super.key,
@@ -221,6 +225,7 @@ final class AuthActionButton extends StatelessWidget {
     required this.onPressed,
     this.buttonStyle,
     this.icon,
+    this.direction = Axis.vertical,
     required this.scope,
     this.showError = true,
   });
@@ -228,7 +233,9 @@ final class AuthActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: direction == Axis.horizontal
+          ? CrossAxisAlignment.center
+          : CrossAxisAlignment.stretch,
       children: [
         LoaderButton(
           title: title,
@@ -263,7 +270,7 @@ class ErrorText extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         Expanded(
-          child: Text(
+          child: SelectableText(
             error.toString(),
             style: theme.textTheme.bodyMedium
                 ?.apply(color: theme.colorScheme.error),

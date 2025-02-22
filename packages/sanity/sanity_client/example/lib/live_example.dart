@@ -20,7 +20,7 @@ Future<void> main() async {
     *[_type == "vyuh.document" && identifier.current == "hello-world"][0]
   ''';
 
-  final stream = client.fetchLive(query);
+  final stream = client.fetchLive(query, includeDrafts: true);
 
   await for (var response in stream) {
     final json = const JsonEncoder.withIndent('\t').convert(response.result);

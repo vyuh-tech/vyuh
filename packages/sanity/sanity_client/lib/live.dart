@@ -23,11 +23,12 @@ extension LiveConnect on SanityClient {
   Stream<SanityQueryResponse> fetchLive(
     String query, {
     Map<String, String>? params,
+    includeDrafts = false,
   }) {
     final sanityRequest = SanityRequest(
       urlBuilder: urlBuilder,
       query: '',
-      live: true,
+      live: includeDrafts ? LiveConfig.withDrafts() : LiveConfig(),
     );
 
     final uri = sanityRequest.getUri;

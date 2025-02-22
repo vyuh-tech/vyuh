@@ -8,7 +8,10 @@ typedef ScopedWidgetBuilder = Widget Function(
 
 final class AuthFlow extends StatefulWidget {
   final ScopedWidgetBuilder builder;
-  const AuthFlow({super.key, required this.builder});
+  const AuthFlow({
+    super.key,
+    required this.builder,
+  });
 
   @override
   State<AuthFlow> createState() => AuthFlowState();
