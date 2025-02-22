@@ -1,3 +1,7 @@
+## 1.17.5
+
+ - **FIX**: including live as a config, updated the vyuh_feature_auth to be a bit more comprehensive and includes correct icons for various OAuth providers.
+
 ## 1.17.4
 
  - **FIX**: handling errors in the auth user card layout correctly and displaying it, including the auth plugin to return Future.error().

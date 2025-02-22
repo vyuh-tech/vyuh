@@ -1,3 +1,7 @@
+## 1.7.5
+
+ - **FIX**: including live as a config, updated the vyuh_feature_auth to be a bit more comprehensive and includes correct icons for various OAuth providers.
+
 ## 1.7.4
 
  - **FIX**: fixed the stale responses in live query. It was because the lastEventId changes for every message and should be tracked.
