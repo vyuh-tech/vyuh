@@ -1,3 +1,7 @@
+## 1.40.4
+
+ - **FIX**: fixing the check for fallback route and adding direction as a parameter in oauth layout.
+
 ## 1.40.3
 
  - **FIX**: handling errors in the auth user card layout correctly and displaying it, including the auth plugin to return Future.error().
