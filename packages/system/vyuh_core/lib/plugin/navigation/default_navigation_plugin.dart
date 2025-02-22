@@ -77,8 +77,10 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
   List<g.RouteBase> _finalizeRoutes(List<g.RouteBase> routes) {
     final fallbackRoutes = routes.where((r) {
-      return r == NavigationPlugin.fallbackRoute ||
-          (r as GoRoute?)?.path == NavigationPlugin.fallbackRoute.path;
+      final isFallbackRoute = r == NavigationPlugin.fallbackRoute;
+      final hasFallbackPath =
+          r is GoRoute && r.path == NavigationPlugin.fallbackRoute.path;
+      return isFallbackRoute || hasFallbackPath;
     }).toList(growable: false);
 
     if (fallbackRoutes.isNotEmpty) {
