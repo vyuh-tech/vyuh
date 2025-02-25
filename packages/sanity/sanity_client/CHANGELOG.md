@@ -1,3 +1,7 @@
+## 1.7.6
+
+ - **FIX**: improve the query handling for live for include drafts. Also added assertions for the proper configurations. Adding a simple profile card to the Vyuh auth feature.
+
 ## 1.7.5
 
  - **FIX**: including live as a config, updated the vyuh_feature_auth to be a bit more comprehensive and includes correct icons for various OAuth providers.

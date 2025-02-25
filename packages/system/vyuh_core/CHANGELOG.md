@@ -1,3 +1,7 @@
+## 1.40.5
+
+ - **FIX**: improve the query handling for live for include drafts. Also added assertions for the proper configurations. Adding a simple profile card to the Vyuh auth feature.
+
 ## 1.40.4
 
  - **FIX**: fixing the check for fallback route and adding direction as a parameter in oauth layout.
