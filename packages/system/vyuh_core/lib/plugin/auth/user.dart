@@ -20,6 +20,12 @@ class User {
   /// The method used to login.
   final LoginMethod loginMethod;
 
+  /// The last sign-in time of the user.
+  final DateTime? lastSignInTime;
+
+  /// The creation time of the user.
+  final DateTime? creationTime;
+
   /// Create a new user with the given parameters.
   const User({
     required this.loginMethod,
@@ -28,6 +34,8 @@ class User {
     this.email,
     this.phoneNumber,
     this.photoUrl,
+    this.lastSignInTime,
+    this.creationTime,
   });
 
   /// Returns true if this user is the unknown user.

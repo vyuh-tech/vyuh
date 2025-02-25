@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
+import 'package:flutter_web_plugins/url_strategy.dart' as strategy;
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -9,6 +9,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   GoRouter _router = GoRouter(routes: []);
 
   var _routingConfig = RoutingConfigNotifier([]);
+  static g.GoRouterRedirect? _redirect;
 
   DefaultNavigationPlugin()
       : super(
@@ -24,11 +25,15 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   }
 
   static void usePathStrategy() {
-    usePathUrlStrategy();
+    strategy.usePathUrlStrategy();
   }
 
   static void useHashStrategy() {
-    useHashStrategy();
+    strategy.setUrlStrategy(const strategy.HashUrlStrategy());
+  }
+
+  static void setRouterRedirect(g.GoRouterRedirect redirect) {
+    _redirect = redirect;
   }
 
   @override
@@ -37,7 +42,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       required List<g.RouteBase> routes,
       required GlobalKey<NavigatorState> rootNavigatorKey}) {
     final allRoutes = _finalizeRoutes(routes);
-    _routingConfig = RoutingConfigNotifier(allRoutes);
+    _routingConfig = RoutingConfigNotifier(allRoutes, redirect: _redirect);
 
     _router = GoRouter.routingConfig(
       initialLocation: initialLocation ?? '/',
@@ -188,10 +193,16 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 }
 
 final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
-  RoutingConfigNotifier(List<g.RouteBase> routes)
-      : super(g.RoutingConfig(routes: routes));
+  final g.GoRouterRedirect? redirect;
+
+  RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect})
+      : super(redirect == null
+            ? g.RoutingConfig(routes: routes)
+            : g.RoutingConfig(routes: routes, redirect: redirect));
 
   void setRoutes(List<g.RouteBase> routes) {
-    value = g.RoutingConfig(routes: routes);
+    value = redirect == null
+        ? g.RoutingConfig(routes: routes)
+        : g.RoutingConfig(routes: routes, redirect: redirect!);
   }
 }

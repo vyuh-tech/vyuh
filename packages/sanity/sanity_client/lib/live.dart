@@ -25,6 +25,13 @@ extension LiveConnect on SanityClient {
     Map<String, String>? params,
     includeDrafts = false,
   }) {
+    assert(
+      includeDrafts
+          ? config.perspective == Perspective.previewDrafts && !config.useCdn
+          : true,
+      'When includeDrafts is true, the config must have perspective set to previewDrafts and useCdn set to false',
+    );
+
     final sanityRequest = SanityRequest(
       urlBuilder: urlBuilder,
       query: '',

@@ -41,71 +41,69 @@ class _EmailPasswordViewState extends State<EmailPasswordView> {
         key: _formKey,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              EmailField(submit: () => _submit(context, scope)),
-              const SizedBox(height: 8),
-              PasswordField(
-                showPasswordVisibilityToggle:
-                    widget.content.showPasswordVisibilityToggle,
-                submit: () => _submit(context, scope),
-              ),
-              if (widget.content.actionType == AuthActionType.signIn)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Align(
-                    alignment: Alignment.centerRight,
+          child: AutofillGroup(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                EmailField(submit: () => _submit(context, scope)),
+                const SizedBox(height: 8),
+                PasswordField(
+                  showPasswordVisibilityToggle:
+                      widget.content.showPasswordVisibilityToggle,
+                  submit: () => _submit(context, scope),
+                ),
+                if (widget.content.actionType == AuthActionType.signIn)
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: HintAction(
+                        hintLabel: const SizedBox.shrink(),
+                        actionLabel: HintAction.defaultActionLabel(
+                            context, "Forgot your password?"),
+                        onTap: (_) {
+                          widget.content.forgotPasswordAction?.execute(context);
+                        },
+                      ),
+                    ),
+                  ),
+                const SizedBox(height: 20),
+                AuthActionButton(
+                  scope: scope,
+                  title: widget.content.actionType.title,
+                  onPressed: (context) => _submit(context, scope),
+                  showError: widget.content.showLoginError,
+                ),
+                if (widget.content.actionType == AuthActionType.signIn)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: HintAction(
-                      hintLabel: const SizedBox.shrink(),
-                      actionLabel: HintAction.defaultActionLabel(
-                          context, "Forgot your password?"),
+                      hintLabel: HintAction.defaultHintLabel(
+                          context, "Don't have an account? "),
+                      actionLabel:
+                          HintAction.defaultActionLabel(context, "Sign Up"),
                       onTap: (_) {
-                        // final email = FormBuilder.of(context)
-                        //     ?.instantValue['email'] as String?;
-                        widget.content.forgotPasswordAction?.execute(context);
+                        widget.content.signupAction?.execute(context);
                       },
                     ),
                   ),
-                ),
-              const SizedBox(height: 20),
-              AuthActionButton(
-                scope: scope,
-                title: widget.content.actionType.title,
-                onPressed: (context) => _submit(context, scope),
-                showError: widget.content.showLoginError,
-              ),
-              if (widget.content.actionType == AuthActionType.signIn)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: HintAction(
-                    hintLabel: HintAction.defaultHintLabel(
-                        context, "Don't have an account? "),
-                    actionLabel:
-                        HintAction.defaultActionLabel(context, "Sign Up"),
-                    onTap: (_) {
-                      // final email = FormBuilder.of(context)
-                      //     ?.instantValue['email'] as String?;
-                      widget.content.signupAction?.execute(context);
-                    },
+                if (widget.content.actionType == AuthActionType.signUp)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: HintAction(
+                      hintLabel: HintAction.defaultHintLabel(
+                          context, "Already have an account? "),
+                      actionLabel:
+                          HintAction.defaultActionLabel(context, "Login"),
+                      onTap: (_) {
+                        // final email = FormBuilder.of(context)
+                        //     ?.instantValue['email'] as String?;
+                        widget.content.loginAction?.execute(context);
+                      },
+                    ),
                   ),
-                ),
-              if (widget.content.actionType == AuthActionType.signUp)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: HintAction(
-                    hintLabel: HintAction.defaultHintLabel(
-                        context, "Already have an account? "),
-                    actionLabel:
-                        HintAction.defaultActionLabel(context, "Login"),
-                    onTap: (_) {
-                      // final email = FormBuilder.of(context)
-                      //     ?.instantValue['email'] as String?;
-                      widget.content.loginAction?.execute(context);
-                    },
-                  ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       );

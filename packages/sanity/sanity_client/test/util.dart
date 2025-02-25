@@ -9,8 +9,8 @@ SanityClient getClient({
   final Client? httpClient,
   String? apiVersion,
   bool? explainQuery,
-  Perspective? perspective,
-  bool? useCdn,
+  Perspective? perspective = Perspective.published,
+  bool? useCdn = true,
 }) =>
     SanityClient(
       SanityConfig(

@@ -55,6 +55,7 @@ class EmailField extends StatelessWidget {
       decoration: const InputDecoration(labelText: 'Email'),
       keyboardType: TextInputType.emailAddress,
       inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+      autofillHints: [AutofillHints.email, AutofillHints.username],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
         FormBuilderValidators.email(),
@@ -84,6 +85,11 @@ class PhoneInputField extends StatelessWidget {
           inputDecoration ?? const InputDecoration(labelText: 'Phone Number'),
       keyboardType: TextInputType.phone,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
+      autofillHints: [
+        AutofillHints.telephoneNumber,
+        AutofillHints.telephoneNumberLocal,
+        AutofillHints.telephoneNumberNational
+      ],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
         FormBuilderValidators.phoneNumber(),
@@ -155,6 +161,7 @@ class _PasswordFieldState extends State<PasswordField> {
                 )
               : null),
       obscureText: !_showPassword,
+      autofillHints: const [AutofillHints.password],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
       ]),

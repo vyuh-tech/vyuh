@@ -73,6 +73,11 @@ final class SanityConfig {
         apiVersion = apiVersion ?? defaultApiVersion,
         perspective = perspective ?? Perspective.raw,
         explainQuery = explainQuery ?? false {
+    if (this.useCdn) {
+      assert(perspective == Perspective.published,
+          'When useCdn is true, perspective can only be set to published');
+    }
+
     assert(token.trim().isNotEmpty, '''
 Invalid Token provided. 
 Setup an API token, with Viewer access, in the Sanity Management Console.
