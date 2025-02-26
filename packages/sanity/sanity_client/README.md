@@ -9,18 +9,21 @@ manage content in your Dart and Flutter applications.
 
 ## Features ✨
 
-- **GROQ Support** 🔍: Execute powerful GROQ queries with full type safety
-- **HTTP API Support** 🌐:
+- **GROQ Support**: Execute powerful GROQ queries with full type safety
+- **HTTP API Support**:
   - Complete support for Sanity's HTTP API parameters
   - Configurable API versions
   - Published/Draft content perspectives
   - Query explanations for debugging
   - CDN support for better performance
-- **Asset Handling** 🖼️:
+- **Live Fetch**
+  - Supports fetching live data in published and draft modes
+  - Supports automatic reconnects
+- **Asset Handling**️:
   - Flexible image URL builders
   - Support for external image services (Cloudinary, ImageKit)
   - File asset management
-- **Type Safety** 🛡️:
+- **Type Safety**:
   - Strong typing for queries and responses
   - Proper error handling and validation
   - Null safety support
@@ -76,9 +79,30 @@ final recentMovies = await client.fetch('''
     releaseDate,
     "poster": poster.asset->url
   }
-''', parameters: {
+''', params: {
   'fromDate': '2024-01-01',
 });
+```
+
+### Fetching Live updates
+
+```dart
+var query = '''
+  *[_type == "vyuh.document" && identifier.current == "hello-world"][0]
+''';
+
+// Fetch live from the Sanity.io CDN
+final stream = client.fetchLive(query);
+
+// OR Fetch live from the Sanity.io API CDN for drafts
+final stream = client.fetchLive(query, includeDrafts: true);
+
+await for (var response in stream) {
+  final json = response.result;
+  // ignore: avoid_print
+  print('$json\n-------------------');
+}
+
 ```
 
 ### Image URL Building
@@ -86,12 +110,14 @@ final recentMovies = await client.fetch('''
 Generate image URLs with transformations:
 
 ```dart
-final imageUrl = client.imageUrl
-    .image(imageRef)
-    .width(800)
-    .height(600)
-    .fit('crop')
-    .toString();
+final imageUrl = client.imageUrl(
+  imageRef,
+  options: ImageUrlOptions(
+    width: 800,
+    height: 600,
+    fit: ImageFit.crop,
+  ),
+);
 ```
 
 ### Custom Image Service (Optional and only indicative)
@@ -100,12 +126,13 @@ Use external image services:
 
 ```dart
 // Using Cloudinary
-client.imageUrlBuilder = (ref) {
-  return CloudinaryUrlBuilder(
+final client = SanityClient(
+  projectId: 'your_project_id',
+  dataset: 'your_dataset',
+  // Using Cloudinary
+  urlBuilder: CloudinaryUrlBuilder(
     cloudName: 'your-cloud-name',
-    imageId: ref.asset.id,
-  );
-};
+  ),
 ```
 
 ## Configuration 🔧
@@ -138,9 +165,9 @@ The client provides proper error handling:
 try {
   final result = await client.fetch(query);
   // Handle success
-} on SanityError catch (e) {
+} on SanityException catch (e) {
   // Handle Sanity-specific errors
-  print('Sanity error: ${e.message}');
+  print('Sanity error: $e');
 } catch (e) {
   // Handle other errors
   print('Error: $e');
@@ -155,9 +182,6 @@ changes, please open an issue first to discuss what you would like to change.
 ## Learn More 📚
 
 - Visit [docs.vyuh.tech](https://docs.vyuh.tech) for detailed documentation
-- Check out the [GitHub repository](https://github.com/vyuh-tech/vyuh) for
-  source code
-- Report issues on the [issue tracker](https://github.com/vyuh-tech/vyuh/issues)
 - Learn more about [Sanity.io](https://www.sanity.io/docs)
 
 ---
