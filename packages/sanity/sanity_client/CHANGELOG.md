@@ -1,3 +1,7 @@
+## 1.7.7
+
+ - **FIX**: readme fixed with correct API.
+
 ## 1.7.6
 
  - **FIX**: improve the query handling for live for include drafts. Also added assertions for the proper configurations. Adding a simple profile card to the Vyuh auth feature.
