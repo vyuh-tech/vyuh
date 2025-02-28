@@ -21,28 +21,28 @@ minimal configuration.
 
 ## Features ✨
 
-- **Content Management** 📝
+- **Content Management**
 
   - Fetch single or multiple documents
   - Support for all Sanity content types
   - Automatic content type mapping
   - Built-in caching with configurable duration
 
-- **Asset Support** 🖼️
+- **Asset Support**
 
   - Image assets with transformations
   - File assets with metadata
   - Reference handling
   - Asset caching
 
-- **Routing Integration** 🛣️
+- **Routing Integration**
 
   - Automatic route generation from content
   - Support for Vyuh framework schema
   - Dynamic route parameters
   - Nested route handling
 
-- **Performance** ⚡
+- **Performance**
   - Efficient content caching
   - CDN support
   - Optimized network requests
@@ -155,6 +155,73 @@ final route = await contentProvider.fetchRoute(
 if (route != null) {
   // Handle route content
 }
+```
+
+### Live Query Integration [NEW ✨]
+
+`SanityContentProvider` now includes support for the `LiveContentProvider` API.
+It offers real-time updates for your Sanity content, allowing your app to stay
+in sync with your dataset.
+
+> The API is almost identical with the standard `ContentProvider`, barring the
+> fact that the live API returns a `Stream<T?>` instead of a `Future<T?>`.
+
+Here are examples of how to use the live query methods:
+
+```dart
+// Create a LiveProvider instance
+final liveProvider = SanityContentProvider(
+  projectId: 'your-project-id',
+  dataset: 'your-dataset',
+  useCdn: true,
+  perspective: 'published',
+).live; // Notice the call to get the LiveContentProvider instance
+
+// Fetch real-time updates for a single document
+final singleStream = liveProvider.fetchSingle<Post>(
+  '*[_type == "post" && _id == $id][0]',
+  fromJson: Post.fromJson,
+  queryParams: {'id': 'post-123'},
+);
+
+singleStream.listen((post) {
+// Handle updated post
+});
+
+// Fetch real-time updates for multiple documents
+final multipleStream = liveProvider.fetchMultiple<Post>(
+  '*[_type == "post" && category == $category]',
+  fromJson: Post.fromJson,
+  queryParams: {'category': 'tech'},
+);
+
+multipleStream.listen((posts) {
+// Handle updated list of posts
+});
+
+// Fetch real-time updates by ID
+final idStream = liveProvider.fetchById<Author>(
+  'author-123',
+  fromJson: Author.fromJson,
+);
+
+idStream.listen((author) {
+// Handle updated author
+});
+
+// Use StreamBuilder in your widget tree
+StreamBuilder<Post>(
+  stream: singleStream,
+  builder: (context, snapshot) {
+    if (snapshot.hasData) {
+      return Text(snapshot.data!.title);
+    } else if (snapshot.hasError) {
+      return Text('Error: ${snapshot.error}');
+    }
+
+    return CircularProgressIndicator();
+  },
+);
 ```
 
 ## Configuration 🔧

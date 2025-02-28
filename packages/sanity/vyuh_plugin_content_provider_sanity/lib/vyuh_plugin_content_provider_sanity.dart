@@ -8,6 +8,9 @@ import 'package:vyuh_cache/vyuh_cache.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_plugin_content_provider_sanity/exception.dart';
 
+part 'live_provider.dart';
+part 'processor.dart';
+
 identity(Map<String, dynamic> json) => json;
 
 final Map<String, String> fieldMap = {
@@ -24,6 +27,7 @@ final class SanityContentProvider extends ContentProvider {
   final Duration cacheDuration;
 
   final Cache<SanityQueryResponse> _cache;
+  late final _QueryProcessor _processor;
 
   SanityContentProvider(
     SanityClient client, {
@@ -32,8 +36,15 @@ final class SanityContentProvider extends ContentProvider {
         _cache = Cache(
             CacheConfig(storage: MemoryCacheStorage(), ttl: cacheDuration)),
         super(
-            name: 'vyuh.content.provider.sanity',
-            title: 'Sanity Content Provider');
+          name: 'vyuh.content.provider.sanity',
+          title: 'Sanity Content Provider',
+          live: _SanityLiveContentProvider(),
+        ) {
+    _processor = _QueryProcessor(client: _client);
+
+    final liveProvider = live as _SanityLiveContentProvider;
+    liveProvider.setProcessor(_processor);
+  }
 
   factory SanityContentProvider.withConfig({
     required SanityConfig config,
@@ -55,113 +66,81 @@ final class SanityContentProvider extends ContentProvider {
   @override
   Future<void> init() async {
     _client.setHttpClient(VyuhBinding.instance.network);
+    await live.init();
   }
 
   @override
-  Future<void> dispose() async {}
-
-  @override
-  Future<T?> fetchSingle<T>(String query,
-      {required FromJsonConverter<T> fromJson,
-      Map<String, String>? queryParams}) async {
-    final response = await _runQuery(query, queryParams);
-    if (response == null || response.result == null) {
-      return null;
-    }
-
-    if (response.result is! Map<String, dynamic>) {
-      throw InvalidResultTypeException(
-        expectedType: Map<String, dynamic>,
-        actualType: response.result.runtimeType,
-      );
-    }
-
-    return fromJson(response.result);
+  Future<void> dispose() async {
+    await live.dispose();
   }
 
   @override
-  Future<List<T>?> fetchMultiple<T>(String query,
-      {required FromJsonConverter<T> fromJson,
-      Map<String, String>? queryParams}) async {
-    final response = await _runQuery(query, queryParams);
-    if (response == null) {
-      return null;
-    }
+  Future<T?> fetchById<T>(
+    String id, {
+    required FromJsonConverter<T> fromJson,
+    bool useCache = true,
+  }) {
+    final record = _processor.id(id);
 
-    if (response.result is! List<dynamic>) {
-      throw InvalidResultTypeException(
-        expectedType: List<dynamic>,
-        actualType: response.result.runtimeType,
-      );
-    }
-
-    final list = response.result as List;
-
-    return list
-        .map((json) => fromJson(json as Map<String, dynamic>))
-        .where((x) => x != null)
-        .cast<T>()
-        .toList(growable: false);
+    return fetchSingle(
+      record.query,
+      queryParams: record.params,
+      fromJson: fromJson,
+    );
   }
 
-  Future<SanityQueryResponse?> _runQuery(String query,
-      [Map<String, String>? queryParams]) async {
+  @override
+  Future<T?> fetchSingle<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool useCache = true,
+  }) async {
+    final response = await _runQuery(query, queryParams, useCache);
+    return _processor.processSingle(response, fromJson);
+  }
+
+  @override
+  Future<List<T>?> fetchMultiple<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool useCache = true,
+  }) async {
+    final response = await _runQuery(query, queryParams, useCache);
+    return _processor.processMultiple(response, fromJson);
+  }
+
+  @override
+  Future<RouteBase?> fetchRoute({
+    String? path,
+    String? routeId,
+    bool useCache = true,
+  }) async {
+    final record = _processor.route(path: path, routeId: routeId);
+
+    return fetchSingle<RouteBase>(
+      record.query,
+      queryParams: record.params,
+      fromJson: RouteBase.fromJson,
+    );
+  }
+
+  Future<SanityQueryResponse?> _runQuery(
+    String query, [
+    Map<String, String>? queryParams,
+    bool useCache = true,
+  ]) async {
     _log('Running query: $query');
     _log('with params: $queryParams');
 
     final url = _client.urlBuilder.queryUrl(query, params: queryParams);
-    final response = await _cache.build(url.toString(),
-        generateValue: () => _client.fetch(query, params: queryParams));
-
-    if (response != null) {
-      _log(
-          'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms');
-    }
+    final response = await (useCache
+        ? _cache.build(url.toString(),
+            generateValue: () => _client.fetch(query, params: queryParams))
+        : _client.fetch(query, params: queryParams));
 
     return response;
-  }
-
-  static final _routeTypes =
-      ["vyuh.route", "vyuh.conditionalRoute"].map((x) => '"$x"').join(', ');
-
-  static get _routeFromPathQuery => '''
-*[_type in [$_routeTypes] && path == \$path] | order(_type asc, _updatedAt desc) $_routeContentProjection
-  ''';
-
-  static _routeFromIdQuery(bool includeDrafts) => '''
-*[_id == \$routeId${includeDrafts ? ' || _id == "drafts." + \$routeId' : ''}] $_routeContentProjection
-  ''';
-
-  static _idMatchCondition(String id, {required bool includeDrafts}) =>
-      '''*[_id == \$id${includeDrafts ? ' || _id == "drafts." + \$id' : ''}]''';
-
-  static get _routeContentProjection => '''
-{
-  ...,
-  "category": category->,
-  "regions": regions[] {
-    "identifier": region->identifier, 
-    "title": region->title,
-    items,
-  },
-}[0]
-  ''';
-
-  @override
-  Future<RouteBase?> fetchRoute({String? path, String? routeId}) async {
-    debugAssertOneOfPathOrRouteId(path, routeId);
-
-    if (path != null) {
-      return fetchSingle<RouteBase>(_routeFromPathQuery,
-          fromJson: RouteBase.fromJson, queryParams: {'path': path});
-    }
-
-    final includeDrafts =
-        _client.config.perspective == Perspective.previewDrafts ||
-            _client.config.perspective == Perspective.raw;
-
-    return fetchSingle<RouteBase>(_routeFromIdQuery(includeDrafts),
-        fromJson: RouteBase.fromJson, queryParams: {'routeId': '$routeId'});
   }
 
   @override
@@ -199,17 +178,8 @@ final class SanityContentProvider extends ContentProvider {
         ? _client.fileUrl(fileRef.asset!.ref)
         : null;
   }
+}
 
-  @override
-  Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson}) {
-    final condition = _idMatchCondition(id,
-        includeDrafts: _client.config.perspective == Perspective.raw);
-
-    return fetchSingle('$condition[0]',
-        queryParams: {'id': id}, fromJson: fromJson);
-  }
-
-  _log(String message) {
-    VyuhBinding.instance.log.debug(message);
-  }
+_log(String message) {
+  VyuhBinding.instance.log.debug(message);
 }

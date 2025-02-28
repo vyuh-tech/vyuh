@@ -21,7 +21,11 @@ class MockContentProvider extends Mock implements ContentProvider {
   Future<void> dispose() async {}
 
   @override
-  Future<RouteBase?> fetchRoute({String? path, String? routeId}) async {
+  Future<RouteBase?> fetchRoute({
+    String? path,
+    String? routeId,
+    bool useCache = true,
+  }) async {
     return MockRoute(path: path ?? '/');
   }
 }

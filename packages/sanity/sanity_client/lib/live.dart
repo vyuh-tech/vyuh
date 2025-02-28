@@ -27,7 +27,7 @@ extension LiveConnect on SanityClient {
   }) {
     assert(
       includeDrafts
-          ? config.perspective == Perspective.previewDrafts && !config.useCdn
+          ? config.perspective == Perspective.drafts && !config.useCdn
           : true,
       'When includeDrafts is true, the config must have perspective set to previewDrafts and useCdn set to false',
     );

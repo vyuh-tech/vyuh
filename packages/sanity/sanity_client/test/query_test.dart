@@ -89,7 +89,7 @@ void main() {
     final c1 = getClient(
       httpClient: httpClient,
       explainQuery: true,
-      perspective: Perspective.previewDrafts,
+      perspective: Perspective.drafts,
       useCdn: false,
       apiVersion: 'v2024-02-16',
     );

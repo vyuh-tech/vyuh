@@ -12,19 +12,29 @@ final class NoOpContentProvider extends ContentProvider {
   Future<void> dispose() => Future.value();
 
   @override
-  Future<List<T>?> fetchMultiple<T>(String query,
-          {required FromJsonConverter<T> fromJson,
-          Map<String, String>? queryParams}) =>
+  Future<List<T>?> fetchMultiple<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool useCache = true,
+  }) =>
       Future.value(null);
 
   @override
-  Future<RouteBase?> fetchRoute({String? path, String? routeId}) =>
+  Future<RouteBase?> fetchRoute({
+    String? path,
+    String? routeId,
+    bool useCache = true,
+  }) =>
       Future.value(null);
 
   @override
-  Future<T?> fetchSingle<T>(String query,
-          {required FromJsonConverter<T> fromJson,
-          Map<String, String>? queryParams}) =>
+  Future<T?> fetchSingle<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool useCache = true,
+  }) =>
       Future.value(null);
 
   @override
@@ -47,8 +57,11 @@ final class NoOpContentProvider extends ContentProvider {
   String schemaType(Map<String, dynamic> json) => throw UnimplementedError();
 
   @override
-  Future<T?> fetchById<T>(String id,
-          {required FromJsonConverter<T> fromJson}) =>
+  Future<T?> fetchById<T>(
+    String id, {
+    required FromJsonConverter<T> fromJson,
+    bool useCache = true,
+  }) =>
       Future.value(null);
 
   @override

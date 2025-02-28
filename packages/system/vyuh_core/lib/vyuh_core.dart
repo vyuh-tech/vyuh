@@ -73,6 +73,7 @@ export 'plugin/auth/user.dart';
 export 'plugin/content/content_item.dart';
 export 'plugin/content/content_plugin.dart';
 export 'plugin/content/content_provider.dart';
+export 'plugin/content/live_content_provider.dart';
 export 'plugin/content/noop_content_plugin.dart';
 export 'plugin/content/noop_content_provider.dart';
 export 'plugin/content/reference.dart';

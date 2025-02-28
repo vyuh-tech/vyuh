@@ -16,10 +16,10 @@ enum Perspective {
 
   /// Fetch drafts as if they were published.
   ///
-  /// Note: Queries using the previewDrafts perspective are not cached in the CDN,
-  /// and will return an error if [useCdn] is not set to false.
-  /// You should always explicitly set [useCdn] to false when using previewDrafts.
-  previewDrafts,
+  /// Note: Queries using the drafts perspective are not cached on the CDN,
+  /// and will return an error if [useCdn] is not set to true.
+  /// You should always explicitly set [useCdn] to false when using `drafts`.
+  drafts,
 
   /// Fetch only the published documents
   published,
