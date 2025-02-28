@@ -17,9 +17,9 @@
   ],
   "dependencies": {
     "@vyuh/sanity-plugin-structure": "^1.37.0",
-    "@vyuh/sanity-schema-auth": "^1.28.4",
+    "@vyuh/sanity-schema-auth": "^1.28.5",
     "@vyuh/sanity-schema-core": "^1.37.0",
-    "@vyuh/sanity-schema-onboarding": "^1.28.4",
+    "@vyuh/sanity-schema-onboarding": "^1.28.5",
     "@vyuh/sanity-schema-system": "^1.37.0",
     "conference-sanity-schema": "workspace:*",
     "food-sanity-schema": "workspace:*",
@@ -27,7 +27,7 @@
     "puzzles-sanity-schema": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.76.1",
+    "sanity": "^3.77.2",
     "settings-sanity-schema": "workspace:*",
     "styled-components": "^6.1.15",
     "tmdb-sanity-schema": "workspace:*",
@@ -39,7 +39,7 @@
     "@types/react": "^18.3.18",
     "eslint": "^8.57.1",
     "lodash-es": "^4.17.21",
-    "nanoid": "^5.1.0",
+    "nanoid": "^5.1.2",
     "typescript": "^5.7.3"
   }
 }

@@ -1,5 +1,11 @@
 # @vyuh/sanity-schema-onboarding
 
+## 1.28.5
+
+### Patch Changes
+
+- package dependencies update
+
 ## 1.28.4
 
 ## 1.28.3

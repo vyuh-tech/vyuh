@@ -1,6 +1,6 @@
 {
   "name": "@vyuh/sanity-schema-auth",
-  "version": "1.28.4",
+  "version": "1.28.5",
   "description": "Schemas for configuring Authentication on Sanity CMS when using the Vyuh Framework",
   "homepage": "https://vyuh.tech",
   "repository": {
@@ -41,7 +41,7 @@
     "@vyuh/sanity-schema-system": "^1.37.0",
     "lodash-es": "^4.17.21",
     "react-icons": "^5.5.0",
-    "sanity": "^3.76.1"
+    "sanity": "^3.77.2"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
@@ -50,7 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.1",
-    "tsup": "^8.3.6",
+    "tsup": "^8.4.0",
     "typescript": "^5.7.3"
   },
   "peerDependencies": {
