@@ -36,5 +36,6 @@ const _$BarcodeTypeEnumMap = {
   BarcodeType.DataMatrix: 'DataMatrix',
   BarcodeType.Aztec: 'Aztec',
   BarcodeType.Rm4scc: 'Rm4scc',
+  BarcodeType.Postnet: 'Postnet',
   BarcodeType.Itf: 'Itf',
 };
