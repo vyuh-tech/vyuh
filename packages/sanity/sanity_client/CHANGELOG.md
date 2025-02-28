@@ -1,3 +1,8 @@
+## 1.8.0
+
+ - **FIX**: example update.
+ - **FEAT**: adding support for live querying across the board, from the sanity_client to the ContentProvider.
+
 ## 1.7.7
 
  - **FIX**: readme fixed with correct API.

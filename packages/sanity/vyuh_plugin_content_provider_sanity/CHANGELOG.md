@@ -1,3 +1,7 @@
+## 1.12.0
+
+ - **FEAT**: adding support for live querying across the board, from the sanity_client to the ContentProvider.
+
 ## 1.11.1
 
  - **FIX**: format fixes in readme.

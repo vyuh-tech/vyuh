@@ -1,3 +1,7 @@
+## 1.41.0
+
+ - **FEAT**: adding support for live querying across the board, from the sanity_client to the ContentProvider.
+
 ## 1.40.5
 
  - **FIX**: improve the query handling for live for include drafts. Also added assertions for the proper configurations. Adding a simple profile card to the Vyuh auth feature.
