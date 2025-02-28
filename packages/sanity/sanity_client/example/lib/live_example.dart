@@ -22,9 +22,10 @@ Future<void> main() async {
 
   final stream = client.fetchLive(query, includeDrafts: true);
 
-  await for (var response in stream) {
+  // We are not tracking the subscription here but should be used for cleanup
+  final _ = stream.listen((response) {
     final json = const JsonEncoder.withIndent('\t').convert(response.result);
     // ignore: avoid_print
     print('$json\n-------------------');
-  }
+  });
 }
