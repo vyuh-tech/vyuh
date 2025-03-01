@@ -45,13 +45,15 @@ extension LiveConnect on SanityClient {
 
     final controller = StreamController<SanityQueryResponse>();
 
-    EventFlux.instance.connect(
+    final flux = EventFlux.spawn();
+    flux.connect(
       EventFluxConnectionType.get,
       uri.toString(),
       autoReconnect: true,
       reconnectConfig: ReconnectConfig(
-        mode: ReconnectMode.exponential,
+        mode: ReconnectMode.linear,
         maxAttempts: 5,
+        onReconnect: () => debugPrint('Reconnected to Live API'),
       ),
       header: headers,
       httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
@@ -61,7 +63,8 @@ extension LiveConnect on SanityClient {
           throw LiveConnectException('With query: $query, params: $params');
         }
 
-        _onLiveConnectCallback(controller, query, params, response.stream!);
+        _onLiveConnectCallback(
+            controller, query, params, response.stream!, flux);
       },
       onError: (error) {
         throw LiveConnectException('With query: $query, params: $params');
@@ -76,6 +79,7 @@ extension LiveConnect on SanityClient {
     String query,
     Map<String, String>? params,
     Stream<EventFluxData> stream,
+    EventFlux flux,
   ) async {
     late final StreamSubscription<EventFluxData> subscription;
     String? lastEventId;
@@ -83,7 +87,7 @@ extension LiveConnect on SanityClient {
 
     controller.onCancel = () {
       subscription.cancel();
-      EventFlux.instance.disconnect();
+      flux.disconnect();
     };
 
     fetchQuery() async {

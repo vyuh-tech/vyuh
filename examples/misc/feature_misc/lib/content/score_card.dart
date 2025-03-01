@@ -87,32 +87,50 @@ final class ScoreCardDefaultLayout extends LayoutConfiguration<ScoreCard> {
 
   @override
   Widget build(BuildContext context, ScoreCard content) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          _ScoreCardHeader(
-            player1: content.player1,
-            player2: content.player2,
-          ),
-          Expanded(
+    return _ScoreCardView(content: content);
+  }
+}
+
+/// View component for ScoreCard content item
+class _ScoreCardView extends StatelessWidget {
+  final ScoreCard content;
+
+  const _ScoreCardView({
+    required this.content,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return LimitedBox(
+      maxHeight: 250,
+      child: Card(
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _ScoreCardHeader(
+              player1: content.player1,
+              player2: content.player2,
+            ),
+            Expanded(
               child: content.games.isNotEmpty
                   ? _ScoreCardGames(
                       games: content.games,
                       player1: content.player1,
                       player2: content.player2,
                     )
-                  : const _EmptyGamesPlaceholder()),
-          _ScoreCardFooter(
-            games: content.games,
-            player1: content.player1,
-            player2: content.player2,
-          ),
-        ],
+                  : const _EmptyGamesPlaceholder(),
+            ),
+            _ScoreCardFooter(
+              games: content.games,
+              player1: content.player1,
+              player2: content.player2,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -133,7 +151,7 @@ class _ScoreCardHeader extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
         color: theme.colorScheme.primaryContainer,
         borderRadius: const BorderRadius.only(

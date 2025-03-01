@@ -103,8 +103,7 @@ class _LiveCardView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ConstrainedBox(
-            constraints:
-                BoxConstraints(minHeight: 200, maxHeight: content.size.height),
+            constraints: BoxConstraints.expand(height: content.size.height),
             child: vyuh.content.buildContent(
               context,
               snapshot.data as Document,
