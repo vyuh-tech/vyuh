@@ -6,6 +6,18 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'live_card.g.dart';
 
+enum LiveCardSize {
+  small,
+  medium,
+  large;
+
+  double get height => switch (this) {
+        LiveCardSize.small => 300,
+        LiveCardSize.medium => 400,
+        LiveCardSize.large => 600,
+      };
+}
+
 @JsonSerializable()
 final class LiveCard extends ContentItem {
   static const schemaName = 'misc.card.live';
@@ -24,6 +36,7 @@ final class LiveCard extends ContentItem {
 
   final ObjectReference? document;
   final bool includeDrafts;
+  final LiveCardSize size = LiveCardSize.medium;
 
   LiveCard({
     this.document,
@@ -90,7 +103,8 @@ class _LiveCardView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(minHeight: 200, maxHeight: 300),
+            constraints:
+                BoxConstraints(minHeight: 200, maxHeight: content.size.height),
             child: vyuh.content.buildContent(
               context,
               snapshot.data as Document,

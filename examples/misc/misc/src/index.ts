@@ -1,5 +1,6 @@
 import {
   BuiltContentSchemaBuilder,
+  DefaultFieldsModifier,
   defaultLayoutConfiguration,
   FeatureDescriptor,
 } from '@vyuh/sanity-schema-core';
@@ -7,6 +8,7 @@ import { partOfDay } from './condition/part-of-day.ts';
 import {
   APIContentDescriptor,
   CardDescriptor,
+  DocumentDescriptor,
   RouteDescriptor,
 } from '@vyuh/sanity-schema-system';
 import { dummyJsonApi } from './content/dummy-json-api.ts';
@@ -27,6 +29,7 @@ import { simulatedDelayLifecycleHandler } from './lifecycle-handlers/simulatedDe
 import { diRegistrationLifecycleHandler } from './lifecycle-handlers/diRegistrationLifecycleHandler.ts';
 import { diStoreCardLayout } from './content/diStore-card-layout.ts';
 import { liveCard } from './content/live-card.ts';
+import { scoreCard } from './content/score-card.ts';
 
 export const misc = new FeatureDescriptor({
   name: 'misc',
@@ -48,6 +51,9 @@ export const misc = new FeatureDescriptor({
         diRegistrationLifecycleHandler,
       ],
     }),
+    new DocumentDescriptor({
+      items: [{ type: scoreCard.name }],
+    }),
     new CardDescriptor({
       layouts: [missingCardLayout, diStoreCardLayout],
     }),
@@ -67,5 +73,11 @@ export const misc = new FeatureDescriptor({
     new ProductCardContentBuilder(),
     new BuiltContentSchemaBuilder(missingContent),
     new BuiltContentSchemaBuilder(liveCard),
+    new BuiltContentSchemaBuilder(scoreCard),
+  ],
+  contentSchemaModifiers: [
+    new DefaultFieldsModifier({
+      excludedSchemaTypes: [{ type: scoreCard.name }],
+    }),
   ],
 });

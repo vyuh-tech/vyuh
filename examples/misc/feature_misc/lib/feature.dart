@@ -6,6 +6,7 @@ import 'package:feature_misc/content/live_card.dart';
 import 'package:feature_misc/content/product/default_layout.dart';
 import 'package:feature_misc/content/product/mini_view_layout.dart';
 import 'package:feature_misc/content/product/product_card.dart';
+import 'package:feature_misc/content/score_card.dart';
 import 'package:feature_misc/lifecycle_handlers/di_registration_lifecycle_handler.dart';
 import 'package:feature_misc/lifecycle_handlers/simulated_delay_lifecycle_handler.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,7 @@ final feature = FeatureDescriptor(
         ProductCard.contentBuilder,
         LiveCard.contentBuilder,
         Document.contentBuilder,
+        ScoreCard.contentBuilder,
       ],
       conditions: [
         PartOfDayCondition.typeDescriptor,

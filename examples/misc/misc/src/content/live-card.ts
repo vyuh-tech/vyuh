@@ -20,6 +20,20 @@ export const liveCard = defineType({
       title: 'Document',
       to: [{ type: 'vyuh.document' }],
     }),
+    defineField({
+      name: 'size',
+      type: 'string',
+      title: 'Size',
+      options: {
+        list: [
+          { title: 'Small', value: 'small' },
+          { title: 'Medium', value: 'medium' },
+          { title: 'Large', value: 'large' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'medium',
+    }),
   ],
   preview: {
     select: {
