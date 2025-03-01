@@ -1,3 +1,7 @@
+## 1.8.2
+
+ - **FIX**: adding more tests and also removing the need to specify token for useCdn=true and perspective=published.
+
 ## 1.8.1
 
  - **FIX**: adding support for multiple event streams.

@@ -16,7 +16,7 @@ dependencies:
   vyuh_core: ^1.41.0
   vyuh_content_widget: ^1.1.11
   vyuh_extension_content: ^1.22.0
-  sanity_client: ^1.8.1
+  sanity_client: ^1.8.2
   vyuh_plugin_content_provider_sanity: ^1.12.0
   vyuh_plugin_telemetry_provider_console: ^1.1.3
 
