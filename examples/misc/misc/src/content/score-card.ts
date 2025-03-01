@@ -24,6 +24,7 @@ export const scoreCard: SchemaTypeDefinition = defineType({
       title: 'Games',
       type: 'array',
       icon: GiTabletopPlayers,
+      validation: (Rule) => Rule.required().min(1).max(7),
       of: [
         defineField({
           name: 'game',
