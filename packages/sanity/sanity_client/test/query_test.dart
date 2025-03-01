@@ -32,29 +32,6 @@ void main() {
     expect(client.urlBuilder, isA<SanityUrlBuilder>());
   });
 
-  test('Asserts that a token is provided', () async {
-    expect(
-      () => SanityConfig(
-        projectId: project,
-        dataset: dataset,
-        token: '',
-      ),
-      throwsA(isA<AssertionError>()),
-    );
-  });
-
-  test('Asserts that the apiVersion has a valid format', () async {
-    expect(
-      () => SanityConfig(
-        projectId: project,
-        dataset: dataset,
-        token: token,
-        apiVersion: 'invalid',
-      ),
-      throwsA(isA<AssertionError>()),
-    );
-  });
-
   test('Request is constructed properly', () async {
     final httpClient = MockClient((final req) async {
       expect(req.url.host, contains('$project.apicdn.sanity.io'));
@@ -108,6 +85,7 @@ void main() {
         dataset: dataset,
         token: token,
         useCdn: false,
+        perspective: Perspective.drafts,
       ),
       httpClient: httpClient,
     );

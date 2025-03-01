@@ -45,7 +45,8 @@ extension LiveConnect on SanityClient {
 
     final controller = StreamController<SanityQueryResponse>();
 
-    final flux = EventFlux.spawn();
+    final flux = SanityConfig.createEventFlux();
+
     flux.connect(
       EventFluxConnectionType.get,
       uri.toString(),
