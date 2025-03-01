@@ -1,3 +1,7 @@
+## 1.8.1
+
+ - **FIX**: adding support for multiple event streams.
+
 ## 1.8.0
 
  - **FIX**: example update.
