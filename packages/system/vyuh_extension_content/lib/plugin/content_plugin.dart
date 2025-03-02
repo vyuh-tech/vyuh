@@ -88,7 +88,7 @@ final class DefaultContentPlugin extends ContentPlugin {
 
     return ScopedDIWidget(
       debugLabel: 'Scoped DI for $label',
-      child: useLiveRoute
+      child: useLiveRoute && provider.supportsLive
           ? _buildLiveRoute(context, url: url, routeId: routeId)
           : _buildStaticRoute(context, url: url, routeId: routeId),
     );
