@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -8,8 +9,15 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 final class DefaultContentPlugin extends ContentPlugin {
   ContentExtensionBuilder? _extensionBuilder;
 
-  DefaultContentPlugin({required super.provider})
-      : super(
+  /// Whether to use live route updates via streams.
+  /// When true, uses RouteStreamBuilder for real-time updates.
+  /// When false, uses RouteFutureBuilder for one-time loading.
+  final bool useLiveRoute;
+
+  DefaultContentPlugin({
+    required super.provider,
+    this.useLiveRoute = false,
+  }) : super(
           name: 'vyuh.plugin.content',
           title: 'Content Plugin',
         );
@@ -80,31 +88,65 @@ final class DefaultContentPlugin extends ContentPlugin {
 
     return ScopedDIWidget(
       debugLabel: 'Scoped DI for $label',
-      child: RouteFutureBuilder(
-        url: url,
-        routeId: routeId,
-        fetchRoute: (context, {path, routeId}) => provider
-            .fetchRoute(path: path, routeId: routeId)
-            .then((value) async {
-          if (!context.mounted) {
-            return null;
-          }
-
-          // Reset DI scope when a new route is fetched
-          await context.di.reset();
-
-          if (!context.mounted) {
-            return null;
-          }
-
-          // Now initialize the new route, since the DI scope has been reset
-          // and we have a clean slate for new registrations
-          final finalRoute = await value?.init(context);
-          return finalRoute;
-        }),
-        buildContent: buildContent,
-      ),
+      child: useLiveRoute
+          ? _buildLiveRoute(context, url: url, routeId: routeId)
+          : _buildStaticRoute(context, url: url, routeId: routeId),
     );
+  }
+
+  /// Builds a route with live updates using RouteStreamBuilder
+
+  Widget _buildLiveRoute(BuildContext context, {Uri? url, String? routeId}) {
+    return RouteStreamBuilder(
+      url: url,
+      routeId: routeId,
+      includeDrafts: kDebugMode,
+      fetchRoute: (context, {path, routeId, includeDrafts = false}) {
+        // Get the base stream from the provider
+        final stream = provider.live.fetchRoute(
+          path: path,
+          routeId: routeId,
+          includeDrafts: includeDrafts,
+        );
+
+        // Transform the stream to handle DI scope resets
+        return stream.asyncMap(
+            (route) => context.mounted ? _initRoute(context, route) : null);
+      },
+      buildContent: buildContent,
+    );
+  }
+
+  /// Builds a route with one-time loading using RouteFutureBuilder
+
+  Widget _buildStaticRoute(BuildContext context, {Uri? url, String? routeId}) {
+    return RouteFutureBuilder(
+      url: url,
+      routeId: routeId,
+      fetchRoute: (context, {path, routeId}) => provider
+          .fetchRoute(path: path, routeId: routeId)
+          .then((route) => context.mounted ? _initRoute(context, route) : null),
+      buildContent: buildContent,
+    );
+  }
+
+  /// Common method to initialize a route with proper DI scope handling
+  /// This ensures consistent behavior between live and static routes
+  Future<RouteBase?> _initRoute(BuildContext context, RouteBase? route) async {
+    if (route == null) {
+      return null;
+    }
+
+    // Reset DI scope when a new route is fetched
+    await context.di.reset();
+
+    if (!context.mounted) {
+      return null;
+    }
+
+    // Now initialize the new route with the clean DI scope
+    final finalRoute = await route.init(context);
+    return finalRoute;
   }
 
   @override

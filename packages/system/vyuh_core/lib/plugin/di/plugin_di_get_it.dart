@@ -19,7 +19,7 @@ final class GetItDIPlugin extends DIPlugin {
   Future<void> init() => _instance.reset();
 
   @override
-  Future<void> dispose() async {}
+  Future<void> dispose() async => _instance.reset();
 
   @override
   T get<T extends Object>({String? name}) {

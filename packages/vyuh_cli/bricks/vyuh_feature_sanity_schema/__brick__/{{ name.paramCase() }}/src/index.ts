@@ -1,6 +1,6 @@
 import { FeatureDescriptor } from '@vyuh/sanity-schema-core';
 import { RouteDescriptor } from '@vyuh/sanity-schema-system';
-import {SimpleContentDescriptor, SimpleContentSchemaBuilder} from './simple-content';
+import { SimpleContentDescriptor, SimpleContentSchemaBuilder } from './simple-content';
 
 export const {{ name.camelCase() }} = new FeatureDescriptor({
   name: '{{ name.camelCase() }}',

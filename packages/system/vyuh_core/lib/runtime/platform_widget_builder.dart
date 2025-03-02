@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+
 import 'platform/powered_by_widget.dart';
 
 part 'platform/default_route_loader.dart';

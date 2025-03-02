@@ -5,10 +5,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// It is associated with the Dependency Injection (DI) Plugin type and
 /// includes methods for registering, unregistering, retrieving, and
 /// checking the existence of instances in the DI container.
-///
-/// This class also includes lifecycle management methods and integrates
-/// functionality from the [PreloadedPlugin] mixin.
-abstract class DIPlugin extends Plugin with PreloadedPlugin {
+abstract class DIPlugin extends Plugin {
   /// Constructs a `DIPlugin` instance with the given [name] and [title].
   DIPlugin({required super.name, required super.title}) : super();
 
@@ -94,10 +91,9 @@ extension AsyncLazyDI on DIPlugin {
   ///   return MyService();
   /// }, name: 'myService');
   /// ```
-  void registerAsync<T extends Object>(
-      Future<T> Function() fn,
-      {String? name}
-      ) => registerLazy<Future<T>>(fn, name: name);
+  void registerAsync<T extends Object>(Future<T> Function() fn,
+          {String? name}) =>
+      registerLazy<Future<T>>(fn, name: name);
 
   /// Retrieves an asynchronously initialized dependency from the dependency injection container.
   ///
@@ -114,5 +110,6 @@ extension AsyncLazyDI on DIPlugin {
   /// final myServiceFuture = diPlugin.getAsync<MyService>(name: 'myService');
   /// myServiceFuture.then((service) => print('Service initialized: $service'));
   /// ```
-  Future<T> getAsync<T extends Object>({String? name}) => get<Future<T>>(name: name);
+  Future<T> getAsync<T extends Object>({String? name}) =>
+      get<Future<T>>(name: name);
 }
