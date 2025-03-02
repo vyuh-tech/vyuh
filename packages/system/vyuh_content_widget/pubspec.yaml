@@ -22,7 +22,7 @@ dependencies:
   json_annotation: ^4.9.0
 
   vyuh_core: ^1.42.0
-  vyuh_extension_content: ^1.23.0
+  vyuh_extension_content: ^1.23.1
 
 dev_dependencies:
   flutter_test:

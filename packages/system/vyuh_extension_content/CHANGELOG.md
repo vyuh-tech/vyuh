@@ -1,3 +1,7 @@
+## 1.23.1
+
+ - **FIX**: checking if the provider supportsLive before using live routes in the content plugin.
+
 ## 1.23.0
 
  - **FEAT**: introducing live route updates for enhanced developer experience when working with the Sanity CMS.
