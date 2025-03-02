@@ -1,3 +1,7 @@
+## 1.42.0
+
+ - **FEAT**: introducing live route updates for enhanced developer experience when working with the Sanity CMS.
+
 ## 1.41.0
 
  - **FEAT**: adding support for live querying across the board, from the sanity_client to the ContentProvider.

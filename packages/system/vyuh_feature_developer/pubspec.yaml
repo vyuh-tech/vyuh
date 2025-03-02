@@ -21,8 +21,8 @@ dependencies:
   go_router: ^14.0.1
   flutter_sticky_header: ^0.7.0
   collection: ^1.18.0
-  vyuh_core: ^1.41.0
-  vyuh_extension_content: ^1.22.0
+  vyuh_core: ^1.42.0
+  vyuh_extension_content: ^1.23.0
 
 dev_dependencies:
   flutter_test:

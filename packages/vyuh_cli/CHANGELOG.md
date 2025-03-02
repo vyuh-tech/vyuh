@@ -1,3 +1,7 @@
+## 0.0.9
+
+ - **FEAT**: introducing live route updates for enhanced developer experience when working with the Sanity CMS.
+
 ## 0.0.8+4
 
  - **FIX**: adding the missing .env file to project brick.
