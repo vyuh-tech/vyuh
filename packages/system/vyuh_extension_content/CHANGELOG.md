@@ -1,3 +1,7 @@
+## 1.23.3
+
+ - **FIX**: add manual refresh for route builders only in debug mode.
+
 ## 1.23.2
 
  - **FIX**: refactoring the live connection code.
