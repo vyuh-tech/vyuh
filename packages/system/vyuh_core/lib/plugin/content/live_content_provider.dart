@@ -72,8 +72,11 @@ final class NoOpLiveContentProvider extends LiveContentProvider {
       _error('fetchMultiple');
 
   @override
-  Stream<RouteBase?> fetchRoute(
-          {String? path, String? routeId, bool includeDrafts = false}) =>
+  Stream<RouteBase?> fetchRoute({
+    String? path,
+    String? routeId,
+    bool includeDrafts = false,
+  }) =>
       _error('fetchRoute');
 
   @override

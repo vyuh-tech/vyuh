@@ -18,8 +18,17 @@ enum _LiveEventType {
       };
 }
 
+typedef _ConnectionConfig = ({
+  LiveConfig liveConfig,
+  StreamController<SanityQueryResponse> controller,
+  EventFlux flux,
+  Stream<EventFluxData> stream,
+});
+
 extension LiveConnect on SanityClient {
   /// Fetches data from Sanity using Server-Sent Events (SSE) for live updates.
+  ///
+  /// [includeDrafts] whe true it will also listen to draft changes.
   Stream<SanityQueryResponse> fetchLive(
     String query, {
     Map<String, String>? params,
@@ -32,10 +41,11 @@ extension LiveConnect on SanityClient {
       'When includeDrafts is true, the config must have perspective set to previewDrafts and useCdn set to false',
     );
 
+    final liveConfig = includeDrafts ? LiveConfig.withDrafts() : LiveConfig();
     final sanityRequest = SanityRequest(
       urlBuilder: urlBuilder,
       query: '',
-      live: includeDrafts ? LiveConfig.withDrafts() : LiveConfig(),
+      live: liveConfig,
     );
 
     final uri = sanityRequest.getUri;
@@ -64,8 +74,12 @@ extension LiveConnect on SanityClient {
           throw LiveConnectException('With query: $query, params: $params');
         }
 
-        _onLiveConnectCallback(
-            controller, query, params, response.stream!, flux);
+        _onLiveConnectCallback(query, params, config: (
+          liveConfig: liveConfig,
+          controller: controller,
+          stream: response.stream!,
+          flux: flux,
+        ));
       },
       onError: (error) {
         throw LiveConnectException('With query: $query, params: $params');
@@ -75,16 +89,18 @@ extension LiveConnect on SanityClient {
     return controller.stream;
   }
 
-  void _onLiveConnectCallback(
-    StreamController<SanityQueryResponse> controller,
-    String query,
-    Map<String, String>? params,
-    Stream<EventFluxData> stream,
-    EventFlux flux,
-  ) async {
+  void _onLiveConnectCallback(String query, Map<String, String>? params,
+      {required _ConnectionConfig config}) async {
     late final StreamSubscription<EventFluxData> subscription;
     String? lastEventId;
     List<String> syncTags = [];
+
+    final (
+      controller: controller,
+      liveConfig: liveConfig,
+      flux: flux,
+      stream: stream
+    ) = config;
 
     controller.onCancel = () {
       subscription.cancel();
@@ -112,6 +128,7 @@ extension LiveConnect on SanityClient {
     listener(event) async {
       if (controller.isClosed) {
         subscription.cancel();
+        flux.disconnect();
         return;
       }
 
@@ -125,6 +142,7 @@ extension LiveConnect on SanityClient {
 
         case _LiveEventType.message:
           lastEventId = event.id;
+
           final eventData = jsonDecode(event.data);
           final tags = (eventData?['tags'] as List?)?.cast<String>();
 

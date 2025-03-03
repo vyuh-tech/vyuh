@@ -40,13 +40,19 @@ class _SanityLiveContentProvider extends LiveContentProvider {
   }
 
   @override
-  Stream<RouteBase?> fetchRoute(
-      {String? path, String? routeId, bool includeDrafts = false}) {
+  Stream<RouteBase?> fetchRoute({
+    String? path,
+    String? routeId,
+    bool includeDrafts = false,
+  }) {
     final record = processor.route(path: path, routeId: routeId);
 
     return processor.client
-        .fetchLive(record.query,
-            params: record.params, includeDrafts: includeDrafts)
+        .fetchLive(
+          record.query,
+          params: record.params,
+          includeDrafts: includeDrafts,
+        )
         .map((response) =>
             processor.processSingle(response, RouteBase.fromJson));
   }

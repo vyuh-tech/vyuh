@@ -95,7 +95,6 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   /// Builds a route with live updates using RouteStreamBuilder
-
   Widget _buildLiveRoute(BuildContext context, {Uri? url, String? routeId}) {
     return RouteStreamBuilder(
       url: url,
@@ -118,7 +117,6 @@ final class DefaultContentPlugin extends ContentPlugin {
   }
 
   /// Builds a route with one-time loading using RouteFutureBuilder
-
   Widget _buildStaticRoute(BuildContext context, {Uri? url, String? routeId}) {
     return RouteFutureBuilder(
       url: url,

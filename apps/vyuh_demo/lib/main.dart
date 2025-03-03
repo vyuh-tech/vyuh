@@ -75,7 +75,7 @@ _getPlugins() {
 
   return PluginDescriptor(
     content: DefaultContentPlugin(
-      useLiveRoute: false,
+      useLiveRoute: true,
       provider: SanityContentProvider.withConfig(
         config: SanityConfig(
           projectId: '8b76lu9s',
