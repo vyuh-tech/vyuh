@@ -96,8 +96,7 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
                 );
               }
 
-              return _ContentWithRefresh(
-                onRefresh: _refresh,
+              return RouteContentWithRefresh(
                 child: widget.buildContent(context, route),
               );
 
@@ -112,32 +111,6 @@ class _RouteFutureBuilderState extends State<RouteFutureBuilder> {
               );
           }
         },
-      ),
-    );
-  }
-}
-
-class _ContentWithRefresh extends StatelessWidget {
-  final Widget child;
-  final void Function() onRefresh;
-
-  const _ContentWithRefresh({required this.child, required this.onRefresh});
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        children: [
-          Positioned.fill(child: child),
-          Positioned(
-              left: 5,
-              bottom: MediaQuery.of(context).viewPadding.bottom,
-              child: IconButton.filledTonal(
-                mouseCursor: SystemMouseCursors.click,
-                icon: const Icon(Icons.refresh),
-                onPressed: onRefresh,
-              ))
-        ],
       ),
     );
   }

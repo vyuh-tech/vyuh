@@ -58,14 +58,109 @@ class _RouteStreamBuilderState extends State<RouteStreamBuilder> {
   @override
   void didUpdateWidget(RouteStreamBuilder oldWidget) {
     super.didUpdateWidget(oldWidget);
-    
+
     // Re-subscribe if the URL or route ID changes
-    if (oldWidget.url != widget.url || 
-        oldWidget.routeId != widget.routeId || 
+    if (oldWidget.url != widget.url ||
+        oldWidget.routeId != widget.routeId ||
         oldWidget.includeDrafts != widget.includeDrafts) {
       _disposeCurrentRoute();
       _initStream();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Handle the case where stream initialization failed
+    if (_streamTracker == null) {
+      final errorMsg = 'Failed to initialize stream for route';
+      final exception = Exception(errorMsg);
+
+      return VyuhBinding.instance.widgetBuilder.routeErrorView(
+        context,
+        title: errorMsg,
+        error: exception,
+        onRetry: () {
+          _disposeCurrentRoute();
+          _initStream();
+        },
+      );
+    }
+
+    return RouteBuilderProxy(
+      onRefresh: _refresh,
+      child: Observer(
+        builder: (context) {
+          final streamStatus = _streamTracker!.status;
+          final route = _streamTracker!.value;
+          final error = _streamTracker!.error;
+          final isUrl = widget.url != null;
+          final errorMsg =
+              'Failed to load ${isUrl ? 'url' : 'routeId'}: ${isUrl ? widget.url.toString() : widget.routeId}';
+
+          // Handle error state first
+          if (error != null) {
+            VyuhBinding.instance.telemetry.reportError(error);
+
+            return VyuhBinding.instance.widgetBuilder.routeErrorView(
+              context,
+              title: errorMsg,
+              error: error,
+              onRetry: () {
+                _disposeCurrentRoute();
+                _initStream();
+              },
+            );
+          }
+
+          // Then handle different stream statuses
+          switch (streamStatus) {
+            case StreamStatus.waiting:
+              return VyuhBinding.instance.widgetBuilder.routeLoader(context);
+
+            case StreamStatus.active:
+              if (route == null) {
+                final exception = Exception(errorMsg);
+                VyuhBinding.instance.telemetry.reportError(exception);
+
+                return VyuhBinding.instance.widgetBuilder.routeErrorView(
+                  context,
+                  title: 'Failed to load route from CMS',
+                  error: exception,
+                  onRetry: () {
+                    _disposeCurrentRoute();
+                    _initStream();
+                  },
+                );
+              }
+
+              return RouteContentWithRefresh(
+                child: widget.buildContent(context, route),
+              );
+
+            case StreamStatus.done:
+              if (route != null) {
+                return RouteContentWithRefresh(
+                  child: widget.buildContent(context, route),
+                );
+              }
+
+              // If we're done but have no data, show an error
+              final exception = Exception('No route data received');
+              VyuhBinding.instance.telemetry.reportError(exception);
+
+              return VyuhBinding.instance.widgetBuilder.routeErrorView(
+                context,
+                title: errorMsg,
+                error: exception,
+                onRetry: () {
+                  _disposeCurrentRoute();
+                  _initStream();
+                },
+              );
+          }
+        },
+      ),
+    );
   }
 
   @override
@@ -74,16 +169,33 @@ class _RouteStreamBuilderState extends State<RouteStreamBuilder> {
     super.dispose();
   }
 
+  Future<void> _refresh() async {
+    if (!mounted) return;
+
+    setState(() {
+      _disposeCurrentRoute();
+    });
+
+    // Allow the UI to update and show loading state
+    await Future.microtask(() {});
+
+    if (!mounted) return;
+
+    setState(() {
+      _initStream();
+    });
+  }
+
   /// Disposes the current route and stream tracker.
   void _disposeCurrentRoute() {
     if (_streamTracker == null) return;
-    
+
     // Dispose the current route if it exists
     final route = _streamTracker!.value;
     if (route != null) {
       Future.microtask(route.dispose);
     }
-    
+
     // Explicitly close the ObservableStream to prevent memory leaks
     _streamTracker!.close();
     _streamTracker = null;
@@ -98,7 +210,7 @@ class _RouteStreamBuilderState extends State<RouteStreamBuilder> {
         routeId: widget.routeId,
         includeDrafts: widget.includeDrafts,
       );
-      
+
       if (context.mounted) {
         _streamTracker = ObservableStream(stream);
       }
@@ -110,93 +222,5 @@ class _RouteStreamBuilderState extends State<RouteStreamBuilder> {
         _streamTracker = ObservableStream(Stream.error(e));
       }
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // Handle the case where stream initialization failed
-    if (_streamTracker == null) {
-      final errorMsg = 'Failed to initialize stream for route';
-      final exception = Exception(errorMsg);
-      
-      return VyuhBinding.instance.widgetBuilder.routeErrorView(
-        context,
-        title: errorMsg,
-        error: exception,
-        onRetry: () {
-          _disposeCurrentRoute();
-          _initStream();
-        },
-      );
-    }
-    
-    return Observer(
-      builder: (context) {
-        final streamStatus = _streamTracker!.status;
-        final route = _streamTracker!.value;
-        final error = _streamTracker!.error;
-        final isUrl = widget.url != null;
-        final errorMsg =
-            'Failed to load ${isUrl ? 'url' : 'routeId'}: ${isUrl ? widget.url.toString() : widget.routeId}';
-
-        // Handle error state first
-        if (error != null) {
-          VyuhBinding.instance.telemetry.reportError(error);
-
-          return VyuhBinding.instance.widgetBuilder.routeErrorView(
-            context,
-            title: errorMsg,
-            error: error,
-            onRetry: () {
-              _disposeCurrentRoute();
-              _initStream();
-            },
-          );
-        }
-
-        // Then handle different stream statuses
-        switch (streamStatus) {
-          case StreamStatus.waiting:
-            return VyuhBinding.instance.widgetBuilder.routeLoader(context);
-
-          case StreamStatus.active:
-            if (route == null) {
-              final exception = Exception(errorMsg);
-              VyuhBinding.instance.telemetry.reportError(exception);
-
-              return VyuhBinding.instance.widgetBuilder.routeErrorView(
-                context,
-                title: 'Failed to load route from CMS',
-                error: exception,
-                onRetry: () {
-                  _disposeCurrentRoute();
-                  _initStream();
-                },
-              );
-            }
-
-            return widget.buildContent(context, route);
-
-          case StreamStatus.done:
-            if (route != null) {
-              return widget.buildContent(context, route);
-            }
-            
-            // If we're done but have no data, show an error
-            final exception = Exception('No route data received');
-            VyuhBinding.instance.telemetry.reportError(exception);
-
-            return VyuhBinding.instance.widgetBuilder.routeErrorView(
-              context,
-              title: errorMsg,
-              error: exception,
-              onRetry: () {
-                _disposeCurrentRoute();
-                _initStream();
-              },
-            );
-        }
-      },
-    );
   }
 }
