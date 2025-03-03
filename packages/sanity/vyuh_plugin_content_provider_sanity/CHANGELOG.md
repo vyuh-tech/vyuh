@@ -1,3 +1,7 @@
+## 1.12.1
+
+ - **FIX**: refactoring the live connection code.
+
 ## 1.12.0
 
  - **FEAT**: adding support for live querying across the board, from the sanity_client to the ContentProvider.

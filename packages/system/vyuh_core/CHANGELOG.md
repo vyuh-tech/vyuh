@@ -1,3 +1,7 @@
+## 1.42.1
+
+ - **FIX**: refactoring the live connection code.
+
 ## 1.42.0
 
  - **FEAT**: introducing live route updates for enhanced developer experience when working with the Sanity CMS.

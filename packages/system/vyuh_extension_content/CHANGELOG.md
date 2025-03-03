@@ -1,3 +1,7 @@
+## 1.23.2
+
+ - **FIX**: refactoring the live connection code.
+
 ## 1.23.1
 
  - **FIX**: checking if the provider supportsLive before using live routes in the content plugin.
