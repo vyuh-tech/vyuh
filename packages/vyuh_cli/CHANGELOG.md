@@ -1,3 +1,7 @@
+## 0.0.10
+
+ - **FEAT**: adding support for creating content items with vyuh_cli.
+
 ## 0.0.9
 
  - **FEAT**: introducing live route updates for enhanced developer experience when working with the Sanity CMS.

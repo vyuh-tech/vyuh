@@ -1,3 +1,7 @@
+## 1.8.4
+
+ - **FIX**: closing the controller on initial server errors.
+
 ## 1.8.3
 
  - **FIX**: refactoring the live connection code.
