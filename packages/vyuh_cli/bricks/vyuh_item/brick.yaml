@@ -1,0 +1,16 @@
+name: vyuh_item
+description: A Vyuh ContentItem template
+version: 0.1.0+1
+
+environment:
+  mason: ">=0.1.0-dev <0.1.0"
+
+vars:
+  item_name:
+    type: string
+    description: The name of the ContentItem
+    prompt: ContentItem name
+  feature_name:
+    type: string
+    description: The name of the feature
+    prompt: Feature name

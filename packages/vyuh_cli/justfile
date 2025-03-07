@@ -8,7 +8,7 @@ watch:
     watchexec  --watch ./bricks just bundle-all
 
 # Bundle all templates
-bundle-all: bundle-project bundle-feature bundle-feature-sanity-schema
+bundle-all: bundle-project bundle-feature bundle-item bundle-feature-sanity-schema
     @echo "All templates have been bundled successfully!"
 
 # Bundle vyuh_project template
@@ -25,5 +25,10 @@ bundle-feature:
 bundle-feature-sanity-schema:
     mason bundle bricks/vyuh_feature_sanity_schema -t dart -o lib/commands/create/schema
     dart format lib/commands/create/schema/vyuh_feature_sanity_schema_bundle.dart
+
+# Bundle vyuh_item template
+bundle-item:
+    mason bundle bricks/vyuh_item -t dart -o lib/commands/create/item
+    dart format lib/commands/create/item/vyuh_item_bundle.dart
 
 

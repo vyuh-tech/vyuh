@@ -43,7 +43,7 @@ void templateSummary({
 
   final details = '''
   • To get started refer to $readmePathLink
-  • Your project code is in $projectPathLink
+  • Your code is in $projectPathLink
 ''';
 
   logger
