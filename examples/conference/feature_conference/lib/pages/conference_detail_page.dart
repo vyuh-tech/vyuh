@@ -16,14 +16,15 @@ final class ConferenceDetailPage extends StatelessWidget {
         GoRouterState.of(context).pathParameters['conferenceId']!;
     final editionLayout = EditionSummaryLayout();
 
-    return ConferenceRouteScaffold<(Conference, List<Edition>)>(
+    return ConferenceRouteScaffold<(Conference?, List<Edition>)>(
       errorTitle: 'Failed to load Editions',
       future: () async {
-        final [conference as Conference, editions as List<Edition>] =
-            await Future.wait([
-          vyuh.di.get<ConferenceApi>().conference(conferenceId: conferenceId),
-          vyuh.di.get<ConferenceApi>().editions(conferenceId: conferenceId),
-        ]);
+        final getConference =
+            vyuh.di.get<ConferenceApi>().conference(conferenceId: conferenceId);
+        final getEditions =
+            vyuh.di.get<ConferenceApi>().editions(conferenceId: conferenceId);
+
+        final (conference, editions) = await (getConference, getEditions).wait;
 
         return (conference, editions);
       },
@@ -33,11 +34,14 @@ final class ConferenceDetailPage extends StatelessWidget {
 
         return ConferenceRouteCustomScrollView(
           title: 'Conference',
-          subtitle: conference.title,
+          subtitle: conference?.title,
           sliver: SliverList(
             delegate: SliverChildListDelegate(
               [
-                VyuhBinding.instance.content.buildContent(context, conference),
+                if (conference != null)
+                  VyuhBinding.instance.content.buildContent(context, conference)
+                else
+                  Text('No conference found with id: $conferenceId'),
                 const Divider(),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
