@@ -2,7 +2,7 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
-    - packages/vyuh_cli/bricks/*/__brick__
+    - packages/vyuh_cli/bricks/*/__brick__/**
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
