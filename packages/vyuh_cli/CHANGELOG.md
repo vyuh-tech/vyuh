@@ -1,3 +1,7 @@
+## 0.0.10+1
+
+ - **FIX**: refactoring to make the create commands more consistent.
+
 ## 0.0.10
 
  - **FEAT**: adding support for creating content items with vyuh_cli.
