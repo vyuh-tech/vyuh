@@ -82,7 +82,9 @@ extension LiveConnect on SanityClient {
         ));
       },
       onError: (error) {
-        throw LiveConnectException('With query: $query, params: $params');
+        controller.close();
+        throw LiveConnectException(
+            'With query: $query, params: $params, error: $error');
       },
     );
 
