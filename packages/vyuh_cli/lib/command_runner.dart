@@ -11,7 +11,7 @@ import 'package:vyuh_cli/version.dart';
 const executableName = 'vyuh';
 const packageName = 'vyuh_cli';
 const description =
-    'Scaffold a new project, feature or schema for the Vyuh Framework.';
+    'Scaffold a new project, feature, schema, or item for the Vyuh Framework.';
 
 /// {@template vyuh_cli_command_runner}
 /// A [CommandRunner] for the CLI.

@@ -1,56 +1,36 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:args/args.dart';
-import 'package:args/command_runner.dart';
 import 'package:mason/mason.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart' as path;
+import 'package:vyuh_cli/commands/create/base_create_command.dart';
 import 'package:vyuh_cli/commands/create/item/template.dart';
 import 'package:vyuh_cli/template.dart';
 import 'package:vyuh_cli/utils/utils.dart';
 
-final class CreateItemCommand extends Command<int> {
+final class CreateItemCommand extends BaseCreateCommand {
   CreateItemCommand({
-    required this.logger,
-    required MasonGeneratorFromBundle? generatorFromBundle,
-    required MasonGeneratorFromBrick? generatorFromBrick,
-  })  : _generatorFromBundle = generatorFromBundle ?? MasonGenerator.fromBundle,
-        _generatorFromBrick = generatorFromBrick ?? MasonGenerator.fromBrick {
+    required super.logger,
+    required super.generatorFromBundle,
+    required super.generatorFromBrick,
+  });
+
+  @override
+  void setupArgParser() {
+    super.setupArgParser();
     argParser.addOption(
       'feature',
       abbr: 'f',
       help:
           'The feature to add the content item to. If not specified, the item will be created without a feature context.',
     );
-    argParser.addOption(
-      'output-directory',
-      abbr: 'o',
-      help:
-          'Custom output directory for the ContentItem files. Defaults to the feature directory.',
-    );
   }
-
-  final Logger logger;
-  final MasonGeneratorFromBundle _generatorFromBundle;
-  final MasonGeneratorFromBrick _generatorFromBrick;
-
-  @visibleForTesting
-  ArgResults? argResultOverrides;
 
   String? get featureName {
     return argResults['feature'] as String?;
   }
 
-  String? get outputDirectory {
-    return argResults['output-directory'] as String?;
-  }
-
-  String get itemName {
-    final args = argResults.rest;
-    _validateItemName(args);
-    return args.first;
-  }
+  String get itemName => argResults.rest.first;
 
   @override
   String get name => 'item';
@@ -58,14 +38,12 @@ final class CreateItemCommand extends Command<int> {
   @override
   String get description => 'Create a new Vyuh ContentItem.';
 
+  @override
   Template get template => ItemTemplate();
 
   @override
   String get invocation =>
       'vyuh create $name <item-name> [--feature <feature-name>] [--output-directory <directory>]';
-
-  @override
-  ArgResults get argResults => argResultOverrides ?? super.argResults!;
 
   bool _isValidItemName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);
@@ -93,37 +71,14 @@ final class CreateItemCommand extends Command<int> {
     }
   }
 
-  Future<MasonGenerator> _getGeneratorForTemplate() async {
-    try {
-      final brick = Brick.version(
-        name: template.bundle.name,
-        version: '^${template.bundle.version}',
-      );
-      logger.detail(
-        '''Building generator from brick: ${brick.name} ${brick.location.version}''',
-      );
-      return await _generatorFromBrick(brick);
-    } catch (error) {
-      logger.detail('Building generator from brick failed: $error');
-    }
-    logger.detail(
-      '''Building generator from bundle ${template.bundle.name} ${template.bundle.version}''',
-    );
-    return _generatorFromBundle(template.bundle);
+  @override
+  void validateArgs() {
+    _validateItemName(argResults.rest);
+    // Add any additional validations here if needed in the future
   }
 
   @override
-  Future<int> run() async {
-    final template = this.template;
-    final generator = await _getGeneratorForTemplate();
-    final result = await runCreate(generator, template);
-
-    return result;
-  }
-
-  Future<int> runCreate(MasonGenerator generator, Template template) async {
-    var vars = getTemplateVars();
-
+  Future<Directory> getTargetDirectory() async {
     // Determine the base directory (feature directory, custom output directory, or current directory)
     final Directory baseDir;
     if (outputDirectory != null) {
@@ -131,7 +86,7 @@ final class CreateItemCommand extends Command<int> {
       baseDir = Directory(outputDirectory!);
       if (!baseDir.existsSync()) {
         logger.err('Output directory not found: ${baseDir.path}');
-        return ExitCode.noInput.code;
+        throw Exception('Output directory not found: ${baseDir.path}');
       }
     } else if (featureName != null) {
       // Use feature directory if feature name is provided
@@ -139,7 +94,7 @@ final class CreateItemCommand extends Command<int> {
           path.join('features', featureName!, 'feature_$featureName'));
       if (!baseDir.existsSync()) {
         logger.err('Feature directory not found: ${baseDir.path}');
-        return ExitCode.noInput.code;
+        throw Exception('Feature directory not found: ${baseDir.path}');
       }
     } else {
       // Default to current directory if neither output directory nor feature name is provided
@@ -149,53 +104,31 @@ final class CreateItemCommand extends Command<int> {
     }
 
     final contentDir = Directory(path.join(baseDir.path, 'lib', 'content'));
-    if (!contentDir.existsSync()) {
-      contentDir.createSync(recursive: true);
-    }
+    return contentDir;
+  }
 
-    final target = DirectoryGeneratorTarget(contentDir);
+  @override
+  Map<String, dynamic> getTemplateVars() {
+    final vars = super.getTemplateVars();
+    vars['item_name'] = itemName;
+    vars['feature_name'] = featureName ?? 'vyuh';
+    return vars;
+  }
 
-    await generator.hooks.preGen(
-      vars: vars,
-      onVarsChanged: (v) => vars = v,
-      workingDirectory: target.dir.path,
-      logger: logger,
-    );
+  @override
+  Future<int> runGenerate(MasonGenerator generator, Directory targetDir) async {
+    final result = await super.runGenerate(generator, targetDir);
 
-    final _ = await generator.generate(target, vars: vars, logger: logger);
-
-    await generator.hooks.postGen(
-      vars: vars,
-      onVarsChanged: (v) => vars = v,
-      workingDirectory: target.dir.path,
-      logger: logger,
-    );
-
-    await template.onGenerateComplete(
-      logger,
-      target.dir,
-    );
-
-    logger.info(
-      '''
+    if (result == ExitCode.success.code) {
+      logger.info(
+        '''
 Don't forget to:
 1. Run 'dart run build_runner build' to generate the JSON serialization code
 2. Register the ContentBuilder in your FeatureDescriptor with the ContentExtensionDescriptor()
 ''',
-    );
+      );
+    }
 
-    return ExitCode.success.code;
-  }
-
-  @mustCallSuper
-  Map<String, dynamic> getTemplateVars() {
-    final itemName = this.itemName;
-    final featureName = this.featureName;
-
-    return <String, dynamic>{
-      'item_name': itemName,
-      'feature_name': featureName ??
-          'vyuh', // Default to 'vyuh' if no feature name is provided
-    };
+    return result;
   }
 }
