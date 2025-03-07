@@ -1,3 +1,7 @@
+## 0.0.10+2
+
+ - **FIX**: linting fixes.
+
 ## 0.0.10+1
 
  - **FIX**: refactoring to make the create commands more consistent.
