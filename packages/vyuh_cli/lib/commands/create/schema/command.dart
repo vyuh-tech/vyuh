@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:mason/mason.dart';
-import 'package:path/path.dart' as path;
 import 'package:vyuh_cli/commands/create/base_create_command.dart';
 import 'package:vyuh_cli/commands/create/schema/template.dart';
 import 'package:vyuh_cli/template.dart';
@@ -14,7 +12,7 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
     required super.generatorFromBundle,
     required super.generatorFromBrick,
   });
-  
+
   @override
   void setupArgParser() {
     super.setupArgParser();
@@ -47,7 +45,8 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   }
 
   @override
-  String get invocation => 'vyuh create $name <feature-name> [--output-directory <directory>] [--cms <cms-type>]';
+  String get invocation =>
+      'vyuh create $name <feature-name> [--output-directory <directory>] [--cms <cms-type>]';
 
   bool _isValidPackageName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);
@@ -74,7 +73,7 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
       );
     }
   }
-  
+
   @override
   void validateArgs() {
     _validateFeatureName(argResults.rest);
@@ -85,10 +84,9 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory = outputDirectory != null 
-        ? Directory(outputDirectory!) 
-        : Directory('.');
-        
+    final directory =
+        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+
     return directory;
   }
 

@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:mason/mason.dart';
-import 'package:path/path.dart' as path;
 import 'package:vyuh_cli/commands/create/base_create_command.dart';
 import 'package:vyuh_cli/commands/create/project/template.dart';
 import 'package:vyuh_cli/template.dart';
@@ -64,7 +62,8 @@ class CreateProjectCommand extends BaseCreateCommand {
   String get orgName => argResults['org-name'] as String? ?? _defaultOrgName;
 
   @override
-  String get invocation => 'vyuh create $name <project-name> [--output-directory <directory>] [--org-name <org>] [--cms <cms-type>]';
+  String get invocation =>
+      'vyuh create $name <project-name> [--output-directory <directory>] [--org-name <org>] [--cms <cms-type>]';
 
   bool _isValidPackageName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);
@@ -101,10 +100,9 @@ class CreateProjectCommand extends BaseCreateCommand {
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory = outputDirectory != null 
-        ? Directory(outputDirectory!) 
-        : Directory('.');
-        
+    final directory =
+        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+
     return directory;
   }
 
