@@ -17,7 +17,7 @@ dependencies:
   flutter_sanity_portable_text: ^1.6.2
   vyuh_core: ^1.42.1
   vyuh_feature_system: ^1.38.2
-  vyuh_extension_content: ^1.23.3
+  vyuh_extension_content: ^1.24.0
   intl: ^0.19.0
   url_launcher: ^6.3.1
 

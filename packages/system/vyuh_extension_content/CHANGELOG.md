@@ -1,3 +1,7 @@
+## 1.24.0
+
+ - **FEAT**: add support to control the route-refresh button. It can be turned off in production.
+
 ## 1.23.3
 
  - **FIX**: add manual refresh for route builders only in debug mode.
