@@ -27,6 +27,9 @@ class RouteStreamBuilder extends StatefulWidget {
   /// Whether to include draft content.
   final bool includeDrafts;
 
+  /// Whether to allow refreshing the route, with the overlay Refresh button.
+  final bool allowRefresh;
+
   /// Creates a [RouteStreamBuilder].
   ///
   /// Either [url] or [routeId] must be provided, but not both.
@@ -37,6 +40,7 @@ class RouteStreamBuilder extends StatefulWidget {
     required this.fetchRoute,
     required this.buildContent,
     this.includeDrafts = false,
+    this.allowRefresh = true,
   }) {
     debugAssertOneOfPathOrRouteId(url?.toString(), routeId);
   }
@@ -133,15 +137,19 @@ class _RouteStreamBuilderState extends State<RouteStreamBuilder> {
                 );
               }
 
-              return RouteContentWithRefresh(
-                child: widget.buildContent(context, route),
-              );
+              return widget.allowRefresh
+                  ? RouteContentWithRefresh(
+                      child: widget.buildContent(context, route),
+                    )
+                  : widget.buildContent(context, route);
 
             case StreamStatus.done:
               if (route != null) {
-                return RouteContentWithRefresh(
-                  child: widget.buildContent(context, route),
-                );
+                return widget.allowRefresh
+                    ? RouteContentWithRefresh(
+                        child: widget.buildContent(context, route),
+                      )
+                    : widget.buildContent(context, route);
               }
 
               // If we're done but have no data, show an error

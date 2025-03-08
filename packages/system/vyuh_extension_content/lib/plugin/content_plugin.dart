@@ -14,9 +14,13 @@ final class DefaultContentPlugin extends ContentPlugin {
   /// When false, uses RouteFutureBuilder for one-time loading.
   final bool useLiveRoute;
 
+  /// Whether to allow manual refreshing of the route.
+  final bool allowRouteRefresh;
+
   DefaultContentPlugin({
     required super.provider,
     this.useLiveRoute = false,
+    this.allowRouteRefresh = true,
   }) : super(
           name: 'vyuh.plugin.content',
           title: 'Content Plugin',
@@ -100,6 +104,7 @@ final class DefaultContentPlugin extends ContentPlugin {
       url: url,
       routeId: routeId,
       includeDrafts: kDebugMode,
+      allowRefresh: allowRouteRefresh,
       fetchRoute: (context, {path, routeId, includeDrafts = false}) {
         // Get the base stream from the provider
         final stream = provider.live.fetchRoute(
@@ -121,6 +126,7 @@ final class DefaultContentPlugin extends ContentPlugin {
     return RouteFutureBuilder(
       url: url,
       routeId: routeId,
+      allowRefresh: allowRouteRefresh,
       fetchRoute: (context, {path, routeId}) => provider
           .fetchRoute(path: path, routeId: routeId)
           .then((route) => context.mounted ? _initRoute(context, route) : null),
