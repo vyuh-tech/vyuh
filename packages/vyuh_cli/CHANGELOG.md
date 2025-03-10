@@ -1,3 +1,7 @@
+## 0.0.10+3
+
+ - **FIX**: version upgrades and setting the invocation line consistenly across commands.
+
 ## 0.0.10+2
 
  - **FIX**: linting fixes.
