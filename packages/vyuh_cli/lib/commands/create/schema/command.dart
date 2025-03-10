@@ -45,8 +45,7 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   }
 
   @override
-  String get invocation =>
-      'vyuh create $name <feature-name> [--output-directory <directory>] [--cms <cms-type>]';
+  String get invocation => 'vyuh create $name <feature-name> [arguments]';
 
   bool _isValidPackageName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);

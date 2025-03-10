@@ -42,8 +42,7 @@ final class CreateItemCommand extends BaseCreateCommand {
   Template get template => ItemTemplate();
 
   @override
-  String get invocation =>
-      'vyuh create $name <item-name> [--feature <feature-name>] [--output-directory <directory>]';
+  String get invocation => 'vyuh create $name <item-name> [arguments]';
 
   bool _isValidItemName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);

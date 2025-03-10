@@ -31,7 +31,7 @@ final class CreateFeatureCommand extends BaseCreateCommand {
   Template get template => FeatureTemplate();
 
   @override
-  String get invocation => 'vyuh create $name <feature-name> [--output-directory <directory>]';
+  String get invocation => 'vyuh create $name <feature-name> [arguments]';
 
   bool _isValidPackageName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);

@@ -62,8 +62,7 @@ class CreateProjectCommand extends BaseCreateCommand {
   String get orgName => argResults['org-name'] as String? ?? _defaultOrgName;
 
   @override
-  String get invocation =>
-      'vyuh create $name <project-name> [--output-directory <directory>] [--org-name <org>] [--cms <cms-type>]';
+  String get invocation => 'vyuh create $name <project-name> [arguments]';
 
   bool _isValidPackageName(String name) {
     final match = identifierRegExp.matchAsPrefix(name);
