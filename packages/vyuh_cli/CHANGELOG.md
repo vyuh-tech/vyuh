@@ -1,3 +1,7 @@
+## 0.0.10+4
+
+ - **FIX**: adding dash in the regex for identifier.
+
 ## 0.0.10+3
 
  - **FIX**: version upgrades and setting the invocation line consistenly across commands.
