@@ -105,7 +105,7 @@ final class SanityContentProvider extends ContentProvider {
     String query, {
     required FromJsonConverter<T> fromJson,
     Map<String, String>? queryParams,
-    bool useCache = true,
+    bool useCache = false,
   }) async {
     final response = await _runQuery(query, queryParams, useCache);
     return _processor.processMultiple(response, fromJson);
