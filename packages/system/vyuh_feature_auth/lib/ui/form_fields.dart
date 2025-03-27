@@ -32,7 +32,7 @@ final class LoaderButton extends StatelessWidget {
               height: 20,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: Theme.of(context).indicatorColor,
+                color: Theme.of(context).tabBarTheme.indicatorColor,
               ))
           : icon,
       label: title == null ? const SizedBox.shrink() : Text(title!),
