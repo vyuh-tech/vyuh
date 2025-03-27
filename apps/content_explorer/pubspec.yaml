@@ -20,7 +20,7 @@ dependencies:
 
   # Vyuh Features
   vyuh_feature_system: ^1.38.3
-  vyuh_feature_auth: ^1.17.8
+  vyuh_feature_auth: ^1.17.9
   vyuh_feature_onboarding: ^1.6.4
 
   # Example Features

@@ -1,3 +1,7 @@
+## 1.17.9
+
+ - **FIX**: fixing lints.
+
 ## 1.17.8
 
  - **FIX**: package updates and also fixing the mouse cursor on cards.
