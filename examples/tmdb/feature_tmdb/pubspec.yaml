@@ -20,7 +20,7 @@ dependencies:
   flutter_mobx: ^2.2.0+2
   flutter_sanity_portable_text: ^1.6.2
   vyuh_core: ^1.42.1
-  vyuh_feature_system: ^1.38.2
+  vyuh_feature_system: ^1.38.3
   vyuh_extension_content: ^1.24.0
   vyuh_cache: ^1.4.5
   photo_view: ^0.15.0

@@ -1,3 +1,7 @@
+## 1.17.8
+
+ - **FIX**: package updates and also fixing the mouse cursor on cards.
+
 ## 1.17.7
 
  - **FIX**: improve the query handling for live for include drafts. Also added assertions for the proper configurations. Adding a simple profile card to the Vyuh auth feature.

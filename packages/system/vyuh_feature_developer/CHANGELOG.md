@@ -1,3 +1,7 @@
+## 1.13.2
+
+ - **FIX**: package updates and also fixing the mouse cursor on cards.
+
 ## 1.13.1
 
  - **FIX**: format fixes in readme.

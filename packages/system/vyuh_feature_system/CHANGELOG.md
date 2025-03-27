@@ -1,3 +1,7 @@
+## 1.38.3
+
+ - **FIX**: package updates and also fixing the mouse cursor on cards.
+
 ## 1.38.2
 
  - **FIX**: renaming extensionDescriptor => descriptor.
