@@ -217,14 +217,22 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                           ? BorderRadius.circular(8)
                           : const BorderRadius.only(
                               topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8))),
+                              topRight: Radius.circular(8),
+                            )),
                   child: AspectRatio(
                       aspectRatio: _controller.value.aspectRatio,
                       child: Chewie(controller: _chewieController!)),
                 ),
                 if (widget.content.title != null)
                   Container(
-                    color: theme.colorScheme.inverseSurface,
+                    clipBehavior: Clip.antiAlias,
+                    decoration: BoxDecoration(
+                        color: theme.colorScheme.inverseSurface,
+                        borderRadius: widget.content.title == null
+                            ? BorderRadius.circular(8)
+                            : const BorderRadius.only(
+                                bottomLeft: Radius.circular(8),
+                                bottomRight: Radius.circular(8))),
                     padding: const EdgeInsets.all(4),
                     child: Text(
                       widget.content.title!,

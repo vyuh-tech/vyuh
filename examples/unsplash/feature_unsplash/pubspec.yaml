@@ -21,7 +21,7 @@ dependencies:
   unsplash_client: ^2.2.0
   flutter_blurhash: ^0.8.2
   photo_view: ^0.15.0
-  intl: ^0.19.0
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

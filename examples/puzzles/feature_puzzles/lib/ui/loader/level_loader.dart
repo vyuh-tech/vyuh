@@ -2,7 +2,7 @@ import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_puzzles/api/model/level.dart';
 import 'package:feature_puzzles/ui/widgets/puzzle_button.dart';
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -15,7 +15,7 @@ class LevelContentLoader extends StatelessWidget {
     final gap = SizedBox(height: theme.sizing.s4);
 
     final level = Level.empty();
-    return Skeletonizer(
+    return Shimmer(
       enabled: true,
       child: Column(
         children: [

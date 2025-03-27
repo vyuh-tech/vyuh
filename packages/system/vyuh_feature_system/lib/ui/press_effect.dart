@@ -22,41 +22,46 @@ class _PressEffectState extends State<PressEffect> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: widget.onTap != null
-          ? () {
-              setState(() {
-                if (_tapped) {
-                  return;
-                }
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onTap != null
+            ? () {
+                setState(() {
+                  if (_tapped) {
+                    return;
+                  }
 
-                _tapped = true;
-              });
-            }
-          : null,
-      child: _tapped
-          ? widget.child.animate(onComplete: (_) {
-              setState(() {
-                _tapped = false;
+                  _tapped = true;
+                });
+              }
+            : null,
+        child: _tapped
+            ? widget.child.animate(onComplete: (_) {
+                setState(() {
+                  _tapped = false;
 
-                Future.delayed(
-                  const Duration(milliseconds: 50),
-                  () {
-                    if (!context.mounted) {
-                      return;
-                    }
+                  Future.delayed(
+                    const Duration(milliseconds: 50),
+                    () {
+                      if (!context.mounted) {
+                        return;
+                      }
 
-                    return widget.onTap?.call(context);
-                  },
-                );
-              });
-            }).toggle(
-              duration: 25.ms,
-              delay: 50.ms,
-              builder: (_, value, child) {
-                return child.animate().scaleXY(end: value ? widget.scale : 1.0);
-              })
-          : widget.child,
+                      return widget.onTap?.call(context);
+                    },
+                  );
+                });
+              }).toggle(
+                duration: 25.ms,
+                delay: 50.ms,
+                builder: (_, value, child) {
+                  return child
+                      .animate()
+                      .scaleXY(end: value ? widget.scale : 1.0);
+                })
+            : widget.child,
+      ),
     );
   }
 }

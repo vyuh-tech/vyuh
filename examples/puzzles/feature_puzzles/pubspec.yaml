@@ -29,7 +29,7 @@ dependencies:
   neopop: ^1.0.2
   animated_flip_counter: ^0.3.4
   uuid: ^4.5.0
-  skeletonizer: ^1.4.2
+  shimmer_animation: ^2.2.2
 
 dev_dependencies:
   flutter_test:

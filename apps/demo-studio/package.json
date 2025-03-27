@@ -5,7 +5,7 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
+    "dev": "sanity dev --port 3334",
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy",
