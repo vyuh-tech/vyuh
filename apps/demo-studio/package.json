@@ -27,9 +27,9 @@
     "puzzles-sanity-schema": "workspace:*",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "sanity": "^3.81.0",
+    "sanity": "^3.82.0",
     "settings-sanity-schema": "workspace:*",
-    "styled-components": "^6.1.16",
+    "styled-components": "^6.1.17",
     "tmdb-sanity-schema": "workspace:*",
     "wonderous-sanity-schema": "workspace:*"
   },
@@ -40,6 +40,6 @@
     "eslint": "^8.57.1",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.1.5",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   }
 }
