@@ -84,73 +84,13 @@ final class DefaultContentPlugin extends ContentPlugin {
 
   @override
   Widget buildRoute(BuildContext context, {Uri? url, String? routeId}) {
-    final label = [
-      url == null ? null : 'Url: $url',
-      routeId == null ? null : 'RouteId: $routeId',
-      'Route',
-    ].firstWhere((x) => x != null);
-
-    return ScopedDIWidget(
-      debugLabel: 'Scoped DI for $label',
-      child: useLiveRoute && provider.supportsLive
-          ? _buildLiveRoute(context, url: url, routeId: routeId)
-          : _buildStaticRoute(context, url: url, routeId: routeId),
-    );
-  }
-
-  /// Builds a route with live updates using RouteStreamBuilder
-  Widget _buildLiveRoute(BuildContext context, {Uri? url, String? routeId}) {
-    return RouteStreamBuilder(
+    return RouteBuilder(
       url: url,
       routeId: routeId,
       includeDrafts: kDebugMode,
       allowRefresh: allowRouteRefresh,
-      fetchRoute: (context, {path, routeId, includeDrafts = false}) {
-        // Get the base stream from the provider
-        final stream = provider.live.fetchRoute(
-          path: path,
-          routeId: routeId,
-          includeDrafts: includeDrafts,
-        );
-
-        // Transform the stream to handle DI scope resets
-        return stream.asyncMap(
-            (route) => context.mounted ? _initRoute(context, route) : null);
-      },
-      buildContent: buildContent,
+      isLive: useLiveRoute,
     );
-  }
-
-  /// Builds a route with one-time loading using RouteFutureBuilder
-  Widget _buildStaticRoute(BuildContext context, {Uri? url, String? routeId}) {
-    return RouteFutureBuilder(
-      url: url,
-      routeId: routeId,
-      allowRefresh: allowRouteRefresh,
-      fetchRoute: (context, {path, routeId}) => provider
-          .fetchRoute(path: path, routeId: routeId)
-          .then((route) => context.mounted ? _initRoute(context, route) : null),
-      buildContent: buildContent,
-    );
-  }
-
-  /// Common method to initialize a route with proper DI scope handling
-  /// This ensures consistent behavior between live and static routes
-  Future<RouteBase?> _initRoute(BuildContext context, RouteBase? route) async {
-    if (route == null) {
-      return null;
-    }
-
-    // Reset DI scope when a new route is fetched
-    await context.di.reset();
-
-    if (!context.mounted) {
-      return null;
-    }
-
-    // Now initialize the new route with the clean DI scope
-    final finalRoute = await route.init(context);
-    return finalRoute;
   }
 
   @override
