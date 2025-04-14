@@ -1,3 +1,7 @@
+## 1.43.0
+
+ - **FEAT**: adding a document builder for more generalized document loading from CMS.
+
 ## 1.42.1
 
  - **FIX**: refactoring the live connection code.

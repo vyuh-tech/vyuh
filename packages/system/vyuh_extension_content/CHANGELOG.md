@@ -1,3 +1,7 @@
+## 1.26.0
+
+ - **FEAT**: adding a document builder for more generalized document loading from CMS.
+
 ## 1.25.0
 
  - **FEAT**: package updates and adding a route_builder that wraps future/stream versions, similar to React.
