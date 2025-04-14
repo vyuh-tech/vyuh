@@ -5,7 +5,7 @@ final messages = {
   'title': (_) => 'No Content Plugin',
   'error': (String arg) => '''
 No content plugin configured to render $arg.
- 
+
 You have three options:
 1. Configure one of the default ContentPlugin-s to render this content.
 2. Create a custom ContentPlugin to render this content.
