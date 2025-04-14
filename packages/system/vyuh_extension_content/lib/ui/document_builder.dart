@@ -196,8 +196,10 @@ final class DocumentBuilder<T> extends StatelessWidget {
   Widget _buildStaticDocument(BuildContext context) {
     return DocumentFutureBuilder<T>(
       allowRefresh: allowRefresh,
-      future: fetchDocument().then((document) =>
-          context.mounted ? _initDocument(context, document) : null),
+      future: () {
+        return fetchDocument().then((document) =>
+            context.mounted ? _initDocument(context, document) : null);
+      },
       buildContent: buildContent,
     );
   }

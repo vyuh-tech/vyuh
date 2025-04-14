@@ -13,7 +13,7 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 /// use [DocumentStreamBuilder] instead.
 class DocumentFutureBuilder<T> extends StatefulWidget {
   /// The future that resolves with the document data.
-  final Future<T?> future;
+  final Future<T?> Function() future;
 
   /// A function that builds the UI for the content.
   final Widget Function(BuildContext context, T document) buildContent;
@@ -58,7 +58,7 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
   }
 
   ObservableFuture<T?> _fetchDocument() {
-    return ObservableFuture(widget.future);
+    return ObservableFuture(widget.future());
   }
 
   @override
