@@ -17,7 +17,7 @@ dependencies:
   flutter_sanity_portable_text: ^1.6.2
   vyuh_core: ^1.43.0
   vyuh_feature_system: ^1.38.3
-  vyuh_extension_content: ^1.26.0
+  vyuh_extension_content: ^1.26.1
   design_system: ^1.0.0
   barcode_widget: ^2.0.4
   vyuh_content_widget: ^1.0.0

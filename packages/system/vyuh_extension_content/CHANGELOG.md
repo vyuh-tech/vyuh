@@ -1,3 +1,7 @@
+## 1.26.1
+
+ - **FIX**: fetchdocument should be a function that returns a future.
+
 ## 1.26.0
 
  - **FEAT**: adding a document builder for more generalized document loading from CMS.
