@@ -43,7 +43,7 @@ jobs:
       - name: Build web app
         run: |
           cd apps/vyuh_demo
-          flutter build web --release
+          flutter build web --release --base-href /vyuh/
 
       - name: Upload static files as artifact
         id: deployment
