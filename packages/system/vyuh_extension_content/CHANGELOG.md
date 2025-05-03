@@ -1,3 +1,7 @@
+## 1.26.2
+
+ - **FIX**: some cleanups.
+
 ## 1.26.1
 
  - **FIX**: fetchdocument should be a function that returns a future.
