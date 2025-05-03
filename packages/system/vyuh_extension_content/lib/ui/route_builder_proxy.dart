@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RouteBuilderProxy extends InheritedWidget {
@@ -35,26 +34,24 @@ final class RouteContentWithRefresh extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: kDebugMode
-          ? Stack(
-              children: [
-                Positioned.fill(child: child),
-                Positioned(
-                  left: 5,
-                  bottom: MediaQuery.of(context).viewPadding.bottom,
-                  child: IconButton.filledTonal(
-                    visualDensity: VisualDensity.compact,
-                    mouseCursor: SystemMouseCursors.click,
-                    icon: const Icon(Icons.refresh),
-                    iconSize: 16,
-                    onPressed: () {
-                      RouteBuilderProxy.of(context)?.refresh();
-                    },
-                  ),
-                )
-              ],
-            )
-          : child,
+      child: Stack(
+        children: [
+          Positioned.fill(child: child),
+          Positioned(
+            left: 5,
+            bottom: MediaQuery.of(context).viewPadding.bottom + 5,
+            child: IconButton.filledTonal(
+              visualDensity: VisualDensity.compact,
+              mouseCursor: SystemMouseCursors.click,
+              icon: const Icon(Icons.refresh),
+              iconSize: 16,
+              onPressed: () {
+                RouteBuilderProxy.of(context)?.refresh();
+              },
+            ),
+          )
+        ],
+      ),
     );
   }
 }

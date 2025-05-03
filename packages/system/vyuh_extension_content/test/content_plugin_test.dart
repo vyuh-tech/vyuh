@@ -48,8 +48,11 @@ void main() {
     testWidgets('registers type descriptors', (tester) async {
       await vyuh.getReady(tester);
 
-      expect(vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType), isTrue);
-      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType), isTrue);
+      expect(
+          vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType),
+          isTrue);
+      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType),
+          isTrue);
     });
 
     testWidgets('creates content item from json', (tester) async {
@@ -100,7 +103,7 @@ void main() {
         TestBuildContext(),
         url: Uri.parse('https://example.com'),
       );
-      expect(widget, isA<RouteFutureBuilder>());
+      expect(widget, isA<DocumentFutureBuilder>());
     });
 
     testWidgets('handles content with layout configuration', (tester) async {

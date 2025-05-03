@@ -285,7 +285,7 @@ class _ScoreCardGames extends StatelessWidget {
           ),
           children: [
             // Empty cell for player column
-            TableCell(child: const SizedBox()),
+            const TableCell(child: SizedBox()),
 
             // Game number cells - always show 7 games
             for (int i = 0; i < 7; i++)
