@@ -8,10 +8,10 @@
   },
   "private": true,
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^2.0.1",
-    "@vyuh/sanity-schema-system": "^2.0.1",
+    "@vyuh/sanity-schema-core": "^2.0.2",
+    "@vyuh/sanity-schema-system": "^2.0.2",
     "react-icons": "^5.5.0",
-    "sanity": "^3.86.1"
+    "sanity": "^3.87.1"
   },
   "devDependencies": {
     "typescript": "^5.8.3"
