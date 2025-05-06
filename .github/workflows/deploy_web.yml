@@ -42,7 +42,7 @@ jobs:
       - name: Build web app
         run: |
           cd apps/vyuh_demo
-          flutter build web --release --base-href /
+          flutter build web --release --base-href / --wasm
 
       - name: Deploy to Cloudflare Pages
         id: deployment
