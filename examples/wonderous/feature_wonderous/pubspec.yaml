@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^14.0.1
+  go_router: ^15.1.1
   json_annotation: ^4.8.1
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
@@ -19,7 +19,7 @@ dependencies:
   vyuh_feature_system: ^1.38.3
   vyuh_extension_content: ^1.26.2
   design_system: ^1.0.0
-  unsplash_client: ^2.2.0
+  unsplash_client: ^3.0.0
   smooth_page_indicator: ^1.1.0
   google_maps_flutter: ^2.7.0
   chakra_shared: ^1.0.0

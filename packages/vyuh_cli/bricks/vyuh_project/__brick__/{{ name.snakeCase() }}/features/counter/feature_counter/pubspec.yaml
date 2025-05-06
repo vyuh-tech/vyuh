@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^14.0.1
+  go_router: ^15.1.1
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2

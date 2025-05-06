@@ -29,18 +29,18 @@ gen-tmdb_client: (_generate-json "packages/tmdb_client" "watch")
 
 # Launch images and Icons
 gen-launcher-icons:
-    #!/usr/bin/env bash
+    #!/usr/bin/env fish
     cd apps/vyuh_demo
     flutter pub run flutter_launcher_icons
 
 gen-splash-screen:
-    #!/usr/bin/env bash
+    #!/usr/bin/env fish
     cd apps/vyuh_demo
     flutter pub run flutter_native_splash:create
 
 
 _generate-json package command="build":
-    #!/usr/bin/env bash
+    #!/usr/bin/env fish
     echo "Building JSON-Serializable in {{package}}"
     cd {{package}}
     dart run build_runner {{command}} --delete-conflicting-outputs
@@ -49,13 +49,13 @@ _generate-json package command="build":
 build-and-upload-ipa: _build-ipa _upload-to-testflight
 
 _build-ipa:
-    #!/usr/bin/env bash
+    #!/usr/bin/env fish
     cd apps/vyuh_demo
     rm -rf build/ios/ipa
     melos bootstrap
     flutter build ipa --obfuscate --split-debug-info=build/ios/symbols
 
 _upload-to-testflight:
-    #!/usr/bin/env bash
+    #!/usr/bin/env fish
     cd apps/vyuh_demo/ios
     fastlane beta

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:introduction_screen/introduction_screen.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_onboarding/onboarding.dart';
@@ -15,7 +14,7 @@ final class DefaultOnboardingLayout
   static final typeDescriptor = TypeDescriptor(
     schemaType: schemaName,
     fromJson: DefaultOnboardingLayout.fromJson,
-    title: 'Default Onboarding Layout',
+    title: 'Simple Page View Onboarding Layout',
   );
 
   DefaultOnboardingLayout() : super(schemaType: schemaName);
@@ -25,50 +24,182 @@ final class DefaultOnboardingLayout
 
   @override
   Widget build(BuildContext context, OnboardingContent content) {
+    return _OnboardingPageView(content: content);
+  }
+}
+
+class _OnboardingPageView extends StatefulWidget {
+  final OnboardingContent content;
+
+  const _OnboardingPageView({required this.content});
+
+  @override
+  State<_OnboardingPageView> createState() => _OnboardingPageViewState();
+}
+
+class _OnboardingPageViewState extends State<_OnboardingPageView> {
+  late final PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController();
+    _pageController.addListener(_onPageChanged);
+  }
+
+  @override
+  void dispose() {
+    _pageController.removeListener(_onPageChanged);
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _onPageChanged() {
+    final page = _pageController.page?.round() ?? 0;
+    if (page != _currentPage) {
+      setState(() {
+        _currentPage = page;
+      });
+    }
+  }
+
+  void _goToNextPage() {
+    if (_currentPage < widget.content.steps.length - 1) {
+      _pageController.animateToPage(
+        _currentPage + 1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
+    } else {
+      _handleDone();
+    }
+  }
+
+  void _handleDone() {
+    if (widget.content.doneAction != null) {
+      widget.content.doneAction!.execute(context);
+    }
+  }
+
+  void _handleSkip() {
+    _handleDone();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isLastPage = _currentPage == widget.content.steps.length - 1;
+
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Page content
+            Expanded(
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: widget.content.steps.length,
+                itemBuilder: (context, index) {
+                  return _buildPage(context, widget.content.steps[index]);
+                },
+              ),
+            ),
+
+            // Page indicators
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  widget.content.steps.length,
+                  (index) => _buildDotIndicator(index, theme),
+                ),
+              ),
+            ),
+
+            // Navigation buttons
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Skip button
+                  if (!isLastPage)
+                    TextButton(
+                      onPressed: _handleSkip,
+                      child: const Text('Skip'),
+                    )
+                  else
+                    const SizedBox(width: 80), // Placeholder for alignment
+
+                  // Next/Done button
+                  ElevatedButton(
+                    onPressed: _goToNextPage,
+                    child: Text(isLastPage ? 'Done' : 'Next'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDotIndicator(int index, ThemeData theme) {
+    final isActive = index == _currentPage;
+
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 150),
+      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+      height: 8.0,
+      width: isActive ? 24.0 : 8.0,
+      decoration: BoxDecoration(
+        color: isActive
+            ? theme.colorScheme.primary
+            : theme.colorScheme.primary.withValues(alpha: 0.25),
+        borderRadius: BorderRadius.circular(4.0),
+      ),
+    );
+  }
+
+  Widget _buildPage(BuildContext context, OnboardingStep step) {
     final theme = Theme.of(context);
 
-    final pages = content.steps.map((step) {
-      return PageViewModel(
-        title: step.title,
-        bodyWidget: step.description != null
-            ? vyuh.content.buildContent(context, step.description!)
-            : null,
-        image: _buildImage(step, theme),
-        decoration: const PageDecoration(
-          pageMargin: EdgeInsets.all(0),
-          titlePadding: EdgeInsets.symmetric(vertical: 16),
-          bodyPadding: EdgeInsets.symmetric(horizontal: 16),
-          imagePadding: EdgeInsets.only(bottom: 24),
-          contentMargin: EdgeInsets.all(16),
-        ),
-      );
-    }).toList();
+    return Padding(
+      padding: const EdgeInsets.all(24.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Image
+          if (step.image != null || step.icon != null)
+            Expanded(
+              flex: 3,
+              child: Center(
+                child: _buildImage(step, theme),
+              ),
+            ),
 
-    return IntroductionScreen(
-      pages: pages,
-      showSkipButton: true,
-      skip: const Text('Skip'),
-      next: const Text('Next'),
-      done: const Text('Done'),
-      onDone: () {
-        if (content.doneAction != null) {
-          content.doneAction!.execute(context);
-        }
-      },
-      onSkip: () {
-        if (content.doneAction != null) {
-          content.doneAction!.execute(context);
-        }
-      },
-      dotsDecorator: DotsDecorator(
-        size: const Size(8.0, 8.0),
-        spacing: const EdgeInsets.symmetric(horizontal: 4.0),
-        color: theme.colorScheme.primary.withValues(alpha: 0.25),
-        activeSize: const Size(16.0, 8.0),
-        activeColor: theme.colorScheme.primary,
-        activeShape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(4.0)),
-        ),
+          // Title
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16.0),
+            child: Text(
+              step.title,
+              style: theme.textTheme.headlineSmall,
+              textAlign: TextAlign.center,
+            ),
+          ),
+
+          // Description
+          if (step.description != null)
+            Expanded(
+              flex: 2,
+              child: SingleChildScrollView(
+                child: vyuh.content.buildContent(context, step.description!),
+              ),
+            ),
+        ],
       ),
     );
   }
