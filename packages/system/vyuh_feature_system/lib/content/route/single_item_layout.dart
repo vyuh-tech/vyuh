@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_feature_system/ui/single_item_route_scaffold.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -34,14 +35,7 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
 
   @override
   Widget build(BuildContext context, vf.Route content) {
-    final first =
-        content.regions.expand((element) => element.items).firstOrNull;
-
-    final child = first == null
-        ? vf.empty
-        : VyuhBinding.instance.content.buildContent(context, first);
-
-    return vf.RouteScaffold(
+    return SingleItemRouteScaffold(
       content: content,
       appBar: showAppBar
           ? AppBar(
@@ -56,7 +50,6 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
             )
           : null,
       useSafeArea: useSafeArea,
-      body: child,
     );
   }
 }

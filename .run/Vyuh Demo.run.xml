@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Vyuh Demo" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="additionalArgs" value="--web-experimental-hot-reload" />
+    <option name="filePath" value="$PROJECT_DIR$/apps/vyuh_demo/lib/main.dart" />
+    <method v="2" />
+  </configuration>
+</component>

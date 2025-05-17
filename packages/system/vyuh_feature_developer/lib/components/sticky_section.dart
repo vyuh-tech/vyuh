@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_sticky_header/flutter_sticky_header.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 
 /// A widget to display a sticky section.
@@ -26,17 +25,22 @@ final class StickySection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return SliverStickyHeader(
-      header: Container(
-        color: headerColor ?? theme.colorScheme.inverseSurface,
-        padding: const EdgeInsets.all(8),
-        margin: const EdgeInsets.only(bottom: 2),
-        child: Text(title,
-            style: theme.textTheme.labelLarge
-                ?.apply(color: theme.colorScheme.onInverseSurface),
-            textAlign: TextAlign.center),
-      ),
-      sliver: sliver ?? const SliverToBoxAdapter(child: EmptyItemTile()),
+    return SliverMainAxisGroup(
+      slivers: [
+        SliverAppBar(
+          pinned: true,
+          floating: true,
+          snap: true,
+          backgroundColor: headerColor ?? theme.colorScheme.inverseSurface,
+          elevation: 0,
+          automaticallyImplyLeading: false,
+          title: Text(title,
+              style: theme.textTheme.labelLarge
+                  ?.apply(color: theme.colorScheme.onInverseSurface),
+              textAlign: TextAlign.center),
+        ),
+        sliver ?? const SliverToBoxAdapter(child: EmptyItemTile()),
+      ],
     );
   }
 }

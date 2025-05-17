@@ -43,9 +43,9 @@ class BreakpointConfiguration {
 /// * Access the current breakpoint configuration
 final class BreakpointService {
   static var _config = BreakpointConfiguration(
-    small: 450,
-    medium: 800,
-    large: 1920,
+    small: 640,
+    medium: 768,
+    large: 1024,
     xlarge: double.infinity,
   );
 
@@ -58,9 +58,9 @@ final class BreakpointService {
   /// Example:
   /// ```dart
   /// BreakpointService.configure(BreakpointConfiguration(
-  ///   small: 450,
-  ///   medium: 800,
-  ///   large: 1920,
+  ///   small: 640,
+  ///   medium: 768,
+  ///   large: 1024,
   ///   xlarge: double.infinity,
   /// ));
   /// ```

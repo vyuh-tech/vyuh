@@ -17,8 +17,8 @@ import 'package:vyuh_demo/root_feature.dart' as root;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_auth/vyuh_feature_auth.dart' as auth;
 
-// import 'package:vyuh_feature_developer/vyuh_feature_developer.dart'
-//     as developer;
+import 'package:vyuh_feature_developer/vyuh_feature_developer.dart'
+    as developer;
 import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart'
     as onboarding;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
@@ -32,7 +32,7 @@ void main() async {
     features: () => [
       // Core Vyuh features that are necessary for all apps
       system.feature,
-      // developer.feature,
+      developer.feature,
 
       // Example Features
       root.feature,
