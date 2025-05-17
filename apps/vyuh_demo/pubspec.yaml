@@ -25,7 +25,7 @@ dependencies:
   vyuh_core: ^1.43.1
   vyuh_extension_content: ^1.26.2
   vyuh_feature_system: ^1.38.4
-  vyuh_feature_developer: ^1.13.3
+  vyuh_feature_developer: ^1.13.4
   vyuh_plugin_content_provider_sanity: ^1.12.1
   vyuh_feature_auth: ^1.17.10
   vyuh_feature_onboarding: ^1.6.5

@@ -1,3 +1,7 @@
+## 1.13.4
+
+ - **FIX**: showing empty message for missing actions in content extension.
+
 ## 1.13.3
 
  - **FIX**: package updates and using the SliverMainAxisGroup instead of sticky headers.
