@@ -28,12 +28,16 @@ class ContentExtensionDetail extends StatelessWidget {
             ),
             StickySection(
               title: 'Actions [${extension.actions?.length ?? 0}]',
-              sliver: SliverList.list(
-                children: [
-                  for (final item in extension.actions ?? <TypeDescriptor>[])
-                    ItemTile(title: item.title, description: item.schemaType)
-                ],
-              ),
+              sliver: extension.actions != null && extension.actions!.isNotEmpty
+                  ? SliverList.list(
+                      children: [
+                        for (final item
+                            in extension.actions ?? <TypeDescriptor>[])
+                          ItemTile(
+                              title: item.title, description: item.schemaType)
+                      ],
+                    )
+                  : null,
             ),
             StickySection(
               title: 'Route Types [${extension.routeTypes?.length ?? 0}]',
@@ -47,7 +51,7 @@ class ContentExtensionDetail extends StatelessWidget {
                               title: item.title, description: item.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemTile()),
+                  : null,
             ),
             StickySection(
               title: 'Conditions [${extension.conditions?.length ?? 0}]',
@@ -61,7 +65,7 @@ class ContentExtensionDetail extends StatelessWidget {
                               title: item.title, description: item.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemTile()),
+                  : null,
             ),
             StickySection(
               title:
@@ -77,7 +81,7 @@ class ContentExtensionDetail extends StatelessWidget {
                               description: item.content.schemaType)
                       ],
                     )
-                  : const SliverToBoxAdapter(child: EmptyItemTile()),
+                  : null,
             ),
             StickySection(
               title: 'Content Descriptors [${extension.contents?.length ?? 0}]',
@@ -90,7 +94,7 @@ class ContentExtensionDetail extends StatelessWidget {
                               _ContentDescriptorTile(item: item)
                           ],
                         )
-                      : const SliverToBoxAdapter(child: EmptyItemTile()),
+                      : null,
             ),
           ],
         ),
