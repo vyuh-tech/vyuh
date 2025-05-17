@@ -18,17 +18,17 @@ dependencies:
   flutter_native_splash: ^2.4.0
 
   # Sanity Integration
-  sanity_client: ^1.8.4
+  sanity_client: ^1.8.5
   flutter_sanity_portable_text: ^1.6.2
 
   # Vyuh Framework
-  vyuh_core: ^1.43.0
+  vyuh_core: ^1.43.1
   vyuh_extension_content: ^1.26.2
-  vyuh_feature_system: ^1.38.3
-  vyuh_feature_developer: ^1.13.2
+  vyuh_feature_system: ^1.38.4
+  vyuh_feature_developer: ^1.13.3
   vyuh_plugin_content_provider_sanity: ^1.12.1
-  vyuh_feature_auth: ^1.17.9
-  vyuh_feature_onboarding: ^1.6.4
+  vyuh_feature_auth: ^1.17.10
+  vyuh_feature_onboarding: ^1.6.5
   vyuh_plugin_telemetry_provider_console: ^1.1.3
 
   # Example Features

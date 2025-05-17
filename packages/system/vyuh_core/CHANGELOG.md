@@ -1,3 +1,7 @@
+## 1.43.1
+
+ - **FIX**: package updates and removing dep on introduction_screen.
+
 ## 1.43.0
 
  - **FEAT**: adding a document builder for more generalized document loading from CMS.

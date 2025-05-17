@@ -1,3 +1,8 @@
+## 1.13.3
+
+ - **FIX**: package updates and using the SliverMainAxisGroup instead of sticky headers.
+ - **FIX**: package updates and removing dep on introduction_screen.
+
 ## 1.13.2
 
  - **FIX**: package updates and also fixing the mouse cursor on cards.

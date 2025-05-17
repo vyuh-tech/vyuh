@@ -1,3 +1,7 @@
+## 0.0.10+5
+
+ - **FIX**: package updates and removing dep on introduction_screen.
+
 ## 0.0.10+4
 
  - **FIX**: adding dash in the regex for identifier.

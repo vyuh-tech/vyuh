@@ -1,3 +1,7 @@
+## 1.1.5
+
+ - **FIX**: package updates and removing dep on introduction_screen.
+
 ## 1.1.4
 
  - **FIX**: format fixes in readme.

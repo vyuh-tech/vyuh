@@ -1,3 +1,7 @@
+## 1.6.5
+
+ - **FIX**: package updates and removing dep on introduction_screen.
+
 ## 1.6.4
 
  - **FIX**: ensuring there are no duplicate fallback routes, fixed the boxfit of images in onboarding screen.

@@ -19,9 +19,9 @@ dependencies:
   design_system: ^1.0.0
 
   # Vyuh Features
-  vyuh_feature_system: ^1.38.3
-  vyuh_feature_auth: ^1.17.9
-  vyuh_feature_onboarding: ^1.6.4
+  vyuh_feature_system: ^1.38.4
+  vyuh_feature_auth: ^1.17.10
+  vyuh_feature_onboarding: ^1.6.5
 
   # Example Features
   feature_counter: ^1.0.0
