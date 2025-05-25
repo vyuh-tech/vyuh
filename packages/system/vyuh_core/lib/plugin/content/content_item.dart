@@ -58,10 +58,12 @@ abstract class ContentItem implements SchemaItem {
   final String schemaType;
 
   /// The layout configuration for the content item.
-  @JsonKey(fromJson: typeFromFirstOfListJson<LayoutConfiguration>)
+  @JsonKey(
+      fromJson: typeFromFirstOfListJson<LayoutConfiguration>,
+      includeToJson: false)
   final LayoutConfiguration? layout;
 
-  @JsonKey(fromJson: modifierList)
+  @JsonKey(fromJson: modifierList, includeToJson: false)
   final List<ContentModifierConfiguration>? modifiers;
 
   static List<ContentModifierConfiguration>? modifierList(dynamic json) =>
