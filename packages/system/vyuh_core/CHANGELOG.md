@@ -1,3 +1,7 @@
+## 1.43.2
+
+ - **FIX**: removing toJSON from layouts and modifiers.
+
 ## 1.43.1
 
  - **FIX**: package updates and removing dep on introduction_screen.
