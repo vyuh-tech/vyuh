@@ -27,7 +27,7 @@
     "puzzles-sanity-schema": "workspace:^1.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "sanity": "^3.88.3",
+    "sanity": "^3.89.0",
     "settings-sanity-schema": "workspace:^1.0.0",
     "styled-components": "^6.1.18",
     "tmdb-sanity-schema": "workspace:^1.0.0",
@@ -36,7 +36,7 @@
   "devDependencies": {
     "@sanity/eslint-config-studio": "^5.0.2",
     "@types/lodash-es": "^4.17.12",
-    "@types/react": "^19.1.4",
+    "@types/react": "^19.1.5",
     "eslint": "^9.27.0",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.1.5",
