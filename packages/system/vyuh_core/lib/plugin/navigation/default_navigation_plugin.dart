@@ -44,12 +44,17 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     final allRoutes = _finalizeRoutes(routes);
     _routingConfig = RoutingConfigNotifier(allRoutes, redirect: _redirect);
 
+    final observers = vyuh.plugins
+        .whereType<RouteObservers>()
+        .expand((p) => p.observers)
+        .toList();
+
     _router = GoRouter.routingConfig(
       initialLocation: initialLocation ?? '/',
       routingConfig: _routingConfig,
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: kDebugMode,
-      observers: vyuh.analytics.observers,
+      observers: observers,
       errorBuilder: (context, state) => vyuh.widgetBuilder.routeErrorView(
         context,
         title: 'Failed to load route',

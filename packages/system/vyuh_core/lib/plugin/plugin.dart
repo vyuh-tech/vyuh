@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 abstract class Plugin {
   final String name;
@@ -19,6 +20,10 @@ abstract class Plugin {
 /// before the main platform initialization. It ensures that the
 /// plugin is loaded at the correct time in the initialization sequence.
 mixin PreloadedPlugin on Plugin {}
+
+mixin RouteObservers on Plugin {
+  List<NavigatorObserver> get observers;
+}
 
 /// A mixin to mark any plugin to be loaded only once after the Platform has been initialized.
 /// This mixin can be used together with [PreloadedPlugin] to ensure that the plugin is loaded at the
