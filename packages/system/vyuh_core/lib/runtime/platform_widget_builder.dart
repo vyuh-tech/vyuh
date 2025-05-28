@@ -21,7 +21,8 @@ part 'platform/error_view.dart';
 ///   theme: platform.theme,
 /// );
 /// ```
-typedef AppBuilder = Widget Function(VyuhPlatform platform);
+typedef AppBuilder = Widget Function(
+    BuildContext context, VyuhPlatform platform);
 
 /// A builder for a widget that is shown when the app is loading.
 ///
@@ -205,7 +206,7 @@ class PlatformWidgetBuilder {
   }
 
   static final system = PlatformWidgetBuilder(
-      appBuilder: (platform) {
+      appBuilder: (_, platform) {
         return MaterialApp.router(
           theme: ThemeData.light(useMaterial3: true),
           routerConfig: platform.router.instance,

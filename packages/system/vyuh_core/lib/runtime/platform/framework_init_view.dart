@@ -25,7 +25,7 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
 
         Widget? loadedApp;
         if (status == FutureStatus.fulfilled) {
-          loadedApp = vyuh.widgetBuilder.appBuilder(vyuh);
+          loadedApp = vyuh.widgetBuilder.appBuilder(context, vyuh);
         }
 
         final child = status == null || status == FutureStatus.pending
