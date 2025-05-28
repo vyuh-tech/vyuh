@@ -42,7 +42,7 @@ void runWidgetBook({
       env: DefaultEnvPlugin(),
     ),
     platformWidgetBuilder: PlatformWidgetBuilder.system.copyWith(
-      appBuilder: (platform) => WidgetBookShell(
+      appBuilder: (_, platform) => WidgetBookShell(
         features: platform.features,
         lightTheme: lightTheme,
         darkTheme: darkTheme,
