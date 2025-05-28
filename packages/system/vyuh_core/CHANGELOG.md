@@ -1,3 +1,7 @@
+## 1.43.3
+
+ - **FIX**: adding the missing context parameter for appBuilder.
+
 ## 1.43.2
 
  - **FIX**: removing toJSON from layouts and modifiers.
