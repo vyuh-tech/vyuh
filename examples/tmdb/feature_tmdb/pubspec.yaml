@@ -19,7 +19,7 @@ dependencies:
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
   flutter_sanity_portable_text: ^1.6.2
-  vyuh_core: ^1.43.3
+  vyuh_core: ^1.43.4
   vyuh_feature_system: ^1.38.4
   vyuh_extension_content: ^1.26.2
   vyuh_cache: ^1.4.6

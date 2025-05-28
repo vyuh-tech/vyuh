@@ -1,3 +1,7 @@
+## 1.43.4
+
+ - **FIX**: using a RouteObserver as a mixin on a Plugin.
+
 ## 1.43.3
 
  - **FIX**: adding the missing context parameter for appBuilder.
