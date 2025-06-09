@@ -65,6 +65,29 @@ class EmailField extends StatelessWidget {
   }
 }
 
+class UsernameField extends StatelessWidget {
+  final void Function() submit;
+  final String? username;
+  const UsernameField({super.key, this.username, required this.submit});
+
+  @override
+  Widget build(BuildContext context) {
+    return FormBuilderTextField(
+      name: 'username',
+      initialValue: username,
+      decoration: const InputDecoration(labelText: 'Username'),
+      keyboardType: TextInputType.text,
+      inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+      autofillHints: [AutofillHints.username],
+      validator: FormBuilderValidators.compose([
+        FormBuilderValidators.required(),
+        FormBuilderValidators.minLength(3, errorText: 'Username must be at least 3 characters'),
+      ]),
+      onSubmitted: (_) => submit(),
+    );
+  }
+}
+
 class PhoneInputField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final InputDecoration? inputDecoration;
