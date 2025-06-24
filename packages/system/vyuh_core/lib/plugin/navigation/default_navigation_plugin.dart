@@ -11,7 +11,9 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   var _routingConfig = RoutingConfigNotifier([]);
   static g.GoRouterRedirect? _redirect;
 
-  DefaultNavigationPlugin()
+  final bool includeFallbackRoute;
+
+  DefaultNavigationPlugin({this.includeFallbackRoute = true})
       : super(
           name: 'vyuh.plugin.navigation.default',
           title: 'Default Navigation Plugin (GoRouter)',
@@ -86,26 +88,30 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   }
 
   List<g.RouteBase> _finalizeRoutes(List<g.RouteBase> routes) {
-    final fallbackRoutes = routes.where((r) {
-      final isFallbackRoute = r == NavigationPlugin.fallbackRoute;
-      final hasFallbackPath =
-          r is GoRoute && r.path == NavigationPlugin.fallbackRoute.path;
-      return isFallbackRoute || hasFallbackPath;
-    }).toList(growable: false);
+    if (includeFallbackRoute) {
+      final fallbackRoutes = routes.where((r) {
+        final isFallbackRoute = r == NavigationPlugin.fallbackRoute;
+        final hasFallbackPath =
+            r is GoRoute && r.path == NavigationPlugin.fallbackRoute.path;
+        return isFallbackRoute || hasFallbackPath;
+      }).toList(growable: false);
 
-    if (fallbackRoutes.isNotEmpty) {
-      vyuh.log.warn(
-          ('We found one or more fallback Routes "/:path(.*)", which will be removed'));
+      if (fallbackRoutes.isNotEmpty) {
+        vyuh.log.warn(
+            ('We found one or more fallback Routes "/:path(.*)", which will be removed'));
+      }
+
+      for (final route in fallbackRoutes) {
+        routes.remove(route);
+      }
+
+      return [
+        ...routes,
+        NavigationPlugin.fallbackRoute,
+      ];
     }
 
-    for (final route in fallbackRoutes) {
-      routes.remove(route);
-    }
-
-    return [
-      ...routes,
-      NavigationPlugin.fallbackRoute,
-    ];
+    return routes;
   }
 
   @override
