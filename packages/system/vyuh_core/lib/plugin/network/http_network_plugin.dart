@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:http/browser_client.dart';
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -29,17 +31,25 @@ final class HttpNetworkPlugin extends NetworkPlugin {
 
   final RetryOptions _retryOptions;
   final Duration _timeout;
+  final bool _webIncludeCredentials;
 
+  /// Creates an HTTP network plugin.
+  ///
+  /// [webIncludeCredentials] - When true and running on web, uses browser's fetch API
+  /// with credentials: 'include' to send HTTP-only cookies with cross-origin requests.
+  /// This is essential for session-based authentication with HTTP-only cookies.
   HttpNetworkPlugin({
     Client? client,
     RetryOptions? retryOptions,
     Duration? timeout,
+    bool webIncludeCredentials = true,
   })  : _retryOptions = retryOptions ??
             const RetryOptions(
               maxAttempts: 3,
               delayFactor: Duration(milliseconds: 200),
             ),
         _timeout = timeout ?? const Duration(seconds: 30),
+        _webIncludeCredentials = webIncludeCredentials,
         super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
     if (client != null) {
       _client = client;
@@ -53,7 +63,12 @@ final class HttpNetworkPlugin extends NetworkPlugin {
       return;
     }
 
-    _client = Client();
+    // Use BrowserClient for web when credentials are needed
+    if (kIsWeb && _webIncludeCredentials) {
+      _client = BrowserClient()..withCredentials = true;
+    } else {
+      _client = Client();
+    }
     _initialized = true;
   }
 
