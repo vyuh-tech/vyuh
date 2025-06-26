@@ -1,3 +1,7 @@
+## 1.44.1
+
+ - **FIX**: updated plugin to only include non-url-strategy parameters.
+
 ## 1.44.0
 
  - **FIX**: adding ability to control the fallback route in navigation plugin.
