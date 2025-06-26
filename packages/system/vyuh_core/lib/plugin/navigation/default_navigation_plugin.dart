@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+enum UrlStrategy { path, hash }
+
 final class DefaultNavigationPlugin extends NavigationPlugin {
   GoRouter _router = GoRouter(routes: []);
 
@@ -13,11 +15,29 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
   final bool includeFallbackRoute;
 
-  DefaultNavigationPlugin({this.includeFallbackRoute = true})
-      : super(
+  DefaultNavigationPlugin({
+    this.includeFallbackRoute = true,
+    final bool urlReflectsImperativeAPIs = false,
+    final UrlStrategy urlStrategy = UrlStrategy.path,
+    g.GoRouterRedirect? redirect,
+  }) : super(
           name: 'vyuh.plugin.navigation.default',
           title: 'Default Navigation Plugin (GoRouter)',
-        );
+        ) {
+    if (urlReflectsImperativeAPIs) {
+      enableURLReflectsImperativeAPIs();
+    }
+
+    if (urlStrategy == UrlStrategy.path) {
+      usePathStrategy();
+    } else {
+      useHashStrategy();
+    }
+
+    if (redirect != null) {
+      setRouterRedirect(redirect);
+    }
+  }
 
   @override
   GoRouter get instance => _router;
