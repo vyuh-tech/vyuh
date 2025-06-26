@@ -1,3 +1,8 @@
+## 1.44.0
+
+ - **FIX**: adding ability to control the fallback route in navigation plugin.
+ - **FEAT**: adding the ability to configure the navigation plugin directly from the constructor.
+
 ## 1.43.4
 
  - **FIX**: using a RouteObserver as a mixin on a Plugin.

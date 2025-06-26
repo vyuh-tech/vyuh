@@ -1,3 +1,7 @@
+## 1.18.0
+
+ - **FEAT**: adding username / pwd as a separate form.
+
 ## 1.17.10
 
  - **FIX**: package updates and removing dep on introduction_screen.
