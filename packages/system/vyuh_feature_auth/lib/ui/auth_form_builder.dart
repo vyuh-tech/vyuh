@@ -4,11 +4,12 @@ import 'package:vyuh_feature_auth/ui/auth_state_widget.dart';
 import 'package:vyuh_feature_auth/ui/form_fields.dart';
 
 final class AuthFormBuilder extends StatelessWidget {
-  final Widget Function(BuildContext, AuthFlowScope) child;
+  final Widget Function(BuildContext, AuthFlowScope, VoidCallback submit) child;
   final Widget Function(BuildContext, AuthFlowScope)? footer;
   final String actionTitle;
   final Future<void> Function(FormBuilderState) authAction;
   final AuthState endAuthState;
+  final bool showError;
 
   const AuthFormBuilder({
     super.key,
@@ -17,6 +18,7 @@ final class AuthFormBuilder extends StatelessWidget {
     this.footer,
     required this.authAction,
     required this.endAuthState,
+    this.showError = true,
   });
 
   @override
@@ -27,13 +29,16 @@ final class AuthFormBuilder extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Builder(builder: (context) => child(context, scope)),
+            Builder(builder: (context) {
+              submit() => _submit(context, scope);
+              return child(context, scope, submit);
+            }),
             const SizedBox(height: 20),
             AuthActionButton(
               scope: scope,
               title: actionTitle,
               onPressed: (context) => _submit(context, scope),
-              showError: true,
+              showError: showError,
             ),
             if (footer != null) footer!(context, scope),
           ],
@@ -43,6 +48,7 @@ final class AuthFormBuilder extends StatelessWidget {
   }
 
   _submit(BuildContext context, AuthFlowScope scope) {
+    FocusManager.instance.primaryFocus?.unfocus();
     final state = FormBuilder.of(context);
     if (state == null) {
       return;
