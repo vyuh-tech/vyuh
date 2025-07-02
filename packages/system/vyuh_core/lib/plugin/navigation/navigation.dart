@@ -24,6 +24,8 @@ abstract class NavigationPlugin extends Plugin {
 
   void appendRoutes(List<g.RouteBase> routes);
 
+  void appendInitialRoutes(List<g.RouteBase> routes);
+
   void pop<T extends Object?>([T? result]);
 
   void go(String location, {Object? extra});

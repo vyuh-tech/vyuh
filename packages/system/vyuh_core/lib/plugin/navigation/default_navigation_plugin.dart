@@ -13,6 +13,9 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
   final bool includeFallbackRoute;
 
+  var _initialized = false;
+  final List<g.RouteBase> _initialRoutes = [];
+
   DefaultNavigationPlugin({
     this.includeFallbackRoute = true,
     final bool urlReflectsImperativeAPIs = false,
@@ -54,7 +57,11 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       {String? initialLocation,
       required List<g.RouteBase> routes,
       required GlobalKey<NavigatorState> rootNavigatorKey}) {
-    final allRoutes = _finalizeRoutes(routes);
+    if (_initialized) {
+      throw StateError('Router already initialized');
+    }
+
+    final allRoutes = _finalizeRoutes([...routes, ..._initialRoutes]);
     _routingConfig = RoutingConfigNotifier(allRoutes, redirect: _redirect);
 
     final observers = vyuh.plugins
@@ -78,6 +85,8 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
         },
       ),
     );
+
+    _initialized = true;
   }
 
   @override
@@ -85,7 +94,17 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     // Ensure we have a fallback route at the very end
     final newRoutes = _finalizeRoutes(routes);
 
-    _routingConfig.value = RoutingConfig(routes: newRoutes);
+    _routingConfig.setRoutes(newRoutes);
+  }
+
+  @override
+  void appendInitialRoutes(List<g.RouteBase> routes) {
+    if (_initialized) {
+      throw StateError(
+          'Cannot append initial routes after Router is initialized');
+    }
+
+    _initialRoutes.addAll(routes);
   }
 
   @override
@@ -127,11 +146,22 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
   @override
   Future<void> init() {
+    _initialized = false;
+    _initialRoutes.clear();
+    _routingConfig = RoutingConfigNotifier(_initialRoutes, redirect: _redirect);
+
     return Future.value();
   }
 
   @override
   Future<void> dispose() {
+    if (_initialized) {
+      _routingConfig.dispose();
+      _router = GoRouter(routes: []);
+      _initialRoutes.clear();
+      _initialized = false;
+    }
+
     return Future.value();
   }
 

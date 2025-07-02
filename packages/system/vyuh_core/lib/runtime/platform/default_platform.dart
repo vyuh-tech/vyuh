@@ -146,6 +146,13 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
                 ));
 
         await telemetry.trace<void>(
+          name: 'Feature Extensions',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) => _initFeatureExtensions(_features),
+        );
+
+        return telemetry.trace<void>(
           name: 'Feature Routes',
           operation: 'Init',
           parentTrace: trace,
@@ -160,13 +167,6 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
                   .toList(),
             );
           },
-        );
-
-        return telemetry.trace<void>(
-          name: 'Feature Extensions',
-          operation: 'Init',
-          parentTrace: trace,
-          fn: (_) => _initFeatureExtensions(_features),
         );
       },
     );
