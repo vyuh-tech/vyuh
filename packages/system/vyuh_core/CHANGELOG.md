@@ -1,3 +1,8 @@
+## 1.44.2
+
+ - **FIX**: making the router setup the last step in the inti process, after all plugins, features and extensions are initialized.
+ - **FIX**: adding the ability to include credentials in browser client for http.
+
 ## 1.44.1
 
  - **FIX**: updated plugin to only include non-url-strategy parameters.

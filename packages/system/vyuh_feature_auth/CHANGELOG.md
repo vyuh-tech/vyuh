@@ -1,3 +1,7 @@
+## 1.18.1
+
+ - **FIX**: using AuthFormBuilder consistently.
+
 ## 1.18.0
 
  - **FEAT**: adding username / pwd as a separate form.

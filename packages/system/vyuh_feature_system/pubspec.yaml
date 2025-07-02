@@ -28,7 +28,7 @@ dependencies:
   logger: ^2.0.2+1
   go_router: ^15.1.1
   flutter_sanity_portable_text: ^1.6.2
-  vyuh_core: ^1.44.1
+  vyuh_core: ^1.44.2
   vyuh_extension_content: ^1.26.2
   json_path: ^0.7.1
   url_launcher: ^6.3.0
