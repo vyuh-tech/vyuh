@@ -1,6 +1,6 @@
 name: vyuh_feature_developer
 description: A Developer-focused feature that shows all the included features in a Vyuh-enabled App
-version: 1.13.4
+version: 1.14.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_feature_developer
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -20,8 +20,8 @@ dependencies:
     sdk: flutter
   go_router: ^16.0.0
   collection: ^1.18.0
-  vyuh_core: ^1.44.2
-  vyuh_extension_content: ^1.26.2
+  vyuh_core: ^1.45.0
+  vyuh_extension_content: ^1.27.0
 
 dev_dependencies:
   flutter_test:

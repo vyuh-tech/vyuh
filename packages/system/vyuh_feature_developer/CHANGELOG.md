@@ -1,3 +1,7 @@
+## 1.14.0
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 1.13.4
 
  - **FIX**: showing empty message for missing actions in content extension.

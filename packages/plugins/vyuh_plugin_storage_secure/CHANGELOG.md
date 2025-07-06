@@ -1,3 +1,7 @@
+## 1.3.0
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 1.2.0
 
  - **FEAT**: adding default implementations for storage and secure storage plugins, updated readmes.

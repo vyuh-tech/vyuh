@@ -1,3 +1,7 @@
+## 1.45.0
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 1.44.2
 
  - **FIX**: making the router setup the last step in the inti process, after all plugins, features and extensions are initialized.

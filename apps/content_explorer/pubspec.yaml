@@ -13,15 +13,15 @@ dependencies:
   cupertino_icons: ^1.0.8
 
   # The main package that helps you run the widgetbook
-  vyuh_widgetbook: ^1.2.1
+  vyuh_widgetbook: ^1.3.0
 
   # Shared packages
   design_system: ^1.0.0
 
   # Vyuh Features
-  vyuh_feature_system: ^1.38.4
-  vyuh_feature_auth: ^1.18.1
-  vyuh_feature_onboarding: ^1.6.5
+  vyuh_feature_system: ^1.39.0
+  vyuh_feature_auth: ^1.19.0
+  vyuh_feature_onboarding: ^1.7.0
 
   # Example Features
   feature_counter: ^1.0.0

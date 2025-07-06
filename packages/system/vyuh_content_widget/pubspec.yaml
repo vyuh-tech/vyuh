@@ -1,6 +1,6 @@
 name: vyuh_content_widget
 description: A widget that can render content from a CMS, relying on the Vyuh ecosystem to provide the content.
-version: 1.1.11
+version: 1.2.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_content_widget
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -21,8 +21,8 @@ dependencies:
 
   json_annotation: ^4.9.0
 
-  vyuh_core: ^1.44.2
-  vyuh_extension_content: ^1.26.2
+  vyuh_core: ^1.45.0
+  vyuh_extension_content: ^1.27.0
 
 dev_dependencies:
   flutter_test:

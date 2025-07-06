@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 1.1.3
 
  - **FIX**: format fixes in readme.

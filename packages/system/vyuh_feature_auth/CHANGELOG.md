@@ -1,3 +1,7 @@
+## 1.19.0
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 1.18.1
 
  - **FIX**: using AuthFormBuilder consistently.

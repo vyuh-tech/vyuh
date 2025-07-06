@@ -1,3 +1,7 @@
+## 0.0.11
+
+ - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
+
 ## 0.0.10+5
 
  - **FIX**: package updates and removing dep on introduction_screen.
