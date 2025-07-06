@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:http/browser_client.dart';
 import 'package:http/http.dart';
 import 'package:retry/retry.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+
+import 'http_network_plugin_stub.dart'
+    if (dart.library.html) 'http_network_plugin_web.dart';
 
 final class HttpNetworkConfig {
   final Duration timeout;
@@ -65,7 +67,7 @@ final class HttpNetworkPlugin extends NetworkPlugin {
 
     // Use BrowserClient for web when credentials are needed
     if (kIsWeb && _webIncludeCredentials) {
-      _client = BrowserClient()..withCredentials = true;
+      _client = createWebClient();
     } else {
       _client = Client();
     }
