@@ -1,5 +1,8 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
+typedef ContentDescriptorFactory<T extends ContentItem> = ContentDescriptor
+    Function({List<TypeDescriptor<LayoutConfiguration<T>>>? layouts});
+
 abstract class ContentDescriptor {
   final String title;
   final String schemaType;
@@ -24,7 +27,8 @@ abstract class ContentDescriptor {
   ///
   /// Returns a function that takes in a list of [TypeDescriptor]<[LayoutConfiguration]>. This is the function
   /// that will be used by consuming features to pass in new layouts for the [ContentItem].
-  static createDefault({required String schemaType, required String title}) {
+  static ContentDescriptorFactory createDefault(
+      {required String schemaType, required String title}) {
     return ({List<TypeDescriptor<LayoutConfiguration>>? layouts}) =>
         _DefaultContentDescriptor(
           schemaType: schemaType,

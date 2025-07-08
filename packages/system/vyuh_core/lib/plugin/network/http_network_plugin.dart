@@ -116,7 +116,8 @@ final class HttpNetworkPlugin extends NetworkPlugin {
       _withRetryAndTimeout(() =>
           _client.patch(url, headers: headers, body: body, encoding: encoding));
 
-  _withRetryAndTimeout(Future<Response> Function() fn) => _retryOptions.retry(
+  Future<Response> _withRetryAndTimeout(Future<Response> Function() fn) =>
+      _retryOptions.retry(
         () => fn().timeout(_timeout),
         retryIf: (e) {
           // Use the string based to check to avoid importing dart:io.

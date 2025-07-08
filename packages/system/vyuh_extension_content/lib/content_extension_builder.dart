@@ -98,7 +98,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     return _typeConverterMap[T]?[typeName]?.fromJson.call(json);
   }
 
-  register<T>(TypeDescriptor<T> descriptor) {
+  void register<T>(TypeDescriptor<T> descriptor) {
     _typeConverterMap.putIfAbsent(T, () => {});
 
     final hasKey = _typeConverterMap[T]!.containsKey(descriptor.schemaType);
@@ -112,6 +112,27 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
   bool isRegistered<T>(String schemaType) {
     return _typeConverterMap[T]?.containsKey(schemaType) == true;
+  }
+
+  /// Register a ContentBuilder directly
+  /// This allows other plugins to register content builders programmatically
+  void registerBuilder(ContentBuilder builder) {
+    final schemaType = builder.content.schemaType;
+
+    if (_contentBuilderMap.containsKey(schemaType)) {
+      VyuhBinding.instance.log.warn(
+        'ContentBuilder for schemaType: $schemaType is already registered. Overriding.',
+      );
+    }
+
+    _contentBuilderMap[schemaType] = builder;
+
+    // Initialize the builder with empty descriptors since it's being registered directly
+    builder.init([]);
+
+    VyuhBinding.instance.log.info(
+      'Registered ContentBuilder for schemaType: $schemaType',
+    );
   }
 
   void _initTypeRegistrations<T>(List<ContentExtensionDescriptor> descriptors,

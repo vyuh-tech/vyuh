@@ -51,7 +51,7 @@ final class _UninitializedPlatform extends VyuhPlatform {
   PlatformWidgetBuilder get widgetBuilder => throw _error();
 }
 
-_error() =>
-    StateError('''You are using an uninitialized instance of the VyuhPlatform. 
+Never _error() => throw StateError(
+    '''You are using an uninitialized instance of the VyuhPlatform. 
     Please call runApp() in vyuh_core to get a correct instance.
     ''');

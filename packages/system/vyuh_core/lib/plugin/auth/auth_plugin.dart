@@ -31,7 +31,7 @@ abstract class AuthPlugin extends Plugin {
 
   @protected
   @nonVirtual
-  setCurrentUser(User user) {
+  void setCurrentUser(User user) {
     _currentUser = user;
     controller.add(user);
   }

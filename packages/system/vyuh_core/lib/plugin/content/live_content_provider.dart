@@ -85,7 +85,7 @@ final class NoOpLiveContentProvider extends LiveContentProvider {
   @override
   Future<void> init() async {}
 
-  _error(String methodName) {
+  Never _error(String methodName) {
     throw UnimplementedError('''
 You are using the $methodName from NoOpLiveContentProvider, which is not implemented.
 Derive from $LiveContentProvider for a real implementation.''');

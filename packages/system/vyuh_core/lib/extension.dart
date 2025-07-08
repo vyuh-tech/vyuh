@@ -25,7 +25,7 @@ abstract class ExtensionDescriptor {
     required this.title,
   });
 
-  onSourceFeatureUpdated();
+  void onSourceFeatureUpdated();
 }
 
 /// The base type for all extension builders. An extension builder is responsible for building an extension,

@@ -72,7 +72,7 @@ class ContentBuilder<T extends ContentItem> {
   ///
   /// This is called internally by the content system and should
   /// not be called directly.
-  setSourceFeature(String? featureName) {
+  void setSourceFeature(String? featureName) {
     _sourceFeature = featureName;
     defaultLayoutDescriptor.setSourceFeature(featureName);
   }
@@ -154,7 +154,7 @@ class ContentBuilder<T extends ContentItem> {
   /// - [layout]: The new default layout
   /// - [fromJson]: The JSON converter for the layout
   /// - [sourceFeatureName]: The source feature for the layout
-  setDefaultLayout(
+  void setDefaultLayout(
     LayoutConfiguration<T> layout, {
     required FromJsonConverter<LayoutConfiguration<T>> fromJson,
     String? sourceFeatureName,

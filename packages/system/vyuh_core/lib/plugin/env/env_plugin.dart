@@ -22,5 +22,5 @@ abstract class EnvPlugin extends Plugin {
   String? maybeGet(String key, {String? fallback});
 
   /// Clears all the environment variables.
-  clear();
+  void clear();
 }

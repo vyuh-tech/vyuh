@@ -35,7 +35,7 @@ abstract class ContentPlugin extends Plugin {
   T? fromJson<T>(Map<String, dynamic> json);
 
   /// Registers the given type descriptor
-  register<T>(TypeDescriptor<T> descriptor);
+  void register<T>(TypeDescriptor<T> descriptor);
 
   /// Checks if the given schema type is registered for type T
   bool isRegistered<T>(String schemaType);
