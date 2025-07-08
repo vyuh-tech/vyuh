@@ -1,3 +1,7 @@
+## 1.28.0
+
+ - **FEAT**: allowing registration of builders directly on ContentExtensionBuilder.
+
 ## 1.27.0
 
  - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.

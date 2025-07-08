@@ -13,9 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   go_router: ^16.0.0
 
-  vyuh_core: ^1.45.0
+  vyuh_core: ^1.46.0
   vyuh_content_widget: ^1.2.0
-  vyuh_extension_content: ^1.27.0
+  vyuh_extension_content: ^1.28.0
   sanity_client: ^1.8.5
   vyuh_plugin_content_provider_sanity: ^1.13.0
   vyuh_plugin_telemetry_provider_console: ^1.2.0
