@@ -1,3 +1,7 @@
+## 1.28.1
+
+ - **FIX**: allowing descriptors as well.
+
 ## 1.28.0
 
  - **FEAT**: allowing registration of builders directly on ContentExtensionBuilder.

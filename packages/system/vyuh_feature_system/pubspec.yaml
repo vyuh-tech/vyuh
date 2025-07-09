@@ -29,7 +29,7 @@ dependencies:
   go_router: ^16.0.0
   flutter_sanity_portable_text: ^1.7.0
   vyuh_core: ^1.46.0
-  vyuh_extension_content: ^1.28.0
+  vyuh_extension_content: ^1.28.1
   json_path: ^0.7.1
   url_launcher: ^6.3.0
   nanoid: ^1.0.0
