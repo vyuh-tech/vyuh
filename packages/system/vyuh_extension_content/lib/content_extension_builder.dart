@@ -64,9 +64,7 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     for (final entry in _contentBuilderMap.entries) {
       final schemaType = entry.key;
       final builder = entry.value;
-      final descriptors = contents[schemaType] ?? <ContentDescriptor>[];
-
-      builder.init(descriptors);
+      registerBuilder(builder, descriptors: contents[schemaType] ?? []);
     }
 
     _initTypeRegistrations(
@@ -116,7 +114,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
   /// Register a ContentBuilder directly
   /// This allows other plugins to register content builders programmatically
-  void registerBuilder(ContentBuilder builder) {
+  void registerBuilder(ContentBuilder builder,
+      {List<ContentDescriptor>? descriptors = const []}) {
     final schemaType = builder.content.schemaType;
 
     if (_contentBuilderMap.containsKey(schemaType)) {
@@ -127,8 +126,12 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
     _contentBuilderMap[schemaType] = builder;
 
-    // Initialize the builder with empty descriptors since it's being registered directly
-    builder.init([]);
+    final matchingDescriptors = descriptors
+            ?.where((element) => element.schemaType == schemaType)
+            .toList(growable: false) ??
+        [];
+
+    builder.init(matchingDescriptors);
 
     VyuhBinding.instance.log.info(
       'Registered ContentBuilder for schemaType: $schemaType',
