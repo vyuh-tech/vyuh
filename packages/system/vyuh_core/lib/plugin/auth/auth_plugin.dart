@@ -13,6 +13,9 @@ abstract class AuthPlugin extends Plugin {
 
   User _currentUser = User.unknown;
 
+  String get token;
+  String get refreshToken;
+
   /// Creates an instance of [AuthPlugin].
   AuthPlugin({required super.name, required super.title}) : super();
 

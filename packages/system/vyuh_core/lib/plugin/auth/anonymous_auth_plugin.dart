@@ -11,4 +11,10 @@ final class UnknownAuthPlugin extends AuthPlugin {
 
   @override
   User get currentUser => User.unknown;
+
+  @override
+  String get refreshToken => '';
+
+  @override
+  String get token => '';
 }
