@@ -14,7 +14,7 @@ dependencies:
     sdk: flutter
   go_router: ^16.0.0
   collection: ^1.18.0
-  vyuh_core: ^1.46.0
+  vyuh_core: ^1.46.1
   vyuh_feature_system: ^1.39.0
   vyuh_extension_content: ^1.28.1
   mobx: ^2.3.3+2

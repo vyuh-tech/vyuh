@@ -1,3 +1,7 @@
+## 1.46.1
+
+ - **FIX**: adding token and refreshToken to auth plugin.
+
 ## 1.46.0
 
  - **FEAT**: allowing registration of builders directly on ContentExtensionBuilder.
