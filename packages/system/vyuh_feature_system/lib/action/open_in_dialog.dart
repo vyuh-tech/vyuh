@@ -74,7 +74,7 @@ final class OpenInDialogAction extends ActionConfiguration {
     }
   }
 
-  _dialogContent(BuildContext context) {
+  Widget _dialogContent(BuildContext context) {
     if (linkType == LinkType.url) {
       final finalUrl = Uri.tryParse(url ?? '::Not valid URI::');
 

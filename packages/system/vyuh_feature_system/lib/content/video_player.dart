@@ -251,7 +251,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
         : VyuhBinding.instance.widgetBuilder.contentLoader(context);
   }
 
-  _buildChewie(BuildContext context, video.VideoPlayerController controller) {
+  ChewieController _buildChewie(
+      BuildContext context, video.VideoPlayerController controller) {
     return ChewieController(
         videoPlayerController: controller,
         autoPlay: widget.content.autoplay,

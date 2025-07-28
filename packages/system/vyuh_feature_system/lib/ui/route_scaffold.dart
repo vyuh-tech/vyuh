@@ -82,7 +82,7 @@ final class RouteScaffold extends StatelessWidget {
     return scaffold;
   }
 
-  _buildDrawer(BuildContext context, List<ContentItem> items) {
+  NavigationDrawer _buildDrawer(BuildContext context, List<ContentItem> items) {
     return NavigationDrawer(
       children: [
         for (final item in items)

@@ -108,7 +108,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
     );
   }
 
-  _buildImageAndText(f.BuildContext context, e.Card content) {
+  f.Card _buildImageAndText(f.BuildContext context, e.Card content) {
     final theme = f.Theme.of(context);
 
     final blockLength = content.content?.blocks?.length;

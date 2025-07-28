@@ -6,12 +6,13 @@ import 'package:flutter/cupertino.dart';
 /// * [small] - For mobile devices and small screens
 /// * [medium] - For tablets and medium-sized screens
 /// * [large] - For desktop and large screens
-/// * [xlarge] - For extra large screens and TV displays
+/// * [xLarge] - For extra large screens and TV displays
 enum Breakpoint {
   small,
   medium,
   large,
-  xlarge,
+  xLarge,
+  xxLarge,
 }
 
 /// Configuration for screen size breakpoints used in responsive design.
@@ -20,18 +21,20 @@ enum Breakpoint {
 /// * [small] - Width threshold for small screens (default: 450)
 /// * [medium] - Width threshold for medium screens (default: 800)
 /// * [large] - Width threshold for large screens (default: 1920)
-/// * [xlarge] - Width threshold for extra large screens (default: infinity)
+/// * [xLarge] - Width threshold for extra large screens (default: infinity)
 class BreakpointConfiguration {
   final double small;
   final double medium;
   final double large;
-  final double xlarge;
+  final double xLarge;
+  final double xxLarge;
 
   BreakpointConfiguration({
     required this.small,
     required this.medium,
     required this.large,
-    required this.xlarge,
+    required this.xLarge,
+    required this.xxLarge,
   });
 }
 
@@ -46,7 +49,8 @@ final class BreakpointService {
     small: 640,
     medium: 768,
     large: 1024,
-    xlarge: double.infinity,
+    xLarge: 1280,
+    xxLarge: double.infinity,
   );
 
   BreakpointConfiguration get config => _config;
@@ -91,7 +95,7 @@ final class BreakpointService {
     } else if (width < config.large) {
       return Breakpoint.large;
     } else {
-      return Breakpoint.xlarge;
+      return Breakpoint.xLarge;
     }
   }
 }

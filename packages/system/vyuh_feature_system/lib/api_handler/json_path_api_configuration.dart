@@ -151,7 +151,7 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
     );
   }
 
-  _buildCardList(BuildContext context, List<vf.Card> data) {
+  Widget _buildCardList(BuildContext context, List<vf.Card> data) {
     if (data.isEmpty) {
       return VyuhBinding.instance.content.buildContent(
           context,
