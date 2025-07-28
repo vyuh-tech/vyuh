@@ -21,7 +21,7 @@ dependencies:
   vyuh_plugin_telemetry_provider_console: ^1.2.0
 
   feature_conference: ^1.0.0
-  vyuh_feature_system: ^1.39.0
+  vyuh_feature_system: ^1.40.0
 
 dev_dependencies:
   flutter_test:

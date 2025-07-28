@@ -1,3 +1,7 @@
+## 1.40.0
+
+ - **FEAT**: add xxLarge breakpoint, update method return types for improved type safety.
+
 ## 1.39.0
 
  - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.
