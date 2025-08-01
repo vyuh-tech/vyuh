@@ -37,7 +37,7 @@ final class Movie extends FeaturedShow {
 
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
-  shortInfo() => MovieShortInfo(
+  MovieShortInfo shortInfo() => MovieShortInfo(
         id: id,
         title: title,
         overview: overview,

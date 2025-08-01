@@ -58,4 +58,12 @@ final class ChakraAuthPlugin extends AuthPlugin {
 
     setCurrentUser(User.unknown);
   }
+
+  @override
+  // TODO: implement refreshToken
+  String get refreshToken => throw UnimplementedError();
+
+  @override
+  // TODO: implement token
+  String get token => throw UnimplementedError();
 }
