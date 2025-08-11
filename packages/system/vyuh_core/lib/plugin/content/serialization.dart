@@ -16,16 +16,21 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// - The input array is empty
 /// - The type conversion fails
 T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json) {
-  final item = (json as List?)?.firstOrNull;
-  if (item == null) {
+  final jsonItem = switch (json) {
+    (Map<String, dynamic> item) => item,
+    (List list) => list.firstOrNull,
+    _ => null,
+  };
+
+  if (jsonItem == null) {
     return null;
   }
 
-  final typedItem = VyuhBinding.instance.content.fromJson<T>(item);
+  final typedItem = VyuhBinding.instance.content.fromJson<T>(jsonItem);
   assert(
       typedItem != null,
       _missingTypeRegistrationMessage<T>(
-          VyuhBinding.instance.content.provider.schemaType(item)));
+          VyuhBinding.instance.content.provider.schemaType(jsonItem)));
 
   return typedItem;
 }
