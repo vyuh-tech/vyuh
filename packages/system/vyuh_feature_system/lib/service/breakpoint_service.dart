@@ -21,7 +21,8 @@ enum Breakpoint {
 /// * [small] - Width threshold for small screens (default: 450)
 /// * [medium] - Width threshold for medium screens (default: 800)
 /// * [large] - Width threshold for large screens (default: 1920)
-/// * [xLarge] - Width threshold for extra large screens (default: infinity)
+/// * [xLarge] - Width threshold for extra large screens
+/// * [xxLarge] - Width threshold for giant screens (default: infinity)
 class BreakpointConfiguration {
   final double small;
   final double medium;
@@ -94,8 +95,10 @@ final class BreakpointService {
       return Breakpoint.medium;
     } else if (width < config.large) {
       return Breakpoint.large;
-    } else {
+    } else if (width < config.xLarge) {
       return Breakpoint.xLarge;
+    } else {
+      return Breakpoint.xxLarge;
     }
   }
 }
