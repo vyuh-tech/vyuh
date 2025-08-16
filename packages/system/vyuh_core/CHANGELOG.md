@@ -1,3 +1,7 @@
+## 1.47.0
+
+ - **FEAT**: adding local content provider.
+
 ## 1.46.1
 
  - **FIX**: adding token and refreshToken to auth plugin.
