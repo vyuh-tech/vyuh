@@ -30,7 +30,7 @@ dependencies:
   flutter_sanity_portable_text: ^1.7.0
   http: ^1.2.1
   retry: ^3.1.2
-  flutter_dotenv: ^5.1.0
+  flutter_dotenv: ^6.0.0
   event_bus: ^2.0.1
 
 dev_dependencies:
