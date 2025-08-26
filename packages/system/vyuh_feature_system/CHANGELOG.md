@@ -1,3 +1,7 @@
+## 1.40.1
+
+ - **FIX**: package updates.
+
 ## 1.40.0
 
  - **FEAT**: add xxLarge breakpoint, update method return types for improved type safety.

@@ -1,3 +1,7 @@
+## 1.47.1
+
+ - **FIX**: package updates.
+
 ## 1.47.0
 
  - **FEAT**: adding local content provider.
