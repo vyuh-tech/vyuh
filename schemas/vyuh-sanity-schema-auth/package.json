@@ -36,9 +36,9 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@vyuh/sanity-schema-core": "^2.0.5",
-    "@vyuh/sanity-schema-forms": "^2.0.5",
-    "@vyuh/sanity-schema-system": "^2.0.5",
+    "@vyuh/sanity-schema-core": "^2.0.6",
+    "@vyuh/sanity-schema-forms": "^2.0.6",
+    "@vyuh/sanity-schema-system": "^2.0.6",
     "lodash-es": "^4.17.21",
     "react-icons": "^5.5.0",
     "sanity": "^4.6.0"
