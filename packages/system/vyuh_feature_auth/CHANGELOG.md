@@ -1,3 +1,7 @@
+## 1.20.0
+
+ - **FEAT**: adding autofocus to password field.
+
 ## 1.19.0
 
  - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.

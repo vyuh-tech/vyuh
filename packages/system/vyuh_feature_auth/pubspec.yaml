@@ -1,6 +1,6 @@
 name: vyuh_feature_auth
 description: Provides the Auth feature for your Vyuh project.
-version: 1.19.0
+version: 1.20.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
 
