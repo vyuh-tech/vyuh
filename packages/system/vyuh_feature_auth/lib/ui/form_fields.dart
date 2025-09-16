@@ -156,10 +156,12 @@ class OtpInputField extends StatelessWidget {
 
 class PasswordField extends StatefulWidget {
   final bool showPasswordVisibilityToggle;
+  final bool autofocus;
   final void Function() submit;
   const PasswordField(
       {super.key,
       this.showPasswordVisibilityToggle = false,
+      this.autofocus = false,
       required this.submit});
 
   @override
@@ -173,6 +175,7 @@ class _PasswordFieldState extends State<PasswordField> {
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: 'password',
+      autofocus: widget.autofocus,
       decoration: InputDecoration(
           labelText: 'Password',
           suffixIcon: widget.showPasswordVisibilityToggle
