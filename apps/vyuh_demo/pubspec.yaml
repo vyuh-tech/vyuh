@@ -1,10 +1,11 @@
 name: vyuh_demo
+resolution: workspace
 description: A tech demo of the Vyuh Framework
 publish_to: none
 version: 1.0.0
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   flutter:

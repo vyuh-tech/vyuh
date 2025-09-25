@@ -1,10 +1,11 @@
 name: feature_settings
+resolution: workspace
 description: Handles app-level settings that can be set on Sanity
 version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=3.16.0'
 
 dependencies:

@@ -1,4 +1,5 @@
 name: content_explorer
+resolution: workspace
 description: A Content Explorer for the Vyuh Demo App, as a Widgetbook. Use this as a reference for your own Vyuh Apps.
 publish_to: none
 version: 1.0.0+1

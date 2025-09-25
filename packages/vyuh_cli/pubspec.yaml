@@ -1,4 +1,5 @@
 name: vyuh_cli
+resolution: workspace
 description: A command-line interface for the Vyuh Framework to generate Vyuh projects, features and schemas.
 version: 0.0.11
 homepage: https://vyuh.tech
@@ -17,7 +18,7 @@ screenshots:
     path: _images/vyuh_cli.png
 
 environment:
-  sdk: ^3.5.0
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   args: ^2.5.0

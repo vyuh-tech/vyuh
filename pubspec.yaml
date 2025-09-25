@@ -1,10 +1,69 @@
 name: vyuh
+publish_to: none
+
+workspace:
+  - packages/plugins/vyuh_plugin_storage_hive
+  - packages/plugins/vyuh_plugin_storage_secure
+  - packages/plugins/vyuh_plugin_telemetry_provider_console
+  - packages/sanity/flutter_sanity_portable_text
+  - packages/sanity/sanity_client
+  - packages/sanity/vyuh_plugin_content_provider_sanity
+  - packages/system/vyuh_cache
+  - packages/system/vyuh_content_widget
+  - packages/system/vyuh_core
+  - packages/system/vyuh_extension_content
+  - packages/system/vyuh_feature_auth
+  - packages/system/vyuh_feature_developer
+  - packages/system/vyuh_feature_onboarding
+  - packages/system/vyuh_feature_system
+  - packages/system/vyuh_test
+  - packages/system/vyuh_widgetbook
+  - packages/vyuh_cli
+  - packages/sanity/flutter_sanity_portable_text/example
+  - packages/sanity/sanity_client/example
+  - examples/conference/feature_conference
+  - examples/feature_counter
+  - examples/food/feature_food
+  - examples/misc/feature_misc
+  - examples/puzzles/feature_puzzles
+  - examples/settings/feature_settings
+  - examples/shared/chakra_shared
+  - examples/shared/design_system
+  - examples/shared/tmdb_client
+  - examples/tmdb/feature_tmdb
+  - examples/unsplash/feature_unsplash
+  - examples/wonderous/feature_wonderous
+  - apps/content_explorer
+  - apps/content_widget_demo
+  - apps/vyuh_demo
 
 environment:
-  sdk: '>=3.2.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
-  melos: ^6.2.0
+  flutter_lints: ^6.0.0
+  melos: ^7.0.0
   pubspec_parse: ^1.3.0
   mason_logger: ^0.3.1
+
+melos:
+  name: vyuh
+  repository: https://github.com/vyuh-tech/vyuh
+
+  command:
+    version:
+      workspaceChangelog: false
+      fetchTags: false
+      updateGitTagRefs: false
+      includeCommitId: false
+      linkToCommits: false
+      hooks:
+        post: melos run update_version
+
+  ide:
+    intellij:
+      moduleNamePrefix: ''
+
+  scripts:
+    update_version:
+      run: dart run tools/update_version.dart

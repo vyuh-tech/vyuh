@@ -1,10 +1,11 @@
 name: feature_conference
+resolution: workspace
 description: A Feature Conference feature package for the Vyuh Framework
 version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

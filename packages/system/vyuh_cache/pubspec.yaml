@@ -1,4 +1,5 @@
 name: vyuh_cache
+resolution: workspace
 description: A flexible caching solution for Vyuh Framework Apps, offering time-based caching with pluggable storage backends to reduce API calls and boost performance.
 version: 1.4.6
 homepage: https://vyuh.tech
@@ -11,7 +12,7 @@ topics:
   - system
 
 environment:
-  sdk: ^3.1.0
+  sdk: '>=3.6.0 <4.0.0'
 
 dependencies:
   crypto: ^3.0.3

@@ -1,10 +1,11 @@
 name: sanity_client_example
+resolution: workspace
 description: An example for using the sanity_client package
 version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: ^3.3.3
+  sdk: '>=3.6.0 <4.0.0'
 
 # Add regular dependencies here.
 dependencies:

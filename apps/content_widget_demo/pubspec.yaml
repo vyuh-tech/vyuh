@@ -1,4 +1,5 @@
 name: content_widget_demo
+resolution: workspace
 description: A demo to showcase the use of the VyuhContentWidget
 publish_to: none
 version: 1.0.0+1

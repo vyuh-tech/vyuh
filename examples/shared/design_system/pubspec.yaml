@@ -1,10 +1,11 @@
 name: design_system
+resolution: workspace
 description: Design System for the features in the Chakra Demo App
 version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

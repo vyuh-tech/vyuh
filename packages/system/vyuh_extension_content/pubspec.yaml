@@ -1,4 +1,5 @@
 name: vyuh_extension_content
+resolution: workspace
 description: An extension for the Vyuh framework for creating CMS integrations
 version: 1.28.1
 homepage: https://vyuh.tech
@@ -12,7 +13,7 @@ topics:
   - system
 
 environment:
-  sdk: '>=3.3.0 <4.0.0'
+  sdk: '>=3.6.0 <4.0.0'
   flutter: '>=3.16.0'
 
 dependencies:
