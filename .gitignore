@@ -5,6 +5,7 @@ dist
 .sanity
 .DS_Store
 .idea
+.run
 coverage
 .metadata
 .dart_tool
@@ -18,5 +19,3 @@ mason-lock.json
 devtools_options.yaml
 pnpm-lock.yaml
 
-# windsurf rules
-.windsurfrules
