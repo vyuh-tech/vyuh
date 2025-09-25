@@ -1,3 +1,7 @@
+## 1.21.0
+
+ - **FEAT**: upgrading to melos 7.0.
+
 ## 1.20.0
 
  - **FEAT**: adding autofocus to password field.

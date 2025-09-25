@@ -1,3 +1,7 @@
+## 1.9.0
+
+ - **FEAT**: upgrading to melos 7.0.
+
 ## 1.8.5
 
  - **FIX**: package updates and removing dep on introduction_screen.

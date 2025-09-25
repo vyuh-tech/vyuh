@@ -1,3 +1,7 @@
+## 1.48.0
+
+ - **FEAT**: upgrading to melos 7.0.
+
 ## 1.47.1
 
  - **FIX**: package updates.

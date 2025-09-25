@@ -1,3 +1,7 @@
+## 0.0.12
+
+ - **FEAT**: upgrading to melos 7.0.
+
 ## 0.0.11
 
  - **FEAT**: upgrading go_router to 16.0.0 across all packages and also upgrading other packages.

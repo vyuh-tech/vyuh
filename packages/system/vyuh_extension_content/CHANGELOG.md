@@ -1,3 +1,7 @@
+## 1.29.0
+
+ - **FEAT**: upgrading to melos 7.0.
+
 ## 1.28.1
 
  - **FIX**: allowing descriptors as well.
