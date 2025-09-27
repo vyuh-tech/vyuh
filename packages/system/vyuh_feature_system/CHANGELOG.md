@@ -1,3 +1,7 @@
+## 1.42.0
+
+ - **FEAT**: replace `UnknownContentBuilder` with `UnknownContentIndicator`, add comprehensive unknown type handling.
+
 ## 1.41.0
 
  - **FEAT**: upgrading to melos 7.0.
