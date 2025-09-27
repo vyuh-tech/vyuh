@@ -26,6 +26,9 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
   @override
   Future<void> onInit(List<ExtensionDescriptor> extensions) async {
+    // Initialize unknown placeholder factory to handle missing type registrations
+    initializeUnknownPlaceholderFactory();
+
     // Attach to the Content Plugin before setting up the Content{Builder,Descriptor}s
     VyuhBinding.instance.content.attach(this);
 

@@ -83,7 +83,7 @@ final class UnknownConditionalLayout<T extends ContentItem>
 
   UnknownConditionalLayout({required this.missingSchemaType})
       : super(
-          schemaType: '${Unknown.schemaName}.layout.conditional',
+          schemaType: 'vyuh.unknown.layout.conditional',
           cases: [],
           defaultCase: 'default',
           condition: Condition(),
@@ -91,11 +91,16 @@ final class UnknownConditionalLayout<T extends ContentItem>
 
   @override
   Widget build(BuildContext context, T content) {
-    final unknown = Unknown(
-        missingSchemaType: missingSchemaType,
-        description:
-            'This is due to a missing ConditionalLayout with schemaType: $missingSchemaType.');
+    final failure = LayoutFailure(
+      schemaType: missingSchemaType,
+      contentSchemaType: content.schemaType,
+      description: 'Missing ConditionalLayout with schemaType: $missingSchemaType',
+      suggestions: [
+        'Register a ConditionalLayout for $missingSchemaType',
+        'Check if the layout type is properly exported',
+      ],
+    );
 
-    return VyuhBinding.instance.content.buildContent(context, unknown);
+    return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
   }
 }

@@ -84,10 +84,10 @@ abstract class ContentItem implements SchemaItem {
   factory ContentItem.fromJson(Map<String, dynamic> json) {
     final type = VyuhBinding.instance.content.provider.schemaType(json);
     return VyuhBinding.instance.content.fromJson<ContentItem>(json) ??
-        Unknown(
-            missingSchemaType: type,
-            description:
-                'This is due to a missing implementation for the ContentItem.');
+        UnknownContentItem(
+          missingSchemaType: type,
+          jsonPayload: json,
+        );
   }
 
   /// Sets the parent content item for the given list of children.
@@ -218,3 +218,23 @@ abstract interface class ContainerItem implements ContentItem {}
 /// Root items are directly managed by the content system and can be
 /// fetched by their unique identifiers.
 abstract interface class RootItem implements ContainerItem {}
+
+/// Internal marker class for unknown content items.
+///
+/// This is used internally when ContentItem.fromJson encounters an unknown
+/// schema type. It gets converted to a ContentItemFailure by DefaultContentPlugin.
+final class UnknownContentItem extends ContentItem {
+  static const schemaName = 'vyuh.unknown.internal';
+
+  final String missingSchemaType;
+  final Map<String, dynamic> jsonPayload;
+
+  UnknownContentItem({
+    required this.missingSchemaType,
+    required this.jsonPayload,
+  }) : super(
+          schemaType: schemaName,
+          layout: null,
+          modifiers: null,
+        );
+}

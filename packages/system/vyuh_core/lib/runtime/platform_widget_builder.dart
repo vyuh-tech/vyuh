@@ -8,6 +8,7 @@ import 'platform/powered_by_widget.dart';
 
 part 'platform/default_route_loader.dart';
 part 'platform/error_view.dart';
+part 'platform/unknown_content_view.dart';
 
 /// A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.
 ///
@@ -135,6 +136,29 @@ typedef ErrorViewBuilder = Widget Function(
   bool showRestart,
 });
 
+/// A builder for unknown content failures.
+///
+/// This builder is called when content-related operations fail due to missing
+/// registrations, layouts, modifiers, actions, or conditions. It provides a
+/// unified way to handle all content failures across the framework.
+///
+/// Example:
+/// ```dart
+/// UnknownContentBuilder builder = (context, failure) {
+///   switch (failure) {
+///     case ContentItemFailure():
+///       return ContentErrorWidget(failure: failure);
+///     case LayoutFailure():
+///       return LayoutErrorWidget(failure: failure);
+///     // ... handle other failure types
+///   }
+/// };
+/// ```
+typedef UnknownContentBuilder = Widget Function(
+  BuildContext context,
+  ContentFailure failure,
+);
+
 /// A builder for platform-specific widgets used throughout the Vyuh application.
 ///
 /// This class provides a centralized way to customize the appearance and behavior
@@ -142,6 +166,7 @@ typedef ErrorViewBuilder = Widget Function(
 /// - App root widget ([appBuilder])
 /// - Loading indicators ([appLoader], [contentLoader], [routeLoader])
 /// - Error views ([errorView], [routeErrorView])
+/// - Unknown content handling ([unknown])
 /// - Image placeholders ([imagePlaceholder])
 ///
 /// Use [copyWith] to create a modified version of an existing builder:
@@ -149,6 +174,7 @@ typedef ErrorViewBuilder = Widget Function(
 /// final customBuilder = defaultPlatformWidgetBuilder.copyWith(
 ///   appLoader: (context) => MyCustomLoader(),
 ///   errorView: (context, {title, error}) => MyCustomErrorView(title: title),
+///   unknown: (context, failure) => MyCustomUnknownWidget(failure: failure),
 /// );
 /// ```
 class PlatformWidgetBuilder {
@@ -174,6 +200,9 @@ class PlatformWidgetBuilder {
   /// A builder for the error view widget.
   final ErrorViewBuilder errorView;
 
+  /// A builder for unknown content failures.
+  final UnknownContentBuilder unknown;
+
   /// Creates a new [PlatformWidgetBuilder] instance.
   PlatformWidgetBuilder({
     required this.appBuilder,
@@ -183,6 +212,7 @@ class PlatformWidgetBuilder {
     required this.errorView,
     required this.routeErrorView,
     required this.imagePlaceholder,
+    required this.unknown,
   });
 
   /// Creates a copy of this [PlatformWidgetBuilder] but with the given fields
@@ -194,6 +224,7 @@ class PlatformWidgetBuilder {
     ImagePlaceholderBuilder? imagePlaceholder,
     RouteErrorViewBuilder? routeErrorView,
     ErrorViewBuilder? errorView,
+    UnknownContentBuilder? unknown,
   }) {
     return PlatformWidgetBuilder(
         appBuilder: appBuilder ?? this.appBuilder,
@@ -202,7 +233,8 @@ class PlatformWidgetBuilder {
         routeLoader: routeLoader ?? this.routeLoader,
         errorView: errorView ?? this.errorView,
         routeErrorView: routeErrorView ?? this.routeErrorView,
-        imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder);
+        imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder,
+        unknown: unknown ?? this.unknown);
   }
 
   static final system = PlatformWidgetBuilder(
@@ -281,5 +313,6 @@ class PlatformWidgetBuilder {
             onRetry: onRetry,
             retryLabel: retryLabel,
             showRestart: true,
-          ));
+          ),
+      unknown: (context, failure) => _UnknownContentView(failure: failure));
 }

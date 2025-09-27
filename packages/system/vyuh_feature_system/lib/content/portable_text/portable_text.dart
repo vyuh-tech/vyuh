@@ -83,10 +83,10 @@ class PortableTextContent extends ContentItem {
 
           if (itemDescriptor == null) {
             return kDebugMode
-                ? Unknown(
+                ? UnknownContentItem(
                     missingSchemaType: type,
-                    description:
-                        'An $TypeDescriptor for this block-type has not been specified. Make sure to add that in your $PortableTextDescriptor.')
+                    jsonPayload: e,
+                  )
                 : null;
           }
 

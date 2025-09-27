@@ -111,11 +111,6 @@ final descriptor = ContentExtensionDescriptor(
       ],
       blocks: [
         BlockItemDescriptor(
-          type: Unknown.typeDescriptor,
-          builder: (context, content) => VyuhBinding.instance.content
-              .buildContent(context, content as Unknown),
-        ),
-        BlockItemDescriptor(
           type: TypeDescriptor(
             schemaType: TextBlockItem.schemaName,
             fromJson: TextBlockItem.fromJson,
@@ -167,10 +162,6 @@ final descriptor = ContentExtensionDescriptor(
     Group.contentBuilder,
     Conditional.contentBuilder,
     ConditionalRoute.contentBuilder,
-
-    // This is defined explicitly because the ContentBuilder type is defined
-    // in vyuh_extension_content and not in vyuh_core
-    UnknownContentBuilder(),
 
     Empty.contentBuilder,
     PortableTextContent.contentBuilder,

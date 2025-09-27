@@ -15,3 +15,6 @@ export 'ui/scoped_di_widget.dart';
 export 'ui/document_builder.dart';
 export 'ui/document_future_builder.dart';
 export 'ui/document_stream_builder.dart';
+export 'ui/unknown_content_indicator.dart';
+export 'plugin/unknown_placeholders.dart';
+export 'plugin/unknown_placeholder_factory.dart';

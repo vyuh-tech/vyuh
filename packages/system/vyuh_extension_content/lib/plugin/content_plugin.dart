@@ -36,50 +36,117 @@ final class DefaultContentPlugin extends ContentPlugin {
     T content, {
     LayoutConfiguration<T>? layout,
   }) {
-    final builder = _extensionBuilder!.contentBuilder(content.schemaType);
-
-    assert(builder != null,
-        'Failed to retrieve builder for schemaType: ${content.schemaType}. Is the ContentBuilder registered for this schemaType?');
-
-    Widget? contentWidget;
-    try {
-      contentWidget =
-          layout?.build(context, content) ?? builder?.build(context, content);
-    } catch (e) {
-      final possibleLayouts = [
-        layout?.schemaType,
-        content.layout?.schemaType,
-        builder?.defaultLayout.schemaType
-      ].nonNulls;
-      return VyuhBinding.instance.widgetBuilder.errorView(context,
-          error: e,
-          title: 'Failed to build layout',
-          subtitle:
-              'Possible Layouts: "${possibleLayouts.join(', ')}" for Content: "${content.schemaType}"');
+    // Handle internal unknown content items by converting to ContentItemFailure
+    if (content is UnknownContentItem) {
+      final failure = ContentItemFailure(
+        schemaType: content.missingSchemaType,
+        jsonPayload: content.jsonPayload,
+        description: 'No ContentItem registration found for schema type: ${content.missingSchemaType}',
+        suggestions: [
+          'Register a TypeDescriptor for ${content.missingSchemaType}',
+          'Check if the content type is properly exported',
+          'Verify the schema type matches the registered type',
+        ],
+      );
+      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
     }
 
-    if (contentWidget != null) {
-      final modifiers = content.getModifiers();
+    final builder = _extensionBuilder!.contentBuilder(content.schemaType);
 
-      if (modifiers != null && modifiers.isNotEmpty) {
-        try {
-          return modifiers.fold<Widget>(
-            contentWidget,
-            (child, modifier) => modifier.build(context, child, content),
+    // Handle missing ContentBuilder
+    if (builder == null) {
+      final failure = LayoutFailure(
+        schemaType: content.schemaType,
+        contentSchemaType: content.schemaType,
+        description: 'No ContentBuilder registered for this schema type',
+        suggestions: ['Register a ContentBuilder for ${content.schemaType}'],
+      );
+      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    }
+
+    Widget contentWidget;
+
+    // Check if we have an unknown layout configuration
+    if (layout != null && layout is UnknownLayoutConfiguration) {
+      final unknownLayout = layout as UnknownLayoutConfiguration;
+      final failure = LayoutFailure(
+        schemaType: unknownLayout.missingSchemaType,
+        contentSchemaType: content.schemaType,
+        jsonPayload: unknownLayout.jsonPayload,
+        description: 'Unknown layout type: ${unknownLayout.missingSchemaType}',
+        suggestions: [
+          'Register a TypeDescriptor for ${unknownLayout.missingSchemaType}',
+          'Check if the layout type is properly exported',
+        ],
+      );
+      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    }
+
+    try {
+      contentWidget =
+          layout?.build(context, content) ?? builder.build(context, content);
+    } catch (e) {
+      final failure = LayoutFailure(
+        schemaType: layout?.schemaType ?? builder.defaultLayout.schemaType,
+        contentSchemaType: content.schemaType,
+        requestedLayoutType: layout?.schemaType,
+        description: 'Failed to build layout: ${e.toString()}',
+        suggestions: [
+          'Check if the layout is compatible with content type ${content.schemaType}',
+          'Verify layout implementation for ${layout?.schemaType ?? 'default layout'}',
+        ],
+      );
+      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    }
+
+    final modifiers = content.getModifiers();
+
+    if (modifiers != null && modifiers.isNotEmpty) {
+      // Check for unknown modifiers first
+      for (int i = 0; i < modifiers.length; i++) {
+        final modifier = modifiers[i];
+        if (modifier is UnknownContentModifierConfiguration) {
+          final modifierChain = modifiers.map((m) => m.schemaType).toList();
+          final failure = ModifierFailure(
+            schemaType: modifier.missingSchemaType,
+            modifierChain: modifierChain,
+            failedIndex: i,
+            jsonPayload: modifier.jsonPayload,
+            description: 'Unknown modifier type: ${modifier.missingSchemaType}',
+            suggestions: [
+              'Register a TypeDescriptor for ${modifier.missingSchemaType}',
+              'Check if the modifier type is properly exported',
+            ],
           );
-        } catch (e) {
-          return VyuhBinding.instance.widgetBuilder.errorView(context,
-              error: e,
-              title: 'Failed to apply modifiers',
-              subtitle:
-                  'Modifier Chain: "${modifiers.map((m) => m.schemaType).join(' -> ')}" for Content: "${content.schemaType}"');
+          return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
         }
       }
 
-      return contentWidget;
+      try {
+        return modifiers.fold<Widget>(
+          contentWidget,
+          (child, modifier) => modifier.build(context, child, content),
+        );
+      } catch (e) {
+        final modifierChain = modifiers.map((m) => m.schemaType).toList();
+        // Try to determine which modifier failed (this is a best effort)
+        final failedIndex = modifiers.length - 1; // Default to the last one
+
+        final failure = ModifierFailure(
+          schemaType: modifiers.last.schemaType,
+          modifierChain: modifierChain,
+          failedIndex: failedIndex,
+          description: 'Failed to apply modifier: ${e.toString()}',
+          suggestions: [
+            'Check modifier implementation for ${modifiers.last.schemaType}',
+            'Verify modifier compatibility with content type ${content.schemaType}',
+          ],
+        );
+        return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+      }
     }
 
-    return const SizedBox.shrink();
+    return contentWidget;
   }
 
   @override
