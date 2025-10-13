@@ -88,6 +88,7 @@ export 'plugin/env/default_env_plugin.dart';
 export 'plugin/env/env_plugin.dart';
 export 'plugin/event_plugin.dart';
 export 'plugin/feature_flag.dart';
+export 'plugin/i18n/i18n.dart';
 export 'plugin/navigation/default_navigation_plugin.dart';
 export 'plugin/navigation/navigation.dart';
 export 'plugin/network/http_network_plugin.dart';

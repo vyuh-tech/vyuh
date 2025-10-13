@@ -28,6 +28,7 @@ dependencies:
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   get_it: ^8.0.2
+  shared_preferences: ^2.3.3
   flutter_sanity_portable_text: ^1.8.0
   http: ^1.2.1
   retry: ^3.1.2
