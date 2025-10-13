@@ -11,7 +11,7 @@ import 'translation_registration.dart';
 /// Plugin for managing internationalization across features
 ///
 /// This plugin provides centralized locale management and allows features
-/// to register their translation providers and locale change handlers.
+/// to register their locale change handlers.
 ///
 /// Usage in features:
 /// ```dart
@@ -21,11 +21,11 @@ import 'translation_registration.dart';
 ///     if (localePlugin != null) {
 ///       localePlugin.registerTranslations(
 ///         TranslationRegistration(
+///           name: 'my_feature',
 ///           onLocaleChange: (locale) async {
 ///             final appLocale = _convertToAppLocale(locale);
 ///             await FeatureLocaleSettings.setLocale(appLocale);
 ///           },
-///           provider: (child) => FeatureTranslationProvider(child: child),
 ///         ),
 ///       );
 ///     }
@@ -71,9 +71,10 @@ class LocalePlugin extends Plugin {
   /// The plugin will:
   /// 1. Initialize the feature's translations with the current locale
   /// 2. Register the callback for future locale changes
-  /// 3. Nest the provider widget at the app root
   void registerTranslations(TranslationRegistration registration) {
     _registrations.add(registration);
+
+    vyuh.log.info('LocalePlugin: Registered translations for "${registration.name}"');
 
     // Initialize with current locale (async to support deferred loading)
     Future.microtask(() async {
@@ -81,22 +82,10 @@ class LocalePlugin extends Plugin {
         await registration.onLocaleChange(currentLocale.value);
       } catch (e) {
         vyuh.log.error(
-          'LocalePlugin: Error initializing feature translations: $e',
+          'LocalePlugin: Error initializing "${registration.name}" translations: $e',
         );
       }
     });
-  }
-
-  /// Wrap a widget with all registered translation providers
-  ///
-  /// This nests all feature TranslationProviders around the child widget.
-  /// Should be called once at the app root level.
-  Widget wrapWithProviders(Widget child) {
-    var result = child;
-    for (final registration in _registrations.reversed) {
-      result = registration.provider(result);
-    }
-    return result;
   }
 
   /// Set the application locale
@@ -116,7 +105,7 @@ class LocalePlugin extends Plugin {
           await registration.onLocaleChange(locale);
         } catch (e) {
           vyuh.log.error(
-              'LocalePlugin: Error notifying feature of locale change: $e');
+              'LocalePlugin: Error notifying "${registration.name}" of locale change: $e');
         }
       }
 

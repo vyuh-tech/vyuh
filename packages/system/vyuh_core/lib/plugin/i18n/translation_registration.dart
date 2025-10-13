@@ -2,31 +2,31 @@ import 'package:flutter/material.dart';
 
 /// Registration for feature-specific translations
 ///
-/// Features can register their translation providers and locale change handlers
-/// with the LocalePlugin. This enables automatic translation updates when the
-/// application locale changes.
+/// Features can register their translation with the LocalePlugin.
+/// When using slang, translations are managed globally through LocaleSettings,
+/// so no provider wrapper is needed.
 ///
 /// Example:
 /// ```dart
 /// localePlugin.registerTranslations(
 ///   TranslationRegistration(
+///     name: 'my_feature',
 ///     onLocaleChange: (locale) async {
 ///       final appLocale = _convertToAppLocale(locale);
 ///       await FeatureLocaleSettings.setLocale(appLocale);
 ///     },
-///     provider: (child) => FeatureTranslationProvider(child: child),
 ///   ),
 /// );
 /// ```
 class TranslationRegistration {
+  /// Name of the translation system (for debugging)
+  final String name;
+
   /// Callback when locale changes (async to support deferred loading)
   final Future<void> Function(Locale locale) onLocaleChange;
 
-  /// Provider widget to wrap the app
-  final Widget Function(Widget child) provider;
-
   const TranslationRegistration({
+    required this.name,
     required this.onLocaleChange,
-    required this.provider,
   });
 }
