@@ -116,8 +116,8 @@ class LocalePlugin extends Plugin {
         try {
           await registration.onLocaleChange(locale);
         } catch (e) {
-          vyuh.log
-              .error('LocalePlugin: Error notifying feature of locale change: $e');
+          vyuh.log.error(
+              'LocalePlugin: Error notifying feature of locale change: $e');
         }
       }
 
