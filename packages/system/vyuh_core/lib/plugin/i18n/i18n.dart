@@ -32,15 +32,25 @@
 ///
 /// ## Setup in Applications
 ///
-/// Applications should create and register the LocalePlugin with supported locales:
+/// Applications should create and register the LocalePlugin with supported locales.
+/// Locale configurations are typically defined at the application level:
 ///
 /// ```dart
+/// // Define your app's supported locales
+/// const english = LocaleConfiguration(
+///   locale: Locale('en'),
+///   nativeName: 'English',
+///   icon: '🇺🇸',
+/// );
+///
+/// const hindi = LocaleConfiguration(
+///   locale: Locale('hi'),
+///   nativeName: 'हिन्दी',
+///   icon: '🇮🇳',
+/// );
+///
 /// final localePlugin = LocalePlugin(
-///   locales: [
-///     LocaleConfiguration.english,
-///     LocaleConfiguration.hindi,
-///     LocaleConfiguration.german,
-///   ],
+///   locales: [english, hindi],
 /// );
 ///
 /// runApp(

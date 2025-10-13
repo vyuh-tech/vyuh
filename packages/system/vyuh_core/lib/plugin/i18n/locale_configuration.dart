@@ -44,26 +44,4 @@ class LocaleConfiguration {
       icon: icon,
     );
   }
-
-  /// Default configurations for common languages
-  static const english = LocaleConfiguration(
-    locale: Locale('en'),
-    nativeName: 'English',
-    icon: '🇺🇸',
-  );
-
-  static const hindi = LocaleConfiguration(
-    locale: Locale('hi'),
-    nativeName: 'हिन्दी',
-    icon: '🇮🇳',
-  );
-
-  static const german = LocaleConfiguration(
-    locale: Locale('de'),
-    nativeName: 'Deutsch',
-    icon: '🇩🇪',
-  );
-
-  /// Default set of locale configurations (English, Hindi, German)
-  static const defaults = [english, hindi, german];
 }

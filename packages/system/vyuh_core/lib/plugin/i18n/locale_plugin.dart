@@ -57,9 +57,10 @@ class LocalePlugin extends Plugin {
   List<Locale> get supportedLocales => locales.map((l) => l.locale).toList();
 
   LocalePlugin({
-    this.locales = LocaleConfiguration.defaults,
+    required this.locales,
     LocaleConfiguration? defaultLocale,
-  })  : _defaultLocale = defaultLocale,
+  })  : assert(locales.isNotEmpty, 'At least one locale must be provided'),
+        _defaultLocale = defaultLocale,
         super(name: 'locale', title: 'Internationalization') {
     currentLocale = Observable((_defaultLocale ?? locales.first).locale);
   }
