@@ -109,10 +109,8 @@ class LocalePlugin extends Plugin {
     runInAction(() => isLoadingLocale.value = true);
 
     try {
-      // Update the observable
-      runInAction(() => currentLocale.value = locale);
-
-      // Notify all registered feature translations (async to support deferred loading)
+      // IMPORTANT: Load all deferred translation libraries BEFORE updating the observable
+      // This ensures translations are ready when the UI rebuilds
       for (final registration in _registrations) {
         try {
           await registration.onLocaleChange(locale);
@@ -121,6 +119,9 @@ class LocalePlugin extends Plugin {
               'LocalePlugin: Error notifying feature of locale change: $e');
         }
       }
+
+      // Now update the observable to trigger UI rebuild with loaded translations
+      runInAction(() => currentLocale.value = locale);
 
       // Persist the preference
       await _prefs?.setString(_localePreferenceKey, locale.languageCode);
