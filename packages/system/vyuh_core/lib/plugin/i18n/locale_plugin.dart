@@ -74,7 +74,8 @@ class LocalePlugin extends Plugin {
   void registerTranslations(TranslationRegistration registration) {
     _registrations.add(registration);
 
-    vyuh.log.info('LocalePlugin: Registered translations for "${registration.name}"');
+    vyuh.log.info(
+        'LocalePlugin: Registered translations for "${registration.name}"');
 
     // Initialize with current locale (async to support deferred loading)
     Future.microtask(() async {
