@@ -98,6 +98,10 @@ class LocalePlugin extends Plugin {
     runInAction(() => isLoadingLocale.value = true);
 
     try {
+      vyuh.log.info(
+        'LocalePlugin: Starting locale change from "${currentLocale.value.languageCode}" to "${locale.languageCode}"',
+      );
+
       // IMPORTANT: Load all deferred translation libraries BEFORE updating the observable
       // This ensures translations are ready when the UI rebuilds
       for (final registration in _registrations) {
@@ -109,8 +113,16 @@ class LocalePlugin extends Plugin {
         }
       }
 
+      vyuh.log.info(
+        'LocalePlugin: All translation systems notified, updating currentLocale to "${locale.languageCode}"',
+      );
+
       // Now update the observable to trigger UI rebuild with loaded translations
       runInAction(() => currentLocale.value = locale);
+
+      vyuh.log.info(
+        'LocalePlugin: currentLocale updated, now="${currentLocale.value.languageCode}"',
+      );
 
       // Persist the preference
       await _prefs?.setString(_localePreferenceKey, locale.languageCode);
