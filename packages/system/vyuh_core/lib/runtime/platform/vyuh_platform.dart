@@ -107,6 +107,10 @@ extension NamedPlugins on VyuhPlatform {
 
   /// The event plugin, for managing and emitting events within the platform.
   EventPlugin get event => getPlugin<EventPlugin>()!;
+
+  /// The locale plugin, providing access to locale settings.
+  /// Can be null if the plugin is not registered.
+  LocalePlugin? get locale => getPlugin<LocalePlugin>();
 }
 
 /// Restart the platform, re-running the initialization process.
