@@ -1,3 +1,7 @@
+## 1.50.0
+
+ - **FEAT**: adding locale plugin.
+
 ## 1.49.0
 
  - **FEAT**: replace `UnknownContentBuilder` with `UnknownContentIndicator`, add comprehensive unknown type handling.
