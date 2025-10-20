@@ -44,6 +44,7 @@ the extension mechanism.
 - **Storage** 💾: Persistent storage capabilities for local data
 - **Environment Variables** 🔧: Flexible configuration system for managing
   environment-specific settings
+- **Locale**: the locale plugin to manage translations
 - **Platform Widgets** 🎨: Customizable widgets for common UI patterns like
   loaders and error views
 
