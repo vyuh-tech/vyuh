@@ -81,7 +81,8 @@ class UsernameField extends StatelessWidget {
       autofillHints: [AutofillHints.username],
       validator: FormBuilderValidators.compose([
         FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(3, errorText: 'Username must be at least 3 characters'),
+        FormBuilderValidators.minLength(3,
+            errorText: 'Username must be at least 3 characters'),
       ]),
       onSubmitted: (_) => submit(),
     );
@@ -243,6 +244,8 @@ class HintAction extends StatelessWidget {
   }
 }
 
+typedef ErrorBuilder = Widget Function(BuildContext context, Object? error);
+
 final class AuthActionButton extends StatelessWidget {
   final void Function(BuildContext context) onPressed;
   final String? title;
@@ -251,6 +254,7 @@ final class AuthActionButton extends StatelessWidget {
   final AuthFlowScope scope;
   final bool showError;
   final Axis direction;
+  final ErrorBuilder? errorBuilder;
 
   const AuthActionButton({
     super.key,
@@ -261,6 +265,7 @@ final class AuthActionButton extends StatelessWidget {
     this.direction = Axis.vertical,
     required this.scope,
     this.showError = true,
+    this.errorBuilder,
   });
 
   @override
@@ -280,7 +285,9 @@ final class AuthActionButton extends StatelessWidget {
         if (showError && scope.authState == AuthState.error)
           Padding(
             padding: const EdgeInsets.only(top: 8.0),
-            child: ErrorText(error: scope.error),
+            child: errorBuilder != null
+                ? errorBuilder!(context, scope.error)
+                : ErrorText(error: scope.error),
           ),
       ],
     );

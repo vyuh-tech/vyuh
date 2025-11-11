@@ -10,6 +10,7 @@ final class AuthFormBuilder extends StatelessWidget {
   final Future<void> Function(FormBuilderState) authAction;
   final AuthState endAuthState;
   final bool showError;
+  final ErrorBuilder? errorBuilder;
 
   const AuthFormBuilder({
     super.key,
@@ -19,6 +20,7 @@ final class AuthFormBuilder extends StatelessWidget {
     required this.authAction,
     required this.endAuthState,
     this.showError = true,
+    this.errorBuilder,
   });
 
   @override
@@ -39,6 +41,7 @@ final class AuthFormBuilder extends StatelessWidget {
               title: actionTitle,
               onPressed: (context) => _submit(context, scope),
               showError: showError,
+              errorBuilder: errorBuilder,
             ),
             if (footer != null) footer!(context, scope),
           ],
