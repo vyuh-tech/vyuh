@@ -1,3 +1,7 @@
+## 1.22.0
+
+ - **FEAT**: adding ability to pass errorBuilder to AuthFormBuilder.
+
 ## 1.21.0
 
  - **FEAT**: upgrading to melos 7.0.
