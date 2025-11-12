@@ -1,3 +1,7 @@
+## 1.22.1
+
+ - **FIX**: cleaning up analysis issues.
+
 ## 1.22.0
 
  - **FEAT**: adding ability to pass errorBuilder to AuthFormBuilder.

@@ -1,3 +1,7 @@
+## 1.50.1
+
+ - **FIX**: cleaning up analysis issues.
+
 ## 1.50.0
 
  - **FEAT**: adding locale plugin.

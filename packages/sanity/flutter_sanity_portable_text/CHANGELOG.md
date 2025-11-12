@@ -1,3 +1,7 @@
+## 1.8.1
+
+ - **FIX**: cleaning up analysis issues.
+
 ## 1.8.0
 
  - **FEAT**: upgrading to melos 7.0.

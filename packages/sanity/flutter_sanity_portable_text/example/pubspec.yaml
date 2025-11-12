@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_sanity_portable_text: ^1.8.0
+  flutter_sanity_portable_text: ^1.8.1
 
 dev_dependencies:
   flutter_test:

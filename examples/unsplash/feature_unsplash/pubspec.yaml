@@ -15,8 +15,8 @@ dependencies:
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
-  flutter_sanity_portable_text: ^1.8.0
-  vyuh_core: ^1.50.0
+  flutter_sanity_portable_text: ^1.8.1
+  vyuh_core: ^1.50.1
   vyuh_feature_system: ^1.42.0
   vyuh_extension_content: ^1.30.0
   unsplash_client: ^3.0.0
