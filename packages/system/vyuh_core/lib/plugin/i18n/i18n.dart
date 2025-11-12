@@ -60,6 +60,7 @@
 ///   ),
 /// );
 /// ```
+library;
 
 export 'locale_configuration.dart';
 export 'locale_plugin.dart';

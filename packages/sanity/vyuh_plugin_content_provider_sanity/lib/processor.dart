@@ -7,21 +7,21 @@ final class _QueryProcessor {
 
   _QueryProcessor({required this.client});
 
-  static idMatchCondition(String id, {required bool includeDrafts}) =>
+  static String idMatchCondition(String id, {required bool includeDrafts}) =>
       '''*[_id == \$id${includeDrafts ? ' || _id == "drafts." + \$id' : ''}]''';
 
   static final _routeTypes =
       ["vyuh.route", "vyuh.conditionalRoute"].map((x) => '"$x"').join(', ');
 
-  static get _routeFromPathQuery => '''
+  static String get _routeFromPathQuery => '''
 *[_type in [$_routeTypes] && path == \$path] | order(_type asc, _updatedAt desc) $_routeContentProjection
   ''';
 
-  static _routeFromIdQuery(bool includeDrafts) => '''
+  static String _routeFromIdQuery(bool includeDrafts) => '''
 *[_id == \$routeId${includeDrafts ? ' || _id == "drafts." + \$routeId' : ''}] $_routeContentProjection
   ''';
 
-  static get _routeContentProjection => '''
+  static String get _routeContentProjection => '''
 {
   ...,
   "category": category->,

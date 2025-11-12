@@ -45,7 +45,7 @@ class _RoutesListState extends State<RoutesList> {
     return paths;
   }
 
-  _recurse(List<g.RouteBase> routes, List<_PathInfo> accumulator,
+  void _recurse(List<g.RouteBase> routes, List<_PathInfo> accumulator,
       String parentPath, int depth) {
     for (final route in routes) {
       String prefix = parentPath;

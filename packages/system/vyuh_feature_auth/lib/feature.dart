@@ -12,7 +12,8 @@ import 'package:vyuh_feature_auth/content/profile_card.dart';
 import 'package:vyuh_feature_auth/content/username_password_form.dart';
 import 'package:vyuh_feature_system/content/index.dart';
 
-feature({List<go.RouteBase> Function()? routes}) => FeatureDescriptor(
+FeatureDescriptor feature({List<go.RouteBase> Function()? routes}) =>
+    FeatureDescriptor(
       name: 'auth',
       title: 'Authentication UI',
       icon: Icons.account_circle_outlined,

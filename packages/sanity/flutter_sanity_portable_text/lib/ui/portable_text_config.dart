@@ -74,7 +74,7 @@ final class PortableTextConfig {
   PortableTextConfig._();
 
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
-  apply({
+  void apply({
     final double listIndent = defaultListIndent,
     final EdgeInsets itemPadding = defaultItemPadding,
     final BulletRenderer? bulletRenderer,

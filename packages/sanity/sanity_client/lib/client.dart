@@ -38,7 +38,7 @@ final class SanityClient {
         };
 
   /// Set the HTTP client to use for fetching data
-  setHttpClient(http.Client client) {
+  void setHttpClient(http.Client client) {
     httpClient = client;
   }
 

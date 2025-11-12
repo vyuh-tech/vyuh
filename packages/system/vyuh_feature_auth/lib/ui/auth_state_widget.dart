@@ -102,7 +102,7 @@ class AuthFlowState extends State<AuthFlow> {
     }
   }
 
-  _cancelOtherOperations() {
+  void _cancelOtherOperations() {
     for (final operation in _operations) {
       operation.cancel();
     }
@@ -110,7 +110,7 @@ class AuthFlowState extends State<AuthFlow> {
     _operations.clear();
   }
 
-  _resetOtherFlows() {
+  void _resetOtherFlows() {
     for (final flow in _flows) {
       if (flow != this) {
         runInAction(() => flow.authState.value = AuthState.signedOut);

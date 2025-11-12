@@ -11,7 +11,7 @@ import 'package:vyuh_plugin_content_provider_sanity/exception.dart';
 part 'live_provider.dart';
 part 'processor.dart';
 
-identity(Map<String, dynamic> json) => json;
+Map<String, dynamic> identity(Map<String, dynamic> json) => json;
 
 final Map<String, String> fieldMap = {
   FieldName.id.name: '_id',
@@ -180,6 +180,6 @@ final class SanityContentProvider extends ContentProvider {
   }
 }
 
-_log(String message) {
+void _log(String message) {
   VyuhBinding.instance.log.debug(message);
 }

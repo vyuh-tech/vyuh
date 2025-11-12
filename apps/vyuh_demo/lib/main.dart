@@ -67,7 +67,7 @@ void main() async {
   );
 }
 
-_getPlugins() {
+PluginDescriptor _getPlugins() {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Ensure all imperatively navigated URLs are shown in the URL bar

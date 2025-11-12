@@ -50,7 +50,7 @@ final class AuthFormBuilder extends StatelessWidget {
     });
   }
 
-  _submit(BuildContext context, AuthFlowScope scope) {
+  void _submit(BuildContext context, AuthFlowScope scope) {
     FocusManager.instance.primaryFocus?.unfocus();
     final state = FormBuilder.of(context);
     if (state == null) {
