@@ -1,3 +1,7 @@
+## 1.16.0
+
+ - **FEAT**: pubspec updates.
+
 ## 1.15.1
 
  - **FIX**: cleaning up analysis issues.

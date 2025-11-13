@@ -1,3 +1,7 @@
+## 0.0.13
+
+ - **FEAT**: pubspec updates.
+
 ## 0.0.12
 
  - **FEAT**: upgrading to melos 7.0.

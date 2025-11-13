@@ -1,3 +1,7 @@
+## 1.23.0
+
+ - **FEAT**: pubspec updates.
+
 ## 1.22.1
 
  - **FIX**: cleaning up analysis issues.

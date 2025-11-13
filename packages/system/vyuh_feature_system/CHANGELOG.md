@@ -1,3 +1,7 @@
+## 1.43.0
+
+ - **FEAT**: pubspec updates.
+
 ## 1.42.0
 
  - **FEAT**: replace `UnknownContentBuilder` with `UnknownContentIndicator`, add comprehensive unknown type handling.
