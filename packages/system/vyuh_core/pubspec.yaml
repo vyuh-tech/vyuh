@@ -24,10 +24,10 @@ dependencies:
   cached_network_image: ^3.2.3
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
-  go_router: ^16.0.0
+  go_router: ^17.0.0
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
-  get_it: ^8.0.2
+  get_it: ^9.0.5
   shared_preferences: ^2.3.3
   flutter_sanity_portable_text: ^1.8.1
   http: ^1.2.1

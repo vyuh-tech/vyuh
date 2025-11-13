@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  go_router: ^16.0.0
+  go_router: ^17.0.0
   json_annotation: ^4.8.1
   vyuh_core: ^1.50.1
   vyuh_feature_system: ^1.42.0
