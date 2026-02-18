@@ -182,6 +182,17 @@ final class _RouteContentBuilder extends ContentBuilder<Route> {
   init(List<ContentDescriptor> descriptors) {
     super.init(descriptors);
 
+    _registerRouteTypes(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    super.addDescriptors(descriptors);
+
+    _registerRouteTypes(descriptors);
+  }
+
+  void _registerRouteTypes(List<ContentDescriptor> descriptors) {
     final rtDescriptors = descriptors.cast<RouteDescriptor>();
     final initConfigs = rtDescriptors.expand((element) =>
         element.lifecycleHandlers ??

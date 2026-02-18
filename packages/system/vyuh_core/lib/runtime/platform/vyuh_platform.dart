@@ -72,6 +72,14 @@ abstract class VyuhPlatform {
   /// Gets the ExtensionBuilder given an extensionType
   ExtensionBuilder? extensionBuilder<T extends ExtensionDescriptor>();
 
+  /// Whether a feature (eager or lazy) has been loaded and is ready.
+  bool isFeatureLoaded(String featureName);
+
+  /// Programmatically load a lazy feature by name.
+  /// If the feature is already loaded (eager or lazy), this is a no-op.
+  /// Throws [StateError] if no feature with the given name is registered.
+  Future<void> loadFeature(String featureName);
+
   Future<void> dispose();
 }
 

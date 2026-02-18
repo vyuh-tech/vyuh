@@ -70,6 +70,17 @@ final class _APIContentBuilder extends ContentBuilder<APIContent> {
   void init(List<ContentDescriptor> descriptors) {
     super.init(descriptors);
 
+    _registerConfigurations(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    super.addDescriptors(descriptors);
+
+    _registerConfigurations(descriptors);
+  }
+
+  void _registerConfigurations(List<ContentDescriptor> descriptors) {
     final configs = descriptors.cast<APIContentDescriptor>().expand((element) =>
         element.configurations ?? <TypeDescriptor<ApiConfiguration>>[]);
 

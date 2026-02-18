@@ -79,6 +79,19 @@ final class _DocumentListViewContentBuilder extends ContentBuilder {
 
   @override
   void init(List<ContentDescriptor> descriptors) {
+    _registerDocumentTypes(descriptors);
+
+    super.init(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    _registerDocumentTypes(descriptors);
+
+    super.addDescriptors(descriptors);
+  }
+
+  void _registerDocumentTypes(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentListViewDescriptor>();
 
     registerDescriptors<DocumentItem>(
@@ -93,7 +106,5 @@ final class _DocumentListViewContentBuilder extends ContentBuilder {
     registerDescriptors<DocumentItemConfiguration>(ds.expand((element) =>
         element.listItemConfigurations ??
         <TypeDescriptor<DocumentItemConfiguration>>[]));
-
-    super.init(descriptors);
   }
 }

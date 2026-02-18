@@ -147,4 +147,68 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
       register<T>(element);
     });
   }
+
+  /// Register extensions from a lazily-loaded feature incrementally.
+  ///
+  /// Called after the initial [onInit] has already run. Uses the same
+  /// registration primitives as [_build] but operates additively —
+  /// only processes the new descriptors without clearing existing state.
+  @override
+  void registerLazy(ExtensionDescriptor descriptor) {
+    if (descriptor is! ContentExtensionDescriptor) return;
+
+    final ext = descriptor;
+
+    // Track which content schemaTypes were newly registered via registerBuilder,
+    // so we can skip them in the addDescriptors step below.
+    final newlyRegistered = <String>{};
+
+    // 1. Register NEW content builders (calls registerBuilder → init, same as _build)
+    for (final builder in ext.contentBuilders ?? <ContentBuilder>[]) {
+      final schemaType = builder.content.schemaType;
+
+      if (_contentBuilderMap.containsKey(schemaType)) {
+        // Existing builder — will be handled additively in step 2
+        continue;
+      }
+
+      final matchingDescriptors = (ext.contents ?? [])
+          .where((cd) => cd.schemaType == schemaType)
+          .toList(growable: false);
+
+      registerBuilder(builder, descriptors: matchingDescriptors);
+      newlyRegistered.add(schemaType);
+    }
+
+    // 2. For EXISTING builders: additively register new descriptors.
+    //    Uses addDescriptors() which adds layouts without clearing,
+    //    and runs subclass-specific registration logic (same as init but additive).
+    for (final content in ext.contents ?? <ContentDescriptor>[]) {
+      final schemaType = content.schemaType;
+
+      // Skip descriptors already processed by registerBuilder in step 1
+      if (newlyRegistered.contains(schemaType)) continue;
+
+      final existingBuilder = _contentBuilderMap[schemaType];
+      if (existingBuilder == null) continue;
+
+      existingBuilder.addDescriptors([content]);
+    }
+
+    // 3. Register extension-level type descriptors (same as _build's _initTypeRegistrations)
+    for (final action
+        in ext.actions ?? <TypeDescriptor<ActionConfiguration>>[]) {
+      register<ActionConfiguration>(action);
+    }
+
+    for (final condition
+        in ext.conditions ?? <TypeDescriptor<ConditionConfiguration>>[]) {
+      register<ConditionConfiguration>(condition);
+    }
+
+    for (final modifier in ext.contentModifiers ??
+        <TypeDescriptor<ContentModifierConfiguration>>[]) {
+      register<ContentModifierConfiguration>(modifier);
+    }
+  }
 }

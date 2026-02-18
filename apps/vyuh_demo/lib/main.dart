@@ -2,10 +2,10 @@ import 'package:chakra_shared/chakra_plugin_auth.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_conference/feature_conference.dart' as conference;
 import 'package:feature_counter/feature_counter.dart' as counter;
-import 'package:feature_food/feature_food.dart' as food;
+import 'package:feature_food/feature_food.dart' deferred as food;
 import 'package:feature_misc/feature_misc.dart' as misc;
 import 'package:feature_puzzles/feature_puzzles.dart' as puzzles;
-import 'package:feature_tmdb/feature_tmdb.dart' as tmdb;
+import 'package:feature_tmdb/feature_tmdb.dart' deferred as tmdb;
 import 'package:feature_unsplash/feature_unsplash.dart' as unsplash;
 import 'package:feature_wonderous/feature_wonderous.dart' as wonderous;
 import 'package:flutter/material.dart';
@@ -34,11 +34,9 @@ void main() async {
       system.feature,
       developer.feature,
 
-      // Example Features
+      // Example Features (eagerly loaded)
       root.feature,
       counter.feature,
-      tmdb.feature,
-      food.feature,
       wonderous.feature,
       puzzles.feature,
       misc.feature,
@@ -46,6 +44,27 @@ void main() async {
       onboarding.feature,
       auth.feature(),
       conference.feature,
+    ],
+    // Lazily loaded features — code-split on web, deferred init on native
+    lazyFeatures: () => [
+      vc.LazyFeatureDescriptor(
+        name: 'food',
+        title: 'Food',
+        routePrefixes: ['/food'],
+        loader: () async {
+          await food.loadLibrary();
+          return food.feature;
+        },
+      ),
+      vc.LazyFeatureDescriptor(
+        name: 'tmdb',
+        title: 'TMDB',
+        routePrefixes: ['/tmdb'],
+        loader: () async {
+          await tmdb.loadLibrary();
+          return tmdb.feature;
+        },
+      ),
     ],
     platformWidgetBuilder:
         vc.PlatformWidgetBuilder.system.copyWith(appBuilder: (_, platform) {

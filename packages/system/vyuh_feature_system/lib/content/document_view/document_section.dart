@@ -51,12 +51,23 @@ final class _DocumentSectionViewContentBuilder extends ContentBuilder {
 
   @override
   void init(List<ContentDescriptor> descriptors) {
+    _registerConfigurations(descriptors);
+
+    super.init(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    _registerConfigurations(descriptors);
+
+    super.addDescriptors(descriptors);
+  }
+
+  void _registerConfigurations(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentSectionViewDescriptor>();
 
     registerDescriptors<DocumentItemConfiguration>(ds.expand((element) =>
         element.configurations ??
         <TypeDescriptor<DocumentItemConfiguration>>[]));
-
-    super.init(descriptors);
   }
 }

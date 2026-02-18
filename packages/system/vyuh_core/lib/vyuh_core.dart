@@ -64,6 +64,7 @@ library;
 export 'asserts.dart';
 export 'extension.dart';
 export 'feature_descriptor.dart';
+export 'lazy_feature_descriptor.dart';
 export 'plugin/analytics/analytics_plugin.dart';
 export 'plugin/analytics/analytics_provider.dart';
 export 'plugin/analytics/noop_analytics_provider.dart';

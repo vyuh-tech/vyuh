@@ -114,6 +114,19 @@ final class _DocumentViewContentBuilder extends ContentBuilder {
 
   @override
   void init(List<ContentDescriptor> descriptors) {
+    _registerDocumentTypes(descriptors);
+
+    super.init(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    _registerDocumentTypes(descriptors);
+
+    super.addDescriptors(descriptors);
+  }
+
+  void _registerDocumentTypes(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentViewDescriptor>();
 
     registerDescriptors<QueryConfiguration>(ds.expand((element) =>
@@ -124,8 +137,6 @@ final class _DocumentViewContentBuilder extends ContentBuilder {
           element.documentTypes ?? <TypeDescriptor<DocumentItem>>[]),
       checkUnique: true,
     );
-
-    super.init(descriptors);
   }
 }
 

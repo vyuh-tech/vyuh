@@ -115,6 +115,29 @@ class ContentBuilder<T extends ContentItem> {
     registerDescriptors<LayoutConfiguration>(layouts);
   }
 
+  /// Additively registers new descriptors into this builder.
+  ///
+  /// Unlike [init], this does NOT clear existing layouts — it only adds
+  /// new ones. Called when a lazily-loaded feature adds descriptors to an
+  /// already-initialized builder.
+  ///
+  /// Subclasses that override [init] to register custom type descriptors
+  /// MUST also override this method to register those same types additively.
+  @mustCallSuper
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    final newLayouts = descriptors.expand((element) =>
+        element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]);
+
+    // Add only truly new layouts (avoid duplicates)
+    final existingSchemaTypes = _layouts.map((l) => l.schemaType).toSet();
+    final uniqueNewLayouts = newLayouts
+        .where((l) => !existingSchemaTypes.contains(l.schemaType))
+        .toList(growable: false);
+
+    _layouts.addAll(uniqueNewLayouts);
+    registerDescriptors<LayoutConfiguration>(uniqueNewLayouts);
+  }
+
   /// Registers a list of type descriptors with the content system.
   ///
   /// This is a helper method used by [init] to register layout types.
