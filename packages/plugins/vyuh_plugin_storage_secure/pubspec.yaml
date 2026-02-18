@@ -20,7 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   vyuh_core: ^1.51.0
-  flutter_secure_storage: ^9.2.4
+  flutter_secure_storage: ^10.0.0
 
 dev_dependencies:
   flutter_test:
