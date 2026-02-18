@@ -1,3 +1,7 @@
+## 1.44.0
+
+ - **FEAT**: update dependencies and remove unused configurations.
+
 ## 1.43.0
 
  - **FEAT**: pubspec updates.

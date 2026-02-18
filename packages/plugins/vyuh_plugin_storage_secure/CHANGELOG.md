@@ -1,3 +1,7 @@
+## 1.5.0
+
+ - **FEAT**: update dependencies and remove unused configurations.
+
 ## 1.4.0
 
  - **FEAT**: upgrading to melos 7.0.
