@@ -19,11 +19,11 @@ class ProjectTemplate extends Template {
   Future<void> onGenerateComplete(Logger logger, Directory outputDir) async {
     // For projects, the outputDir is the parent directory where the project was created
     // We need to determine the actual project directory based on the directory contents
-    
-    // Look for a subdirectory that contains pubspec.yaml (the Flutter project)  
+
+    // Look for a subdirectory that contains pubspec.yaml (the Flutter project)
     final entries = outputDir.listSync();
     Directory? projectDir;
-    
+
     for (final entry in entries) {
       if (entry is Directory) {
         final pubspecFile = File(path.join(entry.path, 'pubspec.yaml'));
@@ -33,10 +33,10 @@ class ProjectTemplate extends Template {
         }
       }
     }
-    
+
     // If we couldn't find a project directory, use the output directory
     final targetDir = projectDir ?? outputDir;
-    
+
     templateSummary(
       logger: logger,
       outputDir: targetDir,

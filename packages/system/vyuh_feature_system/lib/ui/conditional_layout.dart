@@ -94,7 +94,8 @@ final class UnknownConditionalLayout<T extends ContentItem>
     final failure = LayoutFailure(
       schemaType: missingSchemaType,
       contentSchemaType: content.schemaType,
-      description: 'Missing ConditionalLayout with schemaType: $missingSchemaType',
+      description:
+          'Missing ConditionalLayout with schemaType: $missingSchemaType',
       suggestions: [
         'Register a ConditionalLayout for $missingSchemaType',
         'Check if the layout type is properly exported',

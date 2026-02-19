@@ -65,7 +65,8 @@ T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json) {
 
   // For other types, we need to use the factory method approach
   // Since we can't import extension_content types here, we use a callback system
-  final unknownPlaceholder = _unknownPlaceholderFactory?.call(T, schemaType, jsonItem);
+  final unknownPlaceholder =
+      _unknownPlaceholderFactory?.call(T, schemaType, jsonItem);
 
   if (unknownPlaceholder != null) {
     return unknownPlaceholder as T?;
@@ -104,39 +105,45 @@ List<T>? listFromJson<T extends SchemaItem>(dynamic json) {
     throw ArgumentError.value(json, 'json', 'is not a List');
   }
 
-  return json.map((itemJson) {
-    final item = VyuhBinding.instance.content.fromJson<T>(itemJson);
+  return json
+      .map((itemJson) {
+        final item = VyuhBinding.instance.content.fromJson<T>(itemJson);
 
-    if (item != null) {
-      return item;
-    }
+        if (item != null) {
+          return item;
+        }
 
-    // Create appropriate unknown placeholder based on type
-    final schemaType = VyuhBinding.instance.content.provider.schemaType(itemJson);
+        // Create appropriate unknown placeholder based on type
+        final schemaType =
+            VyuhBinding.instance.content.provider.schemaType(itemJson);
 
-    // For ContentItem, we already have UnknownContentItem
-    if (T == ContentItem) {
-      return UnknownContentItem(
-        missingSchemaType: schemaType,
-        jsonPayload: itemJson,
-      ) as T;
-    }
+        // For ContentItem, we already have UnknownContentItem
+        if (T == ContentItem) {
+          return UnknownContentItem(
+            missingSchemaType: schemaType,
+            jsonPayload: itemJson,
+          ) as T;
+        }
 
-    // For other types, use the factory method approach
-    final unknownPlaceholder = _unknownPlaceholderFactory?.call(T, schemaType, itemJson);
+        // For other types, use the factory method approach
+        final unknownPlaceholder =
+            _unknownPlaceholderFactory?.call(T, schemaType, itemJson);
 
-    if (unknownPlaceholder != null) {
-      return unknownPlaceholder as T;
-    }
+        if (unknownPlaceholder != null) {
+          return unknownPlaceholder as T;
+        }
 
-    // In debug mode, provide helpful error message
-    if (kDebugMode) {
-      print(_missingTypeRegistrationMessage<T>(schemaType));
-    }
+        // In debug mode, provide helpful error message
+        if (kDebugMode) {
+          print(_missingTypeRegistrationMessage<T>(schemaType));
+        }
 
-    // If no placeholder could be created, we have to skip this item
-    return null;
-  }).where((item) => item != null).cast<T>().toList(growable: false);
+        // If no placeholder could be created, we have to skip this item
+        return null;
+      })
+      .where((item) => item != null)
+      .cast<T>()
+      .toList(growable: false);
 }
 
 /// Reads a value from a JSON object using the provided key.
@@ -157,7 +164,6 @@ List<T>? listFromJson<T extends SchemaItem>(dynamic json) {
 Object? readValue(dynamic json, String key) {
   return VyuhBinding.instance.content.provider.fieldValue(key, json);
 }
-
 
 /// Creates an error message for missing type registration.
 ///

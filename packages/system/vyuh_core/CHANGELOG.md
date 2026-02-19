@@ -1,3 +1,7 @@
+## 1.52.0
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.
+
 ## 1.51.0
 
  - **FEAT**: pubspec updates.

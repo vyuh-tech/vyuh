@@ -21,7 +21,8 @@ final class UnknownActionConfiguration extends ActionConfiguration {
   }) : super(schemaType: schemaName);
 
   @override
-  Future<void> execute(BuildContext context, {Map<String, dynamic>? arguments}) async {
+  Future<void> execute(BuildContext context,
+      {Map<String, dynamic>? arguments}) async {
     // No-op execution - the visual feedback is already shown during deserialization
     // This prevents the action from actually doing anything harmful
   }
@@ -52,7 +53,8 @@ final class UnknownConditionConfiguration extends ConditionConfiguration {
 /// Unknown layout configuration placeholder.
 ///
 /// Used when a LayoutConfiguration type cannot be resolved during deserialization.
-final class UnknownLayoutConfiguration<T extends ContentItem> extends LayoutConfiguration<T> {
+final class UnknownLayoutConfiguration<T extends ContentItem>
+    extends LayoutConfiguration<T> {
   static const schemaName = 'vyuh.unknown.layout';
 
   final String missingSchemaType;
@@ -83,7 +85,8 @@ final class UnknownLayoutConfiguration<T extends ContentItem> extends LayoutConf
 /// Unknown content modifier configuration placeholder.
 ///
 /// Used when a ContentModifierConfiguration type cannot be resolved during deserialization.
-final class UnknownContentModifierConfiguration extends ContentModifierConfiguration {
+final class UnknownContentModifierConfiguration
+    extends ContentModifierConfiguration {
   static const schemaName = 'vyuh.unknown.modifier';
 
   final String missingSchemaType;

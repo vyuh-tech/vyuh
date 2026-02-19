@@ -47,7 +47,8 @@ final class CreateCommand extends Command<int> {
   String get summary => '$invocation\n$description';
 
   @override
-  String get description => 'Creates Vyuh projects, features, content items, and CMS schemas.';
+  String get description =>
+      'Creates Vyuh projects, features, content items, and CMS schemas.';
 
   @override
   String get name => 'create';

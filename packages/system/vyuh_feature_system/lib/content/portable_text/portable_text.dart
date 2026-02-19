@@ -219,6 +219,17 @@ final class _PortableTextContentBuilder
   void init(List<ContentDescriptor> descriptors) {
     super.init(descriptors);
 
+    _registerPortableTextTypes(descriptors);
+  }
+
+  @override
+  void addDescriptors(List<ContentDescriptor> descriptors) {
+    super.addDescriptors(descriptors);
+
+    _registerPortableTextTypes(descriptors);
+  }
+
+  void _registerPortableTextTypes(List<ContentDescriptor> descriptors) {
     final pDescriptors = descriptors.cast<PortableTextDescriptor>();
 
     // Blocks

@@ -11,8 +11,8 @@ class UnknownContentDetector {
   static bool hasUnknownActions(vyuh_action.Action? action) {
     if (action?.configurations == null) return false;
 
-    return action!.configurations!.any((config) =>
-        config is UnknownActionConfiguration);
+    return action!.configurations!
+        .any((config) => config is UnknownActionConfiguration);
   }
 
   /// Checks if a list of actions contains any unknown action configurations.
@@ -30,8 +30,8 @@ class UnknownContentDetector {
     final modifiers = contentItem.getModifiers();
     if (modifiers == null) return false;
 
-    return modifiers.any((modifier) =>
-        modifier is UnknownContentModifierConfiguration);
+    return modifiers
+        .any((modifier) => modifier is UnknownContentModifierConfiguration);
   }
 
   /// Checks if a content item has an unknown layout.
@@ -48,9 +48,10 @@ class UnknownContentDetector {
     LayoutConfiguration? layout,
   }) {
     return hasUnknownModifiers(contentItem) ||
-           hasUnknownLayout(layout ?? contentItem.layout) ||
-           hasUnknownActionsInList(additionalActions) ||
-           additionalConditions.any((condition) => hasUnknownConditions(condition));
+        hasUnknownLayout(layout ?? contentItem.layout) ||
+        hasUnknownActionsInList(additionalActions) ||
+        additionalConditions
+            .any((condition) => hasUnknownConditions(condition));
   }
 }
 
@@ -197,7 +198,7 @@ class _UnknownContentWrapper extends StatelessWidget {
       builder: (dialogContext) => AlertDialog(
         backgroundColor: Colors.red.shade50,
         icon: Icon(Icons.warning_amber_rounded,
-                  color: Colors.red.shade700, size: 48),
+            color: Colors.red.shade700, size: 48),
         title: Text(
           'Unknown Content Detected',
           style: TextStyle(color: Colors.red.shade900),
@@ -217,52 +218,53 @@ class _UnknownContentWrapper extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               ...issues.map((issue) => Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Icon(
-                      issue.icon,
-                      color: Colors.red.shade700,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            issue.type,
-                            style: TextStyle(
-                              color: Colors.red.shade800,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.only(top: 2),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6, vertical: 2),
-                            decoration: BoxDecoration(
-                              color: Colors.red.shade100,
-                              borderRadius: BorderRadius.circular(3),
-                              border: Border.all(color: Colors.red.shade300),
-                            ),
-                            child: Text(
-                              issue.schemaType,
-                              style: TextStyle(
-                                fontFamily: 'monospace',
-                                color: Colors.red.shade900,
-                                fontSize: 11,
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          issue.icon,
+                          color: Colors.red.shade700,
+                          size: 16,
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                issue.type,
+                                style: TextStyle(
+                                  color: Colors.red.shade800,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13,
+                                ),
                               ),
-                            ),
+                              Container(
+                                margin: const EdgeInsets.only(top: 2),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 6, vertical: 2),
+                                decoration: BoxDecoration(
+                                  color: Colors.red.shade100,
+                                  borderRadius: BorderRadius.circular(3),
+                                  border:
+                                      Border.all(color: Colors.red.shade300),
+                                ),
+                                child: Text(
+                                  issue.schemaType,
+                                  style: TextStyle(
+                                    fontFamily: 'monospace',
+                                    color: Colors.red.shade900,
+                                    fontSize: 11,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )),
+                  )),
               const SizedBox(height: 12),
               Text(
                 'Register TypeDescriptors for these schema types to fix.',
@@ -306,7 +308,8 @@ class _UnknownContentWrapper extends StatelessWidget {
     // Check conditions
     for (final condition in conditions.where((c) => c != null)) {
       if (condition!.configuration is UnknownConditionConfiguration) {
-        final unknown = condition.configuration as UnknownConditionConfiguration;
+        final unknown =
+            condition.configuration as UnknownConditionConfiguration;
         issues.add(_UnknownIssue(
           type: 'Unknown Condition',
           schemaType: unknown.missingSchemaType,

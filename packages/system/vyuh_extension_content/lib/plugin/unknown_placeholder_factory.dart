@@ -51,7 +51,6 @@ SchemaItem? createUnknownPlaceholder(
   return null;
 }
 
-
 /// Initializes the unknown placeholder factory for the serialization system.
 /// This should be called during app initialization.
 void initializeUnknownPlaceholderFactory() {

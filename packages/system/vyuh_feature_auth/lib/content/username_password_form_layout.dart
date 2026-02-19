@@ -19,7 +19,8 @@ final class DefaultUsernamePasswordFormLayout
   DefaultUsernamePasswordFormLayout()
       : super(schemaType: typeDescriptor.schemaType);
 
-  factory DefaultUsernamePasswordFormLayout.fromJson(Map<String, dynamic> json) =>
+  factory DefaultUsernamePasswordFormLayout.fromJson(
+          Map<String, dynamic> json) =>
       _$DefaultUsernamePasswordFormLayoutFromJson(json);
 
   @override

@@ -37,6 +37,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   Future<void>? featureReady(String featureName) => _readyFeatures[featureName];
 
   final FeaturesBuilder _featuresBuilder;
+  final LazyFeaturesBuilder? _lazyFeaturesBuilder;
+  late final _LazyFeatureManager _lazyFeatureManager;
 
   @override
   List<Plugin> get plugins => VyuhBinding.instance.plugins;
@@ -46,13 +48,16 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   _DefaultVyuhPlatform({
     required FeaturesBuilder featuresBuilder,
+    LazyFeaturesBuilder? lazyFeaturesBuilder,
     required PluginDescriptor pluginDescriptor,
     required PlatformWidgetBuilder widgetBuilder,
     this.initialLocation,
   })  : _featuresBuilder = featuresBuilder,
+        _lazyFeaturesBuilder = lazyFeaturesBuilder,
         _pluginDescriptor = pluginDescriptor,
         _widgetBuilder = widgetBuilder {
     _tracker = _PlatformInitTracker(this);
+    _lazyFeatureManager = _LazyFeatureManager(this);
   }
 
   @override
@@ -76,6 +81,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     _features.clear();
     _readyFeatures.clear();
     _featureExtensionBuilderMap.clear();
+    _lazyFeatureManager.reset();
     _userInitialLocation = '';
   }
 
@@ -120,7 +126,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         _readyFeatures.clear();
         _features = await _featuresBuilder();
 
-        // Ensure feature names are unique
+        // Register lazy features
+        final lazyFeatures = _lazyFeaturesBuilder?.call() ?? [];
+        _lazyFeatureManager.reset();
+        _lazyFeatureManager.registerLazyFeatures(lazyFeatures);
+
+        // Ensure feature names are unique across eager and lazy features
         final featureNames = <String>{};
         for (final feature in _features) {
           if (featureNames.contains(feature.name)) {
@@ -130,6 +141,17 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
             featureNames.add(feature.name);
           }
         }
+        for (final lazy in lazyFeatures) {
+          if (featureNames.contains(lazy.name)) {
+            throw StateError(
+                'Lazy feature name "${lazy.name}" is not unique. Ensure only uniquely named features are included.');
+          } else {
+            featureNames.add(lazy.name);
+          }
+        }
+
+        // Topologically sort eager features by dependencies
+        _features = _topologicalSort(_features);
 
         final initFns =
             _features.map((feature) => telemetry.trace<List<g.RouteBase>>(
@@ -159,13 +181,17 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           fn: (_) async {
             final allRoutes = await Future.wait(initFns, eagerError: true);
 
-            return _initRouter(
-              allRoutes
+            // Build placeholder routes for lazy features
+            final placeholderRoutes =
+                _lazyFeatureManager.buildPlaceholderRoutes();
+
+            return _initRouter([
+              ...allRoutes
                   .where((routes) => routes != null)
                   .cast<List<g.RouteBase>>()
-                  .expand((routes) => routes)
-                  .toList(),
-            );
+                  .expand((routes) => routes),
+              ...placeholderRoutes,
+            ]);
           },
         );
       },
@@ -255,6 +281,110 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
             builder.init(extensions[entry.key] ?? <ExtensionDescriptor>[]),
       );
     }
+  }
+
+  /// Called by [_LazyFeatureManager] after a feature is loaded.
+  /// Runs the feature's init, registers extensions, and swaps routes.
+  Future<void> _activateLazyFeature(
+    FeatureDescriptor feature,
+    List<String> routePrefixes,
+  ) async {
+    // 1. Run feature's init (DI registrations, etc.)
+    await feature.init?.call();
+    _features.add(feature);
+
+    // 2. Register extensions incrementally
+    _registerLazyExtensions(feature);
+
+    // 3. Get the feature's routes
+    final featureRoutes = await feature.routes?.call() ?? [];
+
+    // 4. Replace placeholder routes with real routes
+    final currentRoutes =
+        router.instance.configuration.routes.toList(growable: true);
+
+    // Remove placeholder routes matching these prefixes
+    currentRoutes.removeWhere((route) {
+      if (route is g.GoRoute) {
+        return routePrefixes.contains(route.path);
+      }
+      return false;
+    });
+
+    // Add real routes and replace
+    router.replaceRoutes([...currentRoutes, ...featureRoutes]);
+
+    // Track readiness
+    _readyFeatures[feature.name] = Future.value();
+  }
+
+  /// Register a lazy feature's extensions incrementally into existing builders.
+  void _registerLazyExtensions(FeatureDescriptor feature) {
+    for (final ext in feature.extensions ?? <ExtensionDescriptor>[]) {
+      ext.setSourceFeature(feature.name);
+
+      final builder = _featureExtensionBuilderMap[ext.runtimeType];
+      if (builder != null) {
+        builder.registerLazy(ext);
+      }
+    }
+  }
+
+  /// Topologically sort features based on their [FeatureDescriptor.dependencies].
+  static List<FeatureDescriptor> _topologicalSort(
+      List<FeatureDescriptor> features) {
+    // If no features have dependencies, return as-is (common case)
+    if (features.every((f) => f.dependencies.isEmpty)) {
+      return features;
+    }
+
+    final featureMap = {for (final f in features) f.name: f};
+    final sorted = <FeatureDescriptor>[];
+    final visited = <String>{};
+    final visiting = <String>{}; // cycle detection
+
+    void visit(String name) {
+      if (visited.contains(name)) return;
+      if (visiting.contains(name)) {
+        throw StateError(
+            'Circular dependency detected involving feature: $name');
+      }
+
+      visiting.add(name);
+      final feature = featureMap[name];
+      if (feature != null) {
+        for (final dep in feature.dependencies) {
+          visit(dep);
+        }
+        sorted.add(feature);
+      }
+      visiting.remove(name);
+      visited.add(name);
+    }
+
+    for (final feature in features) {
+      visit(feature.name);
+    }
+
+    return sorted;
+  }
+
+  @override
+  bool isFeatureLoaded(String featureName) {
+    // Check eager features
+    if (_features.any((f) => f.name == featureName)) return true;
+
+    // Check lazy features
+    return _lazyFeatureManager.isLoaded(featureName);
+  }
+
+  @override
+  Future<void> loadFeature(String featureName) async {
+    // Already loaded as eager feature
+    if (_features.any((f) => f.name == featureName)) return;
+
+    // Load lazy feature
+    await _lazyFeatureManager.loadFeature(featureName);
   }
 
   @override

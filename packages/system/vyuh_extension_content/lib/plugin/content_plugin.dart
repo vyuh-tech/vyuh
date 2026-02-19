@@ -41,7 +41,8 @@ final class DefaultContentPlugin extends ContentPlugin {
       final failure = ContentItemFailure(
         schemaType: content.missingSchemaType,
         jsonPayload: content.jsonPayload,
-        description: 'No ContentItem registration found for schema type: ${content.missingSchemaType}',
+        description:
+            'No ContentItem registration found for schema type: ${content.missingSchemaType}',
         suggestions: [
           'Register a TypeDescriptor for ${content.missingSchemaType}',
           'Check if the content type is properly exported',

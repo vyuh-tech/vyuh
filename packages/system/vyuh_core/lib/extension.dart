@@ -73,6 +73,11 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
   @protected
   Future<void> onDispose() async {}
 
+  /// Registers extensions from a lazily-loaded feature.
+  /// Override in subclasses that support incremental registration.
+  /// By default this is a no-op.
+  void registerLazy(ExtensionDescriptor descriptor) {}
+
   /// Initializes the extension.
   @nonVirtual
   Future<void> init(List<ExtensionDescriptor> extensions) async {

@@ -49,6 +49,12 @@ final class _UninitializedPlatform extends VyuhPlatform {
 
   @override
   PlatformWidgetBuilder get widgetBuilder => throw _error();
+
+  @override
+  bool isFeatureLoaded(String featureName) => throw _error();
+
+  @override
+  Future<void> loadFeature(String featureName) => throw _error();
 }
 
 Never _error() => throw StateError(

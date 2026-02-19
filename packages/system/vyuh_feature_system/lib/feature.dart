@@ -162,7 +162,6 @@ final descriptor = ContentExtensionDescriptor(
     Group.contentBuilder,
     Conditional.contentBuilder,
     ConditionalRoute.contentBuilder,
-
     Empty.contentBuilder,
     PortableTextContent.contentBuilder,
     Divider.contentBuilder,

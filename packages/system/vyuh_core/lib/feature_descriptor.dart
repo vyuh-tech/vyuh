@@ -37,6 +37,11 @@ final class FeatureDescriptor {
   /// The list of extension builders exposed by this feature.
   final List<ExtensionBuilder>? extensionBuilders;
 
+  /// Optional list of feature names that must be initialized before this feature.
+  /// Used for ordering during initialization. If empty (the default),
+  /// no ordering constraint is applied.
+  final List<String> dependencies;
+
   final RouteBuilderFunction _routes;
 
   /// The routes for the feature.
@@ -53,6 +58,7 @@ final class FeatureDescriptor {
     required RouteBuilderFunction routes,
     this.extensions,
     this.extensionBuilders,
+    this.dependencies = const [],
   }) : _routes = _runOnce(routes) {
     // Set the source feature in all extension builders
     for (final extensionBuilder in extensionBuilders ?? <ExtensionBuilder>[]) {
