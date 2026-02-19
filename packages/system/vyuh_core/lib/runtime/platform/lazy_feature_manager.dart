@@ -241,6 +241,5 @@ class _FeatureDisabledException implements Exception {
   });
 
   @override
-  String toString() =>
-      'Feature "$featureName" is disabled (flag: "$flagName")';
+  String toString() => 'Feature "$featureName" is disabled (flag: "$flagName")';
 }

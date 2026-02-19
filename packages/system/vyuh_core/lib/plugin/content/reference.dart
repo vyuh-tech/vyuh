@@ -4,10 +4,10 @@ import 'package:vyuh_core/vyuh_core.dart';
 part 'reference.g.dart';
 
 /// A reference to an image asset in the content management system.
-/// 
+///
 /// This class represents an image reference that can be used in content models.
 /// It supports both direct asset references and Sanity-specific image assets.
-/// 
+///
 /// Example:
 /// ```dart
 /// final imageRef = ImageReference(
@@ -36,10 +36,10 @@ class ImageReference {
 }
 
 /// A reference to a file asset in the content management system.
-/// 
+///
 /// This class represents a file reference that can be used in content models.
 /// It supports file assets like PDFs, documents, or other binary files.
-/// 
+///
 /// Example:
 /// ```dart
 /// final fileRef = FileReference(
@@ -64,14 +64,14 @@ class FileReference {
 }
 
 /// A reference to any content object in the content management system.
-/// 
+///
 /// This class represents a generic reference to any content item. It is used
 /// to establish relationships between content items, such as references to
 /// images, files, or other content types.
-/// 
+///
 /// The [type] field indicates the type of reference (e.g., 'reference', 'image').
 /// The [ref] field contains the unique identifier of the referenced content.
-/// 
+///
 /// Example:
 /// ```dart
 /// final ref = ObjectReference(
