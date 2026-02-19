@@ -1,3 +1,7 @@
+## 1.45.0
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.
+
 ## 1.44.0
 
  - **FEAT**: update dependencies and remove unused configurations.

@@ -21,8 +21,8 @@ dependencies:
     sdk: flutter
   go_router: ^17.0.0
   collection: ^1.18.0
-  vyuh_core: ^1.51.0
-  vyuh_extension_content: ^1.30.0
+  vyuh_core: ^1.52.0
+  vyuh_extension_content: ^1.31.0
 
 dev_dependencies:
   flutter_test:

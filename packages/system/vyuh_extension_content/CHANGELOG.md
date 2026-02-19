@@ -1,3 +1,7 @@
+## 1.31.0
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.
+
 ## 1.30.0
 
  - **FEAT**: replace `UnknownContentBuilder` with `UnknownContentIndicator`, add comprehensive unknown type handling.
