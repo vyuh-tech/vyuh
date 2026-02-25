@@ -31,13 +31,13 @@
     "@vyuh/sanity-schema-core": "^2.0.6",
     "@vyuh/sanity-schema-system": "^2.0.6",
     "react-icons": "^5.5.0",
-    "sanity": "^5.10.0"
+    "sanity": "^5.12.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "@typescript-eslint/parser": "^8.56.0",
-    "eslint": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.56.1",
+    "@typescript-eslint/parser": "^8.56.1",
+    "eslint": "^10.0.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   },

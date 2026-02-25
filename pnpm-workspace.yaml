@@ -2,3 +2,7 @@ packages:
   - apps/*
   - schemas/*
   - examples/*/*
+
+onlyBuiltDependencies:
+  - '@swc/core'
+  - esbuild
