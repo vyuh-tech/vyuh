@@ -1,3 +1,8 @@
+## 1.46.0
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting ([#55](https://github.com/vyuh-tech/vyuh/issues/55)).
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.
+
 ## 1.45.0
 
  - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.

@@ -1,3 +1,7 @@
+## 0.0.14
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting ([#55](https://github.com/vyuh-tech/vyuh/issues/55)).
+
 ## 0.0.13
 
  - **FEAT**: pubspec updates.

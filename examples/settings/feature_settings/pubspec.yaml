@@ -13,8 +13,8 @@ dependencies:
     sdk: flutter
   go_router: ^17.0.0
   json_annotation: ^4.8.1
-  vyuh_core: ^1.52.0
-  vyuh_feature_system: ^1.45.0
+  vyuh_core: ^1.53.0
+  vyuh_feature_system: ^1.46.0
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
 

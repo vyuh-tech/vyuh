@@ -1,7 +1,7 @@
 name: vyuh_plugin_storage_secure
 resolution: workspace
 description: A secure storage plugin for Vyuh using flutter_secure_storage for encrypted data storage across platforms
-version: 1.5.0
+version: 1.6.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/plugins/vyuh_plugin_storage_secure
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vyuh_core: ^1.52.0
+  vyuh_core: ^1.53.0
   flutter_secure_storage: ^10.0.0
 
 dev_dependencies:

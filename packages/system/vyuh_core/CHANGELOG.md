@@ -1,3 +1,9 @@
+## 1.53.0
+
+ - **FEAT**(auth): add refreshSession method to support token refresh logic.
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting ([#55](https://github.com/vyuh-tech/vyuh/issues/55)).
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.
+
 ## 1.52.0
 
  - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting.

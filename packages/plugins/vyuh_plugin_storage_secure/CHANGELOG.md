@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**: add support for lazy-loaded features with deferred initialization and web code splitting ([#55](https://github.com/vyuh-tech/vyuh/issues/55)).
+
 ## 1.5.0
 
  - **FEAT**: update dependencies and remove unused configurations.
