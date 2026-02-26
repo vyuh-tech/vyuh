@@ -99,6 +99,14 @@ abstract class AuthPlugin extends Plugin {
   Future<void> logout() =>
       Future.error(UnimplementedError(_errorMessage('logout()')));
 
+  /// Attempts to refresh the current session token.
+  ///
+  /// Called by the network layer when a 401 is received, giving the auth
+  /// plugin a chance to refresh the token before the caller retries.
+  /// Returns `true` if the token was successfully refreshed.
+  /// Default implementation returns `false` (no refresh support).
+  Future<bool> refreshSession() => Future.value(false);
+
   /// Deletes the current user account.
   Future<void> deleteAccount() =>
       Future.error(UnimplementedError(_errorMessage('deleteAccount()')));
