@@ -7,6 +7,9 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   /// We only track this to pass it on to [VyuhBinding]
   final PlatformWidgetBuilder _widgetBuilder;
 
+  /// The app runner that controls how the app is launched.
+  final AppRunner _appRunner;
+
   final Map<Type, ExtensionBuilder> _featureExtensionBuilderMap = {};
 
   /// Initialize first time to avoid any late-init errors.
@@ -51,11 +54,13 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     LazyFeaturesBuilder? lazyFeaturesBuilder,
     required PluginDescriptor pluginDescriptor,
     required PlatformWidgetBuilder widgetBuilder,
+    required AppRunner appRunner,
     this.initialLocation,
   })  : _featuresBuilder = featuresBuilder,
         _lazyFeaturesBuilder = lazyFeaturesBuilder,
         _pluginDescriptor = pluginDescriptor,
-        _widgetBuilder = widgetBuilder {
+        _widgetBuilder = widgetBuilder,
+        _appRunner = appRunner {
     _tracker = _PlatformInitTracker(this);
     _lazyFeatureManager = _LazyFeatureManager(this);
   }
@@ -67,7 +72,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
-    flutter.runApp(const _FrameworkInitView());
+    _appRunner(const _FrameworkInitView());
   }
 
   @override
