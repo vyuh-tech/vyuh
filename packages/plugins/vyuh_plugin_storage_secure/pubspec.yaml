@@ -19,7 +19,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vyuh_core: ^1.53.0
+  vyuh_core: ^1.54.0
   flutter_secure_storage: ^10.0.0
 
 dev_dependencies:

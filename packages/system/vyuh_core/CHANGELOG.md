@@ -1,3 +1,7 @@
+## 1.54.0
+
+ - **FEAT**(vyuh_core): introduce configurable AppRunner for customized app launch.
+
 ## 1.53.0
 
  - **FEAT**(auth): add refreshSession method to support token refresh logic.
