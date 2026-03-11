@@ -23,7 +23,7 @@ dependencies:
   flutter_form_builder: ^10.0.1
   form_builder_validators: ^11.1.2
   async: ^2.11.0
-  font_awesome_flutter: ^10.8.0
+  font_awesome_flutter: ^11.0.0
   intl: ^0.20.2
 
 dev_dependencies:

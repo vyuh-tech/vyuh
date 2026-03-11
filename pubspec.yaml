@@ -4,6 +4,7 @@ publish_to: none
 workspace:
   - packages/plugins/vyuh_plugin_storage_hive
   - packages/plugins/vyuh_plugin_storage_secure
+  - packages/plugins/vyuh_plugin_storage_shared_preferences
   - packages/plugins/vyuh_plugin_telemetry_provider_console
   - packages/sanity/flutter_sanity_portable_text
   - packages/sanity/sanity_client
