@@ -35,7 +35,10 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
                 title: 'Failed to load app',
                 error: vyuh.tracker.error,
               );
-        final pendingApp = MaterialApp(home: child);
+        final pendingApp = MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: child,
+        );
 
         return AnimatedSwitcher(
           duration: const Duration(milliseconds: 500),
