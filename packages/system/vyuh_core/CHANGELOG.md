@@ -1,3 +1,7 @@
+## 1.55.0
+
+ - **FEAT**(vyuh_core): disable debug banner in pending app view.
+
 ## 1.54.0
 
  - **FEAT**(vyuh_core): introduce configurable AppRunner for customized app launch.
