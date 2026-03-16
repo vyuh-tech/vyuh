@@ -14,11 +14,18 @@ class PortableTextBlock extends StatelessWidget {
   /// The model representing the block of Portable Text.
   final TextBlockItem model;
 
-  const PortableTextBlock({super.key, required this.model});
+  /// Optional configuration override for this block.
+  ///
+  /// When null, falls back to [PortableTextConfig.shared].
+  /// Use [PortableTextConfig.from] to create a scoped config with
+  /// overrides (e.g. custom [PortableTextConfig.itemPadding]).
+  final PortableTextConfig? config;
+
+  const PortableTextBlock({super.key, required this.model, this.config});
 
   @override
   Widget build(final BuildContext context) {
-    final config = PortableTextConfig.shared;
+    final config = this.config ?? PortableTextConfig.shared;
 
     final spans = model.children
         .map((final span) => _buildInlineSpan(span, Theme.of(context), context))
