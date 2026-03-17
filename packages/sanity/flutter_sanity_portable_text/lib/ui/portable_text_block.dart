@@ -17,7 +17,7 @@ class PortableTextBlock extends StatelessWidget {
   /// Optional configuration override for this block.
   ///
   /// When null, falls back to [PortableTextConfig.shared].
-  /// Use [PortableTextConfig.from] to create a scoped config with
+  /// Use [PortableTextConfig.copyWith] to create a scoped config with
   /// overrides (e.g. custom [PortableTextConfig.itemPadding]).
   final PortableTextConfig? config;
 

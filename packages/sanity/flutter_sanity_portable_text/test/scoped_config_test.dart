@@ -7,14 +7,14 @@ void main() {
     PortableTextConfig.shared.reset();
   });
 
-  group('PortableTextConfig.from', () {
+  group('PortableTextConfig.copyWith', () {
     test('copies all values from source by default', () {
       PortableTextConfig.shared.apply(
         itemPadding: const EdgeInsets.all(16),
         listIndent: 32,
       );
 
-      final scoped = PortableTextConfig.from(PortableTextConfig.shared);
+      final scoped = PortableTextConfig.shared.copyWith();
 
       expect(scoped.itemPadding, const EdgeInsets.all(16));
       expect(scoped.listIndent, 32);
@@ -29,8 +29,7 @@ void main() {
         itemPadding: const EdgeInsets.only(bottom: 8),
       );
 
-      final scoped = PortableTextConfig.from(
-        PortableTextConfig.shared,
+      final scoped = PortableTextConfig.shared.copyWith(
         itemPadding: EdgeInsets.zero,
       );
 
@@ -40,8 +39,7 @@ void main() {
     });
 
     test('overrides listIndent when specified', () {
-      final scoped = PortableTextConfig.from(
-        PortableTextConfig.shared,
+      final scoped = PortableTextConfig.shared.copyWith(
         listIndent: 40,
       );
 
@@ -55,8 +53,7 @@ void main() {
       final originalPadding = original.itemPadding;
       final originalIndent = original.listIndent;
 
-      PortableTextConfig.from(
-        original,
+      original.copyWith(
         itemPadding: const EdgeInsets.all(99),
         listIndent: 99,
       );
@@ -71,8 +68,7 @@ void main() {
         (WidgetTester tester) async {
       PortableTextConfig.shared.itemPadding = const EdgeInsets.only(bottom: 10);
 
-      final scoped = PortableTextConfig.from(
-        PortableTextConfig.shared,
+      final scoped = PortableTextConfig.shared.copyWith(
         itemPadding: EdgeInsets.zero,
       );
 
@@ -107,8 +103,7 @@ void main() {
     testWidgets(
         'scoped config with zero padding in Row enables correct center alignment',
         (WidgetTester tester) async {
-      final scoped = PortableTextConfig.from(
-        PortableTextConfig.shared,
+      final scoped = PortableTextConfig.shared.copyWith(
         itemPadding: EdgeInsets.zero,
       );
 
