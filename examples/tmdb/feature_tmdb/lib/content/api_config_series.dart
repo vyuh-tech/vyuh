@@ -119,7 +119,7 @@ final class ApiSeriesConfigsSection
     }
   }
 
-  _getResourceType(BuildContext context) {
+  SeriesListType? _getResourceType(BuildContext context) {
     SeriesListType? type = resourceType;
     if (resourceType == SeriesListType.bySelectedList) {
       type = GoRouterState.of(context).seriesListType();

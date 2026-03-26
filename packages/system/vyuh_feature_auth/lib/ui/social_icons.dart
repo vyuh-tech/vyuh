@@ -4,11 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class SocialIcons {
   SocialIcons._();
 
-  static const IconData twitter = FontAwesomeIcons.xTwitter;
-  static const IconData meta = FontAwesomeIcons.meta;
-  static const IconData apple = FontAwesomeIcons.apple;
-  static const IconData google = FontAwesomeIcons.google;
-  static const IconData github = FontAwesomeIcons.github;
-  static const IconData microsoft = FontAwesomeIcons.microsoft;
-  static const IconData linkedIn = FontAwesomeIcons.linkedin;
+  static final IconData twitter = FontAwesomeIcons.xTwitter.data;
+  static final IconData meta = FontAwesomeIcons.meta.data;
+  static final IconData apple = FontAwesomeIcons.apple.data;
+  static final IconData google = FontAwesomeIcons.google.data;
+  static final IconData github = FontAwesomeIcons.github.data;
+  static final IconData microsoft = FontAwesomeIcons.microsoft.data;
+  static final IconData linkedIn = FontAwesomeIcons.linkedin.data;
 }

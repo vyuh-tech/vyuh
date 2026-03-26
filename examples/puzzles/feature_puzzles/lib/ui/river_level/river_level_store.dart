@@ -66,7 +66,7 @@ class RiverLevelStore {
     });
   }
 
-  void _gameListener(event) {
+  void _gameListener(int event) {
     if (isEnded) {
       debugPrint('Game ended');
       return;

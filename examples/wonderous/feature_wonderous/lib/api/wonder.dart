@@ -81,7 +81,7 @@ final class Wonder implements DocumentItem {
 
   factory Wonder.fromJson(Map<String, dynamic> json) => _$WonderFromJson(json);
 
-  static colorFromJson(String value) {
+  static Color colorFromJson(String value) {
     final hex = int.tryParse(value, radix: 16) ?? 0;
     return Color(hex);
   }

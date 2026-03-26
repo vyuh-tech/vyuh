@@ -173,29 +173,29 @@ extension IdExtraction on go.GoRouterState {
 }
 
 final class TmdbPath {
-  static movieDetails(int id) => '/tmdb/home/movie/$id';
-  static seriesDetails(int id) => '/tmdb/home/series/$id';
+  static String movieDetails(int id) => '/tmdb/home/movie/$id';
+  static String seriesDetails(int id) => '/tmdb/home/series/$id';
 
-  static movieCastList(int id) => '/tmdb/home/movie/$id/cast';
-  static seriesCastList(int id) => '/tmdb/home/series/$id/cast';
+  static String movieCastList(int id) => '/tmdb/home/movie/$id/cast';
+  static String seriesCastList(int id) => '/tmdb/home/series/$id/cast';
 
-  static movieCrewList(int id) => '/tmdb/home/movie/$id/crew';
-  static seriesCrewList(int id) => '/tmdb/home/series/$id/crew';
+  static String movieCrewList(int id) => '/tmdb/home/movie/$id/crew';
+  static String seriesCrewList(int id) => '/tmdb/home/series/$id/crew';
 
-  static movieReviewsList(int id) => '/tmdb/home/movie/$id/reviews';
-  static seriesReviewsList(int id) => '/tmdb/home/series/$id/reviews';
+  static String movieReviewsList(int id) => '/tmdb/home/movie/$id/reviews';
+  static String seriesReviewsList(int id) => '/tmdb/home/series/$id/reviews';
 
-  static movieRecommendationList(int id) => '/tmdb/home/movie/$id/similar';
-  static seriesRecommendationList(int id) => '/tmdb/home/series/$id/similar';
+  static String movieRecommendationList(int id) => '/tmdb/home/movie/$id/similar';
+  static String seriesRecommendationList(int id) => '/tmdb/home/series/$id/similar';
 
-  static movieList(MovieListType type) => '/tmdb/home/movie/${type.name}';
-  static seriesList(SeriesListType type) => '/tmdb/home/series/${type.name}';
+  static String movieList(MovieListType type) => '/tmdb/home/movie/${type.name}';
+  static String seriesList(SeriesListType type) => '/tmdb/home/series/${type.name}';
 
-  static seriesGenres(int id) => '/tmdb/search/series/genres/$id';
-  static movieGenres(int id) => '/tmdb/search/movie/genres/$id';
+  static String seriesGenres(int id) => '/tmdb/search/series/genres/$id';
+  static String movieGenres(int id) => '/tmdb/search/movie/genres/$id';
 
-  static watchlist() => '/tmdb/watchlist';
-  static personDetails(int id) => '/tmdb/person/$id';
-  static movie() => '/tmdb/movie';
-  static series() => '/tmdb/series';
+  static String watchlist() => '/tmdb/watchlist';
+  static String personDetails(int id) => '/tmdb/person/$id';
+  static String movie() => '/tmdb/movie';
+  static String series() => '/tmdb/series';
 }

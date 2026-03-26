@@ -21,7 +21,7 @@ final class FlutterCommand extends CliCommand {
     await _applyOverrides(context, appName);
   }
 
-  _createProject(
+  Future<void> _createProject(
     HookContext context,
     String name,
     String description,
@@ -47,7 +47,7 @@ final class FlutterCommand extends CliCommand {
         ),
       );
 
-  _addPackages(HookContext context, String name, String appName) =>
+  Future<void> _addPackages(HookContext context, String name, String appName) =>
       trackOperation(
         context,
         startMessage: path.normalize('Adding Flutter packages @ apps/$appName'),
@@ -75,7 +75,7 @@ final class FlutterCommand extends CliCommand {
         ),
       );
 
-  _applyOverrides(HookContext context, String appName) => trackOperation(
+  Future<void> _applyOverrides(HookContext context, String appName) => trackOperation(
         context,
         startMessage: 'Updating Flutter project',
         endMessage: 'Flutter project updated',
@@ -85,7 +85,7 @@ final class FlutterCommand extends CliCommand {
         },
       );
 
-  _updateYaml(String appName) async {
+  Future<void> _updateYaml(String appName) async {
     final pubspec = File.fromUri(
       Uri.parse('./$appName/apps/$appName/pubspec.yaml'),
     );
@@ -129,7 +129,7 @@ final class FlutterCommand extends CliCommand {
     await pubspec.writeAsString(editor.toString());
   }
 
-  _finalizeOverrides(HookContext context, String appName) async {
+  Future<void> _finalizeOverrides(HookContext context, String appName) async {
     await copyPath('./$appName/overrides', './$appName/apps/$appName');
 
     // Clear out the test file

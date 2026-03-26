@@ -119,7 +119,7 @@ final class ApiMovieConfigsSection
     }
   }
 
-  _getResourceType(BuildContext context) {
+  MovieListType? _getResourceType(BuildContext context) {
     MovieListType? type = resourceType;
     if (resourceType == MovieListType.bySelectedList) {
       type = GoRouterState.of(context).movieListType();

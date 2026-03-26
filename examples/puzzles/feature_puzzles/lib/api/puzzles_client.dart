@@ -20,7 +20,7 @@ final class PuzzleClient {
     return _levelFutures[id]!;
   }
 
-  clearCache() {
+  void clearCache() {
     _levelFutures.clear();
   }
 }

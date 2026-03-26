@@ -10,7 +10,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 enum BrowseMode { movies, series }
 
 extension BrowseModeExt on BrowseMode {
-  get isMovieMode => this == BrowseMode.movies;
+  bool get isMovieMode => this == BrowseMode.movies;
 
   int? selectedId(BuildContext context) => isMovieMode
       ? GoRouterState.of(context).movieId()
@@ -27,7 +27,7 @@ final class TMDBStore {
     return _futures[key];
   }
 
-  selectMovie(int id) {
+  void selectMovie(int id) {
     final client = vyuh.di.get<TMDBClient>();
 
     _fetchMovieInfo(
@@ -85,7 +85,7 @@ final class TMDBStore {
     return _futures[key] as ObservableFuture<ListResponse<MovieShortInfo>>;
   }
 
-  get isMoviesMode => mode.value == BrowseMode.movies;
+  bool get isMoviesMode => mode.value == BrowseMode.movies;
 
   void toggleBrowseMode() {
     runInAction(() {
@@ -95,7 +95,7 @@ final class TMDBStore {
     });
   }
 
-  selectSeries(int id) {
+  void selectSeries(int id) {
     final client = vyuh.di.get<TMDBClient>();
 
     _fetchSeriesInfo(
@@ -154,7 +154,7 @@ final class TMDBStore {
     return _futures[key] as ObservableFuture<ListResponse<SeriesShortInfo>>;
   }
 
-  _fetchMovieInfo(
+  Future<void> _fetchMovieInfo(
     int id,
     String key,
     Future<dynamic> Function(int id) fetch,
@@ -167,7 +167,7 @@ final class TMDBStore {
     _futures[key] = future.asObservable();
   }
 
-  _fetchSeriesInfo(
+  Future<void> _fetchSeriesInfo(
     int id,
     String key,
     Future<dynamic> Function(int id) fetch,
@@ -207,7 +207,7 @@ final class TMDBStore {
     });
   }
 
-  _fetchPersonInfo(
+  Future<void> _fetchPersonInfo(
     int id,
     String key,
     Future<dynamic> Function(int id) fetch,
