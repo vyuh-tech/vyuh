@@ -15,10 +15,10 @@
   "license": "FSL",
   "devDependencies": {
     "all-contributors-cli": "^6.26.1",
-    "prettier": "^3.8.1",
-    "typescript": "^5.9.3"
+    "prettier": "^3.8.2",
+    "typescript": "^6.0.2"
   },
   "dependencies": {
-    "@changesets/cli": "^2.29.8"
+    "@changesets/cli": "^2.30.0"
   }
 }
