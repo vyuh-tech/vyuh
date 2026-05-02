@@ -73,6 +73,31 @@ final class PortableTextConfig {
 
   PortableTextConfig._();
 
+  /// Creates a copy of this [PortableTextConfig] but with the given fields
+  /// replaced with new values.
+  ///
+  /// This is useful when you need a scoped configuration for a specific
+  /// [PortableTextBlock] without mutating the global [shared] instance.
+  /// For example, rendering blocks inside a [Row] where the default
+  /// [itemPadding] would throw off cross-axis alignment.
+  PortableTextConfig copyWith({
+    EdgeInsets? itemPadding,
+    double? listIndent,
+    BulletRenderer? bulletRenderer,
+    TextStyle? Function(BuildContext)? baseStyle,
+  }) {
+    final copy = PortableTextConfig._();
+    copy.styles.addAll(styles);
+    copy.blocks.addAll(blocks);
+    copy.blockContainers.addAll(blockContainers);
+    copy.markDefs.addAll(markDefs);
+    copy.baseStyle = baseStyle ?? this.baseStyle;
+    copy.bulletRenderer = bulletRenderer ?? this.bulletRenderer;
+    copy.itemPadding = itemPadding ?? this.itemPadding;
+    copy.listIndent = listIndent ?? this.listIndent;
+    return copy;
+  }
+
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
   void apply({
     final double listIndent = defaultListIndent,
