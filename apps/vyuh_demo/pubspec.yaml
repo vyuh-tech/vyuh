@@ -28,7 +28,7 @@ dependencies:
   vyuh_feature_system: ^1.47.0
   vyuh_feature_developer: ^1.17.0
   vyuh_plugin_content_provider_sanity: ^1.15.0
-  vyuh_feature_auth: ^1.24.0
+  vyuh_feature_auth: ^1.25.0
   vyuh_feature_onboarding: ^1.10.0
   vyuh_plugin_telemetry_provider_console: ^1.4.0
 
