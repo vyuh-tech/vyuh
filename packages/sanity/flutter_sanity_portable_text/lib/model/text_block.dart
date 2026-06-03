@@ -94,6 +94,11 @@ class Span {
       _$SpanFromJson(json);
 }
 
+/// Resolves custom mark deserializers from [PortableTextConfig.shared].
+///
+/// This runs at JSON-parse time with no [BuildContext], so it must read the context-free
+/// [PortableTextConfig.shared] registry rather than a per-subtree config. Mark *styling* is
+/// still resolved per subtree at render time via `PortableTextConfig.of(context)`.
 List<MarkDef> _markDefsFromJson(final List<dynamic> json) {
   final markDefs = PortableTextConfig.shared.markDefs;
 

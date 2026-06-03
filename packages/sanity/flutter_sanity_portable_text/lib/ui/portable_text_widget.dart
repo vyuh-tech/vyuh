@@ -45,6 +45,6 @@ Widget defaultListBuilder(
     itemCount: blocks.length,
     padding: EdgeInsets.zero,
     itemBuilder: (final context, final index) =>
-        PortableTextConfig.shared.buildBlock(context, blocks[index]),
+        PortableTextConfig.of(context).buildBlock(context, blocks[index]),
   );
 }

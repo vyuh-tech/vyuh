@@ -27,7 +27,8 @@ typedef BulletRenderer = InlineSpan Function(BuildContext, TextBlockItem);
 /// configuration can be customized to match the visual design of the app. The default
 /// configuration is based on the Material Design guidelines.
 ///
-/// Note that the configuration is shared across all instances of the [PortableText] widget.
+/// A single global default lives in [shared]; individual subtrees can override the rendering
+/// configuration by wrapping them in a [PortableTextTheme] (resolved via [of]).
 final class PortableTextConfig {
   /// The styles used to render the Portable Text content. The keys are the style names used
   /// in the Portable Text content, such as "h1", "h2", "blockquote", etc. The default styles
@@ -63,15 +64,72 @@ final class PortableTextConfig {
   /// The base style used for rendering the Portable Text content. The default value is the bodyMedium style from the theme.
   TextStyle? Function(BuildContext) baseStyle = defaultBaseStyle;
 
-  /// The shared instance of the PortableTextConfig. This instance is used by all [PortableText] widgets
-  /// in the application. You can customize the configuration by calling the [apply] method.
-  static final PortableTextConfig shared = PortableTextConfig._();
+  /// The default/root configuration, used by [PortableText] widgets when no [PortableTextTheme]
+  /// ancestor provides one (see [of]). It is also the context-free registry consulted at
+  /// JSON-parse time for custom mark deserializers (see `_markDefsFromJson`). You can customize
+  /// it by calling the [apply] method.
+  static final PortableTextConfig shared = PortableTextConfig();
 
   /// The bullet renderer used to render the bullet for list items. The default value is a simple bullet renderer
   /// that handles the default bullet types: number, square, and circle.
   BulletRenderer bulletRenderer = defaultBulletRenderer;
 
-  PortableTextConfig._();
+  PortableTextConfig();
+
+  /// Returns the nearest [PortableTextConfig] supplied by a [PortableTextTheme] ancestor,
+  /// falling back to [shared] when none is present. Mirrors `Theme.of`.
+  static PortableTextConfig of(final BuildContext context) =>
+      PortableTextTheme.maybeOf(context) ?? shared;
+
+  /// Returns a copy of this config with the given fields overridden.
+  ///
+  /// The map fields ([styles], [blocks], [blockContainers], [markDefs]) are MERGED — provided
+  /// keys win, the rest are kept — and scalar fields are replaced when provided. This
+  /// intentionally differs from `ThemeData.copyWith` (which replaces whole fields) because
+  /// these maps are additive registries, so the common case is overriding a single key while
+  /// keeping the others.
+  ///
+  /// Note: overriding [markDefs] here affects mark *rendering/styling* only. It does not change
+  /// which custom deserializer runs at JSON-parse time — that always reads the context-free
+  /// [shared] registry (see `_markDefsFromJson`).
+  PortableTextConfig copyWith({
+    final Map<String, TextStyleBuilder>? styles,
+    final Map<String, BlockWidgetBuilder>? blocks,
+    final Map<String, BlockContainerBuilder>? blockContainers,
+    final Map<String, MarkDefDescriptor>? markDefs,
+    final double? listIndent,
+    final EdgeInsets? itemPadding,
+    final TextStyle? Function(BuildContext)? baseStyle,
+    final BulletRenderer? bulletRenderer,
+  }) {
+    final config = PortableTextConfig();
+    config.styles
+      ..clear()
+      ..addAll(this.styles);
+    config.blocks
+      ..clear()
+      ..addAll(this.blocks);
+    config.blockContainers
+      ..clear()
+      ..addAll(this.blockContainers);
+    config.markDefs
+      ..clear()
+      ..addAll(this.markDefs);
+    config.listIndent = this.listIndent;
+    config.itemPadding = this.itemPadding;
+    config.baseStyle = this.baseStyle;
+    config.bulletRenderer = this.bulletRenderer;
+
+    if (styles != null) config.styles.addAll(styles);
+    if (blocks != null) config.blocks.addAll(blocks);
+    if (blockContainers != null) config.blockContainers.addAll(blockContainers);
+    if (markDefs != null) config.markDefs.addAll(markDefs);
+    if (listIndent != null) config.listIndent = listIndent;
+    if (itemPadding != null) config.itemPadding = itemPadding;
+    if (baseStyle != null) config.baseStyle = baseStyle;
+    if (bulletRenderer != null) config.bulletRenderer = bulletRenderer;
+    return config;
+  }
 
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
   void apply({
@@ -131,7 +189,7 @@ final class PortableTextConfig {
   static const defaultItemPadding = EdgeInsets.only(bottom: 8);
   static BulletRenderer defaultBulletRenderer =
       (final BuildContext context, final TextBlockItem model) {
-    final textStyle = PortableTextConfig.shared.baseStyle(context);
+    final textStyle = PortableTextConfig.of(context).baseStyle(context);
 
     switch (model.listItem) {
       case ListItemType.number:
