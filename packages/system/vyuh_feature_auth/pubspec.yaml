@@ -2,6 +2,7 @@ name: vyuh_feature_auth
 resolution: workspace
 description: Provides the Auth feature for your Vyuh project.
 version: 2.0.0
+publish_to: https://pub.vyuh.tech
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
 
