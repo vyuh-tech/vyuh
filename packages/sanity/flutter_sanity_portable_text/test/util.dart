@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 TextSpan? findTextSpan(bool Function(TextSpan span) predicate) {
   TextSpan? textSpan;
 
-  for (final richText in find
-      .byType(RichText)
-      .evaluate()
-      .map((element) => element.widget)
-      .cast<RichText>()) {
+  for (final richText
+      in find
+          .byType(RichText)
+          .evaluate()
+          .map((element) => element.widget)
+          .cast<RichText>()) {
     richText.text.visitChildren((span) {
       if (span is TextSpan && predicate(span)) {
         textSpan = span;
@@ -29,12 +30,9 @@ class CustomMarkDef extends MarkDef {
   static const schemaName = 'custom-mark';
 
   CustomMarkDef({required this.color, required super.key})
-      : super(type: schemaName);
+    : super(type: schemaName);
 
   factory CustomMarkDef.fromJson(final Map<String, dynamic> json) {
-    return CustomMarkDef(
-      color: Color(json['color']),
-      key: json['_key'],
-    );
+    return CustomMarkDef(color: Color(json['color']), key: json['_key']);
   }
 }

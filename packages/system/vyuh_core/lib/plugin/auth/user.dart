@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Represents a user of the application.
 class User {
@@ -103,8 +103,7 @@ enum LoginMethod {
       LoginMethod.twitter ||
       LoginMethod.github ||
       LoginMethod.linkedin ||
-      LoginMethod.microsoft =>
-        Icons.verified_user,
+      LoginMethod.microsoft => Icons.verified_user,
       _ => Icons.help,
     };
   }
@@ -124,7 +123,7 @@ enum LoginMethod {
       LoginMethod.github => 'GitHub',
       LoginMethod.linkedin => 'LinkedIn',
       LoginMethod.microsoft => 'Microsoft',
-      LoginMethod.custom => 'Custom'
+      LoginMethod.custom => 'Custom',
     };
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/email_password_form.dart';
 import 'package:vyuh_feature_auth/ui/auth_form_builder.dart';
@@ -22,10 +22,7 @@ enum AuthActionType {
 class EmailPasswordView extends StatelessWidget {
   final EmailPasswordForm content;
 
-  const EmailPasswordView({
-    super.key,
-    required this.content,
-  });
+  const EmailPasswordView({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +61,9 @@ class EmailPasswordView extends StatelessWidget {
                     child: HintAction(
                       hintLabel: const SizedBox.shrink(),
                       actionLabel: HintAction.defaultActionLabel(
-                          context, "Forgot your password?"),
+                        context,
+                        "Forgot your password?",
+                      ),
                       onTap: (_) {
                         content.forgotPasswordAction?.execute(context);
                       },
@@ -81,9 +80,13 @@ class EmailPasswordView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: HintAction(
                   hintLabel: HintAction.defaultHintLabel(
-                      context, "Don't have an account? "),
-                  actionLabel:
-                      HintAction.defaultActionLabel(context, "Sign Up"),
+                    context,
+                    "Don't have an account? ",
+                  ),
+                  actionLabel: HintAction.defaultActionLabel(
+                    context,
+                    "Sign Up",
+                  ),
                   onTap: (_) {
                     content.signupAction?.execute(context);
                   },
@@ -94,7 +97,9 @@ class EmailPasswordView extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 20.0),
                 child: HintAction(
                   hintLabel: HintAction.defaultHintLabel(
-                      context, "Already have an account? "),
+                    context,
+                    "Already have an account? ",
+                  ),
                   actionLabel: HintAction.defaultActionLabel(context, "Login"),
                   onTap: (_) {
                     content.loginAction?.execute(context);
@@ -112,11 +117,15 @@ extension on AuthActionType {
   Future<void> execute(String email, String password) {
     switch (this) {
       case AuthActionType.signIn:
-        return vyuh.auth
-            .loginWithEmailPassword(email: email, password: password);
+        return vyuh.auth.loginWithEmailPassword(
+          email: email,
+          password: password,
+        );
       case AuthActionType.signUp:
-        return vyuh.auth
-            .registerWithEmailPassword(email: email, password: password);
+        return vyuh.auth.registerWithEmailPassword(
+          email: email,
+          password: password,
+        );
     }
   }
 }

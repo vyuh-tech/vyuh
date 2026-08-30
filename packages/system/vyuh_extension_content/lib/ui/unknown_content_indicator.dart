@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content/action.dart' as vyuh_action;
 import 'package:vyuh_extension_content/content/condition.dart';
@@ -11,8 +11,9 @@ class UnknownContentDetector {
   static bool hasUnknownActions(vyuh_action.Action? action) {
     if (action?.configurations == null) return false;
 
-    return action!.configurations!
-        .any((config) => config is UnknownActionConfiguration);
+    return action!.configurations!.any(
+      (config) => config is UnknownActionConfiguration,
+    );
   }
 
   /// Checks if a list of actions contains any unknown action configurations.
@@ -30,8 +31,9 @@ class UnknownContentDetector {
     final modifiers = contentItem.getModifiers();
     if (modifiers == null) return false;
 
-    return modifiers
-        .any((modifier) => modifier is UnknownContentModifierConfiguration);
+    return modifiers.any(
+      (modifier) => modifier is UnknownContentModifierConfiguration,
+    );
   }
 
   /// Checks if a content item has an unknown layout.
@@ -50,8 +52,9 @@ class UnknownContentDetector {
     return hasUnknownModifiers(contentItem) ||
         hasUnknownLayout(layout ?? contentItem.layout) ||
         hasUnknownActionsInList(additionalActions) ||
-        additionalConditions
-            .any((condition) => hasUnknownConditions(condition));
+        additionalConditions.any(
+          (condition) => hasUnknownConditions(condition),
+        );
   }
 }
 
@@ -149,10 +152,7 @@ class _UnknownContentWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget wrappedChild = Container(
       decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.red.shade600,
-          width: 2,
-        ),
+        border: Border.all(color: Colors.red.shade600, width: 2),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Stack(
@@ -168,11 +168,7 @@ class _UnknownContentWrapper extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               padding: const EdgeInsets.all(4),
-              child: Icon(
-                Icons.warning_rounded,
-                color: Colors.white,
-                size: 16,
-              ),
+              child: Icon(Icons.warning_rounded, color: Colors.white, size: 16),
             ),
           ),
         ],
@@ -197,8 +193,11 @@ class _UnknownContentWrapper extends StatelessWidget {
       barrierDismissible: true,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: Colors.red.shade50,
-        icon: Icon(Icons.warning_amber_rounded,
-            color: Colors.red.shade700, size: 48),
+        icon: Icon(
+          Icons.warning_amber_rounded,
+          color: Colors.red.shade700,
+          size: 48,
+        ),
         title: Text(
           'Unknown Content Detected',
           style: TextStyle(color: Colors.red.shade900),
@@ -217,54 +216,53 @@ class _UnknownContentWrapper extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              ...issues.map((issue) => Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          issue.icon,
-                          color: Colors.red.shade700,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                issue.type,
+              ...issues.map(
+                (issue) => Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Icon(issue.icon, color: Colors.red.shade700, size: 16),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              issue.type,
+                              style: TextStyle(
+                                color: Colors.red.shade800,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 13,
+                              ),
+                            ),
+                            Container(
+                              margin: const EdgeInsets.only(top: 2),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.red.shade100,
+                                borderRadius: BorderRadius.circular(3),
+                                border: Border.all(color: Colors.red.shade300),
+                              ),
+                              child: Text(
+                                issue.schemaType,
                                 style: TextStyle(
-                                  color: Colors.red.shade800,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 13,
+                                  fontFamily: 'monospace',
+                                  color: Colors.red.shade900,
+                                  fontSize: 11,
                                 ),
                               ),
-                              Container(
-                                margin: const EdgeInsets.only(top: 2),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 6, vertical: 2),
-                                decoration: BoxDecoration(
-                                  color: Colors.red.shade100,
-                                  borderRadius: BorderRadius.circular(3),
-                                  border:
-                                      Border.all(color: Colors.red.shade300),
-                                ),
-                                child: Text(
-                                  issue.schemaType,
-                                  style: TextStyle(
-                                    fontFamily: 'monospace',
-                                    color: Colors.red.shade900,
-                                    fontSize: 11,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               const SizedBox(height: 12),
               Text(
                 'Register TypeDescriptors for these schema types to fix.',
@@ -295,11 +293,13 @@ class _UnknownContentWrapper extends StatelessWidget {
       if (action!.configurations != null) {
         for (final config in action.configurations!) {
           if (config is UnknownActionConfiguration) {
-            issues.add(_UnknownIssue(
-              type: 'Unknown Action',
-              schemaType: config.missingSchemaType,
-              icon: Icons.play_arrow_outlined,
-            ));
+            issues.add(
+              _UnknownIssue(
+                type: 'Unknown Action',
+                schemaType: config.missingSchemaType,
+                icon: Icons.play_arrow_outlined,
+              ),
+            );
           }
         }
       }
@@ -310,22 +310,26 @@ class _UnknownContentWrapper extends StatelessWidget {
       if (condition!.configuration is UnknownConditionConfiguration) {
         final unknown =
             condition.configuration as UnknownConditionConfiguration;
-        issues.add(_UnknownIssue(
-          type: 'Unknown Condition',
-          schemaType: unknown.missingSchemaType,
-          icon: Icons.rule_outlined,
-        ));
+        issues.add(
+          _UnknownIssue(
+            type: 'Unknown Condition',
+            schemaType: unknown.missingSchemaType,
+            icon: Icons.rule_outlined,
+          ),
+        );
       }
     }
 
     // Check layout
     final layoutToCheck = layout ?? contentItem.layout;
     if (layoutToCheck is UnknownLayoutConfiguration) {
-      issues.add(_UnknownIssue(
-        type: 'Unknown Layout',
-        schemaType: layoutToCheck.missingSchemaType,
-        icon: Icons.view_quilt_outlined,
-      ));
+      issues.add(
+        _UnknownIssue(
+          type: 'Unknown Layout',
+          schemaType: layoutToCheck.missingSchemaType,
+          icon: Icons.view_quilt_outlined,
+        ),
+      );
     }
 
     // Check modifiers
@@ -333,11 +337,13 @@ class _UnknownContentWrapper extends StatelessWidget {
     if (modifiers != null) {
       for (final modifier in modifiers) {
         if (modifier is UnknownContentModifierConfiguration) {
-          issues.add(_UnknownIssue(
-            type: 'Unknown Modifier',
-            schemaType: modifier.missingSchemaType,
-            icon: Icons.tune_outlined,
-          ));
+          issues.add(
+            _UnknownIssue(
+              type: 'Unknown Modifier',
+              schemaType: modifier.missingSchemaType,
+              icon: Icons.tune_outlined,
+            ),
+          );
         }
       }
     }

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract class Plugin {
   final String name;
@@ -40,12 +40,14 @@ mixin InitOncePlugin on Plugin {
     if (_initCompleter == null) {
       _initCompleter = Completer();
 
-      initOnce().then((final _) {
-        _initCompleter!.complete();
-        _initialized = true;
-      }).catchError((final e) {
-        _initCompleter!.completeError(e);
-      });
+      initOnce()
+          .then((final _) {
+            _initCompleter!.complete();
+            _initialized = true;
+          })
+          .catchError((final e) {
+            _initCompleter!.completeError(e);
+          });
     }
 
     return _initCompleter!.future;

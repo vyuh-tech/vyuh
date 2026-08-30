@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget to display a list of content items.
 ///
@@ -37,9 +37,7 @@ final class ContentList extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
               border: Border(
-                bottom: BorderSide(
-                  color: theme.colorScheme.primary,
-                ),
+                bottom: BorderSide(color: theme.colorScheme.primary),
               ),
             ),
             margin: const EdgeInsets.only(bottom: 2),
@@ -56,15 +54,16 @@ final class ContentList extends StatelessWidget {
           Expanded(
             child: items.isEmpty
                 ? (emptyStateWidget ??
-                    Center(
-                      child: Text(
-                        'No items',
-                        style: theme.textTheme.bodyMedium?.apply(
-                          color: theme.colorScheme.onSurface
-                              .withValues(alpha: 0.5),
+                      Center(
+                        child: Text(
+                          'No items',
+                          style: theme.textTheme.bodyMedium?.apply(
+                            color: theme.colorScheme.onSurface.withValues(
+                              alpha: 0.5,
+                            ),
+                          ),
                         ),
-                      ),
-                    ))
+                      ))
                 : SingleChildScrollView(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,

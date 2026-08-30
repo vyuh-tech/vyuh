@@ -2,7 +2,7 @@ import 'package:feature_conference/api/conference_api.dart';
 import 'package:feature_conference/content/speaker.dart';
 import 'package:feature_conference/layouts/speaker_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class SpeakersPage extends StatelessWidget {
@@ -26,17 +26,14 @@ final class SpeakersPage extends StatelessWidget {
               crossAxisSpacing: 8,
               childAspectRatio: 0.8,
             ),
-            delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                final speaker = speakers[index];
-                return VyuhBinding.instance.content.buildContent(
-                  context,
-                  speaker,
-                  layout: SpeakerProfileCardLayout(),
-                );
-              },
-              childCount: speakers.length,
-            ),
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final speaker = speakers[index];
+              return VyuhBinding.instance.content.buildContent(
+                context,
+                speaker,
+                layout: SpeakerProfileCardLayout(),
+              );
+            }, childCount: speakers.length),
           ),
         );
       },

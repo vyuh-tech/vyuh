@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
 import 'package:vyuh_feature_developer/pages/feature_detail.dart';
@@ -9,9 +9,7 @@ import 'package:vyuh_feature_developer/pages/plugin_detail.dart';
 class PluginAndFeatureList extends StatelessWidget {
   /// Creates a new plugin and feature list view.
   ///
-  const PluginAndFeatureList({
-    super.key,
-  });
+  const PluginAndFeatureList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,11 +34,12 @@ class PluginAndFeatureList extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             StickySection(
-                title: 'Plugins [${plugins.length}]',
-                sliver: SliverList.builder(
-                  itemBuilder: (_, index) => plugins[index].build(context),
-                  itemCount: plugins.length,
-                )),
+              title: 'Plugins [${plugins.length}]',
+              sliver: SliverList.builder(
+                itemBuilder: (_, index) => plugins[index].build(context),
+                itemCount: plugins.length,
+              ),
+            ),
             StickySection(
               title: 'Features [${features.length}]',
               sliver: SliverList.builder(

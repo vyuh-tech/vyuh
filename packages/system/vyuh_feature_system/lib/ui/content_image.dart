@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image_platform_interface/cached_network_image_platform_interface.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A widget for displaying images from various sources with advanced features.
@@ -67,23 +67,23 @@ class ContentImage extends StatelessWidget {
   });
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final dpr = MediaQuery.devicePixelRatioOf(context).toInt();
 
     return LayoutBuilder(
-      builder: (final BuildContext context, final BoxConstraints constraints) {
+      builder: (BuildContext context, BoxConstraints constraints) {
         var roundedWidth = constraints.maxWidth.isFinite
             ? constraints.maxWidth.roundedTo(nearestSize)
             : constraints.minWidth > 0
-                ? constraints.minWidth.roundedTo(nearestSize)
-                : null;
+            ? constraints.minWidth.roundedTo(nearestSize)
+            : null;
         final roundedHeight = (roundedWidth == null)
             ? null
             : (constraints.maxHeight.isFinite
-                ? constraints.maxHeight.roundedTo(nearestSize)
-                : (constraints.minHeight > 0
-                    ? constraints.minHeight.roundedTo(nearestSize)
-                    : null));
+                  ? constraints.maxHeight.roundedTo(nearestSize)
+                  : (constraints.minHeight > 0
+                        ? constraints.minHeight.roundedTo(nearestSize)
+                        : null));
 
         roundedWidth = (roundedWidth == null && roundedHeight == null)
             ? MediaQuery.sizeOf(context).width.roundedTo(nearestSize)
@@ -102,13 +102,13 @@ class ContentImage extends StatelessWidget {
                 format: format,
               )
             : url != null && url!.isNotEmpty
-                ? CachedNetworkImageProvider(
-                    url!,
-                    maxHeight: imageHeight?.toInt(),
-                    maxWidth: imageWidth?.toInt(),
-                    imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
-                  )
-                : null;
+            ? CachedNetworkImageProvider(
+                url!,
+                maxHeight: imageHeight?.toInt(),
+                maxWidth: imageWidth?.toInt(),
+                imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet,
+              )
+            : null;
 
         if (provider == null) {
           return ClipRect(
@@ -122,15 +122,14 @@ class ContentImage extends StatelessWidget {
         } else {
           return Image(
             image: provider,
-            loadingBuilder:
-                (final context, final child, final loadingProgress) {
+            loadingBuilder: (context, child, loadingProgress) {
               return loadingProgress == null
                   ? child
-                  : VyuhBinding.instance.widgetBuilder
-                      .imagePlaceholder(context);
+                  : VyuhBinding.instance.widgetBuilder.imagePlaceholder(
+                      context,
+                    );
             },
-            errorBuilder: (final context, final error, final stackTrace) =>
-                const ClipRect(
+            errorBuilder: (context, error, stackTrace) => const ClipRect(
               clipBehavior: Clip.hardEdge,
               child: Icon(Icons.error_outline_rounded),
             ),
@@ -152,7 +151,7 @@ class ContentImage extends StatelessWidget {
 /// Used internally by [ContentImage] to optimize image dimensions for caching.
 /// For example, 123.0 rounded to nearest 10 becomes 120.
 extension on double {
-  int roundedTo(final int multiple) {
+  int roundedTo(int multiple) {
     final value = toInt();
     final remainder = value % multiple;
 

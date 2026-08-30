@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -21,8 +21,10 @@ final class UnknownActionConfiguration extends ActionConfiguration {
   }) : super(schemaType: schemaName);
 
   @override
-  Future<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  Future<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     // No-op execution - the visual feedback is already shown during deserialization
     // This prevents the action from actually doing anything harmful
   }

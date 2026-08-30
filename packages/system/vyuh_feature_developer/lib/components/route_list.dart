@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
 
@@ -45,8 +45,12 @@ class _RoutesListState extends State<RoutesList> {
     return paths;
   }
 
-  void _recurse(List<g.RouteBase> routes, List<_PathInfo> accumulator,
-      String parentPath, int depth) {
+  void _recurse(
+    List<g.RouteBase> routes,
+    List<_PathInfo> accumulator,
+    String parentPath,
+    int depth,
+  ) {
     for (final route in routes) {
       String prefix = parentPath;
 
@@ -102,16 +106,16 @@ class _PathList extends StatelessWidget {
                     SizedBox(width: path.$2 * 8),
                     if (path.$2 > 0)
                       Transform(
-                          alignment: Alignment.center,
-                          transform: Matrix4.rotationX(pi),
-                          child: const Icon(Icons.turn_right)),
+                        alignment: Alignment.center,
+                        transform: Matrix4.rotationX(pi),
+                        child: const Icon(Icons.turn_right),
+                      ),
                     Expanded(
                       child: Text(
                         path.$1,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium
-                            ?.apply(fontFamily: 'Courier'),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.apply(fontFamily: 'Courier'),
                       ),
                     ),
                   ],

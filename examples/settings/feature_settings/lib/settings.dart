@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -12,26 +12,27 @@ class Settings {
 
   @JsonKey(defaultValue: [])
   final List<TabInfo> tabs;
-  Settings({
-    required this.title,
-    required this.tabs,
-  });
+  Settings({required this.title, required this.tabs});
 
   factory Settings.fromJson(Map<String, dynamic> json) =>
       _$SettingsFromJson(json);
 }
 
 extension FetchSettingsByProvider on Settings {
-  static Future<Settings?> fetchByProvider(
-      {required String identifier, required String documentId}) async {
-    final settings = await (vyuh.content.provider.name
-            .toLowerCase()
-            .contains('localsanity')
-        ? vyuh.content.provider
-            .fetchById(documentId, fromJson: Settings.fromJson)
-        : vyuh.content.provider.fetchSingle(
-            '*[_type == "${Settings.schemaName}" && identifier == "$identifier"][0]',
-            fromJson: Settings.fromJson));
+  static Future<Settings?> fetchByProvider({
+    required String identifier,
+    required String documentId,
+  }) async {
+    final settings =
+        await (vyuh.content.provider.name.toLowerCase().contains('localsanity')
+            ? vyuh.content.provider.fetchById(
+                documentId,
+                fromJson: Settings.fromJson,
+              )
+            : vyuh.content.provider.fetchSingle(
+                '*[_type == "${Settings.schemaName}" && identifier == "$identifier"][0]',
+                fromJson: Settings.fromJson,
+              ));
 
     return settings;
   }
@@ -51,7 +52,7 @@ enum IconIdentifier {
   movies,
   series,
   food,
-  watchlist
+  watchlist,
 }
 
 @JsonSerializable()

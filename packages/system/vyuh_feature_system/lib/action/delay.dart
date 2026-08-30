@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -21,20 +21,25 @@ final class DelayAction extends ActionConfiguration {
   final String message;
 
   DelayAction({this.milliseconds = 0, this.message = '', super.isAwaited})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory DelayAction.fromJson(Map<String, dynamic> json) =>
       _$DelayActionFromJson(json);
 
   @override
-  Future<FutureOr<void>> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  Future<FutureOr<void>> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     if (isAwaited == true) {
-      ScaffoldMessenger.maybeOf(context)?.showSnackBar(SnackBar(
-        content:
-            Text(message.isEmpty ? 'Waiting for $milliseconds ms' : message),
-        duration: Duration(milliseconds: milliseconds),
-      ));
+      ScaffoldMessenger.maybeOf(context)?.showSnackBar(
+        SnackBar(
+          content: Text(
+            message.isEmpty ? 'Waiting for $milliseconds ms' : message,
+          ),
+          duration: Duration(milliseconds: milliseconds),
+        ),
+      );
 
       await Future.delayed(Duration(milliseconds: milliseconds));
 

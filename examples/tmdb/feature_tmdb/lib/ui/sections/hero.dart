@@ -2,7 +2,7 @@ import 'package:chakra_shared/ui/detail_builder.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/movie_details.dart';
 import 'package:feature_tmdb/ui/series_details.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';

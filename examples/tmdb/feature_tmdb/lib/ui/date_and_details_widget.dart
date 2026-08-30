@@ -1,7 +1,7 @@
 import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 
 class TitleAndDateWidget extends StatelessWidget {

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -29,15 +29,15 @@ final class DropDownMenu extends ContentItem {
 
 final class DropDownContentBuilder extends ContentBuilder<DropDownMenu> {
   DropDownContentBuilder()
-      : super(
-          content: TypeDescriptor(
-            schemaType: DropDownMenu.schemaName,
-            title: 'DropDown Menu',
-            fromJson: DropDownMenu.fromJson,
-          ),
-          defaultLayout: DefaultDropDownMenuLayout(),
-          defaultLayoutDescriptor: DefaultDropDownMenuLayout.typeDescriptor,
-        );
+    : super(
+        content: TypeDescriptor(
+          schemaType: DropDownMenu.schemaName,
+          title: 'DropDown Menu',
+          fromJson: DropDownMenu.fromJson,
+        ),
+        defaultLayout: DefaultDropDownMenuLayout(),
+        defaultLayoutDescriptor: DefaultDropDownMenuLayout.typeDescriptor,
+      );
 }
 
 final class DefaultDropDownMenuLayout
@@ -69,11 +69,7 @@ final class DropDownItem {
 
   final Action? action;
 
-  DropDownItem({
-    required this.title,
-    required this.value,
-    this.action,
-  });
+  DropDownItem({required this.title, required this.value, this.action});
 
   factory DropDownItem.fromJson(Map<String, dynamic> json) =>
       _$DropDownItemFromJson(json);
@@ -82,10 +78,7 @@ final class DropDownItem {
 class DropDownMenuWidget extends StatefulWidget {
   final DropDownMenu content;
 
-  const DropDownMenuWidget({
-    super.key,
-    required this.content,
-  });
+  const DropDownMenuWidget({super.key, required this.content});
 
   @override
   State<DropDownMenuWidget> createState() => _DropDownMenuWidgetState();
@@ -109,8 +102,9 @@ class _DropDownMenuWidgetState extends State<DropDownMenuWidget>
       _selectedItem = data;
     });
     final arguments = <String, dynamic>{DropDownMenu.schemaName: data};
-    final action =
-        data.action != null ? data.action! : widget.content.selectionChanged;
+    final action = data.action != null
+        ? data.action!
+        : widget.content.selectionChanged;
     action?.execute(context, arguments: arguments);
   }
 

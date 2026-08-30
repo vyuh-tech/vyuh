@@ -1,7 +1,7 @@
 import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:feature_tmdb/ui/common_widgets/vote_percentage.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as f;
 
@@ -36,9 +36,7 @@ class ImageAndPopularityWidget extends StatelessWidget {
             Positioned(
               right: theme.spacing.s8,
               top: theme.spacing.s8,
-              child: VotePercentage(
-                voteAverage: info.voteAverage,
-              ),
+              child: VotePercentage(voteAverage: info.voteAverage),
             ),
         ],
       ),

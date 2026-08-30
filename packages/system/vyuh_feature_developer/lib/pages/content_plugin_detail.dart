@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
@@ -31,9 +31,7 @@ class ContentPluginDetailsView extends StatelessWidget {
               pinned: true,
               primary: true,
             ),
-            SliverToBoxAdapter(
-              child: _ContentPluginHeader(plugin: plugin),
-            ),
+            SliverToBoxAdapter(child: _ContentPluginHeader(plugin: plugin)),
             if (contentBuilders?.isNotEmpty ?? false)
               StickySection(
                 title: 'Content Builders [${contentBuilders!.length}]',
@@ -62,8 +60,9 @@ class ContentPluginDetailsView extends StatelessWidget {
                               ),
                               Text(
                                 '(${builder.content.schemaType})',
-                                style: theme.textTheme.labelMedium
-                                    ?.apply(color: theme.disabledColor),
+                                style: theme.textTheme.labelMedium?.apply(
+                                  color: theme.disabledColor,
+                                ),
                               ),
                               for (final layout in builder.layouts)
                                 Padding(
@@ -74,7 +73,8 @@ class ContentPluginDetailsView extends StatelessWidget {
                                     children: [
                                       const Padding(
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 8.0),
+                                          horizontal: 8.0,
+                                        ),
                                         child: Text('↳'),
                                       ),
                                       Expanded(
@@ -91,9 +91,9 @@ class ContentPluginDetailsView extends StatelessWidget {
                                               layout.schemaType,
                                               style: theme.textTheme.labelMedium
                                                   ?.apply(
-                                                      color:
-                                                          theme.disabledColor),
-                                            )
+                                                    color: theme.disabledColor,
+                                                  ),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -102,7 +102,7 @@ class ContentPluginDetailsView extends StatelessWidget {
                                 ),
                             ],
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ),
@@ -114,8 +114,9 @@ class ContentPluginDetailsView extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   sliver: SliverList.list(
                     children: [
-                      for (final schemaType
-                          in entry.value.keys.sortedBy((element) => element))
+                      for (final schemaType in entry.value.keys.sortedBy(
+                        (element) => element,
+                      ))
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Column(
@@ -125,12 +126,13 @@ class ContentPluginDetailsView extends StatelessWidget {
                               Text(entry.value[schemaType]!.title),
                               Text(
                                 '($schemaType)',
-                                style: theme.textTheme.labelMedium
-                                    ?.apply(color: theme.disabledColor),
+                                style: theme.textTheme.labelMedium?.apply(
+                                  color: theme.disabledColor,
+                                ),
                               ),
                             ],
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ),
@@ -143,9 +145,7 @@ class ContentPluginDetailsView extends StatelessWidget {
 }
 
 class _ContentPluginHeader extends StatelessWidget {
-  const _ContentPluginHeader({
-    required this.plugin,
-  });
+  const _ContentPluginHeader({required this.plugin});
 
   final ContentPlugin plugin;
 
@@ -174,8 +174,9 @@ class _ContentPluginHeader extends StatelessWidget {
                     ),
                     Text(
                       '(${plugin.provider.name})',
-                      style: theme.textTheme.labelMedium
-                          ?.apply(color: theme.disabledColor),
+                      style: theme.textTheme.labelMedium?.apply(
+                        color: theme.disabledColor,
+                      ),
                     ),
                   ],
                 ),

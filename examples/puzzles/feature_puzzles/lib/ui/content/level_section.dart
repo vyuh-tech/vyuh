@@ -3,10 +3,10 @@ import 'package:feature_puzzles/api/puzzles_client.dart';
 import 'package:feature_puzzles/routes.dart';
 import 'package:feature_puzzles/ui/loader/level_loader.dart';
 import 'package:feature_puzzles/ui/river_level/river_level.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -23,11 +23,8 @@ final class LevelSection extends ContentItem {
 
   final String title;
 
-  LevelSection({
-    required this.title,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
+  LevelSection({required this.title, super.layout, super.modifiers})
+    : super(schemaType: schemaName);
 
   factory LevelSection.fromJson(Map<String, dynamic> json) =>
       _$LevelSectionFromJson(json);
@@ -107,8 +104,10 @@ class _LevelSectionBuilderState extends State<LevelSectionBuilder> {
             );
           case FutureStatus.fulfilled:
             if (content == null) {
-              return vyuh.widgetBuilder
-                  .errorView(context, title: 'Failed to fetch Level');
+              return vyuh.widgetBuilder.errorView(
+                context,
+                title: 'Failed to fetch Level',
+              );
             }
 
             return widget.builder(context, content);

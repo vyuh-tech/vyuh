@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:feature_food/routes.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -22,7 +22,7 @@ final class SelectMenuItem extends ActionConfiguration {
   final ObjectReference? menuItem;
 
   SelectMenuItem({this.menuItem, super.isAwaited})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory SelectMenuItem.fromJson(Map<String, dynamic> json) =>
       _$SelectMenuItemFromJson(json);

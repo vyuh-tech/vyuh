@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ScaleEffectButton extends StatefulWidget {
   final Widget child;
@@ -36,19 +36,16 @@ class _ScaleEffectButtonState extends State<ScaleEffectButton>
 
   @override
   Widget build(final BuildContext context) => GestureDetector(
-        onTap: () async {
-          await _controller.reverse();
-          await _controller.fling();
-          widget.onTap.call();
-        },
-        onTapCancel: () async {
-          await _controller.fling();
-        },
-        child: Transform.scale(
-          scale: _scale,
-          child: widget.child,
-        ),
-      );
+    onTap: () async {
+      await _controller.reverse();
+      await _controller.fling();
+      widget.onTap.call();
+    },
+    onTapCancel: () async {
+      await _controller.fling();
+    },
+    child: Transform.scale(scale: _scale, child: widget.child),
+  );
 
   @override
   void dispose() {

@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -36,8 +36,10 @@ final class OpenInDialogAction extends ActionConfiguration {
       _$OpenInDialogActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     final theme = Theme.of(context);
 
     switch (behavior) {
@@ -60,14 +62,18 @@ final class OpenInDialogAction extends ActionConfiguration {
           builder: (context) => Dialog.fullscreen(
             backgroundColor: theme.colorScheme.surface,
             child: SafeArea(
-              child: Column(children: [
-                Align(
+              child: Column(
+                children: [
+                  Align(
                     alignment: Alignment.topRight,
                     child: IconButton.filled(
-                        onPressed: () => context.pop(),
-                        icon: const Icon(Icons.close))),
-                Expanded(child: _dialogContent(context)),
-              ]),
+                      onPressed: () => context.pop(),
+                      icon: const Icon(Icons.close),
+                    ),
+                  ),
+                  Expanded(child: _dialogContent(context)),
+                ],
+              ),
             ),
           ),
         );
@@ -86,17 +92,11 @@ final class OpenInDialogAction extends ActionConfiguration {
         return WebView(uri: finalUrl);
       }
 
-      return VyuhBinding.instance.content.buildRoute(
-        context,
-        url: finalUrl,
-      );
+      return VyuhBinding.instance.content.buildRoute(context, url: finalUrl);
     }
 
     final routeId = route?.ref;
 
-    return VyuhBinding.instance.content.buildRoute(
-      context,
-      routeId: routeId,
-    );
+    return VyuhBinding.instance.content.buildRoute(context, routeId: routeId);
   }
 }

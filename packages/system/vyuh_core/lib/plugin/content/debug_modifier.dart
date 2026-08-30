@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/plugin/content/content_item.dart';
 
 final class DebugModifier extends ContentModifierConfiguration {

@@ -1,6 +1,6 @@
 import 'package:design_system/design_system.dart' hide BorderRadius;
-import 'package:flutter/material.dart' hide Action, Route;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action, Route;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -17,20 +17,15 @@ final class TmdbListLayout extends LayoutConfiguration<Route> {
     title: 'Tmdb List Layout',
   );
 
-  TmdbListLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  TmdbListLayout({required this.title, required this.subtitle})
+    : super(schemaType: schemaName);
 
   factory TmdbListLayout.fromJson(Map<String, dynamic> json) =>
       _$TmdbListLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, Route content) {
-    return TmdbListLayoutLayoutView(
-      layout: this,
-      content: content,
-    );
+    return TmdbListLayoutLayoutView(layout: this, content: content);
   }
 }
 
@@ -77,15 +72,9 @@ final class TmdbListLayoutLayoutView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          layout.title ?? '',
-          style: theme.tmdbTheme.displaySmall,
-        ),
+        Text(layout.title ?? '', style: theme.tmdbTheme.displaySmall),
         if (layout.subtitle != null)
-          Text(
-            layout.subtitle ?? '',
-            style: theme.tmdbTheme.bodySmall,
-          ),
+          Text(layout.subtitle ?? '', style: theme.tmdbTheme.bodySmall),
       ],
     );
   }

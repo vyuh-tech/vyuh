@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/plugin/navigation/fallback_route_page_builder.dart';
@@ -46,8 +46,10 @@ abstract class NavigationPlugin extends Plugin {
     Object? extra,
   });
 
-  Future<T?> pushReplacement<T extends Object?>(String location,
-      {Object? extra});
+  Future<T?> pushReplacement<T extends Object?>(
+    String location, {
+    Object? extra,
+  });
 
   Future<T?> pushReplacementNamed<T extends Object?>(
     String name, {

@@ -1,6 +1,6 @@
 import 'package:design_system/utils/extensions.dart';
 import 'package:feature_misc/content/api/model.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class ListContainer extends StatelessWidget {
@@ -59,9 +59,7 @@ final class ProductTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(item.title, style: theme.textTheme.titleMedium),
-            Text(
-              '\$${item.price}',
-            ),
+            Text('\$${item.price}'),
           ],
         ),
       ),

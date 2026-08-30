@@ -3,7 +3,7 @@ import 'package:feature_puzzles/api/puzzles_client.dart';
 import 'package:feature_puzzles/routes.dart';
 import 'package:feature_puzzles/ui/content/level_section.dart';
 import 'package:feature_puzzles/ui/layout/level_layout.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -20,9 +20,7 @@ final feature = FeatureDescriptor(
   extensions: [
     ContentExtensionDescriptor(
       contents: [
-        RouteDescriptor(layouts: [
-          LevelLayout.typeDescriptor,
-        ]),
+        RouteDescriptor(layouts: [LevelLayout.typeDescriptor]),
       ],
       contentBuilders: [
         ContentBuilder<LevelSection>(
@@ -31,9 +29,7 @@ final feature = FeatureDescriptor(
           defaultLayoutDescriptor: LevelSectionLayout.typeDescriptor,
         ),
       ],
-      actions: [
-        SelectLevel.typeDescriptor,
-      ],
+      actions: [SelectLevel.typeDescriptor],
     ),
   ],
 );

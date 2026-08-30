@@ -3,7 +3,7 @@ import 'package:feature_conference/content/session.dart';
 import 'package:feature_conference/content/track.dart';
 import 'package:feature_conference/layouts/session_summary_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/content_image.dart';
 
@@ -24,8 +24,10 @@ final class TrackDetailPage extends StatelessWidget {
       future: () async {
         final api = vyuh.di.get<ConferenceApi>();
         final track = await api.track(id: trackId);
-        final sessions =
-            await api.sessions(editionId: editionId, trackId: trackId);
+        final sessions = await api.sessions(
+          editionId: editionId,
+          trackId: trackId,
+        );
 
         return (track!, sessions);
       },
@@ -40,9 +42,9 @@ final class TrackDetailPage extends StatelessWidget {
             delegate: SliverChildListDelegate([
               if (track.icon != null)
                 Card(
-                    clipBehavior: Clip.antiAlias,
-                    child:
-                        ContentImage(ref: track.icon, height: 150, width: 150)),
+                  clipBehavior: Clip.antiAlias,
+                  child: ContentImage(ref: track.icon, height: 150, width: 150),
+                ),
               Text(
                 track.title,
                 style: theme.textTheme.headlineMedium,

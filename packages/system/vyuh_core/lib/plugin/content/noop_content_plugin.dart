@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final messages = {
   'title': (_) => 'No Content Plugin',
-  'error': (String arg) => '''
+  'error': (String arg) =>
+      '''
 No content plugin configured to render $arg.
 
 You have three options:
@@ -15,15 +16,18 @@ You have three options:
 
 final class NoOpContentPlugin extends ContentPlugin {
   NoOpContentPlugin()
-      : super(
-          provider: NoOpContentProvider(),
-          name: 'vyuh.plugin.content.noop',
-          title: 'No Op Content Plugin',
-        );
+    : super(
+        provider: NoOpContentProvider(),
+        name: 'vyuh.plugin.content.noop',
+        title: 'No Op Content Plugin',
+      );
 
   @override
-  Widget buildContent<T extends ContentItem>(BuildContext context, T content,
-      {LayoutConfiguration<T>? layout}) {
+  Widget buildContent<T extends ContentItem>(
+    BuildContext context,
+    T content, {
+    LayoutConfiguration<T>? layout,
+  }) {
     return VyuhBinding.instance.widgetBuilder.errorView(
       context,
       title: messages['title']!(''),

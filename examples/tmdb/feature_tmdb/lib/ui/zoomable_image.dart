@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:design_system/design_system.dart' hide BorderRadius;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -25,7 +25,7 @@ class ZoomableImage extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         PageRouteBuilder(
-          pageBuilder: (_, __, ___) {
+          pageBuilder: (_, _, _) {
             return InteractiveFullScreenViewer(
               title: title,
               tag: tag,
@@ -81,10 +81,7 @@ class InteractiveFullScreenViewer extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(title, style: theme.tmdbTheme.displaySmall),
-              Text(
-                'Glimpses enlarged',
-                style: theme.tmdbTheme.bodySmall,
-              ),
+              Text('Glimpses enlarged', style: theme.tmdbTheme.bodySmall),
             ],
           ),
         ),
@@ -97,9 +94,7 @@ class InteractiveFullScreenViewer extends StatelessWidget {
             itemCount: 1,
             builder: (_, index) {
               return PhotoViewGalleryPageOptions(
-                imageProvider: CachedNetworkImageProvider(
-                  imageUrl!,
-                ),
+                imageProvider: CachedNetworkImageProvider(imageUrl!),
                 minScale: PhotoViewComputedScale.covered,
                 maxScale: PhotoViewComputedScale.covered,
                 heroAttributes: PhotoViewHeroAttributes(tag: tag),

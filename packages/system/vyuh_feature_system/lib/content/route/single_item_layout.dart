@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/single_item_route_scaffold.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
@@ -15,9 +15,10 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
     title: 'Single Item Layout',
     fromJson: SingleItemLayout.fromJson,
     preview: () => SingleItemLayout(
-        showAppBar: true,
-        useSafeArea: true,
-        actions: [MenuAction(icon: MenuIconType.settings)]),
+      showAppBar: true,
+      useSafeArea: true,
+      actions: [MenuAction(icon: MenuIconType.settings)],
+    ),
   );
 
   final bool showAppBar;
@@ -43,8 +44,9 @@ final class SingleItemLayout extends LayoutConfiguration<vf.Route> {
               actions: actions
                   ?.map(
                     (e) => IconButton(
-                        onPressed: () => e.action?.execute(context),
-                        icon: Icon(e.icon.iconData)),
+                      onPressed: () => e.action?.execute(context),
+                      icon: Icon(e.icon.iconData),
+                    ),
                   )
                   .toList(growable: false),
             )

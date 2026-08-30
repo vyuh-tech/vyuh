@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart' hide Card;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Card;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -79,7 +79,7 @@ final class AccordionItem {
 
 class AccordionDescriptor extends ContentDescriptor {
   AccordionDescriptor({super.layouts})
-      : super(schemaType: Accordion.schemaName, title: 'Accordion');
+    : super(schemaType: Accordion.schemaName, title: 'Accordion');
 }
 
 final class DefaultAccordionLayout extends LayoutConfiguration<Accordion> {
@@ -119,7 +119,8 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
     super.initState();
 
     _expansions.addAll(
-        List<bool>.generate(widget.content.items.length, (index) => false));
+      List<bool>.generate(widget.content.items.length, (index) => false),
+    );
   }
 
   @override
@@ -134,17 +135,19 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
           if (widget.content.title != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(widget.content.title!,
-                  style:
-                      theme.textTheme.titleMedium?.apply(fontWeightDelta: 2)),
+              child: Text(
+                widget.content.title!,
+                style: theme.textTheme.titleMedium?.apply(fontWeightDelta: 2),
+              ),
             ),
           if (widget.content.description != null)
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 widget.content.description!,
-                style: theme.textTheme.bodyMedium
-                    ?.apply(color: theme.colorScheme.secondary),
+                style: theme.textTheme.bodyMedium?.apply(
+                  color: theme.colorScheme.secondary,
+                ),
               ),
             ),
           ExpansionPanelList(
@@ -155,22 +158,28 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
               });
             },
             children: widget.content.items
-                .mapIndexed((index, item) => ExpansionPanel(
+                .mapIndexed(
+                  (index, item) => ExpansionPanel(
                     canTapOnHeader: true,
                     isExpanded: _expansions[index],
                     headerBuilder: (_, isExpanded) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(item.title,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.apply(fontWeightDelta: isExpanded ? 3 : 0)),
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        item.title,
+                        style: Theme.of(context).textTheme.bodyMedium?.apply(
+                          fontWeightDelta: isExpanded ? 3 : 0,
                         ),
+                      ),
+                    ),
                     body: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: VyuhBinding.instance.content
-                          .buildContent(context, item.content ?? Empty()),
-                    )))
+                      child: VyuhBinding.instance.content.buildContent(
+                        context,
+                        item.content ?? Empty(),
+                      ),
+                    ),
+                  ),
+                )
                 .toList(growable: false),
           ),
         ],

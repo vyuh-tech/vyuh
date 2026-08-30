@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -19,7 +19,7 @@ final class PageViewLayout extends LayoutConfiguration<Group> {
   final double viewportFraction;
 
   PageViewLayout({required this.showIndicator, this.viewportFraction = 0.75})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory PageViewLayout.fromJson(Map<String, dynamic> json) =>
       _$PageViewLayoutFromJson(json);
@@ -34,10 +34,7 @@ class _PageViewWidget extends StatefulWidget {
   final Group content;
   final PageViewLayout layout;
 
-  const _PageViewWidget({
-    required this.content,
-    required this.layout,
-  });
+  const _PageViewWidget({required this.content, required this.layout});
 
   @override
   State<_PageViewWidget> createState() => _PageViewWidgetState();
@@ -66,8 +63,10 @@ class _PageViewWidgetState extends State<_PageViewWidget> {
             child: PageView.builder(
               itemCount: widget.content.items.length,
               itemBuilder: (context, index) {
-                return vyuh.content
-                    .buildContent(context, widget.content.items[index]);
+                return vyuh.content.buildContent(
+                  context,
+                  widget.content.items[index],
+                );
               },
               scrollDirection: Axis.horizontal,
               controller: _controller,

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
@@ -33,29 +33,20 @@ final class SpeakerLayout extends LayoutConfiguration<Speaker> {
         if (content.photo != null)
           AspectRatio(
             aspectRatio: 1,
-            child: ContentImage(
-              ref: content.photo!,
-              fit: BoxFit.cover,
-            ),
+            child: ContentImage(ref: content.photo!, fit: BoxFit.cover),
           ),
         if (content.social != null) _SocialBar(social: content.social!),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              content.name,
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
+            Text(content.name, style: Theme.of(context).textTheme.titleLarge),
             if (content.tagline != null)
               Text(
                 content.tagline!,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             if (content.bio != null)
-              Text(
-                content.bio!,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              Text(content.bio!, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
       ],
@@ -123,13 +114,16 @@ final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(
+          context,
+        ).pathParameters['editionId']!;
 
         vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/speakers/${content.id}');
+          '/conferences/$conferenceId/editions/$editionId/speakers/${content.id}',
+        );
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -139,10 +133,7 @@ final class SpeakerProfileCardLayout extends LayoutConfiguration<Speaker> {
             if (content.photo != null)
               AspectRatio(
                 aspectRatio: 1,
-                child: ContentImage(
-                  ref: content.photo!,
-                  fit: BoxFit.cover,
-                ),
+                child: ContentImage(ref: content.photo!, fit: BoxFit.cover),
               ),
             Padding(
               padding: const EdgeInsets.all(8),

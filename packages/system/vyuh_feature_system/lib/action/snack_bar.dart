@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -32,12 +32,15 @@ final class ShowSnackBarAction extends ActionConfiguration {
       _$ShowSnackBarActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     if (messenger == null) {
-      VyuhBinding.instance.log
-          .debug('No ScaffoldMessenger found in the widget tree');
+      VyuhBinding.instance.log.debug(
+        'No ScaffoldMessenger found in the widget tree',
+      );
       return null;
     }
 
@@ -63,22 +66,22 @@ final class HideSnackBarAction extends ActionConfiguration {
 
   final bool immediately;
 
-  HideSnackBarAction({
-    super.title,
-    this.immediately = false,
-    super.isAwaited,
-  }) : super(schemaType: schemaName);
+  HideSnackBarAction({super.title, this.immediately = false, super.isAwaited})
+    : super(schemaType: schemaName);
 
   factory HideSnackBarAction.fromJson(Map<String, dynamic> json) =>
       _$HideSnackBarActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     final messenger = ScaffoldMessenger.maybeOf(context);
     if (messenger == null) {
-      VyuhBinding.instance.log
-          .debug('No ScaffoldMessenger found in the widget tree');
+      VyuhBinding.instance.log.debug(
+        'No ScaffoldMessenger found in the widget tree',
+      );
       return null;
     }
 

@@ -37,21 +37,20 @@ final class HttpNetworkPlugin extends NetworkPlugin {
 
   /// Creates an HTTP network plugin.
   ///
-  /// [webIncludeCredentials] - When true and running on web, uses browser's fetch API
+  /// [_webIncludeCredentials] - When true and running on web, uses browser's fetch API
   /// with credentials: 'include' to send HTTP-only cookies with cross-origin requests.
   /// This is essential for session-based authentication with HTTP-only cookies.
   HttpNetworkPlugin({
     Client? client,
     RetryOptions? retryOptions,
     Duration? timeout,
-    bool webIncludeCredentials = true,
+    this._webIncludeCredentials = true,
   })  : _retryOptions = retryOptions ??
             const RetryOptions(
               maxAttempts: 3,
               delayFactor: Duration(milliseconds: 200),
             ),
         _timeout = timeout ?? const Duration(seconds: 30),
-        _webIncludeCredentials = webIncludeCredentials,
         super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
     if (client != null) {
       _client = client;

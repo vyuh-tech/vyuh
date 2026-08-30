@@ -5,8 +5,8 @@ import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/sections/preview_list.dart';
 import 'package:feature_tmdb/ui/sections/statistics.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:readmore/readmore.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -50,10 +50,12 @@ class PersonHeroView extends StatelessWidget {
                   margin: EdgeInsets.zero,
                   child: ContentImage(
                     url: data.profileImage,
-                    width: theme.sizing
-                        .widthFull(MediaQuery.of(context).size.width),
-                    height: theme.sizing
-                        .widthFull(MediaQuery.of(context).size.height),
+                    width: theme.sizing.widthFull(
+                      MediaQuery.of(context).size.width,
+                    ),
+                    height: theme.sizing.widthFull(
+                      MediaQuery.of(context).size.height,
+                    ),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -61,10 +63,7 @@ class PersonHeroView extends StatelessWidget {
               Gap.h20,
               Align(
                 alignment: Alignment.centerLeft,
-                child: Text(
-                  data.name,
-                  style: theme.tmdbTheme.displayMedium,
-                ),
+                child: Text(data.name, style: theme.tmdbTheme.displayMedium),
               ),
               Gap.h20,
             ],

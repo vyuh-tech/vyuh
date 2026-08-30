@@ -2,34 +2,24 @@ import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:design_system/design_system.dart';
 import 'package:feature_puzzles/ui/river_level/dialogs/dialogs.dart';
 import 'package:feature_puzzles/ui/river_level/river_level_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MenuWidget extends StatelessWidget {
   final RiverLevelStore store;
 
-  const MenuWidget({
-    super.key,
-    required this.store,
-  });
+  const MenuWidget({super.key, required this.store});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
-      padding: EdgeInsets.all(
-        theme.spacing.s12,
-      ),
-      decoration: BoxDecoration(
-        color: theme.colorScheme.primaryContainer,
-      ),
+      padding: EdgeInsets.all(theme.spacing.s12),
+      decoration: BoxDecoration(color: theme.colorScheme.primaryContainer),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          MenuItem(
-            icon: Icons.refresh,
-            onTap: store.reset,
-          ),
+          MenuItem(icon: Icons.refresh, onTap: store.reset),
           MenuItem(
             icon: Icons.info,
             onTap: () => showInstructionsDialog(context, level: store.level),
@@ -62,11 +52,7 @@ class MenuWidget extends StatelessWidget {
 }
 
 class MenuItem extends StatelessWidget {
-  const MenuItem({
-    super.key,
-    required this.icon,
-    this.onTap,
-  });
+  const MenuItem({super.key, required this.icon, this.onTap});
 
   final IconData icon;
   final VoidCallback? onTap;
@@ -79,10 +65,7 @@ class MenuItem extends StatelessWidget {
       onPressed: onTap,
       icon: CircleAvatar(
         backgroundColor: theme.colorScheme.primary,
-        child: Icon(
-          icon,
-          color: theme.colorScheme.onPrimary,
-        ),
+        child: Icon(icon, color: theme.colorScheme.onPrimary),
       ),
     );
   }

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/content/group/default_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -24,9 +24,11 @@ final class GridGroupLayout extends LayoutConfiguration<Group> {
 
   final bool scrollable;
 
-  GridGroupLayout(
-      {this.columns = 2, this.aspectRatio = 1.0, this.scrollable = false})
-      : super(schemaType: schemaName);
+  GridGroupLayout({
+    this.columns = 2,
+    this.aspectRatio = 1.0,
+    this.scrollable = false,
+  }) : super(schemaType: schemaName);
 
   factory GridGroupLayout.fromJson(Map<String, dynamic> json) =>
       _$GridGroupLayoutFromJson(json);

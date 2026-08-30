@@ -87,9 +87,7 @@ class Card extends ContentItem implements PortableBlockItem {
     super.layout,
     super.modifiers,
   }) : super(schemaType: Card.schemaName) {
-    setParent([
-      if (content != null) content!,
-    ]);
+    setParent([?content]);
   }
 
   factory Card.fromJson(Map<String, dynamic> json) => _$CardFromJson(json);
@@ -112,7 +110,7 @@ class Card extends ContentItem implements PortableBlockItem {
 /// ```
 class CardDescriptor extends ContentDescriptor {
   CardDescriptor({super.layouts})
-      : super(schemaType: Card.schemaName, title: 'Card');
+    : super(schemaType: Card.schemaName, title: 'Card');
 }
 
 /// A conditional layout for cards that adapts based on specified conditions.

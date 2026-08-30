@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 class ConferenceRouteScaffold<T> extends StatefulWidget {
@@ -92,7 +92,7 @@ class ConferenceRouteCustomScrollView extends StatelessWidget {
             padding: const EdgeInsets.all(16),
             sliver: sliver,
           ),
-        )
+        ),
       ],
     );
   }
@@ -128,7 +128,8 @@ class ConferenceRouteSliverAppBar extends StatelessWidget {
             Text(
               subtitle!,
               style: theme.textTheme.labelMedium?.apply(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer),
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
             ),
         ],
       ),

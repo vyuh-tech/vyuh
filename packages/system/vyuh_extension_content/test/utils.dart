@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -60,7 +60,8 @@ class TestContentItem extends ContentItem {
       id: json['id'] as String,
       title: json['title'] as String,
       layout: typeFromFirstOfListJson<LayoutConfiguration<TestContentItem>>(
-          json['layout']),
+        json['layout'],
+      ),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );
   }
@@ -71,16 +72,15 @@ class TestLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 
   static final typeDescriptor =
       TypeDescriptor<LayoutConfiguration<TestContentItem>>(
-    schemaType: schemaName,
-    title: 'Test Layout',
-    fromJson: TestLayoutConfiguration.fromJson,
-  );
+        schemaType: schemaName,
+        title: 'Test Layout',
+        fromJson: TestLayoutConfiguration.fromJson,
+      );
 
   final double padding;
 
-  TestLayoutConfiguration({
-    required this.padding,
-  }) : super(schemaType: schemaName);
+  TestLayoutConfiguration({required this.padding})
+    : super(schemaType: schemaName);
 
   factory TestLayoutConfiguration.fromJson(Map<String, dynamic> json) {
     return TestLayoutConfiguration(
@@ -95,12 +95,8 @@ class TestLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 }
 
 class TestContentDescriptor extends ContentDescriptor {
-  TestContentDescriptor({
-    super.layouts,
-  }) : super(
-          schemaType: TestContentItem.schemaName,
-          title: 'Test Content Item',
-        );
+  TestContentDescriptor({super.layouts})
+    : super(schemaType: TestContentItem.schemaName, title: 'Test Content Item');
 }
 
 class TestModifier extends ContentModifierConfiguration {
@@ -114,14 +110,10 @@ class TestModifier extends ContentModifierConfiguration {
 
   final bool enabled;
 
-  TestModifier({
-    required this.enabled,
-  }) : super(schemaType: schemaName);
+  TestModifier({required this.enabled}) : super(schemaType: schemaName);
 
   factory TestModifier.fromJson(Map<String, dynamic> json) {
-    return TestModifier(
-      enabled: json['enabled'] as bool,
-    );
+    return TestModifier(enabled: json['enabled'] as bool);
   }
 
   @override
@@ -139,20 +131,21 @@ final class MockRoute extends RouteBase {
     super.modifiers,
     super.category,
   }) : super(
-          schemaType: schemaName,
-          title: 'Mock Route',
-          id: 'mock.route',
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-        );
+         schemaType: schemaName,
+         title: 'Mock Route',
+         id: 'mock.route',
+         createdAt: DateTime.now(),
+         updatedAt: DateTime.now(),
+       );
 
   @override
   String get schemaType => 'mock.route';
 
   static final typeDescriptor = TypeDescriptor(
-      schemaType: schemaName,
-      fromJson: MockRoute.fromJson,
-      title: 'Mock Route');
+    schemaType: schemaName,
+    fromJson: MockRoute.fromJson,
+    title: 'Mock Route',
+  );
 
   static final contentBuilder = ContentBuilder(
     content: MockRoute.typeDescriptor,
@@ -177,9 +170,10 @@ class MockLayoutConfiguration extends LayoutConfiguration<MockRoute> {
   static const schemaName = 'mock.layout';
 
   static final typeDescriptor = TypeDescriptor(
-      schemaType: schemaName,
-      fromJson: MockLayoutConfiguration.fromJson,
-      title: 'Mock Layout');
+    schemaType: schemaName,
+    fromJson: MockLayoutConfiguration.fromJson,
+    title: 'Mock Layout',
+  );
 
   MockLayoutConfiguration() : super(schemaType: schemaName);
 
@@ -194,12 +188,8 @@ class MockLayoutConfiguration extends LayoutConfiguration<MockRoute> {
 }
 
 class MockRouteDescriptor extends ContentDescriptor {
-  MockRouteDescriptor({
-    super.layouts,
-  }) : super(
-          schemaType: MockRoute.schemaName,
-          title: 'Mock Route',
-        );
+  MockRouteDescriptor({super.layouts})
+    : super(schemaType: MockRoute.schemaName, title: 'Mock Route');
 }
 
 class TestAction extends ActionConfiguration {
@@ -213,20 +203,18 @@ class TestAction extends ActionConfiguration {
 
   final String actionType;
 
-  TestAction({
-    required this.actionType,
-    super.isAwaited,
-  }) : super(schemaType: schemaName);
+  TestAction({required this.actionType, super.isAwaited})
+    : super(schemaType: schemaName);
 
   factory TestAction.fromJson(Map<String, dynamic> json) {
-    return TestAction(
-      actionType: json['actionType'] as String,
-    );
+    return TestAction(actionType: json['actionType'] as String);
   }
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     // Mock action execution
   }
 }
@@ -242,14 +230,10 @@ class TestCondition extends ConditionConfiguration {
 
   final bool condition;
 
-  TestCondition({
-    required this.condition,
-  }) : super(schemaType: schemaName);
+  TestCondition({required this.condition}) : super(schemaType: schemaName);
 
   factory TestCondition.fromJson(Map<String, dynamic> json) {
-    return TestCondition(
-      condition: json['condition'] as bool,
-    );
+    return TestCondition(condition: json['condition'] as bool);
   }
 
   @override

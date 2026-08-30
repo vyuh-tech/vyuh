@@ -8,15 +8,14 @@ import 'package:feature_puzzles/feature_puzzles.dart' as puzzles;
 import 'package:feature_tmdb/feature_tmdb.dart' deferred as tmdb;
 import 'package:feature_unsplash/feature_unsplash.dart' as unsplash;
 import 'package:feature_wonderous/feature_wonderous.dart' as wonderous;
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_core/plugin/plugin_descriptor.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_demo/root_feature.dart' as root;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_auth/vyuh_feature_auth.dart' as auth;
-
 import 'package:vyuh_feature_developer/vyuh_feature_developer.dart'
     as developer;
 import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart'
@@ -66,23 +65,24 @@ void main() async {
         },
       ),
     ],
-    platformWidgetBuilder:
-        vc.PlatformWidgetBuilder.system.copyWith(appBuilder: (_, platform) {
-      return Observer(
-        builder: (_) {
-          var mode = platform.di.get<system.ThemeService>().currentMode.value;
+    platformWidgetBuilder: vc.PlatformWidgetBuilder.system.copyWith(
+      appBuilder: (_, platform) {
+        return Observer(
+          builder: (_) {
+            var mode = platform.di.get<system.ThemeService>().currentMode.value;
 
-          return MaterialApp.router(
-            title: 'Vyuh Demo',
-            themeMode: mode,
-            debugShowCheckedModeBanner: false,
-            theme: DesignSystem.lightTheme,
-            darkTheme: DesignSystem.darkTheme,
-            routerConfig: platform.router.instance,
-          );
-        },
-      );
-    }),
+            return MaterialApp.router(
+              title: 'Vyuh Demo',
+              themeMode: mode,
+              debugShowCheckedModeBanner: false,
+              theme: DesignSystem.lightTheme,
+              darkTheme: DesignSystem.darkTheme,
+              routerConfig: platform.router.instance,
+            );
+          },
+        );
+      },
+    ),
   );
 }
 
@@ -111,7 +111,8 @@ PluginDescriptor _getPlugins() {
     ),
     env: vc.DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
-    telemetry:
-        vc.TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
+    telemetry: vc.TelemetryPlugin(
+      providers: [ConsoleLoggerTelemetryProvider()],
+    ),
   );
 }

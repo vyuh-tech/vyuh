@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -17,7 +17,7 @@ final class SimulatedDelayLifecycleHandler extends RouteLifecycleConfiguration {
   );
 
   SimulatedDelayLifecycleHandler({this.delay = 1})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory SimulatedDelayLifecycleHandler.fromJson(Map<String, dynamic> json) =>
       _$SimulatedDelayLifecycleHandlerFromJson(json);

@@ -8,7 +8,7 @@ import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/section_title.dart';
 import 'package:feature_tmdb/utils/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/model/person.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
@@ -31,24 +31,22 @@ class PeopleSectionView extends StatelessWidget {
     required BrowseMode mode,
     ListRepresentation representation = ListRepresentation.short,
     required bool isCast,
-  }) =>
-      PeopleSectionView(
-        mode: mode,
-        representation: representation,
-        title: 'Top Crew',
-        isCast: isCast,
-      );
+  }) => PeopleSectionView(
+    mode: mode,
+    representation: representation,
+    title: 'Top Crew',
+    isCast: isCast,
+  );
 
   factory PeopleSectionView.large({
     required BrowseMode mode,
     ListRepresentation representation = ListRepresentation.long,
     required bool isCast,
-  }) =>
-      PeopleSectionView(
-        mode: mode,
-        representation: representation,
-        isCast: isCast,
-      );
+  }) => PeopleSectionView(
+    mode: mode,
+    representation: representation,
+    isCast: isCast,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -154,9 +152,8 @@ class PersonListView extends StatelessWidget {
                           SizedBox(width: theme.spacing.s8),
                       scrollDirection: Axis.horizontal,
                       itemCount: min(maxCountForViewAll, people.length),
-                      itemBuilder: (context, index) => PersonView(
-                        person: people[index],
-                      ),
+                      itemBuilder: (context, index) =>
+                          PersonView(person: people[index]),
                     ),
             ),
           ),
@@ -169,11 +166,7 @@ class PersonListView extends StatelessWidget {
 }
 
 class PersonView extends StatelessWidget {
-  const PersonView({
-    super.key,
-    required this.person,
-    this.height,
-  });
+  const PersonView({super.key, required this.person, this.height});
 
   final BasePerson person;
   final double? height;
@@ -200,10 +193,12 @@ class PersonView extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   child: vf.ContentImage(
                     url: person.profileImage,
-                    height: theme.sizing
-                        .widthFull(MediaQuery.sizeOf(context).height),
-                    width: theme.sizing
-                        .widthFull(MediaQuery.sizeOf(context).width),
+                    height: theme.sizing.widthFull(
+                      MediaQuery.sizeOf(context).height,
+                    ),
+                    width: theme.sizing.widthFull(
+                      MediaQuery.sizeOf(context).width,
+                    ),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -231,16 +226,15 @@ class PersonView extends StatelessWidget {
             Flexible(
               flex: 1,
               child: Padding(
-                padding: EdgeInsets.only(
-                  left: theme.spacing.s8,
-                ),
+                padding: EdgeInsets.only(left: theme.spacing.s8),
                 child: Text(
                   person.knownFor.safeValue,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                   textAlign: TextAlign.start,
-                  style: theme.tmdbTheme.bodySmall
-                      ?.apply(color: theme.colorScheme.onSurfaceVariant),
+                  style: theme.tmdbTheme.bodySmall?.apply(
+                    color: theme.colorScheme.onSurfaceVariant,
+                  ),
                 ),
               ),
             ),
@@ -254,10 +248,7 @@ class PersonView extends StatelessWidget {
 class PersonListViewLargeCard extends StatelessWidget {
   final List<BasePerson> people;
 
-  const PersonListViewLargeCard({
-    super.key,
-    required this.people,
-  });
+  const PersonListViewLargeCard({super.key, required this.people});
 
   @override
   Widget build(BuildContext context) {
@@ -280,11 +271,7 @@ class PersonLargeCard extends StatelessWidget {
   final BasePerson person;
   final bool isCast;
 
-  const PersonLargeCard({
-    super.key,
-    required this.person,
-    this.isCast = true,
-  });
+  const PersonLargeCard({super.key, required this.person, this.isCast = true});
 
   @override
   Widget build(BuildContext context) {
@@ -313,10 +300,12 @@ class PersonLargeCard extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     child: vf.ContentImage(
                       url: person.profileImage,
-                      width: theme.sizing
-                          .widthFull(MediaQuery.sizeOf(context).width),
-                      height: theme.sizing
-                          .widthFull(MediaQuery.sizeOf(context).height),
+                      width: theme.sizing.widthFull(
+                        MediaQuery.sizeOf(context).width,
+                      ),
+                      height: theme.sizing.widthFull(
+                        MediaQuery.sizeOf(context).height,
+                      ),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -329,16 +318,18 @@ class PersonLargeCard extends StatelessWidget {
                       children: [
                         Text(person.name, style: theme.tmdbTheme.headlineSmall),
                         Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: theme.spacing.s8),
+                          padding: EdgeInsets.symmetric(
+                            vertical: theme.spacing.s8,
+                          ),
                           child: Text(
                             person.knownFor.safeValue,
                             style: theme.tmdbTheme.bodySmall,
                           ),
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.symmetric(vertical: theme.spacing.s8),
+                          padding: EdgeInsets.symmetric(
+                            vertical: theme.spacing.s8,
+                          ),
                           child: Text(
                             'Known for Department: ${person.knownForDepartment}',
                             style: theme.tmdbTheme.bodySmall,
@@ -351,9 +342,7 @@ class PersonLargeCard extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(
-                top: theme.spacing.s16,
-              ),
+              padding: EdgeInsets.only(top: theme.spacing.s16),
               child: const Divider(),
             ),
           ],

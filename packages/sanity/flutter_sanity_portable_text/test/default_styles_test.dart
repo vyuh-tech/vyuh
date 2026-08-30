@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'util.dart';
 
@@ -9,20 +9,27 @@ void main() {
     PortableTextConfig.shared.reset();
   });
 
-  testWidgets('PortableText renders the default span styles correctly',
-      (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(
-      home: PortableText(blocks: [
-        TextBlockItem(children: [
-          Span(text: 'Normal', marks: ['normal']),
-          Span(text: 'Strong', marks: ['strong']),
-          Span(text: 'Emphasized', marks: ['em']),
-          Span(text: 'Strike Through', marks: ['strike-through']),
-          Span(text: 'Underline', marks: ['underline']),
-          Span(text: 'Inline Code', marks: ['code']),
-        ]),
-      ]),
-    ));
+  testWidgets('PortableText renders the default span styles correctly', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(
+      MaterialApp(
+        home: PortableText(
+          blocks: [
+            TextBlockItem(
+              children: [
+                Span(text: 'Normal', marks: ['normal']),
+                Span(text: 'Strong', marks: ['strong']),
+                Span(text: 'Emphasized', marks: ['em']),
+                Span(text: 'Strike Through', marks: ['strike-through']),
+                Span(text: 'Underline', marks: ['underline']),
+                Span(text: 'Inline Code', marks: ['code']),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
 
     final Map<String, bool Function(TextSpan)> predicates = {
       'Normal': (span) =>
@@ -39,27 +46,33 @@ void main() {
 
     for (final entry in predicates.entries) {
       expect(
-          findTextSpan((span) => span.text == entry.key && entry.value(span)),
-          isNotNull);
+        findTextSpan((span) => span.text == entry.key && entry.value(span)),
+        isNotNull,
+      );
     }
   });
 
-  testWidgets('PortableText renders the default block styles correctly',
-      (WidgetTester tester) async {
+  testWidgets('PortableText renders the default block styles correctly', (
+    WidgetTester tester,
+  ) async {
     final navKey = GlobalKey<NavigatorState>();
 
-    await tester.pumpWidget(MaterialApp(
-      navigatorKey: navKey,
-      home: PortableText(blocks: [
-        _textBlock('h1'),
-        _textBlock('h2'),
-        _textBlock('h3'),
-        _textBlock('h4'),
-        _textBlock('h5'),
-        _textBlock('h6'),
-        _textBlock('blockquote'),
-      ]),
-    ));
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: navKey,
+        home: PortableText(
+          blocks: [
+            _textBlock('h1'),
+            _textBlock('h2'),
+            _textBlock('h3'),
+            _textBlock('h4'),
+            _textBlock('h5'),
+            _textBlock('h6'),
+            _textBlock('blockquote'),
+          ],
+        ),
+      ),
+    );
 
     final Map<String, bool Function(TextSpan)> predicates = {
       'h1': (span) =>
@@ -91,21 +104,23 @@ void main() {
 
     for (final entry in predicates.entries) {
       expect(
-          findTextSpan((span) => span.text == entry.key && entry.value(span)),
-          isNotNull);
+        findTextSpan((span) => span.text == entry.key && entry.value(span)),
+        isNotNull,
+      );
     }
   });
 
-  testWidgets('PortableText renders the default block containers correctly',
-      (WidgetTester tester) async {
+  testWidgets('PortableText renders the default block containers correctly', (
+    WidgetTester tester,
+  ) async {
     final navKey = GlobalKey<NavigatorState>();
 
-    await tester.pumpWidget(MaterialApp(
-      navigatorKey: navKey,
-      home: PortableText(blocks: [
-        _textBlock('blockquote'),
-      ]),
-    ));
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: navKey,
+        home: PortableText(blocks: [_textBlock('blockquote')]),
+      ),
+    );
 
     final container =
         find.byType(Container).evaluate().first.widget as Container;
@@ -113,33 +128,32 @@ void main() {
   });
 
   // test that a bullet item is rendered correctly
-  testWidgets('PortableText renders a bullet item correctly',
-      (WidgetTester tester) async {
+  testWidgets('PortableText renders a bullet item correctly', (
+    WidgetTester tester,
+  ) async {
     final navKey = GlobalKey<NavigatorState>();
 
-    await tester.pumpWidget(MaterialApp(
-      navigatorKey: navKey,
-      home: PortableText(blocks: [
-        TextBlockItem(
-          children: [
-            Span(text: 'Hello'),
+    await tester.pumpWidget(
+      MaterialApp(
+        navigatorKey: navKey,
+        home: PortableText(
+          blocks: [
+            TextBlockItem(
+              children: [Span(text: 'Hello')],
+              listItem: ListItemType.bullet,
+            ),
+            TextBlockItem(
+              children: [Span(text: 'Hello')],
+              listItem: ListItemType.square,
+            ),
+            TextBlockItem(
+              children: [Span(text: 'Hello')],
+              listItem: ListItemType.number,
+            ),
           ],
-          listItem: ListItemType.bullet,
         ),
-        TextBlockItem(
-          children: [
-            Span(text: 'Hello'),
-          ],
-          listItem: ListItemType.square,
-        ),
-        TextBlockItem(
-          children: [
-            Span(text: 'Hello'),
-          ],
-          listItem: ListItemType.number,
-        ),
-      ]),
-    ));
+      ),
+    );
 
     expect(find.byIcon(Icons.circle), findsOne);
     expect(find.byIcon(Icons.check_box_outline_blank), findsOne);
@@ -148,5 +162,8 @@ void main() {
 }
 
 TextBlockItem _textBlock(String style) {
-  return TextBlockItem(children: [Span(text: style)], style: style);
+  return TextBlockItem(
+    children: [Span(text: style)],
+    style: style,
+  );
 }

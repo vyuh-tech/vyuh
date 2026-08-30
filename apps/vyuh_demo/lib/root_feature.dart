@@ -1,6 +1,6 @@
 import 'package:design_system/design_system.dart';
-import 'package:flutter/material.dart' hide Card;
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart' hide Card;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 

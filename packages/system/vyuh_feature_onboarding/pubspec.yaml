@@ -6,8 +6,8 @@ homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
@@ -21,6 +21,7 @@ dependencies:
   vyuh_feature_system: ^1.47.0
   vyuh_extension_content: ^1.32.0
 
+  material_ui: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

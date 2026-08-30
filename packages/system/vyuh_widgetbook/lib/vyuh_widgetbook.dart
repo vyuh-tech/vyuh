@@ -1,6 +1,6 @@
 library;
 
-import 'package:flutter/material.dart' hide runApp;
+import 'package:material_ui/material_ui.dart' hide runApp;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 

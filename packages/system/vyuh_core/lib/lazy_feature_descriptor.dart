@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A callback that loads a [FeatureDescriptor], potentially using
@@ -86,6 +86,8 @@ final class LazyFeatureDescriptor {
     this.icon,
     this.dependencies = const [],
     this.featureFlag,
-  }) : assert(routePrefixes.isNotEmpty,
-            'At least one route prefix is required for lazy feature "$name"');
+  }) : assert(
+         routePrefixes.isNotEmpty,
+         'At least one route prefix is required for lazy feature "$name"',
+       );
 }

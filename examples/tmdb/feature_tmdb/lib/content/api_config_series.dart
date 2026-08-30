@@ -7,9 +7,9 @@ import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/sections/series_card.dart';
 import 'package:feature_tmdb/ui/widget/carousel_widget.dart';
 import 'package:feature_tmdb/ui/widget/circular_carousel.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -45,10 +45,7 @@ final class ApiSeriesConfigsSection
       _$ApiSeriesConfigsSectionFromJson(json);
 
   @override
-  Widget build(
-    BuildContext context,
-    List<SeriesShortInfo>? data,
-  ) {
+  Widget build(BuildContext context, List<SeriesShortInfo>? data) {
     SeriesListType? resourceType = _getResourceType(context);
     final theme = Theme.of(context);
 
@@ -79,12 +76,8 @@ final class ApiSeriesConfigsSection
           items: data ?? [],
           itemBuilder: (context, item) =>
               representation == ListRepresentation.short
-                  ? SeriesCard(
-                      series: item,
-                    )
-                  : SeriesCard.large(
-                      series: item,
-                    ),
+              ? SeriesCard(series: item)
+              : SeriesCard.large(series: item),
           title: resourceType.title,
           variant: representation,
           onViewAllTap: () {
@@ -95,13 +88,12 @@ final class ApiSeriesConfigsSection
   }
 
   @override
-  Future<List<SeriesShortInfo>?> invoke(
-    BuildContext context,
-  ) async {
+  Future<List<SeriesShortInfo>?> invoke(BuildContext context) async {
     switch (type) {
       case ConfigsSectionType.carousel:
-        final data =
-            await vyuh.di.get<TMDBStore>().fetchSeriesList(resourceType);
+        final data = await vyuh.di.get<TMDBStore>().fetchSeriesList(
+          resourceType,
+        );
         return data.results;
       case ConfigsSectionType.listType:
         SeriesListType? resType = _getResourceType(context);
@@ -112,9 +104,10 @@ final class ApiSeriesConfigsSection
 
         final genreId = GoRouterState.of(context).genreId();
 
-        final data = await vyuh.di
-            .get<TMDBStore>()
-            .fetchSeriesList(resType, genreId: genreId);
+        final data = await vyuh.di.get<TMDBStore>().fetchSeriesList(
+          resType,
+          genreId: genreId,
+        );
         return data.results;
     }
   }

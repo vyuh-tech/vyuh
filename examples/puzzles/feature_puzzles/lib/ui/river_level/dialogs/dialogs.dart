@@ -5,8 +5,8 @@ import 'package:feature_puzzles/routes.dart';
 import 'package:feature_puzzles/ui/river_level/widgets/character_widget.dart';
 import 'package:feature_puzzles/ui/widgets/animated_heading_text.dart';
 import 'package:feature_puzzles/ui/widgets/puzzle_button.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 void showWinDialog(
@@ -65,9 +65,9 @@ void showWinDialog(
           SizedBox(height: theme.spacing.s8),
           PuzzleButton(
             onTap: () {
-              Navigator.of(context).popUntil(
-                ModalRoute.withName(PuzzlesPath.puzzles),
-              );
+              Navigator.of(
+                context,
+              ).popUntil(ModalRoute.withName(PuzzlesPath.puzzles));
             },
             title: 'NEXT',
             color: theme.colorScheme.secondary,
@@ -78,24 +78,15 @@ void showWinDialog(
   );
 }
 
-void showWarningDialog(
-  BuildContext context, {
-  required final String message,
-}) {
+void showWarningDialog(BuildContext context, {required final String message}) {
   showDialog(
     context: context,
     builder: (context) {
       final theme = Theme.of(context);
 
       return AlertDialog(
-        title: Text(
-          'WARNING',
-          style: theme.textTheme.headlineSmall,
-        ),
-        content: Text(
-          message.toUpperCase(),
-          style: theme.textTheme.bodyLarge,
-        ),
+        title: Text('WARNING', style: theme.textTheme.headlineSmall),
+        content: Text(message.toUpperCase(), style: theme.textTheme.bodyLarge),
         actions: [
           PuzzleButton(
             color: Colors.orange,
@@ -117,8 +108,9 @@ void showLoseDialog(
 }) {
   showDialog(
     context: context,
-    barrierColor:
-        Theme.of(context).colorScheme.onErrorContainer.withValues(alpha: 0.5),
+    barrierColor: Theme.of(
+      context,
+    ).colorScheme.onErrorContainer.withValues(alpha: 0.5),
     builder: (context) {
       final theme = Theme.of(context);
       return AlertDialog(
@@ -171,20 +163,14 @@ void showLoseDialog(
   );
 }
 
-void showInstructionsDialog(
-  BuildContext context, {
-  required Level level,
-}) {
+void showInstructionsDialog(BuildContext context, {required Level level}) {
   showDialog(
     context: context,
     builder: (context) {
       final theme = Theme.of(context);
 
       return AlertDialog(
-        title: Text(
-          'INSTRUCTIONS',
-          style: theme.textTheme.headlineSmall,
-        ),
+        title: Text('INSTRUCTIONS', style: theme.textTheme.headlineSmall),
         content: AspectRatio(
           aspectRatio: theme.aspectRatio.oneToOne,
           child: Column(
@@ -220,10 +206,7 @@ void showHowToPlayDialog(BuildContext context) {
       final theme = Theme.of(context);
 
       return AlertDialog(
-        title: Text(
-          'HOW TO PLAY',
-          style: theme.textTheme.headlineSmall,
-        ),
+        title: Text('HOW TO PLAY', style: theme.textTheme.headlineSmall),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

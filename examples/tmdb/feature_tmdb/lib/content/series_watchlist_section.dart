@@ -4,9 +4,9 @@ import 'package:feature_tmdb/routes.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/collection_view.dart';
 import 'package:feature_tmdb/ui/sections/series_card.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -23,10 +23,8 @@ final class SeriesWatchlistSection extends ContentItem {
     fromJson: SeriesWatchlistSection.fromJson,
   );
 
-  SeriesWatchlistSection({
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
+  SeriesWatchlistSection({super.layout, super.modifiers})
+    : super(schemaType: schemaName);
 
   factory SeriesWatchlistSection.fromJson(Map<String, dynamic> json) =>
       _$SeriesWatchlistSectionFromJson(json);
@@ -34,11 +32,11 @@ final class SeriesWatchlistSection extends ContentItem {
 
 final class SeriesWatchlistSectionBuilder extends ContentBuilder {
   SeriesWatchlistSectionBuilder()
-      : super(
-          content: SeriesWatchlistSection.typeDescriptor,
-          defaultLayout: SeriesWatchlistSectionLayout(),
-          defaultLayoutDescriptor: SeriesWatchlistSectionLayout.typeDescriptor,
-        );
+    : super(
+        content: SeriesWatchlistSection.typeDescriptor,
+        defaultLayout: SeriesWatchlistSectionLayout(),
+        defaultLayoutDescriptor: SeriesWatchlistSectionLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()
@@ -65,9 +63,7 @@ final class SeriesWatchlistSectionLayout
 }
 
 final class SeriesWatchlistView extends StatelessWidget {
-  const SeriesWatchlistView({
-    super.key,
-  });
+  const SeriesWatchlistView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -130,17 +126,12 @@ class DismissibleWidget extends StatelessWidget {
       background: Container(
         color: theme.colorScheme.error,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.symmetric(
-          horizontal: theme.spacing.s32,
-        ),
+        padding: EdgeInsets.symmetric(horizontal: theme.spacing.s32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.delete_outline,
-              color: theme.colorScheme.onPrimary,
-            ),
+            Icon(Icons.delete_outline, color: theme.colorScheme.onPrimary),
             Text(
               'Delete',
               style: theme.tmdbTheme.headlineMedium?.copyWith(

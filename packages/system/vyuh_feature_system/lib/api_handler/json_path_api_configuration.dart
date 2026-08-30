@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:json_path/json_path.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -119,7 +119,7 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
     return switch (root) {
       List() => root.map((e) => _createCard(e)).toList(),
       Map() => [_createCard(root as Map<String, dynamic>)],
-      _ => null
+      _ => null,
     };
   }
 
@@ -129,24 +129,30 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
   }
 
   vf.Card _createCard(Map<String, dynamic> json) {
-    final fields = {
-      'title': fieldMap?.title,
-      'description': fieldMap?.description,
-      'imageUrl': fieldMap?.imageUrl,
-    }.entries.where((x) => x.value != null).map((e) {
-      final value =
-          JsonPath(e.value!.path).read(json).singleOrNull?.value as String?;
-      return MapEntry(e.key, value);
-    }).fold(<String, String?>{}, (previousValue, element) {
-      previousValue[element.key] = element.value;
-      return previousValue;
-    });
+    final fields =
+        {
+              'title': fieldMap?.title,
+              'description': fieldMap?.description,
+              'imageUrl': fieldMap?.imageUrl,
+            }.entries
+            .where((x) => x.value != null)
+            .map((e) {
+              final value =
+                  JsonPath(e.value!.path).read(json).singleOrNull?.value
+                      as String?;
+              return MapEntry(e.key, value);
+            })
+            .fold(<String, String?>{}, (previousValue, element) {
+              previousValue[element.key] = element.value;
+              return previousValue;
+            });
 
     return vf.Card(
       title: fields['title'],
       description: fields['description'],
-      imageUrl:
-          fields['imageUrl'] != null ? Uri.parse(fields['imageUrl']!) : null,
+      imageUrl: fields['imageUrl'] != null
+          ? Uri.parse(fields['imageUrl']!)
+          : null,
       layout: ListItemCardLayout(title: 'List Item'),
     );
   }
@@ -154,18 +160,22 @@ final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>> {
   Widget _buildCardList(BuildContext context, List<vf.Card> data) {
     if (data.isEmpty) {
       return VyuhBinding.instance.content.buildContent(
-          context,
-          vf.Card(
-              title: 'No Data',
-              description: 'We could not find any data for the url: $url'));
+        context,
+        vf.Card(
+          title: 'No Data',
+          description: 'We could not find any data for the url: $url',
+        ),
+      );
     }
 
     final list = VyuhBinding.instance.content.buildContent(
-        context,
-        vf.Group(
-            title: title,
-            items: data,
-            layout: vf.ListGroupLayout(percentHeight: 0.5)));
+      context,
+      vf.Group(
+        title: title,
+        items: data,
+        layout: vf.ListGroupLayout(percentHeight: 0.5),
+      ),
+    );
 
     return list;
   }

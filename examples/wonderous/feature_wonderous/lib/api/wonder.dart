@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -110,10 +110,7 @@ class Video {
   final String videoId;
   final String caption;
 
-  Video({
-    required this.videoId,
-    required this.caption,
-  });
+  Video({required this.videoId, required this.caption});
 
   factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 }
@@ -123,10 +120,7 @@ final class Quote {
   final String text;
   final String? author;
 
-  Quote({
-    required this.text,
-    this.author,
-  });
+  Quote({required this.text, this.author});
   factory Quote.fromJson(Map<String, dynamic> json) => _$QuoteFromJson(json);
 }
 
@@ -135,10 +129,7 @@ class Event {
   final int year;
   final String title;
 
-  Event({
-    required this.year,
-    required this.title,
-  });
+  Event({required this.year, required this.title});
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
 }

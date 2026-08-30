@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart' as flutter;
+import 'package:material_ui/material_ui.dart' as flutter;
 
 class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
   final double none;
@@ -34,17 +34,16 @@ class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
     final double? medium,
     final double? large,
     final double? xLarge,
-  }) =>
-      BorderRadius(
-        none: none ?? this.none,
-        xxSmall: xxSmall ?? this.xxSmall,
-        xSmall: xSmall ?? this.xSmall,
-        small: small ?? this.small,
-        normal: normal ?? this.normal,
-        medium: medium ?? this.medium,
-        large: large ?? this.large,
-        xLarge: xLarge ?? this.xLarge,
-      );
+  }) => BorderRadius(
+    none: none ?? this.none,
+    xxSmall: xxSmall ?? this.xxSmall,
+    xSmall: xSmall ?? this.xSmall,
+    small: small ?? this.small,
+    normal: normal ?? this.normal,
+    medium: medium ?? this.medium,
+    large: large ?? this.large,
+    xLarge: xLarge ?? this.xLarge,
+  );
 
   @override
   flutter.ThemeExtension<BorderRadius> lerp(
@@ -55,54 +54,14 @@ class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
       return this;
     }
     return BorderRadius(
-      none: lerpDouble(
-            none,
-            other.none,
-            t,
-          ) ??
-          none,
-      xxSmall: lerpDouble(
-            xxSmall,
-            other.xxSmall,
-            t,
-          ) ??
-          xxSmall,
-      xSmall: lerpDouble(
-            xSmall,
-            other.xSmall,
-            t,
-          ) ??
-          xSmall,
-      small: lerpDouble(
-            small,
-            other.small,
-            t,
-          ) ??
-          small,
-      normal: lerpDouble(
-            normal,
-            other.normal,
-            t,
-          ) ??
-          normal,
-      medium: lerpDouble(
-            medium,
-            other.medium,
-            t,
-          ) ??
-          medium,
-      large: lerpDouble(
-            large,
-            other.large,
-            t,
-          ) ??
-          large,
-      xLarge: lerpDouble(
-            xLarge,
-            other.xLarge,
-            t,
-          ) ??
-          xLarge,
+      none: lerpDouble(none, other.none, t) ?? none,
+      xxSmall: lerpDouble(xxSmall, other.xxSmall, t) ?? xxSmall,
+      xSmall: lerpDouble(xSmall, other.xSmall, t) ?? xSmall,
+      small: lerpDouble(small, other.small, t) ?? small,
+      normal: lerpDouble(normal, other.normal, t) ?? normal,
+      medium: lerpDouble(medium, other.medium, t) ?? medium,
+      large: lerpDouble(large, other.large, t) ?? large,
+      xLarge: lerpDouble(xLarge, other.xLarge, t) ?? xLarge,
     );
   }
 }

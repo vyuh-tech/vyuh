@@ -5,8 +5,8 @@ import 'package:feature_wonderous/ui/sections/hero_section.dart';
 import 'package:feature_wonderous/ui/sections/history_section.dart';
 import 'package:feature_wonderous/ui/sections/location_info_section.dart';
 import 'package:feature_wonderous/ui/sections/photos_section.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -33,10 +33,8 @@ final class WonderSectionConfiguration
 
   final WonderSectionType type;
 
-  WonderSectionConfiguration({
-    super.title,
-    this.type = WonderSectionType.hero,
-  }) : super(schemaType: schemaName);
+  WonderSectionConfiguration({super.title, this.type = WonderSectionType.hero})
+    : super(schemaType: schemaName);
 
   factory WonderSectionConfiguration.fromJson(Map<String, dynamic> json) =>
       _$WonderSectionConfigurationFromJson(json);
@@ -45,12 +43,18 @@ final class WonderSectionConfiguration
   Widget build(BuildContext context, Wonder document) {
     return switch (type) {
       WonderSectionType.hero => WonderHeroSection(wonder: document),
-      WonderSectionType.history =>
-        WonderHistorySection(title: title, wonder: document),
-      WonderSectionType.construction =>
-        WonderConstructionSection(title: title, wonder: document),
-      WonderSectionType.locationInfo =>
-        WonderLocationInfoSection(title: title, wonder: document),
+      WonderSectionType.history => WonderHistorySection(
+        title: title,
+        wonder: document,
+      ),
+      WonderSectionType.construction => WonderConstructionSection(
+        title: title,
+        wonder: document,
+      ),
+      WonderSectionType.locationInfo => WonderLocationInfoSection(
+        title: title,
+        wonder: document,
+      ),
       WonderSectionType.events => WonderEventsSection(wonder: document),
       WonderSectionType.photos => WonderPhotosSection(wonder: document),
     };

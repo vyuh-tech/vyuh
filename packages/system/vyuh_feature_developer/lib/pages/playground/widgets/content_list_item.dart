@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget to display a list item for a content item.
 ///
@@ -36,8 +36,9 @@ final class ContentListItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 1),
       child: Material(
-        color:
-            isSelected ? theme.colorScheme.primary : theme.colorScheme.surface,
+        color: isSelected
+            ? theme.colorScheme.primary
+            : theme.colorScheme.surface,
         child: InkWell(
           onTap: onTap,
           child: Padding(

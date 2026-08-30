@@ -7,9 +7,9 @@ import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/sections/movie_card.dart';
 import 'package:feature_tmdb/ui/widget/carousel_widget.dart';
 import 'package:feature_tmdb/ui/widget/circular_carousel.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -45,10 +45,7 @@ final class ApiMovieConfigsSection
       _$ApiMovieConfigsSectionFromJson(json);
 
   @override
-  Widget build(
-    BuildContext context,
-    List<MovieShortInfo>? data,
-  ) {
+  Widget build(BuildContext context, List<MovieShortInfo>? data) {
     MovieListType? resourceType = _getResourceType(context);
     final theme = Theme.of(context);
 
@@ -79,12 +76,8 @@ final class ApiMovieConfigsSection
           items: data ?? [],
           itemBuilder: (context, item) =>
               representation == ListRepresentation.short
-                  ? MovieCard(
-                      movie: item,
-                    )
-                  : MovieCard.large(
-                      movie: item,
-                    ),
+              ? MovieCard(movie: item)
+              : MovieCard.large(movie: item),
           title: resourceType.title,
           variant: representation,
           onViewAllTap: () {
@@ -95,13 +88,12 @@ final class ApiMovieConfigsSection
   }
 
   @override
-  Future<List<MovieShortInfo>?> invoke(
-    BuildContext context,
-  ) async {
+  Future<List<MovieShortInfo>?> invoke(BuildContext context) async {
     switch (type) {
       case ConfigsSectionType.carousel:
-        final data =
-            await vyuh.di.get<TMDBStore>().fetchMovieList(resourceType);
+        final data = await vyuh.di.get<TMDBStore>().fetchMovieList(
+          resourceType,
+        );
         return data.results;
       case ConfigsSectionType.listType:
         MovieListType? resType = _getResourceType(context);
@@ -112,9 +104,10 @@ final class ApiMovieConfigsSection
 
         final genreId = GoRouterState.of(context).genreId();
 
-        final data = await vyuh.di
-            .get<TMDBStore>()
-            .fetchMovieList(resType, genreId: genreId);
+        final data = await vyuh.di.get<TMDBStore>().fetchMovieList(
+          resType,
+          genreId: genreId,
+        );
         return data.results;
     }
   }

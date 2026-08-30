@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
@@ -21,17 +21,14 @@ final class LevelLayout extends LayoutConfiguration<vf.Route> {
 
   @override
   Widget build(BuildContext context, vf.Route content) {
-    final first =
-        content.regions.expand((element) => element.items).firstOrNull;
+    final first = content.regions
+        .expand((element) => element.items)
+        .firstOrNull;
 
-    final child =
-        first == null ? vf.empty : vyuh.content.buildContent(context, first);
+    final child = first == null
+        ? vf.empty
+        : vyuh.content.buildContent(context, first);
 
-    return SafeArea(
-      bottom: false,
-      child: Scaffold(
-        body: child,
-      ),
-    );
+    return SafeArea(bottom: false, child: Scaffold(body: child));
   }
 }

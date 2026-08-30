@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart' as flutter;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as flutter;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -68,13 +68,16 @@ class ConditionalAction extends ActionConfiguration {
       _$ConditionalActionFromJson(json);
 
   @override
-  Future<void> execute(flutter.BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  Future<void> execute(
+    flutter.BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     final value = (await condition?.execute(context)) ?? defaultCase;
 
     if (context.mounted) {
-      final caseAction =
-          cases?.firstWhereOrNull((element) => element.value == value);
+      final caseAction = cases?.firstWhereOrNull(
+        (element) => element.value == value,
+      );
 
       caseAction?.action?.execute(context);
     }

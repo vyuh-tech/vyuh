@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
@@ -38,10 +38,7 @@ final class ConferenceCardLayout extends LayoutConfiguration<Conference> {
             fit: StackFit.expand,
             children: [
               Positioned.fill(
-                child: ContentImage(
-                  ref: content.logo,
-                  fit: BoxFit.cover,
-                ),
+                child: ContentImage(ref: content.logo, fit: BoxFit.cover),
               ),
               Positioned(
                 left: 0,
@@ -62,10 +59,9 @@ final class ConferenceCardLayout extends LayoutConfiguration<Conference> {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     content.title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(color: theme.colorScheme.onPrimary),
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: theme.colorScheme.onPrimary,
+                    ),
                   ),
                 ),
               ),

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -56,12 +56,9 @@ class LocalePlugin extends Plugin {
   /// Available locales in the application
   List<Locale> get supportedLocales => locales.map((l) => l.locale).toList();
 
-  LocalePlugin({
-    required this.locales,
-    LocaleConfiguration? defaultLocale,
-  })  : assert(locales.isNotEmpty, 'At least one locale must be provided'),
-        _defaultLocale = defaultLocale,
-        super(name: 'locale', title: 'Internationalization') {
+  LocalePlugin({required this.locales, this._defaultLocale})
+    : assert(locales.isNotEmpty, 'At least one locale must be provided'),
+      super(name: 'locale', title: 'Internationalization') {
     currentLocale = Observable((_defaultLocale ?? locales.first).locale);
   }
 
@@ -75,7 +72,8 @@ class LocalePlugin extends Plugin {
     _registrations.add(registration);
 
     vyuh.log.info(
-        'LocalePlugin: Registered translations for "${registration.name}"');
+      'LocalePlugin: Registered translations for "${registration.name}"',
+    );
 
     // Initialize with current locale (async to support deferred loading)
     Future.microtask(() async {
@@ -110,7 +108,8 @@ class LocalePlugin extends Plugin {
           await registration.onLocaleChange(locale);
         } catch (e) {
           vyuh.log.error(
-              'LocalePlugin: Error notifying "${registration.name}" of locale change: $e');
+            'LocalePlugin: Error notifying "${registration.name}" of locale change: $e',
+          );
         }
       }
 

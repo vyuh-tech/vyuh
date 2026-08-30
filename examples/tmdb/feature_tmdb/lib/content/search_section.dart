@@ -1,6 +1,6 @@
 import 'package:feature_tmdb/ui/search_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content/content_builder.dart';
 
@@ -13,11 +13,11 @@ enum SearchType {
   people;
 
   String get title => switch (this) {
-        SearchType.all => 'All',
-        SearchType.movies => 'Movies',
-        SearchType.series => 'Series',
-        SearchType.people => 'People',
-      };
+    SearchType.all => 'All',
+    SearchType.movies => 'Movies',
+    SearchType.series => 'Series',
+    SearchType.people => 'People',
+  };
 }
 
 @JsonSerializable()
@@ -50,11 +50,11 @@ final class SearchSection extends ContentItem {
 
 final class SearchSectionBuilder extends ContentBuilder {
   SearchSectionBuilder()
-      : super(
-          content: SearchSection.typeDescriptor,
-          defaultLayout: SearchSectionLayout(),
-          defaultLayoutDescriptor: SearchSectionLayout.typeDescriptor,
-        );
+    : super(
+        content: SearchSection.typeDescriptor,
+        defaultLayout: SearchSectionLayout(),
+        defaultLayoutDescriptor: SearchSectionLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()
@@ -74,8 +74,6 @@ final class SearchSectionLayout extends LayoutConfiguration<SearchSection> {
 
   @override
   Widget build(BuildContext context, SearchSection content) {
-    return SearchScreen(
-      content: content,
-    );
+    return SearchScreen(content: content);
   }
 }

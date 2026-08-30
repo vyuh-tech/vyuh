@@ -7,7 +7,7 @@ import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/collection_view.dart';
 import 'package:feature_tmdb/ui/sections/movie_card.dart';
 import 'package:feature_tmdb/ui/sections/series_card.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
@@ -39,10 +39,10 @@ class FeaturedPreviewListSection extends StatelessWidget {
     this.representation = ListRepresentation.short,
     this.mediaCardType = MediaCardType.home,
   }) : assert(
-          movieType != null ||
-              seriesType != null ||
-              movieType == null && seriesType == null,
-        );
+         movieType != null ||
+             seriesType != null ||
+             movieType == null && seriesType == null,
+       );
 
   @override
   Widget build(BuildContext context) {
@@ -60,24 +60,22 @@ class FeaturedPreviewListSection extends StatelessWidget {
             itemBuilder: (context, item) {
               return mode == BrowseMode.movies
                   ? representation == ListRepresentation.short
-                      ? MovieCard(
-                          movie: item as MovieShortInfo,
-                          mediaCardType: mediaCardType,
-                        )
-                      : MovieCard.large(
-                          movie: item as MovieShortInfo,
-                        )
+                        ? MovieCard(
+                            movie: item as MovieShortInfo,
+                            mediaCardType: mediaCardType,
+                          )
+                        : MovieCard.large(movie: item as MovieShortInfo)
                   : representation == ListRepresentation.short
-                      ? SeriesCard(
-                          series: item as SeriesShortInfo,
-                          mediaCardType: mediaCardType,
-                        )
-                      : SeriesCard.large(series: item as SeriesShortInfo);
+                  ? SeriesCard(
+                      series: item as SeriesShortInfo,
+                      mediaCardType: mediaCardType,
+                    )
+                  : SeriesCard.large(series: item as SeriesShortInfo);
             },
             onViewAllTap: mediaCardType == MediaCardType.recommendation
                 ? () => mode == BrowseMode.movies
-                    ? vyuh.router.push(TmdbPath.movieRecommendationList(id))
-                    : vyuh.router.push(TmdbPath.seriesRecommendationList(id))
+                      ? vyuh.router.push(TmdbPath.movieRecommendationList(id))
+                      : vyuh.router.push(TmdbPath.seriesRecommendationList(id))
                 : null,
             title: title ?? 'More Like This',
             mediaCardType: mediaCardType,

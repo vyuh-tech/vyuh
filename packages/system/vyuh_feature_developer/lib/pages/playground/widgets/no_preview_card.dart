@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget to display a card with a message when no preview is available.
 ///
@@ -13,11 +13,7 @@ final class NoPreviewCard extends StatelessWidget {
 
   /// Creates a new no preview card widget.
   ///
-  const NoPreviewCard({
-    super.key,
-    required this.title,
-    required this.message,
-  });
+  const NoPreviewCard({super.key, required this.title, required this.message});
 
   @override
   Widget build(BuildContext context) {

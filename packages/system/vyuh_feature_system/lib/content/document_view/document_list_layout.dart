@@ -1,3 +1,4 @@
+import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -6,10 +7,7 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'document_list_layout.g.dart';
 
-enum ListViewMode {
-  list,
-  grid,
-}
+enum ListViewMode { list, grid }
 
 @JsonSerializable()
 final class DefaultDocumentListViewLayout
@@ -41,24 +39,29 @@ final class DefaultDocumentListViewLayout
       list: content,
       builder: (context, items) {
         return CustomScrollView(
-          cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
+          scrollCacheExtent: ScrollCacheExtent.pixels(
+            MediaQuery.sizeOf(context).height * 1.5,
+          ),
           primary: true,
           slivers: [
             if (mode == ListViewMode.list)
               SliverList.builder(
                 itemBuilder: (context, index) => AspectRatio(
-                    aspectRatio: aspectRatio,
-                    child: content.listItem!.build(context, items[index])),
+                  aspectRatio: aspectRatio,
+                  child: content.listItem!.build(context, items[index]),
+                ),
                 itemCount: items.length,
               ),
             if (mode == ListViewMode.grid)
               SliverGrid.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: columns, childAspectRatio: aspectRatio),
+                  crossAxisCount: columns,
+                  childAspectRatio: aspectRatio,
+                ),
                 itemBuilder: (context, index) =>
                     content.listItem!.build(context, items[index]),
                 itemCount: items.length,
-              )
+              ),
           ],
         );
       },
@@ -84,6 +87,6 @@ final class DocumentListViewConditionalLayout
   }) : super(schemaType: schemaName);
 
   factory DocumentListViewConditionalLayout.fromJson(
-          Map<String, dynamic> json) =>
-      _$DocumentListViewConditionalLayoutFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$DocumentListViewConditionalLayoutFromJson(json);
 }

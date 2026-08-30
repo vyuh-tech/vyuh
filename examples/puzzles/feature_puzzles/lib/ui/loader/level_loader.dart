@@ -1,7 +1,7 @@
 import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_puzzles/api/model/level.dart';
 import 'package:feature_puzzles/ui/widgets/puzzle_button.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -26,9 +26,7 @@ class LevelContentLoader extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: AspectRatio(
                     aspectRatio: theme.aspectRatio.oneToOne,
-                    child: Container(
-                      color: Colors.grey.withValues(alpha: 0.2),
-                    ),
+                    child: Container(color: Colors.grey.withValues(alpha: 0.2)),
                   ),
                 ),
                 gap,
@@ -38,9 +36,7 @@ class LevelContentLoader extends StatelessWidget {
                 ),
                 gap,
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: theme.spacing.s16,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: theme.spacing.s16),
                   child: vyuh.content.buildContent(context, level.instructions),
                 ),
                 gap,
@@ -51,12 +47,9 @@ class LevelContentLoader extends StatelessWidget {
             padding: EdgeInsets.all(theme.spacing.s16),
             child: Column(
               children: [
-                PuzzleButton(
-                  title: "START LEVEL",
-                  onTap: () {},
-                ),
+                PuzzleButton(title: "START LEVEL", onTap: () {}),
                 gap,
-                const PoweredByWidget()
+                const PoweredByWidget(),
               ],
             ),
           ),

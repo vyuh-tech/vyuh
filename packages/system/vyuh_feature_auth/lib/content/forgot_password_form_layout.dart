@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/forgot_password_form.dart';
 import 'package:vyuh_feature_auth/ui/forgot_password_view.dart';

@@ -1,13 +1,10 @@
 import 'package:design_system/design_system.dart' as ds;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class ProviderView extends StatelessWidget {
-  const ProviderView({
-    super.key,
-    required this.provider,
-  });
+  const ProviderView({super.key, required this.provider});
 
   final Provider provider;
 
@@ -27,10 +24,7 @@ class ProviderView extends StatelessWidget {
         Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              provider.name,
-              style: theme.tmdbTheme.bodySmall,
-            ),
+            Text(provider.name, style: theme.tmdbTheme.bodySmall),
             if (provider.originCountry != null)
               Padding(
                 padding: EdgeInsets.only(left: theme.spacing.s2),

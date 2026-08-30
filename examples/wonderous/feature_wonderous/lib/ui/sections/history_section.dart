@@ -1,8 +1,8 @@
 import 'package:design_system/utils/extensions.dart';
 import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/ui/common.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class WonderHistorySection extends StatelessWidget {
   final String? title;

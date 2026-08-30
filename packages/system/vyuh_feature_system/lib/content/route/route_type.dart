@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/dialog_page.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -23,7 +23,7 @@ final class PageRouteType extends RouteTypeConfiguration {
   final PageBehavior behavior;
 
   PageRouteType({this.behavior = PageBehavior.material})
-      : super(schemaType: PageRouteType.schemaName);
+    : super(schemaType: PageRouteType.schemaName);
 
   factory PageRouteType.fromJson(Map<String, dynamic> json) =>
       _$PageRouteTypeFromJson(json);
@@ -31,16 +31,8 @@ final class PageRouteType extends RouteTypeConfiguration {
   @override
   Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]) {
     return behavior == PageBehavior.material
-        ? MaterialPage(
-            child: child,
-            name: route.path,
-            key: pageKey,
-          )
-        : CupertinoPage(
-            child: child,
-            name: route.path,
-            key: pageKey,
-          );
+        ? MaterialPage(child: child, name: route.path, key: pageKey)
+        : CupertinoPage(child: child, name: route.path, key: pageKey);
   }
 }
 
@@ -56,7 +48,7 @@ final class DialogRouteType extends RouteTypeConfiguration {
   final DialogBehavior behavior;
 
   DialogRouteType({this.behavior = DialogBehavior.modalBottomSheet})
-      : super(schemaType: DialogRouteType.schemaName);
+    : super(schemaType: DialogRouteType.schemaName);
 
   factory DialogRouteType.fromJson(Map<String, dynamic> json) =>
       _$DialogRouteTypeFromJson(json);
@@ -65,9 +57,15 @@ final class DialogRouteType extends RouteTypeConfiguration {
   Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]) {
     return switch (behavior) {
       DialogBehavior.modalBottomSheet => ModalDialogPage(
-          builder: (context) => child, name: route.path, key: pageKey),
-      DialogBehavior.fullscreen =>
-        DialogPage(builder: (context) => child, name: route.path, key: pageKey),
+        builder: (context) => child,
+        name: route.path,
+        key: pageKey,
+      ),
+      DialogBehavior.fullscreen => DialogPage(
+        builder: (context) => child,
+        name: route.path,
+        key: pageKey,
+      ),
     };
   }
 }

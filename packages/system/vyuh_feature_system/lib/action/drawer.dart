@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -32,24 +32,29 @@ final class DrawerAction extends ActionConfiguration {
       _$DrawerActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     final scaffoldState = Scaffold.maybeOf(context);
     if (scaffoldState == null) {
-      VyuhBinding.instance.log
-          .debug('DrawerAction requires a Scaffold ancestor');
+      VyuhBinding.instance.log.debug(
+        'DrawerAction requires a Scaffold ancestor',
+      );
       return null;
     }
 
     if (isEndDrawer == false && scaffoldState.hasDrawer == false) {
       VyuhBinding.instance.log.debug(
-          'DrawerAction requires an drawer to be present in your Scaffold');
+        'DrawerAction requires an drawer to be present in your Scaffold',
+      );
       return null;
     }
 
     if (isEndDrawer && scaffoldState.hasEndDrawer == false) {
       VyuhBinding.instance.log.debug(
-          'DrawerAction requires an endDrawer to be present in your Scaffold');
+        'DrawerAction requires an endDrawer to be present in your Scaffold',
+      );
       return null;
     }
 

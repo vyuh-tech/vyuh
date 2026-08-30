@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -52,19 +52,17 @@ abstract class ApiConfiguration<T> implements SchemaItem {
 class APIContentDescriptor extends ContentDescriptor {
   final List<TypeDescriptor<ApiConfiguration>>? configurations;
 
-  APIContentDescriptor({
-    this.configurations,
-    super.layouts,
-  }) : super(schemaType: APIContent.schemaName, title: 'API Content');
+  APIContentDescriptor({this.configurations, super.layouts})
+    : super(schemaType: APIContent.schemaName, title: 'API Content');
 }
 
 final class _APIContentBuilder extends ContentBuilder<APIContent> {
   _APIContentBuilder()
-      : super(
-          content: APIContent.typeDescriptor,
-          defaultLayout: _DefaultAPIContentLayout(),
-          defaultLayoutDescriptor: _DefaultAPIContentLayout.typeDescriptor,
-        );
+    : super(
+        content: APIContent.typeDescriptor,
+        defaultLayout: _DefaultAPIContentLayout(),
+        defaultLayoutDescriptor: _DefaultAPIContentLayout.typeDescriptor,
+      );
 
   @override
   void init(List<ContentDescriptor> descriptors) {
@@ -81,8 +79,10 @@ final class _APIContentBuilder extends ContentBuilder<APIContent> {
   }
 
   void _registerConfigurations(List<ContentDescriptor> descriptors) {
-    final configs = descriptors.cast<APIContentDescriptor>().expand((element) =>
-        element.configurations ?? <TypeDescriptor<ApiConfiguration>>[]);
+    final configs = descriptors.cast<APIContentDescriptor>().expand(
+      (element) =>
+          element.configurations ?? <TypeDescriptor<ApiConfiguration>>[],
+    );
 
     for (final config in configs) {
       VyuhBinding.instance.content.register<ApiConfiguration>(config);

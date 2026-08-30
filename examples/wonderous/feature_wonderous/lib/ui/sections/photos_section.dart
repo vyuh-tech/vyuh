@@ -3,7 +3,7 @@ import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/api/wonder_client.dart';
 import 'package:feature_wonderous/ui/common.dart';
 import 'package:feature_wonderous/ui/formatters.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart'
     hide Divider, Card;
@@ -89,10 +89,9 @@ class WonderEvent extends StatelessWidget {
               child: Text(
                 year,
                 textAlign: TextAlign.right,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleLarge
-                    ?.apply(color: Colors.black),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleLarge?.apply(color: Colors.black),
               ),
             ),
             SizedBox(width: theme.sizing.s2),
@@ -102,10 +101,9 @@ class WonderEvent extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: theme.spacing.s8),
                 child: Text(
                   event.title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium
-                      ?.apply(color: Colors.black),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.apply(color: Colors.black),
                 ),
               ),
             ),

@@ -1,5 +1,5 @@
 import 'package:feature_puzzles/utils/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class BoatWidget extends StatelessWidget {
   final int itemCount;
@@ -15,21 +15,18 @@ class BoatWidget extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) => Container(
-        constraints: constraints,
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage(
-              Assets.boat,
-              package: Assets.package,
-            ),
-            fit: BoxFit.fill,
-          ),
-        ),
-        child: ListView.builder(
-          itemCount: itemCount,
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemBuilder: itemBuilder,
-        ),
-      );
+    constraints: constraints,
+    decoration: const BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage(Assets.boat, package: Assets.package),
+        fit: BoxFit.fill,
+      ),
+    ),
+    child: ListView.builder(
+      itemCount: itemCount,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemBuilder: itemBuilder,
+    ),
+  );
 }

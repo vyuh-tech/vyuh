@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -80,14 +80,13 @@ class ContentBuilder<T extends ContentItem> {
   /// Creates a new content builder.
   ///
   /// - [content]: Type descriptor for the content type
-  /// - [defaultLayout]: Default layout configuration
-  /// - [defaultLayoutDescriptor]: Type descriptor for default layout
+  /// - [_defaultLayout]: Default layout configuration
+  /// - [_defaultLayoutDescriptor]: Type descriptor for default layout
   ContentBuilder({
     required this.content,
-    required LayoutConfiguration<T> defaultLayout,
-    required TypeDescriptor<LayoutConfiguration<T>> defaultLayoutDescriptor,
-  })  : _defaultLayout = defaultLayout,
-        _defaultLayoutDescriptor = defaultLayoutDescriptor;
+    required this._defaultLayout,
+    required this._defaultLayoutDescriptor,
+  });
 
   /// Initializes this content builder with the given descriptors.
   ///
@@ -101,8 +100,9 @@ class ContentBuilder<T extends ContentItem> {
   void init(List<ContentDescriptor> descriptors) {
     VyuhBinding.instance.content.register<ContentItem>(content);
 
-    final userLayouts = descriptors.expand((element) =>
-        element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]);
+    final userLayouts = descriptors.expand(
+      (element) => element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[],
+    );
     final layouts = <TypeDescriptor<LayoutConfiguration>>{
       defaultLayoutDescriptor,
       ...userLayouts,
@@ -125,8 +125,9 @@ class ContentBuilder<T extends ContentItem> {
   /// MUST also override this method to register those same types additively.
   @mustCallSuper
   void addDescriptors(List<ContentDescriptor> descriptors) {
-    final newLayouts = descriptors.expand((element) =>
-        element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[]);
+    final newLayouts = descriptors.expand(
+      (element) => element.layouts ?? <TypeDescriptor<LayoutConfiguration>>[],
+    );
 
     // Add only truly new layouts (avoid duplicates)
     final existingSchemaTypes = _layouts.map((l) => l.schemaType).toSet();
@@ -143,8 +144,10 @@ class ContentBuilder<T extends ContentItem> {
   /// This is a helper method used by [init] to register layout types.
   /// Can also be used to register other types like modifiers.
   @protected
-  void registerDescriptors<U>(Iterable<TypeDescriptor<U>> descriptors,
-      {bool checkUnique = false}) {
+  void registerDescriptors<U>(
+    Iterable<TypeDescriptor<U>> descriptors, {
+    bool checkUnique = false,
+  }) {
     for (var element in descriptors) {
       if (checkUnique &&
           VyuhBinding.instance.content.isRegistered<U>(element.schemaType)) {
@@ -165,8 +168,9 @@ class ContentBuilder<T extends ContentItem> {
     var layout = content.getLayout();
     if (layout == null) {
       layout = defaultLayout;
-      VyuhBinding.instance.log
-          .debug('No layout found for ${content.schemaType}. Using default.');
+      VyuhBinding.instance.log.debug(
+        'No layout found for ${content.schemaType}. Using default.',
+      );
     }
 
     return layout.build(context, content);

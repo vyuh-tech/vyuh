@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_onboarding/default_layout.dart';
@@ -9,19 +9,16 @@ part 'onboarding.g.dart';
 
 final class OnboardingDescriptor extends ContentDescriptor {
   OnboardingDescriptor({super.layouts})
-      : super(
-          schemaType: OnboardingContent.schemaName,
-          title: 'Onboarding',
-        );
+    : super(schemaType: OnboardingContent.schemaName, title: 'Onboarding');
 }
 
 final class OnboardingContentBuilder extends ContentBuilder<OnboardingContent> {
   OnboardingContentBuilder()
-      : super(
-          content: OnboardingContent.typeDescriptor,
-          defaultLayout: DefaultOnboardingLayout(),
-          defaultLayoutDescriptor: DefaultOnboardingLayout.typeDescriptor,
-        );
+    : super(
+        content: OnboardingContent.typeDescriptor,
+        defaultLayout: DefaultOnboardingLayout(),
+        defaultLayoutDescriptor: DefaultOnboardingLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()
@@ -58,12 +55,7 @@ final class OnboardingStep {
 
   final ImageReference? image;
 
-  OnboardingStep({
-    this.title = '',
-    this.description,
-    this.icon,
-    this.image,
-  });
+  OnboardingStep({this.title = '', this.description, this.icon, this.image});
 
   factory OnboardingStep.fromJson(Map<String, dynamic> json) =>
       _$OnboardingStepFromJson(json);

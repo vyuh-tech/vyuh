@@ -1,7 +1,7 @@
 import 'package:chewie/chewie.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:video_player/video_player.dart' as video;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -112,7 +112,7 @@ final class VideoPlayerDefaultLayout
   );
 
   VideoPlayerDefaultLayout()
-      : super(schemaType: '${VideoPlayerItem.schemaName}.layout.default');
+    : super(schemaType: '${VideoPlayerItem.schemaName}.layout.default');
 
   factory VideoPlayerDefaultLayout.fromJson(Map<String, dynamic> json) =>
       _$VideoPlayerDefaultLayoutFromJson(json);
@@ -134,10 +134,7 @@ final class VideoPlayerDefaultLayout
 final class VideoPlayerWidget extends StatefulWidget {
   final VideoPlayerItem content;
 
-  const VideoPlayerWidget({
-    super.key,
-    required this.content,
-  });
+  const VideoPlayerWidget({super.key, required this.content});
 
   @override
   State<VideoPlayerWidget> createState() => _VideoPlayerWidgetState();
@@ -158,12 +155,13 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   Future<void> _initPlayer() async {
     final videoUrl = widget.content.linkType == VideoLinkType.file
         ? widget.content.file != null
-            ? VyuhBinding.instance.content.provider
-                .fileUrl(widget.content.file!)
-            : null
+              ? VyuhBinding.instance.content.provider.fileUrl(
+                  widget.content.file!,
+                )
+              : null
         : widget.content.url != null
-            ? Uri.parse(widget.content.url!)
-            : null;
+        ? Uri.parse(widget.content.url!)
+        : null;
 
     if (videoUrl == null) {
       _error = UnsupportedError('Unable to determine video url');
@@ -171,20 +169,25 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
     }
 
     _controller = video.VideoPlayerController.networkUrl(videoUrl)
-      ..initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
+      ..initialize()
+          .then((_) {
+            if (!mounted) {
+              return;
+            }
 
-        _controller.setVolume(widget.content.muted ? 0 : 1);
+            _controller.setVolume(widget.content.muted ? 0 : 1);
 
-        _chewieController = _buildChewie(context, _controller);
+            _chewieController = _buildChewie(context, _controller);
 
-        setState(() {});
-      }).timeout(const Duration(seconds: 5), onTimeout: () {
-        _error = Exception('Failed to load video from given url or file');
-        setState(() {});
-      });
+            setState(() {});
+          })
+          .timeout(
+            const Duration(seconds: 5),
+            onTimeout: () {
+              _error = Exception('Failed to load video from given url or file');
+              setState(() {});
+            },
+          );
   }
 
   @override
@@ -198,8 +201,11 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   @override
   Widget build(BuildContext context) {
     if (_error != null) {
-      return VyuhBinding.instance.widgetBuilder
-          .errorView(context, error: _error, title: 'Failed to load video');
+      return VyuhBinding.instance.widgetBuilder.errorView(
+        context,
+        error: _error,
+        title: 'Failed to load video',
+      );
     }
 
     final theme = Theme.of(context);
@@ -213,36 +219,39 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                 Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                      borderRadius: widget.content.title == null
-                          ? BorderRadius.circular(8)
-                          : const BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                            )),
+                    borderRadius: widget.content.title == null
+                        ? BorderRadius.circular(8)
+                        : const BorderRadius.only(
+                            topLeft: Radius.circular(8),
+                            topRight: Radius.circular(8),
+                          ),
+                  ),
                   child: AspectRatio(
-                      aspectRatio: _controller.value.aspectRatio,
-                      child: Chewie(controller: _chewieController!)),
+                    aspectRatio: _controller.value.aspectRatio,
+                    child: Chewie(controller: _chewieController!),
+                  ),
                 ),
                 if (widget.content.title != null)
                   Container(
                     clipBehavior: Clip.antiAlias,
                     decoration: BoxDecoration(
-                        color: theme.colorScheme.inverseSurface,
-                        borderRadius: widget.content.title == null
-                            ? BorderRadius.circular(8)
-                            : const BorderRadius.only(
-                                bottomLeft: Radius.circular(8),
-                                bottomRight: Radius.circular(8))),
+                      color: theme.colorScheme.inverseSurface,
+                      borderRadius: widget.content.title == null
+                          ? BorderRadius.circular(8)
+                          : const BorderRadius.only(
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8),
+                            ),
+                    ),
                     padding: const EdgeInsets.all(4),
                     child: Text(
                       widget.content.title!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context)
-                          .textTheme
-                          .labelMedium
-                          ?.apply(color: theme.colorScheme.onInverseSurface),
+                      style: Theme.of(context).textTheme.labelMedium?.apply(
+                        color: theme.colorScheme.onInverseSurface,
+                      ),
                     ),
                   ),
               ],
@@ -252,17 +261,23 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
   }
 
   ChewieController _buildChewie(
-      BuildContext context, video.VideoPlayerController controller) {
+    BuildContext context,
+    video.VideoPlayerController controller,
+  ) {
     return ChewieController(
-        videoPlayerController: controller,
-        autoPlay: widget.content.autoplay,
-        deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
-        looping: widget.content.loop,
-        hideControlsTimer: const Duration(seconds: 1),
-        placeholder: VyuhBinding.instance.widgetBuilder.contentLoader(context),
-        errorBuilder: (context, errorMessage) {
-          return VyuhBinding.instance.widgetBuilder.errorView(context,
-              title: 'Failed to play video', error: errorMessage);
-        });
+      videoPlayerController: controller,
+      autoPlay: widget.content.autoplay,
+      deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
+      looping: widget.content.loop,
+      hideControlsTimer: const Duration(seconds: 1),
+      placeholder: VyuhBinding.instance.widgetBuilder.contentLoader(context),
+      errorBuilder: (context, errorMessage) {
+        return VyuhBinding.instance.widgetBuilder.errorView(
+          context,
+          title: 'Failed to play video',
+          error: errorMessage,
+        );
+      },
+    );
   }
 }

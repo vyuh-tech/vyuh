@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -17,11 +17,7 @@ final class Preview extends StatelessWidget {
 
   /// Creates a new preview widget.
   ///
-  const Preview({
-    super.key,
-    required this.builder,
-    required this.layout,
-  });
+  const Preview({super.key, required this.builder, required this.layout});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +30,11 @@ final class Preview extends StatelessWidget {
             content: content,
             layout: contentLayout,
             child: Builder(
-              builder: (context) => vyuh.content
-                  .buildContent(context, content, layout: contentLayout),
+              builder: (context) => vyuh.content.buildContent(
+                context,
+                content,
+                layout: contentLayout,
+              ),
             ),
           );
 
@@ -46,11 +45,7 @@ final class Preview extends StatelessWidget {
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(8),
-      child: widget ??
-          NoPreviewCard(
-            title: layout.title,
-            message: message,
-          ),
+      child: widget ?? NoPreviewCard(title: layout.title, message: message),
     );
   }
 }

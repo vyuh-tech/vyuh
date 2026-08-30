@@ -3,16 +3,19 @@ import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/ui/common.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class WonderLocationInfoSection extends StatelessWidget {
   final String? title;
   final Wonder wonder;
 
-  const WonderLocationInfoSection(
-      {super.key, this.title, required this.wonder});
+  const WonderLocationInfoSection({
+    super.key,
+    this.title,
+    required this.wonder,
+  });
 
   @override
   Widget build(BuildContext context) {

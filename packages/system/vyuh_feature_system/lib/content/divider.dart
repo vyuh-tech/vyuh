@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart' as f;
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as f;
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -47,12 +47,8 @@ class Divider extends ContentItem implements PortableBlockItem {
   final double? thickness;
   final double? indent;
 
-  Divider({
-    this.thickness = 1,
-    this.indent = 8,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: Divider.schemaName);
+  Divider({this.thickness = 1, this.indent = 8, super.layout, super.modifiers})
+    : super(schemaType: Divider.schemaName);
 
   factory Divider.fromJson(Map<String, dynamic> json) =>
       _$DividerFromJson(json);
@@ -77,7 +73,7 @@ class Divider extends ContentItem implements PortableBlockItem {
 /// ```
 class DividerDescriptor extends ContentDescriptor {
   DividerDescriptor({super.layouts})
-      : super(schemaType: Divider.schemaName, title: 'Divider');
+    : super(schemaType: Divider.schemaName, title: 'Divider');
 }
 
 /// Default layout for divider content.
@@ -101,22 +97,17 @@ final class DefaultDividerLayout extends LayoutConfiguration<Divider> {
   );
 
   DefaultDividerLayout()
-      : super(schemaType: '${Divider.schemaName}.layout.default');
+    : super(schemaType: '${Divider.schemaName}.layout.default');
 
   factory DefaultDividerLayout.fromJson(Map<String, dynamic> json) =>
       DefaultDividerLayout();
 
   @override
   Widget build(BuildContext context, Divider content) {
-    final child = f.Divider(
-      thickness: content.thickness,
-    );
+    final child = f.Divider(thickness: content.thickness);
 
     return content.indent != null && content.indent! > 0
-        ? Padding(
-            padding: EdgeInsets.all(content.indent!),
-            child: child,
-          )
+        ? Padding(padding: EdgeInsets.all(content.indent!), child: child)
         : child;
   }
 }

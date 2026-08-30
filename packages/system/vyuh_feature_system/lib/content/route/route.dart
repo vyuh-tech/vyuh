@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -44,10 +44,14 @@ final class Route extends RouteBase {
       routeType: PageRouteType(),
       path: '/preview',
       regions: [
-        Region(identifier: 'body', title: 'Body', items: [
-          Card.typeDescriptor.preview!.call(),
-          Group.typeDescriptor.preview!.call(),
-        ]),
+        Region(
+          identifier: 'body',
+          title: 'Body',
+          items: [
+            Card.typeDescriptor.preview!.call(),
+            Group.typeDescriptor.preview!.call(),
+          ],
+        ),
       ],
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
@@ -83,8 +87,8 @@ final class Route extends RouteBase {
   factory Route.fromJson(Map<String, dynamic> json) => _$RouteFromJson(json);
 
   static List<RouteLifecycleConfiguration>? lifecycleHandlersFromJson(
-          dynamic json) =>
-      listFromJson<RouteLifecycleConfiguration>(json);
+    dynamic json,
+  ) => listFromJson<RouteLifecycleConfiguration>(json);
 
   @override
   Future<RouteBase?> init(BuildContext context) async {
@@ -135,11 +139,7 @@ final class Region {
   @JsonKey(defaultValue: [])
   final List<ContentItem> items;
 
-  Region({
-    required this.identifier,
-    required this.title,
-    required this.items,
-  });
+  Region({required this.identifier, required this.title, required this.items});
 
   factory Region.fromJson(Map<String, dynamic> json) => _$RegionFromJson(json);
 }
@@ -163,20 +163,17 @@ final class RouteDescriptor extends ContentDescriptor {
   List<TypeDescriptor<RouteLifecycleConfiguration>>? lifecycleHandlers;
   List<TypeDescriptor<RouteTypeConfiguration>>? routeTypes;
 
-  RouteDescriptor({
-    this.lifecycleHandlers,
-    this.routeTypes,
-    super.layouts,
-  }) : super(schemaType: Route.schemaName, title: 'Route');
+  RouteDescriptor({this.lifecycleHandlers, this.routeTypes, super.layouts})
+    : super(schemaType: Route.schemaName, title: 'Route');
 }
 
 final class _RouteContentBuilder extends ContentBuilder<Route> {
   _RouteContentBuilder()
-      : super(
-          content: Route.typeDescriptor,
-          defaultLayout: DefaultRouteLayout(),
-          defaultLayoutDescriptor: DefaultRouteLayout.typeDescriptor,
-        );
+    : super(
+        content: Route.typeDescriptor,
+        defaultLayout: DefaultRouteLayout(),
+        defaultLayoutDescriptor: DefaultRouteLayout.typeDescriptor,
+      );
 
   @override
   init(List<ContentDescriptor> descriptors) {
@@ -194,17 +191,22 @@ final class _RouteContentBuilder extends ContentBuilder<Route> {
 
   void _registerRouteTypes(List<ContentDescriptor> descriptors) {
     final rtDescriptors = descriptors.cast<RouteDescriptor>();
-    final initConfigs = rtDescriptors.expand((element) =>
-        element.lifecycleHandlers ??
-        <TypeDescriptor<RouteLifecycleConfiguration>>[]);
+    final initConfigs = rtDescriptors.expand(
+      (element) =>
+          element.lifecycleHandlers ??
+          <TypeDescriptor<RouteLifecycleConfiguration>>[],
+    );
 
     for (final config in initConfigs) {
-      VyuhBinding.instance.content
-          .register<RouteLifecycleConfiguration>(config);
+      VyuhBinding.instance.content.register<RouteLifecycleConfiguration>(
+        config,
+      );
     }
 
-    final routeTypes = rtDescriptors.expand((element) =>
-        element.routeTypes ?? <TypeDescriptor<RouteTypeConfiguration>>[]);
+    final routeTypes = rtDescriptors.expand(
+      (element) =>
+          element.routeTypes ?? <TypeDescriptor<RouteTypeConfiguration>>[],
+    );
 
     for (final config in routeTypes) {
       VyuhBinding.instance.content.register<RouteTypeConfiguration>(config);

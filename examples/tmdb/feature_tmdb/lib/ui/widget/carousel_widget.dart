@@ -4,7 +4,7 @@ import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_tmdb/routes.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/common_widgets/vote_percentage.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -73,9 +73,7 @@ class CarouselWidget extends StatelessWidget {
           Positioned(
             right: theme.spacing.s32,
             top: theme.spacing.s16,
-            child: VotePercentage(
-              voteAverage: voteAverage,
-            ),
+            child: VotePercentage(voteAverage: voteAverage),
           ),
           Positioned.fill(
             bottom: -theme.spacing.s32,

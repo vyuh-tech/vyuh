@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -64,8 +64,10 @@ final class Action {
   /// - If [isAwaited] is false, executes asynchronously
   ///
   /// The [arguments] map is passed to each configuration's execute method.
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     if (configurations == null) {
       return;
     }
@@ -148,11 +150,7 @@ abstract class ActionConfiguration implements SchemaItem {
   final bool? isAwaited;
 
   /// Creates a new action configuration.
-  ActionConfiguration({
-    required this.schemaType,
-    this.title,
-    this.isAwaited,
-  });
+  ActionConfiguration({required this.schemaType, this.title, this.isAwaited});
 
   /// Executes this configuration.
   ///

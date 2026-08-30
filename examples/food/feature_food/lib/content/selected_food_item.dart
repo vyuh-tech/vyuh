@@ -2,9 +2,9 @@ import 'package:feature_food/api.dart';
 import 'package:feature_food/content/food_item.dart';
 import 'package:feature_food/content/food_item_default_layout.dart';
 import 'package:feature_food/routes.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -20,10 +20,8 @@ final class SelectedFoodItem extends ContentItem {
     title: 'Selected Food Menu Item',
   );
 
-  SelectedFoodItem({
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
+  SelectedFoodItem({super.layout, super.modifiers})
+    : super(schemaType: schemaName);
 
   factory SelectedFoodItem.fromJson(Map<String, dynamic> json) =>
       _$SelectedFoodItemFromJson(json);
@@ -32,11 +30,11 @@ final class SelectedFoodItem extends ContentItem {
 final class SelectedFoodMenuItemContentBuilder
     extends ContentBuilder<SelectedFoodItem> {
   SelectedFoodMenuItemContentBuilder()
-      : super(
-          content: SelectedFoodItem.typeDescriptor,
-          defaultLayout: DefaultFoodMenuItemLayout(),
-          defaultLayoutDescriptor: DefaultFoodMenuItemLayout.typeDescriptor,
-        );
+    : super(
+        content: SelectedFoodItem.typeDescriptor,
+        defaultLayout: DefaultFoodMenuItemLayout(),
+        defaultLayoutDescriptor: DefaultFoodMenuItemLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()

@@ -3,8 +3,8 @@ description: "A sample feature package for the Vyuh Framework"
 version: 1.0.0
 
 environment:
-  sdk: '>=3.3.3 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
@@ -13,10 +13,11 @@ dependencies:
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
-  flutter_sanity_portable_text: ^1.0.0
-  vyuh_core: ^1.0.0
-  vyuh_feature_system: ^1.0.0
-  vyuh_extension_content: ^1.0.0
+  material_ui: ^1.1.0
+  flutter_sanity_portable_text: ^2.0.0
+  vyuh_core: ^2.0.0
+  vyuh_feature_system: ^2.0.0
+  vyuh_extension_content: ^2.0.0
 
 dev_dependencies:
   flutter_test:

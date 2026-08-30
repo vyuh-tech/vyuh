@@ -122,8 +122,8 @@ class ConferenceApi {
       ''',
       queryParams: {
         'editionId': editionId,
-        if (trackId != null) 'trackId': trackId,
-        if (speakerId != null) 'speakerId': speakerId,
+        'trackId': ?trackId,
+        'speakerId': ?speakerId,
       },
       fromJson: Session.fromJson,
     );

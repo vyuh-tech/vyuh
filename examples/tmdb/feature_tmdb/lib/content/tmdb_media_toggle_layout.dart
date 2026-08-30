@@ -1,9 +1,9 @@
 import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/common_widgets/box_widget.dart';
-import 'package:flutter/material.dart' hide Action, Route;
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action, Route;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -34,10 +34,7 @@ final class TmdbMediaToggleLayout extends LayoutConfiguration<Route> {
 
   @override
   Widget build(BuildContext context, Route content) {
-    return TmdbMediaToggleLayoutView(
-      layout: this,
-      content: content,
-    );
+    return TmdbMediaToggleLayoutView(layout: this, content: content);
   }
 }
 

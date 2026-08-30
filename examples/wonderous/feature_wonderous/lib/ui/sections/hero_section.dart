@@ -2,7 +2,7 @@ import 'package:design_system/utils/extensions.dart';
 import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/ui/common.dart';
 import 'package:feature_wonderous/ui/formatters.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart'
     hide Divider, Card;
 
@@ -20,9 +20,7 @@ final class WonderHeroSection extends StatelessWidget {
         padding: EdgeInsets.all(theme.spacing.s16),
         child: Column(
           children: [
-            ContentImage(
-              ref: wonder.icon,
-            ),
+            ContentImage(ref: wonder.icon),
             Row(
               children: [
                 const Expanded(child: Divider()),
@@ -30,8 +28,9 @@ final class WonderHeroSection extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: theme.spacing.s8),
                   child: Text(
                     wonder.subtitle,
-                    style: theme.textTheme.bodyMedium
-                        ?.apply(color: wonder.textColor),
+                    style: theme.textTheme.bodyMedium?.apply(
+                      color: wonder.textColor,
+                    ),
                   ),
                 ),
                 const Expanded(child: Divider()),
@@ -40,8 +39,9 @@ final class WonderHeroSection extends StatelessWidget {
             Text(
               wonder.title,
               textAlign: TextAlign.center,
-              style:
-                  theme.textTheme.displayMedium?.apply(color: wonder.textColor),
+              style: theme.textTheme.displayMedium?.apply(
+                color: wonder.textColor,
+              ),
             ),
             Text(
               wonder.location.place,
@@ -50,8 +50,10 @@ final class WonderHeroSection extends StatelessWidget {
             const Divider(),
             Text(
               '${wonder.startYear.formattedYear} to ${wonder.endYear.formattedYear}',
-              style: theme.textTheme.bodyMedium
-                  ?.apply(color: wonder.textColor, fontWeightDelta: 2),
+              style: theme.textTheme.bodyMedium?.apply(
+                color: wonder.textColor,
+                fontWeightDelta: 2,
+              ),
             ),
             SizedBox(height: theme.spacing.s16),
             ClipRRect(

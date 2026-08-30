@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/forgot_password_form.dart';
 import 'package:vyuh_feature_auth/ui/auth_form_builder.dart';
@@ -27,16 +27,16 @@ class ForgotPasswordView extends StatelessWidget {
           }
         },
         endAuthState: AuthState.passwordResetEmailSent,
-        child: (context, scope, submit) => EmailField(
-          submit: submit,
-          email: email,
-        ),
+        child: (context, scope, submit) =>
+            EmailField(submit: submit, email: email),
         footer: (context, scope) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: HintAction(
             onTap: (_) => content.returnAction?.execute(context),
-            hintLabel:
-                HintAction.defaultHintLabel(context, 'Know your password? '),
+            hintLabel: HintAction.defaultHintLabel(
+              context,
+              'Know your password? ',
+            ),
             actionLabel: HintAction.defaultActionLabel(context, 'Go Back'),
           ),
         ),

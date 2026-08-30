@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:unsplash_client/unsplash_client.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -22,10 +22,7 @@ final class PhotoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: _buildDetailView(context),
-    );
+    return GestureDetector(onTap: onTap, child: _buildDetailView(context));
   }
 
   Widget _buildDetailView(BuildContext context) {
@@ -62,8 +59,9 @@ final class PhotoCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 _Chip(
-                    label: 'by ${photo.user.name}',
-                    padding: const EdgeInsets.symmetric(horizontal: 4))
+                  label: 'by ${photo.user.name}',
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                ),
               ],
             ),
           ),
@@ -73,8 +71,9 @@ final class PhotoCard extends StatelessWidget {
             right: 0,
             bottom: 0,
             child: _Chip(
-                label: title!,
-                borderRadius: const BorderRadius.all(Radius.zero)),
+              label: title!,
+              borderRadius: const BorderRadius.all(Radius.zero),
+            ),
           ),
       ],
     );
@@ -107,16 +106,13 @@ class _Chip extends StatelessWidget {
       child: Row(
         children: [
           if (icon != null)
-            Icon(
-              icon,
-              size: 16,
-              color: theme.colorScheme.onInverseSurface,
-            ),
+            Icon(icon, size: 16, color: theme.colorScheme.onInverseSurface),
           const SizedBox(width: 4),
           Text(
             label,
-            style: theme.textTheme.labelSmall!
-                .apply(color: theme.colorScheme.onInverseSurface),
+            style: theme.textTheme.labelSmall!.apply(
+              color: theme.colorScheme.onInverseSurface,
+            ),
           ),
         ],
       ),

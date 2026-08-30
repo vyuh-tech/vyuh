@@ -5,13 +5,10 @@ import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/section_title.dart';
 import 'package:feature_tmdb/utils/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Divider;
 
-typedef ItemWidgetBuilder<T> = Widget? Function(
-  BuildContext context,
-  T item,
-);
+typedef ItemWidgetBuilder<T> = Widget? Function(BuildContext context, T item);
 
 enum MediaCardType { home, recommendation, watchlist }
 
@@ -40,8 +37,9 @@ final class CollectionView<T> extends StatelessWidget {
     }
 
     final size = MediaQuery.of(context).size;
-    final listItems =
-        variant == ListRepresentation.short ? items.toList() : items;
+    final listItems = variant == ListRepresentation.short
+        ? items.toList()
+        : items;
 
     if (variant == ListRepresentation.short) {
       return _ShortListView<T>(
@@ -128,11 +126,7 @@ class _ShortListView<T> extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: SectionTitle(
-                  title: title,
-                ),
-              ),
+              Expanded(child: SectionTitle(title: title)),
               if (items.shouldShowViewAll && onViewAllTap != null)
                 TextButton(
                   onPressed: onViewAllTap,

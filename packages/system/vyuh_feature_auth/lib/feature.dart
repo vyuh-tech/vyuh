@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as go;
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content_extension_descriptor.dart';
 import 'package:vyuh_feature_auth/auth_user_card_layout.dart';
@@ -18,26 +18,26 @@ FeatureDescriptor feature({List<go.RouteBase> Function()? routes}) =>
       title: 'Authentication UI',
       icon: Icons.account_circle_outlined,
       extensions: [descriptor],
-      routes: routes ??
+      routes:
+          routes ??
           () => [
-                CMSRoute(path: '/login'),
-                CMSRoute(path: '/signup'),
-                CMSRoute(path: '/forgot-password'),
-              ],
+            CMSRoute(path: '/login'),
+            CMSRoute(path: '/signup'),
+            CMSRoute(path: '/forgot-password'),
+          ],
     );
 
-final descriptor = ContentExtensionDescriptor(contents: [
-  CardDescriptor(
-    layouts: [
-      AuthUserCardLayout.typeDescriptor,
-    ],
-  ),
-], contentBuilders: [
-  EmailPasswordForm.contentBuilder,
-  UsernamePasswordForm.contentBuilder,
-  ProfileCard.contentBuilder,
-  ForgotPasswordForm.contentBuilder,
-  OAuthSignIn.contentBuilder,
-  PhoneOtpForm.contentBuilder,
-  HintActionText.contentBuilder,
-]);
+final descriptor = ContentExtensionDescriptor(
+  contents: [
+    CardDescriptor(layouts: [AuthUserCardLayout.typeDescriptor]),
+  ],
+  contentBuilders: [
+    EmailPasswordForm.contentBuilder,
+    UsernamePasswordForm.contentBuilder,
+    ProfileCard.contentBuilder,
+    ForgotPasswordForm.contentBuilder,
+    OAuthSignIn.contentBuilder,
+    PhoneOtpForm.contentBuilder,
+    HintActionText.contentBuilder,
+  ],
+);

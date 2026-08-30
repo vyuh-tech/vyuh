@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart' hide RouteBase;
 
 Future<List<RouteBase>> routes() async {
@@ -36,7 +36,7 @@ Future<List<RouteBase>> routes() async {
               ],
             ),
           ],
-          builder: (context, __, shell) {
+          builder: (context, _, shell) {
             return Scaffold(
               appBar: AppBar(
                 actions: [
@@ -82,6 +82,6 @@ String wonderPathResolver(String path) {
       '/wonderous/wonder/events',
     (String x) when x.contains(RegExp(r'/wonder/[^/]+/photos')) =>
       '/wonderous/wonder/photos',
-    _ => path
+    _ => path,
   };
 }

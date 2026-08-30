@@ -10,9 +10,9 @@ import 'package:feature_tmdb/ui/sections/preview_list.dart';
 import 'package:feature_tmdb/ui/sections/review_card.dart';
 import 'package:feature_tmdb/ui/sections/statistics.dart';
 import 'package:feature_tmdb/ui/sections/trailer.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -21,11 +21,11 @@ part 'series_detail_section.g.dart';
 
 final class SeriesDetailSectionBuilder extends ContentBuilder {
   SeriesDetailSectionBuilder()
-      : super(
-          content: SeriesDetailSection.typeDescriptor,
-          defaultLayout: SeriesDetailSectionLayout(),
-          defaultLayoutDescriptor: SeriesDetailSectionLayout.typeDescriptor,
-        );
+    : super(
+        content: SeriesDetailSection.typeDescriptor,
+        defaultLayout: SeriesDetailSectionLayout(),
+        defaultLayoutDescriptor: SeriesDetailSectionLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()
@@ -130,5 +130,5 @@ enum SeriesDetailSectionType {
   recommendations,
   reviews,
   footer,
-  trailer
+  trailer,
 }

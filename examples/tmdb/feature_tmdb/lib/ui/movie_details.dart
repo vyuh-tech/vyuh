@@ -4,7 +4,7 @@ import 'package:feature_tmdb/ui/common_widgets/vote_percentage.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/widget/add_to_watchlist_button.dart';
 import 'package:feature_tmdb/ui/widget/dot_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
@@ -12,10 +12,7 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 class MovieHeroCard extends StatelessWidget {
   final Movie movie;
 
-  const MovieHeroCard({
-    super.key,
-    required this.movie,
-  });
+  const MovieHeroCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +87,7 @@ class MovieHeroCard extends StatelessWidget {
           ),
         ] else ...[
           IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: theme.colorScheme.primary,
-            ),
+            icon: Icon(Icons.arrow_back_ios, color: theme.colorScheme.primary),
             onPressed: () => Navigator.of(context).pop(),
           ),
         ],
@@ -119,8 +113,9 @@ class MovieHeroCard extends StatelessWidget {
                       backgroundColor: theme.colorScheme.secondary,
                       label: Text(
                         movie.status ?? '',
-                        style: theme.tmdbTheme.bodySmall
-                            ?.copyWith(color: theme.colorScheme.onSecondary),
+                        style: theme.tmdbTheme.bodySmall?.copyWith(
+                          color: theme.colorScheme.onSecondary,
+                        ),
                       ),
                     ),
                     if (movie.voteAverage != null)
@@ -132,17 +127,13 @@ class MovieHeroCard extends StatelessWidget {
                 ),
               movieDetailWidget(context),
               ds.Gap.h24,
-              AddToWatchlistButton(
-                item: movie,
-              ),
+              AddToWatchlistButton(item: movie),
               ds.Gap.h24,
               if (movie.genres != null)
                 Wrap(
                   spacing: theme.spacing.s8,
                   children: movie.genres!
-                      .map(
-                        (genre) => _genreChip(context, genre),
-                      )
+                      .map((genre) => _genreChip(context, genre))
                       .toList(),
                 ),
               if (movie.overview.isNotEmpty) ...[
@@ -161,22 +152,13 @@ class MovieHeroCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          movie.title,
-          style: theme.tmdbTheme.displayMedium,
-        ),
+        Text(movie.title, style: theme.tmdbTheme.displayMedium),
         if (movie.tagline != null)
-          Text(
-            movie.tagline!,
-            style: theme.tmdbTheme.bodyMedium,
-          ),
+          Text(movie.tagline!, style: theme.tmdbTheme.bodyMedium),
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            Text(
-              movie.adult ? 'A' : 'U/A',
-              style: theme.tmdbTheme.labelLarge,
-            ),
+            Text(movie.adult ? 'A' : 'U/A', style: theme.tmdbTheme.labelLarge),
             ds.Gap.w4,
             const DotWidget(),
             ds.Gap.w4,
@@ -203,18 +185,14 @@ class MovieHeroCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(theme.borderRadius.large),
         ),
-        backgroundColor:
-            theme.colorScheme.inverseSurface.withValues(alpha: 0.8),
+        backgroundColor: theme.colorScheme.inverseSurface.withValues(
+          alpha: 0.8,
+        ),
         labelStyle: theme.tmdbTheme.labelMedium?.apply(
           color: theme.colorScheme.onPrimary,
         ),
-        label: Text(
-          genre.name,
-          style: theme.tmdbTheme.headlineSmall,
-        ),
-        padding: EdgeInsets.symmetric(
-          horizontal: theme.spacing.s4,
-        ),
+        label: Text(genre.name, style: theme.tmdbTheme.headlineSmall),
+        padding: EdgeInsets.symmetric(horizontal: theme.spacing.s4),
       ),
     );
   }

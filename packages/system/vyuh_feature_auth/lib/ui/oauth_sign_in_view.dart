@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/oauth_signin.dart';
 import 'package:vyuh_feature_auth/content/oauth_signin_layout.dart';
@@ -34,22 +34,23 @@ class _OAuthSignInViewState extends State<OAuthSignInView> {
               LoaderButton(
                 onPressed: () {
                   _invokedMethod = authType.loginMethod;
-                  scope.runAuthAction(
-                    () async {
-                      await vyuh.auth.loginWithOAuth(authType);
-                      if (context.mounted) {
-                        widget.content.action?.execute(context);
-                      }
-                    },
-                  );
+                  scope.runAuthAction(() async {
+                    await vyuh.auth.loginWithOAuth(authType);
+                    if (context.mounted) {
+                      widget.content.action?.execute(context);
+                    }
+                  });
                 },
-                loading: _invokedMethod == authType.loginMethod &&
+                loading:
+                    _invokedMethod == authType.loginMethod &&
                     scope.authState == AuthState.inProgress,
-                icon: widget.layout.type == OAuthLayoutType.iconText ||
+                icon:
+                    widget.layout.type == OAuthLayoutType.iconText ||
                         widget.layout.type == OAuthLayoutType.icon
                     ? Icon(authType.icon)
                     : null,
-                title: widget.layout.type == OAuthLayoutType.iconText ||
+                title:
+                    widget.layout.type == OAuthLayoutType.iconText ||
                         widget.layout.type == OAuthLayoutType.text
                     ? authType.buttonTitle
                     : null,
@@ -97,24 +98,24 @@ extension on String {
 
 extension on OAuthType {
   IconData get icon => switch (this) {
-        OAuthType.google => SocialIcons.google,
-        OAuthType.meta => SocialIcons.meta,
-        OAuthType.twitter => SocialIcons.twitter,
-        OAuthType.apple => SocialIcons.apple,
-        OAuthType.github => SocialIcons.github,
-        OAuthType.microsoft => SocialIcons.microsoft,
-        OAuthType.linkedin => SocialIcons.linkedIn,
-        _ => Icons.account_circle_outlined,
-      };
+    OAuthType.google => SocialIcons.google,
+    OAuthType.meta => SocialIcons.meta,
+    OAuthType.twitter => SocialIcons.twitter,
+    OAuthType.apple => SocialIcons.apple,
+    OAuthType.github => SocialIcons.github,
+    OAuthType.microsoft => SocialIcons.microsoft,
+    OAuthType.linkedin => SocialIcons.linkedIn,
+    _ => Icons.account_circle_outlined,
+  };
 
   String get buttonTitle => name.capitalize();
 
   ButtonStyle? get buttonStyle => switch (this) {
-        OAuthType.apple => const ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(Colors.black),
-            foregroundColor: WidgetStatePropertyAll(Colors.white),
-            iconColor: WidgetStatePropertyAll(Colors.white),
-          ),
-        _ => null,
-      };
+    OAuthType.apple => const ButtonStyle(
+      backgroundColor: WidgetStatePropertyAll(Colors.black),
+      foregroundColor: WidgetStatePropertyAll(Colors.white),
+      iconColor: WidgetStatePropertyAll(Colors.white),
+    ),
+    _ => null,
+  };
 }

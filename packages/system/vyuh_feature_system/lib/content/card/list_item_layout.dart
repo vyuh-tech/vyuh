@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as sys;
 
@@ -39,8 +39,9 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                 Container(
                   clipBehavior: Clip.antiAlias,
                   decoration: BoxDecoration(
-                      color: theme.colorScheme.surface,
-                      borderRadius: BorderRadius.circular(8)),
+                    color: theme.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                   height: 64,
                   width: 92,
                   child: sys.ContentImage(
@@ -82,7 +83,7 @@ class ListItemCardLayout extends LayoutConfiguration<sys.Card> {
                 ),
               ),
               if (content.action != null)
-                const Icon(Icons.chevron_right_rounded)
+                const Icon(Icons.chevron_right_rounded),
             ],
           ),
         ),

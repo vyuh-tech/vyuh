@@ -1,15 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
-enum KnownRegionType {
-  body,
-  drawer,
-  endDrawer,
-  header,
-  footer,
-}
+enum KnownRegionType { body, drawer, endDrawer, header, footer }
 
 /// A [Scaffold] that uses a [CustomScrollView] to display the content of a [vf.Route].
 /// Use this when creating custom layouts for the Route content.
@@ -52,9 +46,7 @@ final class RouteScaffold extends StatelessWidget {
       children: [
         for (final headerItem in headerItems)
           VyuhBinding.instance.content.buildContent(context, headerItem),
-        Expanded(
-          child: body ?? vf.ContentItemsScrollView(items: bodyItems),
-        ),
+        Expanded(child: body ?? vf.ContentItemsScrollView(items: bodyItems)),
         for (final footerItem in footerItems)
           VyuhBinding.instance.content.buildContent(context, footerItem),
       ],
@@ -63,8 +55,9 @@ final class RouteScaffold extends StatelessWidget {
     final scaffold = Scaffold(
       appBar: appBar,
       body: useSafeArea ? SafeArea(child: bodyContent) : bodyContent,
-      drawer:
-          drawerItems.isNotEmpty ? _buildDrawer(context, drawerItems) : null,
+      drawer: drawerItems.isNotEmpty
+          ? _buildDrawer(context, drawerItems)
+          : null,
       endDrawer: endDrawerItems.isNotEmpty
           ? _buildDrawer(context, endDrawerItems)
           : null,

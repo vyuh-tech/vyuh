@@ -2,9 +2,9 @@ import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_tmdb/routes.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/utils/utils.dart';
-import 'package:flutter/material.dart' hide Action, Route;
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action, Route;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/single_item_route_scaffold.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -23,20 +23,15 @@ final class TmdbSingleItemLayout extends LayoutConfiguration<Route> {
     title: 'Tmdb Single Item Layout',
   );
 
-  TmdbSingleItemLayout({
-    required this.title,
-    required this.subtitle,
-  }) : super(schemaType: schemaName);
+  TmdbSingleItemLayout({required this.title, required this.subtitle})
+    : super(schemaType: schemaName);
 
   factory TmdbSingleItemLayout.fromJson(Map<String, dynamic> json) =>
       _$TmdbSingleItemLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, Route content) {
-    return TmdbSingleItemLayoutView(
-      layout: this,
-      content: content,
-    );
+    return TmdbSingleItemLayoutView(layout: this, content: content);
   }
 }
 
@@ -101,15 +96,9 @@ final class TmdbSingleItemLayoutView extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          layout.title ?? '',
-          style: theme.tmdbTheme.displaySmall,
-        ),
+        Text(layout.title ?? '', style: theme.tmdbTheme.displaySmall),
         if (subtitle.isNotEmpty)
-          Text(
-            layout.subtitle ?? subtitle,
-            style: theme.tmdbTheme.bodySmall,
-          ),
+          Text(layout.subtitle ?? subtitle, style: theme.tmdbTheme.bodySmall),
       ],
     );
   }

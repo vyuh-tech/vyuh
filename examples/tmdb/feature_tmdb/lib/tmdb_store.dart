@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:feature_tmdb/routes.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
@@ -30,11 +30,7 @@ final class TMDBStore {
   void selectMovie(int id) {
     final client = vyuh.di.get<TMDBClient>();
 
-    _fetchMovieInfo(
-      id,
-      '$id.movie',
-      (id) => client.movies.details(id),
-    );
+    _fetchMovieInfo(id, '$id.movie', (id) => client.movies.details(id));
     _fetchMovieInfo(
       id,
       '$id.movie.credits'.toString(),
@@ -98,11 +94,7 @@ final class TMDBStore {
   void selectSeries(int id) {
     final client = vyuh.di.get<TMDBClient>();
 
-    _fetchSeriesInfo(
-      id,
-      '$id.series',
-      (id) => client.series.details(id),
-    );
+    _fetchSeriesInfo(id, '$id.series', (id) => client.series.details(id));
     _fetchSeriesInfo(
       id,
       '$id.series.credits'.toString(),

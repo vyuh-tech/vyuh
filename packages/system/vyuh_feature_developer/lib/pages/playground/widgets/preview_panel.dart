@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -22,12 +22,7 @@ final class PreviewPanel extends StatelessWidget {
 
   /// Creates a new preview panel widget.
   ///
-  const PreviewPanel({
-    super.key,
-    this.builder,
-    this.layout,
-    this.feature,
-  });
+  const PreviewPanel({super.key, this.builder, this.layout, this.feature});
 
   Widget _buildBreadcrumb(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,8 +55,9 @@ final class PreviewPanel extends StatelessWidget {
   }
 
   Widget _featureHeader(BuildContext context, String featureName) {
-    final feature =
-        vyuh.features.firstWhereOrNull((f) => f.name == featureName);
+    final feature = vyuh.features.firstWhereOrNull(
+      (f) => f.name == featureName,
+    );
     if (feature == null) {
       return const SizedBox.shrink();
     }
@@ -96,16 +92,11 @@ final class PreviewPanel extends StatelessWidget {
             child: _featureHeader(context, layout?.sourceFeature ?? ''),
           ),
           Expanded(
-            child: Preview(
-              builder: builder!,
-              layout: layout!,
-            ),
-          )
+            child: Preview(builder: builder!, layout: layout!),
+          ),
         ] else
           const Expanded(
-            child: Center(
-              child: Text('Select a layout to preview'),
-            ),
+            child: Center(child: Text('Select a layout to preview')),
           ),
       ],
     );

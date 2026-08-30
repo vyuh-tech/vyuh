@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ModalDialogPage<T> extends Page<T> {
   final Offset? anchorPoint;
@@ -25,17 +25,17 @@ class ModalDialogPage<T> extends Page<T> {
 
   @override
   Route<T> createRoute(BuildContext context) => ModalBottomSheetRoute(
-        isScrollControlled: false,
-        isDismissible: barrierDismissible,
-        enableDrag: true,
-        showDragHandle: true,
-        settings: this,
-        builder: builder,
-        anchorPoint: anchorPoint,
-        barrierLabel: barrierLabel,
-        useSafeArea: useSafeArea,
-        capturedThemes: themes,
-      );
+    isScrollControlled: false,
+    isDismissible: barrierDismissible,
+    enableDrag: true,
+    showDragHandle: true,
+    settings: this,
+    builder: builder,
+    anchorPoint: anchorPoint,
+    barrierLabel: barrierLabel,
+    useSafeArea: useSafeArea,
+    capturedThemes: themes,
+  );
 }
 
 class DialogPage<T> extends Page<T> {
@@ -63,14 +63,14 @@ class DialogPage<T> extends Page<T> {
 
   @override
   Route<T> createRoute(BuildContext context) => DialogRoute(
-        context: context,
-        barrierColor: barrierColor,
-        barrierDismissible: barrierDismissible,
-        settings: this,
-        builder: builder,
-        anchorPoint: anchorPoint,
-        barrierLabel: barrierLabel,
-        useSafeArea: useSafeArea,
-        themes: themes,
-      );
+    context: context,
+    barrierColor: barrierColor,
+    barrierDismissible: barrierDismissible,
+    settings: this,
+    builder: builder,
+    anchorPoint: anchorPoint,
+    barrierLabel: barrierLabel,
+    useSafeArea: useSafeArea,
+    themes: themes,
+  );
 }

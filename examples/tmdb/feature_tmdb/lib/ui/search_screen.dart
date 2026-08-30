@@ -5,8 +5,8 @@ import 'package:feature_tmdb/store/tmdb_search_store.dart';
 import 'package:feature_tmdb/ui/sections/movie_card.dart';
 import 'package:feature_tmdb/ui/sections/people_card.dart';
 import 'package:feature_tmdb/ui/sections/series_card.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
@@ -43,9 +43,10 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _searchApi() async {
     final query = _searchController.text.trim();
-    vyuh.di
-        .get<TmdbSearchStore>()
-        .searchMedia(query: query, searchTypes: widget.content.searchTypes);
+    vyuh.di.get<TmdbSearchStore>().searchMedia(
+      query: query,
+      searchTypes: widget.content.searchTypes,
+    );
   }
 
   @override
@@ -72,8 +73,9 @@ class _SearchScreenState extends State<SearchScreen> {
                 ),
                 shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(theme.borderRadius.medium),
+                    borderRadius: BorderRadius.circular(
+                      theme.borderRadius.medium,
+                    ),
                   ),
                 ),
                 trailing: [
@@ -118,15 +120,13 @@ class _SearchScreenState extends State<SearchScreen> {
                 //added flex factor to cover entire screen space left
                 Expanded(
                   flex: 50,
-                  child: vyuh.content
-                      .buildContent(context, widget.content.emptyView!),
+                  child: vyuh.content.buildContent(
+                    context,
+                    widget.content.emptyView!,
+                  ),
                 )
               else
-                const Expanded(
-                  child: Center(
-                    child: Text('No Results Found'),
-                  ),
-                ),
+                const Expanded(child: Center(child: Text('No Results Found'))),
           ],
         );
       },
@@ -147,10 +147,9 @@ class SearchListView<T> extends StatelessWidget {
       return Center(
         child: Text(
           'No Results Found',
-          style: Theme.of(context)
-              .textTheme
-              .titleLarge!
-              .copyWith(color: Theme.of(context).colorScheme.outline),
+          style: Theme.of(context).textTheme.titleLarge!.copyWith(
+            color: Theme.of(context).colorScheme.outline,
+          ),
         ),
       );
     }
@@ -173,18 +172,11 @@ class SearchListView<T> extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = items?.results[index];
         if (item is MovieShortInfo) {
-          return MovieCard(
-            movie: item,
-          );
+          return MovieCard(movie: item);
         } else if (item is SeriesShortInfo) {
-          return SeriesCard(
-            series: item,
-          );
+          return SeriesCard(series: item);
         } else if (item is Person) {
-          return PersonView(
-            person: item,
-            height: theme.sizing.s32,
-          );
+          return PersonView(person: item, height: theme.sizing.s32);
         }
         return empty;
       },

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' hide RouteBase;
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A function that resolves a CMS path from a local path. This is useful when
@@ -27,19 +27,23 @@ final class CMSRoute extends GoRoute {
     super.redirect,
     super.routes,
   }) : super(
-          pageBuilder: pageBuilder == null && redirect == null
-              ? defaultRoutePageBuilder
-              : pageBuilder,
-        );
+         pageBuilder: pageBuilder == null && redirect == null
+             ? defaultRoutePageBuilder
+             : pageBuilder,
+       );
 }
 
 /// The default page builder for CMS routes.
 Page<dynamic> defaultRoutePageBuilder(
   BuildContext context,
   GoRouterState state, {
-  Widget Function(BuildContext context, Animation<double> animation,
-          Animation<double> secondaryAnimation, Widget child)?
-      transitionsBuilder,
+  Widget Function(
+    BuildContext context,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  )?
+  transitionsBuilder,
   Duration? transitionDuration,
 }) {
   final route = state.extra as RouteBase?;
@@ -64,7 +68,8 @@ Page<dynamic> defaultRoutePageBuilder(
     key: state.pageKey,
     child: vyuh.content.buildRoute(context, url: Uri.parse(path)),
     transitionsBuilder: transitionsBuilder,
-    transitionDuration: transitionDuration ??
+    transitionDuration:
+        transitionDuration ??
         const Duration(milliseconds: 300), // Increase the duration here
   );
 }

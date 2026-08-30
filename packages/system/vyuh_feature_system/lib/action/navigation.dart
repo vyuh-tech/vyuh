@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -106,17 +106,23 @@ final class NavigationAction extends ActionConfiguration {
     _performNavigation(context, uri: uri);
   }
 
-  Future<void> _performNavigation(BuildContext context,
-      {Uri? uri, String? routeId}) async {
+  Future<void> _performNavigation(
+    BuildContext context, {
+    Uri? uri,
+    String? routeId,
+  }) async {
     final state = Overlay.of(context);
     final entry = OverlayEntry(
-        builder: (_) => VyuhBinding.instance.widgetBuilder
-            .routeLoader(context, uri, routeId));
+      builder: (_) =>
+          VyuhBinding.instance.widgetBuilder.routeLoader(context, uri, routeId),
+    );
     state.insert(entry);
 
     try {
-      final route = await VyuhBinding.instance.content.provider
-          .fetchRoute(path: uri?.toString(), routeId: routeId);
+      final route = await VyuhBinding.instance.content.provider.fetchRoute(
+        path: uri?.toString(),
+        routeId: routeId,
+      );
       if (!context.mounted) {
         return;
       }
@@ -124,7 +130,8 @@ final class NavigationAction extends ActionConfiguration {
       final path = route?.path;
       if (path == null) {
         throw ArgumentError(
-            'Unable to determine path from route. Tried with uri: ${uri.toString()}, routeId: $routeId');
+          'Unable to determine path from route. Tried with uri: ${uri.toString()}, routeId: $routeId',
+        );
       }
 
       if (!context.mounted) {

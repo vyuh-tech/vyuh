@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget to display a list item for an item.
 ///
@@ -33,15 +33,13 @@ final class ItemTile extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       contentPadding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0),
       titleAlignment: ListTileTitleAlignment.center,
-      title: Text(
-        title,
-        style: theme.textTheme.bodyLarge,
-      ),
+      title: Text(title, style: theme.textTheme.bodyLarge),
       subtitle: (description != null)
           ? Text(
               description!,
-              style: theme.textTheme.labelMedium
-                  ?.apply(color: theme.disabledColor),
+              style: theme.textTheme.labelMedium?.apply(
+                color: theme.disabledColor,
+              ),
             )
           : null,
       trailing: onTap != null ? const Icon(Icons.chevron_right_rounded) : null,

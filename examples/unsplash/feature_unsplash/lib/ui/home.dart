@@ -1,7 +1,7 @@
 import 'package:feature_unsplash/ui/collection_view.dart';
 import 'package:feature_unsplash/ui/photo_card.dart';
 import 'package:feature_unsplash/unsplash_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:unsplash_client/unsplash_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -20,8 +20,10 @@ class _UnsplashHomeState extends State<UnsplashHome>
   void initState() {
     super.initState();
 
-    _controller =
-        TabController(length: UnsplashSections.values.length, vsync: this);
+    _controller = TabController(
+      length: UnsplashSections.values.length,
+      vsync: this,
+    );
   }
 
   @override
@@ -40,10 +42,11 @@ class _UnsplashHomeState extends State<UnsplashHome>
             ),
             Expanded(
               child: TabBarView(
-                  controller: _controller,
-                  children: UnsplashSections.values
-                      .map((section) => section.buildWidget(context))
-                      .toList(growable: false)),
+                controller: _controller,
+                children: UnsplashSections.values
+                    .map((section) => section.buildWidget(context))
+                    .toList(growable: false),
+              ),
             ),
           ],
         ),
@@ -90,8 +93,9 @@ enum UnsplashSections {
               ? PhotoCard(
                   title: '${collection.title}  (${collection.totalPhotos})',
                   photo: collection.coverPhoto!,
-                  onTap: () => vyuh.router
-                      .push('/unsplash/home/collections/${collection.id}'),
+                  onTap: () => vyuh.router.push(
+                    '/unsplash/home/collections/${collection.id}',
+                  ),
                 )
               : const Icon(Icons.question_mark),
         );

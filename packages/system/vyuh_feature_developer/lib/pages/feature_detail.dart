@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_developer/components/items.dart';
@@ -10,10 +10,7 @@ import 'package:vyuh_feature_developer/components/sticky_section.dart';
 class FeatureItem extends StatelessWidget {
   /// Creates a new feature item.
   ///
-  const FeatureItem({
-    super.key,
-    required this.feature,
-  });
+  const FeatureItem({super.key, required this.feature});
 
   /// The feature to display.
   ///
@@ -27,8 +24,10 @@ class FeatureItem extends StatelessWidget {
       onTap: () => vyuh.router.push('/developer/features/${feature.name}'),
       child: ListTile(
         titleAlignment: ListTileTitleAlignment.center,
-        contentPadding:
-            const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8),
+        contentPadding: const EdgeInsets.symmetric(
+          vertical: 0.0,
+          horizontal: 8,
+        ),
         leading: Hero(
           tag: feature.name,
           transitionOnUserGestures: true,
@@ -44,8 +43,10 @@ class FeatureItem extends StatelessWidget {
           children: [
             Text(
               feature.title,
-              style: theme.textTheme.bodyLarge
-                  ?.apply(color: theme.colorScheme.primary, fontWeightDelta: 2),
+              style: theme.textTheme.bodyLarge?.apply(
+                color: theme.colorScheme.primary,
+                fontWeightDelta: 2,
+              ),
               maxLines: 1,
             ),
             Text(
@@ -77,20 +78,14 @@ class FeatureDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(feature.title),
-      ),
+      appBar: AppBar(title: Text(feature.title)),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            SliverToBoxAdapter(
-              child: FeatureHeroCard(feature: feature),
-            ),
+            SliverToBoxAdapter(child: FeatureHeroCard(feature: feature)),
             StickySection(
               title: 'Routes',
-              sliver: RoutesList(
-                feature: feature,
-              ),
+              sliver: RoutesList(feature: feature),
             ),
             StickySection(
               title: 'Extensions',
@@ -107,7 +102,8 @@ class FeatureDetail extends StatelessWidget {
               sliver: feature.extensionBuilders != null
                   ? SliverList.builder(
                       itemBuilder: (context, index) => ItemTile(
-                          title: feature.extensionBuilders![index].title),
+                        title: feature.extensionBuilders![index].title,
+                      ),
                       itemCount: feature.extensionBuilders!.length,
                     )
                   : null,
@@ -124,10 +120,7 @@ class FeatureDetail extends StatelessWidget {
 class FeatureHeroCard extends StatelessWidget {
   /// Creates a new feature hero card.
   ///
-  const FeatureHeroCard({
-    super.key,
-    required this.feature,
-  });
+  const FeatureHeroCard({super.key, required this.feature});
 
   /// The feature to display.
   ///
@@ -159,14 +152,15 @@ class FeatureHeroCard extends StatelessWidget {
               children: [
                 Text(
                   feature.name,
-                  style: theme.textTheme.labelMedium
-                      ?.apply(color: theme.disabledColor),
+                  style: theme.textTheme.labelMedium?.apply(
+                    color: theme.disabledColor,
+                  ),
                 ),
                 if (feature.description != null)
                   Flexible(child: Text(feature.description!)),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -188,10 +182,7 @@ extension WidgetBuilder on ExtensionDescriptor {
               vyuh.router.push('/developer/extensions/content', extra: this),
         );
       default:
-        return ItemTile(
-          title: title,
-          description: runtimeType.toString(),
-        );
+        return ItemTile(title: title, description: runtimeType.toString());
     }
   }
 }

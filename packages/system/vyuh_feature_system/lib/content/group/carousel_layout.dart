@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/content/group/default_layout.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -19,7 +19,7 @@ final class CarouselGroupLayout extends LayoutConfiguration<Group> {
   final double viewportFraction;
 
   CarouselGroupLayout({this.viewportFraction = 0.75})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory CarouselGroupLayout.fromJson(Map<String, dynamic> json) =>
       _$CarouselGroupLayoutFromJson(json);
@@ -28,10 +28,7 @@ final class CarouselGroupLayout extends LayoutConfiguration<Group> {
   Widget build(BuildContext context, Group content) {
     return GroupLayoutContainer(
       content: content,
-      body: Carousel(
-        content: content,
-        viewportFraction: viewportFraction,
-      ),
+      body: Carousel(content: content, viewportFraction: viewportFraction),
     );
   }
 }

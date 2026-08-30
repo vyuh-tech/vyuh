@@ -1,6 +1,6 @@
 import 'package:feature_wonderous/api/wonder.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart' as vc;
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
@@ -61,9 +61,7 @@ final class WonderListItemConfiguration
     fromJson: WonderListItemConfiguration.fromJson,
   );
 
-  WonderListItemConfiguration({
-    super.title,
-  }) : super(schemaType: schemaName);
+  WonderListItemConfiguration({super.title}) : super(schemaType: schemaName);
 
   factory WonderListItemConfiguration.fromJson(Map<String, dynamic> json) =>
       _$WonderListItemConfigurationFromJson(json);
@@ -74,9 +72,7 @@ final class WonderListItemConfiguration
 }
 
 class _WonderItem extends StatelessWidget {
-  const _WonderItem({
-    required this.document,
-  });
+  const _WonderItem({required this.document});
 
   final WonderMiniInfo document;
 

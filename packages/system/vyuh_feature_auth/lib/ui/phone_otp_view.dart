@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/vyuh_feature_auth.dart';
 
 class PhoneOTPView extends StatelessWidget {
   final PhoneOtpForm content;
 
-  const PhoneOTPView({
-    super.key,
-    required this.content,
-  });
+  const PhoneOTPView({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +35,10 @@ class PhoneOTPView extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: HintAction(
                   hintLabel: const SizedBox.shrink(),
-                  actionLabel:
-                      HintAction.defaultActionLabel(context, "Get OTP"),
+                  actionLabel: HintAction.defaultActionLabel(
+                    context,
+                    "Get OTP",
+                  ),
                   onTap: (_) {
                     content.getOtpAction?.execute(context);
                   },
@@ -47,16 +46,16 @@ class PhoneOTPView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
-            OtpInputField(
-              submit: (_) => submit(),
-            ),
+            OtpInputField(submit: (_) => submit()),
           ],
         ),
         footer: (context, scope) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: HintAction(
-            hintLabel:
-                HintAction.defaultHintLabel(context, "Don't have an account? "),
+            hintLabel: HintAction.defaultHintLabel(
+              context,
+              "Don't have an account? ",
+            ),
             actionLabel: HintAction.defaultActionLabel(context, "Sign Up"),
             onTap: (_) {
               content.signupAction?.execute(context);

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -8,8 +8,11 @@ class Carousel extends StatefulWidget {
 
   final double viewportFraction;
 
-  const Carousel(
-      {super.key, required this.content, this.viewportFraction = 0.75});
+  const Carousel({
+    super.key,
+    required this.content,
+    this.viewportFraction = 0.75,
+  });
 
   @override
   State<Carousel> createState() => _CarouselState();
@@ -39,17 +42,21 @@ class _CarouselState extends State<Carousel> {
               pageSnapping: true,
               scrollDirection: Axis.horizontal,
               children: widget.content.items
-                  .map((e) =>
-                      VyuhBinding.instance.content.buildContent(context, e))
+                  .map(
+                    (e) =>
+                        VyuhBinding.instance.content.buildContent(context, e),
+                  )
                   .toList(growable: false),
             ),
           ),
           const SizedBox(height: 8),
           SmoothPageIndicator(
             controller: _controller,
-            onDotClicked: (index) => _controller.animateToPage(index,
-                curve: Curves.easeInOutCubic,
-                duration: const Duration(milliseconds: 300)),
+            onDotClicked: (index) => _controller.animateToPage(
+              index,
+              curve: Curves.easeInOutCubic,
+              duration: const Duration(milliseconds: 300),
+            ),
             count: widget.content.items.length,
             effect: JumpingDotEffect(
               offset: 20,
@@ -59,7 +66,7 @@ class _CarouselState extends State<Carousel> {
               dotColor: theme.colorScheme.inversePrimary,
               activeDotColor: theme.colorScheme.primary,
             ),
-          )
+          ),
         ],
       ),
     );

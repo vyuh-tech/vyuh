@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -43,10 +43,7 @@ class Empty extends ContentItem {
     defaultLayoutDescriptor: DefaultEmptyLayout.typeDescriptor,
   );
 
-  Empty({
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: Empty.schemaName);
+  Empty({super.layout, super.modifiers}) : super(schemaType: Empty.schemaName);
 
   factory Empty.fromJson(Map<String, dynamic> json) => _$EmptyFromJson(json);
 }
@@ -62,7 +59,7 @@ class Empty extends ContentItem {
 /// ```
 class EmptyDescriptor extends ContentDescriptor {
   EmptyDescriptor()
-      : super(schemaType: Empty.schemaName, title: 'Empty', layouts: const []);
+    : super(schemaType: Empty.schemaName, title: 'Empty', layouts: const []);
 }
 
 /// Default layout for empty content that renders nothing.

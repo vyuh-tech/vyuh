@@ -1,6 +1,6 @@
 import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_tmdb/tmdb_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 class BoxWidget extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_developer/components/standard_plugin_view.dart';
 import 'package:vyuh_feature_developer/components/sticky_section.dart';
@@ -27,8 +27,9 @@ class TelemetryPluginDetail extends StatelessWidget {
             ),
             SliverToBoxAdapter(
               child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: StandardPluginItem(plugin: plugin)),
+                padding: const EdgeInsets.all(8.0),
+                child: StandardPluginItem(plugin: plugin),
+              ),
             ),
             StickySection(
               title: 'Providers [${plugin.providers.length}]',
@@ -54,10 +55,7 @@ class _TelemetryProviderDetail extends StatelessWidget {
 
   final TelemetryProvider provider;
 
-  const _TelemetryProviderDetail({
-    required this.provider,
-    required this.index,
-  });
+  const _TelemetryProviderDetail({required this.provider, required this.index});
 
   @override
   Widget build(BuildContext context) {

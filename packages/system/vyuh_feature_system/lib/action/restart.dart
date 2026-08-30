@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -23,8 +23,10 @@ final class RestartApplicationAction extends ActionConfiguration {
       _$RestartApplicationActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     return vyuh.tracker.init();
   }
 }

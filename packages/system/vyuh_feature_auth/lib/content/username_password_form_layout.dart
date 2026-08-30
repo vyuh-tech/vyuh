@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/username_password_form.dart';
 import 'package:vyuh_feature_auth/ui/username_password_view.dart';
@@ -17,11 +17,11 @@ final class DefaultUsernamePasswordFormLayout
   );
 
   DefaultUsernamePasswordFormLayout()
-      : super(schemaType: typeDescriptor.schemaType);
+    : super(schemaType: typeDescriptor.schemaType);
 
   factory DefaultUsernamePasswordFormLayout.fromJson(
-          Map<String, dynamic> json) =>
-      _$DefaultUsernamePasswordFormLayoutFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$DefaultUsernamePasswordFormLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, UsernamePasswordForm content) {

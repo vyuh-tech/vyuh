@@ -12,8 +12,8 @@ topics:
   - system
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: '>=3.16.0'
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
@@ -35,6 +35,8 @@ dependencies:
   flutter_dotenv: ^6.0.0
   event_bus: ^2.0.1
 
+  material_ui: ^1.1.0
+  cupertino_ui: ^1.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,37 +1,33 @@
 import 'package:design_system/core/index.dart' as core;
 import 'package:design_system/design_system.dart' as ds;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 extension BrightnessTheme on Brightness {
   ThemeData get theme => switch (this) {
-        Brightness.light => ds.DesignSystem.lightTheme,
-        Brightness.dark => ds.DesignSystem.darkTheme,
-      };
+    Brightness.light => ds.DesignSystem.lightTheme,
+    Brightness.dark => ds.DesignSystem.darkTheme,
+  };
 }
 
 extension DesignSystemExtension on ThemeData {
   ThemeData get withExtensions => copyWith(
-        extensions: [
-          const core.BorderRadius(),
-          const core.BorderWidth(),
-          const core.Sizing(),
-          const core.Spacing(),
-          const core.AspectRatio(),
-          const core.LinearGradient(),
-          const core.TmdbTextStyleTheme(),
-        ],
-        bottomSheetTheme: BottomSheetThemeData(
-          backgroundColor: colorScheme.surface,
-          shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(const core.BorderRadius().large),
-          ),
-          constraints: const BoxConstraints(
-            minHeight: 400,
-            maxHeight: 600,
-          ),
-        ),
-      );
+    extensions: [
+      const core.BorderRadius(),
+      const core.BorderWidth(),
+      const core.Sizing(),
+      const core.Spacing(),
+      const core.AspectRatio(),
+      const core.LinearGradient(),
+      const core.TmdbTextStyleTheme(),
+    ],
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: colorScheme.surface,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(const core.BorderRadius().large),
+      ),
+      constraints: const BoxConstraints(minHeight: 400, maxHeight: 600),
+    ),
+  );
 
   core.Spacing get spacing => extension<core.Spacing>() ?? const core.Spacing();
 

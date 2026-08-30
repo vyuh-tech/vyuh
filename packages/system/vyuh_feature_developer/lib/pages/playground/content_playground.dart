@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -34,9 +34,7 @@ final class ContentPlaygroundState extends State<ContentPlayground> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Content Playground'),
-      ),
+      appBar: AppBar(title: const Text('Content Playground')),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -50,10 +48,14 @@ final class ContentPlaygroundState extends State<ContentPlayground> {
                   children: [
                     _buildFeatureList(context),
                     VerticalDivider(
-                        width: 3, color: theme.colorScheme.surfaceDim),
+                      width: 3,
+                      color: theme.colorScheme.surfaceDim,
+                    ),
                     _buildContentList(context),
                     VerticalDivider(
-                        width: 3, color: theme.colorScheme.surfaceDim),
+                      width: 3,
+                      color: theme.colorScheme.surfaceDim,
+                    ),
                     _buildLayoutList(context),
                   ],
                 ),
@@ -86,12 +88,7 @@ final class ContentPlaygroundState extends State<ContentPlayground> {
     final features = vyuh.features.toList();
     final allFeatures = [
       const FeatureItem(title: 'All Content', feature: null),
-      ...features.map(
-        (f) => FeatureItem(
-          title: f.title,
-          feature: f,
-        ),
-      ),
+      ...features.map((f) => FeatureItem(title: f.title, feature: f)),
     ];
 
     return ContentList(
@@ -135,10 +132,7 @@ final class ContentPlaygroundState extends State<ContentPlayground> {
         );
       }).toList(),
       emptyStateWidget: const Center(
-        child: Text(
-          'No content available',
-          textAlign: TextAlign.center,
-        ),
+        child: Text('No content available', textAlign: TextAlign.center),
       ),
     );
   }
@@ -162,10 +156,7 @@ final class ContentPlaygroundState extends State<ContentPlayground> {
         );
       }).toList(),
       emptyStateWidget: const Center(
-        child: Text(
-          'Select a content type',
-          textAlign: TextAlign.center,
-        ),
+        child: Text('Select a content type', textAlign: TextAlign.center),
       ),
     );
   }

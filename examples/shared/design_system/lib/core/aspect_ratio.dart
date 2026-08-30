@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart' as flutter;
+import 'package:material_ui/material_ui.dart' as flutter;
 
 class AspectRatio extends flutter.ThemeExtension<AspectRatio> {
   final double nineToSixteen;
@@ -33,17 +33,16 @@ class AspectRatio extends flutter.ThemeExtension<AspectRatio> {
     final double? sixteenToNine,
     final double? twoToOne,
     final double? fourToOne,
-  }) =>
-      AspectRatio(
-        nineToSixteen: nineToSixteen ?? this.nineToSixteen,
-        fourToFive: fourToFive ?? this.fourToFive,
-        oneToOne: oneToOne ?? this.oneToOne,
-        fourToThree: fourToThree ?? this.fourToThree,
-        threeToTwo: threeToTwo ?? this.threeToTwo,
-        sixteenToNine: sixteenToNine ?? this.sixteenToNine,
-        twoToOne: twoToOne ?? this.twoToOne,
-        fourToOne: fourToOne ?? this.fourToOne,
-      );
+  }) => AspectRatio(
+    nineToSixteen: nineToSixteen ?? this.nineToSixteen,
+    fourToFive: fourToFive ?? this.fourToFive,
+    oneToOne: oneToOne ?? this.oneToOne,
+    fourToThree: fourToThree ?? this.fourToThree,
+    threeToTwo: threeToTwo ?? this.threeToTwo,
+    sixteenToNine: sixteenToNine ?? this.sixteenToNine,
+    twoToOne: twoToOne ?? this.twoToOne,
+    fourToOne: fourToOne ?? this.fourToOne,
+  );
 
   @override
   flutter.ThemeExtension<AspectRatio> lerp(
@@ -54,54 +53,16 @@ class AspectRatio extends flutter.ThemeExtension<AspectRatio> {
       return this;
     }
     return AspectRatio(
-      nineToSixteen: lerpDouble(
-            nineToSixteen,
-            other.nineToSixteen,
-            t,
-          ) ??
-          nineToSixteen,
-      fourToFive: lerpDouble(
-            fourToFive,
-            other.fourToFive,
-            t,
-          ) ??
-          fourToFive,
-      oneToOne: lerpDouble(
-            oneToOne,
-            other.oneToOne,
-            t,
-          ) ??
-          oneToOne,
-      fourToThree: lerpDouble(
-            fourToThree,
-            other.fourToThree,
-            t,
-          ) ??
-          fourToThree,
-      threeToTwo: lerpDouble(
-            threeToTwo,
-            other.threeToTwo,
-            t,
-          ) ??
-          threeToTwo,
-      sixteenToNine: lerpDouble(
-            sixteenToNine,
-            other.sixteenToNine,
-            t,
-          ) ??
-          sixteenToNine,
-      twoToOne: lerpDouble(
-            twoToOne,
-            other.twoToOne,
-            t,
-          ) ??
-          twoToOne,
-      fourToOne: lerpDouble(
-            fourToOne,
-            other.fourToOne,
-            t,
-          ) ??
-          fourToOne,
+      nineToSixteen:
+          lerpDouble(nineToSixteen, other.nineToSixteen, t) ?? nineToSixteen,
+      fourToFive: lerpDouble(fourToFive, other.fourToFive, t) ?? fourToFive,
+      oneToOne: lerpDouble(oneToOne, other.oneToOne, t) ?? oneToOne,
+      fourToThree: lerpDouble(fourToThree, other.fourToThree, t) ?? fourToThree,
+      threeToTwo: lerpDouble(threeToTwo, other.threeToTwo, t) ?? threeToTwo,
+      sixteenToNine:
+          lerpDouble(sixteenToNine, other.sixteenToNine, t) ?? sixteenToNine,
+      twoToOne: lerpDouble(twoToOne, other.twoToOne, t) ?? twoToOne,
+      fourToOne: lerpDouble(fourToOne, other.fourToOne, t) ?? fourToOne,
     );
   }
 }

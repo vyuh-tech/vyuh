@@ -1,9 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/profile_card.dart';
@@ -69,23 +69,23 @@ class _LoggedInUser extends StatelessWidget {
                 height: 200 + 8,
                 margin: const EdgeInsets.only(top: 16),
                 decoration: BoxDecoration(
-                    color: theme.colorScheme.primaryContainer,
-                    shape: BoxShape.circle,
-                    border:
-                        Border.all(color: theme.colorScheme.surface, width: 8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: theme.colorScheme.primary.withValues(alpha: 0.5),
-                        blurRadius: 8,
-                        offset: const Offset(0, 4),
-                      ),
-                    ]),
+                  color: theme.colorScheme.primaryContainer,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: theme.colorScheme.surface,
+                    width: 8,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: theme.colorScheme.primary.withValues(alpha: 0.5),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
                 child: ClipOval(
                   child: user.photoUrl != null
-                      ? ContentImage(
-                          url: user.photoUrl!,
-                          fit: BoxFit.cover,
-                        )
+                      ? ContentImage(url: user.photoUrl!, fit: BoxFit.cover)
                       : Container(
                           width: 128,
                           height: 128,
@@ -102,8 +102,10 @@ class _LoggedInUser extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               spacing: 8,
               children: [
-                SelectableText(user.name ?? 'N/A',
-                    style: theme.textTheme.headlineMedium),
+                SelectableText(
+                  user.name ?? 'N/A',
+                  style: theme.textTheme.headlineMedium,
+                ),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
@@ -125,8 +127,9 @@ class _LoggedInUser extends StatelessWidget {
                   children: [
                     Text(
                       'Login Method',
-                      style: theme.textTheme.labelMedium
-                          ?.apply(color: theme.disabledColor),
+                      style: theme.textTheme.labelMedium?.apply(
+                        color: theme.disabledColor,
+                      ),
                     ),
                     Text(user.loginMethod.label()),
                     Icon(user.loginMethod.icon(), size: 24),
@@ -137,11 +140,15 @@ class _LoggedInUser extends StatelessWidget {
                   children: [
                     Text(
                       'Created On',
-                      style: theme.textTheme.labelMedium
-                          ?.apply(color: theme.disabledColor),
+                      style: theme.textTheme.labelMedium?.apply(
+                        color: theme.disabledColor,
+                      ),
                     ),
-                    Text(DateFormat('MMM d, yyyy hh:mm:ss a')
-                        .format(user.creationTime!)),
+                    Text(
+                      DateFormat(
+                        'MMM d, yyyy hh:mm:ss a',
+                      ).format(user.creationTime!),
+                    ),
                   ],
                 ),
                 Row(
@@ -149,11 +156,15 @@ class _LoggedInUser extends StatelessWidget {
                   children: [
                     Text(
                       'Last Sign In On',
-                      style: theme.textTheme.labelMedium
-                          ?.apply(color: theme.disabledColor),
+                      style: theme.textTheme.labelMedium?.apply(
+                        color: theme.disabledColor,
+                      ),
                     ),
-                    Text(DateFormat('MMM d, yyyy hh:mm:ss a')
-                        .format(user.lastSignInTime!)),
+                    Text(
+                      DateFormat(
+                        'MMM d, yyyy hh:mm:ss a',
+                      ).format(user.lastSignInTime!),
+                    ),
                   ],
                 ),
                 const Divider(),
@@ -179,8 +190,10 @@ class _UnknownUserCard extends StatelessWidget {
         child: Column(
           spacing: 8,
           children: [
-            Text(vyuh.auth.currentUser.name ?? 'Unknown/Anonymous User',
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              vyuh.auth.currentUser.name ?? 'Unknown/Anonymous User',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             OutlinedButton(
               onPressed: () async {
                 content.loginAction?.execute(context);
@@ -188,12 +201,9 @@ class _UnknownUserCard extends StatelessWidget {
               child: const Row(
                 mainAxisSize: MainAxisSize.min,
                 spacing: 8,
-                children: [
-                  Icon(Icons.login),
-                  Text('Login'),
-                ],
+                children: [Icon(Icons.login), Text('Login')],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -236,42 +246,44 @@ class _LogoutButtonState extends State<_LogoutButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      if (_future.value.status == FutureStatus.pending) {
-        return vyuh.widgetBuilder.contentLoader(context);
-      }
+    return Observer(
+      builder: (context) {
+        if (_future.value.status == FutureStatus.pending) {
+          return vyuh.widgetBuilder.contentLoader(context);
+        }
 
-      return Column(
-        children: [
-          OutlinedButton(
-            onPressed: () async {
-              runInAction(() => _future.value = ObservableFuture(
-                    vyuh.auth.logout().then(
-                      (_) {
-                        if (context.mounted) {
-                          widget.content.logoutAction?.execute(context);
-                        }
-                      },
-                    ),
-                  ));
-            },
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.logout),
-                SizedBox(width: 8),
-                Text('Logout'),
-              ],
+        return Column(
+          children: [
+            OutlinedButton(
+              onPressed: () async {
+                runInAction(
+                  () => _future.value = ObservableFuture(
+                    vyuh.auth.logout().then((_) {
+                      if (context.mounted) {
+                        widget.content.logoutAction?.execute(context);
+                      }
+                    }),
+                  ),
+                );
+              },
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.logout),
+                  SizedBox(width: 8),
+                  Text('Logout'),
+                ],
+              ),
             ),
-          ),
-          if (_future.value.status == FutureStatus.rejected)
-            vyuh.widgetBuilder.errorView(
-              context,
-              error: _future.value.error,
-              title: 'Failed to logout',
-            )
-        ],
-      );
-    });
+            if (_future.value.status == FutureStatus.rejected)
+              vyuh.widgetBuilder.errorView(
+                context,
+                error: _future.value.error,
+                title: 'Failed to logout',
+              ),
+          ],
+        );
+      },
+    );
   }
 }

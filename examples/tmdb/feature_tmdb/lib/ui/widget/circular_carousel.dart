@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:design_system/design_system.dart' as ds;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:vyuh_feature_system/content/empty.dart';
 
@@ -81,10 +81,8 @@ class _CircularCarouselState extends State<CircularCarousel> {
 
     final pageView = PageView.builder(
       controller: _controller,
-      itemBuilder: (context, index) => widget.itemBuilder(
-        context,
-        index % widget.itemCount,
-      ),
+      itemBuilder: (context, index) =>
+          widget.itemBuilder(context, index % widget.itemCount),
       onPageChanged: _handleCircularPageChange,
     );
 

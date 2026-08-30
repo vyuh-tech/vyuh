@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_onboarding/onboarding.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -132,7 +132,6 @@ class _OnboardingPageViewState extends State<_OnboardingPageView> {
                     )
                   else
                     const SizedBox(width: 80), // Placeholder for alignment
-
                   // Next/Done button
                   ElevatedButton(
                     onPressed: _goToNextPage,
@@ -174,12 +173,7 @@ class _OnboardingPageViewState extends State<_OnboardingPageView> {
         children: [
           // Image
           if (step.image != null || step.icon != null)
-            Expanded(
-              flex: 3,
-              child: Center(
-                child: _buildImage(step, theme),
-              ),
-            ),
+            Expanded(flex: 3, child: Center(child: _buildImage(step, theme))),
 
           // Title
           Padding(
@@ -206,10 +200,7 @@ class _OnboardingPageViewState extends State<_OnboardingPageView> {
 
   Widget _buildImage(OnboardingStep step, ThemeData theme) {
     if (step.image != null) {
-      return ContentImage(
-        ref: step.image!,
-        fit: BoxFit.contain,
-      );
+      return ContentImage(ref: step.image!, fit: BoxFit.contain);
     }
 
     if (step.icon != null) {

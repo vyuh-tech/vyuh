@@ -1,7 +1,7 @@
 import 'package:design_system/utils/extensions.dart';
 import 'package:feature_food/content/food_item.dart';
-import 'package:flutter/material.dart' as f;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart' as f;
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -280,8 +280,9 @@ class NutritionalInformation extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           children: [
-            for (final fact
-                in nutrition.where((x) => x.includeInSummary == false))
+            for (final fact in nutrition.where(
+              (x) => x.includeInSummary == false,
+            ))
               Row(
                 children: [
                   Padding(

@@ -50,17 +50,13 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   PlatformWidgetBuilder get widgetBuilder => VyuhBinding.instance.widgetBuilder;
 
   _DefaultVyuhPlatform({
-    required FeaturesBuilder featuresBuilder,
-    LazyFeaturesBuilder? lazyFeaturesBuilder,
-    required PluginDescriptor pluginDescriptor,
-    required PlatformWidgetBuilder widgetBuilder,
-    required AppRunner appRunner,
+    required this._featuresBuilder,
+    this._lazyFeaturesBuilder,
+    required this._pluginDescriptor,
+    required this._widgetBuilder,
+    required this._appRunner,
     this.initialLocation,
-  })  : _featuresBuilder = featuresBuilder,
-        _lazyFeaturesBuilder = lazyFeaturesBuilder,
-        _pluginDescriptor = pluginDescriptor,
-        _widgetBuilder = widgetBuilder,
-        _appRunner = appRunner {
+  }) {
     _tracker = _PlatformInitTracker(this);
     _lazyFeatureManager = _LazyFeatureManager(this);
   }

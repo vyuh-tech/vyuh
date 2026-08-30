@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -39,7 +39,7 @@ abstract class ConditionalLayout<T extends ContentItem>
 
     final layout =
         VyuhBinding.instance.content.fromJson<LayoutConfiguration>(json) ??
-            UnknownConditionalLayout(missingSchemaType: type);
+        UnknownConditionalLayout(missingSchemaType: type);
 
     return layout as ConditionalLayout<T>;
   }
@@ -47,33 +47,37 @@ abstract class ConditionalLayout<T extends ContentItem>
   @override
   Widget build(BuildContext context, T content) {
     return FutureBuilder(
-        future: condition.execute(context),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.active || ConnectionState.done:
-              if (snapshot.hasError) {
-                return VyuhBinding.instance.widgetBuilder.errorView(
+      future: condition.execute(context),
+      builder: (context, snapshot) {
+        switch (snapshot.connectionState) {
+          case ConnectionState.active || ConnectionState.done:
+            if (snapshot.hasError) {
+              return VyuhBinding.instance.widgetBuilder.errorView(
+                context,
+                error: snapshot.error,
+                title:
+                    'Failed to execute condition: ${condition.configuration?.schemaType}.',
+              );
+            }
+
+            final value = snapshot.data ?? defaultCase;
+
+            final caseItem = cases.firstWhereOrNull(
+              (element) => element.value == value,
+            );
+
+            return caseItem?.item?.build(context, content) ??
+                VyuhBinding.instance.widgetBuilder.errorView(
                   context,
-                  error: snapshot.error,
                   title:
-                      'Failed to execute condition: ${condition.configuration?.schemaType}.',
+                      'No LayoutConfiguration for content with schemaType: ${content.schemaType}.',
+                  subtitle: 'Condition evaluated to: $value.',
                 );
-              }
-
-              final value = snapshot.data ?? defaultCase;
-
-              final caseItem =
-                  cases.firstWhereOrNull((element) => element.value == value);
-
-              return caseItem?.item?.build(context, content) ??
-                  VyuhBinding.instance.widgetBuilder.errorView(context,
-                      title:
-                          'No LayoutConfiguration for content with schemaType: ${content.schemaType}.',
-                      subtitle: 'Condition evaluated to: $value.');
-            default:
-              return VyuhBinding.instance.widgetBuilder.contentLoader(context);
-          }
-        });
+          default:
+            return VyuhBinding.instance.widgetBuilder.contentLoader(context);
+        }
+      },
+    );
   }
 }
 
@@ -82,12 +86,12 @@ final class UnknownConditionalLayout<T extends ContentItem>
   final String missingSchemaType;
 
   UnknownConditionalLayout({required this.missingSchemaType})
-      : super(
-          schemaType: 'vyuh.unknown.layout.conditional',
-          cases: [],
-          defaultCase: 'default',
-          condition: Condition(),
-        );
+    : super(
+        schemaType: 'vyuh.unknown.layout.conditional',
+        cases: [],
+        defaultCase: 'default',
+        condition: Condition(),
+      );
 
   @override
   Widget build(BuildContext context, T content) {

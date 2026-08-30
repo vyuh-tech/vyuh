@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -12,10 +12,10 @@ enum LiveCardSize {
   large;
 
   double get height => switch (this) {
-        LiveCardSize.small => 300,
-        LiveCardSize.medium => 400,
-        LiveCardSize.large => 600,
-      };
+    LiveCardSize.small => 300,
+    LiveCardSize.medium => 400,
+    LiveCardSize.large => 600,
+  };
 }
 
 @JsonSerializable()
@@ -51,7 +51,7 @@ final class LiveCard extends ContentItem {
 
 final class LiveCardDescriptor extends ContentDescriptor {
   LiveCardDescriptor({super.layouts = const []})
-      : super(schemaType: LiveCard.schemaName, title: 'Live Card');
+    : super(schemaType: LiveCard.schemaName, title: 'Live Card');
 }
 
 @JsonSerializable()
@@ -78,9 +78,7 @@ final class LiveCardDefaultLayout extends LayoutConfiguration<LiveCard> {
 class _LiveCardView extends StatelessWidget {
   final LiveCard content;
 
-  const _LiveCardView({
-    required this.content,
-  });
+  const _LiveCardView({required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +90,11 @@ class _LiveCardView extends StatelessWidget {
       ),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return vyuh.widgetBuilder.errorView(context,
-              error: snapshot.error, title: 'Failed to load Document');
+          return vyuh.widgetBuilder.errorView(
+            context,
+            error: snapshot.error,
+            title: 'Failed to load Document',
+          );
         }
 
         if (!snapshot.hasData) {

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 final class DefaultPageRouteLayout extends StatelessWidget {
@@ -6,8 +6,11 @@ final class DefaultPageRouteLayout extends StatelessWidget {
 
   final vf.DefaultRouteLayout layout;
 
-  const DefaultPageRouteLayout(
-      {super.key, required this.content, required this.layout});
+  const DefaultPageRouteLayout({
+    super.key,
+    required this.content,
+    required this.layout,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +23,9 @@ final class DefaultPageRouteLayout extends StatelessWidget {
               actions: layout.actions
                   ?.map(
                     (e) => IconButton(
-                        onPressed: () => e.action?.execute(context),
-                        icon: Icon(e.icon.iconData)),
+                      onPressed: () => e.action?.execute(context),
+                      icon: Icon(e.icon.iconData),
+                    ),
                   )
                   .toList(growable: false),
             )

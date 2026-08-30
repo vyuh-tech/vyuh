@@ -1,7 +1,7 @@
 import 'package:feature_unsplash/ui/collection_view.dart';
 import 'package:feature_unsplash/ui/photo_card.dart';
 import 'package:feature_unsplash/unsplash_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:unsplash_client/unsplash_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -17,24 +17,27 @@ class _SearchViewState extends State<SearchView> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      SearchBox(
-        onResults: (results) => setState(() {
-          _resultsFuture = results;
-        }),
-      ),
-      Expanded(
-        child: CollectionView<Photo>(
+    return Column(
+      children: [
+        SearchBox(
+          onResults: (results) => setState(() {
+            _resultsFuture = results;
+          }),
+        ),
+        Expanded(
+          child: CollectionView<Photo>(
             columns: 2,
             future: () => _resultsFuture,
             itemBuilder: (photo) => PhotoCard(
-                  photo: photo,
-                  showStats: true,
-                  onTap: () =>
-                      vyuh.router.push('/unsplash/home/photos/${photo.id}'),
-                )),
-      ),
-    ]);
+              photo: photo,
+              showStats: true,
+              onTap: () =>
+                  vyuh.router.push('/unsplash/home/photos/${photo.id}'),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
@@ -68,9 +71,7 @@ class _SearchBoxState extends State<SearchBox> {
         decoration: InputDecoration(
           labelText: 'Search Unsplash',
           suffixIcon: IconButton(
-            icon: const Icon(
-              Icons.search,
-            ),
+            icon: const Icon(Icons.search),
             onPressed: _searchPhotos,
           ),
         ),

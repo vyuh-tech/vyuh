@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_auth/ui/form_fields.dart';
@@ -57,7 +57,7 @@ final class HintActionText extends ContentItem {
 
 final class HintActionTextDescriptor extends ContentDescriptor {
   HintActionTextDescriptor({super.layouts = const []})
-      : super(schemaType: HintActionText.schemaName, title: 'Hint Action Text');
+    : super(schemaType: HintActionText.schemaName, title: 'Hint Action Text');
 }
 
 @JsonSerializable()

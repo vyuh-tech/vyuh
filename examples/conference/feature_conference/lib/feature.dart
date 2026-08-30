@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content_extension_descriptor.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -33,9 +33,7 @@ final feature = FeatureDescriptor(
   init: () async {
     vyuh.di.register(ConferenceApi(VyuhBinding.instance.content.provider));
   },
-  extensions: [
-    extensionDescriptor,
-  ],
+  extensions: [extensionDescriptor],
   routes: routes,
 );
 
@@ -60,27 +58,13 @@ final extensionDescriptor = ContentExtensionDescriptor(
       ],
     ),
     Speaker.descriptor(
-      layouts: [
-        SpeakerLayout.typeDescriptor,
-        SpeakerChipLayout.typeDescriptor,
-      ],
+      layouts: [SpeakerLayout.typeDescriptor, SpeakerChipLayout.typeDescriptor],
     ),
     Track.descriptor(
-      layouts: [
-        TrackLayout.typeDescriptor,
-        TrackChipLayout.typeDescriptor,
-      ],
+      layouts: [TrackLayout.typeDescriptor, TrackChipLayout.typeDescriptor],
     ),
-    Venue.descriptor(
-      layouts: [
-        VenueLayout.typeDescriptor,
-      ],
-    ),
-    Sponsor.descriptor(
-      layouts: [
-        SponsorLayout.typeDescriptor,
-      ],
-    ),
+    Venue.descriptor(layouts: [VenueLayout.typeDescriptor]),
+    Sponsor.descriptor(layouts: [SponsorLayout.typeDescriptor]),
   ],
   contentBuilders: [
     Conference.contentBuilder,

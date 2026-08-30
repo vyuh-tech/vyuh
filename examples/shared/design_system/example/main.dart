@@ -1,5 +1,5 @@
 import 'package:design_system/design_system.dart' as ds;
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,16 +50,12 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('You have pushed the button this many times:'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            SizedBox(
-              height: theme.spacing.s2,
-            ),
+            SizedBox(height: theme.spacing.s2),
           ],
         ),
       ),

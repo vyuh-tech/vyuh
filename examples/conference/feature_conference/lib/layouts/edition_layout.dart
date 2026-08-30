@@ -1,6 +1,6 @@
 import 'package:feature_conference/content/sponsor.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
@@ -61,7 +61,8 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
           children: [
             const Icon(Icons.event),
             Text(
-                '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}'),
+              '${dayFormat.format(content.startDate.toLocal())} - ${dayFormat.format(content.endDate.toLocal())}',
+            ),
           ],
         ),
         if (content.url != null)
@@ -98,8 +99,10 @@ final class EditionLayout extends LayoutConfiguration<Edition> {
                     spacing: 4,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      VyuhBinding.instance.content
-                          .buildContent(context, sponsor.sponsor!),
+                      VyuhBinding.instance.content.buildContent(
+                        context,
+                        sponsor.sponsor!,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         spacing: 4,

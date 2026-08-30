@@ -5,7 +5,7 @@ import 'package:feature_wonderous/content/section.dart';
 import 'package:feature_wonderous/content/wonder_list_item.dart';
 import 'package:feature_wonderous/routes.dart';
 import 'package:feature_wonderous/ui/page_view_layout.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/content/document_view/document_list.dart';
@@ -23,10 +23,7 @@ final feature = FeatureDescriptor(
     final secretKey = vyuh.env.get('UNSPLASH_SECRET_KEY');
 
     vyuh.di.register(
-      WonderClient(
-        unsplashAccessKey: accessKey,
-        unsplashSecretKey: secretKey,
-      ),
+      WonderClient(unsplashAccessKey: accessKey, unsplashSecretKey: secretKey),
     );
   },
   routes: routes,
@@ -34,28 +31,16 @@ final feature = FeatureDescriptor(
     ContentExtensionDescriptor(
       contents: [
         DocumentViewDescriptor(
-          queries: [
-            WonderQueryConfiguration.typeDescriptor,
-          ],
-          documentTypes: [
-            Wonder.typeDescriptor,
-          ],
+          queries: [WonderQueryConfiguration.typeDescriptor],
+          documentTypes: [Wonder.typeDescriptor],
         ),
         DocumentSectionViewDescriptor(
-          configurations: [
-            WonderSectionConfiguration.typeDescriptor,
-          ],
+          configurations: [WonderSectionConfiguration.typeDescriptor],
         ),
         DocumentListViewDescriptor(
-          documentTypes: [
-            WonderMiniInfo.typeDescriptor,
-          ],
-          queryConfigurations: [
-            WonderListQueryConfiguration.typeDescriptor,
-          ],
-          listItemConfigurations: [
-            WonderListItemConfiguration.typeDescriptor,
-          ],
+          documentTypes: [WonderMiniInfo.typeDescriptor],
+          queryConfigurations: [WonderListQueryConfiguration.typeDescriptor],
+          listItemConfigurations: [WonderListItemConfiguration.typeDescriptor],
         ),
         GroupDescriptor(
           layouts: [

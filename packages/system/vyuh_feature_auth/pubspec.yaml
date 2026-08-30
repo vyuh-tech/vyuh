@@ -6,8 +6,8 @@ homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   json_annotation: ^4.9.0
@@ -18,6 +18,9 @@ dependencies:
   vyuh_core: ^1.55.0
   vyuh_feature_system: ^1.47.0
   vyuh_extension_content: ^1.32.0
+  vyuh_cdx_ui:
+    hosted: https://pub.vyuh.tech
+    version: ^2.0.0
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
   flutter_form_builder: ^10.0.1
@@ -26,10 +29,10 @@ dependencies:
   font_awesome_flutter: ^11.0.0
   intl: ^0.20.2
 
+  material_ui: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
-

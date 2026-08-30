@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class WebView extends StatefulWidget {
   final Uri uri;
@@ -35,38 +35,39 @@ class _WebViewState extends State<WebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(widget.uri.toString())),
-        body: Stack(
-          children: [
-            Positioned.fill(
-              child: InAppWebView(
-                initialUrlRequest: URLRequest(url: WebUri.uri(widget.uri)),
-                initialSettings: settings,
-                onWebViewCreated: (controller) => _controller = controller,
-                onReceivedError: (controller, request, errorResponse) =>
-                    debugPrint(errorResponse.toString()),
-                onProgressChanged: (_, progress) {
-                  setState(() {
-                    _progress = progress;
-                  });
-                },
-                gestureRecognizers: {
-                  // This is required to allow scrolling on the page. Without this the page can't be scrolled
-                  // and the scroll happens on the outside container instead.
-                  Factory<VerticalDragGestureRecognizer>(
-                      () => VerticalDragGestureRecognizer()),
-                },
-              ),
+      appBar: AppBar(title: Text(widget.uri.toString())),
+      body: Stack(
+        children: [
+          Positioned.fill(
+            child: InAppWebView(
+              initialUrlRequest: URLRequest(url: WebUri.uri(widget.uri)),
+              initialSettings: settings,
+              onWebViewCreated: (controller) => _controller = controller,
+              onReceivedError: (controller, request, errorResponse) =>
+                  debugPrint(errorResponse.toString()),
+              onProgressChanged: (_, progress) {
+                setState(() {
+                  _progress = progress;
+                });
+              },
+              gestureRecognizers: {
+                // This is required to allow scrolling on the page. Without this the page can't be scrolled
+                // and the scroll happens on the outside container instead.
+                Factory<VerticalDragGestureRecognizer>(
+                  () => VerticalDragGestureRecognizer(),
+                ),
+              },
             ),
-            if (_progress < 100)
-              Positioned(
-                  left: 0,
-                  right: 0,
-                  top: 0,
-                  child: LinearProgressIndicator(
-                    value: _progress / 100.0,
-                  ))
-          ],
-        ));
+          ),
+          if (_progress < 100)
+            Positioned(
+              left: 0,
+              right: 0,
+              top: 0,
+              child: LinearProgressIndicator(value: _progress / 100.0),
+            ),
+        ],
+      ),
+    );
   }
 }

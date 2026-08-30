@@ -1,6 +1,6 @@
 import 'package:visibility_detector/visibility_detector.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class YoutubeVideoPlayer extends StatefulWidget {
   final String videoId;
@@ -55,35 +55,33 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
 
   @override
   Widget build(BuildContext context) => AspectRatio(
-        aspectRatio: widget.aspectRatio,
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            VisibilityDetector(
-              key: const Key('youtube_player'),
-              onVisibilityChanged: (info) {
-                if (info.visibleFraction == 0) {
-                  _controller.pauseVideo();
-                }
-              },
-              child: YoutubePlayer(
-                controller: _controller,
-                enableFullScreenOnVerticalDrag:
-                    widget.enableFullScreenOnVerticalDrag,
-                aspectRatio: widget.aspectRatio,
-                backgroundColor: widget.backgroundColor,
-              ),
-            ),
-            if (_loading)
-              Container(
-                color: widget.backgroundColor ?? Colors.black,
-                child: const Center(
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-          ],
+    aspectRatio: widget.aspectRatio,
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        VisibilityDetector(
+          key: const Key('youtube_player'),
+          onVisibilityChanged: (info) {
+            if (info.visibleFraction == 0) {
+              _controller.pauseVideo();
+            }
+          },
+          child: YoutubePlayer(
+            controller: _controller,
+            enableFullScreenOnVerticalDrag:
+                widget.enableFullScreenOnVerticalDrag,
+            aspectRatio: widget.aspectRatio,
+            backgroundColor: widget.backgroundColor,
+          ),
         ),
-      );
+        if (_loading)
+          Container(
+            color: widget.backgroundColor ?? Colors.black,
+            child: const Center(
+              child: CircularProgressIndicator(color: Colors.white),
+            ),
+          ),
+      ],
+    ),
+  );
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -11,10 +11,7 @@ final class Game {
   final int score1;
   final int score2;
 
-  Game({
-    this.score1 = 0,
-    this.score2 = 0,
-  });
+  Game({this.score1 = 0, this.score2 = 0});
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);
 
@@ -95,9 +92,7 @@ final class ScoreCardDefaultLayout extends LayoutConfiguration<ScoreCard> {
 class _ScoreCardView extends StatelessWidget {
   final ScoreCard content;
 
-  const _ScoreCardView({
-    required this.content,
-  });
+  const _ScoreCardView({required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -105,9 +100,7 @@ class _ScoreCardView extends StatelessWidget {
       maxHeight: 250,
       child: Card(
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -141,10 +134,7 @@ class _ScoreCardHeader extends StatelessWidget {
   final String player1;
   final String player2;
 
-  const _ScoreCardHeader({
-    required this.player1,
-    required this.player2,
-  });
+  const _ScoreCardHeader({required this.player1, required this.player2});
 
   @override
   Widget build(BuildContext context) {
@@ -199,10 +189,7 @@ class _VersusLabel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 6,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
           color: theme.colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
@@ -483,8 +470,8 @@ class _ScoreCardFooter extends StatelessWidget {
                       maxLines: 2,
                     )
                   : games.isNotEmpty && games.length == 7
-                      ? const Text('Tie')
-                      : const SizedBox(),
+                  ? const Text('Tie')
+                  : const SizedBox(),
             ),
           ),
           Container(

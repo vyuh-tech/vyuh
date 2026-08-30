@@ -1,7 +1,7 @@
 import 'package:design_system/utils/extensions.dart';
 import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/ui/formatters.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart'
     hide Card, Divider;
@@ -15,10 +15,7 @@ final class WonderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        child,
-        const SectionDivider(),
-      ],
+      children: [child, const SectionDivider()],
     );
   }
 }
@@ -26,10 +23,7 @@ final class WonderSection extends StatelessWidget {
 final class WonderHeader extends StatelessWidget {
   final Wonder wonder;
 
-  const WonderHeader({
-    super.key,
-    required this.wonder,
-  });
+  const WonderHeader({super.key, required this.wonder});
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +45,17 @@ final class WonderHeader extends StatelessWidget {
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
-            style:
-                theme.textTheme.displayMedium?.apply(color: wonder.textColor),
+            style: theme.textTheme.displayMedium?.apply(
+              color: wonder.textColor,
+            ),
           ),
           const Divider(),
           Text(
             '${wonder.startYear.formattedYear} to ${wonder.endYear.formattedYear}',
-            style: theme.textTheme.bodyMedium
-                ?.apply(color: wonder.textColor, fontWeightDelta: 2),
+            style: theme.textTheme.bodyMedium?.apply(
+              color: wonder.textColor,
+              fontWeightDelta: 2,
+            ),
           ),
         ],
       ),
@@ -103,8 +100,10 @@ class SectionTitle extends StatelessWidget {
       padding: EdgeInsets.all(theme.spacing.s16),
       child: Text(
         title,
-        style: theme.textTheme.titleLarge
-            ?.apply(fontWeightDelta: 2, color: theme.colorScheme.primary),
+        style: theme.textTheme.titleLarge?.apply(
+          fontWeightDelta: 2,
+          color: theme.colorScheme.primary,
+        ),
       ),
     );
   }
@@ -155,8 +154,9 @@ class QuoteBlock extends StatelessWidget {
                       padding: EdgeInsets.only(top: theme.spacing.s16),
                       child: Text(
                         '- ${author!}',
-                        style:
-                            theme.textTheme.bodyMedium?.apply(color: textColor),
+                        style: theme.textTheme.bodyMedium?.apply(
+                          color: textColor,
+                        ),
                       ),
                     ),
                 ],
@@ -183,13 +183,11 @@ class QuoteBlock extends StatelessWidget {
                 clipBehavior: Clip.antiAlias,
                 decoration: BoxDecoration(
                   color: theme.colorScheme.surface,
-                  borderRadius:
-                      BorderRadius.circular(theme.borderRadius.medium),
+                  borderRadius: BorderRadius.circular(
+                    theme.borderRadius.medium,
+                  ),
                   boxShadow: [
-                    BoxShadow(
-                      color: color,
-                      blurRadius: theme.spacing.s4,
-                    ),
+                    BoxShadow(color: color, blurRadius: theme.spacing.s4),
                   ],
                 ),
                 child: ContentImage(

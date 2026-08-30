@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
@@ -20,10 +20,10 @@ enum UrlLaunchMode {
   platformDefault;
 
   LaunchMode get launchMode => switch (this) {
-        UrlLaunchMode.inApp => LaunchMode.inAppWebView,
-        UrlLaunchMode.externalApp => LaunchMode.externalApplication,
-        UrlLaunchMode.platformDefault => LaunchMode.platformDefault,
-      };
+    UrlLaunchMode.inApp => LaunchMode.inAppWebView,
+    UrlLaunchMode.externalApp => LaunchMode.externalApplication,
+    UrlLaunchMode.platformDefault => LaunchMode.platformDefault,
+  };
 }
 
 /// An action configuration for opening URLs in various ways.
@@ -84,8 +84,10 @@ final class OpenUrlAction extends ActionConfiguration {
       _$OpenUrlActionFromJson(json);
 
   @override
-  FutureOr<void> execute(BuildContext context,
-      {Map<String, dynamic>? arguments}) async {
+  FutureOr<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
     if (url == null || url!.isEmpty) {
       VyuhBinding.instance.log.debug('No url provided to open');
     }

@@ -1,5 +1,5 @@
 import 'package:design_system/design_system.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:neopop/neopop.dart';
 
 class PuzzleButton extends StatelessWidget {
@@ -31,9 +31,7 @@ class PuzzleButton extends StatelessWidget {
           children: [
             Text(
               title,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                color: Colors.white,
-              ),
+              style: theme.textTheme.bodyLarge?.copyWith(color: Colors.white),
             ),
           ],
         ),

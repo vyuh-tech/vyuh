@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart' as flutter;
+import 'package:material_ui/material_ui.dart' as flutter;
 
 class Spacing extends flutter.ThemeExtension<Spacing> {
   final double s0;
@@ -57,25 +57,24 @@ class Spacing extends flutter.ThemeExtension<Spacing> {
     final double? s64,
     final double? s72,
     final double? s80,
-  }) =>
-      Spacing(
-        s0: s0 ?? this.s0,
-        s1: s1 ?? this.s1,
-        s2: s2 ?? this.s2,
-        s4: s4 ?? this.s4,
-        s8: s8 ?? this.s8,
-        s12: s12 ?? this.s12,
-        s16: s16 ?? this.s16,
-        s20: s20 ?? this.s20,
-        s24: s24 ?? this.s24,
-        s32: s32 ?? this.s32,
-        s40: s40 ?? this.s40,
-        s48: s48 ?? this.s48,
-        s56: s56 ?? this.s56,
-        s64: s64 ?? this.s64,
-        s72: s72 ?? this.s72,
-        s80: s80 ?? this.s80,
-      );
+  }) => Spacing(
+    s0: s0 ?? this.s0,
+    s1: s1 ?? this.s1,
+    s2: s2 ?? this.s2,
+    s4: s4 ?? this.s4,
+    s8: s8 ?? this.s8,
+    s12: s12 ?? this.s12,
+    s16: s16 ?? this.s16,
+    s20: s20 ?? this.s20,
+    s24: s24 ?? this.s24,
+    s32: s32 ?? this.s32,
+    s40: s40 ?? this.s40,
+    s48: s48 ?? this.s48,
+    s56: s56 ?? this.s56,
+    s64: s64 ?? this.s64,
+    s72: s72 ?? this.s72,
+    s80: s80 ?? this.s80,
+  );
 
   @override
   flutter.ThemeExtension<Spacing> lerp(
@@ -86,102 +85,22 @@ class Spacing extends flutter.ThemeExtension<Spacing> {
       return this;
     }
     return Spacing(
-      s0: lerpDouble(
-            s0,
-            other.s0,
-            t,
-          ) ??
-          s0,
-      s1: lerpDouble(
-            s1,
-            other.s1,
-            t,
-          ) ??
-          s1,
-      s2: lerpDouble(
-            s2,
-            other.s2,
-            t,
-          ) ??
-          s2,
-      s4: lerpDouble(
-            s4,
-            other.s4,
-            t,
-          ) ??
-          s4,
-      s8: lerpDouble(
-            s8,
-            other.s8,
-            t,
-          ) ??
-          s8,
-      s12: lerpDouble(
-            s12,
-            other.s12,
-            t,
-          ) ??
-          s12,
-      s16: lerpDouble(
-            s16,
-            other.s16,
-            t,
-          ) ??
-          s16,
-      s20: lerpDouble(
-            s20,
-            other.s20,
-            t,
-          ) ??
-          s20,
-      s24: lerpDouble(
-            s24,
-            other.s24,
-            t,
-          ) ??
-          s24,
-      s32: lerpDouble(
-            s32,
-            other.s32,
-            t,
-          ) ??
-          s32,
-      s40: lerpDouble(
-            s40,
-            other.s40,
-            t,
-          ) ??
-          s40,
-      s48: lerpDouble(
-            s48,
-            other.s48,
-            t,
-          ) ??
-          s48,
-      s56: lerpDouble(
-            s56,
-            other.s56,
-            t,
-          ) ??
-          s56,
-      s64: lerpDouble(
-            s64,
-            other.s64,
-            t,
-          ) ??
-          s64,
-      s72: lerpDouble(
-            s72,
-            other.s72,
-            t,
-          ) ??
-          s72,
-      s80: lerpDouble(
-            s80,
-            other.s80,
-            t,
-          ) ??
-          s80,
+      s0: lerpDouble(s0, other.s0, t) ?? s0,
+      s1: lerpDouble(s1, other.s1, t) ?? s1,
+      s2: lerpDouble(s2, other.s2, t) ?? s2,
+      s4: lerpDouble(s4, other.s4, t) ?? s4,
+      s8: lerpDouble(s8, other.s8, t) ?? s8,
+      s12: lerpDouble(s12, other.s12, t) ?? s12,
+      s16: lerpDouble(s16, other.s16, t) ?? s16,
+      s20: lerpDouble(s20, other.s20, t) ?? s20,
+      s24: lerpDouble(s24, other.s24, t) ?? s24,
+      s32: lerpDouble(s32, other.s32, t) ?? s32,
+      s40: lerpDouble(s40, other.s40, t) ?? s40,
+      s48: lerpDouble(s48, other.s48, t) ?? s48,
+      s56: lerpDouble(s56, other.s56, t) ?? s56,
+      s64: lerpDouble(s64, other.s64, t) ?? s64,
+      s72: lerpDouble(s72, other.s72, t) ?? s72,
+      s80: lerpDouble(s80, other.s80, t) ?? s80,
     );
   }
 }

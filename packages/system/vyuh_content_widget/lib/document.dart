@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart' hide Action;
+import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -23,7 +24,9 @@ final class Document extends ContentItem {
 
   /// Used for extending the layouts of documents
   static final descriptor = ContentDescriptor.createDefault(
-      schemaType: schemaName, title: 'Document Descriptor');
+    schemaType: schemaName,
+    title: 'Document Descriptor',
+  );
 
   /// The default content builder for documents, which assembles all the
   /// descriptors and constructs the final document representation.
@@ -81,7 +84,7 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
 
   final DocumentRenderMode mode;
   DocumentDefaultLayout({this.mode = DocumentRenderMode.single})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory DocumentDefaultLayout.fromJson(Map<String, dynamic> json) =>
       _$DocumentDefaultLayoutFromJson(json);
@@ -89,7 +92,8 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
   @override
   Widget build(BuildContext context, Document content) {
     final theme = Theme.of(context);
-    final mode = (content.layout as DocumentDefaultLayout?)?.mode ??
+    final mode =
+        (content.layout as DocumentDefaultLayout?)?.mode ??
         DocumentRenderMode.single;
 
     return Column(
@@ -100,22 +104,29 @@ final class DocumentDefaultLayout extends LayoutConfiguration<Document> {
         if (content.description != null) Text(content.description!),
         if (content.items != null && content.items!.isNotEmpty)
           Expanded(
-              child: switch (mode) {
-            DocumentRenderMode.single => VyuhContentBinding.content
-                .buildContent(context, content.items!.first),
-            DocumentRenderMode.list => CustomScrollView(
-                cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
+            child: switch (mode) {
+              DocumentRenderMode.single =>
+                VyuhContentBinding.content.buildContent(
+                  context,
+                  content.items!.first,
+                ),
+              DocumentRenderMode.list => CustomScrollView(
+                scrollCacheExtent: ScrollCacheExtent.pixels(
+                  MediaQuery.sizeOf(context).height * 1.5,
+                ),
                 primary: true,
                 slivers: [
                   SliverList.builder(
                     itemBuilder: (context, index) => VyuhBinding
-                        .instance.content
+                        .instance
+                        .content
                         .buildContent(context, content.items![index]),
                     itemCount: content.items!.length,
-                  )
+                  ),
                 ],
-              )
-          }),
+              ),
+            },
+          ),
       ],
     );
   }

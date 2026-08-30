@@ -2,15 +2,18 @@ import 'package:chakra_shared/ui/youtube_video_player.dart';
 import 'package:design_system/utils/extensions.dart';
 import 'package:feature_wonderous/api/wonder.dart';
 import 'package:feature_wonderous/ui/common.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class WonderConstructionSection extends StatelessWidget {
   final String? title;
   final Wonder wonder;
 
-  const WonderConstructionSection(
-      {super.key, this.title, required this.wonder});
+  const WonderConstructionSection({
+    super.key,
+    this.title,
+    required this.wonder,
+  });
 
   @override
   Widget build(BuildContext context) {

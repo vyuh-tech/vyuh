@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:feature_settings/feature_settings.dart';
 import 'package:feature_tmdb/content/enums/config_enum.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// Returns a function that executes [fn] only once and returns its result.
@@ -57,7 +57,7 @@ List<go.RouteBase> routes(Settings settings) {
               ),
             )
             .toList(growable: false),
-        builder: (context, __, shell) {
+        builder: (context, _, shell) {
           final theme = Theme.of(context);
           return Scaffold(
             body: shell,
@@ -185,11 +185,15 @@ final class TmdbPath {
   static String movieReviewsList(int id) => '/tmdb/home/movie/$id/reviews';
   static String seriesReviewsList(int id) => '/tmdb/home/series/$id/reviews';
 
-  static String movieRecommendationList(int id) => '/tmdb/home/movie/$id/similar';
-  static String seriesRecommendationList(int id) => '/tmdb/home/series/$id/similar';
+  static String movieRecommendationList(int id) =>
+      '/tmdb/home/movie/$id/similar';
+  static String seriesRecommendationList(int id) =>
+      '/tmdb/home/series/$id/similar';
 
-  static String movieList(MovieListType type) => '/tmdb/home/movie/${type.name}';
-  static String seriesList(SeriesListType type) => '/tmdb/home/series/${type.name}';
+  static String movieList(MovieListType type) =>
+      '/tmdb/home/movie/${type.name}';
+  static String seriesList(SeriesListType type) =>
+      '/tmdb/home/series/${type.name}';
 
   static String seriesGenres(int id) => '/tmdb/search/series/genres/$id';
   static String movieGenres(int id) => '/tmdb/search/movie/genres/$id';

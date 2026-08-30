@@ -5,8 +5,8 @@ import 'package:feature_puzzles/ui/river_level/river_level_store.dart';
 import 'package:feature_puzzles/ui/river_level/widgets/level_play_widget.dart';
 import 'package:feature_puzzles/ui/river_level/widgets/menu_widget.dart';
 import 'package:feature_puzzles/ui/river_level/widgets/start_level_widget.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 
 class RiverLevel extends StatefulWidget {
@@ -26,30 +26,26 @@ class _RiverLevelState extends State<RiverLevel> {
   @override
   void initState() {
     super.initState();
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 3));
-    store = RiverLevelStore(level: widget.level)..init();
-    _disposeReaction = reaction(
-      (_) => store.levelEndReason.value,
-      (final reason) {
-        if (reason != null) {
-          if (reason.won) {
-            showWinDialog(
-              context,
-              confettiController: _confettiController,
-              onPlayAgain: store.reset,
-              score: store.getScore(),
-            );
-          } else {
-            showLoseDialog(
-              context,
-              reason: reason,
-              onPlayAgain: store.reset,
-            );
-          }
-        }
-      },
+    _confettiController = ConfettiController(
+      duration: const Duration(seconds: 3),
     );
+    store = RiverLevelStore(level: widget.level)..init();
+    _disposeReaction = reaction((_) => store.levelEndReason.value, (
+      final reason,
+    ) {
+      if (reason != null) {
+        if (reason.won) {
+          showWinDialog(
+            context,
+            confettiController: _confettiController,
+            onPlayAgain: store.reset,
+            score: store.getScore(),
+          );
+        } else {
+          showLoseDialog(context, reason: reason, onPlayAgain: store.reset);
+        }
+      }
+    });
   }
 
   @override
@@ -62,27 +58,25 @@ class _RiverLevelState extends State<RiverLevel> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      final isStarted = store.isStarted;
+    return Observer(
+      builder: (context) {
+        final isStarted = store.isStarted;
 
-      return AnimatedSwitcher(
-        duration: const Duration(milliseconds: 500),
-        child: isStarted
-            ? Column(
-                children: [
-                  Flexible(
-                    child: LevelPlayWidget(
-                      store: store,
-                    ),
-                  ),
-                  MenuWidget(store: store),
-                ],
-              )
-            : StartLevelWidget(
-                level: widget.level,
-                onStart: store.startLevel,
-              ),
-      );
-    });
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: isStarted
+              ? Column(
+                  children: [
+                    Flexible(child: LevelPlayWidget(store: store)),
+                    MenuWidget(store: store),
+                  ],
+                )
+              : StartLevelWidget(
+                  level: widget.level,
+                  onStart: store.startLevel,
+                ),
+        );
+      },
+    );
   }
 }

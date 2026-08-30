@@ -1,6 +1,6 @@
 import 'package:feature_unsplash/unsplash_store.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:unsplash_client/unsplash_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -39,24 +39,21 @@ class PhotoDetail extends StatelessWidget {
               return Column(
                 children: [
                   Expanded(
-                      flex: 2,
-                      child: PhotoView(
-                        minScale: 0.1,
-                        maxScale: 1.0,
-                        strictScale: true,
-                        backgroundDecoration: BoxDecoration(
-                            color: theme.colorScheme.surfaceContainer),
-                        enablePanAlways: true,
-                        gestureDetectorBehavior: HitTestBehavior.opaque,
-                        basePosition: Alignment.topCenter,
-                        imageProvider: NetworkImage(
-                          photo.urls.full.toString(),
-                        ),
-                      )),
-                  Expanded(
-                    flex: 1,
-                    child: _PhotoInfo(photo: photo),
+                    flex: 2,
+                    child: PhotoView(
+                      minScale: 0.1,
+                      maxScale: 1.0,
+                      strictScale: true,
+                      backgroundDecoration: BoxDecoration(
+                        color: theme.colorScheme.surfaceContainer,
+                      ),
+                      enablePanAlways: true,
+                      gestureDetectorBehavior: HitTestBehavior.opaque,
+                      basePosition: Alignment.topCenter,
+                      imageProvider: NetworkImage(photo.urls.full.toString()),
+                    ),
                   ),
+                  Expanded(flex: 1, child: _PhotoInfo(photo: photo)),
                 ],
               );
             },
@@ -70,9 +67,7 @@ class PhotoDetail extends StatelessWidget {
 class _PhotoInfo extends StatelessWidget {
   final Photo photo;
 
-  const _PhotoInfo({
-    required this.photo,
-  });
+  const _PhotoInfo({required this.photo});
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +79,14 @@ class _PhotoInfo extends StatelessWidget {
       decoration: BoxDecoration(
         color: theme.colorScheme.surfaceContainer,
         borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(16), topRight: Radius.circular(16)),
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
         boxShadow: [
           BoxShadow(
             blurRadius: 8,
             color: theme.colorScheme.inverseSurface.withValues(alpha: 0.25),
-          )
+          ),
         ],
       ),
       child: SingleChildScrollView(
@@ -97,32 +94,36 @@ class _PhotoInfo extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             if (photo.description != null)
-              Text(
-                photo.description!,
-                style: theme.textTheme.titleMedium,
-              ),
+              Text(photo.description!, style: theme.textTheme.titleMedium),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
-                  color: Color(int.parse(
+                  color: Color(
+                    int.parse(
                       'FF${photo.color.toUpperCase().replaceAll('#', '')}',
-                      radix: 16)),
+                      radix: 16,
+                    ),
+                  ),
                   width: 64,
                   height: 64,
                 ),
                 Chip(
                   avatar: CircleAvatar(
-                      foregroundImage: NetworkImage(
-                          photo.user.profileImage.small.toString())),
+                    foregroundImage: NetworkImage(
+                      photo.user.profileImage.small.toString(),
+                    ),
+                  ),
                   label: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(photo.user.name, style: theme.textTheme.labelSmall),
                       if (photo.user.twitterUsername != null)
-                        Text('@${photo.user.twitterUsername!}',
-                            style: theme.textTheme.labelSmall),
+                        Text(
+                          '@${photo.user.twitterUsername!}',
+                          style: theme.textTheme.labelSmall,
+                        ),
                     ],
                   ),
                 ),
@@ -143,15 +144,17 @@ class _PhotoInfo extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            Text(DateFormat.yMMMMd().format(photo.createdAt),
-                style: theme.textTheme.titleMedium),
+            Text(
+              DateFormat.yMMMMd().format(photo.createdAt),
+              style: theme.textTheme.titleMedium,
+            ),
             const SizedBox(height: 16),
             Text('Tags', style: theme.textTheme.titleSmall),
             if (photo.tags != null && photo.tags!.isNotEmpty)
               SizedBox(
                 height: 50,
                 child: ListView.separated(
-                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  separatorBuilder: (_, _) => const SizedBox(width: 8),
                   itemCount: photo.tags!.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, index) =>
@@ -159,7 +162,7 @@ class _PhotoInfo extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 16),
-            if (photo.exif != null) ExifView(exif: photo.exif!)
+            if (photo.exif != null) ExifView(exif: photo.exif!),
           ],
         ),
       ),
@@ -210,12 +213,18 @@ class _ExifStat extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label,
-            style: theme.textTheme.labelSmall
-                ?.apply(color: theme.colorScheme.onSurface)),
-        Text(value ?? '---',
-            style: theme.textTheme.titleMedium
-                ?.apply(color: theme.colorScheme.onSurface)),
+        Text(
+          label,
+          style: theme.textTheme.labelSmall?.apply(
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
+        Text(
+          value ?? '---',
+          style: theme.textTheme.titleMedium?.apply(
+            color: theme.colorScheme.onSurface,
+          ),
+        ),
       ],
     );
   }

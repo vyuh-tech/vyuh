@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AnimatedHeadingText extends StatelessWidget {
   final String text;
@@ -17,22 +17,17 @@ class AnimatedHeadingText extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Text(
-      text,
-      style: style ?? theme.textTheme.headlineSmall,
-      maxLines: maxLines,
-    )
-        .animate(
-          onPlay: (controller) => controller.repeat(),
+          text,
+          style: style ?? theme.textTheme.headlineSmall,
+          maxLines: maxLines,
         )
+        .animate(onPlay: (controller) => controller.repeat())
         .shimmer(
           duration: 1200.ms,
           color: theme.colorScheme.primary.withValues(alpha: 0.5),
         )
         .animate() // this wraps the previous Animate in another Animate
-        .fadeIn(
-          duration: 1200.ms,
-          curve: Curves.easeOutQuad,
-        )
+        .fadeIn(duration: 1200.ms, curve: Curves.easeOutQuad)
         .slide();
   }
 }

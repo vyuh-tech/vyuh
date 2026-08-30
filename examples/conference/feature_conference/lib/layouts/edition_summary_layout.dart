@@ -1,8 +1,8 @@
 import 'package:feature_conference/content/edition.dart';
 import 'package:feature_conference/utils.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
@@ -26,8 +26,9 @@ final class EditionSummaryLayout extends LayoutConfiguration<Edition> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
 
         vyuh.router.go('/conferences/$conferenceId/editions/${content.id}');
       },
@@ -39,22 +40,13 @@ final class EditionSummaryLayout extends LayoutConfiguration<Edition> {
             spacing: 16,
             children: [
               if (content.logo != null)
-                ContentImage(
-                  ref: content.logo,
-                  height: 128,
-                ),
+                ContentImage(ref: content.logo, height: 128),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 8,
                 children: [
-                  Text(
-                    content.title,
-                    style: theme.textTheme.titleLarge,
-                  ),
-                  Text(
-                    content.tagline,
-                    style: theme.textTheme.bodyMedium,
-                  ),
+                  Text(content.title, style: theme.textTheme.titleLarge),
+                  Text(content.tagline, style: theme.textTheme.bodyMedium),
                 ],
               ),
               Row(

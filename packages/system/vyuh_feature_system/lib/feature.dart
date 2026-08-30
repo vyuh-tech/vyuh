@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart' hide Card, Divider, Route;
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart' hide Card, Divider, Route;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/action/alert.dart';
@@ -27,37 +27,40 @@ final feature = FeatureDescriptor(
     VyuhBinding.instance.di.register(BreakpointService());
   },
   routes: () => _routes,
-  extensions: [
-    descriptor,
-  ],
-  extensionBuilders: [
-    ContentExtensionBuilder(),
-  ],
+  extensions: [descriptor],
+  extensionBuilders: [ContentExtensionBuilder()],
 );
 
 final descriptor = ContentExtensionDescriptor(
   contents: [
-    RouteDescriptor(routeTypes: [
-      PageRouteType.typeDescriptor,
-      DialogRouteType.typeDescriptor,
-    ], layouts: [
-      DefaultRouteLayout.typeDescriptor,
-      TabsRouteLayout.typeDescriptor,
-      SingleItemLayout.typeDescriptor,
-      RouteConditionalLayout.typeDescriptor,
-    ]),
-    Card.descriptor(layouts: [
-      DefaultCardLayout.typeDescriptor,
-      ListItemCardLayout.typeDescriptor,
-      ButtonCardLayout.typeDescriptor,
-      CardConditionalLayout.typeDescriptor,
-    ]),
-    GroupDescriptor(layouts: [
-      CarouselGroupLayout.typeDescriptor,
-      GridGroupLayout.typeDescriptor,
-      ListGroupLayout.typeDescriptor,
-      GroupConditionalLayout.typeDescriptor,
-    ]),
+    RouteDescriptor(
+      routeTypes: [
+        PageRouteType.typeDescriptor,
+        DialogRouteType.typeDescriptor,
+      ],
+      layouts: [
+        DefaultRouteLayout.typeDescriptor,
+        TabsRouteLayout.typeDescriptor,
+        SingleItemLayout.typeDescriptor,
+        RouteConditionalLayout.typeDescriptor,
+      ],
+    ),
+    Card.descriptor(
+      layouts: [
+        DefaultCardLayout.typeDescriptor,
+        ListItemCardLayout.typeDescriptor,
+        ButtonCardLayout.typeDescriptor,
+        CardConditionalLayout.typeDescriptor,
+      ],
+    ),
+    GroupDescriptor(
+      layouts: [
+        CarouselGroupLayout.typeDescriptor,
+        GridGroupLayout.typeDescriptor,
+        ListGroupLayout.typeDescriptor,
+        GroupConditionalLayout.typeDescriptor,
+      ],
+    ),
     ConditionalDescriptor(),
     ConditionalRouteDescriptor(),
     EmptyDescriptor(),
@@ -107,7 +110,7 @@ final descriptor = ContentExtensionDescriptor(
               ),
             );
           },
-        )
+        ),
       ],
       blocks: [
         BlockItemDescriptor(
@@ -141,19 +144,13 @@ final descriptor = ContentExtensionDescriptor(
       configurations: [JsonPathApiConfiguration.typeDescriptor],
     ),
     DocumentViewDescriptor(
-      layouts: [
-        DocumentViewConditionalLayout.typeDescriptor,
-      ],
+      layouts: [DocumentViewConditionalLayout.typeDescriptor],
     ),
     DocumentSectionViewDescriptor(
-      layouts: [
-        DocumentSectionViewConditionalLayout.typeDescriptor,
-      ],
+      layouts: [DocumentSectionViewConditionalLayout.typeDescriptor],
     ),
     DocumentListViewDescriptor(
-      layouts: [
-        DocumentListViewConditionalLayout.typeDescriptor,
-      ],
+      layouts: [DocumentListViewConditionalLayout.typeDescriptor],
     ),
   ],
   contentBuilders: [
@@ -172,9 +169,7 @@ final descriptor = ContentExtensionDescriptor(
     DocumentSectionView.contentBuilder,
     DocumentListView.contentBuilder,
   ],
-  contentModifiers: [
-    ThemeModifier.typeDescriptor,
-  ],
+  contentModifiers: [ThemeModifier.typeDescriptor],
   conditions: [
     BooleanCondition.typeDescriptor,
     FeatureFlagCondition.typeDescriptor,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class RouteBuilderProxy extends InheritedWidget {
   final Future<void> Function() _onRefresh;
@@ -6,8 +6,8 @@ class RouteBuilderProxy extends InheritedWidget {
   const RouteBuilderProxy({
     super.key,
     required super.child,
-    required Future<void> Function() onRefresh,
-  }) : _onRefresh = onRefresh;
+    required this._onRefresh,
+  });
 
   Future<void> refresh() => _onRefresh();
 
@@ -49,7 +49,7 @@ final class RouteContentWithRefresh extends StatelessWidget {
                 RouteBuilderProxy.of(context)?.refresh();
               },
             ),
-          )
+          ),
         ],
       ),
     );

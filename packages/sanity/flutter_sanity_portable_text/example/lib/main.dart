@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class UnregisteredBlockItem implements PortableBlockItem {
   @override
@@ -24,10 +24,7 @@ final class CustomBlockItem implements PortableBlockItem {
 }
 
 final class CustomMarkDef implements MarkDef {
-  CustomMarkDef({
-    required this.color,
-    required this.key,
-  });
+  CustomMarkDef({required this.color, required this.key});
 
   @override
   final String key;
@@ -39,9 +36,7 @@ final class CustomMarkDef implements MarkDef {
 }
 
 final class UnregisteredMarkDef implements MarkDef {
-  UnregisteredMarkDef({
-    required this.key,
-  });
+  UnregisteredMarkDef({required this.key});
 
   @override
   final String key;
@@ -66,14 +61,14 @@ void main() {
 void _registerCustomBlockStyle() {
   PortableTextConfig.shared.styles['custom-style'] =
       (final BuildContext context, final TextStyle base) {
-    final theme = Theme.of(context);
+        final theme = Theme.of(context);
 
-    return base.copyWith(
-      color: theme.colorScheme.primary,
-      fontSize: 18,
-      fontWeight: FontWeight.bold,
-    );
-  };
+        return base.copyWith(
+          color: theme.colorScheme.primary,
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        );
+      };
 }
 
 void _registerCustomMark() {
@@ -119,21 +114,19 @@ void _registerCustomBlock() {
   PortableTextConfig.shared.blocks['custom'] = (context, item) {
     final theme = Theme.of(context);
     final custom = item as CustomBlockItem;
-    final style =
-        theme.textTheme.bodyMedium?.apply(color: custom.foregroundColor);
+    final style = theme.textTheme.bodyMedium?.apply(
+      color: custom.foregroundColor,
+    );
 
     return Container(
       decoration: BoxDecoration(
-          color: custom.backgroundColor,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.blueAccent, width: 2),
-          boxShadow: const [
-            BoxShadow(
-              offset: Offset(0, 4),
-              blurRadius: 2,
-              color: Colors.black26,
-            )
-          ]),
+        color: custom.backgroundColor,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.blueAccent, width: 2),
+        boxShadow: const [
+          BoxShadow(offset: Offset(0, 4), blurRadius: 2, color: Colors.black26),
+        ],
+      ),
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(8),
       child: Text(custom.text, style: style),
@@ -159,16 +152,13 @@ class MyApp extends StatelessWidget {
             child: PortableText(
               blocks: [
                 TextBlockItem(
-                  children: [
-                    Span(
-                      text: 'Sanity Portable Text',
-                    ),
-                  ],
+                  children: [Span(text: 'Sanity Portable Text')],
                   style: 'h1',
                 ),
 
                 // Directly from JSON
-                TextBlockItem.fromJson(jsonDecode('''
+                TextBlockItem.fromJson(
+                  jsonDecode('''
     {
       "_type": "block",
       "style": "h3",
@@ -184,7 +174,8 @@ class MyApp extends StatelessWidget {
         }
       ]
     }
-  ''')),
+  '''),
+                ),
 
                 // Let's try a blockquote now
                 TextBlockItem(
@@ -193,9 +184,7 @@ class MyApp extends StatelessWidget {
                       text:
                           '"The best way to predict the future is to invent it."',
                     ),
-                    Span(
-                      text: '\n- Steve Jobs',
-                    ),
+                    Span(text: '\n- Steve Jobs'),
                   ],
                   style: 'blockquote',
                 ),
@@ -218,11 +207,13 @@ class MyApp extends StatelessWidget {
                     Span(text: 'Emphasized text, ', marks: ['em']),
                     Span(text: 'Underlined text, ', marks: ['underline']),
                     Span(
-                        text: 'Strike through text, ',
-                        marks: ['strike-through']),
+                      text: 'Strike through text, ',
+                      marks: ['strike-through'],
+                    ),
                     Span(
-                        text: 'All combined',
-                        marks: ['strong', 'em', 'underline', 'strike-through']),
+                      text: 'All combined',
+                      marks: ['strong', 'em', 'underline', 'strike-through'],
+                    ),
                     Span(text: '.'),
                   ],
                 ),
@@ -233,33 +224,39 @@ class MyApp extends StatelessWidget {
                 for (final index in [1, 2, 3, 4, 5, 6])
                   _textBlock('H$index', style: 'h$index'),
                 CustomBlockItem(
-                    text: 'We can also do custom blocks!',
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.primaries[4]),
+                  text: 'We can also do custom blocks!',
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.primaries[4],
+                ),
                 _textBlock(
-                    ('And report when a block item is not registered for rendering..')),
+                  ('And report when a block item is not registered for rendering..'),
+                ),
                 UnregisteredBlockItem(),
                 TextBlockItem(
                   children: [
-                    Span(
-                      text: 'We can also do ',
-                    ),
+                    Span(text: 'We can also do '),
                     Span(text: 'custom marks!', marks: ['custom-key']),
                     Span(
-                        text:
-                            ' and report when a custom mark is not registered, such as:'),
+                      text:
+                          ' and report when a custom mark is not registered, such as:',
+                    ),
                     Span(text: ' this.', marks: ['missing-key']),
                   ],
                   markDefs: [
                     CustomMarkDef(color: Colors.red, key: 'custom-key'),
-                    UnregisteredMarkDef(key: 'missing-key')
+                    UnregisteredMarkDef(key: 'missing-key'),
                   ],
                 ),
-                TextBlockItem(children: [
-                  Span(text: '\nAnd there ends the quick tour of '),
-                  Span(text: 'Sanity Portable Text. ', marks: ['strong', 'em']),
-                  Span(text: 'Now go make some noise in portable text!'),
-                ])
+                TextBlockItem(
+                  children: [
+                    Span(text: '\nAnd there ends the quick tour of '),
+                    Span(
+                      text: 'Sanity Portable Text. ',
+                      marks: ['strong', 'em'],
+                    ),
+                    Span(text: 'Now go make some noise in portable text!'),
+                  ],
+                ),
               ],
             ),
           ),
@@ -271,18 +268,14 @@ class MyApp extends StatelessWidget {
 
 TextBlockItem _textBlock(String text, {String? style}) {
   return TextBlockItem(
-    children: [
-      Span(text: text),
-    ],
+    children: [Span(text: text)],
     style: style ?? 'normal',
   );
 }
 
 TextBlockItem _listItem(String text, ListItemType type) {
   return TextBlockItem(
-    children: [
-      Span(text: text),
-    ],
+    children: [Span(text: text)],
     listItem: type,
   );
 }

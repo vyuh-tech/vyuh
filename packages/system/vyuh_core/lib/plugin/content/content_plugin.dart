@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// The base class for a Content Plugin
@@ -20,8 +20,11 @@ abstract class ContentPlugin extends Plugin {
 
   /// Builds a Widget for the given content. You can pass in an optional [layout]
   /// to override the default layout
-  Widget buildContent<T extends ContentItem>(BuildContext context, T content,
-      {LayoutConfiguration<T>? layout});
+  Widget buildContent<T extends ContentItem>(
+    BuildContext context,
+    T content, {
+    LayoutConfiguration<T>? layout,
+  });
 
   /// Builds a Widget for the given route url or id. This is used for top-level documents called routes.
   /// These could represent a page, dialog or a conditional-route.
@@ -41,11 +44,4 @@ abstract class ContentPlugin extends Plugin {
   bool isRegistered<T>(String schemaType);
 }
 
-enum FieldName {
-  id,
-  type,
-  key,
-  ref,
-  updatedAt,
-  createdAt,
-}
+enum FieldName { id, type, key, ref, updatedAt, createdAt }

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -36,33 +36,36 @@ part 'portable_text.g.dart';
 class PortableTextContent extends ContentItem {
   static const schemaName = 'vyuh.portableText';
   static final typeDescriptor = TypeDescriptor(
-      schemaType: schemaName,
-      title: 'Portable Text',
-      fromJson: PortableTextContent.fromJson,
-      preview: () => PortableTextContent(
-            blocks: [
-              TextBlockItem(children: [
-                Span(text: 'Italic Text, ', marks: ['em']),
-                Span(text: 'Bold Text, ', marks: ['strong']),
-                Span(
-                    text: 'Bold, Italic, Underline Text',
-                    marks: ['em', 'strong', 'underline']),
-              ]),
-              TextBlockItem(children: [
-                Span(text: 'class SomeDartClass {}', marks: ['code']),
-              ]),
-            ],
-          ));
+    schemaType: schemaName,
+    title: 'Portable Text',
+    fromJson: PortableTextContent.fromJson,
+    preview: () => PortableTextContent(
+      blocks: [
+        TextBlockItem(
+          children: [
+            Span(text: 'Italic Text, ', marks: ['em']),
+            Span(text: 'Bold Text, ', marks: ['strong']),
+            Span(
+              text: 'Bold, Italic, Underline Text',
+              marks: ['em', 'strong', 'underline'],
+            ),
+          ],
+        ),
+        TextBlockItem(
+          children: [
+            Span(text: 'class SomeDartClass {}', marks: ['code']),
+          ],
+        ),
+      ],
+    ),
+  );
   static final contentBuilder = _PortableTextContentBuilder();
 
   @JsonKey(defaultValue: [], fromJson: blockItemsFromJson)
   final List<PortableBlockItem>? blocks;
 
-  PortableTextContent({
-    this.blocks,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: PortableTextContent.schemaName) {
+  PortableTextContent({this.blocks, super.layout, super.modifiers})
+    : super(schemaType: PortableTextContent.schemaName) {
     final items = (blocks ?? <ContentItem>[]).whereType<ContentItem>();
     setParent(items);
     _setListItemIndexes(blocks ?? <PortableBlockItem>[]);
@@ -83,10 +86,7 @@ class PortableTextContent extends ContentItem {
 
           if (itemDescriptor == null) {
             return kDebugMode
-                ? UnknownContentItem(
-                    missingSchemaType: type,
-                    jsonPayload: e,
-                  )
+                ? UnknownContentItem(missingSchemaType: type, jsonPayload: e)
                 : null;
           }
 
@@ -97,7 +97,7 @@ class PortableTextContent extends ContentItem {
         .toList(growable: false);
   }
 
-  static void _setListItemIndexes(final List<PortableBlockItem> items) {
+  static void _setListItemIndexes(List<PortableBlockItem> items) {
     List<int> indexStack = [];
     int previousLevel = 0;
 
@@ -152,10 +152,7 @@ final class BlockItemDescriptor {
   final TypeDescriptor<PortableBlockItem> type;
   final BlockWidgetBuilder builder;
 
-  BlockItemDescriptor({
-    required this.type,
-    required this.builder,
-  });
+  BlockItemDescriptor({required this.type, required this.builder});
 }
 
 /// Descriptor for configuring portable text content type in the system.
@@ -200,7 +197,9 @@ class PortableTextDescriptor extends ContentDescriptor {
     this.textStyleBuilders,
     super.layouts,
   }) : super(
-            schemaType: PortableTextContent.schemaName, title: 'Portable Text');
+         schemaType: PortableTextContent.schemaName,
+         title: 'Portable Text',
+       );
 }
 
 final class _PortableTextContentBuilder
@@ -208,12 +207,12 @@ final class _PortableTextContentBuilder
   static Map<String, BlockItemDescriptor> blockMap = {};
 
   _PortableTextContentBuilder()
-      : super(
-          content: PortableTextContent.typeDescriptor,
-          defaultLayout: DefaultPortableTextContentLayout(),
-          defaultLayoutDescriptor:
-              DefaultPortableTextContentLayout.typeDescriptor,
-        );
+    : super(
+        content: PortableTextContent.typeDescriptor,
+        defaultLayout: DefaultPortableTextContentLayout(),
+        defaultLayoutDescriptor:
+            DefaultPortableTextContentLayout.typeDescriptor,
+      );
 
   @override
   void init(List<ContentDescriptor> descriptors) {
@@ -236,9 +235,9 @@ final class _PortableTextContentBuilder
     pDescriptors
         .expand((element) => element.blocks ?? <BlockItemDescriptor>[])
         .fold(blockMap, (previous, descriptor) {
-      previous[descriptor.type.schemaType] = descriptor;
-      return previous;
-    });
+          previous[descriptor.type.schemaType] = descriptor;
+          return previous;
+        });
 
     for (final entry in blockMap.entries) {
       PortableTextConfig.shared.blocks[entry.key] = entry.value.builder;
@@ -284,18 +283,15 @@ class DefaultPortableTextContentLayout
   DefaultPortableTextContentLayout() : super(schemaType: schemaName);
 
   factory DefaultPortableTextContentLayout.fromJson(
-          Map<String, dynamic> json) =>
-      _$DefaultPortableTextContentLayoutFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$DefaultPortableTextContentLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, PortableTextContent content) {
     final child = PortableText(blocks: content.blocks ?? <PortableBlockItem>[]);
 
     if (content.parent is vc.RouteBase) {
-      return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: child,
-      );
+      return Padding(padding: const EdgeInsets.all(8.0), child: child);
     }
 
     return child;

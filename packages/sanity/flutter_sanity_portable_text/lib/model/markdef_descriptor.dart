@@ -1,26 +1,22 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Builds a [TextStyle] for a given [MarkDef].
-typedef MarkDefTextStyleBuilder = TextStyle Function(
-  BuildContext context,
-  MarkDef mark,
-  TextStyle base,
-);
+typedef MarkDefTextStyleBuilder =
+    TextStyle Function(BuildContext context, MarkDef mark, TextStyle base);
 
 /// Deserializes a [MarkDef] from a JSON map.
-typedef MarkDefFromJson = MarkDef Function(
-  Map<String, dynamic> json,
-);
+typedef MarkDefFromJson = MarkDef Function(Map<String, dynamic> json);
 
 /// Builds an [InlineSpan] for a given [MarkDef].
-typedef MarkDefSpanBuilder = InlineSpan Function(
-  BuildContext context,
-  MarkDef mark,
-  String text,
-  TextStyle style,
-);
+typedef MarkDefSpanBuilder =
+    InlineSpan Function(
+      BuildContext context,
+      MarkDef mark,
+      String text,
+      TextStyle style,
+    );
 
 /// Describes a [MarkDef] and its associated builders.
 final class MarkDefDescriptor {

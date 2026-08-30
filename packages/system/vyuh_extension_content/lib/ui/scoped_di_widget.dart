@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// A widget that wraps its child with a scoped instance of [DIPlugin].
@@ -24,8 +24,9 @@ final class ScopedDIWidget extends StatefulWidget {
   /// Get the DIPlugin from the nearest DI scope. If no scope is found,
   /// it will fallback to the platform [DIPlugin].
   static DIPlugin of(BuildContext context) {
-    final scopeDI =
-        context.dependOnInheritedWidgetOfExactType<_InheritedDIScope>()?.scope;
+    final scopeDI = context
+        .dependOnInheritedWidgetOfExactType<_InheritedDIScope>()
+        ?.scope;
 
     if (scopeDI == null) {
       // Fallback to platform DI
@@ -62,20 +63,14 @@ class _ScopedDIWidgetState extends State<ScopedDIWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return _InheritedDIScope(
-      scope: _scopeDI,
-      child: widget.child,
-    );
+    return _InheritedDIScope(scope: _scopeDI, child: widget.child);
   }
 }
 
 class _InheritedDIScope extends InheritedWidget {
   final DIPlugin scope;
 
-  const _InheritedDIScope({
-    required this.scope,
-    required super.child,
-  });
+  const _InheritedDIScope({required this.scope, required super.child});
 
   @override
   bool updateShouldNotify(_InheritedDIScope oldWidget) {

@@ -6,7 +6,7 @@ import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/collection_view.dart';
 import 'package:feature_tmdb/ui/date_and_details_widget.dart';
 import 'package:feature_tmdb/ui/popularity_widget.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/model/movie.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
@@ -24,14 +24,11 @@ final class MovieCard extends StatelessWidget {
     this.mediaCardType = MediaCardType.home,
   });
 
-  factory MovieCard.large({
-    required MovieShortInfo movie,
-  }) =>
-      MovieCard(
-        representation: ListRepresentation.long,
-        movie: movie,
-        width: double.infinity,
-      );
+  factory MovieCard.large({required MovieShortInfo movie}) => MovieCard(
+    representation: ListRepresentation.long,
+    movie: movie,
+    width: double.infinity,
+  );
 
   bool get isRecommendation => mediaCardType == MediaCardType.recommendation;
   bool get isWatchlist => mediaCardType == MediaCardType.watchlist;
@@ -50,41 +47,41 @@ final class MovieCard extends StatelessWidget {
         width: width ?? theme.sizing.s50,
         child: representation == ListRepresentation.short
             ? isWatchlist
-                ? Row(
-                    children: [
-                      SizedBox(
-                        width: theme.sizing.width43(size.width),
-                        height: theme.sizing.s28,
-                        child: ImageAndPopularityWidget(
-                          info: movie,
-                          isRecommendation: isRecommendation,
+                  ? Row(
+                      children: [
+                        SizedBox(
+                          width: theme.sizing.width43(size.width),
+                          height: theme.sizing.s28,
+                          child: ImageAndPopularityWidget(
+                            info: movie,
+                            isRecommendation: isRecommendation,
+                          ),
                         ),
-                      ),
-                      Gap.w8,
-                      Expanded(
-                        child: TitleAndDateWidget(
+                        Gap.w8,
+                        Expanded(
+                          child: TitleAndDateWidget(
+                            browseTypeData: movie,
+                            isRecommendation: isRecommendation,
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: ImageAndPopularityWidget(
+                            info: movie,
+                            isRecommendation: isRecommendation,
+                          ),
+                        ),
+                        Gap.h8,
+                        TitleAndDateWidget(
                           browseTypeData: movie,
                           isRecommendation: isRecommendation,
                         ),
-                      ),
-                    ],
-                  )
-                : Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: ImageAndPopularityWidget(
-                          info: movie,
-                          isRecommendation: isRecommendation,
-                        ),
-                      ),
-                      Gap.h8,
-                      TitleAndDateWidget(
-                        browseTypeData: movie,
-                        isRecommendation: isRecommendation,
-                      ),
-                    ],
-                  )
+                      ],
+                    )
             : Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -113,8 +110,9 @@ final class MovieCard extends StatelessWidget {
                   ),
                   if (movie.overview.isNotEmpty)
                     Padding(
-                      padding:
-                          EdgeInsets.symmetric(horizontal: theme.spacing.s20),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: theme.spacing.s20,
+                      ),
                       child: Text(
                         movie.overview,
                         style: theme.tmdbTheme.bodyMedium,

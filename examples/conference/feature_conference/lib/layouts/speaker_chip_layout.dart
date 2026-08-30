@@ -1,7 +1,7 @@
 import 'package:feature_conference/content/speaker.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -30,13 +30,16 @@ final class SpeakerChipLayout extends LayoutConfiguration<Speaker> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(
+          context,
+        ).pathParameters['editionId']!;
 
         vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/speakers/${content.id}');
+          '/conferences/$conferenceId/editions/$editionId/speakers/${content.id}',
+        );
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -56,10 +59,7 @@ final class SpeakerChipLayout extends LayoutConfiguration<Speaker> {
               radius: radius,
               child: Icon(Icons.person, size: radius),
             ),
-          Text(
-            content.name,
-            style: Theme.of(context).textTheme.labelLarge,
-          ),
+          Text(content.name, style: Theme.of(context).textTheme.labelLarge),
         ],
       ),
     );

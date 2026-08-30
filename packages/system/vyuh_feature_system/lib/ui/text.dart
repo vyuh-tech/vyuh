@@ -1,12 +1,15 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 final class TitleText extends StatelessWidget {
   final String text;
 
   final TextAlign textAlign;
 
-  const TitleText(
-      {super.key, required this.text, this.textAlign = TextAlign.start});
+  const TitleText({
+    super.key,
+    required this.text,
+    this.textAlign = TextAlign.start,
+  });
 
   @override
   Widget build(BuildContext context) {

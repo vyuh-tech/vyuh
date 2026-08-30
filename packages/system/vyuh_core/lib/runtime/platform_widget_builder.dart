@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import 'platform/powered_by_widget.dart';
@@ -22,8 +22,8 @@ part 'platform/unknown_content_view.dart';
 ///   theme: platform.theme,
 /// );
 /// ```
-typedef AppBuilder = Widget Function(
-    BuildContext context, VyuhPlatform platform);
+typedef AppBuilder =
+    Widget Function(BuildContext context, VyuhPlatform platform);
 
 /// A builder for a widget that is shown when the app is loading.
 ///
@@ -51,8 +51,8 @@ typedef Loader = Widget Function(BuildContext context);
 ///   child: Text('Loading $url...'),
 /// );
 /// ```
-typedef RouteLoader = Widget Function(BuildContext context,
-    [Uri? url, String? routeId]);
+typedef RouteLoader =
+    Widget Function(BuildContext context, [Uri? url, String? routeId]);
 
 /// A builder for an image placeholder widget.
 ///
@@ -68,8 +68,8 @@ typedef RouteLoader = Widget Function(BuildContext context,
 ///   color: Colors.grey[300],
 /// );
 /// ```
-typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
-    {double? width, double? height});
+typedef ImagePlaceholderBuilder =
+    Widget Function(BuildContext context, {double? width, double? height});
 
 /// A builder for a route error view widget.
 ///
@@ -92,15 +92,16 @@ typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
 ///   onRetry: onRetry,
 /// );
 /// ```
-typedef RouteErrorViewBuilder = Widget Function(
-  BuildContext context, {
-  required String title,
-  String? retryLabel,
-  VoidCallback? onRetry,
-  dynamic error,
-  StackTrace? stackTrace,
-  String? subtitle,
-});
+typedef RouteErrorViewBuilder =
+    Widget Function(
+      BuildContext context, {
+      required String title,
+      String? retryLabel,
+      VoidCallback? onRetry,
+      dynamic error,
+      StackTrace? stackTrace,
+      String? subtitle,
+    });
 
 /// A builder for an error view widget.
 ///
@@ -125,16 +126,17 @@ typedef RouteErrorViewBuilder = Widget Function(
 ///   showRestart: showRestart,
 /// );
 /// ```
-typedef ErrorViewBuilder = Widget Function(
-  BuildContext context, {
-  required String title,
-  dynamic error,
-  StackTrace? stackTrace,
-  String? retryLabel,
-  VoidCallback? onRetry,
-  String? subtitle,
-  bool showRestart,
-});
+typedef ErrorViewBuilder =
+    Widget Function(
+      BuildContext context, {
+      required String title,
+      dynamic error,
+      StackTrace? stackTrace,
+      String? retryLabel,
+      VoidCallback? onRetry,
+      String? subtitle,
+      bool showRestart,
+    });
 
 /// A builder for unknown content failures.
 ///
@@ -154,10 +156,8 @@ typedef ErrorViewBuilder = Widget Function(
 ///   }
 /// };
 /// ```
-typedef UnknownContentBuilder = Widget Function(
-  BuildContext context,
-  ContentFailure failure,
-);
+typedef UnknownContentBuilder =
+    Widget Function(BuildContext context, ContentFailure failure);
 
 /// A builder for platform-specific widgets used throughout the Vyuh application.
 ///
@@ -227,92 +227,94 @@ class PlatformWidgetBuilder {
     UnknownContentBuilder? unknown,
   }) {
     return PlatformWidgetBuilder(
-        appBuilder: appBuilder ?? this.appBuilder,
-        appLoader: appLoader ?? this.appLoader,
-        contentLoader: contentLoader ?? this.contentLoader,
-        routeLoader: routeLoader ?? this.routeLoader,
-        errorView: errorView ?? this.errorView,
-        routeErrorView: routeErrorView ?? this.routeErrorView,
-        imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder,
-        unknown: unknown ?? this.unknown);
+      appBuilder: appBuilder ?? this.appBuilder,
+      appLoader: appLoader ?? this.appLoader,
+      contentLoader: contentLoader ?? this.contentLoader,
+      routeLoader: routeLoader ?? this.routeLoader,
+      errorView: errorView ?? this.errorView,
+      routeErrorView: routeErrorView ?? this.routeErrorView,
+      imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder,
+      unknown: unknown ?? this.unknown,
+    );
   }
 
   static final system = PlatformWidgetBuilder(
-      appBuilder: (_, platform) {
-        return MaterialApp.router(
-          theme: ThemeData.light(useMaterial3: true),
-          routerConfig: platform.router.instance,
-        );
-      },
-      appLoader: (_) => const _DefaultRouteLoader(
-            delay: Duration(milliseconds: 0),
-            backgroundColor: Colors.black,
-            progressColor: Colors.white,
-          ),
-      routeLoader: (_, [__, ___]) => const _DefaultRouteLoader(
-            delay: Duration(milliseconds: 0),
-            backgroundColor: Colors.white30,
-          ),
-      contentLoader: (_) => const Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  RepaintBoundary(child: CircularProgressIndicator()),
-                  PoweredByWidget(),
-                ],
-              ),
-            ),
-          ),
-      imagePlaceholder: (_, {width, height}) => Container(
-            width: width,
-            height: height,
-            decoration: const BoxDecoration(color: Colors.black12),
-            padding: const EdgeInsets.all(20.0),
-            child: const Icon(
-              Icons.image_not_supported_rounded,
-              color: Colors.grey,
-              size: 32,
-            ),
-          ),
-      errorView: (
-        _, {
-        required title,
-        retryLabel,
-        onRetry,
-        subtitle,
-        error,
-        stackTrace,
-        showRestart = true,
-      }) =>
-          Center(
-            child: _ErrorView(
-              title: title,
-              subtitle: subtitle,
-              error: error,
-              stackTrace: stackTrace,
-              retryLabel: retryLabel,
-              onRetry: onRetry,
-            ),
-          ),
-      routeErrorView: (
-        _, {
-        required title,
-        onRetry,
-        retryLabel,
-        subtitle,
-        error,
-        stackTrace,
-      }) =>
-          _ErrorViewScaffold(
+    appBuilder: (_, platform) {
+      return MaterialApp.router(
+        theme: ThemeData.light(useMaterial3: true),
+        routerConfig: platform.router.instance,
+      );
+    },
+    appLoader: (_) => const _DefaultRouteLoader(
+      delay: Duration(milliseconds: 0),
+      backgroundColor: Colors.black,
+      progressColor: Colors.white,
+    ),
+    routeLoader: (_, [_, _]) => const _DefaultRouteLoader(
+      delay: Duration(milliseconds: 0),
+      backgroundColor: Colors.white30,
+    ),
+    contentLoader: (_) => const Center(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            RepaintBoundary(child: CircularProgressIndicator()),
+            PoweredByWidget(),
+          ],
+        ),
+      ),
+    ),
+    imagePlaceholder: (_, {width, height}) => Container(
+      width: width,
+      height: height,
+      decoration: const BoxDecoration(color: Colors.black12),
+      padding: const EdgeInsets.all(20.0),
+      child: const Icon(
+        Icons.image_not_supported_rounded,
+        color: Colors.grey,
+        size: 32,
+      ),
+    ),
+    errorView:
+        (
+          _, {
+          required title,
+          retryLabel,
+          onRetry,
+          subtitle,
+          error,
+          stackTrace,
+          showRestart = true,
+        }) => Center(
+          child: _ErrorView(
             title: title,
             subtitle: subtitle,
             error: error,
             stackTrace: stackTrace,
-            onRetry: onRetry,
             retryLabel: retryLabel,
-            showRestart: true,
+            onRetry: onRetry,
           ),
-      unknown: (context, failure) => _UnknownContentView(failure: failure));
+        ),
+    routeErrorView:
+        (
+          _, {
+          required title,
+          onRetry,
+          retryLabel,
+          subtitle,
+          error,
+          stackTrace,
+        }) => _ErrorViewScaffold(
+          title: title,
+          subtitle: subtitle,
+          error: error,
+          stackTrace: stackTrace,
+          onRetry: onRetry,
+          retryLabel: retryLabel,
+          showRestart: true,
+        ),
+    unknown: (context, failure) => _UnknownContentView(failure: failure),
+  );
 }

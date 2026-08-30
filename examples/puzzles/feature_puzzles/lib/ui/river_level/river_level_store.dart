@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:feature_puzzles/api/model/level.dart';
 import 'package:feature_puzzles/ui/river_level/river_engine.dart';
 import 'package:feature_puzzles/utils/extensions.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 
 const int boatCapacity = 2;
@@ -22,8 +22,9 @@ class RiverLevelStore {
       ObservableList<Character>();
   final ObservableList<Character> charactersOnBoat =
       ObservableList<Character>();
-  final Observable<AlignmentGeometry> boatAlignment =
-      Observable(Alignment.topCenter);
+  final Observable<AlignmentGeometry> boatAlignment = Observable(
+    Alignment.topCenter,
+  );
 
   final Observable<LevelEndReason?> levelEndReason = Observable(null);
 
@@ -73,9 +74,7 @@ class RiverLevelStore {
     }
     int score = _calculateScore();
     if (score <= 0 && !isEnded && isStarted) {
-      endLevel(
-        reason: LevelEndReason('You ran out of time!'),
-      );
+      endLevel(reason: LevelEndReason('You ran out of time!'));
       return;
     }
   }
@@ -99,9 +98,7 @@ class RiverLevelStore {
     });
   }
 
-  void endLevel({
-    required LevelEndReason reason,
-  }) {
+  void endLevel({required LevelEndReason reason}) {
     runInAction(() {
       endTime.value = DateTime.now();
       levelEndReason.value = LevelEndReason(
@@ -114,15 +111,11 @@ class RiverLevelStore {
   }
 
   void _evaluateWin() {
-    final characters =
-        charactersOnBottom.where((element) => element.isNotEmpty);
+    final characters = charactersOnBottom.where(
+      (element) => element.isNotEmpty,
+    );
     if (characters.length == level.characters.length) {
-      endLevel(
-        reason: LevelEndReason(
-          'You win!',
-          won: true,
-        ),
-      );
+      endLevel(reason: LevelEndReason('You win!', won: true));
     }
   }
 
@@ -158,13 +151,12 @@ class RiverLevelStore {
       onError('No one is on the boat');
       return;
     }
-    final canSail = charactersOnBoat
-        .any((element) => element.canSail && element.isNotEmpty);
+    final canSail = charactersOnBoat.any(
+      (element) => element.canSail && element.isNotEmpty,
+    );
     if (!canSail) {
       final sailors = level.characters
-          .where(
-            (element) => element.canSail,
-          )
+          .where((element) => element.canSail)
           .map((e) => e.title)
           .join(' or ');
       final characters = charactersOnBoat
@@ -193,10 +185,7 @@ class RiverLevelStore {
     );
   }
 
-  void moveCharacter(
-    Character character, {
-    required Function(String) onError,
-  }) {
+  void moveCharacter(Character character, {required Function(String) onError}) {
     if (!isStarted) {
       onError('Please start the game first!');
       return;

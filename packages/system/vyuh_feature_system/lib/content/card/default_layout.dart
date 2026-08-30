@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart' as f;
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as f;
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/text.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as e;
 
 part 'default_layout.g.dart';
 
-enum _CardRenderVariant {
-  imageOnly,
-  imageAndText,
-  textOnly,
-}
+enum _CardRenderVariant { imageOnly, imageAndText, textOnly }
 
 @JsonSerializable()
 class DefaultCardLayout extends LayoutConfiguration<e.Card> {
@@ -29,7 +25,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
   final int maxDescriptionLines;
 
   DefaultCardLayout({required this.title, this.maxDescriptionLines = 2})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory DefaultCardLayout.fromJson(Map<String, dynamic> json) =>
       _$DefaultCardLayoutFromJson(json);
@@ -45,10 +41,11 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
     };
 
     return e.PressEffect(
-        onTap: content.action != null
-            ? (context) => content.action!.execute(context)
-            : null,
-        child: child);
+      onTap: content.action != null
+          ? (context) => content.action!.execute(context)
+          : null,
+      child: child,
+    );
   }
 
   Widget _buildImageOnly(f.BuildContext context, e.Card content) {
@@ -86,10 +83,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (content.title != null)
-                  TitleText(
-                    text: content.title!,
-                    textAlign: TextAlign.center,
-                  ),
+                  TitleText(text: content.title!, textAlign: TextAlign.center),
                 if (content.description != null)
                   SubtitleText(
                     text: content.description!,
@@ -98,8 +92,11 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   ),
                 if (hasBlockContent)
                   Flexible(
-                      child: VyuhBinding.instance.content
-                          .buildContent(context, content.content!)),
+                    child: VyuhBinding.instance.content.buildContent(
+                      context,
+                      content.content!,
+                    ),
+                  ),
               ],
             ),
           ),
@@ -135,10 +132,7 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 if (content.title != null && content.title!.isNotEmpty)
-                  TitleText(
-                    text: content.title!,
-                    textAlign: TextAlign.center,
-                  ),
+                  TitleText(text: content.title!, textAlign: TextAlign.center),
                 if (content.description != null &&
                     content.description!.isNotEmpty)
                   SubtitleText(
@@ -148,8 +142,11 @@ class DefaultCardLayout extends LayoutConfiguration<e.Card> {
                   ),
                 if (hasBlockContent)
                   Flexible(
-                      child: VyuhBinding.instance.content
-                          .buildContent(context, content.content!)),
+                    child: VyuhBinding.instance.content.buildContent(
+                      context,
+                      content.content!,
+                    ),
+                  ),
               ],
             ),
           ),

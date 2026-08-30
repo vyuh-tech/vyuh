@@ -1,14 +1,14 @@
 import 'package:content_widget_demo/example.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
 
 final class RouteExample extends ExampleWidget {
   const RouteExample({super.key})
-      : super(
-          title: 'Complex Route',
-          description: 'Render a complex Route document from the CMS',
-        );
+    : super(
+        title: 'Complex Route',
+        description: 'Render a complex Route document from the CMS',
+      );
 
   @override
   Widget build(BuildContext context) {

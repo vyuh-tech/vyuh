@@ -10,9 +10,9 @@ import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/section_title.dart';
 import 'package:feature_tmdb/utils/constants.dart';
-import 'package:flutter/material.dart' as f;
-import 'package:flutter/material.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:material_ui/material_ui.dart' as f;
+import 'package:material_ui/material_ui.dart';
 import 'package:readmore/readmore.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
@@ -31,14 +31,11 @@ class ReviewSection extends StatelessWidget {
     this.representation = ListRepresentation.short,
   });
 
-  factory ReviewSection.large({
-    required BrowseMode mode,
-  }) =>
-      ReviewSection(
-        mode: mode,
-        representation: ListRepresentation.long,
-        title: 'Reviews',
-      );
+  factory ReviewSection.large({required BrowseMode mode}) => ReviewSection(
+    mode: mode,
+    representation: ListRepresentation.long,
+    title: 'Reviews',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +60,10 @@ class ReviewSection extends StatelessWidget {
         return store.getFuture('$id.$cacheSuffix.reviews');
       },
       builder: (context, data) {
-        final items =
-            data.results.sortedBy((x) => x.updatedAt).reversed.toList();
+        final items = data.results
+            .sortedBy((x) => x.updatedAt)
+            .reversed
+            .toList();
         final theme = Theme.of(context);
 
         if (items.isEmpty) {
@@ -87,10 +86,12 @@ class ReviewSection extends StatelessWidget {
                     if (items.shouldShowViewAll)
                       TextButton(
                         onPressed: () => mode == BrowseMode.movies
-                            ? vyuh.router
-                                .push(TmdbPath.movieReviewsList(idx ?? 0))
-                            : vyuh.router
-                                .push(TmdbPath.seriesReviewsList(idx ?? 0)),
+                            ? vyuh.router.push(
+                                TmdbPath.movieReviewsList(idx ?? 0),
+                              )
+                            : vyuh.router.push(
+                                TmdbPath.seriesReviewsList(idx ?? 0),
+                              ),
                         child: Row(
                           children: [
                             Text(
@@ -113,8 +114,9 @@ class ReviewSection extends StatelessWidget {
               items.isEmpty
                   ? empty
                   : SizedBox(
-                      height: theme.sizing
-                          .width31(MediaQuery.of(context).size.height),
+                      height: theme.sizing.width31(
+                        MediaQuery.of(context).size.height,
+                      ),
                       child: Padding(
                         padding: EdgeInsets.only(
                           left: theme.spacing.s32,
@@ -122,17 +124,15 @@ class ReviewSection extends StatelessWidget {
                         ),
                         child: ListView.separated(
                           scrollDirection: Axis.horizontal,
-                          separatorBuilder: (context, index) => SizedBox(
-                            width: theme.spacing.s8,
-                          ),
+                          separatorBuilder: (context, index) =>
+                              SizedBox(width: theme.spacing.s8),
                           itemCount: min(maxCountForViewAll, items.length),
                           itemBuilder: (context, index) {
                             return SizedBox(
-                              width: MediaQuery.of(context).size.width -
+                              width:
+                                  MediaQuery.of(context).size.width -
                                   8 * theme.spacing.s8,
-                              child: ReviewCard(
-                                item: items[index],
-                              ),
+                              child: ReviewCard(item: items[index]),
                             );
                           },
                         ),
@@ -167,10 +167,7 @@ class ReviewSection extends StatelessWidget {
 }
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({
-    super.key,
-    required this.item,
-  });
+  const ReviewCard({super.key, required this.item});
 
   final Review item;
 
@@ -197,8 +194,9 @@ class ReviewCard extends StatelessWidget {
             children: [
               Expanded(
                 child: SizedBox(
-                  height: theme.sizing
-                      .width23(MediaQuery.sizeOf(context).height * 0.9),
+                  height: theme.sizing.width23(
+                    MediaQuery.sizeOf(context).height * 0.9,
+                  ),
                   child: Scrollbar(
                     controller: scrollController,
                     thumbVisibility: true,

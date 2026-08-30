@@ -5,7 +5,8 @@ publish_to: none
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.6.0
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
@@ -24,6 +25,8 @@ dependencies:
   feature_conference: ^1.0.0
   vyuh_feature_system: ^1.47.0
 
+  material_ui: ^1.1.0
+  cupertino_ui: ^1.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

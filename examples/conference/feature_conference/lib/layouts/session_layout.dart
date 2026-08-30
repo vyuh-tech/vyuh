@@ -1,7 +1,7 @@
 import 'package:feature_conference/layouts/speaker_chip_layout.dart';
 import 'package:feature_conference/layouts/track_chip_layout.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import '../content/session.dart';
@@ -53,10 +53,7 @@ class _SessionHeader extends StatelessWidget {
       spacing: 8,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          content.title,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
+        Text(content.title, style: Theme.of(context).textTheme.headlineSmall),
         Row(
           spacing: 16,
           children: [
@@ -94,8 +91,10 @@ class _SessionDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return content.description != null
-        ? VyuhBinding.instance.content
-            .buildContent(context, content.description!)
+        ? VyuhBinding.instance.content.buildContent(
+            context,
+            content.description!,
+          )
         : const SizedBox.shrink();
   }
 }
@@ -111,19 +110,18 @@ class _SpeakersList extends StatelessWidget {
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Speakers',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        Text('Speakers', style: Theme.of(context).textTheme.titleLarge),
         Wrap(
           spacing: 16,
           runSpacing: 16,
           children: speakers
-              .map((speaker) => VyuhBinding.instance.content.buildContent(
-                    context,
-                    speaker,
-                    layout: SpeakerChipLayout(),
-                  ))
+              .map(
+                (speaker) => VyuhBinding.instance.content.buildContent(
+                  context,
+                  speaker,
+                  layout: SpeakerChipLayout(),
+                ),
+              )
               .toList(),
         ),
       ],
@@ -142,19 +140,18 @@ class _TracksList extends StatelessWidget {
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Tracks',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        Text('Tracks', style: Theme.of(context).textTheme.titleLarge),
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: tracks
-              .map((track) => VyuhBinding.instance.content.buildContent(
-                    context,
-                    track,
-                    layout: TrackChipLayout(),
-                  ))
+              .map(
+                (track) => VyuhBinding.instance.content.buildContent(
+                  context,
+                  track,
+                  layout: TrackChipLayout(),
+                ),
+              )
               .toList(),
         ),
       ],

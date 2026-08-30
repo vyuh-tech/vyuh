@@ -4,7 +4,7 @@ import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/section_title.dart';
 import 'package:feature_tmdb/ui/widget/circular_carousel.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';

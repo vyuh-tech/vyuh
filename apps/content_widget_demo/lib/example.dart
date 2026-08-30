@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 abstract base class ExampleWidget extends StatelessWidget {
   final String title;
@@ -21,11 +21,7 @@ final class ExampleContent extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          example.title,
-        ),
-      ),
+      appBar: AppBar(title: Text(example.title)),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -36,10 +32,7 @@ final class ExampleContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 spacing: 8,
                 children: [
-                  Icon(
-                    Icons.info_outlined,
-                    color: theme.disabledColor,
-                  ),
+                  Icon(Icons.info_outlined, color: theme.disabledColor),
                   Expanded(
                     child: Text(
                       example.description,

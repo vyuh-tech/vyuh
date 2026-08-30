@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import 'document_future_builder.dart';
@@ -115,10 +115,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
   }) {
     return DocumentBuilder<T>(
       key: key,
-      fetchDocument: () => vyuh.content.provider.fetchById(
-        id,
-        fromJson: fromJson,
-      ),
+      fetchDocument: () =>
+          vyuh.content.provider.fetchById(id, fromJson: fromJson),
       liveDocument: isLive
           ? vyuh.content.provider.live.fetchById(
               id,
@@ -150,10 +148,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
 
     return DocumentBuilder<RouteBase>(
       key: key,
-      fetchDocument: () => vyuh.content.provider.fetchRoute(
-        path: url?.path,
-        routeId: routeId,
-      ),
+      fetchDocument: () =>
+          vyuh.content.provider.fetchRoute(path: url?.path, routeId: routeId),
       liveDocument: isLive
           ? vyuh.content.provider.live.fetchRoute(
               path: url?.path,
@@ -174,11 +170,13 @@ final class DocumentBuilder<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedDIWidget(
       debugLabel: 'Scoped DI for Document',
-      child: Builder(builder: (context) {
-        return isLive && liveDocument != null
-            ? _buildLiveDocument(context)
-            : _buildStaticDocument(context);
-      }),
+      child: Builder(
+        builder: (context) {
+          return isLive && liveDocument != null
+              ? _buildLiveDocument(context)
+              : _buildStaticDocument(context);
+        },
+      ),
     );
   }
 
@@ -186,8 +184,9 @@ final class DocumentBuilder<T> extends StatelessWidget {
   Widget _buildLiveDocument(BuildContext context) {
     return DocumentStreamBuilder<T>(
       allowRefresh: allowRefresh,
-      stream: liveDocument!.asyncMap((document) =>
-          context.mounted ? _initDocument(context, document) : null),
+      stream: liveDocument!.asyncMap(
+        (document) => context.mounted ? _initDocument(context, document) : null,
+      ),
       buildContent: buildContent,
     );
   }
@@ -197,8 +196,10 @@ final class DocumentBuilder<T> extends StatelessWidget {
     return DocumentFutureBuilder<T>(
       allowRefresh: allowRefresh,
       future: () {
-        return fetchDocument().then((document) =>
-            context.mounted ? _initDocument(context, document) : null);
+        return fetchDocument().then(
+          (document) =>
+              context.mounted ? _initDocument(context, document) : null,
+        );
       },
       buildContent: buildContent,
     );

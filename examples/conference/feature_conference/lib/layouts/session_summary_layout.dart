@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 import '../content/session.dart';
@@ -30,13 +30,16 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(
+          context,
+        ).pathParameters['editionId']!;
 
         vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/sessions/${content.id}');
+          '/conferences/$conferenceId/editions/$editionId/sessions/${content.id}',
+        );
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -46,21 +49,19 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
             spacing: 16,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                content.title,
-                style: theme.textTheme.titleMedium,
-              ),
+              Text(content.title, style: theme.textTheme.titleMedium),
               if (content.speakers?.isNotEmpty ?? false)
                 Wrap(
                   spacing: 16,
                   runSpacing: 8,
                   children: content.speakers!
-                      .map((speaker) =>
-                          VyuhBinding.instance.content.buildContent(
-                            context,
-                            speaker,
-                            layout: SpeakerChipLayout(mini: true),
-                          ))
+                      .map(
+                        (speaker) => VyuhBinding.instance.content.buildContent(
+                          context,
+                          speaker,
+                          layout: SpeakerChipLayout(mini: true),
+                        ),
+                      )
                       .toList(),
                 ),
               if (content.tracks?.isNotEmpty ?? false)
@@ -68,11 +69,13 @@ final class SessionSummaryLayout extends LayoutConfiguration<Session> {
                   spacing: 8,
                   runSpacing: 8,
                   children: content.tracks!
-                      .map((track) => VyuhBinding.instance.content.buildContent(
-                            context,
-                            track,
-                            layout: TrackChipLayout(),
-                          ))
+                      .map(
+                        (track) => VyuhBinding.instance.content.buildContent(
+                          context,
+                          track,
+                          layout: TrackChipLayout(),
+                        ),
+                      )
                       .toList(),
                 ),
             ],

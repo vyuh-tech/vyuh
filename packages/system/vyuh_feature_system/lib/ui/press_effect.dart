@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:material_ui/material_ui.dart';
 
 class PressEffect extends StatefulWidget {
   final Widget child;
@@ -37,29 +37,31 @@ class _PressEffectState extends State<PressEffect> {
               }
             : null,
         child: _tapped
-            ? widget.child.animate(onComplete: (_) {
-                setState(() {
-                  _tapped = false;
+            ? widget.child
+                  .animate(
+                    onComplete: (_) {
+                      setState(() {
+                        _tapped = false;
 
-                  Future.delayed(
-                    const Duration(milliseconds: 50),
-                    () {
-                      if (!context.mounted) {
-                        return;
-                      }
+                        Future.delayed(const Duration(milliseconds: 50), () {
+                          if (!context.mounted) {
+                            return;
+                          }
 
-                      return widget.onTap?.call(context);
+                          return widget.onTap?.call(context);
+                        });
+                      });
                     },
-                  );
-                });
-              }).toggle(
-                duration: 25.ms,
-                delay: 50.ms,
-                builder: (_, value, child) {
-                  return child
-                      .animate()
-                      .scaleXY(end: value ? widget.scale : 1.0);
-                })
+                  )
+                  .toggle(
+                    duration: 25.ms,
+                    delay: 50.ms,
+                    builder: (_, value, child) {
+                      return child.animate().scaleXY(
+                        end: value ? widget.scale : 1.0,
+                      );
+                    },
+                  )
             : widget.child,
       ),
     );

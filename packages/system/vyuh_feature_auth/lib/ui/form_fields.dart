@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'
+    as legacy_material
+    show Material, MaterialType;
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:vyuh_cdx_ui/vyuh_cdx_ui.dart';
 import 'package:vyuh_feature_auth/ui/auth_state_widget.dart';
 
 final class LoaderButton extends StatelessWidget {
@@ -33,7 +37,8 @@ final class LoaderButton extends StatelessWidget {
               child: CircularProgressIndicator(
                 strokeWidth: 2,
                 color: Theme.of(context).tabBarTheme.indicatorColor,
-              ))
+              ),
+            )
           : icon,
       label: title == null ? const SizedBox.shrink() : Text(title!),
     );
@@ -49,18 +54,20 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'email',
-      initialValue: email,
-      decoration: const InputDecoration(labelText: 'Email'),
-      keyboardType: TextInputType.emailAddress,
-      inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
-      autofillHints: [AutofillHints.email, AutofillHints.username],
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.email(),
-      ]),
-      onSubmitted: (_) => submit(),
+    return _LegacyFormFieldBoundary(
+      child: FormBuilderTextField(
+        name: 'email',
+        initialValue: email,
+        decoration: legacyCdxInputDecoration(context, labelText: 'Email'),
+        keyboardType: TextInputType.emailAddress,
+        inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+        autofillHints: const [AutofillHints.email, AutofillHints.username],
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+          FormBuilderValidators.email(),
+        ]),
+        onSubmitted: (_) => submit(),
+      ),
     );
   }
 }
@@ -72,85 +79,92 @@ class UsernameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'username',
-      initialValue: username,
-      decoration: const InputDecoration(labelText: 'Username'),
-      keyboardType: TextInputType.text,
-      inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
-      autofillHints: [AutofillHints.username],
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(3,
-            errorText: 'Username must be at least 3 characters'),
-      ]),
-      onSubmitted: (_) => submit(),
+    return _LegacyFormFieldBoundary(
+      child: FormBuilderTextField(
+        name: 'username',
+        initialValue: username,
+        decoration: legacyCdxInputDecoration(context, labelText: 'Username'),
+        keyboardType: TextInputType.text,
+        inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+        autofillHints: const [AutofillHints.username],
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+          FormBuilderValidators.minLength(
+            3,
+            errorText: 'Username must be at least 3 characters',
+          ),
+        ]),
+        onSubmitted: (_) => submit(),
+      ),
     );
   }
 }
 
 class PhoneInputField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
-  final InputDecoration? inputDecoration;
+  final String labelText;
   final void Function(BuildContext) submit;
 
   const PhoneInputField({
     super.key,
     required this.submit,
     this.validator,
-    this.inputDecoration,
+    this.labelText = 'Phone Number',
   });
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'phone',
-      decoration:
-          inputDecoration ?? const InputDecoration(labelText: 'Phone Number'),
-      keyboardType: TextInputType.phone,
-      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
-      autofillHints: [
-        AutofillHints.telephoneNumber,
-        AutofillHints.telephoneNumberLocal,
-        AutofillHints.telephoneNumberNational
-      ],
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.phoneNumber(),
-        if (validator != null) validator!,
-      ]),
-      onSubmitted: (_) => submit(context),
+    return _LegacyFormFieldBoundary(
+      child: FormBuilderTextField(
+        name: 'phone',
+        decoration: legacyCdxInputDecoration(context, labelText: labelText),
+        keyboardType: TextInputType.phone,
+        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
+        autofillHints: const [
+          AutofillHints.telephoneNumber,
+          AutofillHints.telephoneNumberLocal,
+          AutofillHints.telephoneNumberNational,
+        ],
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+          FormBuilderValidators.phoneNumber(),
+          ?validator,
+        ]),
+        onSubmitted: (_) => submit(context),
+      ),
     );
   }
 }
 
 class OtpInputField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
-  final InputDecoration? inputDecoration;
+  final String labelText;
   final void Function(BuildContext) submit;
 
   const OtpInputField({
     super.key,
     required this.submit,
-    this.inputDecoration,
     this.validator,
+    this.labelText = 'OTP',
   });
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'otp',
-      autofillHints: const [AutofillHints.oneTimeCode],
-      decoration: inputDecoration ?? const InputDecoration(labelText: 'OTP'),
-      keyboardType: TextInputType.number,
-      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-        FormBuilderValidators.minLength(6),
-        FormBuilderValidators.numeric(),
-        if (validator != null) validator!,
-      ]),
-      onSubmitted: (_) => submit(context),
+    return _LegacyFormFieldBoundary(
+      child: FormBuilderTextField(
+        name: 'otp',
+        autofillHints: const [AutofillHints.oneTimeCode],
+        decoration: legacyCdxInputDecoration(context, labelText: labelText),
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+          FormBuilderValidators.minLength(6),
+          FormBuilderValidators.numeric(),
+          ?validator,
+        ]),
+        onSubmitted: (_) => submit(context),
+      ),
     );
   }
 }
@@ -159,11 +173,12 @@ class PasswordField extends StatefulWidget {
   final bool showPasswordVisibilityToggle;
   final bool autofocus;
   final void Function() submit;
-  const PasswordField(
-      {super.key,
-      this.showPasswordVisibilityToggle = false,
-      this.autofocus = false,
-      required this.submit});
+  const PasswordField({
+    super.key,
+    this.showPasswordVisibilityToggle = false,
+    this.autofocus = false,
+    required this.submit,
+  });
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -174,25 +189,47 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return FormBuilderTextField(
-      name: 'password',
-      autofocus: widget.autofocus,
-      decoration: InputDecoration(
+    return _LegacyFormFieldBoundary(
+      child: FormBuilderTextField(
+        name: 'password',
+        autofocus: widget.autofocus,
+        decoration: legacyCdxInputDecoration(
+          context,
           labelText: 'Password',
           suffixIcon: widget.showPasswordVisibilityToggle
               ? IconButton(
                   icon: Icon(
-                      _showPassword ? Icons.visibility : Icons.visibility_off),
+                    _showPassword ? Icons.visibility : Icons.visibility_off,
+                  ),
                   onPressed: () =>
                       setState(() => _showPassword = !_showPassword),
                 )
-              : null),
-      obscureText: !_showPassword,
-      autofillHints: const [AutofillHints.password],
-      validator: FormBuilderValidators.compose([
-        FormBuilderValidators.required(),
-      ]),
-      onSubmitted: (_) => widget.submit(),
+              : null,
+        ),
+        obscureText: !_showPassword,
+        autofillHints: const [AutofillHints.password],
+        validator: FormBuilderValidators.compose([
+          FormBuilderValidators.required(),
+        ]),
+        onSubmitted: (_) => widget.submit(),
+      ),
+    );
+  }
+}
+
+final class _LegacyFormFieldBoundary extends StatelessWidget {
+  final Widget child;
+
+  const _LegacyFormFieldBoundary({required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    // flutter_form_builder still imports package:flutter/material.dart.
+    return CdxMaterialUiCompatibilityBridge(
+      child: legacy_material.Material(
+        type: legacy_material.MaterialType.transparency,
+        child: child,
+      ),
     );
   }
 }
@@ -215,11 +252,12 @@ class HintAction extends StatelessWidget {
       Text(label);
 
   static Widget defaultActionLabel(BuildContext context, String label) => Text(
-        label,
-        style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-            fontWeight: FontWeight.bold),
-      );
+    label,
+    style: TextStyle(
+      color: Theme.of(context).colorScheme.secondary,
+      fontWeight: FontWeight.bold,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -304,16 +342,14 @@ class ErrorText extends StatelessWidget {
 
     return Row(
       children: [
-        Icon(
-          Icons.error,
-          color: theme.colorScheme.error,
-        ),
+        Icon(Icons.error, color: theme.colorScheme.error),
         const SizedBox(width: 8),
         Expanded(
           child: SelectableText(
             error.toString(),
-            style: theme.textTheme.bodyMedium
-                ?.apply(color: theme.colorScheme.error),
+            style: theme.textTheme.bodyMedium?.apply(
+              color: theme.colorScheme.error,
+            ),
           ),
         ),
       ],

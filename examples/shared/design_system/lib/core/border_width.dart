@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart' as flutter;
+import 'package:material_ui/material_ui.dart' as flutter;
 
 class BorderWidth extends flutter.ThemeExtension<BorderWidth> {
   final double none;
@@ -21,13 +21,12 @@ class BorderWidth extends flutter.ThemeExtension<BorderWidth> {
     final double? small,
     final double? medium,
     final double? large,
-  }) =>
-      BorderWidth(
-        none: none ?? this.none,
-        small: small ?? this.small,
-        medium: medium ?? this.medium,
-        large: large ?? this.large,
-      );
+  }) => BorderWidth(
+    none: none ?? this.none,
+    small: small ?? this.small,
+    medium: medium ?? this.medium,
+    large: large ?? this.large,
+  );
 
   @override
   flutter.ThemeExtension<BorderWidth> lerp(
@@ -38,30 +37,10 @@ class BorderWidth extends flutter.ThemeExtension<BorderWidth> {
       return this;
     }
     return BorderWidth(
-      none: lerpDouble(
-            none,
-            other.none,
-            t,
-          ) ??
-          none,
-      small: lerpDouble(
-            small,
-            other.small,
-            t,
-          ) ??
-          small,
-      medium: lerpDouble(
-            medium,
-            other.medium,
-            t,
-          ) ??
-          medium,
-      large: lerpDouble(
-            large,
-            other.large,
-            t,
-          ) ??
-          large,
+      none: lerpDouble(none, other.none, t) ?? none,
+      small: lerpDouble(small, other.small, t) ?? small,
+      medium: lerpDouble(medium, other.medium, t) ?? medium,
+      large: lerpDouble(large, other.large, t) ?? large,
     );
   }
 }

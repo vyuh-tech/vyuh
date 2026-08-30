@@ -3,7 +3,7 @@ import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/ui/formatters.dart';
 import 'package:feature_tmdb/ui/section_title.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -58,10 +58,7 @@ class StatisticsSection extends StatelessWidget {
 class StatisticsCard extends StatelessWidget {
   final Map<String, String> statistics;
 
-  const StatisticsCard({
-    super.key,
-    required this.statistics,
-  });
+  const StatisticsCard({super.key, required this.statistics});
 
   @override
   Widget build(BuildContext context) {
@@ -127,15 +124,10 @@ class Statistic extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          title,
-          style: theme.tmdbTheme.caption?.copyWith(color: textColor),
-        ),
+        Text(title, style: theme.tmdbTheme.caption?.copyWith(color: textColor)),
         Text(
           value,
-          style: theme.tmdbTheme.bodyMedium?.copyWith(
-            color: textColor,
-          ),
+          style: theme.tmdbTheme.bodyMedium?.copyWith(color: textColor),
         ),
       ],
     );

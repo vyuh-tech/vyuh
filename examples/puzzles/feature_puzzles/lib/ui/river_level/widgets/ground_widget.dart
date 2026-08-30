@@ -1,5 +1,5 @@
 import 'package:feature_puzzles/utils/constants.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class GroundWidget extends StatelessWidget {
   final int itemCount;
@@ -25,10 +25,7 @@ class GroundWidget extends StatelessWidget {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(
-                  Assets.background,
-                  package: Assets.package,
-                ),
+                image: AssetImage(Assets.background, package: Assets.package),
                 fit: BoxFit.fill,
                 opacity: 0.8,
               ),
@@ -47,9 +44,6 @@ class GroundWidget extends StatelessWidget {
 
     return quarterTurns == null
         ? child
-        : RotatedBox(
-            quarterTurns: quarterTurns!,
-            child: child,
-          );
+        : RotatedBox(quarterTurns: quarterTurns!, child: child);
   }
 }

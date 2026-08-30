@@ -2,9 +2,9 @@ import 'package:design_system/design_system.dart';
 import 'package:feature_tmdb/routes.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
 import 'package:feature_tmdb/utils/assets.dart';
-import 'package:flutter/material.dart' as f;
-import 'package:flutter/material.dart' hide Action;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as f;
+import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content/action.dart';
@@ -24,7 +24,7 @@ final class ApiConfigGenreSelection extends ApiConfiguration<List<Genre>> {
   );
 
   ApiConfigGenreSelection({this.allowModeToggle = false, this.action})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory ApiConfigGenreSelection.fromJson(Map<String, dynamic> json) =>
       _$ApiConfigGenreSelectionFromJson(json);
@@ -47,10 +47,7 @@ final class ApiConfigGenreSelection extends ApiConfiguration<List<Genre>> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisSize: MainAxisSize.max,
         children: [
-          Text(
-            'Search by Genres',
-            style: theme.tmdbTheme.headlineSmall,
-          ),
+          Text('Search by Genres', style: theme.tmdbTheme.headlineSmall),
           SizedBox(height: theme.spacing.s8),
           Expanded(
             child: GridView.count(
@@ -145,17 +142,15 @@ class GenreTile extends StatelessWidget {
     10770: Assets.tvMovie,
   };
 
-  const GenreTile({
-    super.key,
-    required this.genre,
-  });
+  const GenreTile({super.key, required this.genre});
 
   @override
   f.Widget build(f.BuildContext context) {
     final store = vyuh.di.get<TMDBStore>();
     final theme = Theme.of(context);
-    final assetPath =
-        store.isMoviesMode ? _icons[genre.id] : _seriesIcons[genre.id];
+    final assetPath = store.isMoviesMode
+        ? _icons[genre.id]
+        : _seriesIcons[genre.id];
 
     return Stack(
       children: [

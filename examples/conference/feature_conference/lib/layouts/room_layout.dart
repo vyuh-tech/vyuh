@@ -1,14 +1,11 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../content/room.dart';
 
 class RoomLayout extends StatelessWidget {
   final Room room;
 
-  const RoomLayout({
-    super.key,
-    required this.room,
-  });
+  const RoomLayout({super.key, required this.room});
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +28,7 @@ class RoomLayout extends StatelessWidget {
                   spacing: 8,
                   children: [
                     Chip(
-                      avatar: const Icon(
-                        Icons.people,
-                        color: Colors.white,
-                      ),
+                      avatar: const Icon(Icons.people, color: Colors.white),
                       label: Text(
                         '${room.capacity}',
                         style: theme.textTheme.labelSmall?.copyWith(
@@ -44,10 +38,7 @@ class RoomLayout extends StatelessWidget {
                       backgroundColor: theme.colorScheme.secondary,
                     ),
                     Chip(
-                      avatar: const Icon(
-                        Icons.stairs,
-                        color: Colors.white,
-                      ),
+                      avatar: const Icon(Icons.stairs, color: Colors.white),
                       label: Text(
                         'Floor ${room.floor}',
                         style: theme.textTheme.labelSmall?.copyWith(
@@ -67,22 +58,26 @@ class RoomLayout extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text('Facilities',
-                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    'Facilities',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
                     children: room.facilities!
-                        .map((f) => Chip(
-                              label: Text(
-                                f.displayName,
-                                style: theme.textTheme.labelSmall?.copyWith(
-                                  color: Colors.white,
-                                ),
+                        .map(
+                          (f) => Chip(
+                            label: Text(
+                              f.displayName,
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                color: Colors.white,
                               ),
-                              backgroundColor: Colors.grey.shade600,
-                            ))
+                            ),
+                            backgroundColor: Colors.grey.shade600,
+                          ),
+                        )
                         .toList(),
                   ),
                 ],

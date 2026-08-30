@@ -1,14 +1,11 @@
 import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/tmdb_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 class AddToWatchlistButton extends StatelessWidget {
-  const AddToWatchlistButton({
-    super.key,
-    required this.item,
-  });
+  const AddToWatchlistButton({super.key, required this.item});
 
   final FeaturedShow item;
 
@@ -25,8 +22,9 @@ class AddToWatchlistButton extends StatelessWidget {
         );
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content:
-                Text('Added ${item.isMovie ? 'Movie' : 'Series'} to Watchlist'),
+            content: Text(
+              'Added ${item.isMovie ? 'Movie' : 'Series'} to Watchlist',
+            ),
             duration: const Duration(milliseconds: 500),
           ),
         );
@@ -40,10 +38,7 @@ class AddToWatchlistButton extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.playlist_add,
-              color: theme.colorScheme.onPrimary,
-            ),
+            Icon(Icons.playlist_add, color: theme.colorScheme.onPrimary),
             SizedBox(width: theme.spacing.s8),
             Text(
               'Add to Watchlist',

@@ -13,8 +13,8 @@ topics:
   - cms
 
 environment:
-  sdk: ^3.6.1
-  flutter: '>=3.16.0'
+  sdk: '>=3.12.0 <4.0.0'
+  flutter: '>=3.47.0'
 
 dependencies:
   flutter:
@@ -25,6 +25,7 @@ dependencies:
   vyuh_core: ^1.55.0
   vyuh_extension_content: ^1.32.0
 
+  material_ui: ^1.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 
 /// Represents different screen size breakpoints for responsive design.
 ///
@@ -7,13 +7,7 @@ import 'package:flutter/cupertino.dart';
 /// * [medium] - For tablets and medium-sized screens
 /// * [large] - For desktop and large screens
 /// * [xLarge] - For extra large screens and TV displays
-enum Breakpoint {
-  small,
-  medium,
-  large,
-  xLarge,
-  xxLarge,
-}
+enum Breakpoint { small, medium, large, xLarge, xxLarge }
 
 /// Configuration for screen size breakpoints used in responsive design.
 ///

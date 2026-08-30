@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:design_system/design_system.dart' hide BorderRadius;
 import 'package:feature_tmdb/ui/formatters.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class VotePercentage extends StatelessWidget {
   final double? voteAverage;
@@ -23,9 +23,7 @@ class VotePercentage extends StatelessWidget {
             ? ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0)
             : ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
         child: Container(
-          padding: EdgeInsets.all(
-            theme.spacing.s8,
-          ),
+          padding: EdgeInsets.all(theme.spacing.s8),
           decoration: hasBackground
               ? BoxDecoration(
                   borderRadius: BorderRadius.circular(theme.borderRadius.small),
@@ -35,10 +33,7 @@ class VotePercentage extends StatelessWidget {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                '🔥',
-                style: theme.tmdbTheme.labelMedium,
-              ),
+              Text('🔥', style: theme.tmdbTheme.labelMedium),
               Gap.w4,
               Text(
                 '${voteAverage.percentage}%',

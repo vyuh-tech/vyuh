@@ -1,7 +1,7 @@
 import 'package:chakra_shared/chakra_shared.dart';
 import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_tmdb/tmdb_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -39,10 +39,7 @@ class FooterSection extends StatelessWidget {
 class FooterCard extends StatelessWidget {
   final String? backdropImage;
 
-  const FooterCard({
-    super.key,
-    this.backdropImage,
-  });
+  const FooterCard({super.key, this.backdropImage});
 
   @override
   Widget build(BuildContext context) {

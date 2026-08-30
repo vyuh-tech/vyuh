@@ -2,8 +2,8 @@ import 'package:design_system/design_system.dart' as ds;
 import 'package:feature_puzzles/api/model/level.dart';
 import 'package:feature_puzzles/ui/widgets/animated_heading_text.dart';
 import 'package:feature_puzzles/ui/widgets/puzzle_button.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -74,9 +74,7 @@ class StartLevelWidget extends StatelessWidget {
                 ),
                 gap,
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: theme.spacing.s16,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: theme.spacing.s16),
                   child: vyuh.content
                       .buildContent(context, level.instructions)
                       .animate()
@@ -91,12 +89,9 @@ class StartLevelWidget extends StatelessWidget {
           padding: EdgeInsets.all(theme.spacing.s16),
           child: Column(
             children: [
-              PuzzleButton(
-                title: "START LEVEL",
-                onTap: onStart,
-              ),
+              PuzzleButton(title: "START LEVEL", onTap: onStart),
               gap,
-              const PoweredByWidget()
+              const PoweredByWidget(),
             ],
           ),
         ),

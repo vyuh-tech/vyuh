@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
@@ -36,10 +36,7 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
             borderRadius: BorderRadius.circular(8),
             child: AspectRatio(
               aspectRatio: 16 / 9,
-              child: ContentImage(
-                ref: content.image!,
-                fit: BoxFit.cover,
-              ),
+              child: ContentImage(ref: content.image!, fit: BoxFit.cover),
             ),
           ),
         Column(
@@ -48,8 +45,10 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
           children: [
             Text(content.title, style: theme.textTheme.titleMedium),
             if (content.description != null)
-              VyuhBinding.instance.content
-                  .buildContent(context, content.description!),
+              VyuhBinding.instance.content.buildContent(
+                context,
+                content.description!,
+              ),
             if (content.address != null) Text(content.address!.formatted),
             if (content.website != null ||
                 content.phone != null ||
@@ -78,15 +77,17 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
                 spacing: 8,
                 runSpacing: 8,
                 children: content.amenities!
-                    .map((a) => Chip(
-                          label: Text(
-                            a.displayName,
-                            style: theme.textTheme.labelSmall?.copyWith(
-                              color: Colors.white,
-                            ),
+                    .map(
+                      (a) => Chip(
+                        label: Text(
+                          a.displayName,
+                          style: theme.textTheme.labelSmall?.copyWith(
+                            color: Colors.white,
                           ),
-                          backgroundColor: Colors.grey.shade600,
-                        ))
+                        ),
+                        backgroundColor: Colors.grey.shade600,
+                      ),
+                    )
                     .toList(),
               ),
             ],
@@ -96,8 +97,10 @@ final class VenueLayout extends LayoutConfiguration<Venue> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: 8,
             children: [
-              Text('Rooms (${content.rooms!.length})',
-                  style: Theme.of(context).textTheme.titleMedium),
+              Text(
+                'Rooms (${content.rooms!.length})',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
               ...content.rooms!.map((r) => RoomLayout(room: r)),
             ],
           ),

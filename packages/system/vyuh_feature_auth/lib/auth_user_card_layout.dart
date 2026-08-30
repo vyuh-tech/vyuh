@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
@@ -30,24 +30,29 @@ final class AuthUserCardLayout extends LayoutConfiguration<vf.Card> {
           children: [
             CircleAvatar(
               radius: 64,
-              foregroundImage:
-                  user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
+              foregroundImage: user.photoUrl != null
+                  ? NetworkImage(user.photoUrl!)
+                  : null,
               child: user.photoUrl == null ? const Icon(Icons.person) : null,
             ),
             const SizedBox(
-                width: 16), // Add some space between the avatar and the text
+              width: 16,
+            ), // Add some space between the avatar and the text
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text.rich(TextSpan(
-                    text: 'User: ',
-                    children: [
-                      TextSpan(
+                  Text.rich(
+                    TextSpan(
+                      text: 'User: ',
+                      children: [
+                        TextSpan(
                           text: user.name ?? 'N/A',
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  )),
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                  ),
                   Text('Email: ${user.email ?? 'N/A'}'),
                   Text('Phone: ${user.phoneNumber ?? 'N/A'}'),
                   Row(
@@ -80,8 +85,10 @@ class _UnknownUserCard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(vyuh.auth.currentUser.name ?? 'Unknown/Anonymous User',
-                style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(
+              vyuh.auth.currentUser.name ?? 'Unknown/Anonymous User',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 8),
             OutlinedButton(
               onPressed: () async {
@@ -95,7 +102,7 @@ class _UnknownUserCard extends StatelessWidget {
                   Text(content.secondaryAction?.title ?? 'Login'),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
@@ -139,35 +146,38 @@ class _LogoutButtonState extends State<_LogoutButton> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      if (_future.value.status == FutureStatus.pending) {
-        return vyuh.widgetBuilder.contentLoader(context);
-      }
+    return Observer(
+      builder: (context) {
+        if (_future.value.status == FutureStatus.pending) {
+          return vyuh.widgetBuilder.contentLoader(context);
+        }
 
-      return Column(
-        children: [
-          OutlinedButton(
-            onPressed: () async {
-              runInAction(
-                  () => _future.value = ObservableFuture(vyuh.auth.logout()));
-            },
-            child: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.logout),
-                SizedBox(width: 8),
-                Text('Logout'),
-              ],
+        return Column(
+          children: [
+            OutlinedButton(
+              onPressed: () async {
+                runInAction(
+                  () => _future.value = ObservableFuture(vyuh.auth.logout()),
+                );
+              },
+              child: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(Icons.logout),
+                  SizedBox(width: 8),
+                  Text('Logout'),
+                ],
+              ),
             ),
-          ),
-          if (_future.value.status == FutureStatus.rejected)
-            vyuh.widgetBuilder.errorView(
-              context,
-              error: _future.value.error,
-              title: 'Failed to logout',
-            )
-        ],
-      );
-    });
+            if (_future.value.status == FutureStatus.rejected)
+              vyuh.widgetBuilder.errorView(
+                context,
+                error: _future.value.error,
+                title: 'Failed to logout',
+              ),
+          ],
+        );
+      },
+    );
   }
 }

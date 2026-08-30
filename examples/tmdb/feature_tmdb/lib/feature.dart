@@ -17,7 +17,7 @@ import 'package:feature_tmdb/content/tmdb_single_item_layout.dart';
 import 'package:feature_tmdb/routes.dart';
 import 'package:feature_tmdb/store/tmdb_search_store.dart';
 import 'package:feature_tmdb/tmdb_store.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content_extension_descriptor.dart';

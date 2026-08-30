@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_auth/ui/auth_state_widget.dart';
 import 'package:vyuh_feature_auth/ui/form_fields.dart';
 
@@ -25,29 +25,33 @@ final class AuthFormBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthFlow(builder: (context, scope) {
-      return FormBuilder(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Builder(builder: (context) {
-              submit() => _submit(context, scope);
-              return child(context, scope, submit);
-            }),
-            const SizedBox(height: 20),
-            AuthActionButton(
-              scope: scope,
-              title: actionTitle,
-              onPressed: (context) => _submit(context, scope),
-              showError: showError,
-              errorBuilder: errorBuilder,
-            ),
-            if (footer != null) footer!(context, scope),
-          ],
-        ),
-      );
-    });
+    return AuthFlow(
+      builder: (context, scope) {
+        return FormBuilder(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Builder(
+                builder: (context) {
+                  submit() => _submit(context, scope);
+                  return child(context, scope, submit);
+                },
+              ),
+              const SizedBox(height: 20),
+              AuthActionButton(
+                scope: scope,
+                title: actionTitle,
+                onPressed: (context) => _submit(context, scope),
+                showError: showError,
+                errorBuilder: errorBuilder,
+              ),
+              if (footer != null) footer!(context, scope),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   void _submit(BuildContext context, AuthFlowScope scope) {

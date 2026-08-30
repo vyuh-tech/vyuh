@@ -1,6 +1,6 @@
 import 'package:feature_tmdb/ui/person_details.dart';
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -8,11 +8,11 @@ part 'person_detail_section.g.dart';
 
 final class PersonDetailsSectionBuilder extends ContentBuilder {
   PersonDetailsSectionBuilder()
-      : super(
-          content: PersonDetailSection.typeDescriptor,
-          defaultLayout: PersonDetailSectionLayout(),
-          defaultLayoutDescriptor: PersonDetailSectionLayout.typeDescriptor,
-        );
+    : super(
+        content: PersonDetailSection.typeDescriptor,
+        defaultLayout: PersonDetailSectionLayout(),
+        defaultLayoutDescriptor: PersonDetailSectionLayout.typeDescriptor,
+      );
 }
 
 @JsonSerializable()
@@ -71,11 +71,8 @@ final class PersonDetailSection extends ContentItem {
 
   final PersonDetailSectionType type;
 
-  PersonDetailSection({
-    required this.type,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
+  PersonDetailSection({required this.type, super.layout, super.modifiers})
+    : super(schemaType: schemaName);
 
   factory PersonDetailSection.fromJson(Map<String, dynamic> json) =>
       _$PersonDetailSectionFromJson(json);
@@ -86,5 +83,5 @@ enum PersonDetailSectionType {
   personalInfo,
   biography,
   movieCredits,
-  tvCredits
+  tvCredits,
 }

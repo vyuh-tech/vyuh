@@ -9,7 +9,7 @@ import 'package:feature_misc/content/product/product_card.dart';
 import 'package:feature_misc/content/score_card.dart';
 import 'package:feature_misc/lifecycle_handlers/di_registration_lifecycle_handler.dart';
 import 'package:feature_misc/lifecycle_handlers/simulated_delay_lifecycle_handler.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -25,9 +25,7 @@ final feature = FeatureDescriptor(
     return [
       CMSRoute(
         path: '/misc',
-        routes: [
-          CMSRoute(path: ':path(.*)'),
-        ],
+        routes: [CMSRoute(path: ':path(.*)')],
       ),
     ];
   },
@@ -41,9 +39,7 @@ final feature = FeatureDescriptor(
           ],
         ),
         APIContentDescriptor(
-          configurations: [
-            DummyJsonApiConfiguration.typeDescriptor,
-          ],
+          configurations: [DummyJsonApiConfiguration.typeDescriptor],
         ),
         RouteDescriptor(
           lifecycleHandlers: [
@@ -51,11 +47,7 @@ final feature = FeatureDescriptor(
             DIRegistrationLifecycleHandler.typeDescriptor,
           ],
         ),
-        CardDescriptor(
-          layouts: [
-            DIStoreCardLayout.typeDescriptor,
-          ],
-        )
+        CardDescriptor(layouts: [DIStoreCardLayout.typeDescriptor]),
       ],
       contentBuilders: [
         ProductCard.contentBuilder,
@@ -63,12 +55,8 @@ final feature = FeatureDescriptor(
         Document.contentBuilder,
         ScoreCard.contentBuilder,
       ],
-      conditions: [
-        PartOfDayCondition.typeDescriptor,
-      ],
-      actions: [
-        ShowBarcodeAction.typeDescriptor,
-      ],
+      conditions: [PartOfDayCondition.typeDescriptor],
+      actions: [ShowBarcodeAction.typeDescriptor],
     ),
   ],
 );

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:nanoid/nanoid.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vt;
 import 'package:vyuh_core/vyuh_core.dart';
@@ -14,12 +14,16 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
     schemaType: schemaName,
     title: 'Tabs Route Layout',
     fromJson: TabsRouteLayout.fromJson,
-    preview: () => TabsRouteLayout(routes: [
-      LinkedRoute(
-          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id')),
-      LinkedRoute(
-          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id')),
-    ]),
+    preview: () => TabsRouteLayout(
+      routes: [
+        LinkedRoute(
+          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id'),
+        ),
+        LinkedRoute(
+          route: ObjectReference(type: 'vyuh.route', ref: 'missing.id'),
+        ),
+      ],
+    ),
   );
 
   final List<LinkedRoute> routes;
@@ -38,19 +42,25 @@ final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase> {
           toolbarHeight: 0,
           bottom: TabBar(
             tabs: routes
-                .map((e) => Tab(
-                      text: e.title,
-                      icon: e.title == null
-                          ? const Icon((Icons.question_mark))
-                          : null,
-                    ))
+                .map(
+                  (e) => Tab(
+                    text: e.title,
+                    icon: e.title == null
+                        ? const Icon((Icons.question_mark))
+                        : null,
+                  ),
+                )
                 .toList(growable: false),
           ),
         ),
         body: TabBarView(
           children: routes
-              .map((e) => VyuhBinding.instance.content
-                  .buildRoute(context, routeId: e.route.ref))
+              .map(
+                (e) => VyuhBinding.instance.content.buildRoute(
+                  context,
+                  routeId: e.route.ref,
+                ),
+              )
               .toList(growable: false),
         ),
       ),

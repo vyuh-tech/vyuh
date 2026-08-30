@@ -1,6 +1,6 @@
 import 'package:feature_tmdb/content/search_section.dart';
 import 'package:feature_tmdb/ui/search_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -39,8 +39,9 @@ final class TmdbSearchStore<T> {
       data = await fetchFutureData;
       // On successful fetch, update the data and set the state to loaded
       runInAction(() {
-        state.value =
-            data != null ? FutureStatus.fulfilled : FutureStatus.rejected;
+        state.value = data != null
+            ? FutureStatus.fulfilled
+            : FutureStatus.rejected;
       });
     } catch (error) {
       // If an error occurs, set the state to error and store the error message
@@ -60,9 +61,7 @@ final class TmdbSearchStore<T> {
     );
   }
 
-  Future<ListResponse<T>?> _fetchDataFromApi({
-    required String query,
-  }) async {
+  Future<ListResponse<T>?> _fetchDataFromApi({required String query}) async {
     runInAction(() => state.value = FutureStatus.pending);
     for (final chip in chips) {
       data = await chip.getItems(query) as ListResponse<T>;

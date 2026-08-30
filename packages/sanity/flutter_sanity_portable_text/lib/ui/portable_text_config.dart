@@ -1,21 +1,17 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../flutter_sanity_portable_text.dart';
 
 /// A function that builds a text style for a Portable Text block or span.
-typedef TextStyleBuilder = TextStyle Function(
-  BuildContext context,
-  TextStyle base,
-);
+typedef TextStyleBuilder =
+    TextStyle Function(BuildContext context, TextStyle base);
 
 /// A function that builds a widget for a Portable block container.
 typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);
 
 /// A function that builds a widget for a Portable block item.
-typedef BlockWidgetBuilder = Widget Function(
-  BuildContext context,
-  PortableBlockItem item,
-);
+typedef BlockWidgetBuilder =
+    Widget Function(BuildContext context, PortableBlockItem item);
 
 /// A function that builds an InlineSpan for a single bullet mark. Using the
 /// [TextBlockItem]'s listItem, listItemIndex and level, the bullet can be customized as needed.
@@ -44,7 +40,7 @@ final class PortableTextConfig {
   /// used in the Portable Text content. The default block container is a simple container, named as "default".
   /// You can customize the rendering of each block container type by providing a custom block container builder.
   final Map<String, BlockContainerBuilder> blockContainers = {
-    ...defaultBlockContainers
+    ...defaultBlockContainers,
   };
 
   /// The mark definitions used to render the Portable Text content. The keys are the mark type names
@@ -131,36 +127,36 @@ final class PortableTextConfig {
   static const defaultItemPadding = EdgeInsets.only(bottom: 8);
   static BulletRenderer defaultBulletRenderer =
       (final BuildContext context, final TextBlockItem model) {
-    final textStyle = PortableTextConfig.shared.baseStyle(context);
+        final textStyle = PortableTextConfig.shared.baseStyle(context);
 
-    switch (model.listItem) {
-      case ListItemType.number:
-        return TextSpan(
-          text: '${(model.listItemIndex ?? 0) + 1}.  ',
-          style: textStyle,
-        );
+        switch (model.listItem) {
+          case ListItemType.number:
+            return TextSpan(
+              text: '${(model.listItemIndex ?? 0) + 1}.  ',
+              style: textStyle,
+            );
 
-      case ListItemType.square:
-        return WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.check_box_outline_blank, size: 8),
-          ),
-          style: textStyle,
-        );
+          case ListItemType.square:
+            return WidgetSpan(
+              alignment: PlaceholderAlignment.middle,
+              child: const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.check_box_outline_blank, size: 8),
+              ),
+              style: textStyle,
+            );
 
-      default:
-        return WidgetSpan(
-          alignment: PlaceholderAlignment.middle,
-          child: const Padding(
-            padding: EdgeInsets.only(right: 8.0),
-            child: Icon(Icons.circle, size: 8),
-          ),
-          style: textStyle,
-        );
-    }
-  };
+          default:
+            return WidgetSpan(
+              alignment: PlaceholderAlignment.middle,
+              child: const Padding(
+                padding: EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.circle, size: 8),
+              ),
+              style: textStyle,
+            );
+        }
+      };
 
   static TextStyle? defaultBaseStyle(BuildContext context) {
     return Theme.of(context).textTheme.bodyMedium;
@@ -168,101 +164,101 @@ final class PortableTextConfig {
 
   static BlockContainerBuilder defaultBlockContainerBuilder =
       (final BuildContext context, final Widget child) {
-    return child;
-  };
+        return child;
+      };
 
   /// The default text styles used by the shared instance of [PortableTextConfig].
   static final Map<String, TextStyleBuilder> defaultStyles = {
-    'h1': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.headlineLarge),
-    'h2': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.headlineMedium),
-    'h3': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.headlineSmall),
-    'h4': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.titleLarge),
-    'h5': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.titleMedium),
-    'h6': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.titleSmall),
-    'blockquote': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(color: Theme.of(context).colorScheme.primary),
-    'normal': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.merge(Theme.of(context).textTheme.bodyMedium),
-    'em': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(fontStyle: FontStyle.italic),
-    'strong': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(fontWeight: FontWeight.bold),
-    'code': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(
+    'h1':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.headlineLarge),
+    'h2':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.headlineMedium),
+    'h3':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.headlineSmall),
+    'h4':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.titleLarge),
+    'h5':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.titleMedium),
+    'h6':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.titleSmall),
+    'blockquote':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(color: Theme.of(context).colorScheme.primary),
+    'normal':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.merge(Theme.of(context).textTheme.bodyMedium),
+    'em':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(fontStyle: FontStyle.italic),
+    'strong':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(fontWeight: FontWeight.bold),
+    'code':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(
           fontFamily: 'monospace',
           fontFamilyFallback: ['Courier New'],
           fontWeight: FontWeight.bold,
         ),
-    'strike-through': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(
+    'strike-through':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
-            TextDecoration.lineThrough
+            TextDecoration.lineThrough,
           ]),
         ),
-    'underline': (
-      final BuildContext context,
-      final TextStyle base, [
-      final MarkDef? mark,
-    ]) =>
-        base.copyWith(
+    'underline':
+        (
+          final BuildContext context,
+          final TextStyle base, [
+          final MarkDef? mark,
+        ]) => base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
-            TextDecoration.underline
+            TextDecoration.underline,
           ]),
         ),
   };
@@ -276,16 +272,10 @@ final class PortableTextConfig {
         padding: const EdgeInsets.symmetric(vertical: 4),
         decoration: BoxDecoration(
           border: Border(
-            left: BorderSide(
-              color: theme.colorScheme.secondary,
-              width: 4,
-            ),
+            left: BorderSide(color: theme.colorScheme.secondary, width: 4),
           ),
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8),
-          child: child,
-        ),
+        child: Padding(padding: const EdgeInsets.only(left: 8), child: child),
       );
     },
   };
@@ -293,9 +283,8 @@ final class PortableTextConfig {
   /// The default block widgets used by the shared instance of [PortableTextConfig].
   /// The default block is a single [PortableTextBlock], named as "block".
   static final Map<String, BlockWidgetBuilder> defaultBlocks = {
-    'block': (final context, final item) => PortableTextBlock(
-          model: item as TextBlockItem,
-        ),
+    'block': (final context, final item) =>
+        PortableTextBlock(model: item as TextBlockItem),
   };
 }
 
@@ -304,34 +293,32 @@ class ErrorView extends StatelessWidget {
   final String message;
   final bool asBlock;
 
-  const ErrorView({
-    super.key,
-    required this.message,
-    this.asBlock = true,
-  });
+  const ErrorView({super.key, required this.message, this.asBlock = true});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
-        color: theme.colorScheme.onErrorContainer,
-        padding: const EdgeInsets.all(4),
-        child: Row(
-          mainAxisSize: asBlock ? MainAxisSize.max : MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, color: theme.colorScheme.error),
-            const SizedBox(width: 8),
-            Expanded(
-              child: Text(
-                message,
-                style: theme.textTheme.bodyMedium
-                    ?.apply(color: theme.colorScheme.errorContainer),
+      color: theme.colorScheme.onErrorContainer,
+      padding: const EdgeInsets.all(4),
+      child: Row(
+        mainAxisSize: asBlock ? MainAxisSize.max : MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Icon(Icons.error_outline, color: theme.colorScheme.error),
+          const SizedBox(width: 8),
+          Expanded(
+            child: Text(
+              message,
+              style: theme.textTheme.bodyMedium?.apply(
+                color: theme.colorScheme.errorContainer,
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

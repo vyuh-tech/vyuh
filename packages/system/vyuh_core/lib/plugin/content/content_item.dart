@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 /// The base interface for all schema-driven content items.
@@ -59,8 +59,9 @@ abstract class ContentItem implements SchemaItem {
 
   /// The layout configuration for the content item.
   @JsonKey(
-      fromJson: typeFromFirstOfListJson<LayoutConfiguration>,
-      includeToJson: false)
+    fromJson: typeFromFirstOfListJson<LayoutConfiguration>,
+    includeToJson: false,
+  )
   final LayoutConfiguration? layout;
 
   @JsonKey(fromJson: modifierList, includeToJson: false)
@@ -84,10 +85,7 @@ abstract class ContentItem implements SchemaItem {
   factory ContentItem.fromJson(Map<String, dynamic> json) {
     final type = VyuhBinding.instance.content.provider.schemaType(json);
     return VyuhBinding.instance.content.fromJson<ContentItem>(json) ??
-        UnknownContentItem(
-          missingSchemaType: type,
-          jsonPayload: json,
-        );
+        UnknownContentItem(missingSchemaType: type, jsonPayload: json);
   }
 
   /// Sets the parent content item for the given list of children.
@@ -232,9 +230,5 @@ final class UnknownContentItem extends ContentItem {
   UnknownContentItem({
     required this.missingSchemaType,
     required this.jsonPayload,
-  }) : super(
-          schemaType: schemaName,
-          layout: null,
-          modifiers: null,
-        );
+  }) : super(schemaType: schemaName, layout: null, modifiers: null);
 }

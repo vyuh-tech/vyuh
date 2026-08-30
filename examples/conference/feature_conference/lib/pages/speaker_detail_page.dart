@@ -3,7 +3,7 @@ import 'package:feature_conference/content/session.dart';
 import 'package:feature_conference/content/speaker.dart';
 import 'package:feature_conference/layouts/session_summary_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class SpeakerDetailPage extends StatelessWidget {
@@ -23,8 +23,10 @@ final class SpeakerDetailPage extends StatelessWidget {
       future: () async {
         final api = vyuh.di.get<ConferenceApi>();
         final speaker = await api.speaker(id: speakerId);
-        final sessions =
-            await api.sessions(editionId: editionId, speakerId: speakerId);
+        final sessions = await api.sessions(
+          editionId: editionId,
+          speakerId: speakerId,
+        );
 
         return (speaker!, sessions);
       },

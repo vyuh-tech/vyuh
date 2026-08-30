@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -30,10 +30,7 @@ void main() {
 
     testWidgets('requires either builder or listBuilder', (tester) async {
       expect(
-        () => VyuhContentWidget(
-          query: '*',
-          fromJson: Document.fromJson,
-        ),
+        () => VyuhContentWidget(query: '*', fromJson: Document.fromJson),
         throwsAssertionError,
       );
     });
@@ -43,18 +40,20 @@ void main() {
         () => VyuhContentWidget(
           query: '*',
           fromJson: Document.fromJson,
-          builder: (_, __) => Container(),
-          listBuilder: (_, __) => Container(),
+          builder: (_, _) => Container(),
+          listBuilder: (_, _) => Container(),
         ),
         throwsAssertionError,
       );
     });
 
     testWidgets('builds single document', (tester) async {
-      when(() => mockContentProvider.fetchSingle<Document>(
-            '*',
-            fromJson: Document.fromJson,
-          )).thenAnswer((_) async => Document(title: 'Mock Document'));
+      when(
+        () => mockContentProvider.fetchSingle<Document>(
+          '*',
+          fromJson: Document.fromJson,
+        ),
+      ).thenAnswer((_) async => Document(title: 'Mock Document'));
 
       await tester.pumpWidget(
         MaterialApp(
@@ -72,10 +71,12 @@ void main() {
       await tester.pump(const Duration(milliseconds: 200));
 
       // Verify mock was called with correct parameters
-      verify(() => mockContentProvider.fetchSingle<Document>(
-            '*',
-            fromJson: Document.fromJson,
-          )).called(1);
+      verify(
+        () => mockContentProvider.fetchSingle<Document>(
+          '*',
+          fromJson: Document.fromJson,
+        ),
+      ).called(1);
 
       // After loading, shows content
       expect(find.text('Mock Document'), findsOneWidget);
@@ -83,23 +84,26 @@ void main() {
     });
 
     testWidgets('builds document list', (tester) async {
-      when(() => mockContentProvider.fetchMultiple<Document>(
-            any(),
-            fromJson: any(named: 'fromJson'),
-            queryParams: any(named: 'queryParams'),
-          )).thenAnswer((_) async => [
-            Document(title: 'Mock Document 1'),
-            Document(title: 'Mock Document 2'),
-          ]);
+      when(
+        () => mockContentProvider.fetchMultiple<Document>(
+          any(),
+          fromJson: any(named: 'fromJson'),
+          queryParams: any(named: 'queryParams'),
+        ),
+      ).thenAnswer(
+        (_) async => [
+          Document(title: 'Mock Document 1'),
+          Document(title: 'Mock Document 2'),
+        ],
+      );
 
       await tester.pumpWidget(
         MaterialApp(
           home: VyuhContentWidget(
             query: '*',
             fromJson: Document.fromJson,
-            listBuilder: (context, docs) => Column(
-              children: docs.map((d) => Text(d.title ?? '')).toList(),
-            ),
+            listBuilder: (context, docs) =>
+                Column(children: docs.map((d) => Text(d.title ?? '')).toList()),
           ),
         ),
       );
@@ -117,11 +121,13 @@ void main() {
     testWidgets('handles fetch error gracefully', (tester) async {
       // Override the default mock behavior for this test
       final mockProvider = mockContentPlugin.provider as MockContentProvider;
-      when(() => mockProvider.fetchSingle<Document>(
-            any(),
-            fromJson: any(named: 'fromJson'),
-            queryParams: any(named: 'queryParams'),
-          )).thenThrow(Exception('Failed to fetch'));
+      when(
+        () => mockProvider.fetchSingle<Document>(
+          any(),
+          fromJson: any(named: 'fromJson'),
+          queryParams: any(named: 'queryParams'),
+        ),
+      ).thenThrow(Exception('Failed to fetch'));
 
       await tester.pumpWidget(
         MaterialApp(
@@ -138,8 +144,9 @@ void main() {
 
       // Wait for the async operation to complete and widget to rebuild
       await tester.pump(); // Process current frame
-      await tester
-          .pump(const Duration(milliseconds: 100)); // Wait for async work
+      await tester.pump(
+        const Duration(milliseconds: 100),
+      ); // Wait for async work
       await tester.pump(); // Process frame after async work
 
       // Should show error state

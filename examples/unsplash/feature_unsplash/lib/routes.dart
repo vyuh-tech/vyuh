@@ -3,9 +3,9 @@ import 'package:feature_unsplash/ui/home.dart';
 import 'package:feature_unsplash/ui/photo_detail.dart';
 import 'package:feature_unsplash/ui/search_view.dart';
 import 'package:feature_unsplash/ui/topic_detail.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:go_router/go_router.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final _homeKey = GlobalKey<NavigatorState>();
@@ -34,7 +34,8 @@ List<go.RouteBase> routes() {
                   path: 'collections/:id',
                   builder: (context, state) {
                     return CollectionDetailView(
-                        id: state.pathParameters['id']!);
+                      id: state.pathParameters['id']!,
+                    );
                   },
                 ),
                 GoRoute(
@@ -51,14 +52,14 @@ List<go.RouteBase> routes() {
           navigatorKey: _searchKey,
           routes: [
             GoRoute(
-                path: '/unsplash/search',
-                builder: (_, __) => const Scaffold(
-                      body: SafeArea(child: SearchView()),
-                    )),
+              path: '/unsplash/search',
+              builder: (_, _) =>
+                  const Scaffold(body: SafeArea(child: SearchView())),
+            ),
           ],
         ),
       ],
-      builder: (context, __, shell) {
+      builder: (context, _, shell) {
         final theme = Theme.of(context);
 
         return Scaffold(
@@ -67,8 +68,9 @@ List<go.RouteBase> routes() {
             title: const Text('Unsplash'),
             actions: [
               IconButton(
-                  onPressed: () => vyuh.router.go('/chakra'),
-                  icon: const Icon(Icons.home))
+                onPressed: () => vyuh.router.go('/chakra'),
+                icon: const Icon(Icons.home),
+              ),
             ],
           ),
           bottomNavigationBar: BottomNavigationBar(

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart' as flutter;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as flutter;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
@@ -14,12 +14,12 @@ enum MenuIconType {
   menu;
 
   flutter.IconData get iconData => switch (this) {
-        MenuIconType.home => flutter.Icons.home,
-        MenuIconType.settings => flutter.Icons.settings,
-        MenuIconType.category => flutter.Icons.category,
-        MenuIconType.account => flutter.Icons.account_circle,
-        MenuIconType.menu => flutter.Icons.menu,
-      };
+    MenuIconType.home => flutter.Icons.home,
+    MenuIconType.settings => flutter.Icons.settings,
+    MenuIconType.category => flutter.Icons.category,
+    MenuIconType.account => flutter.Icons.account_circle,
+    MenuIconType.menu => flutter.Icons.menu,
+  };
 }
 
 @JsonSerializable()
@@ -29,11 +29,7 @@ class MenuAction {
   final MenuIconType icon;
   final Action? action;
 
-  MenuAction({
-    this.title = '',
-    this.icon = MenuIconType.home,
-    this.action,
-  });
+  MenuAction({this.title = '', this.icon = MenuIconType.home, this.action});
 
   factory MenuAction.fromJson(Map<String, dynamic> json) =>
       _$MenuActionFromJson(json);

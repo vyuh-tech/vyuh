@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/ui/content_image.dart';
 
@@ -29,13 +29,16 @@ final class TrackLayout extends LayoutConfiguration<Track> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(
+          context,
+        ).pathParameters['editionId']!;
 
         vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}');
+          '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}',
+        );
       },
       child: Card(
         clipBehavior: Clip.antiAlias,
@@ -47,17 +50,10 @@ final class TrackLayout extends LayoutConfiguration<Track> {
             children: [
               ClipOval(
                 clipBehavior: Clip.antiAlias,
-                child: ContentImage(
-                  ref: content.icon,
-                  height: 48,
-                  width: 48,
-                ),
+                child: ContentImage(ref: content.icon, height: 48, width: 48),
               ),
               Expanded(
-                child: Text(
-                  content.title,
-                  style: theme.textTheme.titleLarge,
-                ),
+                child: Text(content.title, style: theme.textTheme.titleLarge),
               ),
             ],
           ),

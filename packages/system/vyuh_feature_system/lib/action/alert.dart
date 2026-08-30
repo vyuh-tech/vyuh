@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart' as f;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart' as f;
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -32,27 +32,30 @@ final class ShowAlertAction extends ActionConfiguration {
       _$ShowAlertActionFromJson(json);
 
   @override
-  FutureOr<void> execute(f.BuildContext context,
-      {Map<String, dynamic>? arguments}) {
+  FutureOr<void> execute(
+    f.BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) {
     return f.showDialog(
-        context: context,
-        barrierDismissible: barrierDismissible,
-        builder: (context) {
-          return f.AlertDialog(
-            icon: const f.Icon(f.Icons.warning_amber_rounded),
-            title: f.Text(title ?? ''),
-            content: f.Text(message),
-            actions: [
-              for (final action in actions)
-                f.ElevatedButton(
-                  onPressed: () {
-                    action.action?.execute(context);
-                  },
-                  child: f.Text(action.title),
-                ),
-            ],
-          );
-        });
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (context) {
+        return f.AlertDialog(
+          icon: const f.Icon(f.Icons.warning_amber_rounded),
+          title: f.Text(title ?? ''),
+          content: f.Text(message),
+          actions: [
+            for (final action in actions)
+              f.ElevatedButton(
+                onPressed: () {
+                  action.action?.execute(context);
+                },
+                child: f.Text(action.title),
+              ),
+          ],
+        );
+      },
+    );
   }
 }
 

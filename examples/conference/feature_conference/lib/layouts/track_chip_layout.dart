@@ -1,7 +1,7 @@
 import 'package:feature_conference/content/track.dart';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 part 'track_chip_layout.g.dart';
@@ -24,12 +24,15 @@ final class TrackChipLayout extends LayoutConfiguration<Track> {
   Widget build(BuildContext context, Track content) {
     return GestureDetector(
       onTap: () {
-        final conferenceId =
-            GoRouterState.of(context).pathParameters['conferenceId']!;
-        final editionId =
-            GoRouterState.of(context).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(
+          context,
+        ).pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(
+          context,
+        ).pathParameters['editionId']!;
         vyuh.router.push(
-            '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}');
+          '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}',
+        );
       },
       child: Chip(
         avatar: const Icon(Icons.view_column),

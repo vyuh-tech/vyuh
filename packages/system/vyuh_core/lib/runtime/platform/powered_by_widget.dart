@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A widget that displays the 'Powered by Vyuh' text.
 /// The signature of this Framework.
@@ -14,8 +14,9 @@ class PoweredByWidget extends StatelessWidget {
 
     return Text(
       'Powered by Vyuh',
-      style: theme.textTheme.labelSmall
-          ?.apply(color: color ?? theme.colorScheme.secondary),
+      style: theme.textTheme.labelSmall?.apply(
+        color: color ?? theme.colorScheme.secondary,
+      ),
       textAlign: TextAlign.center,
     );
   }

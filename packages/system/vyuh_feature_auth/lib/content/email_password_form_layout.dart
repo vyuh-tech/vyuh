@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_auth/content/email_password_form.dart';
 import 'package:vyuh_feature_auth/ui/email_password_view.dart';
@@ -17,7 +17,7 @@ final class DefaultEmailPasswordFormLayout
   );
 
   DefaultEmailPasswordFormLayout()
-      : super(schemaType: typeDescriptor.schemaType);
+    : super(schemaType: typeDescriptor.schemaType);
 
   factory DefaultEmailPasswordFormLayout.fromJson(Map<String, dynamic> json) =>
       _$DefaultEmailPasswordFormLayoutFromJson(json);

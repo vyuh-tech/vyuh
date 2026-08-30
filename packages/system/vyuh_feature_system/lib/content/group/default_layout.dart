@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
@@ -46,14 +46,18 @@ final class GroupLayoutContainer extends StatelessWidget {
   final Group content;
   final Widget body;
 
-  const GroupLayoutContainer(
-      {super.key, required this.content, required this.body});
+  const GroupLayoutContainer({
+    super.key,
+    required this.content,
+    required this.body,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    final hasHeader = (content.title != null && content.title!.isNotEmpty) ||
+    final hasHeader =
+        (content.title != null && content.title!.isNotEmpty) ||
         (content.description != null && content.description!.isNotEmpty);
 
     return Padding(
@@ -76,10 +80,7 @@ final class GroupLayoutContainer extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          if (hasHeader)
-            const SizedBox(
-              height: 4.0,
-            ),
+          if (hasHeader) const SizedBox(height: 4.0),
           body,
         ],
       ),
