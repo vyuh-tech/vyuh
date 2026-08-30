@@ -1,3 +1,9 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(ui): migrate Vyuh framework to Material UI.
+
 ## 1.55.0
 
  - **FEAT**(vyuh_core): disable debug banner in pending app view.

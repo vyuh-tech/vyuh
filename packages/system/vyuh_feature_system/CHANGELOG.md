@@ -1,3 +1,9 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(ui): migrate Vyuh framework to Material UI.
+
 ## 1.47.0
 
  - **FEAT**(vyuh_feature_system): ThemeService self-resolves system mode against OS brightness.

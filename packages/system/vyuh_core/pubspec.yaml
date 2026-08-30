@@ -1,7 +1,7 @@
 name: vyuh_core
 resolution: workspace
 description: The core library for the Vyuh framework which contains the base types and runtime.
-version: 1.55.0
+version: 2.0.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_core
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -29,7 +29,7 @@ dependencies:
   mobx: ^2.3.0+1
   get_it: ^9.0.5
   shared_preferences: ^2.3.3
-  flutter_sanity_portable_text: ^1.8.1
+  flutter_sanity_portable_text: ^2.0.0
   http: ^1.2.1
   retry: ^3.1.2
   flutter_dotenv: ^6.0.0
@@ -44,7 +44,7 @@ dev_dependencies:
   json_serializable: ^6.7.1
   build_runner: ^2.4.6
   mocktail: ^1.0.4
-  vyuh_test: ^1.4.0
+  vyuh_test: ^1.4.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
