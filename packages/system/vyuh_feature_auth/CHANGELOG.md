@@ -1,3 +1,7 @@
+## 2.0.1
+
+ - **FIX**(vyuh_feature_auth): publish private CDX consumer to Vyuh registry.
+
 ## 2.0.0
 
 > Note: This release has breaking changes.
