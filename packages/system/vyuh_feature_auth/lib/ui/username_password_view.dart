@@ -16,6 +16,7 @@ class UsernamePasswordView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AuthFormBuilder(
+        form: usernamePasswordAuthForm,
         actionTitle: content.actionType.title,
         showError: content.showLoginError,
         authAction: (formState) async {

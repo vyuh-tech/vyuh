@@ -12,6 +12,7 @@ class PhoneOTPView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AuthFormBuilder(
+        form: phoneOtpAuthForm,
         actionTitle: 'Login',
         showError: content.showLoginError,
         authAction: (formState) async {

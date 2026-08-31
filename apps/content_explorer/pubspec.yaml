@@ -21,7 +21,7 @@ dependencies:
 
   # Vyuh Features
   vyuh_feature_system: ^2.0.0
-  vyuh_feature_auth: ^2.0.1
+  vyuh_feature_auth: ^3.0.0
   vyuh_feature_onboarding: ^2.0.0
 
   # Example Features

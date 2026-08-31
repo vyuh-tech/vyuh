@@ -2,11 +2,66 @@ import 'package:flutter/material.dart'
     as legacy_material
     show Material, MaterialType;
 import 'package:flutter/services.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:material_ui/material_ui.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:vyuh_cdx_ui/vyuh_cdx_ui.dart';
 import 'package:vyuh_feature_auth/ui/auth_state_widget.dart';
+
+const emailControlName = 'email';
+const usernameControlName = 'username';
+const phoneControlName = 'phone';
+const otpControlName = 'otp';
+const passwordControlName = 'password';
+
+FormGroup emailPasswordAuthForm({String? email}) => FormGroup({
+  emailControlName: FormControl<String>(
+    value: email,
+    validators: [Validators.required, Validators.email],
+  ),
+  passwordControlName: FormControl<String>(validators: [Validators.required]),
+});
+
+FormGroup emailAuthForm({String? email}) => FormGroup({
+  emailControlName: FormControl<String>(
+    value: email,
+    validators: [Validators.required, Validators.email],
+  ),
+});
+
+FormGroup usernamePasswordAuthForm({String? username}) => FormGroup({
+  usernameControlName: FormControl<String>(
+    value: username,
+    validators: [Validators.required, Validators.minLength(3)],
+  ),
+  passwordControlName: FormControl<String>(validators: [Validators.required]),
+});
+
+FormGroup phoneOtpAuthForm() => FormGroup({
+  phoneControlName: FormControl<String>(
+    validators: [
+      Validators.required,
+      Validators.delegate(_phoneNumberValidator),
+    ],
+  ),
+  otpControlName: FormControl<String>(
+    validators: [
+      Validators.required,
+      Validators.minLength(6),
+      Validators.number(allowNegatives: false),
+    ],
+  ),
+});
+
+Map<String, dynamic>? _phoneNumberValidator(AbstractControl<dynamic> control) {
+  final value = control.value as String?;
+  if (value == null || value.isEmpty) {
+    return null;
+  }
+
+  return RegExp(r'^\+?[0-9]{7,15}$').hasMatch(value)
+      ? null
+      : const {'phoneNumber': true};
+}
 
 final class LoaderButton extends StatelessWidget {
   final String? title;
@@ -49,23 +104,21 @@ final _whitespaceRegExp = RegExp(r'\s\b|\b\s');
 
 class EmailField extends StatelessWidget {
   final void Function() submit;
-  final String? email;
-  const EmailField({super.key, this.email, required this.submit});
+  const EmailField({super.key, required this.submit});
 
   @override
   Widget build(BuildContext context) {
-    return _LegacyFormFieldBoundary(
-      child: FormBuilderTextField(
-        name: 'email',
-        initialValue: email,
+    return _ReactiveFormFieldBoundary(
+      child: ReactiveTextField<String>(
+        formControlName: emailControlName,
         decoration: legacyCdxInputDecoration(context, labelText: 'Email'),
         keyboardType: TextInputType.emailAddress,
         inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
         autofillHints: const [AutofillHints.email, AutofillHints.username],
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-          FormBuilderValidators.email(),
-        ]),
+        validationMessages: {
+          ValidationMessage.required: (_) => 'Email is required',
+          ValidationMessage.email: (_) => 'Enter a valid email address',
+        },
         onSubmitted: (_) => submit(),
       ),
     );
@@ -74,26 +127,22 @@ class EmailField extends StatelessWidget {
 
 class UsernameField extends StatelessWidget {
   final void Function() submit;
-  final String? username;
-  const UsernameField({super.key, this.username, required this.submit});
+  const UsernameField({super.key, required this.submit});
 
   @override
   Widget build(BuildContext context) {
-    return _LegacyFormFieldBoundary(
-      child: FormBuilderTextField(
-        name: 'username',
-        initialValue: username,
+    return _ReactiveFormFieldBoundary(
+      child: ReactiveTextField<String>(
+        formControlName: usernameControlName,
         decoration: legacyCdxInputDecoration(context, labelText: 'Username'),
         keyboardType: TextInputType.text,
         inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
         autofillHints: const [AutofillHints.username],
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-          FormBuilderValidators.minLength(
-            3,
-            errorText: 'Username must be at least 3 characters',
-          ),
-        ]),
+        validationMessages: {
+          ValidationMessage.required: (_) => 'Username is required',
+          ValidationMessage.minLength: (_) =>
+              'Username must be at least 3 characters',
+        },
         onSubmitted: (_) => submit(),
       ),
     );
@@ -101,22 +150,20 @@ class UsernameField extends StatelessWidget {
 }
 
 class PhoneInputField extends StatelessWidget {
-  final FormFieldValidator<String>? validator;
   final String labelText;
   final void Function(BuildContext) submit;
 
   const PhoneInputField({
     super.key,
     required this.submit,
-    this.validator,
     this.labelText = 'Phone Number',
   });
 
   @override
   Widget build(BuildContext context) {
-    return _LegacyFormFieldBoundary(
-      child: FormBuilderTextField(
-        name: 'phone',
+    return _ReactiveFormFieldBoundary(
+      child: ReactiveTextField<String>(
+        formControlName: phoneControlName,
         decoration: legacyCdxInputDecoration(context, labelText: labelText),
         keyboardType: TextInputType.phone,
         inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
@@ -125,11 +172,10 @@ class PhoneInputField extends StatelessWidget {
           AutofillHints.telephoneNumberLocal,
           AutofillHints.telephoneNumberNational,
         ],
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-          FormBuilderValidators.phoneNumber(),
-          ?validator,
-        ]),
+        validationMessages: {
+          ValidationMessage.required: (_) => 'Phone number is required',
+          'phoneNumber': (_) => 'Enter a valid phone number',
+        },
         onSubmitted: (_) => submit(context),
       ),
     );
@@ -137,32 +183,29 @@ class PhoneInputField extends StatelessWidget {
 }
 
 class OtpInputField extends StatelessWidget {
-  final FormFieldValidator<String>? validator;
   final String labelText;
   final void Function(BuildContext) submit;
 
   const OtpInputField({
     super.key,
     required this.submit,
-    this.validator,
     this.labelText = 'OTP',
   });
 
   @override
   Widget build(BuildContext context) {
-    return _LegacyFormFieldBoundary(
-      child: FormBuilderTextField(
-        name: 'otp',
+    return _ReactiveFormFieldBoundary(
+      child: ReactiveTextField<String>(
+        formControlName: otpControlName,
         autofillHints: const [AutofillHints.oneTimeCode],
         decoration: legacyCdxInputDecoration(context, labelText: labelText),
         keyboardType: TextInputType.number,
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-          FormBuilderValidators.minLength(6),
-          FormBuilderValidators.numeric(),
-          ?validator,
-        ]),
+        validationMessages: {
+          ValidationMessage.required: (_) => 'OTP is required',
+          ValidationMessage.minLength: (_) => 'OTP must be at least 6 digits',
+          ValidationMessage.number: (_) => 'OTP must contain only digits',
+        },
         onSubmitted: (_) => submit(context),
       ),
     );
@@ -189,9 +232,9 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return _LegacyFormFieldBoundary(
-      child: FormBuilderTextField(
-        name: 'password',
+    return _ReactiveFormFieldBoundary(
+      child: ReactiveTextField<String>(
+        formControlName: passwordControlName,
         autofocus: widget.autofocus,
         decoration: legacyCdxInputDecoration(
           context,
@@ -208,23 +251,23 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
         obscureText: !_showPassword,
         autofillHints: const [AutofillHints.password],
-        validator: FormBuilderValidators.compose([
-          FormBuilderValidators.required(),
-        ]),
+        validationMessages: {
+          ValidationMessage.required: (_) => 'Password is required',
+        },
         onSubmitted: (_) => widget.submit(),
       ),
     );
   }
 }
 
-final class _LegacyFormFieldBoundary extends StatelessWidget {
+final class _ReactiveFormFieldBoundary extends StatelessWidget {
   final Widget child;
 
-  const _LegacyFormFieldBoundary({required this.child});
+  const _ReactiveFormFieldBoundary({required this.child});
 
   @override
   Widget build(BuildContext context) {
-    // flutter_form_builder still imports package:flutter/material.dart.
+    // reactive_forms still renders Flutter Material text fields internally.
     return CdxMaterialUiCompatibilityBridge(
       child: legacy_material.Material(
         type: legacy_material.MaterialType.transparency,

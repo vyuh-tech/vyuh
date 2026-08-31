@@ -29,6 +29,7 @@ class EmailPasswordView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AuthFormBuilder(
+        form: emailPasswordAuthForm,
         actionTitle: content.actionType.title,
         showError: content.showLoginError,
         authAction: (formState) async {

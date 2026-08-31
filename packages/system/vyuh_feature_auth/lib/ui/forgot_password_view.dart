@@ -16,10 +16,11 @@ class ForgotPasswordView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: AuthFormBuilder(
+        form: () => emailAuthForm(email: email),
         actionTitle: 'Send reset email',
         showError: content.showLoginError,
         authAction: (formState) async {
-          final email = formState.fields['email']?.value as String;
+          final email = formState.control(emailControlName).value as String;
 
           await vyuh.auth.sendPasswordResetEmail(email: email);
           if (context.mounted) {
@@ -27,8 +28,7 @@ class ForgotPasswordView extends StatelessWidget {
           }
         },
         endAuthState: AuthState.passwordResetEmailSent,
-        child: (context, scope, submit) =>
-            EmailField(submit: submit, email: email),
+        child: (context, scope, submit) => EmailField(submit: submit),
         footer: (context, scope) => Padding(
           padding: const EdgeInsets.symmetric(vertical: 20.0),
           child: HintAction(

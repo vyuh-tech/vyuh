@@ -1,3 +1,10 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**(auth): replace Flutter Form Builder with typed reactive forms.
+ - **FIX**(auth): preserve CDX outlined field decoration and validate phone and OTP values as strings.
+
 ## 2.0.1
 
  - **FIX**(vyuh_feature_auth): publish private CDX consumer to Vyuh registry.
