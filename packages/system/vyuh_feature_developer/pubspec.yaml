@@ -1,7 +1,7 @@
 name: vyuh_feature_developer
 resolution: workspace
 description: A Developer-focused feature that shows all the included features in a Vyuh-enabled App
-version: 2.0.0
+version: 2.0.1
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_feature_developer
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -21,8 +21,8 @@ dependencies:
     sdk: flutter
   go_router: ^18.0.1
   collection: ^1.18.0
-  vyuh_core: ^2.0.0
-  vyuh_extension_content: ^2.0.0
+  vyuh_core: ^2.0.1
+  vyuh_extension_content: ^2.0.1
 
   material_ui: ^1.1.0
 dev_dependencies:

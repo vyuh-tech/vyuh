@@ -1,3 +1,7 @@
+## 0.1.1
+
+ - **FIX**: align router dependencies with go_router 18.
+
 ## 0.1.0
 
 > Note: This release has breaking changes.

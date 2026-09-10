@@ -1,7 +1,7 @@
 name: vyuh_content_widget
 resolution: workspace
 description: A widget that can render content from a CMS, relying on the Vyuh ecosystem to provide the content.
-version: 2.0.0
+version: 2.0.1
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_content_widget
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -22,8 +22,8 @@ dependencies:
 
   json_annotation: ^4.9.0
 
-  vyuh_core: ^2.0.0
-  vyuh_extension_content: ^2.0.0
+  vyuh_core: ^2.0.1
+  vyuh_extension_content: ^2.0.1
 
   material_ui: ^1.1.0
 dev_dependencies:
