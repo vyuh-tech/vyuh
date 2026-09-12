@@ -47,8 +47,13 @@ dev_dependencies:
   pubspec_parse: ^1.3.0
   mason_logger: ^0.3.1
 
+dependency_overrides:
+  # Melos requires cli_util 0.5; launcher_icons still declares 0.4.
+  cli_util: ^0.5.1
+
 melos:
   name: vyuh
+  discoverNestedWorkspaces: false
   repository: https://github.com/vyuh-tech/vyuh
 
   command:
@@ -59,7 +64,7 @@ melos:
       includeCommitId: false
       linkToCommits: false
       hooks:
-        post: melos run update_version
+        post: dart --packages=.dart_tool/package_config.json tools/update_version.dart
 
   ide:
     intellij:
