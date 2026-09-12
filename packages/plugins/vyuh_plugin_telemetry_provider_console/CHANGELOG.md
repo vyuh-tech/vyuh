@@ -1,3 +1,7 @@
+## 1.4.3
+
+ - **FIX**: unblock complete package publication with stable release tooling.
+
 ## 1.4.2
 
  - Update a dependency to the latest release.

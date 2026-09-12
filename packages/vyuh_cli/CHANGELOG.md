@@ -1,3 +1,7 @@
+## 0.1.2
+
+ - **FIX**: unblock complete package publication with stable release tooling.
+
 ## 0.1.1
 
  - **FIX**: align router dependencies with go_router 18.
