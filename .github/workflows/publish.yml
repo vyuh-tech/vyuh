@@ -2,49 +2,36 @@ name: Publish
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: vyuh-package-publication
+  cancel-in-progress: false
 
 jobs:
-  publish_dart_packages:
+  publish:
     runs-on: ubuntu-latest
-    if: always()
-
-    strategy:
-      matrix:
-        package:
-          - packages/system/vyuh_cache
-          - packages/system/vyuh_core
-          - packages/system/vyuh_extension_content
-          - packages/system/vyuh_test
-          - packages/vyuh_cli
-          - packages/system/vyuh_feature_system
-          - packages/system/vyuh_feature_developer
-          - packages/system/vyuh_feature_auth
-          - packages/system/vyuh_feature_onboarding
-          - packages/sanity/sanity_client
-          - packages/sanity/flutter_sanity_portable_text
-
-
+    permissions:
+      contents: read
+    env:
+      PUB_TOKEN: ${{ secrets.PUB_TOKEN }}
+      OAUTH_ACCESS_TOKEN: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+      OAUTH_REFRESH_TOKEN: ${{ secrets.OAUTH_REFRESH_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
-
-      - name: Publish if new
-        id: publish
-        uses: k-paxian/dart-package-publisher@master
+      - uses: actions/checkout@v4
         with:
-          flutter: true
-          relativePath: ${{ matrix.package }}
-          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
-          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
-          suppressBuildRunner: true
-          skipTests: true
-          dryRunOnly: false
-
-      - name: Tag commit
-        if: steps.publish.outputs.success
-        uses: hole19/git-tag-action@master
-        env:
-          TAG: ${{steps.publish.outputs.package}}-${{steps.publish.outputs.localVersion}}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+          fetch-depth: 0
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.2'
+          channel: stable
+      - name: Configure existing registry credentials
+        run: |
+          umask 077
+          dart tools/configure_pub_credentials.dart
+          dart pub token add https://pub.vyuh.tech --env-var PUB_TOKEN
+      - name: Resolve workspace
+        run: dart pub get --enforce-lockfile
+      - name: Publish unpublished packages in dependency order
+        run: dart --packages=.dart_tool/package_config.json tools/melos.dart publish --no-dry-run --yes

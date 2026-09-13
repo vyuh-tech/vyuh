@@ -250,7 +250,7 @@ packages:
     source: hosted
     version: "0.2.0"
   cli_launcher:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: cli_launcher
       sha256: "96883f87648524292e24e2cc6a369fbdf64883473fe3e3ddadd3d857bf16a484"
