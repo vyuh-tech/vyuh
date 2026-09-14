@@ -18,13 +18,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cached_network_image: ^3.3.1
-  cached_network_image_platform_interface: ^4.1.1
+  cached_network_image: ^4.0.0
+  cached_network_image_platform_interface: ^5.0.0
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
-  smooth_page_indicator: ^2.0.1
+  smooth_page_indicator: ^3.0.0
   flutter_animate: ^4.3.0
   logger: ^2.0.2+1
   material_ui: ^1.1.0

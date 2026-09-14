@@ -20,7 +20,7 @@ dependencies:
   vyuh_feature_system: ^2.0.1
   vyuh_extension_content: ^2.0.1
   design_system: ^1.0.0
-  smooth_page_indicator: ^2.0.1
+  smooth_page_indicator: ^3.0.0
   chakra_shared: ^1.0.0
   equatable: ^2.0.5
   water_fx: ^1.0.13

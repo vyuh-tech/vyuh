@@ -22,9 +22,9 @@ environment:
 
 dependencies:
   args: ^2.5.0
-  cli_completion: ^0.5.1
+  cli_completion: ^0.6.0
   mason_logger: ^0.3.1
-  pub_updater: ^0.5.0
+  pub_updater: ^0.6.0
   mason: ^0.1.0-dev.60
   meta: ^1.15.0
   universal_io: ^2.2.2

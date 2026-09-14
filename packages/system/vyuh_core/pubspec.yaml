@@ -21,7 +21,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
 
-  cached_network_image: ^3.2.3
+  cached_network_image: ^4.0.0
   collection: ^1.18.0
   flutter_mobx: ^2.2.0+2
   go_router: ^18.0.1

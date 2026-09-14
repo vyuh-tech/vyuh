@@ -21,7 +21,7 @@ dependencies:
   vyuh_extension_content: ^2.0.1
   design_system: ^1.0.0
   unsplash_client: ^3.0.0
-  smooth_page_indicator: ^2.0.1
+  smooth_page_indicator: ^3.0.0
   google_maps_flutter: ^2.7.0
   chakra_shared: ^1.0.0
 
