@@ -194,11 +194,12 @@ packages:
     source: hosted
     version: "2.0.0"
   cdx_field_formatting:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../cdx/packages/cdx_field_formatting"
-      relative: true
-    source: path
+      name: cdx_field_formatting
+      sha256: "92a310225ff41eb59edd2d7bfe38714568c95150bfc1eca7e9912b18e6306ce2"
+      url: "https://pub.vyuh.tech"
+    source: hosted
     version: "2.0.0"
   characters:
     dependency: transitive
@@ -249,7 +250,7 @@ packages:
     source: hosted
     version: "0.2.0"
   cli_launcher:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: cli_launcher
       sha256: "96883f87648524292e24e2cc6a369fbdf64883473fe3e3ddadd3d857bf16a484"
@@ -1818,12 +1819,13 @@ packages:
     source: hosted
     version: "15.3.0"
   vyuh_cdx_ui:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../cdx/packages/vyuh_cdx_ui"
-      relative: true
-    source: path
-    version: "2.4.4"
+      name: vyuh_cdx_ui
+      sha256: "191dae78ef83f55f3b2428f627eae531dc3ea00cf14f5dc91b09c444a6330b9f"
+      url: "https://pub.vyuh.tech"
+    source: hosted
+    version: "2.5.0"
   vyuh_errors:
     dependency: transitive
     description:
@@ -1833,11 +1835,12 @@ packages:
     source: hosted
     version: "1.1.3"
   vyuh_timelines:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../cdx/packages/vyuh_timelines"
-      relative: true
-    source: path
+      name: vyuh_timelines
+      sha256: "434c5a4d7bfc3c8dee7baf16a279286c1ad95ffae68ea724703637d12b5f9387"
+      url: "https://pub.vyuh.tech"
+    source: hosted
     version: "0.2.2"
   wakelock_plus:
     dependency: transitive
