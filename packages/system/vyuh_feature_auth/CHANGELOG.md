@@ -1,3 +1,7 @@
+## 3.0.2
+
+ - **FIX**: Supports vyuh_cdx_ui 3.x.
+
 ## 3.0.1
 
  - **FIX**: align router dependencies with go_router 18.

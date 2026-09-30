@@ -51,6 +51,11 @@ dev_dependencies:
 dependency_overrides:
   # Melos requires cli_util 0.5; launcher_icons still declares 0.4.
   cli_util: ^0.5.1
+  # Temporary: vyuh_cdx_ui 3.x uses re_editor, which still depends on
+  # isolate_manager 4.x -> isolate_contactor (imports dart:html) and breaks
+  # `flutter build web --wasm`. Only takes effect at the workspace root.
+  # Remove once re_editor depends on isolate_manager ^6 (see vyuh_cdx_ui README).
+  isolate_manager: ^6.3.2
 
 melos:
   name: vyuh
