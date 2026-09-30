@@ -197,10 +197,10 @@ packages:
     dependency: transitive
     description:
       name: cdx_field_formatting
-      sha256: "92a310225ff41eb59edd2d7bfe38714568c95150bfc1eca7e9912b18e6306ce2"
+      sha256: "75ef89127feca494d4d391bdd85883e06e3820d6abaad4e6c02c2eda81a0af08"
       url: "https://pub.vyuh.tech"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   characters:
     dependency: transitive
     description:
@@ -877,6 +877,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  isolate_manager:
+    dependency: "direct overridden"
+    description:
+      name: isolate_manager
+      sha256: "806b6195a60f17bcb23e3c6d2f4da1f29e7376c4295b061d135f59613586ad1d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.3.2"
   jni:
     dependency: transitive
     description:
@@ -1317,6 +1325,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  re_editor:
+    dependency: transitive
+    description:
+      name: re_editor
+      sha256: "66671c4774a6b4c5254c9a53ab35a083e7e7da9ae371c519bcf491c70a2a4e56"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.0"
+  re_highlight:
+    dependency: transitive
+    description:
+      name: re_highlight
+      sha256: "6c4ac3f76f939fb7ca9df013df98526634e17d8f7460e028bd23a035870024f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   reactive_forms:
     dependency: transitive
     description:
@@ -1822,10 +1846,10 @@ packages:
     dependency: transitive
     description:
       name: vyuh_cdx_ui
-      sha256: "191dae78ef83f55f3b2428f627eae531dc3ea00cf14f5dc91b09c444a6330b9f"
+      sha256: "9c246fd1c08cf0be46e7f6e7f9893e7e5ec66cc2e6308b00a0a7a82a1653d2ed"
       url: "https://pub.vyuh.tech"
     source: hosted
-    version: "2.5.0"
+    version: "3.0.0"
   vyuh_errors:
     dependency: transitive
     description:
