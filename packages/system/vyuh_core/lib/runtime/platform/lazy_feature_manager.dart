@@ -9,13 +9,13 @@ final class _LazyFeatureManager {
   final Map<String, LazyFeatureDescriptor> _pending = {};
 
   /// Lazy features currently being loaded (prevents double-loads).
-  final Map<String, Future<FeatureDescriptor>> _loading = {};
+  final Map<String, Future<void>> _loading = {};
 
   /// Lazy features that have been fully loaded and activated.
   final Set<String> _loaded = {};
 
-  /// Stores route prefixes per feature name (needed after removal from _pending).
-  final Map<String, List<String>> _routePrefixes = {};
+  int _generation = 0;
+  final Set<Future<void>> _activations = {};
 
   _LazyFeatureManager(this._platform);
 
@@ -23,7 +23,30 @@ final class _LazyFeatureManager {
   void registerLazyFeatures(List<LazyFeatureDescriptor> features) {
     for (final feature in features) {
       _pending[feature.name] = feature;
-      _routePrefixes[feature.name] = List.unmodifiable(feature.routePrefixes);
+    }
+    final visited = <String>{};
+    final visiting = <String>{};
+    void visit(String name) {
+      if (visited.contains(name)) return;
+      if (!visiting.add(name)) {
+        throw StateError('Circular lazy feature dependency involving: $name');
+      }
+      final feature = _pending[name];
+      if (feature == null) {
+        if (!_platform.features.any((feature) => feature.name == name)) {
+          throw StateError('No feature registered for dependency: $name');
+        }
+      } else {
+        for (final dependency in feature.dependencies) {
+          visit(dependency);
+        }
+      }
+      visiting.remove(name);
+      visited.add(name);
+    }
+
+    for (final name in _pending.keys) {
+      visit(name);
     }
   }
 
@@ -45,7 +68,7 @@ final class _LazyFeatureManager {
                   child: _LazyLoadingPage(
                     featureName: lazy.name,
                     manager: this,
-                    targetLocation: state.matchedLocation,
+                    targetLocation: state.uri.toString(),
                   ),
                 ),
               ),
@@ -54,7 +77,7 @@ final class _LazyFeatureManager {
               child: _LazyLoadingPage(
                 featureName: lazy.name,
                 manager: this,
-                targetLocation: state.matchedLocation,
+                targetLocation: state.uri.toString(),
               ),
             ),
           ),
@@ -81,6 +104,31 @@ final class _LazyFeatureManager {
       throw StateError('No lazy feature registered with name: $name');
     }
 
+    final pending = _loadAndActivate(lazy, _generation);
+    _loading[name] = pending;
+    try {
+      await pending;
+    } finally {
+      if (identical(_loading[name], pending)) {
+        _loading.remove(name);
+      }
+    }
+  }
+
+  Future<void> _loadAndActivate(
+    LazyFeatureDescriptor lazy,
+    int generation,
+  ) async {
+    void checkActive() {
+      if (generation != _generation) {
+        throw StateError(
+          'Lazy feature load cancelled by platform lifecycle change',
+        );
+      }
+    }
+
+    final name = lazy.name;
+
     // Check feature flag if configured
     if (lazy.featureFlag != null) {
       final flagPlugin = vyuh.featureFlag;
@@ -102,34 +150,40 @@ final class _LazyFeatureManager {
     for (final dep in lazy.dependencies) {
       if (!_loaded.contains(dep) && _pending.containsKey(dep)) {
         await loadFeature(dep);
+      } else {
+        await _platform.featureReady(dep);
       }
     }
 
+    checkActive();
+
     // Load the feature itself
-    final completer = Completer<FeatureDescriptor>();
-    _loading[name] = completer.future;
+    final feature = await lazy.loader();
 
-    try {
-      final feature = await lazy.loader();
+    checkActive();
 
-      // Validate that the loaded feature name matches
-      assert(
-        feature.name == name,
-        'LazyFeatureDescriptor name "$name" does not match '
-        'loaded FeatureDescriptor name "${feature.name}"',
+    // Validate that the loaded feature name matches
+    if (feature.name != name) {
+      throw StateError(
+        'Lazy feature "$name" loaded a descriptor named "${feature.name}"',
       );
-
-      await _platform._activateLazyFeature(feature, lazy.routePrefixes);
-
-      _loaded.add(name);
-      _pending.remove(name);
-      completer.complete(feature);
-    } catch (e, st) {
-      completer.completeError(e, st);
-      rethrow;
-    } finally {
-      _loading.remove(name);
     }
+
+    final activation = _platform._activateLazyFeature(
+      feature,
+      lazy.routePrefixes,
+      checkActive,
+    );
+    _activations.add(activation);
+    try {
+      await activation;
+    } finally {
+      _activations.remove(activation);
+    }
+    checkActive();
+
+    _loaded.add(name);
+    _pending.remove(name);
   }
 
   /// Whether a lazy feature has been loaded.
@@ -142,12 +196,25 @@ final class _LazyFeatureManager {
   /// All lazy feature names (pending + loaded).
   Iterable<String> get allNames => {..._pending.keys, ..._loaded};
 
+  /// Wait for entered activation hooks to clean up before services are disposed.
+  Future<void> drainActivations() async {
+    await Future.wait(
+      _activations.toList().map((future) async {
+        try {
+          await future;
+        } catch (_) {
+          /* The load caller receives the failure. */
+        }
+      }),
+    );
+  }
+
   /// Reset all state. Called during platform dispose.
   void reset() {
+    _generation++;
     _pending.clear();
     _loading.clear();
     _loaded.clear();
-    _routePrefixes.clear();
   }
 }
 

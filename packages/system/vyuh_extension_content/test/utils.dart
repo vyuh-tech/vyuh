@@ -59,7 +59,7 @@ class TestContentItem extends ContentItem {
     return TestContentItem(
       id: json['id'] as String,
       title: json['title'] as String,
-      layout: typeFromFirstOfListJson<LayoutConfiguration<TestContentItem>>(
+      layout: typeFromFirstOfListJson<LayoutConfiguration>(
         json['layout'],
       ),
       modifiers: ContentItem.modifierList(json['modifiers']),

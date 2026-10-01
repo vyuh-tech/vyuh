@@ -29,23 +29,8 @@ part 'condition.g.dart';
 /// });
 /// ```
 ///
-/// Example usage:
-/// ```dart
-/// final condition = Condition(
-///   configuration: UserRoleCondition(
-///     allowedRoles: ['admin', 'editor'],
-///   ),
-/// );
-///
-/// // Evaluate the condition
-/// final result = await condition.execute(context);
-/// if (result == null) {
-///   // Condition passed
-/// } else {
-///   // Condition failed with error message
-///   print('Access denied: $result');
-/// }
-/// ```
+/// Evaluated values select a matching conditional case, such as a platform name
+/// or a boolean string. Null means no value was produced.
 @JsonSerializable()
 final class Condition {
   /// The configuration that defines the condition's logic.
@@ -61,8 +46,8 @@ final class Condition {
   /// Evaluates the condition in the current context.
   ///
   /// Returns:
-  /// - null if the condition passes
-  /// - an error message string if the condition fails
+  /// - a string value for case matching
+  /// - null if no configuration produced a value
   Future<String?> execute(BuildContext context) async {
     return configuration?.execute(context);
   }

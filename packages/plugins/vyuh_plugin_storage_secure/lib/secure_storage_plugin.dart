@@ -14,7 +14,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 ///
 /// Example usage:
 /// ```dart
-/// final storage = vyuh.platform.getPlugin<StoragePlugin>();
+/// final storage = vyuh.getPlugin<SecureStoragePlugin>()!;
 ///
 /// // Store a value
 /// await storage.write('auth.token', 'my-secure-token');
@@ -36,7 +36,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// * [InitOncePlugin] - Mixin for plugin initialization
 class FlutterSecureStoragePlugin extends SecureStoragePlugin
     with InitOncePlugin {
-  late final FlutterSecureStorage _storage;
+  late FlutterSecureStorage _storage;
 
   final AndroidOptions? _androidOptions;
   final IOSOptions? _iOSOptions;

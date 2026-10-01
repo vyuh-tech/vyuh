@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "publish-packages": "changeset version && pnpm --recursive --filter \"./schemas/*\" build && changeset publish"
+    "publish-packages": "changeset version && pnpm --recursive --filter \"./schemas/*\" build && changeset publish",
+    "build": "pnpm --recursive --if-present build"
   },
   "private": true,
   "keywords": [],
@@ -15,10 +16,23 @@
   "license": "FSL",
   "devDependencies": {
     "all-contributors-cli": "^6.26.1",
-    "prettier": "^3.8.2",
-    "typescript": "^6.0.2"
+    "prettier": "^3.9.9",
+    "typescript": "6.0.3"
   },
   "dependencies": {
-    "@changesets/cli": "^2.30.0"
+    "@changesets/cli": "^3.0.3"
+  },
+  "packageManager": "pnpm@10.13.1",
+  "pnpm": {
+    "overrides": {
+      "sanity": "^6.17.0",
+      "react": "^19.3.0",
+      "react-dom": "^19.3.0",
+      "@sanity/types": "^6.17.0"
+    },
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild"
+    ]
   }
 }

@@ -18,153 +18,147 @@ enum _LiveEventType {
       };
 }
 
-typedef _ConnectionConfig = ({
-  LiveConfig liveConfig,
-  StreamController<SanityQueryResponse> controller,
-  EventFlux flux,
-  Stream<EventFluxData> stream,
-});
-
 extension LiveConnect on SanityClient {
-  /// Fetches data from Sanity using Server-Sent Events (SSE) for live updates.
-  ///
-  /// [includeDrafts] whe true it will also listen to draft changes.
+  /// Fetches live query results. Requests are serialized and bursts coalesced.
+  /// Errors are delivered through the returned stream; cancelling disconnects SSE.
   Stream<SanityQueryResponse> fetchLive(
     String query, {
     Map<String, String>? params,
-    includeDrafts = false,
+    bool includeDrafts = false,
   }) {
-    assert(
-      includeDrafts
-          ? config.perspective == Perspective.drafts && !config.useCdn
-          : true,
-      'When includeDrafts is true, the config must have perspective set to previewDrafts and useCdn set to false',
-    );
-
+    if (includeDrafts &&
+        (config.perspective != Perspective.drafts || config.useCdn)) {
+      throw ArgumentError(
+          'Draft live queries require the drafts perspective without CDN');
+    }
     final liveConfig = includeDrafts ? LiveConfig.withDrafts() : LiveConfig();
-    final sanityRequest = SanityRequest(
-      urlBuilder: urlBuilder,
-      query: '',
-      live: liveConfig,
-    );
-
-    final uri = sanityRequest.getUri;
-
-    final headers = Map<String, String>.from(_requestHeaders);
-    headers['Accept'] = 'text/event-stream';
-
-    final controller = StreamController<SanityQueryResponse>();
-
+    final uri =
+        SanityRequest(urlBuilder: urlBuilder, query: '', live: liveConfig)
+            .getUri;
+    final headers = Map<String, String>.from(_requestHeaders)
+      ..['Accept'] = 'text/event-stream';
     final flux = SanityConfig.createEventFlux();
+    late final StreamController<SanityQueryResponse> controller;
+    StreamSubscription<EventFluxData>? subscription;
+    var cancelled = false;
+    var generation = 0;
+    var fetching = false;
+    var pending = false;
+    String? lastEventId;
+    List<String>? syncTags;
 
-    flux.connect(
-      EventFluxConnectionType.get,
-      uri.toString(),
-      autoReconnect: true,
-      reconnectConfig: ReconnectConfig(
-        mode: ReconnectMode.linear,
-        maxAttempts: 5,
-        onReconnect: () => debugPrint('Reconnected to Live API'),
-      ),
-      header: headers,
-      httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
-      tag: query,
-      onSuccessCallback: (response) {
-        if (response == null || response.stream == null) {
-          throw LiveConnectException('With query: $query, params: $params');
+    void report(Object error, [StackTrace? stack]) {
+      if (!cancelled && !controller.isClosed) controller.addError(error, stack);
+    }
+
+    Future<void> fetchQuery() async {
+      pending = true;
+      if (fetching) return;
+      fetching = true;
+      try {
+        while (pending && !cancelled) {
+          pending = false;
+          final requestGeneration = generation;
+          try {
+            final response = await fetch(query, params: {
+              if (params != null) ...params,
+              'lastLiveEventId': lastEventId ?? '',
+            });
+            if (!cancelled && requestGeneration == generation && !pending) {
+              syncTags = response.syncTags;
+              controller.add(response);
+            }
+          } catch (error, stack) {
+            if (requestGeneration == generation && !pending) {
+              report(error, stack);
+            }
+          }
         }
+      } finally {
+        fetching = false;
+      }
+    }
 
-        _onLiveConnectCallback(query, params, config: (
-          liveConfig: liveConfig,
-          controller: controller,
-          stream: response.stream!,
-          flux: flux,
-        ));
+    void listener(EventFluxData event) {
+      if (cancelled) return;
+      try {
+        switch (_LiveEventType.fromEvent(event)) {
+          case _LiveEventType.welcome || _LiveEventType.restart:
+            lastEventId = event.id;
+            unawaited(fetchQuery());
+          case _LiveEventType.message:
+            lastEventId = event.id;
+            final data = jsonDecode(event.data) as Map<String, dynamic>;
+            final tags = (data['tags'] as List?)?.cast<String>();
+            if (syncTags == null || (tags?.any(syncTags!.contains) ?? false)) {
+              unawaited(fetchQuery());
+            }
+          case _LiveEventType.error:
+            report(LiveConnectException('Live data error for query: $query'));
+          default:
+            break;
+        }
+      } catch (error, stack) {
+        report(error, stack);
+      }
+    }
+
+    controller = StreamController<SanityQueryResponse>(
+      onListen: () {
+        try {
+          flux.connect(
+            EventFluxConnectionType.get,
+            uri.toString(),
+            autoReconnect: true,
+            reconnectConfig:
+                ReconnectConfig(mode: ReconnectMode.linear, maxAttempts: 5),
+            header: headers,
+            httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
+            tag: query,
+            onSuccessCallback: (response) {
+              if (cancelled) {
+                flux.disconnect();
+                return;
+              }
+              final stream = response?.stream;
+              if (stream == null) {
+                report(
+                    LiveConnectException('No live stream for query: $query'));
+                return;
+              }
+              generation++;
+              syncTags = null;
+              final connectionGeneration = generation;
+              unawaited(subscription?.cancel());
+              subscription = stream.listen(
+                (event) {
+                  if (connectionGeneration == generation) listener(event);
+                },
+                onError: (Object error, StackTrace stack) {
+                  if (connectionGeneration == generation) report(error, stack);
+                },
+              );
+              if (fetching) pending = true;
+            },
+            onError: (error) =>
+                report(LiveConnectException('Live connection failed: $error')),
+          );
+        } catch (error, stack) {
+          report(error, stack);
+        }
       },
-      onError: (error) {
-        controller.close();
-        throw LiveConnectException(
-            'With query: $query, params: $params, error: $error');
+      onCancel: () async {
+        cancelled = true;
+        generation++;
+        pending = false;
+        try {
+          await subscription?.cancel();
+        } finally {
+          await flux.disconnect();
+        }
       },
     );
-
     return controller.stream;
-  }
-
-  void _onLiveConnectCallback(String query, Map<String, String>? params,
-      {required _ConnectionConfig config}) async {
-    late final StreamSubscription<EventFluxData> subscription;
-    String? lastEventId;
-    List<String> syncTags = [];
-
-    final (
-      controller: controller,
-      liveConfig: liveConfig,
-      flux: flux,
-      stream: stream
-    ) = config;
-
-    controller.onCancel = () {
-      subscription.cancel();
-      flux.disconnect();
-    };
-
-    fetchQuery() async {
-      try {
-        final allParams = {
-          if (params != null) ...params,
-          'lastLiveEventId': lastEventId ?? '',
-        };
-
-        final response = await fetch(query, params: allParams);
-
-        // Track the syncTags to check with an update
-        syncTags = response.syncTags;
-
-        controller.add(response);
-      } catch (e, stackTrace) {
-        controller.addError(e, stackTrace);
-      }
-    }
-
-    listener(event) async {
-      if (controller.isClosed) {
-        subscription.cancel();
-        flux.disconnect();
-        return;
-      }
-
-      final eventType = _LiveEventType.fromEvent(event);
-
-      switch (eventType) {
-        case _LiveEventType.welcome || _LiveEventType.restart:
-          lastEventId = event.id;
-          fetchQuery();
-          break;
-
-        case _LiveEventType.message:
-          lastEventId = event.id;
-
-          final eventData = jsonDecode(event.data);
-          final tags = (eventData?['tags'] as List?)?.cast<String>();
-
-          final canUpdate = tags?.any((tag) => syncTags.contains(tag)) ?? false;
-          if (canUpdate) {
-            fetchQuery();
-          }
-
-          break;
-
-        case _LiveEventType.error:
-          controller.addError('Live Data error');
-          break;
-
-        default:
-          break;
-      }
-    }
-
-    subscription = stream.listen(listener);
   }
 }
 

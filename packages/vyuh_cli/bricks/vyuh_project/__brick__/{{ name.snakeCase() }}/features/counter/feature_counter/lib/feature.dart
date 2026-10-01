@@ -38,18 +38,6 @@ class _CounterState extends State<_Counter> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Card(
-            child: ListTile(
-              leading: const Icon(
-                Icons.code,
-                size: 48,
-              ),
-              trailing: const Icon(Icons.chevron_right),
-              title: const Text('Developer Tools'),
-              subtitle: const Text('An X-ray vision of the Vyuh App'),
-              onTap: () => vyuh.router.push('/developer'),
-            ),
-          ),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

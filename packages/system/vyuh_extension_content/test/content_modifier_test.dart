@@ -1,3 +1,4 @@
+import 'utils.dart' as fixtures;
 import 'package:flutter/widgets.dart' hide runApp;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -27,7 +28,8 @@ class TestContentItem extends ContentItem {
       id: json['id'] as String,
       title: json['title'] as String,
       layout: typeFromFirstOfListJson<LayoutConfiguration<TestContentItem>>(
-          json['layout']),
+        json['layout'],
+      ),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );
   }
@@ -44,22 +46,15 @@ class VisibilityModifier extends ContentModifierConfiguration {
 
   final bool visible;
 
-  VisibilityModifier({
-    required this.visible,
-  }) : super(schemaType: schemaName);
+  VisibilityModifier({required this.visible}) : super(schemaType: schemaName);
 
   factory VisibilityModifier.fromJson(Map<String, dynamic> json) {
-    return VisibilityModifier(
-      visible: json['visible'] as bool,
-    );
+    return VisibilityModifier(visible: json['visible'] as bool);
   }
 
   @override
   Widget build(BuildContext context, Widget child, ContentItem content) {
-    return Visibility(
-      visible: visible,
-      child: child,
-    );
+    return Visibility(visible: visible, child: child);
   }
 }
 
@@ -74,22 +69,15 @@ class PaddingModifier extends ContentModifierConfiguration {
 
   final double padding;
 
-  PaddingModifier({
-    required this.padding,
-  }) : super(schemaType: schemaName);
+  PaddingModifier({required this.padding}) : super(schemaType: schemaName);
 
   factory PaddingModifier.fromJson(Map<String, dynamic> json) {
-    return PaddingModifier(
-      padding: (json['padding'] as num).toDouble(),
-    );
+    return PaddingModifier(padding: (json['padding'] as num).toDouble());
   }
 
   @override
   Widget build(BuildContext context, Widget child, ContentItem content) {
-    return Padding(
-      padding: EdgeInsets.all(padding),
-      child: child,
-    );
+    return Padding(padding: EdgeInsets.all(padding), child: child);
   }
 }
 
@@ -115,25 +103,46 @@ class ErrorModifier extends ContentModifierConfiguration {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late ContentExtensionBuilder builder;
 
-  setUp(() {
+  setUp(() async {
     builder = ContentExtensionBuilder();
     builder.register<ContentModifierConfiguration>(
-        VisibilityModifier.typeDescriptor);
-    builder
-        .register<ContentModifierConfiguration>(PaddingModifier.typeDescriptor);
-    builder
-        .register<ContentModifierConfiguration>(ErrorModifier.typeDescriptor);
+      VisibilityModifier.typeDescriptor,
+    );
+    builder.register<ContentModifierConfiguration>(
+      PaddingModifier.typeDescriptor,
+    );
+    builder.register<ContentModifierConfiguration>(
+      ErrorModifier.typeDescriptor,
+    );
+    VyuhBinding.instance.widgetInit(
+      plugins: PluginDescriptor(
+        content: DefaultContentPlugin(provider: fixtures.MockContentProvider()),
+      ),
+      extensionBuilder: builder,
+      extensionDescriptors: [
+        ContentExtensionDescriptor(
+          contentModifiers: [
+            VisibilityModifier.typeDescriptor,
+            PaddingModifier.typeDescriptor,
+            ErrorModifier.typeDescriptor,
+          ],
+        ),
+      ],
+    );
+    await VyuhBinding.instance.widgetReady;
   });
 
-  tearDown(() {
-    builder.dispose();
+  tearDown(() async {
+    if (VyuhBinding.instance.initialized) await VyuhBinding.instance.dispose();
   });
 
   group('Content Modifiers', () {
-    testWidgets('applies single modifier correctly',
-        (WidgetTester tester) async {
+    testWidgets('applies single modifier correctly', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(
         id: '1',
         title: 'Test',
@@ -157,8 +166,9 @@ void main() {
       expect(find.byType(Container), findsNothing);
     });
 
-    testWidgets('applies multiple modifiers in correct order',
-        (WidgetTester tester) async {
+    testWidgets('applies multiple modifiers in correct order', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(
         id: '1',
         title: 'Test',
@@ -194,8 +204,9 @@ void main() {
       expect(padding.padding, equals(const EdgeInsets.all(16)));
     });
 
-    testWidgets('handles modifier build errors gracefully',
-        (WidgetTester tester) async {
+    testWidgets('handles modifier build errors gracefully', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(
         id: '1',
         title: 'Test',
@@ -216,6 +227,7 @@ void main() {
         ),
       );
 
+      expect(tester.takeException(), isA<Exception>());
       expect(find.byType(ErrorWidget), findsOneWidget);
     });
 
@@ -224,14 +236,8 @@ void main() {
         'id': '1',
         'title': 'Test',
         'modifiers': [
-          {
-            'schemaType': VisibilityModifier.schemaName,
-            'visible': true,
-          },
-          {
-            'schemaType': PaddingModifier.schemaName,
-            'padding': 8,
-          },
+          {'type': VisibilityModifier.schemaName, 'visible': true},
+          {'type': PaddingModifier.schemaName, 'padding': 8},
         ],
       };
 
@@ -248,16 +254,15 @@ void main() {
         'id': '1',
         'title': 'Test',
         'modifiers': [
-          {
-            'schemaType': 'unknown_modifier',
-          },
+          {'type': 'unknown_modifier'},
         ],
       };
 
       final content = TestContentItem.fromJson(json);
       final modifiers = content.getModifiers();
 
-      expect(modifiers, isEmpty);
+      expect(modifiers, hasLength(1));
+      expect(modifiers!.single, isA<UnknownContentModifierConfiguration>());
     });
   });
 }

@@ -41,7 +41,7 @@ enum LinkType { url, route }
 /// // Navigate to a CMS route
 /// final action = NavigationAction(
 ///   linkType: LinkType.route,
-///   route: ObjectReference('route-id'),
+///   route: ObjectReference(type: 'reference', ref: 'route-id'),
 ///   navigationType: NavigationType.replace,
 /// );
 ///
@@ -79,12 +79,22 @@ final class NavigationAction extends ActionConfiguration {
       _$NavigationActionFromJson(json);
 
   @override
-  void execute(BuildContext context, {Map<String, dynamic>? arguments}) async {
-    assert(url != null || route != null, 'One of url or route must be set.');
-
-    if (linkType == LinkType.route && route != null) {
-      _performNavigation(context, routeId: route!.ref);
+  Future<void> execute(
+    BuildContext context, {
+    Map<String, dynamic>? arguments,
+  }) async {
+    if (linkType == LinkType.route) {
+      if (route == null || route!.ref.trim().isEmpty) {
+        throw ArgumentError(
+          'A route reference is required for route navigation.',
+        );
+      }
+      await _performNavigation(context, routeId: route!.ref);
       return;
+    }
+
+    if (url == null || url!.trim().isEmpty) {
+      throw ArgumentError('A URL is required for URL navigation.');
     }
 
     final uri = Uri.parse(url!);
@@ -103,7 +113,7 @@ final class NavigationAction extends ActionConfiguration {
       return;
     }
 
-    _performNavigation(context, uri: uri);
+    await _performNavigation(context, uri: uri);
   }
 
   Future<void> _performNavigation(

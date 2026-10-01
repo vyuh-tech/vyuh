@@ -18,7 +18,7 @@ packages:
     source: hosted
     version: "2.8.0"
   analyzer:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: analyzer
       sha256: "61c04d0c1bfed555c681ea079519933f071a5a026578ff73c4ff0df2d3462e5e"
@@ -194,13 +194,12 @@ packages:
     source: hosted
     version: "2.0.0"
   cdx_field_formatting:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: cdx_field_formatting
-      sha256: "92a310225ff41eb59edd2d7bfe38714568c95150bfc1eca7e9912b18e6306ce2"
-      url: "https://pub.vyuh.tech"
-    source: hosted
-    version: "2.0.0"
+      path: "../cdx/packages/cdx_field_formatting"
+      relative: true
+    source: path
+    version: "2.1.0"
   characters:
     dependency: transitive
     description:
@@ -237,10 +236,10 @@ packages:
     dependency: transitive
     description:
       name: cli_completion
-      sha256: d61bbbfccabe02fdad54eeb275586e15e31abdeb35ec7a0d68832fae473cc298
+      sha256: "72e8ccc4545f24efa7bbdf3bff7257dc9d62b072dee77513cc54295575bc9220"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.5.1"
   cli_config:
     dependency: transitive
     description:
@@ -877,6 +876,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
+  isolate_contactor:
+    dependency: transitive
+    description:
+      name: isolate_contactor
+      sha256: "6ba8434ceb58238a1389d6365111a3efe7baa1c68a66f4db6d63d351cf6c3a0f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
+  isolate_manager:
+    dependency: transitive
+    description:
+      name: isolate_manager
+      sha256: "22ed0c25f80ec3b5f21e3a55d060f4650afff33f27c2dff34c0f9409d5759ae5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.5+1"
   jni:
     dependency: transitive
     description:
@@ -1150,7 +1165,7 @@ packages:
     source: hosted
     version: "3.2.1"
   path:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: path
       sha256: "75cca69d1490965be98c73ceaea117e8a04dd21217b37b292c9ddbec0d955bc5"
@@ -1297,10 +1312,10 @@ packages:
     dependency: transitive
     description:
       name: pub_updater
-      sha256: "3aadeb8c68d15ef9d117b36474ddcc543b48ae1e64f7dd71407da26df66bf7c8"
+      sha256: "739a0161d73a6974c0675b864fb0cf5147305f7b077b7f03a58fa7a9ab3e7e7d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.5.0"
   pubspec_parse:
     dependency: "direct dev"
     description:
@@ -1317,6 +1332,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  re_editor:
+    dependency: transitive
+    description:
+      name: re_editor
+      sha256: "66671c4774a6b4c5254c9a53ab35a083e7e7da9ae371c519bcf491c70a2a4e56"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.10.0"
+  re_highlight:
+    dependency: transitive
+    description:
+      name: re_highlight
+      sha256: "6c4ac3f76f939fb7ca9df013df98526634e17d8f7460e028bd23a035870024f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   reactive_forms:
     dependency: transitive
     description:
@@ -1819,13 +1850,12 @@ packages:
     source: hosted
     version: "15.3.0"
   vyuh_cdx_ui:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: vyuh_cdx_ui
-      sha256: "191dae78ef83f55f3b2428f627eae531dc3ea00cf14f5dc91b09c444a6330b9f"
-      url: "https://pub.vyuh.tech"
-    source: hosted
-    version: "2.5.0"
+      path: "../cdx/packages/vyuh_cdx_ui"
+      relative: true
+    source: path
+    version: "3.2.1"
   vyuh_errors:
     dependency: transitive
     description:
@@ -1835,12 +1865,11 @@ packages:
     source: hosted
     version: "1.1.3"
   vyuh_timelines:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: vyuh_timelines
-      sha256: "434c5a4d7bfc3c8dee7baf16a279286c1ad95ffae68ea724703637d12b5f9387"
-      url: "https://pub.vyuh.tech"
-    source: hosted
+      path: "../cdx/packages/vyuh_timelines"
+      relative: true
+    source: path
     version: "0.2.2"
   wakelock_plus:
     dependency: transitive

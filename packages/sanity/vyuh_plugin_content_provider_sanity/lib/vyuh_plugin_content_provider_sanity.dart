@@ -72,6 +72,7 @@ final class SanityContentProvider extends ContentProvider {
   @override
   Future<void> dispose() async {
     await live.dispose();
+    await _cache.clear();
   }
 
   @override
@@ -86,6 +87,7 @@ final class SanityContentProvider extends ContentProvider {
       record.query,
       queryParams: record.params,
       fromJson: fromJson,
+      useCache: useCache,
     );
   }
 
@@ -123,6 +125,7 @@ final class SanityContentProvider extends ContentProvider {
       record.query,
       queryParams: record.params,
       fromJson: RouteBase.fromJson,
+      useCache: useCache,
     );
   }
 

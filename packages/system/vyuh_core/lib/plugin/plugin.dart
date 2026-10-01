@@ -25,46 +25,59 @@ mixin RouteObservers on Plugin {
   List<NavigatorObserver> get observers;
 }
 
-/// A mixin to mark any plugin to be loaded only once after the Platform has been initialized.
-/// This mixin can be used together with [PreloadedPlugin] to ensure that the plugin is loaded at the
-/// correct time in the initialization sequence.
+/// Initializes a plugin once per active lifecycle, sharing concurrent calls.
+///
+/// Disposal waits for initialization, releases resources once, and allows a new
+/// lifecycle. Failed initialization can be retried. This can be combined with
+/// [PreloadedPlugin] to select the initialization stage.
 mixin InitOncePlugin on Plugin {
-  Completer? _initCompleter;
+  Future<void>? _initFuture;
+  Future<void>? _disposeFuture;
   bool _initialized = false;
 
   bool get initialized => _initialized;
 
   @override
   @nonVirtual
-  Future<void> init() async {
-    if (_initCompleter == null) {
-      _initCompleter = Completer();
-
-      initOnce()
-          .then((final _) {
-            _initCompleter!.complete();
-            _initialized = true;
-          })
-          .catchError((final e) {
-            _initCompleter!.completeError(e);
-          });
-    }
-
-    return _initCompleter!.future;
+  Future<void> init() {
+    final disposal = _disposeFuture;
+    if (disposal != null) return disposal.then((_) => init());
+    if (_initialized) return Future.value();
+    return _initFuture ??= Future.sync(initOnce).then(
+      (_) {
+        _initialized = true;
+      },
+      onError: (Object error, StackTrace stack) {
+        _initFuture = null;
+        Error.throwWithStackTrace(error, stack);
+      },
+    );
   }
 
   @override
+  @nonVirtual
   Future<void> dispose() {
-    // Since we have opted into the InitOnce mixin, we should not dispose
-    // multiple times
-    if (_initialized) {
-      return Future.value();
-    }
+    return _disposeFuture ??= _dispose().whenComplete(() {
+      _disposeFuture = null;
+    });
+  }
 
-    return disposeOnce();
+  Future<void> _dispose() async {
+    final initialization = _initFuture;
+    if (initialization == null) return;
+    if (!_initialized) {
+      try {
+        await initialization;
+      } catch (_) {
+        return;
+      }
+    }
+    if (!_initialized) return;
+    await disposeOnce();
+    _initialized = false;
+    _initFuture = null;
   }
 
   Future<void> initOnce();
-
   Future<void> disposeOnce();
 }

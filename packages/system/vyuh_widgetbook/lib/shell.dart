@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' as legacy_material;
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
@@ -29,19 +28,16 @@ final class WidgetBookShell extends StatelessWidget {
           ),
       ],
       addons: [
-        MaterialThemeAddon(
+        ThemeAddon<ThemeData>(
+          themeBuilder: (_, theme, child) => Theme(data: theme, child: child),
           themes: [
             WidgetbookTheme(
               name: 'Light',
-              data: lightTheme == null
-                  ? legacy_material.ThemeData.light(useMaterial3: true)
-                  : _toLegacyTheme(lightTheme!),
+              data: lightTheme ?? ThemeData.light(useMaterial3: true),
             ),
             WidgetbookTheme(
               name: 'Dark',
-              data: darkTheme == null
-                  ? legacy_material.ThemeData.dark(useMaterial3: true)
-                  : _toLegacyTheme(darkTheme!),
+              data: darkTheme ?? ThemeData.dark(useMaterial3: true),
             ),
           ],
         ),
@@ -102,7 +98,7 @@ class _ContentPreview extends StatelessWidget {
     }
 
     return Theme(
-      data: _toMaterialUiTheme(legacy_material.Theme.of(context)),
+      data: Theme.of(context),
       child: Builder(
         builder: (context) => vyuh.content.buildContent(
           context,
@@ -113,141 +109,3 @@ class _ContentPreview extends StatelessWidget {
     );
   }
 }
-
-legacy_material.ThemeData _toLegacyTheme(ThemeData theme) =>
-    legacy_material.ThemeData(
-      platform: theme.platform,
-      visualDensity: legacy_material.VisualDensity(
-        horizontal: theme.visualDensity.horizontal,
-        vertical: theme.visualDensity.vertical,
-      ),
-      colorScheme: _toLegacyColorScheme(theme.colorScheme),
-      textTheme: _toLegacyTextTheme(theme.textTheme),
-      useMaterial3: true,
-    );
-
-ThemeData _toMaterialUiTheme(legacy_material.ThemeData theme) => ThemeData(
-  platform: theme.platform,
-  visualDensity: VisualDensity(
-    horizontal: theme.visualDensity.horizontal,
-    vertical: theme.visualDensity.vertical,
-  ),
-  colorScheme: _toMaterialUiColorScheme(theme.colorScheme),
-  textTheme: _toMaterialUiTextTheme(theme.textTheme),
-  useMaterial3: true,
-);
-
-legacy_material.ColorScheme _toLegacyColorScheme(ColorScheme scheme) =>
-    legacy_material.ColorScheme(
-      brightness: scheme.brightness,
-      primary: scheme.primary,
-      onPrimary: scheme.onPrimary,
-      primaryContainer: scheme.primaryContainer,
-      onPrimaryContainer: scheme.onPrimaryContainer,
-      secondary: scheme.secondary,
-      onSecondary: scheme.onSecondary,
-      secondaryContainer: scheme.secondaryContainer,
-      onSecondaryContainer: scheme.onSecondaryContainer,
-      tertiary: scheme.tertiary,
-      onTertiary: scheme.onTertiary,
-      tertiaryContainer: scheme.tertiaryContainer,
-      onTertiaryContainer: scheme.onTertiaryContainer,
-      error: scheme.error,
-      onError: scheme.onError,
-      errorContainer: scheme.errorContainer,
-      onErrorContainer: scheme.onErrorContainer,
-      surface: scheme.surface,
-      onSurface: scheme.onSurface,
-      surfaceDim: scheme.surfaceDim,
-      surfaceBright: scheme.surfaceBright,
-      surfaceContainerLowest: scheme.surfaceContainerLowest,
-      surfaceContainerLow: scheme.surfaceContainerLow,
-      surfaceContainer: scheme.surfaceContainer,
-      surfaceContainerHigh: scheme.surfaceContainerHigh,
-      surfaceContainerHighest: scheme.surfaceContainerHighest,
-      onSurfaceVariant: scheme.onSurfaceVariant,
-      outline: scheme.outline,
-      outlineVariant: scheme.outlineVariant,
-      shadow: scheme.shadow,
-      scrim: scheme.scrim,
-      inverseSurface: scheme.inverseSurface,
-      onInverseSurface: scheme.onInverseSurface,
-      inversePrimary: scheme.inversePrimary,
-      surfaceTint: scheme.surfaceTint,
-    );
-
-ColorScheme _toMaterialUiColorScheme(legacy_material.ColorScheme scheme) =>
-    ColorScheme(
-      brightness: scheme.brightness,
-      primary: scheme.primary,
-      onPrimary: scheme.onPrimary,
-      primaryContainer: scheme.primaryContainer,
-      onPrimaryContainer: scheme.onPrimaryContainer,
-      secondary: scheme.secondary,
-      onSecondary: scheme.onSecondary,
-      secondaryContainer: scheme.secondaryContainer,
-      onSecondaryContainer: scheme.onSecondaryContainer,
-      tertiary: scheme.tertiary,
-      onTertiary: scheme.onTertiary,
-      tertiaryContainer: scheme.tertiaryContainer,
-      onTertiaryContainer: scheme.onTertiaryContainer,
-      error: scheme.error,
-      onError: scheme.onError,
-      errorContainer: scheme.errorContainer,
-      onErrorContainer: scheme.onErrorContainer,
-      surface: scheme.surface,
-      onSurface: scheme.onSurface,
-      surfaceDim: scheme.surfaceDim,
-      surfaceBright: scheme.surfaceBright,
-      surfaceContainerLowest: scheme.surfaceContainerLowest,
-      surfaceContainerLow: scheme.surfaceContainerLow,
-      surfaceContainer: scheme.surfaceContainer,
-      surfaceContainerHigh: scheme.surfaceContainerHigh,
-      surfaceContainerHighest: scheme.surfaceContainerHighest,
-      onSurfaceVariant: scheme.onSurfaceVariant,
-      outline: scheme.outline,
-      outlineVariant: scheme.outlineVariant,
-      shadow: scheme.shadow,
-      scrim: scheme.scrim,
-      inverseSurface: scheme.inverseSurface,
-      onInverseSurface: scheme.onInverseSurface,
-      inversePrimary: scheme.inversePrimary,
-      surfaceTint: scheme.surfaceTint,
-    );
-
-legacy_material.TextTheme _toLegacyTextTheme(TextTheme theme) =>
-    legacy_material.TextTheme(
-      displayLarge: theme.displayLarge,
-      displayMedium: theme.displayMedium,
-      displaySmall: theme.displaySmall,
-      headlineLarge: theme.headlineLarge,
-      headlineMedium: theme.headlineMedium,
-      headlineSmall: theme.headlineSmall,
-      titleLarge: theme.titleLarge,
-      titleMedium: theme.titleMedium,
-      titleSmall: theme.titleSmall,
-      bodyLarge: theme.bodyLarge,
-      bodyMedium: theme.bodyMedium,
-      bodySmall: theme.bodySmall,
-      labelLarge: theme.labelLarge,
-      labelMedium: theme.labelMedium,
-      labelSmall: theme.labelSmall,
-    );
-
-TextTheme _toMaterialUiTextTheme(legacy_material.TextTheme theme) => TextTheme(
-  displayLarge: theme.displayLarge,
-  displayMedium: theme.displayMedium,
-  displaySmall: theme.displaySmall,
-  headlineLarge: theme.headlineLarge,
-  headlineMedium: theme.headlineMedium,
-  headlineSmall: theme.headlineSmall,
-  titleLarge: theme.titleLarge,
-  titleMedium: theme.titleMedium,
-  titleSmall: theme.titleSmall,
-  bodyLarge: theme.bodyLarge,
-  bodyMedium: theme.bodyMedium,
-  bodySmall: theme.bodySmall,
-  labelLarge: theme.labelLarge,
-  labelMedium: theme.labelMedium,
-  labelSmall: theme.labelSmall,
-);

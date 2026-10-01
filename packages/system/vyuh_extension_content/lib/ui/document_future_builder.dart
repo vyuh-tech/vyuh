@@ -44,8 +44,9 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
   }
 
   @override
-  dispose() {
-    super.dispose();
+  void didUpdateWidget(DocumentFutureBuilder<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.future != widget.future) _refresh();
   }
 
   Future<T?> _refresh() {
@@ -58,7 +59,7 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
   }
 
   ObservableFuture<T?> _fetchDocument() {
-    return ObservableFuture(widget.future());
+    return ObservableFuture(Future<T?>.sync(widget.future));
   }
 
   @override

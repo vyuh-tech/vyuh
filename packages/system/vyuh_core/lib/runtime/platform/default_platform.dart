@@ -63,8 +63,10 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   Future<void> run() async {
-    VyuhBinding.instance
-        ._appInit(plugins: _pluginDescriptor, widgetBuilder: _widgetBuilder);
+    await VyuhBinding.instance._appInit(
+      plugins: _pluginDescriptor,
+      widgetBuilder: _widgetBuilder,
+    );
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
@@ -77,6 +79,15 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       return;
     }
 
+    _lazyFeatureManager.reset();
+    await _lazyFeatureManager.drainActivations();
+
+    for (final feature in _features.reversed) {
+      await feature.dispose?.call();
+    }
+    for (final builder in _featureExtensionBuilderMap.values) {
+      await builder.dispose();
+    }
     await VyuhBinding.instance.dispose();
 
     _features.clear();
@@ -88,36 +99,38 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   Future<void> initPlugins(Trace parentTrace) => telemetry.trace(
-      name: 'Plugins',
-      operation: 'Init',
-      parentTrace: parentTrace,
-      fn: (trace) async {
-        // Only run init on non-preloaded plugins
-        final effectivePlugins = plugins.whereNot((p) => p is PreloadedPlugin);
+    name: 'Plugins',
+    operation: 'Init',
+    parentTrace: parentTrace,
+    fn: (trace) async {
+      // Only run init on non-preloaded plugins
+      final effectivePlugins = plugins.whereNot((p) => p is PreloadedPlugin);
 
-        // Run a cleanup first
-        final disposeFns = effectivePlugins.map((e) => e.dispose());
-        await Future.wait(disposeFns, eagerError: true);
+      // Run a cleanup first
+      final disposeFns = effectivePlugins.map((e) => e.dispose());
+      await Future.wait(disposeFns, eagerError: true);
 
-        // Check
-        final initFns = effectivePlugins.map((e) {
-          return telemetry.trace<void>(
-            name: 'Plugin: ${e.title}',
-            operation: 'Init',
-            parentTrace: trace,
-            fn: (_) => e.init(),
-          );
-        });
-
-        await Future.wait(initFns, eagerError: true);
+      // Check
+      final initFns = effectivePlugins.map((e) {
+        return telemetry.trace<void>(
+          name: 'Plugin: ${e.title}',
+          operation: 'Init',
+          parentTrace: trace,
+          fn: (_) => e.init(),
+        );
       });
+
+      await Future.wait(initFns, eagerError: true);
+    },
+  );
 
   @override
   Future<void> initFeatures(Trace parentTrace) async {
-    // Run a cleanup first
-    final disposeFns =
-        _features.where((e) => e.dispose != null).map((e) => e.dispose!());
-    await Future.wait(disposeFns, eagerError: true);
+    _lazyFeatureManager.reset();
+    await _lazyFeatureManager.drainActivations();
+    for (final feature in _features.reversed) {
+      await feature.dispose?.call();
+    }
 
     return telemetry.trace<void>(
       name: 'Features',
@@ -125,7 +138,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       parentTrace: parentTrace,
       fn: (trace) async {
         _readyFeatures.clear();
-        _features = await _featuresBuilder();
+        _features = List.of(await _featuresBuilder());
 
         // Register lazy features
         final lazyFeatures = _lazyFeaturesBuilder?.call() ?? [];
@@ -137,7 +150,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         for (final feature in _features) {
           if (featureNames.contains(feature.name)) {
             throw StateError(
-                'Feature name "${feature.name}" is not unique. Ensure only uniquely named features are included.');
+              'Feature name "${feature.name}" is not unique. Ensure only uniquely named features are included.',
+            );
           } else {
             featureNames.add(feature.name);
           }
@@ -145,7 +159,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         for (final lazy in lazyFeatures) {
           if (featureNames.contains(lazy.name)) {
             throw StateError(
-                'Lazy feature name "${lazy.name}" is not unique. Ensure only uniquely named features are included.');
+              'Lazy feature name "${lazy.name}" is not unique. Ensure only uniquely named features are included.',
+            );
           } else {
             featureNames.add(lazy.name);
           }
@@ -154,19 +169,25 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         // Topologically sort eager features by dependencies
         _features = _topologicalSort(_features);
 
-        final initFns =
-            _features.map((feature) => telemetry.trace<List<g.RouteBase>>(
-                  name: 'Feature: ${feature.title}',
-                  operation: 'Init',
-                  parentTrace: trace,
-                  fn: (trace) {
-                    final future = _initFeature(feature, trace);
+        final initFns = _features.map(
+          (feature) => telemetry.trace<List<g.RouteBase>>(
+            name: 'Feature: ${feature.title}',
+            operation: 'Init',
+            parentTrace: trace,
+            fn: (trace) {
+              final future = () async {
+                for (final dependency in feature.dependencies) {
+                  await _readyFeatures[dependency];
+                }
+                return _initFeature(feature, trace);
+              }();
 
-                    _readyFeatures[feature.name] = future;
+              _readyFeatures[feature.name] = future;
 
-                    return future;
-                  },
-                ));
+              return future;
+            },
+          ),
+        );
 
         await telemetry.trace<void>(
           name: 'Feature Extensions',
@@ -183,8 +204,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
             final allRoutes = await Future.wait(initFns, eagerError: true);
 
             // Build placeholder routes for lazy features
-            final placeholderRoutes =
-                _lazyFeatureManager.buildPlaceholderRoutes();
+            final placeholderRoutes = _lazyFeatureManager
+                .buildPlaceholderRoutes();
 
             return _initRouter([
               ...allRoutes
@@ -200,7 +221,9 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   }
 
   Future<List<g.RouteBase>> _initFeature(
-      FeatureDescriptor feature, Trace? parentTrace) async {
+    FeatureDescriptor feature,
+    Trace? parentTrace,
+  ) async {
     await feature.init?.call();
 
     if (feature.routes == null) {
@@ -232,8 +255,9 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
     final disposeFutures = <Future<void>>[];
 
-    final builders = features
-        .expand((element) => element.extensionBuilders ?? <ExtensionBuilder>[]);
+    final builders = features.expand(
+      (element) => element.extensionBuilders ?? <ExtensionBuilder>[],
+    );
 
     for (final builder in builders) {
       try {
@@ -249,12 +273,16 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     await Future.wait(disposeFutures, eagerError: false);
 
     // Do some consistency checks on the ExtensionBuilders
-    final groupedBuilders =
-        builders.groupListsBy((element) => element.extensionType);
+    final groupedBuilders = builders.groupListsBy(
+      (element) => element.extensionType,
+    );
 
     for (final entry in groupedBuilders.entries) {
-      assert(entry.value.length == 1,
-          'There can be only one FeatureExtensionBuilder for a schema-type. We found ${entry.value.length} for ${entry.key}');
+      if (entry.value.length != 1) {
+        throw StateError(
+          'There can be only one ExtensionBuilder for ${entry.key}',
+        );
+      }
 
       _featureExtensionBuilderMap[entry.key] = entry.value.first;
     }
@@ -267,8 +295,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     extensions.forEach((runtimeType, descriptors) {
       final builder = _featureExtensionBuilderMap[runtimeType];
 
-      assert(builder != null,
-          'Missing ExtensionBuilder for ExtensionDescriptor of schemaType: $runtimeType');
+      if (builder == null) {
+        throw StateError(
+          'Missing ExtensionBuilder for ExtensionDescriptor of schemaType: $runtimeType',
+        );
+      }
     });
 
     // Initialize all extension builders
@@ -289,51 +320,77 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   Future<void> _activateLazyFeature(
     FeatureDescriptor feature,
     List<String> routePrefixes,
+    void Function() checkActive,
   ) async {
-    // 1. Run feature's init (DI registrations, etc.)
-    await feature.init?.call();
-    _features.add(feature);
+    final rollbacks = <VoidCallback>[];
+    List<g.RouteBase>? originalRoutes;
+    var replacingRoutes = false;
+    try {
+      checkActive();
+      await feature.init?.call();
+      checkActive();
+      final featureRoutes = await feature.routes?.call() ?? <g.RouteBase>[];
+      checkActive();
 
-    // 2. Register extensions incrementally
-    _registerLazyExtensions(feature);
-
-    // 3. Get the feature's routes
-    final featureRoutes = await feature.routes?.call() ?? [];
-
-    // 4. Replace placeholder routes with real routes
-    final currentRoutes =
-        router.instance.configuration.routes.toList(growable: true);
-
-    // Remove placeholder routes matching these prefixes
-    currentRoutes.removeWhere((route) {
-      if (route is g.GoRoute) {
-        return routePrefixes.contains(route.path);
+      // Capture every participant before mutating any registry.
+      final descriptors = feature.extensions ?? <ExtensionDescriptor>[];
+      for (final descriptor in descriptors) {
+        final builder = _featureExtensionBuilderMap[descriptor.runtimeType];
+        if (builder == null) {
+          throw StateError(
+            'Missing ExtensionBuilder for ${descriptor.runtimeType}',
+          );
+        }
+        rollbacks.add(builder.captureLazyState(descriptor));
       }
-      return false;
-    });
-
-    // Add real routes and replace
-    router.replaceRoutes([...currentRoutes, ...featureRoutes]);
-
-    // Track readiness
-    _readyFeatures[feature.name] = Future.value();
-  }
-
-  /// Register a lazy feature's extensions incrementally into existing builders.
-  void _registerLazyExtensions(FeatureDescriptor feature) {
-    for (final ext in feature.extensions ?? <ExtensionDescriptor>[]) {
-      ext.setSourceFeature(feature.name);
-
-      final builder = _featureExtensionBuilderMap[ext.runtimeType];
-      if (builder != null) {
-        builder.registerLazy(ext);
+      for (final descriptor in descriptors) {
+        descriptor.setSourceFeature(feature.name);
+        _featureExtensionBuilderMap[descriptor.runtimeType]!.registerLazy(
+          descriptor,
+        );
       }
+      checkActive();
+      originalRoutes = router.instance.configuration.routes.toList();
+      final routes = originalRoutes
+          .where(
+            (route) =>
+                route is! g.GoRoute || !routePrefixes.contains(route.path),
+          )
+          .toList();
+      replacingRoutes = true;
+      router.replaceRoutes([...routes, ...featureRoutes]);
+      checkActive();
+      _features.add(feature);
+      _readyFeatures[feature.name] = Future.value();
+    } catch (error, stack) {
+      // Restore routing even if a custom navigation plugin mutates then throws.
+      if (replacingRoutes && originalRoutes != null) {
+        try {
+          router.replaceRoutes(originalRoutes);
+        } catch (rollbackError, rollbackStack) {
+          telemetry.reportError(rollbackError, stackTrace: rollbackStack);
+        }
+      }
+      for (final rollback in rollbacks.reversed) {
+        try {
+          rollback();
+        } catch (rollbackError, rollbackStack) {
+          telemetry.reportError(rollbackError, stackTrace: rollbackStack);
+        }
+      }
+      try {
+        await feature.dispose?.call();
+      } catch (cleanupError, cleanupStack) {
+        telemetry.reportError(cleanupError, stackTrace: cleanupStack);
+      }
+      Error.throwWithStackTrace(error, stack);
     }
   }
 
   /// Topologically sort features based on their [FeatureDescriptor.dependencies].
   static List<FeatureDescriptor> _topologicalSort(
-      List<FeatureDescriptor> features) {
+    List<FeatureDescriptor> features,
+  ) {
     // If no features have dependencies, return as-is (common case)
     if (features.every((f) => f.dependencies.isEmpty)) {
       return features;
@@ -348,17 +405,19 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       if (visited.contains(name)) return;
       if (visiting.contains(name)) {
         throw StateError(
-            'Circular dependency detected involving feature: $name');
+          'Circular dependency detected involving feature: $name',
+        );
       }
 
       visiting.add(name);
       final feature = featureMap[name];
-      if (feature != null) {
-        for (final dep in feature.dependencies) {
-          visit(dep);
-        }
-        sorted.add(feature);
+      if (feature == null) {
+        throw StateError('No eager feature registered for dependency: $name');
       }
+      for (final dep in feature.dependencies) {
+        visit(dep);
+      }
+      sorted.add(feature);
       visiting.remove(name);
       visited.add(name);
     }

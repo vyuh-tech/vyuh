@@ -31,7 +31,7 @@ export const conference = new FeatureDescriptor({
   description: 'The Conferences feature to manage conference data',
   contents: [
     new DocumentDescriptor({
-      documentTypes: [
+      items: [
         { type: docConference.name },
         { type: edition.name },
         { type: session.name },

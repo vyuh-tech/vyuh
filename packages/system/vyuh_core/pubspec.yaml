@@ -29,7 +29,6 @@ dependencies:
   mobx: ^2.3.0+1
   get_it: ^9.0.5
   shared_preferences: ^2.3.3
-  flutter_sanity_portable_text: ^2.0.0
   http: ^1.2.1
   retry: ^3.1.2
   flutter_dotenv: ^6.0.0

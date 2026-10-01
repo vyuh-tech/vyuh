@@ -21,10 +21,7 @@ final class DefaultContentPlugin extends ContentPlugin {
     required super.provider,
     this.useLiveRoute = false,
     this.allowRouteRefresh = true,
-  }) : super(
-          name: 'vyuh.plugin.content',
-          title: 'Content Plugin',
-        );
+  }) : super(name: 'vyuh.plugin.content', title: 'Content Plugin');
 
   @override
   Map<Type, Map<String, TypeDescriptor>> get typeRegistry =>
@@ -178,7 +175,7 @@ final class DefaultContentPlugin extends ContentPlugin {
   @override
   Future<void> dispose() async {
     await provider.dispose();
-    _extensionBuilder?.dispose();
+    await _extensionBuilder?.dispose();
   }
 
   @override
@@ -188,10 +185,14 @@ final class DefaultContentPlugin extends ContentPlugin {
 
   @override
   void attach(ExtensionBuilder extBuilder) {
-    assert(extBuilder is ContentExtensionBuilder,
-        '''For the $runtimeType to work, there must be one $ContentExtensionBuilder in your extension builders.
-        However, you have provided a ${extBuilder.runtimeType}''');
+    if (extBuilder is! ContentExtensionBuilder) {
+      throw ArgumentError.value(
+        extBuilder,
+        'extBuilder',
+        'DefaultContentPlugin requires a ContentExtensionBuilder',
+      );
+    }
 
-    _extensionBuilder = extBuilder as ContentExtensionBuilder;
+    _extensionBuilder = extBuilder;
   }
 }

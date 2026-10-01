@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:eventflux/eventflux.dart';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
@@ -60,15 +59,18 @@ final class SanityClient {
   }
 
   Future<SanityQueryResponse> _executeGet(SanityRequest request) async {
+    final timer = Stopwatch()..start();
     final response = await httpClient.get(
       request.getUri,
       headers: _requestHeaders,
     );
 
-    return _getQueryResult(response);
+    timer.stop();
+    return _getQueryResult(response, clientTimeMs: timer.elapsedMilliseconds);
   }
 
   Future<SanityQueryResponse> _executePost(SanityRequest request) async {
+    final timer = Stopwatch()..start();
     final response = await httpClient.post(
       request.postUri,
       headers: {
@@ -78,7 +80,8 @@ final class SanityClient {
       body: jsonEncode(request.toPostBody()),
     );
 
-    return _getQueryResult(response);
+    timer.stop();
+    return _getQueryResult(response, clientTimeMs: timer.elapsedMilliseconds);
   }
 
   //ignore: long-parameter-list
@@ -120,20 +123,23 @@ final class SanityClient {
     return datasets;
   }
 
-  SanityQueryResponse _getQueryResult(final http.Response response) {
+  SanityQueryResponse _getQueryResult(
+    final http.Response response, {
+    required int clientTimeMs,
+  }) {
     switch (response.statusCode) {
       case 200:
         final serverResponse = ServerResponse.fromJson(
             jsonDecode(response.body) as Map<String, dynamic>);
 
-        final (age, clientTimeMs, shard) = _extractFromHeaders(response);
+        final (age, shard) = _extractFromHeaders(response);
 
         return SanityQueryResponse(
           result: serverResponse.result,
           syncTags: serverResponse.syncTags,
           info: PerformanceInfo(
             age: age ?? -1,
-            clientTimeMs: clientTimeMs ?? -1,
+            clientTimeMs: clientTimeMs,
             serverTimeMs: serverResponse.ms,
             query: serverResponse.query,
             shard: shard,
@@ -152,17 +158,10 @@ final class SanityClient {
     }
   }
 
-  (int? age, int? serverTimeMs, String shard) _extractFromHeaders(
-      http.Response response) {
+  (int? age, String shard) _extractFromHeaders(http.Response response) {
     final age = response.headers['x-sanity-age'] ?? '';
-    final turnaroundTimeMs =
-        (response.headers['server-timing'] ?? '').replaceAll('api;dur=', '');
     final shard = (response.headers['x-sanity-shard'] ?? '');
 
-    return (
-      int.tryParse(age, radix: 10),
-      int.tryParse(turnaroundTimeMs, radix: 10),
-      shard
-    );
+    return (int.tryParse(age, radix: 10), shard);
   }
 }

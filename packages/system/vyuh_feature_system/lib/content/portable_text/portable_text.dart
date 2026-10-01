@@ -86,7 +86,10 @@ class PortableTextContent extends ContentItem {
 
           if (itemDescriptor == null) {
             return kDebugMode
-                ? UnknownContentItem(missingSchemaType: type, jsonPayload: e)
+                ? UnknownPortableBlock(
+                    missingSchemaType: type,
+                    jsonPayload: Map<String, dynamic>.from(e),
+                  )
                 : null;
           }
 
@@ -215,6 +218,31 @@ final class _PortableTextContentBuilder
       );
 
   @override
+  VoidCallback captureLazyState() {
+    final restoreBase = super.captureLazyState();
+    final oldBlocks = Map.of(blockMap);
+    final config = PortableTextConfig.shared;
+    final blocks = Map.of(config.blocks);
+    final marks = Map.of(config.markDefs);
+    final styles = Map.of(config.styles);
+    return () {
+      restoreBase();
+      blockMap
+        ..clear()
+        ..addAll(oldBlocks);
+      config.blocks
+        ..clear()
+        ..addAll(blocks);
+      config.markDefs
+        ..clear()
+        ..addAll(marks);
+      config.styles
+        ..clear()
+        ..addAll(styles);
+    };
+  }
+
+  @override
   void init(List<ContentDescriptor> descriptors) {
     super.init(descriptors);
 
@@ -256,6 +284,19 @@ final class _PortableTextContentBuilder
       return previous;
     });
   }
+}
+
+/// Optional Portable Text adapter for an unregistered embedded block.
+/// Core unknown-content types do not depend on the Portable Text interface.
+class UnknownPortableBlock extends vc.ContentItem implements PortableBlockItem {
+  final String missingSchemaType;
+  @override
+  String get blockType => schemaType;
+  final Map<String, dynamic> jsonPayload;
+  UnknownPortableBlock({
+    required this.missingSchemaType,
+    required this.jsonPayload,
+  }) : super(schemaType: 'vyuh.unknown.portable', layout: null, modifiers: null);
 }
 
 /// Default layout for portable text content.

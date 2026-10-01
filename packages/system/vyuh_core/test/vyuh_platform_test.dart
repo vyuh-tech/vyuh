@@ -151,9 +151,9 @@ class MockTrace implements Trace {
 
 void main() {
   group('VyuhPlatform', () {
-    tearDown(() {
+    tearDown(() async {
       if (VyuhBinding.instance.initialized) {
-        vyuh.dispose();
+        await vyuh.dispose();
       }
     });
 

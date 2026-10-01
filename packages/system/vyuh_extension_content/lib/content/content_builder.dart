@@ -139,6 +139,21 @@ class ContentBuilder<T extends ContentItem> {
     registerDescriptors<LayoutConfiguration>(uniqueNewLayouts);
   }
 
+  /// Captures mutable builder state for failed lazy-registration rollback.
+  /// Subclasses with additional state must extend this rollback.
+  VoidCallback captureLazyState() {
+    final layouts = List<TypeDescriptor<LayoutConfiguration>>.of(_layouts);
+    final layout = _defaultLayout;
+    final descriptor = _defaultLayoutDescriptor;
+    return () {
+      _layouts
+        ..clear()
+        ..addAll(layouts);
+      _defaultLayout = layout;
+      _defaultLayoutDescriptor = descriptor;
+    };
+  }
+
   /// Registers a list of type descriptors with the content system.
   ///
   /// This is a helper method used by [init] to register layout types.

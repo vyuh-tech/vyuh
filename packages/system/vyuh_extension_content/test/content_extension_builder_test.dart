@@ -15,8 +15,9 @@ void main() {
       contentProvider = MockContentProvider();
     });
 
-    tearDown(() {
-      builder.dispose();
+    tearDown(() async {
+      if (VyuhBinding.instance.initialized) await vyuh.dispose();
+      await builder.dispose();
     });
 
     testWidgets('init fails if MockRoute is not registered', (tester) async {
@@ -42,7 +43,7 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(find.text('Error'), findsOneWidget);
+      expect(vyuh.tracker.error, isNull);
     });
 
     testWidgets('init attaches to content plugin correctly', (tester) async {
@@ -69,8 +70,11 @@ void main() {
       await vyuh.getReady(tester);
 
       expect(
-          vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType),
-          isTrue);
+        vyuh.content.isRegistered<ContentItem>(
+          TestContentItem.typeDescriptor.schemaType,
+        ),
+        isTrue,
+      );
     });
 
     testWidgets('_build collects content builders correctly', (tester) async {
@@ -86,10 +90,7 @@ void main() {
             extensions: [
               ContentExtensionDescriptor(
                 contentBuilders: [contentBuilder1, contentBuilder2],
-                contents: [
-                  TestContentDescriptor(),
-                  MockRouteDescriptor(),
-                ],
+                contents: [TestContentDescriptor(), MockRouteDescriptor()],
               ),
             ],
             extensionBuilders: [builder],
@@ -102,18 +103,22 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(builder.contentBuilder(TestContentItem.schemaName),
-          equals(contentBuilder1));
-      expect(builder.contentBuilder(MockRoute.schemaName),
-          equals(contentBuilder2));
+      expect(
+        builder.contentBuilder(TestContentItem.schemaName),
+        equals(contentBuilder1),
+      );
+      expect(
+        builder.contentBuilder(MockRoute.schemaName),
+        equals(contentBuilder2),
+      );
     });
 
-    testWidgets('_build throws assertion for duplicate content builders',
-        (tester) async {
-      final contentBuilder1 = TestContentItem.contentBuilder;
-      final contentBuilder2 = TestContentItem.contentBuilder;
+    testWidgets(
+      '_build reports a startup error for duplicate content builders',
+      (tester) async {
+        final contentBuilder1 = TestContentItem.contentBuilder;
+        final contentBuilder2 = TestContentItem.contentBuilder;
 
-      expect(() {
         runApp(
           features: () => [
             FeatureDescriptor(
@@ -133,36 +138,40 @@ void main() {
             content: DefaultContentPlugin(provider: contentProvider),
           ),
         );
-      }, throwsAssertionError);
-    });
+        await vyuh.getReady(tester);
+        expect(vyuh.tracker.error, isStateError);
+      },
+    );
 
-    testWidgets('_build throws assertion for missing content builders',
-        (tester) async {
-      expect(() {
-        runApp(
-          features: () => [
-            FeatureDescriptor(
-              name: 'test_feature',
-              title: 'Test Feature',
-              routes: () async => [],
-              extensions: [
-                ContentExtensionDescriptor(
-                  contentBuilders: [],
-                  contents: [TestContentDescriptor()],
-                ),
-              ],
-              extensionBuilders: [builder],
-            ),
-          ],
-          plugins: PluginDescriptor(
-            content: DefaultContentPlugin(provider: contentProvider),
+    testWidgets('_build reports a startup error for missing content builders', (
+      tester,
+    ) async {
+      runApp(
+        features: () => [
+          FeatureDescriptor(
+            name: 'test_feature',
+            title: 'Test Feature',
+            routes: () async => [],
+            extensions: [
+              ContentExtensionDescriptor(
+                contentBuilders: [],
+                contents: [TestContentDescriptor()],
+              ),
+            ],
+            extensionBuilders: [builder],
           ),
-        );
-      }, throwsAssertionError);
+        ],
+        plugins: PluginDescriptor(
+          content: DefaultContentPlugin(provider: contentProvider),
+        ),
+      );
+      await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isStateError);
     });
 
-    testWidgets('_build initializes type registrations correctly',
-        (tester) async {
+    testWidgets('_build initializes type registrations correctly', (
+      tester,
+    ) async {
       final modifier = TestModifier.typeDescriptor;
       final action = TestAction.typeDescriptor;
       final condition = TestCondition.typeDescriptor;
@@ -192,9 +201,18 @@ void main() {
 
       await vyuh.getReady(tester);
 
-      expect(builder.isRegistered(modifier.schemaType), isTrue);
-      expect(builder.isRegistered(action.schemaType), isTrue);
-      expect(builder.isRegistered(condition.schemaType), isTrue);
+      expect(
+        builder.isRegistered<ContentModifierConfiguration>(modifier.schemaType),
+        isTrue,
+      );
+      expect(
+        builder.isRegistered<ActionConfiguration>(action.schemaType),
+        isTrue,
+      );
+      expect(
+        builder.isRegistered<ConditionConfiguration>(condition.schemaType),
+        isTrue,
+      );
     });
   });
 }

@@ -21,9 +21,7 @@ abstract class ExtensionDescriptor {
   }
 
   /// Creates a new ExtensionDescriptor.
-  ExtensionDescriptor({
-    required this.title,
-  });
+  ExtensionDescriptor({required this.title});
 
   void onSourceFeatureUpdated();
 }
@@ -54,10 +52,7 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
   }
 
   /// Creates a new ExtensionBuilder.
-  ExtensionBuilder({
-    required this.extensionType,
-    required this.title,
-  });
+  ExtensionBuilder({required this.extensionType, required this.title});
 
   /// Whether the extension is currently initialized.
   bool get isInitialized => _isInitialized;
@@ -77,6 +72,14 @@ abstract class ExtensionBuilder<T extends ExtensionDescriptor> {
   /// Override in subclasses that support incremental registration.
   /// By default this is a no-op.
   void registerLazy(ExtensionDescriptor descriptor) {}
+
+  /// Captures state before lazy registration and returns a synchronous rollback.
+  /// Builders supporting [registerLazy] must include all mutated registries.
+  /// Unsupported builders fail before any contribution is published.
+  VoidCallback captureLazyState(ExtensionDescriptor descriptor) =>
+      throw UnsupportedError(
+        '$title does not support transactional lazy registration',
+      );
 
   /// Initializes the extension.
   @nonVirtual

@@ -44,6 +44,9 @@ final class DocumentBuilder<T> extends StatelessWidget {
   /// A stream of document data for live updates.
   final Stream<T?>? liveDocument;
 
+  /// Creates a fresh subscription for live refresh/retry.
+  final Stream<T?> Function()? liveDocumentFactory;
+
   /// Whether to allow refreshing the document.
   final bool allowRefresh;
 
@@ -62,6 +65,7 @@ final class DocumentBuilder<T> extends StatelessWidget {
     super.key,
     required this.fetchDocument,
     this.liveDocument,
+    this.liveDocumentFactory,
     required this.buildContent,
     this.allowRefresh = true,
     this.isLive = false,
@@ -87,8 +91,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
         fromJson: fromJson,
         queryParams: queryParams,
       ),
-      liveDocument: isLive
-          ? vyuh.content.provider.live.fetchSingle(
+      liveDocumentFactory: isLive
+          ? () => vyuh.content.provider.live.fetchSingle(
               query,
               fromJson: fromJson,
               queryParams: queryParams,
@@ -117,8 +121,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
       key: key,
       fetchDocument: () =>
           vyuh.content.provider.fetchById(id, fromJson: fromJson),
-      liveDocument: isLive
-          ? vyuh.content.provider.live.fetchById(
+      liveDocumentFactory: isLive
+          ? () => vyuh.content.provider.live.fetchById(
               id,
               fromJson: fromJson,
               includeDrafts: includeDrafts,
@@ -150,8 +154,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
       key: key,
       fetchDocument: () =>
           vyuh.content.provider.fetchRoute(path: url?.path, routeId: routeId),
-      liveDocument: isLive
-          ? vyuh.content.provider.live.fetchRoute(
+      liveDocumentFactory: isLive
+          ? () => vyuh.content.provider.live.fetchRoute(
               path: url?.path,
               routeId: routeId,
               includeDrafts: includeDrafts,
@@ -172,7 +176,7 @@ final class DocumentBuilder<T> extends StatelessWidget {
       debugLabel: 'Scoped DI for Document',
       child: Builder(
         builder: (context) {
-          return isLive && liveDocument != null
+          return isLive && (liveDocument != null || liveDocumentFactory != null)
               ? _buildLiveDocument(context)
               : _buildStaticDocument(context);
         },
@@ -181,15 +185,8 @@ final class DocumentBuilder<T> extends StatelessWidget {
   }
 
   /// Builds a document with live updates using DocumentStreamBuilder
-  Widget _buildLiveDocument(BuildContext context) {
-    return DocumentStreamBuilder<T>(
-      allowRefresh: allowRefresh,
-      stream: liveDocument!.asyncMap(
-        (document) => context.mounted ? _initDocument(context, document) : null,
-      ),
-      buildContent: buildContent,
-    );
-  }
+  Widget _buildLiveDocument(BuildContext context) =>
+      _LiveDocument<T>(owner: this);
 
   /// Builds a document with one-time loading using DocumentFutureBuilder
   Widget _buildStaticDocument(BuildContext context) {
@@ -225,5 +222,69 @@ final class DocumentBuilder<T> extends StatelessWidget {
     }
 
     return document;
+  }
+}
+
+/// Retains a mapped single-subscription stream across unrelated parent rebuilds.
+class _LiveDocument<T> extends StatefulWidget {
+  final DocumentBuilder<T> owner;
+  const _LiveDocument({required this.owner});
+  @override
+  State<_LiveDocument<T>> createState() => _LiveDocumentState<T>();
+}
+
+class _LiveDocumentState<T> extends State<_LiveDocument<T>> {
+  Stream<T?>? _stream;
+  int _generation = 0;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.owner.liveDocumentFactory == null) {
+      _stream = _map(widget.owner.liveDocument!);
+    }
+  }
+
+  Stream<T?> _map(Stream<T?> stream) {
+    final generation = _generation;
+    return stream.asyncMap((document) async {
+      if (!mounted || generation != _generation) return null;
+      final value = await widget.owner._initDocument(context, document);
+      return mounted && generation == _generation ? value : null;
+    });
+  }
+
+  Stream<T?> _createStream() => _map(widget.owner.liveDocumentFactory!());
+  @override
+  void didUpdateWidget(_LiveDocument<T> oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.owner.liveDocument != widget.owner.liveDocument ||
+        oldWidget.owner.liveDocumentFactory !=
+            widget.owner.liveDocumentFactory) {
+      _generation++;
+      _stream = widget.owner.liveDocumentFactory == null
+          ? _map(widget.owner.liveDocument!)
+          : null;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final owner = widget.owner;
+    if (owner.liveDocument != null && owner.liveDocumentFactory != null) {
+      throw StateError('Supply liveDocument or liveDocumentFactory, not both');
+    }
+    return owner.liveDocumentFactory == null
+        ? DocumentStreamBuilder<T>(
+            key: ValueKey(_generation),
+            stream: _stream!,
+            allowRefresh: owner.allowRefresh,
+            buildContent: owner.buildContent,
+          )
+        : DocumentStreamBuilder<T>.refreshable(
+            key: ValueKey(_generation),
+            streamFactory: _createStream,
+            allowRefresh: owner.allowRefresh,
+            buildContent: owner.buildContent,
+          );
   }
 }

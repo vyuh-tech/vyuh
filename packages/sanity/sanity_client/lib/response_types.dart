@@ -62,8 +62,8 @@ final class PerformanceInfo {
   /// The time it took for the server to respond to the query.
   final int serverTimeMs;
 
-  /// The time it took for the client to process the response. This is the
-  /// complete round-trip time.
+  /// Elapsed client time for the HTTP request through receipt of the full body.
+  /// Includes transport latency; excludes subsequent JSON deserialization.
   final int clientTimeMs;
 
   /// The shard that the query was sent to.

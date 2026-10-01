@@ -6,6 +6,9 @@ import 'package:vyuh_test/vyuh_test.dart';
 import 'utils.dart';
 
 void main() {
+  tearDown(() async {
+    if (VyuhBinding.instance.initialized) await vyuh.dispose();
+  });
   group('ContentBuilder Registration', () {
     testWidgets('registers content builder successfully', (tester) async {
       final builder = ContentExtensionBuilder();
@@ -22,9 +25,7 @@ void main() {
                   TestContentItem.contentBuilder,
                   MockRoute.contentBuilder,
                 ],
-                contents: [
-                  TestContentDescriptor(),
-                ],
+                contents: [TestContentDescriptor()],
               ),
             ],
             extensionBuilders: [builder],
@@ -38,9 +39,9 @@ void main() {
       await vyuh.getReady(tester);
 
       expect(
-          () =>
-              builder.register<TestContentItem>(TestContentItem.typeDescriptor),
-          returnsNormally);
+        () => builder.register<TestContentItem>(TestContentItem.typeDescriptor),
+        returnsNormally,
+      );
     });
   });
 }

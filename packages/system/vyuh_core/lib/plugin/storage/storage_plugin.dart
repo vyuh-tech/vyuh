@@ -1,6 +1,6 @@
 import 'package:vyuh_core/vyuh_core.dart';
 
-/// Base class for implementing persistent storage in Vyuh applications.
+/// A key-value storage capability shared by features.
 ///
 /// The storage plugin provides key-value storage functionality for:
 /// - Application settings
@@ -8,8 +8,9 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// - Cache data
 /// - Temporary state
 ///
-/// Data is stored in a non-secure manner and should not be used for
-/// sensitive information. Use [SecureStoragePlugin] for sensitive data.
+/// The app selects an implementation. Persistence and supported value types
+/// depend on that implementation; the default store retains values in memory.
+/// Select an appropriate [SecureStoragePlugin] implementation for sensitive data.
 abstract class StoragePlugin extends Plugin {
   StoragePlugin({required super.name, required super.title});
 
@@ -20,7 +21,7 @@ abstract class StoragePlugin extends Plugin {
 
   /// Writes a value to storage with the given key.
   ///
-  /// The value must be JSON-serializable.
+  /// Supported values and conversion rules depend on the selected implementation.
   Future<dynamic> write(String key, dynamic value);
 
   /// Checks if a key exists in storage.
@@ -32,20 +33,11 @@ abstract class StoragePlugin extends Plugin {
   Future<bool> delete(String key);
 }
 
-/// Base class for implementing secure storage in Vyuh applications.
+/// A storage contract for app-selected secure storage implementations.
 ///
-/// The secure storage plugin provides encrypted key-value storage for
-/// sensitive information such as:
-/// - Authentication tokens
-/// - API keys
-/// - User credentials
-/// - Personal data
-///
-/// Data is stored in a secure, encrypted manner using platform-specific
-/// secure storage mechanisms:
-/// - iOS: Keychain
-/// - Android: EncryptedSharedPreferences
-/// - Web: LocalStorage with encryption
+/// Select a platform adapter appropriate for sensitive values such as tokens.
+/// Encryption, persistence, and supported value types belong to the adapter.
+/// The default in-memory implementation does not encrypt or persist data.
 abstract class SecureStoragePlugin extends Plugin {
   SecureStoragePlugin({required super.name, required super.title});
 
@@ -56,8 +48,7 @@ abstract class SecureStoragePlugin extends Plugin {
 
   /// Writes a value to secure storage with the given key.
   ///
-  /// The value must be JSON-serializable. The data will be
-  /// encrypted before storage.
+  /// Supported values, conversion, and protection depend on the selected adapter.
   Future<dynamic> write(String key, dynamic value);
 
   /// Checks if a key exists in secure storage.

@@ -8,8 +8,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// A descriptor for configuring the plugin system in a Vyuh application.
 ///
 /// The [PluginDescriptor] manages the registration and initialization of all plugins
-/// in the application. It ensures that plugins are loaded in the correct order and
-/// provides type-safe access to plugin instances.
+/// in the application and provides type-safe access to plugin instances.
 ///
 /// Plugins are organized into several categories:
 /// - Core System Plugins:
@@ -38,9 +37,9 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// );
 /// ```
 ///
-/// The initialization order of plugins is managed automatically based on their
-/// dependencies. Core system plugins are initialized first, followed by custom
-/// plugins in the order they are provided.
+/// Plugins marked [PreloadedPlugin] initialize before the platform. The default
+/// app platform initializes the remaining plugins concurrently. There is no
+/// automatic dependency graph between plugins.
 final class PluginDescriptor {
   final Set<Plugin> _plugins = {};
   final Map<Type, Plugin?> _pluginsMap = {};
@@ -62,39 +61,41 @@ final class PluginDescriptor {
     final List<Plugin>? others,
   }) {
     final otherPlugins = others ?? <Plugin>[];
-    assert(() {
-      for (final plugin in otherPlugins) {
-        if (plugin is DIPlugin ||
-            plugin is ContentPlugin ||
-            plugin is AnalyticsPlugin ||
-            plugin is TelemetryPlugin ||
-            plugin is NetworkPlugin ||
-            plugin is AuthPlugin ||
-            plugin is NavigationPlugin ||
-            plugin is EventPlugin ||
-            plugin is StoragePlugin ||
-            plugin is SecureStoragePlugin ||
-            plugin is EnvPlugin) {
-          return false;
-        }
+    for (final plugin in otherPlugins) {
+      if (plugin is DIPlugin ||
+          plugin is ContentPlugin ||
+          plugin is AnalyticsPlugin ||
+          plugin is TelemetryPlugin ||
+          plugin is NetworkPlugin ||
+          plugin is AuthPlugin ||
+          plugin is NavigationPlugin ||
+          plugin is EventPlugin ||
+          plugin is StoragePlugin ||
+          plugin is SecureStoragePlugin ||
+          plugin is EnvPlugin) {
+        throw ArgumentError.value(
+          plugin,
+          'others',
+          'System plugins must use their named constructor parameter',
+        );
       }
-      return true;
-    }(),
-        'Other Plugins should not contain an instance of ${systemPluginTypes.join(' | ')}');
+    }
 
-    _plugins.addAll([
-      di ?? system.get<DIPlugin>(),
-      content ?? system.get<ContentPlugin>(),
-      analytics ?? system.get<AnalyticsPlugin>(),
-      telemetry ?? system.get<TelemetryPlugin>(),
-      network ?? system.get<NetworkPlugin>(),
-      auth ?? system.get<AuthPlugin>(),
-      navigation ?? system.get<NavigationPlugin>(),
-      event ?? system.get<EventPlugin>(),
-      env ?? system.get<EnvPlugin>(),
-      storage ?? system.get<StoragePlugin>(),
-      secureStorage ?? system.get<SecureStoragePlugin>(),
-    ].nonNulls);
+    _plugins.addAll(
+      [
+        di ?? system.get<DIPlugin>(),
+        content ?? system.get<ContentPlugin>(),
+        analytics ?? system.get<AnalyticsPlugin>(),
+        telemetry ?? system.get<TelemetryPlugin>(),
+        network ?? system.get<NetworkPlugin>(),
+        auth ?? system.get<AuthPlugin>(),
+        navigation ?? system.get<NavigationPlugin>(),
+        event ?? system.get<EventPlugin>(),
+        env ?? system.get<EnvPlugin>(),
+        storage ?? system.get<StoragePlugin>(),
+        secureStorage ?? system.get<SecureStoragePlugin>(),
+      ].nonNulls,
+    );
 
     _plugins.addAll(others ?? <Plugin>[]);
   }

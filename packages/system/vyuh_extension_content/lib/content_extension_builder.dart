@@ -1,4 +1,5 @@
 import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
@@ -7,14 +8,16 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
   final Map<String, ContentBuilder> _contentBuilderMap = {};
 
   ContentExtensionBuilder()
-      : super(
-          extensionType: ContentExtensionDescriptor,
-          title: 'Content Extension Builder',
-        );
+    : super(
+        extensionType: ContentExtensionDescriptor,
+        title: 'Content Extension Builder',
+      );
 
   Map<Type, Map<String, TypeDescriptor>> typeRegistry() {
-    return Map<Type, Map<String, TypeDescriptor>>.unmodifiable(
-        _typeConverterMap);
+    return Map<Type, Map<String, TypeDescriptor>>.unmodifiable({
+      for (final entry in _typeConverterMap.entries)
+        entry.key: Map<String, TypeDescriptor>.unmodifiable(entry.value),
+    });
   }
 
   ContentBuilder<ContentItem>? contentBuilder(String schemaType) {
@@ -48,8 +51,11 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
     // Collect the builders
     for (final entry in contentBuilders.entries) {
-      assert(entry.value.length == 1,
-          'There can be only one ContentBuilder for a content-type. We found ${entry.value.length} for ${entry.key}');
+      if (entry.value.length != 1) {
+        throw StateError(
+          'There can be only one ContentBuilder for ${entry.key}',
+        );
+      }
 
       _contentBuilderMap[entry.key] = entry.value.first;
     }
@@ -59,8 +65,11 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
       final schemaType = entry.key;
       final builder = _contentBuilderMap[schemaType];
 
-      assert(builder != null,
-          'Missing ContentBuilder for ContentDescriptor of schemaType: $schemaType');
+      if (builder == null) {
+        throw StateError(
+          'Missing ContentBuilder for ContentDescriptor of schemaType: $schemaType',
+        );
+      }
     }
 
     // Setup the builders
@@ -105,7 +114,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     final hasKey = _typeConverterMap[T]!.containsKey(descriptor.schemaType);
     if (hasKey) {
       VyuhBinding.instance.log.warn(
-          'A duplicate schemaType: ${descriptor.schemaType} is being registered.');
+        'A duplicate schemaType: ${descriptor.schemaType} is being registered.',
+      );
     }
 
     _typeConverterMap[T]![descriptor.schemaType] = descriptor;
@@ -117,8 +127,10 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
   /// Register a ContentBuilder directly
   /// This allows other plugins to register content builders programmatically
-  void registerBuilder(ContentBuilder builder,
-      {List<ContentDescriptor>? descriptors = const []}) {
+  void registerBuilder(
+    ContentBuilder builder, {
+    List<ContentDescriptor>? descriptors = const [],
+  }) {
     final schemaType = builder.content.schemaType;
 
     if (_contentBuilderMap.containsKey(schemaType)) {
@@ -129,7 +141,8 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
 
     _contentBuilderMap[schemaType] = builder;
 
-    final matchingDescriptors = descriptors
+    final matchingDescriptors =
+        descriptors
             ?.where((element) => element.schemaType == schemaType)
             .toList(growable: false) ??
         [];
@@ -141,18 +154,44 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
     );
   }
 
-  void _initTypeRegistrations<T>(List<ContentExtensionDescriptor> descriptors,
-      List<TypeDescriptor<T>> Function(ContentExtensionDescriptor feature) fn) {
+  void _initTypeRegistrations<T>(
+    List<ContentExtensionDescriptor> descriptors,
+    List<TypeDescriptor<T>> Function(ContentExtensionDescriptor feature) fn,
+  ) {
     descriptors.expand((element) => fn(element)).forEach((element) {
       register<T>(element);
     });
   }
 
-  /// Register extensions from a lazily-loaded feature incrementally.
-  ///
-  /// Called after the initial [onInit] has already run. Uses the same
-  /// registration primitives as [_build] but operates additively —
-  /// only processes the new descriptors without clearing existing state.
+  /// Captures converter registries and affected content builders for rollback.
+  @override
+  VoidCallback captureLazyState(ExtensionDescriptor descriptor) {
+    final types = {
+      for (final entry in _typeConverterMap.entries)
+        entry.key: Map<String, TypeDescriptor>.of(entry.value),
+    };
+    final builders = Map<String, ContentBuilder>.of(_contentBuilderMap);
+    final affected = <ContentBuilder>{
+      ...builders.values,
+      if (descriptor is ContentExtensionDescriptor)
+        ...?descriptor.contentBuilders,
+    };
+    final restore = affected
+        .map((builder) => builder.captureLazyState())
+        .toList();
+    return () {
+      for (final rollback in restore.reversed) {
+        rollback();
+      }
+      _typeConverterMap
+        ..clear()
+        ..addAll(types);
+      _contentBuilderMap
+        ..clear()
+        ..addAll(builders);
+    };
+  }
+
   @override
   void registerLazy(ExtensionDescriptor descriptor) {
     if (descriptor is! ContentExtensionDescriptor) return;
@@ -206,8 +245,9 @@ final class ContentExtensionBuilder extends ExtensionBuilder {
       register<ConditionConfiguration>(condition);
     }
 
-    for (final modifier in ext.contentModifiers ??
-        <TypeDescriptor<ContentModifierConfiguration>>[]) {
+    for (final modifier
+        in ext.contentModifiers ??
+            <TypeDescriptor<ContentModifierConfiguration>>[]) {
       register<ContentModifierConfiguration>(modifier);
     }
   }

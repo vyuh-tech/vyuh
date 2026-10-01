@@ -1,3 +1,4 @@
+import 'utils.dart' as fixtures;
 import 'package:flutter/widgets.dart' hide runApp;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -27,7 +28,8 @@ class TestContentItem extends ContentItem {
       id: json['id'] as String,
       title: json['title'] as String,
       layout: typeFromFirstOfListJson<LayoutConfiguration<TestContentItem>>(
-          json['layout']),
+        json['layout'],
+      ),
       modifiers: ContentItem.modifierList(json['modifiers']),
     );
   }
@@ -38,16 +40,15 @@ class TestLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 
   static final typeDescriptor =
       TypeDescriptor<LayoutConfiguration<TestContentItem>>(
-    schemaType: schemaName,
-    title: 'Test Layout',
-    fromJson: TestLayoutConfiguration.fromJson,
-  );
+        schemaType: schemaName,
+        title: 'Test Layout',
+        fromJson: TestLayoutConfiguration.fromJson,
+      );
 
   final double padding;
 
-  TestLayoutConfiguration({
-    required this.padding,
-  }) : super(schemaType: schemaName);
+  TestLayoutConfiguration({required this.padding})
+    : super(schemaType: schemaName);
 
   factory TestLayoutConfiguration.fromJson(Map<String, dynamic> json) {
     return TestLayoutConfiguration(
@@ -57,10 +58,7 @@ class TestLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 
   @override
   Widget build(BuildContext context, TestContentItem content) {
-    return Padding(
-      padding: EdgeInsets.all(padding),
-      child: Container(),
-    );
+    return Padding(padding: EdgeInsets.all(padding), child: Container());
   }
 }
 
@@ -69,10 +67,10 @@ class ErrorLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 
   static final typeDescriptor =
       TypeDescriptor<LayoutConfiguration<TestContentItem>>(
-    schemaType: schemaName,
-    title: 'Error Layout',
-    fromJson: ErrorLayoutConfiguration.fromJson,
-  );
+        schemaType: schemaName,
+        title: 'Error Layout',
+        fromJson: ErrorLayoutConfiguration.fromJson,
+      );
 
   ErrorLayoutConfiguration() : super(schemaType: schemaName);
 
@@ -87,31 +85,41 @@ class ErrorLayoutConfiguration extends LayoutConfiguration<TestContentItem> {
 }
 
 void main() {
+  TestWidgetsFlutterBinding.ensureInitialized();
   late ContentExtensionBuilder builder;
   late ContentBuilder<TestContentItem> contentBuilder;
 
-  setUp(() {
+  setUp(() async {
     builder = ContentExtensionBuilder();
     contentBuilder = ContentBuilder<TestContentItem>(
       content: TestContentItem.typeDescriptor,
       defaultLayout: TestLayoutConfiguration(padding: 0),
       defaultLayoutDescriptor: TestLayoutConfiguration.typeDescriptor,
     );
+    VyuhBinding.instance.widgetInit(
+      plugins: PluginDescriptor(
+        content: DefaultContentPlugin(provider: fixtures.MockContentProvider()),
+      ),
+      extensionBuilder: builder,
+      extensionDescriptors: [
+        ContentExtensionDescriptor(contentBuilders: [contentBuilder]),
+      ],
+    );
+    await VyuhBinding.instance.widgetReady;
   });
 
-  tearDown(() {
-    builder.dispose();
+  tearDown(() async {
+    if (VyuhBinding.instance.initialized) await VyuhBinding.instance.dispose();
   });
 
   group('Layout Configuration', () {
-    testWidgets('uses default layout when no layout specified',
-        (WidgetTester tester) async {
+    testWidgets('uses default layout when no layout specified', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(id: '1', title: 'Test');
 
       await tester.pumpWidget(
-        Builder(
-          builder: (context) => contentBuilder.build(context, content),
-        ),
+        Builder(builder: (context) => contentBuilder.build(context, content)),
       );
 
       final paddingFinder = find.byType(Padding);
@@ -121,8 +129,9 @@ void main() {
       expect(padding.padding, equals(EdgeInsets.zero));
     });
 
-    testWidgets('uses specified layout over default',
-        (WidgetTester tester) async {
+    testWidgets('uses specified layout over default', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(
         id: '1',
         title: 'Test',
@@ -130,9 +139,7 @@ void main() {
       );
 
       await tester.pumpWidget(
-        Builder(
-          builder: (context) => contentBuilder.build(context, content),
-        ),
+        Builder(builder: (context) => contentBuilder.build(context, content)),
       );
 
       final paddingFinder = find.byType(Padding);
@@ -142,8 +149,9 @@ void main() {
       expect(padding.padding, equals(const EdgeInsets.all(16)));
     });
 
-    testWidgets('handles layout build errors gracefully',
-        (WidgetTester tester) async {
+    testWidgets('handles layout build errors gracefully', (
+      WidgetTester tester,
+    ) async {
       final content = TestContentItem(
         id: '1',
         title: 'Test',
@@ -151,31 +159,28 @@ void main() {
       );
 
       await tester.pumpWidget(
-        Builder(
-          builder: (context) => contentBuilder.build(context, content),
-        ),
+        Builder(builder: (context) => contentBuilder.build(context, content)),
       );
 
       // Should show error view instead of crashing
+      expect(tester.takeException(), isA<Exception>());
       expect(find.byType(ErrorWidget), findsOneWidget);
     });
 
     test('deserializes layout configuration from JSON', () {
-      final json = {
-        'padding': 8,
-      };
+      final json = {'padding': 8};
 
       final layout = TestLayoutConfiguration.fromJson(json);
       expect(layout.padding, equals(8.0));
     });
 
     test('handles invalid JSON deserialization', () {
-      final json = {
-        'padding': 'invalid',
-      };
+      final json = {'padding': 'invalid'};
 
-      expect(() => TestLayoutConfiguration.fromJson(json),
-          throwsA(isA<TypeError>()));
+      expect(
+        () => TestLayoutConfiguration.fromJson(json),
+        throwsA(isA<TypeError>()),
+      );
     });
   });
 }

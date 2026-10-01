@@ -2,7 +2,7 @@ import 'package:hive_ce_flutter/hive_flutter.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class HiveStoragePlugin extends StoragePlugin with InitOncePlugin {
-  late final Box _box;
+  late Box _box;
   final String boxName;
 
   /// Creates a new [HiveStoragePlugin] instance.

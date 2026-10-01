@@ -1,64 +1,48 @@
-/// Core library for Vyuh applications.
-
-/// This library provides essential functionalities for building Vyuh apps,
-/// including a way to organize features with [FeatureDescriptor] and leveraging the [Plugin] interface
-/// for interacting with third-party integrations such as Authentication, Content Management,
-/// Networking, Dependency Injection, Analytics, etc.
-
-/// **Key Features:**
-
-/// * **Plugin System:**  A flexible plugin architecture allows extending
-///   Vyuh with custom features and integrations.  See [Plugin] for more details.
-/// * **Modular Features:**  Organize features with [FeatureDescriptor] and build Apps in a composable manner.
-/// Features are atomic, transferable between Vyuh Apps and provide a decentralized approach for building large scale Apps.
-/// * **Platform Widgets:** Provides a mechanism to supply your own Widgets for loaders, error-views and other types of visual branding.
-/// See [VyuhPlatform] and [PlatformWidgetBuilder].
-
-/// **Getting Started:**
-
-/// To use this library, import it into your Dart code:
-
+/// Composition and lifecycle contracts for modular Flutter applications.
+///
+/// A [FeatureDescriptor] declares a product capability with routes, lifecycle
+/// hooks, dependencies, and extension contributions. [PluginDescriptor] selects
+/// the shared capabilities that features consume. The app owns their composition.
+///
+/// Start with an ordinary Flutter screen:
+///
 /// ```dart
-/// import 'package:vyuh_core/vyuh_core.dart';
-/// ```
-
-/// Then, you can initialize the features and plugins.
-
-/// ```dart
-///   runApp(
+/// import 'package:material_ui/material_ui.dart';
+/// import 'package:go_router/go_router.dart';
+/// import 'package:vyuh_core/vyuh_core.dart' as vc;
+///
+/// void main() {
+///   vc.runApp(
 ///     initialLocation: '/',
-///     plugins: PluginDescriptor(
-///       content: DefaultContentPlugin(
-///         provider: SanityContentProvider.withConfig(
-///           config: SanityConfig(
-///             projectId: '<your-project-id>',
-///             dataset: 'production',
-///             perspective: Perspective.previewDrafts,
-///             useCdn: false,
-///             token: '<your-token>',
-///           ),
-///           cacheDuration: const Duration(seconds: 5),
-///         ),
+///     platformWidgetBuilder: vc.PlatformWidgetBuilder.system.copyWith(
+///       appBuilder: (_, platform) => MaterialApp.router(
+///         routerConfig: platform.router.instance,
 ///       ),
-///       env: vc.DefaultEnvPlugin(),
-///       auth: MyCustomAuthPlugin(),
-///       telemetry:
-///           vc.TelemetryPlugin(providers: [vc.ConsoleLoggerTelemetryProvider()]),
 ///     ),
 ///     features: () => [
-///       // Core Vyuh features that are necessary for all apps
-///       system.feature,
-///       developer.feature,
-///
-///       // Example Features
-///       root.feature,
-///       counter.feature,
-///       onboarding.feature,
-///       auth.feature(),
+///       vc.FeatureDescriptor(
+///         name: 'hello',
+///         title: 'Hello',
+///         routes: () => [
+///           GoRoute(
+///             path: '/',
+///             builder: (_, _) => const Scaffold(body: Text('Hello, Vyuh.')),
+///           ),
+///         ],
+///       ),
 ///     ],
 ///   );
+/// }
 /// ```
-
+///
+/// Add feature descriptors to compose a larger app. Use plugin contracts for
+/// shared services such as networking, storage, authentication, and telemetry.
+/// Custom capabilities belong in [PluginDescriptor.others] and are retrieved
+/// from the initialized platform through [VyuhPlatform.getPlugin].
+///
+/// Feature packages own their behavior; apps select the implementations and
+/// configuration they need. See [VyuhPlatform] and [PlatformWidgetBuilder] for
+/// runtime access and app-wide loading, error, and branding widgets.
 library;
 
 export 'asserts.dart';

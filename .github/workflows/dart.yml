@@ -27,6 +27,9 @@ jobs:
           - vyuh_widgetbook
           - vyuh_plugin_content_provider_sanity
           - vyuh_plugin_storage_hive
+          - vyuh_plugin_storage_secure
+          - vyuh_plugin_storage_shared_preferences
+          - vyuh_content_widget
           - vyuh_plugin_telemetry_provider_console
           - vyuh_feature_developer
           - vyuh_feature_system
@@ -35,6 +38,18 @@ jobs:
           - sanity_client
           - flutter_sanity_portable_text
         include:
+          - package: vyuh_plugin_storage_secure
+            path: packages/plugins
+            test: true
+          - package: vyuh_feature_system
+            path: packages/system
+            test: true
+          - package: vyuh_cache
+            path: packages/system
+            test: true
+          - package: vyuh_plugin_content_provider_sanity
+            path: packages/sanity
+            test: true
           - package: vyuh_core
             path: packages/system
             test: true

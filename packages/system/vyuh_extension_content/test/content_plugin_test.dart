@@ -11,7 +11,7 @@ void main() {
     late DefaultContentPlugin plugin;
     late ContentExtensionBuilder extBuilder;
 
-    setUp(() {
+    void configure() {
       plugin = DefaultContentPlugin(provider: MockContentProvider());
       extBuilder = ContentExtensionBuilder();
 
@@ -24,7 +24,10 @@ void main() {
             routes: () => [],
             extensions: [
               ContentExtensionDescriptor(
-                contentBuilders: [TestContentItem.contentBuilder],
+                contentBuilders: [
+                  TestContentItem.contentBuilder,
+                  MockRoute.contentBuilder,
+                ],
                 contents: [TestContentDescriptor()],
                 contentModifiers: [TestModifier.typeDescriptor],
               ),
@@ -32,31 +35,46 @@ void main() {
             extensionBuilders: [extBuilder],
           ),
         ],
-        plugins: PluginDescriptor(
-          content: plugin,
-        ),
+        plugins: PluginDescriptor(content: plugin),
       );
+    }
+
+    tearDown(() async {
+      if (VyuhBinding.instance.initialized) await vyuh.dispose();
     });
 
     testWidgets('initializes correctly', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       expect(vyuh.content, isNotNull);
       expect(vyuh.content.provider, isNotNull);
     });
 
     testWidgets('registers type descriptors', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       expect(
-          vyuh.content.isRegistered(TestContentItem.typeDescriptor.schemaType),
-          isTrue);
-      expect(vyuh.content.isRegistered(TestModifier.typeDescriptor.schemaType),
-          isTrue);
+        vyuh.content.isRegistered<ContentItem>(
+          TestContentItem.typeDescriptor.schemaType,
+        ),
+        isTrue,
+      );
+      expect(
+        vyuh.content.isRegistered<ContentModifierConfiguration>(
+          TestModifier.typeDescriptor.schemaType,
+        ),
+        isTrue,
+      );
     });
 
     testWidgets('creates content item from json', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       final json = {
         'id': 'test123',
@@ -64,14 +82,16 @@ void main() {
         'type': TestContentItem.schemaName,
       };
 
-      final content = plugin.fromJson<TestContentItem>(json);
+      final content = plugin.fromJson<ContentItem>(json) as TestContentItem?;
       expect(content, isNotNull);
       expect(content?.id, equals('test123'));
       expect(content?.title, equals('Test Title'));
     });
 
     testWidgets('returns null for unregistered type', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       final json = {
         'id': 'test123',
@@ -79,72 +99,72 @@ void main() {
         'type': 'unknown_type',
       };
 
-      final content = plugin.fromJson<TestContentItem>(json);
+      final content = plugin.fromJson<ContentItem>(json) as TestContentItem?;
       expect(content, isNull);
     });
 
     testWidgets('builds content widget', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
-      final content = TestContentItem(
-        id: 'test123',
-        title: 'Test Title',
-      );
+      final content = TestContentItem(id: 'test123', title: 'Test Title');
 
       final widget = plugin.buildContent(TestBuildContext(), content);
-      expect(widget, isA<Padding>());
-      expect((widget as Padding).padding, equals(EdgeInsets.zero));
+      expect(widget, isA<Container>());
     });
 
     testWidgets('builds route widget', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       final widget = plugin.buildRoute(
         TestBuildContext(),
         url: Uri.parse('https://example.com'),
       );
-      expect(widget, isA<DocumentFutureBuilder>());
+      expect(widget, isA<RouteBuilder>());
     });
 
     testWidgets('handles content with layout configuration', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       final json = {
         'id': 'test123',
         'title': 'Test Title',
         'type': TestContentItem.schemaName,
         'layout': [
-          {
-            'type': TestLayoutConfiguration.schemaName,
-            'padding': 16,
-          }
+          {'type': TestLayoutConfiguration.schemaName, 'padding': 16},
         ],
       };
 
-      final content = plugin.fromJson<TestContentItem>(json);
+      final content = plugin.fromJson<ContentItem>(json) as TestContentItem?;
       expect(content, isNotNull);
       expect(content?.layout, isNotNull);
       expect(content?.layout, isA<TestLayoutConfiguration>());
       expect(
-          (content?.layout as TestLayoutConfiguration).padding, equals(16.0));
+        (content?.layout as TestLayoutConfiguration).padding,
+        equals(16.0),
+      );
     });
 
     testWidgets('handles content with modifiers', (tester) async {
+      configure();
       await vyuh.getReady(tester);
+      expect(vyuh.tracker.error, isNull);
 
       final json = {
         'id': 'test123',
         'title': 'Test Title',
         'type': TestContentItem.schemaName,
         'modifiers': [
-          {
-            'type': TestModifier.schemaName,
-            'enabled': true,
-          }
+          {'type': TestModifier.schemaName, 'enabled': true},
         ],
       };
 
-      final content = plugin.fromJson<TestContentItem>(json);
+      final content = plugin.fromJson<ContentItem>(json) as TestContentItem?;
       expect(content, isNotNull);
       expect(content?.modifiers, isNotNull);
       expect(content?.modifiers?.length, equals(1));

@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart'
-    as legacy_material
-    show Material, MaterialType;
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -108,19 +105,17 @@ class EmailField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ReactiveFormFieldBoundary(
-      child: ReactiveTextField<String>(
-        formControlName: emailControlName,
-        decoration: legacyCdxInputDecoration(context, labelText: 'Email'),
-        keyboardType: TextInputType.emailAddress,
-        inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
-        autofillHints: const [AutofillHints.email, AutofillHints.username],
-        validationMessages: {
-          ValidationMessage.required: (_) => 'Email is required',
-          ValidationMessage.email: (_) => 'Enter a valid email address',
-        },
-        onSubmitted: (_) => submit(),
-      ),
+    return _MaterialReactiveTextField(
+      formControlName: emailControlName,
+      decoration: cdxInputDecoration(context, labelText: 'Email'),
+      keyboardType: TextInputType.emailAddress,
+      inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+      autofillHints: const [AutofillHints.email, AutofillHints.username],
+      validationMessages: {
+        ValidationMessage.required: (_) => 'Email is required',
+        ValidationMessage.email: (_) => 'Enter a valid email address',
+      },
+      onSubmitted: (_) => submit(),
     );
   }
 }
@@ -131,20 +126,18 @@ class UsernameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ReactiveFormFieldBoundary(
-      child: ReactiveTextField<String>(
-        formControlName: usernameControlName,
-        decoration: legacyCdxInputDecoration(context, labelText: 'Username'),
-        keyboardType: TextInputType.text,
-        inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
-        autofillHints: const [AutofillHints.username],
-        validationMessages: {
-          ValidationMessage.required: (_) => 'Username is required',
-          ValidationMessage.minLength: (_) =>
-              'Username must be at least 3 characters',
-        },
-        onSubmitted: (_) => submit(),
-      ),
+    return _MaterialReactiveTextField(
+      formControlName: usernameControlName,
+      decoration: cdxInputDecoration(context, labelText: 'Username'),
+      keyboardType: TextInputType.text,
+      inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
+      autofillHints: const [AutofillHints.username],
+      validationMessages: {
+        ValidationMessage.required: (_) => 'Username is required',
+        ValidationMessage.minLength: (_) =>
+            'Username must be at least 3 characters',
+      },
+      onSubmitted: (_) => submit(),
     );
   }
 }
@@ -161,23 +154,21 @@ class PhoneInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ReactiveFormFieldBoundary(
-      child: ReactiveTextField<String>(
-        formControlName: phoneControlName,
-        decoration: legacyCdxInputDecoration(context, labelText: labelText),
-        keyboardType: TextInputType.phone,
-        inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
-        autofillHints: const [
-          AutofillHints.telephoneNumber,
-          AutofillHints.telephoneNumberLocal,
-          AutofillHints.telephoneNumberNational,
-        ],
-        validationMessages: {
-          ValidationMessage.required: (_) => 'Phone number is required',
-          'phoneNumber': (_) => 'Enter a valid phone number',
-        },
-        onSubmitted: (_) => submit(context),
-      ),
+    return _MaterialReactiveTextField(
+      formControlName: phoneControlName,
+      decoration: cdxInputDecoration(context, labelText: labelText),
+      keyboardType: TextInputType.phone,
+      inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
+      autofillHints: const [
+        AutofillHints.telephoneNumber,
+        AutofillHints.telephoneNumberLocal,
+        AutofillHints.telephoneNumberNational,
+      ],
+      validationMessages: {
+        ValidationMessage.required: (_) => 'Phone number is required',
+        'phoneNumber': (_) => 'Enter a valid phone number',
+      },
+      onSubmitted: (_) => submit(context),
     );
   }
 }
@@ -194,20 +185,18 @@ class OtpInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ReactiveFormFieldBoundary(
-      child: ReactiveTextField<String>(
-        formControlName: otpControlName,
-        autofillHints: const [AutofillHints.oneTimeCode],
-        decoration: legacyCdxInputDecoration(context, labelText: labelText),
-        keyboardType: TextInputType.number,
-        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-        validationMessages: {
-          ValidationMessage.required: (_) => 'OTP is required',
-          ValidationMessage.minLength: (_) => 'OTP must be at least 6 digits',
-          ValidationMessage.number: (_) => 'OTP must contain only digits',
-        },
-        onSubmitted: (_) => submit(context),
-      ),
+    return _MaterialReactiveTextField(
+      formControlName: otpControlName,
+      autofillHints: const [AutofillHints.oneTimeCode],
+      decoration: cdxInputDecoration(context, labelText: labelText),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      validationMessages: {
+        ValidationMessage.required: (_) => 'OTP is required',
+        ValidationMessage.minLength: (_) => 'OTP must be at least 6 digits',
+        ValidationMessage.number: (_) => 'OTP must contain only digits',
+      },
+      onSubmitted: (_) => submit(context),
     );
   }
 }
@@ -232,47 +221,27 @@ class _PasswordFieldState extends State<PasswordField> {
 
   @override
   Widget build(BuildContext context) {
-    return _ReactiveFormFieldBoundary(
-      child: ReactiveTextField<String>(
-        formControlName: passwordControlName,
-        autofocus: widget.autofocus,
-        decoration: legacyCdxInputDecoration(
-          context,
-          labelText: 'Password',
-          suffixIcon: widget.showPasswordVisibilityToggle
-              ? IconButton(
-                  icon: Icon(
-                    _showPassword ? Icons.visibility : Icons.visibility_off,
-                  ),
-                  onPressed: () =>
-                      setState(() => _showPassword = !_showPassword),
-                )
-              : null,
-        ),
-        obscureText: !_showPassword,
-        autofillHints: const [AutofillHints.password],
-        validationMessages: {
-          ValidationMessage.required: (_) => 'Password is required',
-        },
-        onSubmitted: (_) => widget.submit(),
+    return _MaterialReactiveTextField(
+      formControlName: passwordControlName,
+      autofocus: widget.autofocus,
+      decoration: cdxInputDecoration(
+        context,
+        labelText: 'Password',
+        suffixIcon: widget.showPasswordVisibilityToggle
+            ? IconButton(
+                icon: Icon(
+                  _showPassword ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () => setState(() => _showPassword = !_showPassword),
+              )
+            : null,
       ),
-    );
-  }
-}
-
-final class _ReactiveFormFieldBoundary extends StatelessWidget {
-  final Widget child;
-
-  const _ReactiveFormFieldBoundary({required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    // reactive_forms still renders Flutter Material text fields internally.
-    return CdxMaterialUiCompatibilityBridge(
-      child: legacy_material.Material(
-        type: legacy_material.MaterialType.transparency,
-        child: child,
-      ),
+      obscureText: !_showPassword,
+      autofillHints: const [AutofillHints.password],
+      validationMessages: {
+        ValidationMessage.required: (_) => 'Password is required',
+      },
+      onSubmitted: (_) => widget.submit(),
     );
   }
 }
@@ -397,5 +366,70 @@ class ErrorText extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+/// Reactive Forms owns validation and focus; Material UI owns the text widget.
+class _MaterialReactiveTextField
+    extends ReactiveFocusableFormField<String, String> {
+  _MaterialReactiveTextField({
+    required super.formControlName,
+    required InputDecoration decoration,
+    TextInputType? keyboardType,
+    List<TextInputFormatter>? inputFormatters,
+    Iterable<String>? autofillHints,
+    super.validationMessages,
+    bool obscureText = false,
+    bool autofocus = false,
+    void Function(FormControl<String>)? onSubmitted,
+  }) : super(
+         builder: (field) {
+           final state = field as _MaterialReactiveTextFieldState;
+           return TextField(
+             controller: state.controller,
+             focusNode: state.focusNode,
+             enabled: field.control.enabled,
+             decoration: decoration.copyWith(errorText: field.errorText),
+             keyboardType: keyboardType,
+             inputFormatters: inputFormatters,
+             autofillHints: autofillHints,
+             obscureText: obscureText,
+             autofocus: autofocus,
+             onChanged: field.didChange,
+             onSubmitted: (_) => onSubmitted?.call(field.control),
+           );
+         },
+       );
+
+  @override
+  ReactiveFormFieldState<String, String> createState() =>
+      _MaterialReactiveTextFieldState();
+}
+
+class _MaterialReactiveTextFieldState
+    extends ReactiveFocusableFormFieldState<String, String> {
+  final controller = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    controller.text = value ?? '';
+  }
+
+  @override
+  void onControlValueChanged(dynamic value) {
+    final text = value as String? ?? '';
+    if (controller.text != text) {
+      controller.value = TextEditingValue(
+        text: text,
+        selection: TextSelection.collapsed(offset: text.length),
+      );
+    }
+    super.onControlValueChanged(value);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 }

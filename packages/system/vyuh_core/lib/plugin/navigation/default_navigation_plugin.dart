@@ -70,6 +70,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
         .expand((p) => p.observers)
         .toList();
 
+    _router.dispose();
     _router = GoRouter.routingConfig(
       initialLocation: initialLocation ?? '/',
       routingConfig: _routingConfig,
@@ -155,6 +156,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   @override
   Future<void> dispose() {
     if (_initialized) {
+      _router.dispose();
       _routingConfig.dispose();
       _router = GoRouter(routes: []);
       _initialRoutes.clear();
