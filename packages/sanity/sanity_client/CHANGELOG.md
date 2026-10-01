@@ -1,3 +1,7 @@
+## 1.9.2
+
+ - **FEAT**(framework): harden feature lifecycle and shared capabilities.
+
 ## 1.9.1
 
  - **FIX**: cleaning up analysis issues.

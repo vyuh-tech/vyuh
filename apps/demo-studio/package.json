@@ -17,9 +17,9 @@
   ],
   "dependencies": {
     "@vyuh/sanity-plugin-structure": "^2.0.6",
-    "@vyuh/sanity-schema-auth": "^1.28.5",
+    "@vyuh/sanity-schema-auth": "^1.28.6",
     "@vyuh/sanity-schema-core": "^2.0.6",
-    "@vyuh/sanity-schema-onboarding": "^1.28.5",
+    "@vyuh/sanity-schema-onboarding": "^1.28.6",
     "@vyuh/sanity-schema-system": "^2.0.6",
     "conference-sanity-schema": "workspace:^1.0.0",
     "food-sanity-schema": "workspace:^1.0.0",

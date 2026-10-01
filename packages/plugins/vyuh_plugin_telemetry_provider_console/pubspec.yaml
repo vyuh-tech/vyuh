@@ -3,7 +3,7 @@ homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/plugins/vyuh_plugin_telemetry_provider_console
 resolution: workspace
 description: Console logger telemetry provider for Vyuh
-version: 1.4.3
+version: 1.4.4
 
 environment:
   sdk: '>=3.6.0 <4.0.0'
@@ -12,7 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  vyuh_core: ^2.0.1
+  vyuh_core: ^2.1.0
   logger: ^2.5.0
 
 dev_dependencies:

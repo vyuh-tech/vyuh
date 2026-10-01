@@ -1,3 +1,7 @@
+## 0.1.3
+
+ - **FEAT**(framework): harden feature lifecycle and shared capabilities.
+
 ## 0.1.2
 
  - **FIX**: unblock complete package publication with stable release tooling.

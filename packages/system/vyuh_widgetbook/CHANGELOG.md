@@ -1,3 +1,7 @@
+## 2.0.2
+
+ - **FEAT**(framework): harden feature lifecycle and shared capabilities.
+
 ## 2.0.1
 
  - Update a dependency to the latest release.

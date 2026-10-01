@@ -1,5 +1,12 @@
 # @vyuh/sanity-schema-onboarding
 
+## 1.28.6
+
+### Patch Changes
+
+- Update Sanity and React dependencies and align TypeScript schema build
+  configuration.
+
 ## 1.28.5
 
 ### Patch Changes

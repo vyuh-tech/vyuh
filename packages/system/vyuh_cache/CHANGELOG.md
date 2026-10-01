@@ -1,3 +1,7 @@
+## 1.6.0
+
+ - **FEAT**(framework): harden feature lifecycle and shared capabilities.
+
 ## 1.5.0
 
  - **FEAT**: upgrading to melos 7.0.

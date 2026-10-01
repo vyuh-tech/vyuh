@@ -38,13 +38,13 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6(@babel/core@7.29.7)(@babel/runtime@8.0.5)(@codemirror/lint@6.9.7)(@codemirror/theme-one-dark@6.1.3)(@types/react@19.3.0)(codemirror@6.0.2)(react-dom@19.3.0)(rolldown@1.2.11)(styled-components@6.5.3)(typescript@6.0.3)
       '@vyuh/sanity-schema-auth':
-        specifier: ^1.28.5
+        specifier: ^1.28.6
         version: link:../../schemas/vyuh-sanity-schema-auth
       '@vyuh/sanity-schema-core':
         specifier: ^2.0.6
         version: 2.0.6(@babel/core@7.29.7)(@babel/runtime@8.0.5)(@types/react@19.3.0)(react-dom@19.3.0)(react@19.3.0)(rolldown@1.2.11)(styled-components@6.5.3)(typescript@6.0.3)
       '@vyuh/sanity-schema-onboarding':
-        specifier: ^1.28.5
+        specifier: ^1.28.6
         version: link:../../schemas/vyuh-sanity-schema-onboarding
       '@vyuh/sanity-schema-system':
         specifier: ^2.0.6

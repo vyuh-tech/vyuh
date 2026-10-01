@@ -1,3 +1,7 @@
+## 3.0.2
+
+ - **FEAT**(framework): harden feature lifecycle and shared capabilities.
+
 ## 3.0.1
 
  - **FIX**: align router dependencies with go_router 18.
