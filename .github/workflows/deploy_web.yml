@@ -27,16 +27,24 @@ jobs:
         run: |
           dart pub get --enforce-lockfile
 
-      - name: Make .env file
-        uses: SpicyPizza/create-envfile@v2.0
+      - uses: actions/setup-node@v4
         with:
-          envkey_TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
-          envkey_UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
-          envkey_UNSPLASH_SECRET_KEY: ${{ secrets.UNSPLASH_SECRET_KEY }}
-          directory: apps/vyuh_demo
-          file_name: .env
-          fail_on_empty: false
-          sort_keys: false
+          node-version: '25'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10.13.1'
+      - name: Make .env file
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+          UNSPLASH_SECRET_KEY: ${{ secrets.UNSPLASH_SECRET_KEY }}
+        run: |
+          node --input-type=module <<'NODE'
+          import { writeFileSync } from 'node:fs';
+          const keys = ['TMDB_API_KEY', 'UNSPLASH_ACCESS_KEY', 'UNSPLASH_SECRET_KEY'];
+          const content = keys.map(key => `${key}=${JSON.stringify(process.env[key] ?? '')}`).join('\n');
+          writeFileSync('apps/vyuh_demo/.env', content + '\n', { mode: 0o600 });
+          NODE
 
       - name: Build web app
         run: |
