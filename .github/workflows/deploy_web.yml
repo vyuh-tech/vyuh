@@ -34,7 +34,7 @@ jobs:
         with:
           version: '10.13.1'
       - name: Install deployment tooling
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --filter vyuh --frozen-lockfile
       - name: Make .env file
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
