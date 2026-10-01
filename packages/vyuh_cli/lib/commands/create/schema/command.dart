@@ -19,7 +19,8 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
     argParser.addOption(
       'cms',
       help: 'The content management system for this new schema.',
-      defaultsTo: defaultCMS,
+      defaultsTo: 'sanity',
+      allowed: ['sanity'],
     );
   }
 
@@ -35,10 +36,10 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   String get featureName => argResults.rest.first;
 
   String get cms {
-    final cms = argResults['cms'] as String? ?? defaultCMS;
-    if (cms != defaultCMS) {
+    final cms = argResults['cms'] as String? ?? 'sanity';
+    if (cms != 'sanity') {
       usageException(
-        'The CMS "$cms" is not supported. Only "$defaultCMS" is supported at this time.',
+        'The CMS "$cms" is not supported. Only "sanity" is supported at this time.',
       );
     }
     return cms;

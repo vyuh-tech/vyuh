@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:mason/mason.dart';
 
@@ -9,11 +10,20 @@ abstract base class CliCommand {
     HookContext context, {
     required String startMessage,
     required String endMessage,
-    required Future<void> Function() operation,
+    required Future<dynamic> Function() operation,
   }) async {
     final progress = context.logger.progress(startMessage);
 
-    await operation();
+    try {
+      final result = await operation();
+      if (result is ProcessResult && result.exitCode != 0) {
+        throw StateError(
+            '$startMessage failed (exit ${result.exitCode}): ${result.stderr}');
+      }
+    } catch (_) {
+      progress.fail('$startMessage failed');
+      rethrow;
+    }
 
     progress.complete(endMessage);
   }

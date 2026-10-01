@@ -1,29 +1,14 @@
-name: {{ name.snakeCase() }}
-description: {{ description }}
-
+name: {{ name.snakeCase() }}_workspace
+publish_to: none
 environment:
-  sdk: '>=3.2.0 <4.0.0'
-
+  sdk: '>=3.12.0 <4.0.0'
+workspace:
+  - apps/{{ name.snakeCase() }}
+  - features/counter/feature_counter
 dev_dependencies:
-  flutter_lints: ^5.0.0
-  melos: ^6.2.0
-
-flutter:
-  uses-material-design: true
-
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  image_path: 'assets/app-icon.png'
-  background_color_ios: '#FFFFFF'
-  remove_alpha_ios: true
-  web:
-    generate: true
-    image_path: 'assets/app-icon.png'
-    background_color: '#FFFFFF'
-    theme_color: '#FFFFFF'
-
-flutter_native_splash:
-  color: '#FFFFFF'
-  image: 'assets/launchscreen-image.png'
+  melos: ^8.6.0
+melos:
+  name: {{ name.snakeCase() }}
+  command:
+    version:
+      workspaceChangelog: false

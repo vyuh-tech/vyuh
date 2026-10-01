@@ -33,9 +33,14 @@ class CreateProjectCommand extends BaseCreateCommand {
       )
       ..addOption(
         'cms',
-        help: 'The content management system for this new project.',
+        help: 'Optional CMS integration. No CMS is installed by default.',
         defaultsTo: defaultCMS,
+        allowed: ['none', 'sanity'],
       )
+      ..addMultiOption('platforms',
+          defaultsTo: ['ios', 'android', 'web'],
+          allowed: ['ios', 'android', 'web', 'macos', 'windows', 'linux'],
+          help: 'Flutter target platforms.')
       ..addOption(
         'org-name',
         help: 'The organization for this new project.',
@@ -94,6 +99,16 @@ class CreateProjectCommand extends BaseCreateCommand {
   void validateArgs() {
     _validateProjectName(argResults.rest);
     _validateOrgName(orgName);
+    if ((argResults['platforms'] as List<String>).isEmpty) {
+      usageException('Choose at least one target platform.');
+    }
+    final id = argResults['application-id'] as String?;
+    if (id != null &&
+        !RegExp(r'^[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z][a-zA-Z0-9_]*)+$')
+            .hasMatch(id)) {
+      usageException(
+          'Use a dotted application identifier, such as com.example.catalog.');
+    }
   }
 
   @override
@@ -140,6 +155,7 @@ class CreateProjectCommand extends BaseCreateCommand {
       'description': projectDescription,
       'cms': cms,
       'org_name': orgName,
+      'platforms': (argResults['platforms'] as List<String>).join(','),
       if (applicationId != null) 'application_id': applicationId
     });
 

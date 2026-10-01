@@ -3,6 +3,7 @@ import 'package:mason/mason.dart';
 import 'package:meta/meta.dart';
 import 'package:vyuh_cli/commands/create/feature/command.dart';
 import 'package:vyuh_cli/commands/create/item/command.dart';
+import 'package:vyuh_cli/commands/create/plugin/command.dart';
 import 'package:vyuh_cli/commands/create/project/command.dart';
 import 'package:vyuh_cli/commands/create/schema/command.dart';
 import 'package:vyuh_cli/utils/utils.dart';
@@ -27,6 +28,10 @@ final class CreateCommand extends Command<int> {
         generatorFromBrick: generatorFromBrick,
       ),
     );
+    addSubcommand(CreatePluginCommand(
+        logger: logger,
+        generatorFromBundle: generatorFromBundle,
+        generatorFromBrick: generatorFromBrick));
     addSubcommand(
       CreateSanitySchemaCommand(
         logger: logger,
@@ -48,7 +53,7 @@ final class CreateCommand extends Command<int> {
 
   @override
   String get description =>
-      'Creates Vyuh projects, features, content items, and CMS schemas.';
+      'Scaffold Flutter Apps, features, and capability plugins. CMS items and schemas are optional.';
 
   @override
   String get name => 'create';

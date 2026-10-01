@@ -19,6 +19,26 @@ final class FlutterCommand extends CliCommand {
     await _createProject(context, name, description, appName);
     await _addPackages(context, name, appName);
     await _applyOverrides(context, appName);
+    final id = context.vars['application_id'] as String?;
+    if (id != null) {
+      final original =
+          '${context.vars['org_name'] ?? 'com.example.vyuh'}.$appName';
+      for (final platform in ['android', 'ios', 'macos']) {
+        final dir = Directory('$appName/apps/$appName/$platform');
+        if (!dir.existsSync()) continue;
+        for (final file in dir.listSync(recursive: true).whereType<File>()) {
+          if (file.path.endsWith('.kts') ||
+              file.path.endsWith('.gradle') ||
+              file.path.endsWith('.pbxproj') ||
+              file.path.endsWith('.kt') ||
+              file.path.endsWith('.java') ||
+              file.path.endsWith('.xml')) {
+            await file.writeAsString(
+                (await file.readAsString()).replaceAll(original, id));
+          }
+        }
+      }
+    }
   }
 
   Future<void> _createProject(
@@ -39,7 +59,9 @@ final class FlutterCommand extends CliCommand {
             'create',
             name.snakeCase,
             '--template=app',
-            '--platforms=ios,android,web',
+            '--no-pub',
+            '--platforms=${context.vars['platforms'] ?? 'ios,android,web'}',
+            '--org=${context.vars['org_name'] ?? 'com.example.vyuh'}',
             '--description=$description',
           ],
           workingDirectory: path.normalize('$appName/apps'),
@@ -47,35 +69,44 @@ final class FlutterCommand extends CliCommand {
         ),
       );
 
-  Future<void> _addPackages(HookContext context, String name, String appName) =>
-      trackOperation(
-        context,
-        startMessage: path.normalize('Adding Flutter packages @ apps/$appName'),
-        endMessage: path.normalize('Added Flutter packages @ apps/$appName'),
-        operation: () async => Process.run(
-          'flutter',
-          [
-            'pub',
-            'add',
+  Future<void> _addPackages(
+      HookContext context, String name, String appName) async {
+    final pubspec = File('$appName/apps/$appName/pubspec.yaml');
+    final editor = YamlEditor(await pubspec.readAsString())
+      ..update(['resolution'], 'workspace');
+    await pubspec.writeAsString(editor.toString());
+    await trackOperation(
+      context,
+      startMessage: path.normalize('Adding Flutter packages @ apps/$appName'),
+      endMessage: path.normalize('Added Flutter packages @ apps/$appName'),
+      operation: () async => Process.run(
+        'flutter',
+        [
+          'pub',
+          'add',
+          'vyuh_core:^2.1.0',
+          'material_ui',
+          if (context.vars['cms'] == 'sanity') ...[
             'sanity_client',
-            'vyuh_core',
             'vyuh_extension_content',
             'vyuh_feature_system',
-            'vyuh_feature_developer',
             'vyuh_plugin_content_provider_sanity',
-            'vyuh_plugin_telemetry_provider_console',
-            'mobx',
-            'flutter_mobx',
-            'go_router',
-            'flutter_launcher_icons',
-            'flutter_native_splash',
           ],
-          workingDirectory: path.normalize('$appName/apps/$appName'),
-          runInShell: true,
-        ),
-      );
+          'vyuh_plugin_telemetry_provider_console',
+          'mobx',
+          'flutter_mobx',
+          'go_router',
+          'flutter_launcher_icons',
+          'flutter_native_splash',
+        ],
+        workingDirectory: path.normalize('$appName/apps/$appName'),
+        runInShell: true,
+      ),
+    );
+  }
 
-  Future<void> _applyOverrides(HookContext context, String appName) => trackOperation(
+  Future<void> _applyOverrides(HookContext context, String appName) =>
+      trackOperation(
         context,
         startMessage: 'Updating Flutter project',
         endMessage: 'Flutter project updated',

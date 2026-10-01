@@ -14,15 +14,13 @@ abstract class BaseCreateCommand extends Command<int> {
     required this.logger,
     required MasonGeneratorFromBundle? generatorFromBundle,
     required MasonGeneratorFromBrick? generatorFromBrick,
-  })  : _generatorFromBundle = generatorFromBundle ?? MasonGenerator.fromBundle,
-        _generatorFromBrick = generatorFromBrick ?? MasonGenerator.fromBrick {
+  }) : _generatorFromBundle = generatorFromBundle ?? MasonGenerator.fromBundle {
     // Configure common arguments here
     setupArgParser();
   }
 
   final Logger logger;
   final MasonGeneratorFromBundle _generatorFromBundle;
-  final MasonGeneratorFromBrick _generatorFromBrick;
 
   @visibleForTesting
   ArgResults? argResultOverrides;
@@ -63,21 +61,7 @@ abstract class BaseCreateCommand extends Command<int> {
 
   /// Gets the generator for the template
   Future<MasonGenerator> _getGeneratorForTemplate() async {
-    try {
-      final brick = Brick.version(
-        name: template.bundle.name,
-        version: '^${template.bundle.version}',
-      );
-      logger.detail(
-        '''Building generator from brick: ${brick.name} ${brick.location.version}''',
-      );
-      return await _generatorFromBrick(brick);
-    } catch (error) {
-      logger.detail('Building generator from brick failed: $error');
-    }
-    logger.detail(
-      '''Building generator from bundle ${template.bundle.name} ${template.bundle.version}''',
-    );
+    // Use the bundled, tested scaffold instead of an older registry brick.
     return _generatorFromBundle(template.bundle);
   }
 

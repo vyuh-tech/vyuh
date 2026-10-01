@@ -3,12 +3,18 @@ import 'dart:io';
 import 'package:mason/mason.dart';
 
 void main() {
-  for (final entry
-      in {'vyuh_feature': 'feature', 'vyuh_project': 'project'}.entries) {
+  for (final entry in {
+    'vyuh_feature': 'feature',
+    'vyuh_project': 'project',
+    'vyuh_plugin': 'plugin'
+  }.entries) {
     final bundle =
         createBundle(Directory('packages/vyuh_cli/bricks/${entry.key}'));
-    final variable =
-        entry.key == 'vyuh_feature' ? 'vyuhFeatureBundle' : 'vyuhProjectBundle';
+    final variable = {
+      'feature': 'vyuhFeatureBundle',
+      'project': 'vyuhProjectBundle',
+      'plugin': 'vyuhPluginBundle'
+    }[entry.value]!;
     final json = const JsonEncoder.withIndent('  ').convert(bundle.toJson());
     File('packages/vyuh_cli/lib/commands/create/${entry.value}/${entry.key}_bundle.dart')
         .writeAsStringSync(

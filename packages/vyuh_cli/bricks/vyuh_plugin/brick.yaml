@@ -1,0 +1,14 @@
+name: vyuh_plugin
+description: A shared capability package for the Vyuh framework.
+version: 1.0.0
+environment:
+  mason: ">=0.1.0-dev.52 <0.1.0"
+vars:
+  name:
+    type: string
+  class_name:
+    type: string
+  title_literal:
+    type: string
+  description_literal:
+    type: string

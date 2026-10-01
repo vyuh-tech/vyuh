@@ -12,7 +12,7 @@ class ProjectTemplate extends Template {
           name: 'project',
           bundle: vyuhProjectBundle,
           help:
-              'Generate a Vyuh Project with a Flutter Application and a Sanity Studio.',
+              'Generate a modular Flutter App with a feature workspace and optional CMS integration.',
         );
 
   @override

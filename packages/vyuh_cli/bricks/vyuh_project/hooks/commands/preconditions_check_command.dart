@@ -21,14 +21,20 @@ Refer to https://www.sanity.io/docs/cli for installation instructions.
 final class PreConditionsCheckCommand extends CliCommand {
   @override
   Future<void> run(HookContext context) async {
+    final required = [
+      'flutter',
+      'dart',
+      if (context.vars['cms'] == 'sanity') 'pnpm'
+    ];
     context.logger.alert(
-        'Checking for availability of programs (${programs.keys.join(', ')})...');
+        'Checking for availability of programs (${required.join(', ')})...');
 
-    for (final program in programs.keys) {
+    for (final program in required) {
       final result = await which(program);
 
       if (result == null) {
-        context.logger.err(programs[program]);
+        context.logger.err(programs[program] ??
+            '$program is not installed. Add it to your PATH.');
         exit(1);
       }
     }

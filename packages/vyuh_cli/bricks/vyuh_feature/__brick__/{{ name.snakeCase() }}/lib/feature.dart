@@ -6,13 +6,13 @@ import 'package:vyuh_core/vyuh_core.dart';
 
 final feature = FeatureDescriptor(
   name: '{{ name.snakeCase() }}',
-  title: '{{ name.titleCase() }}',
-  description: 'Describe your feature in more detail here.',
+  title: {{{title_literal}}},
+  description: {{{description_literal}}},
   icon: Icons.add_circle_outlined,
   routes: () async {
     return [
       GoRoute(
-          path: '/counter',
+          path: {{{route_literal}}},
           builder: (context, state) {
             return const _Counter();
           }),

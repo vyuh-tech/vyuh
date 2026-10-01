@@ -1,158 +1,55 @@
-<p align="center">
-  <a href="https://vyuh.tech">
-    <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
-  </a>
-  <h1 align="center">Vyuh Framework</h1>
-  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
-  <p align="center">
-    <a href="https://docs.vyuh.tech">Docs</a> |
-    <a href="https://vyuh.tech">Website</a>
-  </p>
-</p>
+# Vyuh CLI
 
-# vyuh_cli
+Scaffold modular Flutter Apps, portable features, and shared capability plugins. CMS integration is optional and disabled by default.
 
-[![vyuh_cli](https://img.shields.io/pub/v/vyuh_cli.svg?label=vyuh_cli&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_cli)
-
-A command-line interface for the Vyuh Framework to generate Vyuh projects from
-predefined templates.
-
-# Documentation 📝
-
-For official documentation, please visit https://docs.vyuh.tech/
-
-# Quick Start 🚀
-
-## Installing 🧑‍💻
+## Install
 
 ```sh
 dart pub global activate vyuh_cli
 ```
 
-Or install a [specific version](https://pub.dev/packages/vyuh_cli/versions)
-using:
+## Create an App workspace
 
 ```sh
-dart pub global activate vyuh_cli <version>
+vyuh create project shop --org-name=com.acme --platforms=android,ios,web -o products
 ```
 
-> If you haven't already, you might need to
-> [set up your path](https://dart.dev/tools/pub/cmd/pub-global#running-a-script-from-your-path).
+Creates a Dart workspace with a Flutter App, a counter feature, plugin/package directories, Material UI, and local Melos tooling. It runs Flutter setup and workspace bootstrap. Flutter and Dart must be on PATH. `--application-id` overrides native bundle identifiers; `--description` sets the App description. CMS defaults to `none`; `--cms=sanity` explicitly adds Sanity packages and a Studio, requiring Node/pnpm and Sanity account access.
 
-When that is not possible (eg: CI environments), run `vyuh` commands via:
+## Create a feature
 
 ```sh
-dart pub global run vyuh_cli:vyuh <command> <args>
+vyuh create feature feature_catalog --title="Catalog" --description="Product browsing" --route=/catalog -o features
 ```
 
-# Commands ✨
+Generates a Flutter package with a descriptor and starter screen. Add it to the workspace/dependencies and include its descriptor in `runApp(features: ...)`. Package names use lowercase letters, digits, and underscores. Routes must be absolute paths.
 
-## `vyuh doctor`
+## Create a plugin
 
-Vyuh Doctor is a command-line tool that helps developers set up and troubleshoot
-their Vyuh development environment.
+```sh
+vyuh create plugin catalog_search --class-name=CatalogSearchPlugin --title="Catalog search" --description="Shared search capability" -o plugins
+```
 
-- Ensure that the required software is installed
-- Diagnose issues and provide recommendations
+Generates an exported custom Plugin class using InitOncePlugin, cleanup hooks, and a lifecycle test. Register it in PluginDescriptor.others and retrieve it through vyuh.getPlugin. For a built-in system capability, implement its specific contract and use the named descriptor slot instead.
+
+## Optional CMS scaffolds
+
+```sh
+vyuh create schema catalog --cms=sanity
+vyuh create item product --feature=feature_catalog
+```
+
+These commands are explicit authoring tools, independent of the default App/feature/plugin path.
+
+## Development tools
 
 ```sh
 vyuh doctor
+vyuh doctor --cms=sanity
+vyuh update
+vyuh completion --help
+vyuh --version
+vyuh create project --help
 ```
 
-<img width="678" alt="vyuh doctor" src="_images/vyuh_cli_doctor.png">
-
-## `vyuh create`
-
-Create a Vyuh project in seconds based on the predefined template. Each template
-has a corresponding sub-command ( e.g.,`vyuh create project`).
-
-<img width="851" alt="vyuh create project super_app" src="_images/vyuh_cli.png">
-
-```sh
-Creates Vyuh projects, features, and CMS schemas.
-
-Usage: vyuh create <subcommand> <item-name> [arguments]
--h, --help    Print this usage information.
-
-Available subcommands:
-  feature                 A Vyuh feature created by Vyuh CLI.
-  schema                  A Vyuh feature CMS schema created by Vyuh CLI.
-  project                 A Vyuh Flutter project created by Vyuh CLI.
-
-Run "vyuh help" to see global options.
-```
-
-## Usage
-
-### Create projects
-
-Creates a new Vyuh project with the given name.
-
-```sh
-vyuh create project <project-name>
-
-```
-
-```sh
-A Vyuh Flutter project created by Vyuh CLI.
-
-Usage: vyuh create project <project-name> [arguments]
--h, --help                Print this usage information.
--o, --output-directory    The desired output directory when creating a new project.
-    --description         The description for this new project.
-                          (defaults to "A Vyuh Flutter project created by Vyuh CLI.")
-    --cms                 The content management system for this new project.
-                          (defaults to "sanity")
-    --org-name            The organization for this new project.
-                          (defaults to "com.example.vyuh")
-    --application-id      The bundle identifier on iOS or application id on Android. (defaults to <org-name>.<project-name>)
-```
-
-### Create features
-
-Creates a new Vyuh feature with the given name.
-
-```sh
-vyuh create feature <feature-name>
-```
-
-```sh
-A Vyuh feature created by Vyuh CLI.
-
-Usage: vyuh create feature <feature-name> [arguments]
--h, --help                Print this usage information.
--o, --output-directory    The desired output directory when creating a new feature.
-```
-
-### Create schemas
-
-Creates a new Vyuh feature CMS schema with the given name.
-
-```sh
-vyuh create schema <feature-name>
-```
-
-```sh
-A Vyuh feature CMS schema created by Vyuh CLI.
-
-Usage: vyuh create schema <feature-name> [arguments]
--h, --help                Print this usage information.
--o, --output-directory    The desired output directory when creating a new feature.
-    --cms                 The content management system for this new schema.
-                          (defaults to "sanity")
-```
-
-# Contact
-
-Follow us, stay up to date or reach out on:
-
-- [@vyuh_tech](https://x.com/vyuh_tech)
-- [LinkedIn](https://www.linkedin.com/company/vyuh-tech)
-- [Discord](https://discord.gg/b49sbjqszG)
-- [Email](mailto:ask@vyuh.tech)
-
----
-
-<p align="center">Made with ❤️ by <a href="https://vyuh.tech">Vyuh</a></p>
-
-[docs_link]: https://docs.vyuh.tech/
+Doctor checks Flutter/Dart by default and adds Node/pnpm checks when Sanity is selected. Each create command supports --output-directory (-o). Built-in scaffolds ship with the CLI so a registry brick cannot replace them with older templates.

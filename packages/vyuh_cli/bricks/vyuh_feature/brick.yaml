@@ -31,3 +31,12 @@ vars:
     description: Name of your feature
     default: My Feature
     prompt: What is the name of your feature?
+  title_literal:
+    type: string
+    default: '"My Feature"'
+  description_literal:
+    type: string
+    default: '"A modular Vyuh feature."'
+  route_literal:
+    type: string
+    default: '"/counter"'

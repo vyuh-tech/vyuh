@@ -7,21 +7,20 @@ class Doctor {
 
   Doctor({
     required Logger logger,
+    this.cms = 'none',
   }) : _logger = logger;
 
-  List<DoctorValidator> validators = [
+  final String cms;
+
+  late List<DoctorValidator> validators = [
     FlutterValidator(),
     DartValidator(),
-    MelosValidator(),
-    NodeValidator(),
-    PnPmValidator(),
-    SanityValidator(),
+    if (cms == 'sanity') ...[NodeValidator(), PnPmValidator()],
   ];
 
   Future<bool> diagnose() async {
     _logger.info('Doctor summary:');
 
-    bool doctorResult = true;
     int issues = 0;
     for (final validator in validators) {
       final progress = _logger.progress('Checking ${validator.title}');
@@ -30,7 +29,6 @@ class Doctor {
       switch (result.type) {
         case ValidationType.crash:
         case ValidationType.missing:
-          doctorResult = false;
           issues += 1;
           progress.fail(
             '${validator.title} ${result.statusInfo ?? result.typeStr} ${result.leadingIcon}',
@@ -66,6 +64,6 @@ class Doctor {
     _logger.info('');
     _logger.info(UserMessages.summarizeDoctorCheckup(issues));
 
-    return doctorResult;
+    return issues == 0;
   }
 }
