@@ -152,3 +152,9 @@ This checkpoint supersedes the outstanding findings and older Material localizat
 - Homepage now includes a responsive plugins/features/lazy-features bento grid, App title casing, and dedicated capability documentation. Documentation build validates 124 Mermaid diagrams and canonical CMS routing. HMR runs on port 4173.
 
 Remaining verification: real SSE reconnect behavior, published dependency/SDK matrices, measured startup and release performance, and Studio interactions with updated npm dependencies. Default memory cache remains unbounded unless `maxEntries` is selected. Custom lazy extension builders must honor their rollback contract.
+
+### CLI scaffolding follow-up
+
+CLI 0.2.0 adds custom capability-plugin packages, feature title/description/route options, and App platform/organization/native identifier parameters. CMS now defaults to none in both commands and bricks; authoring prerequisites and content packages are conditional. App scaffolds use Dart workspaces and local Melos 8. Built-in generation uses embedded bricks to prevent an older registry template overriding tested scaffolds. Setup subprocess failures propagate. Doctor checks Flutter/Dart by default, with optional Node/pnpm checks for Sanity.
+
+22 focused CLI tests and source/hook analysis pass. Generated plugin lifecycle and feature code were checked against local framework dependency metadata. This does not prove an end-to-end fresh registry install, native platform builds, or authenticated Sanity Studio creation.

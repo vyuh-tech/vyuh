@@ -1,7 +1,7 @@
 name: vyuh_cli
 resolution: workspace
-description: A command-line interface for the Vyuh Framework to generate Vyuh projects, features and schemas.
-version: 0.1.3
+description: A command-line interface for the Vyuh Framework to scaffold modular Flutter Apps, features, and capability plugins with optional CMS integration.
+version: 0.2.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/vyuh_cli
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues

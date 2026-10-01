@@ -1,3 +1,7 @@
+## 0.2.0
+
+ - **FEAT**(cli): scaffold modular Apps features and plugins with optional CMS.
+
 ## 0.1.3
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.
