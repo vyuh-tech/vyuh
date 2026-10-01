@@ -33,6 +33,8 @@ jobs:
       - uses: pnpm/action-setup@v4
         with:
           version: '10.13.1'
+      - name: Install deployment tooling
+        run: pnpm install --frozen-lockfile
       - name: Make .env file
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
@@ -55,6 +57,8 @@ jobs:
         id: deployment
         uses: cloudflare/wrangler-action@v3
         with:
+          packageManager: pnpm
+          wranglerVersion: '4.145.0'
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/vyuh_demo/build/web --project-name=vyuh-demo

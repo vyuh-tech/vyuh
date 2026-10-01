@@ -17,7 +17,8 @@
   "devDependencies": {
     "all-contributors-cli": "^6.26.1",
     "prettier": "^3.9.9",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.145.0"
   },
   "dependencies": {
     "@changesets/cli": "^3.0.3"
