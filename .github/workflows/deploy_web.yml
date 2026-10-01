@@ -19,14 +19,13 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: 'beta'
+          channel: stable
+          flutter-version: '3.47.2'
           cache: true
 
       - name: Install dependencies
         run: |
-          dart pub global activate melos
-          dart pub get
-          dart run melos bs
+          dart pub get --enforce-lockfile
 
       - name: Make .env file
         uses: SpicyPizza/create-envfile@v2.0

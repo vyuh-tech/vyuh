@@ -1,7 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:vyuh_cdx_ui/vyuh_cdx_ui.dart';
 import 'package:vyuh_feature_auth/ui/auth_state_widget.dart';
 
 const emailControlName = 'email';
@@ -9,6 +8,15 @@ const usernameControlName = 'username';
 const phoneControlName = 'phone';
 const otpControlName = 'otp';
 const passwordControlName = 'password';
+
+InputDecoration _authInputDecoration({
+  required String labelText,
+  Widget? suffixIcon,
+}) => InputDecoration(
+  labelText: labelText,
+  suffixIcon: suffixIcon,
+  border: const OutlineInputBorder(),
+);
 
 FormGroup emailPasswordAuthForm({String? email}) => FormGroup({
   emailControlName: FormControl<String>(
@@ -107,7 +115,7 @@ class EmailField extends StatelessWidget {
   Widget build(BuildContext context) {
     return _MaterialReactiveTextField(
       formControlName: emailControlName,
-      decoration: cdxInputDecoration(context, labelText: 'Email'),
+      decoration: _authInputDecoration(labelText: 'Email'),
       keyboardType: TextInputType.emailAddress,
       inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
       autofillHints: const [AutofillHints.email, AutofillHints.username],
@@ -128,7 +136,7 @@ class UsernameField extends StatelessWidget {
   Widget build(BuildContext context) {
     return _MaterialReactiveTextField(
       formControlName: usernameControlName,
-      decoration: cdxInputDecoration(context, labelText: 'Username'),
+      decoration: _authInputDecoration(labelText: 'Username'),
       keyboardType: TextInputType.text,
       inputFormatters: [FilteringTextInputFormatter.deny(_whitespaceRegExp)],
       autofillHints: const [AutofillHints.username],
@@ -156,7 +164,7 @@ class PhoneInputField extends StatelessWidget {
   Widget build(BuildContext context) {
     return _MaterialReactiveTextField(
       formControlName: phoneControlName,
-      decoration: cdxInputDecoration(context, labelText: labelText),
+      decoration: _authInputDecoration(labelText: labelText),
       keyboardType: TextInputType.phone,
       inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'[0-9+]'))],
       autofillHints: const [
@@ -188,7 +196,7 @@ class OtpInputField extends StatelessWidget {
     return _MaterialReactiveTextField(
       formControlName: otpControlName,
       autofillHints: const [AutofillHints.oneTimeCode],
-      decoration: cdxInputDecoration(context, labelText: labelText),
+      decoration: _authInputDecoration(labelText: labelText),
       keyboardType: TextInputType.number,
       inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       validationMessages: {
@@ -224,8 +232,7 @@ class _PasswordFieldState extends State<PasswordField> {
     return _MaterialReactiveTextField(
       formControlName: passwordControlName,
       autofocus: widget.autofocus,
-      decoration: cdxInputDecoration(
-        context,
+      decoration: _authInputDecoration(
         labelText: 'Password',
         suffixIcon: widget.showPasswordVisibilityToggle
             ? IconButton(

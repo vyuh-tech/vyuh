@@ -158,3 +158,7 @@ Remaining verification: real SSE reconnect behavior, published dependency/SDK ma
 CLI 0.2.0 adds custom capability-plugin packages, feature title/description/route options, and App platform/organization/native identifier parameters. CMS now defaults to none in both commands and bricks; authoring prerequisites and content packages are conditional. App scaffolds use Dart workspaces and local Melos 8. Built-in generation uses embedded bricks to prevent an older registry template overriding tested scaffolds. Setup subprocess failures propagate. Doctor checks Flutter/Dart by default, with optional Node/pnpm checks for Sanity.
 
 22 focused CLI tests and source/hook analysis pass. Generated plugin lifecycle and feature code were checked against local framework dependency metadata. This does not prove an end-to-end fresh registry install, native platform builds, or authenticated Sanity Studio creation.
+
+### Publication repair: remove CDX dependencies
+
+The initial release lockfile incorrectly included local sibling CDX paths. Auth also retained a hosted CDX UI dependency. Removed that dependency and its source import, replaced decorations with Material UI, and resolved away all CDX/transitive packages. Local override entries were removed. A clean archive without overrides passes `dart pub get --enforce-lockfile`. Auth is patched to 3.0.3; other release package versions remain unchanged. Analysis and demo workflows now use the same pinned Flutter SDK and resolved local Melos entry point as publication.

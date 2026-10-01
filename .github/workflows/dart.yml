@@ -61,21 +61,22 @@ jobs:
             test: true
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.47.2'
+          channel: stable
       - name: Install dependencies
         run: |
-          dart pub global activate melos
-          dart pub get
-          dart run melos bs
+          dart pub get --enforce-lockfile
 
       - name: Analyze package
-        run: melos exec --scope="${{ matrix.package }}" -- dart analyze --fatal-infos
+        run: dart --packages=.dart_tool/package_config.json tools/melos.dart exec --scope="${{ matrix.package }}" -- dart analyze --fatal-infos
 
       - name: Run tests
         if: matrix.test
-        run: melos exec --scope="${{ matrix.package }}" -- flutter test --coverage
+        run: dart --packages=.dart_tool/package_config.json tools/melos.dart exec --scope="${{ matrix.package }}" -- flutter test --coverage
 
       - name: Upload coverage reports to Codecov
         if: matrix.test

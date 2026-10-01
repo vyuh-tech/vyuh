@@ -1,3 +1,7 @@
+## 3.0.3
+
+- Remove CDX dependencies and use Material UI input decorations directly.
+
 ## 3.0.2
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.

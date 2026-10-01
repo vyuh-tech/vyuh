@@ -89,14 +89,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.4"
-  base_menu:
-    dependency: transitive
-    description:
-      name: base_menu
-      sha256: c621736f94680263eb5a80e97214e8d7239041f2ebe5cd97d7fd0113daa83811
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.1.5"
   boolean_selector:
     dependency: transitive
     description:
@@ -193,13 +185,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
-  cdx_field_formatting:
-    dependency: "direct overridden"
-    description:
-      path: "../cdx/packages/cdx_field_formatting"
-      relative: true
-    source: path
-    version: "2.1.0"
   characters:
     dependency: transitive
     description:
@@ -448,14 +433,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
-  fluentui_system_icons:
-    dependency: transitive
-    description:
-      name: fluentui_system_icons
-      sha256: "1592ae32dae75fb66741ab2c0607bc6554ef086f1c457e27ef937fb4901d33da"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.273"
   flutter:
     dependency: transitive
     description: flutter
@@ -876,22 +853,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.1"
-  isolate_contactor:
-    dependency: transitive
-    description:
-      name: isolate_contactor
-      sha256: "6ba8434ceb58238a1389d6365111a3efe7baa1c68a66f4db6d63d351cf6c3a0f"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.0"
-  isolate_manager:
-    dependency: transitive
-    description:
-      name: isolate_manager
-      sha256: "22ed0c25f80ec3b5f21e3a55d060f4650afff33f27c2dff34c0f9409d5759ae5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "4.1.5+1"
   jni:
     dependency: transitive
     description:
@@ -1332,22 +1293,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
-  re_editor:
-    dependency: transitive
-    description:
-      name: re_editor
-      sha256: "66671c4774a6b4c5254c9a53ab35a083e7e7da9ae371c519bcf491c70a2a4e56"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.0"
-  re_highlight:
-    dependency: transitive
-    description:
-      name: re_highlight
-      sha256: "6c4ac3f76f939fb7ca9df013df98526634e17d8f7460e028bd23a035870024f2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   reactive_forms:
     dependency: transitive
     description:
@@ -1673,22 +1618,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.18"
-  textf:
-    dependency: transitive
-    description:
-      name: textf
-      sha256: e05807e5d5ec8ac0c72c99de3d132cae71e95540e2c3ad6287d0582b7b8b15d8
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.2.4"
-  timezone:
-    dependency: transitive
-    description:
-      name: timezone
-      sha256: "981d1020d6ef8fe1e7b3de5054e5b25579ae7c403d7734adc508ffc47668e9cb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.11.1"
   typed_data:
     dependency: transitive
     description:
@@ -1849,28 +1778,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "15.3.0"
-  vyuh_cdx_ui:
-    dependency: "direct overridden"
-    description:
-      path: "../cdx/packages/vyuh_cdx_ui"
-      relative: true
-    source: path
-    version: "3.2.1"
-  vyuh_errors:
-    dependency: transitive
-    description:
-      name: vyuh_errors
-      sha256: "92f39cff81575319b76f070cbee44d9efd273d341ce4484df81c2fcd104eae68"
-      url: "https://pub.vyuh.tech"
-    source: hosted
-    version: "1.1.3"
-  vyuh_timelines:
-    dependency: "direct overridden"
-    description:
-      path: "../cdx/packages/vyuh_timelines"
-      relative: true
-    source: path
-    version: "0.2.2"
   wakelock_plus:
     dependency: transitive
     description:
