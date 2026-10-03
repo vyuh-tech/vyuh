@@ -15,7 +15,7 @@ jobs:
     permissions:
       contents: read
     env:
-      PUB_TOKEN: ${{ secrets.PUB_TOKEN }}
+      PUB_VYUH_TOKEN: ${{ secrets.PUB_VYUH_TOKEN }}
       OAUTH_ACCESS_TOKEN: ${{ secrets.OAUTH_ACCESS_TOKEN }}
       OAUTH_REFRESH_TOKEN: ${{ secrets.OAUTH_REFRESH_TOKEN }}
     steps:
@@ -30,7 +30,7 @@ jobs:
         run: |
           umask 077
           dart tools/configure_pub_credentials.dart
-          dart pub token add https://pub.vyuh.tech --env-var PUB_TOKEN
+          dart pub token add https://pub.vyuh.tech --env-var PUB_VYUH_TOKEN
       - name: Resolve workspace
         run: dart pub get --enforce-lockfile
       - name: Publish unpublished packages in dependency order
