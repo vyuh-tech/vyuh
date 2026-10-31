@@ -1,6 +1,5 @@
 import { defineConfig } from 'vitepress';
 import tailwindcss from '@tailwindcss/vite';
-import legacyRoutes from './scripts/legacy-routes.json' with { type: 'json' };
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { CARD, SITE_URL, SUBTITLE, TAGLINE, renderCard, sectionOf, type CardPage } from './og';
@@ -69,19 +68,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss(), {
-      name: 'legacy-documentation-redirects',
-      configureServer(server) {
-        server.middlewares.use((request, response, next) => {
-          const url = new URL(request.url ?? '/', 'http://localhost');
-          const route = url.pathname.replace(/\.html$/, '').replace(/\/$/, '');
-          const destination = (legacyRoutes as Record<string, string>)[route];
-          if (!destination) return next();
-          response.writeHead(301, { Location: destination + url.search });
-          response.end();
-        });
-      },
-    }],
+    plugins: [tailwindcss()],
     server: { watch: { ignored: ['**/.vitepress/dist/**'] } },
   },
 
@@ -93,10 +80,6 @@ export default defineConfig({
   description: 'A modular framework to grow your Flutter app. Independent features, shared capabilities, composable apps.',
   sitemap: {
     hostname: 'https://docs.vyuh.tech',
-    transformItems: items => items.filter(item => {
-      const route = '/' + item.url.replace(/\.html$/, '').replace(/\/$/, '');
-      return !(route in legacyRoutes);
-    }),
   },
   markdown: {
     config(md) {

@@ -7,7 +7,6 @@ import SketchDiagram from './components/SketchDiagram.vue';
 import ActionLink from './components/ActionLink.vue';
 import FrameworkLayers from './components/FrameworkLayers.vue';
 import TechStack from './components/TechStack.vue';
-import RedirectPage from './components/RedirectPage.vue';
 import './style.css';
 
 export default {
@@ -20,6 +19,5 @@ export default {
     app.component('ActionLink', ActionLink);
     app.component('FrameworkLayers', FrameworkLayers);
     app.component('TechStack', TechStack);
-    app.component('RedirectPage', RedirectPage);
   },
 } satisfies Theme;
