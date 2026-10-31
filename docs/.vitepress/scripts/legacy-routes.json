@@ -28,14 +28,5 @@
   "/api/flutter-sanity-portable-text": "/cms/api/flutter-sanity-portable-text",
   "/api/vyuh-plugin-content-provider-sanity": "/cms/api/vyuh-plugin-content-provider-sanity",
   "/api/vyuh-widgetbook": "/cms/api/vyuh-widgetbook",
-  "/api/schemas": "/cms/api/schemas",
-  "/framework/vyuh-extension-content": "/cms/packages/vyuh-extension-content",
-  "/framework/vyuh-feature-system": "/cms/packages/vyuh-feature-system",
-  "/framework/vyuh-feature-auth": "/cms/packages/vyuh-feature-auth",
-  "/framework/vyuh-feature-onboarding": "/cms/packages/vyuh-feature-onboarding",
-  "/framework/vyuh-feature-developer": "/cms/packages/vyuh-feature-developer",
-  "/framework/vyuh-content-widget": "/cms/packages/vyuh-content-widget",
-  "/framework/sanity-client": "/cms/packages/sanity-client",
-  "/framework/flutter-sanity-portable-text": "/cms/packages/flutter-sanity-portable-text",
-  "/framework/vyuh-plugin-content-provider-sanity": "/cms/packages/vyuh-plugin-content-provider-sanity"
+  "/api/schemas": "/cms/api/schemas"
 }

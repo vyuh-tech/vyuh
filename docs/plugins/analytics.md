@@ -109,11 +109,11 @@ The router reads `observers` once, when it is built during startup. Return the o
 
 ## Behaviour and lifecycle
 
-- **Startup.** Because it is preloaded, the framework calls `init()` before the platform starts. That runs every provider's `init()` at the same time (`Future.wait`).
-- **Init once.** `init()` comes from `InitOncePlugin`. Calls made while initialization is running wait for the same result. If a provider's `init()` throws, the plugin stays uninitialized and the next `init()` call tries again.
-- **Restart.** Preloaded plugins are not re-initialized when the platform restarts, so your providers keep their state.
+- **Startup.** Because it is preloaded, the framework calls `init()` before the platform starts. That runs every provider's `init()` at the same time.
+- **Init once.** `init()` comes from `InitOncePlugin`. Calls made while initialization is running wait for the same result.
+- **Restart.** Once it has started, the plugin keeps running when the platform restarts, so your providers keep their state.
 - **Dispose.** `vyuh.dispose()` calls `dispose()`, which runs every provider's `dispose()`.
-- **Fan-out.** Each call waits for all providers with `Future.wait`. If one provider throws, the call you awaited throws too. Unlike telemetry, analytics does not catch provider errors for you, so catch errors inside your provider if a failed report should not reach the caller.
+- **One broken provider never stops the others.** `init`, `dispose`, `reportEvent`, `identifyUser` and `resetUser` call each provider separately. If a provider throws, synchronously or by returning a failed `Future`, the plugin prints `Vyuh: analytics provider <Type> failed: <error>` with `debugPrint` and skips it. The other providers still get the call, and the `Future` you awaited completes normally.
 - **Default.** `NoOpAnalyticsProvider` accepts every call, sends nothing and has no observers. Its description reminds you to set a real provider before going to production.
 
 ## Testing
@@ -252,14 +252,8 @@ final class AmplitudeAnalyticsProvider implements AnalyticsProvider {
   Future<void> dispose() => _client.flush();
 
   @override
-  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) async {
-    try {
-      await _client.track(name, params ?? const {});
-    } catch (error, stack) {
-      // Analytics should not break the screen that reported the event.
-      vyuh.telemetry.reportError(error, stackTrace: stack);
-    }
-  }
+  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) =>
+      _client.track(name, params ?? const {});
 
   @override
   Future<void> identifyUser(String userId, {Map<String, dynamic>? traits}) =>
@@ -273,7 +267,7 @@ final class AmplitudeAnalyticsProvider implements AnalyticsProvider {
 Tips:
 
 - Keep `init()` fast. Analytics is preloaded, so a slow `init()` delays the whole app.
-- Catch errors inside `reportEvent`, as above, unless you want callers to see them.
+- You don't need to catch errors in your provider: the plugin logs them and goes on. Catch them yourself only if you want to report them somewhere, such as `vyuh.telemetry`.
 - If your backend has no screen tracking, return an empty list from `observers`.
 - Give `name` a stable, dotted id such as `app.analytics.amplitude`.
 

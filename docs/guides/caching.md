@@ -1,11 +1,13 @@
 ---
-title: vyuh_cache
-description: Expiration-aware caching with configurable storage.
+title: Caching
+description: Reuse expensive results while they are still valid, with vyuh_cache.
 ---
 
-# vyuh_cache
+# Caching
 
 `Cache<V>` wraps a `CacheStorage<V>` implementation with a configured TTL. Use it to reuse an expensive result while it remains valid. It is independent of the content system.
+
+<PubBadge package="vyuh_cache" />
 
 ```mermaid
 flowchart TD

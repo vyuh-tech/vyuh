@@ -20,8 +20,8 @@ dependencies:
   vyuh_core: ^1.0.0
 ```
 
-For a list of all the packages which are publicly available on `pub.dev`, refer
-to the [Framework](/framework/) documentation.
+For the packages published on `pub.dev`, see the
+[package list](/intro/#packages).
 
 ## Adding a Package from the Enterprise Package Registry
 

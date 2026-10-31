@@ -504,6 +504,14 @@ export default defineConfig({
           "link": "/guides/mobx-state-management"
         },
         {
+          "text": "Caching",
+          "link": "/guides/caching"
+        },
+        {
+          "text": "Testing",
+          "link": "/guides/testing"
+        },
+        {
           "text": "Platform",
           "collapsed": true,
           "items": [
@@ -553,44 +561,6 @@ export default defineConfig({
         { "text": "Locale and Translations", "link": "/plugins/locale" },
         { "text": "Feature Flags", "link": "/plugins/feature-flags" },
         { "text": "Writing a Plugin", "link": "/plugins/custom-plugins" }
-      ]
-    },
-    {
-      "text": "Framework",
-      "collapsed": true,
-      "items": [
-        {
-          "text": "Overview",
-          "link": "/framework/"
-        },
-        {
-          "text": "vyuh_core",
-          "link": "/framework/vyuh-core"
-        },
-        {
-          "text": "vyuh_cache",
-          "link": "/framework/vyuh-cache"
-        },
-        {
-          "text": "Hive Storage",
-          "link": "/framework/hive-storage"
-        },
-        {
-          "text": "Secure Storage",
-          "link": "/framework/secure-storage"
-        },
-        {
-          "text": "Preferences Storage",
-          "link": "/framework/shared-preferences-storage"
-        },
-        {
-          "text": "Console Telemetry",
-          "link": "/framework/console-telemetry"
-        },
-        {
-          "text": "Test Helpers",
-          "link": "/framework/vyuh-test"
-        }
       ]
     },
     {

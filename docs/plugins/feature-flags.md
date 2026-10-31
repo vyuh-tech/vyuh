@@ -165,7 +165,7 @@ What happens:
 - **Flag on:** the feature loads as usual.
 - **Flag off:** the feature is not loaded. The user sees a page titled "Reports is not available" with the message "This part of the app is turned off right now." There is no "Try again" button. Vyuh also emits a `FeatureLoadFailedEvent` whose `failure.kind` is `FailureKind.featureDisabled`, and calling `vyuh.loadFeature('reports')` throws.
 - **No flag plugin:** the flag is ignored and the feature loads.
-- **Unknown flag:** Vyuh asks with `defaultValue: true`. If your plugin returns the default for flags it doesn't know, the feature loads.
+- **Flag not set:** Vyuh asks with `defaultValue: true`, so a flag your service doesn't know leaves the feature enabled. This is on purpose: adding a lazy feature never needs a flag first, and a flag only turns a feature off when it is set to `false`. Your plugin should return the default for flags it doesn't know.
 - **`getBool` throws:** this is treated as a normal load failure. The user sees "Could not load Reports" with a "Try again" button.
 
 To keep a feature off until the service says otherwise, make sure the service always sends a value for that flag. You can also call `setDefaults` with `false` in your plugin's `init`.
@@ -300,7 +300,7 @@ void main() {
 }
 ```
 
-`getReady` comes from the [`vyuh_test`](/framework/vyuh-test) package. It waits until the app has started.
+`getReady` comes from the [`vyuh_test`](/guides/testing) package. It waits until the app has started.
 
 Also test what happens when your plugin throws, for example when the flag service is offline.
 

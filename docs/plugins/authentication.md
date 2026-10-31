@@ -25,7 +25,7 @@ flowchart LR
   UI["Login screen"] -->|loginWithEmailPassword| Auth["vyuh.auth"]
   Auth --> Provider["Your provider (Firebase, backend...)"]
   Provider -->|setCurrentUser| Auth
-  Auth -->|userChanges| Features["Features that care"]
+  Auth -->|"userChanges, UserChangedEvent"| Features["Features that care"]
 ```
 
 ## Set up
@@ -122,7 +122,7 @@ The full set of members:
 | `sendPasswordResetEmail(email:)` | Start a password reset |
 | `loginWithOAuth(OAuthType)` | Sign in with Google, Apple, Meta, GitHub, Twitter, LinkedIn, Microsoft or a custom provider |
 | `logout()` | Sign out |
-| `refreshSession()` | Try to refresh the session; returns `true` on success |
+| `refreshSession()` | Try to refresh the session; returns `true` on success. Vyuh never calls it for you |
 | `deleteAccount()` | Delete the signed-in user's account |
 
 A provider implements only the methods it supports. The rest fail with an
@@ -132,34 +132,20 @@ this method.`
 
 ### React to sign-in across features
 
-`AuthPlugin` does not emit Vyuh [events](/plugins/events) on its own. To let
-any feature react to sign-in, turn `userChanges` into an event in the feature
-that owns sign-in, then refresh a [feature
-redirect](/guides/routes-and-navigation#feature-redirects) with it:
+Every time the provider sets the user, `AuthPlugin` emits a
+`UserChangedEvent` on the [event bus](/plugins/events): on sign-in, on
+sign-out (the user is then `User.unknown`) and on profile changes. Its
+`user` getter is the new user, and its name is `'vyuh.auth.user_changed'`.
+
+Use it to re-run a [feature
+redirect](/guides/routes-and-navigation#feature-redirects) with `refreshOn`:
 
 ```dart
-import 'dart:async';
-
 import 'package:vyuh_core/vyuh_core.dart';
-
-final class UserChangedEvent extends VyuhEvent<User> {
-  UserChangedEvent(User user)
-      : super(name: 'com.example.account.userChanged', data: user);
-}
-
-StreamSubscription<User>? _userSubscription;
 
 final account = FeatureDescriptor(
   name: 'account',
   title: 'Account',
-  init: () async {
-    _userSubscription = vyuh.auth.userChanges
-        .listen((user) => vyuh.event.emit(UserChangedEvent(user)));
-  },
-  dispose: () async {
-    await _userSubscription?.cancel();
-    _userSubscription = null;
-  },
   redirects: [
     FeatureRedirect(
       name: 'require-sign-in',
@@ -181,9 +167,22 @@ final account = FeatureDescriptor(
 ```
 
 When the user signs in or out, the event fires, the router re-runs its
-redirects, and the user moves on or off the guarded pages. Other features can
-handle `UserChangedEvent` with an `EventHandler` (to clear a cart, say)
-without importing the account feature.
+redirects, and the user moves on or off the guarded pages. Any feature can
+also handle the event with an `EventHandler`, for example to clear a cart on
+sign-out:
+
+```dart
+final cart = FeatureDescriptor(
+  name: 'cart',
+  title: 'Cart',
+  events: [
+    EventHandler<UserChangedEvent>((event) {
+      if (event.user.isUnknown) clearCart();
+    }),
+  ],
+  routes: () => [/* ... */],
+);
+```
 
 Hiding a page is not security. Your backend must still check the token on
 every request.
@@ -238,13 +237,13 @@ Methods a provider hasn't implemented throw `UnimplementedError` instead.
   a `StateError`. Inside a running app this never happens; in a unit test,
   call `init()` first.
 - **Shutdown and restart.** `dispose()` closes the stream (listeners get a
-  done event). The next `init()` opens a fresh stream, so subscribe again
-  after a restart, for example in your feature's `init`.
-- **The user survives a restart.** `dispose()` does not reset `currentUser`.
-  If your provider needs that, set it in its own `dispose` or `init`.
-- **`refreshSession()`.** The default returns `false`. Nothing in Vyuh Core
-  calls it today, including `HttpNetworkPlugin`; call it yourself (for example
-  after a `401`) if your provider supports it.
+  done event) and resets `currentUser` to `User.unknown`. The next `init()`
+  opens a fresh stream, so subscribe again after a restart, for example in
+  your feature's `init`. An `EventHandler<UserChangedEvent>` needs no
+  re-subscribing: the platform manages it.
+- **`refreshSession()`.** The default returns `false`. Nothing in Vyuh calls
+  it automatically, including `HttpNetworkPlugin`. Call it yourself, for
+  example after a request returns `401`, then retry the request.
 
 ## Testing
 
@@ -297,7 +296,7 @@ For a unit test without an app, call `await auth.init()` before using
 Extend `AuthPlugin`, implement `token` and `refreshToken`, and override the
 sign-in methods your provider supports. After each successful sign-in or
 sign-out, call `setCurrentUser` with the new user (or `User.unknown`). That
-updates `currentUser` and emits on `userChanges`.
+updates `currentUser`, emits on `userChanges` and emits a `UserChangedEvent`.
 
 ```dart
 import 'package:vyuh_core/vyuh_core.dart';
@@ -368,5 +367,5 @@ See [writing a plugin](/plugins/custom-plugins) for the general pattern.
 - [User](/api/vyuh-core#user), [LoginMethod](/api/vyuh-core#loginmethod), [OAuthType](/api/vyuh-core#oauthtype)
 - [AuthException](/api/vyuh-core#authexception)
 
-`UnknownAuthPlugin` is not exported from `package:vyuh_core/vyuh_core.dart`;
-you get it only as the default.
+`UserChangedEvent` and `UnknownAuthPlugin` are exported from
+`package:vyuh_core/vyuh_core.dart`.

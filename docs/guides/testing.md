@@ -1,9 +1,9 @@
 ---
-title: Test Helpers
-description: Package responsibilities and setup for vyuh_test.
+title: Testing
+description: Test Vyuh features and apps in flutter_test with vyuh_test.
 ---
 
-# Test Helpers
+# Testing
 
 `vyuh_test` holds small utilities for testing features and apps built with
 Vyuh in `flutter_test`.

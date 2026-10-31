@@ -31,13 +31,14 @@ flowchart LR
 
 ## Set up
 
-Add the package. Also add `flutter_secure_storage` if you want to pass platform options, because `vyuh_plugin_storage_secure` does not re-export its option classes:
+Add the package:
 
 ```yaml
 dependencies:
   vyuh_plugin_storage_secure: ^1.6.6
-  flutter_secure_storage: ^11.2.0 # only needed for AndroidOptions, IOSOptions, ...
 ```
+
+It re-exports the option classes of `flutter_secure_storage` 11 (`AndroidOptions`, `IOSOptions`, `KeychainAccessibility`, `LinuxOptions`, `MacOsOptions`, `WebOptions` and `WindowsOptions`), so you don't need to import `flutter_secure_storage` to pass platform options.
 
 Register the plugin in the `secureStorage:` slot:
 
@@ -73,7 +74,6 @@ The constructor takes one optional options object per platform. Each one is pass
 | `windowsOptions` | `WindowsOptions?` | `wOptions` |
 
 ```dart
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:vyuh_core/vyuh_core.dart' as vc;
 import 'package:vyuh_plugin_storage_secure/vyuh_plugin_storage_secure.dart';
 
@@ -158,9 +158,9 @@ Future<void> signOut() async {
 | Method | `FlutterSecureStoragePlugin` | `InMemorySecureStoragePlugin` |
 | --- | --- | --- |
 | `read(key)` | The stored `String`, or `null` | The stored value as written, or `null` |
-| `write(key, value)` | Saves `value.toString()`. A `null` value deletes the key. Returns nothing. | Saves the value as it is. Returns the value. |
+| `write(key, value)` | Saves `value.toString()` and returns that string. A `null` value deletes the key and returns `null`. | Saves the value as it is. Returns the value. |
 | `has(key)` | `true` if the key exists | `true` if the key exists |
-| `delete(key)` | `true` if the key existed and was removed, `false` if it was missing | `true` if a non-null value was removed, `false` otherwise |
+| `delete(key)` | `true` if the key existed and was removed, `false` if it was missing | `true` if the key existed (even with a `null` value), `false` if it was missing |
 
 Some tips:
 
@@ -177,8 +177,8 @@ Both implementations use the `InitOncePlugin` mixin, so `init` runs once even if
 **`FlutterSecureStoragePlugin`**
 
 - `init` creates the `FlutterSecureStorage` instance with your options.
-- `dispose` does nothing. Values stay in the platform store, and a new `init` (or a new plugin instance) sees them again.
-- Calling a method before `init` fails with Dart's `LateInitializationError`, because the storage object is created in `init`. It is not a `StateError` like the Hive and SharedPreferences [storage](/plugins/storage) plugins. Vyuh starts the plugin for you, so this only matters when you create it yourself, for example in a test.
+- `dispose` releases the plugin. Values stay in the platform store, and a new `init` (or a new plugin instance) sees them again.
+- Calling a method before `init` or after `dispose` throws a `StateError` that says the plugin is not initialized, like the Hive and SharedPreferences [storage](/plugins/storage) plugins. Vyuh starts the plugin for you, so this only matters when you create it yourself, for example in a test.
 
 **`InMemorySecureStoragePlugin`**
 
@@ -189,11 +189,11 @@ Both implementations use the `InitOncePlugin` mixin, so `init` runs once even if
 
 ### Use the in-memory default
 
-Leave out `secureStorage:` and your feature uses `InMemorySecureStoragePlugin`. You can also create it yourself. It isn't exported from `vyuh_core.dart`, so import its file:
+Leave out `secureStorage:` and your feature uses `InMemorySecureStoragePlugin`. You can also create it yourself. It is exported from `vyuh_core.dart`:
 
 ```dart
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vyuh_core/plugin/storage/in_memory_secure_storage_plugin.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
 void main() {
   test('stores a token', () async {
@@ -212,7 +212,7 @@ Remember that the in-memory plugin keeps values as they are. If your code relies
 
 ### Test FlutterSecureStoragePlugin
 
-`flutter_secure_storage` ships a test helper. `FlutterSecureStorage.setMockInitialValues` swaps the platform for an in-memory one, so no native code runs:
+`flutter_secure_storage` ships a test helper. `FlutterSecureStorage.setMockInitialValues` swaps the platform for an in-memory one, so no native code runs. `FlutterSecureStorage` itself is not re-exported, so add `flutter_secure_storage` to your `dev_dependencies` and import it in the test:
 
 ```dart
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -230,7 +230,7 @@ void main() {
 
     expect(await storage.read('auth.accessToken'), 'abc');
 
-    await storage.write('pin.attempts', 3);
+    expect(await storage.write('pin.attempts', 3), '3');
     expect(await storage.read('pin.attempts'), '3');
 
     await storage.write('pin.attempts', null);
@@ -253,5 +253,5 @@ See [Custom plugins](/plugins/custom-plugins) for the full steps.
 
 - [SecureStoragePlugin](/api/vyuh-core#securestorageplugin)
 - [PluginDescriptor](/api/vyuh-core#plugindescriptor)
-- [Secure storage package](/framework/secure-storage) and [FlutterSecureStoragePlugin API](/api/vyuh-plugin-storage-secure#fluttersecurestorageplugin)
+- [Secure storage package](https://pub.dev/packages/vyuh_plugin_storage_secure) and [FlutterSecureStoragePlugin API](/api/vyuh-plugin-storage-secure#fluttersecurestorageplugin)
 - [Storage](/plugins/storage) for data that isn't sensitive

@@ -141,7 +141,11 @@ final class CrashGuardPlugin extends Plugin with PreloadedPlugin, InitOncePlugin
 }
 ```
 
-Preloaded plugins are initialized one after another, in registration order, when `runApp` starts and before the first frame. They are **not** re-initialized when the platform restarts. Keep their `init` short and safe: a slow one delays the app, and nothing shows a retry screen if it fails. Most plugins should not be preloaded.
+Preloaded plugins are initialized one after another, in registration order, when `runApp` starts and before the first frame. Keep their `init` short: a slow one delays the app. Most plugins should not be preloaded.
+
+If a preloaded plugin's `init` throws, the app does not crash. Vyuh keeps the error and raises it when the platform starts, so the user sees the normal "app failed to start" screen. Its Restart button tries only the preloaded plugins that failed. Preloaded plugins that started keep running across restarts: they are not disposed and initialized again.
+
+A preloaded plugin can't read the [environment](/plugins/environment) in its `init`. The env plugin is not preloaded, because loading its asset needs the Flutter binding, so it starts later.
 
 ### Watch navigation with `RouteObservers`
 
@@ -288,8 +292,9 @@ sequenceDiagram
   participant App as runApp
   participant B as VyuhBinding
   participant P as Platform
-  App->>B: init each PreloadedPlugin, in order
+  App->>B: init each PreloadedPlugin, in order (failures are kept)
   App->>App: show the loading view
+  P->>B: raise a kept preloaded failure, if any
   P->>P: dispose, then init every other plugin, concurrently
   P->>P: init features, then build the router
   Note over P: the router reads RouteObservers.observers
@@ -297,7 +302,7 @@ sequenceDiagram
 
 - Non-preloaded plugins are initialized **at the same time**, with no ordering between them. If one plugin needs another, call `await other.init()` inside your `initOnce`; with `InitOncePlugin` that safely shares the other plugin's single init.
 - Every plugin is initialized before any feature's `init` runs.
-- If a plugin's `init` throws, startup fails and the app shows the startup failure screen. A restart runs `dispose()` and `init()` again, which is where retry-after-failure matters.
+- If a plugin's `init` throws, startup fails and the app shows the startup failure screen. This is true for preloaded plugins too. A restart runs `dispose()` and `init()` again for the regular plugins, and `init()` again only for the preloaded plugins that failed. That is where retry-after-failure matters.
 - `vyuh.dispose()` disposes all plugins at the same time.
 - In widget mode, `VyuhBinding.instance.widgetInit` disposes, then initializes **all** plugins one by one (preloaded or not), before its extension builder.
 

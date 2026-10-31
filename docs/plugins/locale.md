@@ -126,7 +126,7 @@ Keep `routerConfig: platform.router.instance`; that is how Vyuh's routes reach t
 
 ### Change the language
 
-`setLocale` returns `true` when the language changed and `false` when the locale's language code isn't one of your `locales`.
+`setLocale` matches by language. It makes the configured locale for that language current, so `setLocale(Locale('hi', 'IN'))` sets your app's `Locale('hi')`. It returns `true` when the language changed and `false` when the language isn't one of your `locales`.
 
 ```dart
 final changed = await vyuh.locale?.setLocale(const Locale('hi')) ?? false;
@@ -240,14 +240,15 @@ Keep translated text flexible: let labels wrap, test longer languages, and use t
 
 ## Behaviour and lifecycle
 
+- **Name.** The plugin's `name` is `'vyuh.plugin.locale'`.
 - **Not preloaded.** `LocalePlugin` is a plain plugin. The platform initializes it with the other non-preloaded plugins, before any feature's `init` runs, so features can register in `init`.
 - **Startup.** `init()` opens `SharedPreferences` and reads the key `app_locale`. If a saved language is configured, it calls `setLocale` with it. Otherwise (nothing saved, or a language you no longer support) it calls `useDeviceLocale()`.
 - **Before `init`.** Right after construction, `currentLocale` is already the default locale, so the first frame has a valid locale.
-- **`setLocale` steps.** It returns `false` for an unsupported language. Otherwise it sets `isLoadingLocale` to `true`, awaits each registration's `onLocaleChange` in registration order, then sets `currentLocale`, saves the language code in `app_locale`, and finally sets `isLoadingLocale` back to `false`.
+- **`setLocale` steps.** It returns `false` for an unsupported language. Otherwise it picks the configured locale for that language, sets `isLoadingLocale` to `true`, awaits each registration's `onLocaleChange` in registration order, then sets `currentLocale`, saves the language code in `app_locale`, and finally sets `isLoadingLocale` back to `false`.
 - **A failing registration doesn't stop the change.** If a callback throws, the plugin logs `LocalePlugin: Error notifying "<name>" of locale change: ...` with `vyuh.log.error` and goes on to the next one.
 - **Registering late is fine.** `registerTranslations` calls the new registration's `onLocaleChange` with the current locale on the next microtask, not right away. Errors there are logged as `Error initializing "<name>" translations`.
-- **Only the language is saved.** The saved value is the language code (`hi`), not a country variant. `setLocale(Locale('hi', 'IN'))` is accepted and becomes the current locale as given, but after a restart the app loads `Locale('hi')`. Pass the locales from your configuration to avoid surprises.
-- **Dispose and restart.** `dispose()` removes all registrations and drops the preferences handle. It does not reset `currentLocale`. On a platform restart, features run `init` again and register again.
+- **Only the language is saved.** The saved value is the language code (`hi`). Since `setLocale` always switches to the configured locale for that language, the app gets the same locale back after a restart.
+- **Dispose and restart.** `dispose()` removes all registrations, drops the preferences handle and resets `currentLocale` to the default locale. On a platform restart, `init` restores the saved language, and features run `init` again and register again.
 
 ## Testing
 

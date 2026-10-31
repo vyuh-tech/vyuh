@@ -48,14 +48,10 @@ void main() {
 | `timeout` | 30 seconds | How long each attempt may take before it fails with a `TimeoutException` |
 | `retryOptions` | `RetryOptions(maxAttempts: 3, delayFactor: Duration(milliseconds: 200))` | How often and how quickly to retry, from the [`retry`](https://pub.dev/packages/retry) package |
 | `client` | a new `Client` | Use this `http` `Client` instead of creating one |
-| `webIncludeCredentials` | `true` | On the web, send cookies with cross-origin requests (see below). The source declares it as the private named parameter `this._webIncludeCredentials`; callers write `webIncludeCredentials:` |
+| `webIncludeCredentials` | `true` | On the web, send cookies with cross-origin requests (see below) |
 
-::: warning HttpNetworkConfig is not used
-`vyuh_core` also exports an `HttpNetworkConfig` class (with
-`HttpNetworkConfig.standard`: 5 second timeout, 3 attempts, 10 second maximum
-delay). `HttpNetworkPlugin` does not read it. Configure the plugin with the
-constructor arguments above.
-:::
+`HttpNetworkConfig` is deprecated. `HttpNetworkPlugin` does not use it, so pass
+`timeout` and `retryOptions` instead.
 
 ### Cookies on the web
 
@@ -123,17 +119,23 @@ normal `Response`; deciding what it means is up to your service.
   credentials on the web (when `webIncludeCredentials` is on), otherwise a
   standard `Client`. If you passed `client`, that one is used and nothing is
   created.
-- **Shutdown.** `dispose()` closes the client. `close()` does the same, so
-  don't call `vyuh.network.close()` from a feature: it closes the client for
-  the whole app.
-- **Timeouts and retries.** `get`, `head`, `post`, `put`, `patch` and `delete`
-  each run with the timeout and are retried, but only for a `TimeoutException`
-  or a socket error (a failure to reach the server). An HTTP error status is
-  never retried. If every attempt fails, the last error is thrown.
-- **No retries for the rest.** `read`, `readBytes` and `send` go straight to the
-  client, with no timeout and no retries.
+- **Shutdown.** `dispose()` closes the client. `close()` does nothing: every
+  feature shares the client, so only the platform closes it, when it disposes
+  the plugin.
+- **Restart.** The plugin keeps running across platform restarts. If it fails
+  to start, the app shows its startup failure screen, and Restart tries it
+  again.
+- **Timeouts and retries.** `get`, `head`, `post`, `put`, `patch`, `delete`,
+  `read` and `readBytes` each run with the timeout and are retried, but only
+  for a `TimeoutException` or a socket error (a failure to reach the server).
+  An HTTP error status is never retried. If every attempt fails, the last
+  error is thrown.
+- **`send` is not retried.** `send` gets the same timeout, but a streamed
+  request can only be sent once, so it is never retried.
 - **No auth headers.** The plugin adds no headers of its own. Add
-  `Authorization` yourself, for example from `vyuh.auth.token`.
+  `Authorization` yourself, for example from `vyuh.auth.token`. Nothing calls
+  `vyuh.auth.refreshSession()` on a `401` for you; call it and retry the
+  request yourself.
 
 ## Testing
 
@@ -209,7 +211,8 @@ class AuthClient extends BaseClient {
 final network = HttpNetworkPlugin(client: AuthClient());
 ```
 
-This keeps the timeouts and retries. When you pass `client`, the web
+This keeps the timeouts and retries. `vyuh.network.close()` does nothing; the
+platform closes your client when it disposes the plugin. When you pass `client`, the web
 `BrowserClient` is not created for you, so wrap a `BrowserClient` yourself on
 the web if you need cookies. For a completely different transport, extend
 `NetworkPlugin` directly. See [writing a plugin](/plugins/custom-plugins).
@@ -218,4 +221,3 @@ the web if you need cookies. For a completely different transport, extend
 
 - [NetworkPlugin](/api/vyuh-core#networkplugin)
 - [HttpNetworkPlugin](/api/vyuh-core#httpnetworkplugin)
-- [HttpNetworkConfig](/api/vyuh-core#httpnetworkconfig)

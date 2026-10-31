@@ -40,8 +40,23 @@ The [quick start](get-started) provides a complete app with one feature and a st
 | [Getting Started](get-started) | Run your first app and learn the project structure |
 | [Concepts](/concepts/) | Understand features, plugins, extensions, and lifecycle |
 | [Guides](/guides/creating-a-feature) | Implement specific behaviors |
-| [Framework](/framework/) | Choose the packages and their responsibilities |
+| [Plugins](/plugins/) | Choose the shared capabilities and their implementations |
 | [Examples](/examples/) | Trace complete features in source |
 | [API References](/api/) | Look up declarations and directly declared members |
+
+## Packages
+
+| Package | What it gives you |
+| --- | --- |
+| [`vyuh_core`](https://pub.dev/packages/vyuh_core) | Features, plugins, routing, lifecycle, events, errors and theming |
+| [`vyuh_plugin_storage_hive`](https://pub.dev/packages/vyuh_plugin_storage_hive) | [Storage](/plugins/storage) in a Hive box |
+| [`vyuh_plugin_storage_shared_preferences`](https://pub.dev/packages/vyuh_plugin_storage_shared_preferences) | [Storage](/plugins/storage) in shared preferences |
+| [`vyuh_plugin_storage_secure`](https://pub.dev/packages/vyuh_plugin_storage_secure) | [Secure storage](/plugins/secure-storage) on the platform keychain |
+| [`vyuh_plugin_telemetry_provider_console`](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console) | [Telemetry](/plugins/telemetry) to the console |
+| [`vyuh_cache`](https://pub.dev/packages/vyuh_cache) | [Caching](/guides/caching) with expiry |
+| [`vyuh_test`](https://pub.dev/packages/vyuh_test) | [Testing](/guides/testing) helpers |
+| [`vyuh_cli`](cli) | Scaffolding for apps, features and plugins |
+
+Content-driven apps add the [CMS packages](/cms/).
 
 Read [Why Vyuh?](/concepts/why-vyuh) for the ownership, reuse, and lifecycle decisions behind this model. The [CLI](cli) can scaffold feature packages as your project grows.

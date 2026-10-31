@@ -38,7 +38,7 @@ The contract has three methods:
 | Method | What it does |
 |---|---|
 | `on<T>(listener)` | Calls `listener` for every event of type `T` (or a subtype). Returns a `DisposeFunction` that cancels the subscription |
-| `once<T>(listener)` | Calls `listener` for the next event of type `T` only, then cancels itself. Returns nothing, so you can't cancel it early |
+| `once<T>(listener)` | Calls `listener` for the next event of type `T` only, then cancels itself. Returns a `DisposeFunction` that cancels it before the event arrives |
 | `emit<T>(event)` | Sends `event` to every listener of its type |
 
 All events extend `VyuhEvent<T>`, which has a `name`, an optional `data`
@@ -46,8 +46,13 @@ payload of type `T`, and a `timestamp` set when the event is created.
 
 Delivery is **asynchronous**: `emit` returns straight away and listeners run
 shortly after (see [Delivery](#delivery)). `DefaultEventPlugin.init()` creates
-a fresh bus and `dispose()` destroys it, so listeners don't survive a restart;
-calling `on` or `emit` before `init()` throws.
+a fresh bus and `dispose()` destroys it; calling `on` or `emit` before `init()`
+throws. Because the plugin is preloaded, it keeps running when the platform
+restarts. The platform cancels feature handlers on a restart, but a
+subscription you made with `on` stays until you cancel it.
+
+If the event plugin fails to start, the app shows its startup failure screen
+instead of crashing, and Restart tries the plugin again.
 
 ## Declare handlers on a feature
 
@@ -99,6 +104,10 @@ the `location`, and the underlying `error`.
 A load cancelled by a restart or dispose is not a failure, so it emits no
 `FeatureLoadFailedEvent`.
 
+The auth plugin also emits a built-in event, `UserChangedEvent`, every time
+the current user changes, including sign-out. It is a `VyuhEvent<User>`, not
+a `SystemEvent`. See [authentication](/plugins/authentication#react-to-sign-in-across-features).
+
 ## Define and emit your own events
 
 Extend `VyuhEvent<T>`, where `T` is the payload type (`void` for none). Use a
@@ -139,7 +148,16 @@ void dispose() {
 }
 ```
 
-`vyuh.event.once<T>()` listens to the next event of that type only.
+`vyuh.event.once<T>()` listens to the next event of that type only. It
+cancels itself before it calls your listener. It also returns a
+`DisposeFunction`; call it to stop waiting if the event never comes:
+
+```dart
+final cancel = vyuh.event.once<SystemReadyEvent>((_) => showWelcome());
+
+// Later, if you no longer need it:
+cancel();
+```
 
 ## Delivery
 
@@ -195,7 +213,8 @@ Extend `EventPlugin` and implement `on`, `once`, `emit`, `init` and
 `dispose`, then pass it in the `event` slot. Keep it preloaded (the base class
 already mixes in `PreloadedPlugin`), match listeners by type including
 subtypes, so `EventHandler<SystemEvent>` still sees every system event, and
-make sure the function returned by `on` really cancels. See
+make sure the functions returned by `on` and `once` really cancel. Both
+return a `DisposeFunction`. See
 [writing a plugin](/plugins/custom-plugins).
 
 ## See also
@@ -207,5 +226,5 @@ make sure the function returned by `on` really cancels. See
 - [Routes and navigation](/guides/routes-and-navigation#feature-redirects) for
   event-driven redirects
 - [Authentication](/plugins/authentication#react-to-sign-in-across-features)
-  for turning sign-in into an event
+  for `UserChangedEvent`
 - [Startup and lifecycle](/concepts/runtime-lifecycle) for when each event fires

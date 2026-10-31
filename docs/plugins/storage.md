@@ -132,9 +132,9 @@ All four methods are `async`. Always `await` them.
 | Method | What it does |
 | --- | --- |
 | `read(key)` | Returns the stored value, or `null` when the key is missing. |
-| `write(key, value)` | Saves the value. Returns the value you passed in. |
+| `write(key, value)` | Saves the value. Returns what was stored: the value itself, or for `SharedPreferencesStoragePlugin` the string it saved. |
 | `has(key)` | Returns `true` when the key exists. |
-| `delete(key)` | Removes the key. Returns `true` if it was there, `false` if it was missing. |
+| `delete(key)` | Removes the key. Returns `true` if it was there, even when it held `null`, and `false` if it was missing. |
 
 A few habits keep features from stepping on each other:
 
@@ -168,7 +168,7 @@ final count = await vyuh.storage.read('cart.count');
 // SharedPreferencesStoragePlugin: '3' (a String)
 ```
 
-`SharedPreferencesStoragePlugin` saves every value with `setString(key, value.toString())`. So `true` becomes `'true'`, and `null` becomes the text `'null'`. Use `delete` to remove a key instead of writing `null`.
+`SharedPreferencesStoragePlugin` saves every value with `setString(key, value.toString())` and returns that string, so `true` becomes `'true'`. Writing `null` deletes the key and returns `null`.
 
 It still reads values of any type. If native code or another package stored an `int` or a `bool` in `SharedPreferences`, `read` returns that `int` or `bool`.
 
@@ -184,14 +184,15 @@ Vyuh starts plugins for you before your features run. On a restart, it disposes 
 | `dispose` | Clears the map | Closes the box | Drops its reference. The data stays on the device |
 | Before `init` or after `dispose` | Reads and writes the map | Every method throws `StateError` | Every method throws `StateError` |
 | `delete` of a missing key | `false` | `false` | `false` |
+| `write(key, null)` | Keeps the key, with a `null` value | Keeps the key, with a `null` value | Deletes the key |
 
 The `StateError` message says the plugin is not initialized, and asks you to register it in `PluginDescriptor` or call `init()` first. You normally see it when you create the plugin yourself in a test and forget to call `init`.
 
 Some details that can surprise you:
 
 - **The in-memory default loses data on restart.** `dispose` and `init` both clear it, and Vyuh disposes plugins on every restart.
-- **Hive keeps a key whose value is `null`.** After `write('key', null)`, `has('key')` is `true` and `read('key')` is `null`.
-- **Hive boxes are shared by name.** Two `HiveStoragePlugin` instances with the same `boxName` read the same data. Use different box names to keep data apart.
+- **Hive and in-memory keep a key whose value is `null`.** After `write('key', null)`, `has('key')` is `true`, `read('key')` is `null`, and `delete('key')` returns `true`.
+- **Hive boxes are shared by name.** Several `HiveStoragePlugin` instances with the same `boxName` share one Hive box and read the same data. The box closes only when the last of them is disposed. Use different box names to keep data apart.
 
 ## Testing
 
@@ -199,11 +200,11 @@ Some details that can surprise you:
 
 The simplest test leaves out `storage:`. Your feature then uses `InMemoryStoragePlugin`, which needs no platform channels. Each `init` starts empty.
 
-You can also create it yourself. It isn't exported from `vyuh_core.dart`, so import its file:
+You can also create it yourself. It is exported from `vyuh_core.dart`:
 
 ```dart
 import 'package:flutter_test/flutter_test.dart';
-import 'package:vyuh_core/plugin/storage/in_memory_storage_plugin.dart';
+import 'package:vyuh_core/vyuh_core.dart';
 
 void main() {
   test('remembers the display name', () async {
@@ -294,7 +295,7 @@ void main() {
 
 ## Write your own
 
-To store data somewhere else, such as SQLite or a remote cache, extend `StoragePlugin` and implement `read`, `write`, `has` and `delete`. Add the `InitOncePlugin` mixin and put your setup in `initOnce` and cleanup in `disposeOnce`. Keep the contract: `read` returns `null` for a missing key and `delete` returns `false` for one.
+To store data somewhere else, such as SQLite or a remote cache, extend `StoragePlugin` and implement `read`, `write`, `has` and `delete`. Add the `InitOncePlugin` mixin and put your setup in `initOnce` and cleanup in `disposeOnce`. Keep the contract: `read` returns `null` for a missing key, and `delete` returns `false` for a missing key and `true` for one that exists, even with a `null` value.
 
 See [Custom plugins](/plugins/custom-plugins) for the full steps.
 
@@ -302,6 +303,6 @@ See [Custom plugins](/plugins/custom-plugins) for the full steps.
 
 - [StoragePlugin](/api/vyuh-core#storageplugin)
 - [PluginDescriptor](/api/vyuh-core#plugindescriptor)
-- [Hive storage package](/framework/hive-storage) and [HiveStoragePlugin API](/api/vyuh-plugin-storage-hive#hivestorageplugin)
-- [SharedPreferences storage package](/framework/shared-preferences-storage) and [SharedPreferencesStoragePlugin API](/api/vyuh-plugin-storage-shared-preferences#sharedpreferencesstorageplugin)
+- [Hive storage package](https://pub.dev/packages/vyuh_plugin_storage_hive) and [HiveStoragePlugin API](/api/vyuh-plugin-storage-hive#hivestorageplugin)
+- [SharedPreferences storage package](https://pub.dev/packages/vyuh_plugin_storage_shared_preferences) and [SharedPreferencesStoragePlugin API](/api/vyuh-plugin-storage-shared-preferences#sharedpreferencesstorageplugin)
 - [Secure storage](/plugins/secure-storage) for sensitive values

@@ -36,7 +36,7 @@ Directly declared public members:
 FlutterSecureStoragePlugin({AndroidOptions? androidOptions, IOSOptions? iOSOptions, WebOptions? webOptions, MacOsOptions? macOSOptions, LinuxOptions? linuxOptions, WindowsOptions? windowsOptions});
 ```
 
-Creates a new instance of `FlutterSecureStoragePlugin` with platform-specific options.
+Creates a new instance of `FlutterSecureStoragePlugin` with optional platform-specific options from `flutter_secure_storage`, which this package re-exports. Platforms without options use the package defaults.
 
 ```dart
 Future<void> initOnce();
@@ -51,7 +51,7 @@ Future<String?> read(String key);
 Reads a value from secure storage.
 
 ```dart
-Future<void> write(String key, dynamic value);
+Future<String?> write(String key, dynamic value);
 ```
 
 Writes a value to secure storage.
@@ -71,3 +71,5 @@ Deletes a value from secure storage.
 ```dart
 Future<void> disposeOnce();
 ```
+
+Releases the plugin. Stored values stay on the device; using the plugin again needs another `init`.

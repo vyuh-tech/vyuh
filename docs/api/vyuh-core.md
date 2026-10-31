@@ -18,7 +18,7 @@ flowchart BT
 
 ## Choose a declaration
 
-[AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [Loader](#loader) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouterUrlStyle](#routerurlstyle) · [RoutingConfigNotifier](#routingconfignotifier) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [User](#user) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhStrings](#vyuhstrings) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [reportFailure](#reportfailure) · [runApp](#runapp) · [vyuh](#vyuh)
+[AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [InMemorySecureStoragePlugin](#inmemorysecurestorageplugin) · [InMemoryStoragePlugin](#inmemorystorageplugin) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [Loader](#loader) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpEnvPlugin](#noopenvplugin) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouterUrlStyle](#routerurlstyle) · [RoutingConfigNotifier](#routingconfignotifier) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [UnknownAuthPlugin](#unknownauthplugin) · [User](#user) · [UserChangedEvent](#userchangedevent) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhStrings](#vyuhstrings) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [reportFailure](#reportfailure) · [runApp](#runapp) · [vyuh](#vyuh)
 
 ## AnalyticsPlugin {#analyticsplugin}
 
@@ -278,13 +278,13 @@ A stream of user changes.
 void setCurrentUser(User user);
 ```
 
-
+Sets the signed-in user, adds it to `userChanges` and emits a `UserChangedEvent`, so features can react with an `EventHandler` or re-check their redirects with `refreshOn: `UserChangedEvent``.
 
 ```dart
 Future<void> dispose();
 ```
 
-
+Signs the plugin out locally: `currentUser` is `User.unknown` again.
 
 ```dart
 Future<void> init();
@@ -366,7 +366,7 @@ Deletes the current user account.
 
 ## BuildFailureView {#buildfailureview}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L334)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L344)
 
 Shown in release builds in place of a widget that failed to build. Small, quiet and themed, so one broken widget does not break the page.
 
@@ -476,7 +476,7 @@ Clears all instances registered in the DI container.
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/env/default_env_plugin.dart#L4)
 
-Public declaration in this package.
+Reads configuration from a `.env` asset through `flutter_dotenv`.
 
 ```dart
 final class DefaultEnvPlugin extends EnvPlugin
@@ -494,7 +494,7 @@ final String fileName;
 final Map<String, String> defaults;
 ```
 
-
+Values used when the env file doesn't set a key. Values in the file always win.
 
 ```dart
 DefaultEnvPlugin({this.fileName = '.env', this.defaults = const {}});
@@ -540,7 +540,7 @@ String? maybeGet(String key, {String? fallback});
 
 ## DefaultEventPlugin {#defaulteventplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L107)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L108)
 
 Default implementation of `EventPlugin` using the event_bus package.
 
@@ -569,7 +569,7 @@ DisposeFunction on<T extends VyuhEvent>(VyuhEventListener<T> listener);
 
 
 ```dart
-void once<T extends VyuhEvent>(VyuhEventListener<T> listener);
+DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener);
 ```
 
 
@@ -760,7 +760,7 @@ Create a new DeleteAccountFailure with the given error.
 
 ## DisposeFunction {#disposefunction}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L101)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L102)
 
 A function that can be called to dispose of (cancel) an event subscription.
 
@@ -881,7 +881,7 @@ DisposeFunction on<T extends VyuhEvent>(VyuhEventListener<T> listener);
 Subscribe to events of type `T`.
 
 ```dart
-void once<T extends VyuhEvent>(VyuhEventListener<T> listener);
+DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener);
 ```
 
 Subscribe to a single occurrence of an event of type `T`.
@@ -1074,7 +1074,7 @@ Restarts the platform. This rebuilds the whole app, so it is the last resort.
 
 ## FailureCard {#failurecard}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L228)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L234)
 
 The default inline failure, used inside a page for a part that failed.
 
@@ -1504,10 +1504,16 @@ Directly declared public members:
 final String? debugLabel;
 ```
 
-
+A name for this container, shown by `toString` to tell scoped containers apart while debugging.
 
 ```dart
 GetItDIPlugin({this.debugLabel});
+```
+
+
+
+```dart
+String toString();
 ```
 
 
@@ -1610,7 +1616,7 @@ static const dynamic standard;
 
 ## HttpNetworkPlugin {#httpnetworkplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart#L30)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart#L33)
 
 Public declaration in this package.
 
@@ -1678,7 +1684,7 @@ Future<Response> patch(Uri url, {Map<String, String>? headers, Object? body, Enc
 void close();
 ```
 
-
+Does nothing. The client is shared by every feature, so only the platform closes it, when it disposes the plugin.
 
 ```dart
 Future<String> read(Uri url, {Map<String, String>? headers});
@@ -1707,6 +1713,126 @@ A builder for an image placeholder widget.
 ```dart
 typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
 ```
+
+## InMemorySecureStoragePlugin {#inmemorysecurestorageplugin}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/storage/in_memory_secure_storage_plugin.dart#L5)
+
+A simple in-memory secure storage plugin that stores data in a Map.
+
+```dart
+final class InMemorySecureStoragePlugin extends SecureStoragePlugin with InitOncePlugin
+```
+
+Directly declared public members:
+
+```dart
+InMemorySecureStoragePlugin();
+```
+
+
+
+```dart
+Future<dynamic> read(String key);
+```
+
+
+
+```dart
+Future<dynamic> write(String key, dynamic value);
+```
+
+
+
+```dart
+Future<bool> has(String key);
+```
+
+
+
+```dart
+Future<bool> delete(String key);
+```
+
+
+
+```dart
+Future<void> clear();
+```
+
+Clears all data from the secure storage.
+
+```dart
+Future<void> initOnce();
+```
+
+
+
+```dart
+Future<void> disposeOnce();
+```
+
+
+
+## InMemoryStoragePlugin {#inmemorystorageplugin}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/storage/in_memory_storage_plugin.dart#L5)
+
+A simple in-memory storage plugin that stores data in a Map.
+
+```dart
+final class InMemoryStoragePlugin extends StoragePlugin with InitOncePlugin
+```
+
+Directly declared public members:
+
+```dart
+InMemoryStoragePlugin();
+```
+
+
+
+```dart
+Future<dynamic> read(String key);
+```
+
+
+
+```dart
+Future<dynamic> write(String key, dynamic value);
+```
+
+
+
+```dart
+Future<bool> has(String key);
+```
+
+
+
+```dart
+Future<bool> delete(String key);
+```
+
+
+
+```dart
+Future<void> clear();
+```
+
+Clears all data from the storage.
+
+```dart
+Future<void> initOnce();
+```
+
+
+
+```dart
+Future<void> disposeOnce();
+```
+
+
 
 ## InitOncePlugin {#initonceplugin}
 
@@ -1949,10 +2075,10 @@ void registerTranslations(TranslationRegistration registration);
 Register a feature's translation configuration
 
 ```dart
-Future<bool> setLocale(Locale locale);
+Future<bool> setLocale(Locale requested);
 ```
 
-Set the application locale
+Set the application locale. The match is by language, and the configured locale for that language becomes current, so `hi_IN` sets the app's `hi`. Returns false for an unsupported language.
 
 ```dart
 Future<void> useDeviceLocale();
@@ -2006,17 +2132,17 @@ Future<void> dispose();
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/telemetry_plugin.dart#L7)
 
-Public declaration in this package.
+How severe a log message is, from least to most severe, so levels can be compared by `index`.
 
 ```dart
-enum LogLevel { debug, info, trace, warning, error, fatal }
+enum LogLevel { trace, debug, info, warning, error, fatal }
 ```
 
 ## Logger {#logger}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L3)
 
-Public declaration in this package.
+Leveled logging over the telemetry plugin. Every message goes to `reportMessage` as text; `error` and `fatal` also report their error, with its stack trace, through `reportError`.
 
 ```dart
 abstract interface class Logger
@@ -2049,7 +2175,7 @@ void warn(dynamic message);
 
 
 ```dart
-void error(dynamic message, {Object? error});
+void error(dynamic message, {Object? error, StackTrace? stackTrace});
 ```
 
 
@@ -2062,7 +2188,7 @@ void fatal(dynamic message, {Object? error, StackTrace? stackTrace});
 
 ## LoggerInterface {#loggerinterface}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L54)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L62)
 
 A convenience wrapper to provide a Logger interface to the Telemetry reportMessage() calls.
 
@@ -2170,7 +2296,7 @@ Create a new LogoutFailure with the given error.
 
 ## NamedBindings {#namedbindings}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L120)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L144)
 
 The same named accessors as `vyuh.*`, for code that must also run in widget mode, where `runApp` (and so `vyuh`) is not used.
 
@@ -2588,6 +2714,72 @@ List<NavigatorObserver> get observers;
 
 
 
+## NoOpEnvPlugin {#noopenvplugin}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/env/noop_env_plugin.dart#L3)
+
+The default environment plugin: it holds no values. `get` throws and `maybeGet` returns its fallback.
+
+```dart
+final class NoOpEnvPlugin extends EnvPlugin
+```
+
+Directly declared public members:
+
+```dart
+final String fileName;
+```
+
+
+
+```dart
+final Map<String, String> defaults;
+```
+
+
+
+```dart
+NoOpEnvPlugin({this.fileName = '.env', this.defaults = const {}});
+```
+
+
+
+```dart
+Future<void> init();
+```
+
+
+
+```dart
+Map<String, String> all();
+```
+
+
+
+```dart
+dynamic clear();
+```
+
+
+
+```dart
+Future<void> dispose();
+```
+
+
+
+```dart
+String get(String key, {String? fallback});
+```
+
+
+
+```dart
+String? maybeGet(String key, {String? fallback});
+```
+
+
+
 ## NoOpTelemetryProvider {#nooptelemetryprovider}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart#L4)
@@ -2704,7 +2896,7 @@ Future<Trace> startChild(String name, String operation, {LogLevel? level = LogLe
 
 ## OAuthType {#oauthtype}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L115)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L135)
 
 Public declaration in this package.
 
@@ -2722,7 +2914,7 @@ LoginMethod get loginMethod;
 
 ## PlatformLoggerInterface {#platformloggerinterface}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L60)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L68)
 
 Public declaration in this package.
 
@@ -2866,7 +3058,7 @@ Future<void> dispose();
 
 ## PluginDescriptor {#plugindescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/plugin_descriptor.dart#L8)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/plugin_descriptor.dart#L4)
 
 A descriptor for configuring the plugin system in a Vyuh application.
 
@@ -3402,7 +3594,7 @@ Creates a new `SystemReadyEvent`.
 
 ## TelemetryPlugin {#telemetryplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/telemetry_plugin.dart#L30)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/telemetry_plugin.dart#L32)
 
 The default implementation for a Telemetry Plugin.
 
@@ -3616,6 +3808,42 @@ const TranslationRegistration({required this.name, required this.onLocaleChange}
 
 
 
+## UnknownAuthPlugin {#unknownauthplugin}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/anonymous_auth_plugin.dart#L3)
+
+An authentication plugin that does not support any authentication methods.
+
+```dart
+final class UnknownAuthPlugin extends AuthPlugin
+```
+
+Directly declared public members:
+
+```dart
+UnknownAuthPlugin();
+```
+
+Creates an instance of `UnknownAuthPlugin`.
+
+```dart
+User get currentUser;
+```
+
+
+
+```dart
+String get refreshToken;
+```
+
+
+
+```dart
+String get token;
+```
+
+
+
 ## User {#user}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/user.dart#L3)
@@ -3693,6 +3921,30 @@ static const dynamic unknown;
 ```
 
 A constant unknown user.
+
+## UserChangedEvent {#userchangedevent}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L125)
+
+Emitted whenever an `AuthPlugin` sets the current user: on sign-in, sign-out and profile changes. `data` is the new user, which is `User.unknown` after sign-out.
+
+```dart
+final class UserChangedEvent extends VyuhEvent<User>
+```
+
+Directly declared public members:
+
+```dart
+UserChangedEvent(User user);
+```
+
+
+
+```dart
+User get user;
+```
+
+The new current user.
 
 ## VoidFutureFunction {#voidfuturefunction}
 
@@ -3772,7 +4024,7 @@ T? get<T extends Plugin>();
 
 ## VyuhBranding {#vyuhbranding}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L444)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L457)
 
 "Powered by Vyuh", shown when the theme allows it.
 
@@ -3796,7 +4048,7 @@ Widget build(BuildContext context);
 
 ## VyuhEvent {#vyuhevent}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L72)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L73)
 
 Base class for all events in a Vyuh application.
 
@@ -3832,7 +4084,7 @@ VyuhEvent({required this.name, this.data});
 
 ## VyuhEventListener {#vyuheventlistener}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L104)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L105)
 
 A function that handles events of type `T`.
 
@@ -4178,7 +4430,7 @@ The strings of the running app, or the defaults when none is running.
 
 ## VyuhTheme {#vyuhtheme}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L5)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L6)
 
 The app's themes, given once to `PlatformWidgetBuilder.theme`.
 
@@ -4232,7 +4484,7 @@ A copy with the given fields replaced.
 
 ## VyuhThemeExtension {#vyuhthemeextension}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L57)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L58)
 
 Design tokens for the UI the framework draws itself.
 
@@ -4321,7 +4573,37 @@ final bool? showPoweredBy;
 Whether the app loader shows "Powered by Vyuh".
 
 ```dart
-const VyuhThemeExtension({this.appLoaderBackground, this.loaderColor, this.routeLoaderBackground, this.placeholderBackground, this.placeholderForeground, this.failureBackground, this.failureForeground, this.debugBackground, this.debugForeground, this.debugBorder, this.radius, this.loaderDelay, this.showPoweredBy});
+final TextStyle? failureTitleStyle;
+```
+
+Text style of failure titles, merged over the theme's headline (pages) or title (inline cards) style.
+
+```dart
+final TextStyle? failureMessageStyle;
+```
+
+Text style of failure messages, merged over the theme's body style.
+
+```dart
+final Map<FailureKind, IconData>? failureIcons;
+```
+
+Icons for failure kinds. Kinds left out keep their default icon.
+
+```dart
+final double? failureIconSize;
+```
+
+Size of the icon on full-page failures.
+
+```dart
+final double? failureMaxWidth;
+```
+
+Maximum width of the content on full-page failures.
+
+```dart
+const VyuhThemeExtension({this.appLoaderBackground, this.loaderColor, this.routeLoaderBackground, this.placeholderBackground, this.placeholderForeground, this.failureBackground, this.failureForeground, this.debugBackground, this.debugForeground, this.debugBorder, this.radius, this.loaderDelay, this.showPoweredBy, this.failureTitleStyle, this.failureMessageStyle, this.failureIcons, this.failureIconSize, this.failureMaxWidth});
 ```
 
 
@@ -4339,7 +4621,7 @@ static VyuhThemeExtension of(BuildContext context);
 The tokens for `context`: the theme's extension, with every missing token filled from its color scheme.
 
 ```dart
-VyuhThemeExtension copyWith({Color? appLoaderBackground, Color? loaderColor, Color? routeLoaderBackground, Color? placeholderBackground, Color? placeholderForeground, Color? failureBackground, Color? failureForeground, Color? debugBackground, Color? debugForeground, Color? debugBorder, double? radius, Duration? loaderDelay, bool? showPoweredBy});
+VyuhThemeExtension copyWith({Color? appLoaderBackground, Color? loaderColor, Color? routeLoaderBackground, Color? placeholderBackground, Color? placeholderForeground, Color? failureBackground, Color? failureForeground, Color? debugBackground, Color? debugForeground, Color? debugBorder, double? radius, Duration? loaderDelay, bool? showPoweredBy, TextStyle? failureTitleStyle, TextStyle? failureMessageStyle, Map<FailureKind, IconData>? failureIcons, double? failureIconSize, double? failureMaxWidth});
 ```
 
 

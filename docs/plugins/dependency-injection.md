@@ -168,6 +168,8 @@ screens.
 Some state belongs to one part of the screen instead. CMS-driven apps use
 `ScopedDIWidget` from `vyuh_extension_content`, which gives a subtree its own
 `GetItDIPlugin(debugLabel: ...)` and resets it when the widget goes away.
+`toString()` shows the label, as `GetItDIPlugin(<label>)`, so you can tell
+scoped containers apart while debugging.
 Descendants read it with `ScopedDIWidget.of(context)`, which falls back to the
 platform container when there is no scope. See
 [scoped dependency injection](/guides/scoped-di).

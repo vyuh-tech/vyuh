@@ -55,13 +55,13 @@ Future<void> disposeOnce();
 Future<dynamic> read(String key);
 ```
 
-
+Returns the stored value of any type (values written by this plugin are strings), or null when `key` is missing.
 
 ```dart
 Future<dynamic> write(String key, dynamic value);
 ```
 
-
+Stores `value.toString()` and returns that string. Writing null deletes `key` and returns null.
 
 ```dart
 Future<bool> has(String key);
@@ -72,3 +72,5 @@ Future<bool> has(String key);
 ```dart
 Future<bool> delete(String key);
 ```
+
+Returns false when `key` did not exist, as `StoragePlugin.delete` says.

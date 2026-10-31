@@ -123,27 +123,27 @@ Future<void> initCatalog() async {
 | Method | `DefaultEnvPlugin` | `NoOpEnvPlugin` (default) |
 | --- | --- | --- |
 | `get(key, {fallback})` | The value, else `fallback`. Throws an `AssertionError` when both are missing. | Always throws `UnsupportedError` |
-| `maybeGet(key, {fallback})` | The value, else `fallback`, else `null` | Always `null`, even when you pass a `fallback` |
-| `all()` | A map of every loaded key | An empty map |
+| `maybeGet(key, {fallback})` | The value, else `fallback`, else `null` | `fallback` (or `null` without one) |
+| `all()` | An unmodifiable map of every loaded key | An empty map |
 | `clear()` | Removes every value (see below) | Does nothing |
 
 Some tips:
 
 - **Use `get` for settings the feature can't work without.** A missing key fails early, with the key's name in the message.
 - **Use `maybeGet` for optional settings**, and decide what to do when it returns `null`.
-- **Don't change the map from `all()`.** `DefaultEnvPlugin` returns `flutter_dotenv`'s own map, so a change there changes what every feature reads.
+- **The map from `all()` is read-only.** `DefaultEnvPlugin` returns an unmodifiable map, so changing it throws.
 - **All values are strings.** Parse numbers and booleans yourself, for example `int.parse(vyuh.env.get('PAGE_SIZE', fallback: '20'))`.
 
 ::: tip The default throws on `get`
-Without an `env:` plugin, Vyuh uses `NoOpEnvPlugin`. Its `get` always throws, and its `maybeGet` returns `null` and ignores the fallback. If a feature reads the environment, register `DefaultEnvPlugin` or your own `EnvPlugin`.
+Without an `env:` plugin, Vyuh uses `NoOpEnvPlugin`. Its `get` always throws, and its `maybeGet` returns the fallback you pass. If a feature reads the environment, register `DefaultEnvPlugin` or your own `EnvPlugin`. `NoOpEnvPlugin` is exported from `vyuh_core.dart` if you want to create it yourself.
 :::
 
 ## Behaviour and lifecycle
 
 - **`init` loads the file.** It reads the asset, then adds each `defaults` entry whose key the file doesn't set. `DefaultEnvPlugin` doesn't use `InitOncePlugin`, so every `init` loads the file again from scratch.
-- **When you can read it.** Vyuh starts the env plugin together with the other regular plugins, before any feature starts. Read it in a feature's `init` or later. Don't read it from another plugin's `init`, because the two start at the same time. The preloaded plugins (network, telemetry, analytics and events) start even earlier, before the env file is loaded.
+- **When you can read it.** Vyuh starts the env plugin together with the other regular plugins, before any feature starts. Read it in a feature's `init` or later. Don't read it from another plugin's `init`, because the two start at the same time. The env plugin is not preloaded, because loading an asset needs the Flutter binding. So the preloaded plugins (network, telemetry, analytics and events) can't read env values during their own `init`: they start before the env file is loaded. Pass their settings in code instead.
 - **`clear` and `dispose` empty it.** Both call `dotenv.clean()`. After that, `get`, `maybeGet` and `all` throw `flutter_dotenv`'s `NotInitializedError` until `init` runs again. Vyuh calls `dispose` and `init` for you on a restart.
-- **There is one store.** `flutter_dotenv` keeps a single global `dotenv` object. Two `DefaultEnvPlugin` instances, or other code that calls `dotenv.load`, share and overwrite the same values.
+- **There is one store, so use one `DefaultEnvPlugin` per app.** It loads into `flutter_dotenv`'s single global `dotenv` object. Two `DefaultEnvPlugin` instances, or other code that calls `dotenv.load`, share and overwrite the same values.
 
 ```dart
 final env = vc.DefaultEnvPlugin();

@@ -13,7 +13,7 @@ description: Report errors, log messages and time operations with TelemetryPlugi
 | **Default** | `TelemetryPlugin(providers: [NoOpTelemetryProvider()])`: nothing is recorded |
 | **Accessor** | `vyuh.telemetry` and `vyuh.log` (never null), or `VyuhBinding.instance.telemetry` / `.log` in widget mode |
 | **Slot** | `PluginDescriptor(telemetry: ...)` |
-| **Implementations** | [`NoOpTelemetryProvider`](/api/vyuh-core#nooptelemetryprovider) in `vyuh_core`; [`ConsoleLoggerTelemetryProvider`](/framework/console-telemetry) in `vyuh_plugin_telemetry_provider_console` |
+| **Implementations** | [`NoOpTelemetryProvider`](/api/vyuh-core#nooptelemetryprovider) in `vyuh_core`; [`ConsoleLoggerTelemetryProvider`](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console) in `vyuh_plugin_telemetry_provider_console` |
 
 ## How it fits together
 
@@ -75,7 +75,11 @@ void loadCatalog() {
   vyuh.log.debug('Loading catalog');
   vyuh.log.info('Catalog loaded: 42 items');
   vyuh.log.warn('Catalog image missing for item 7');
-  vyuh.log.error('Catalog request failed');
+  vyuh.log.info(42); // any value works; it is turned into text
+}
+
+void onCatalogFailed(Object error, StackTrace stackTrace) {
+  vyuh.log.error('Catalog request failed', error: error, stackTrace: stackTrace);
 }
 ```
 
@@ -85,16 +89,18 @@ void loadCatalog() {
 | `debug(message)` | `LogLevel.debug` |
 | `info(message)` | `LogLevel.info` |
 | `warn(message)` | `LogLevel.warning` |
-| `error(message, {error})` | `LogLevel.error` |
+| `error(message, {error, stackTrace})` | `LogLevel.error` |
 | `fatal(message, {error, stackTrace})` | `LogLevel.fatal` |
 
 Three things to know:
 
-- Pass a `String` as the message. The parameter is typed `dynamic`, but it is handed to `reportMessage(String message, ...)`, so any other type fails at runtime. Use string interpolation: `vyuh.log.info('count: $count')`.
-- `error()` and `fatal()` accept `error` and `stackTrace` arguments but **do not forward them**; only the message is reported. To report an exception with its stack trace, call `vyuh.telemetry.reportError` instead.
+- The message can be any value. The logger turns it into text with `'$message'` before it calls `reportMessage`, so `vyuh.log.info(42)` works.
+- When you pass `error` to `error()` or `fatal()`, the logger also calls `reportError(error, stackTrace: stackTrace, params: {'message': text}, fatal: ...)`. `fatal` is `true` only for `fatal()`. Without `error`, only the message is reported.
 - The logger reads the telemetry plugin from `VyuhBinding`, so it works once `runApp` (or widget mode) has started.
 
-`LogLevel` has these values, in this declared order: `debug`, `info`, `trace`, `warning`, `error`, `fatal`. Note that `trace` comes after `info`, so don't compare levels by their `index` to filter by severity.
+`LogLevel` has these values, from least to most severe: `trace`, `debug`, `info`, `warning`, `error`, `fatal`. You can compare levels by their `index`, for example `level.index >= LogLevel.warning.index`.
+
+If you write your own `Logger`, its `error` method takes the same arguments as `fatal`: `error(message, {Object? error, StackTrace? stackTrace})`.
 
 ### Report errors
 
@@ -151,7 +157,7 @@ final items = await vyuh.telemetry.trace<List<String>>(
 | `parentTrace` | When given, the new trace is started as a child of this one. |
 | `level` | A `LogLevel`, `LogLevel.info` by default. |
 
-It returns `Future<T?>`. If `fn` throws, `trace()` reports the error with `reportError` and then rethrows it, so you still handle it.
+It returns `Future<T?>`. If `fn` throws, `trace()` waits for `reportError` to finish and then rethrows the error, so you still handle it.
 
 Nest traces by passing the trace you received as `parentTrace`:
 
@@ -191,7 +197,7 @@ try {
 
 A `Trace` has these members: `stop()`, `setMetric(name, value)`, `getMetric(name)`, `setAttributes(map)`, `getAttributes()` and `startChild(name, operation, {level})`. Attribute values are strings and metric values are integers.
 
-The plugin's `startTrace` asks every provider for a trace and wraps them in one combined trace. Setting an attribute or metric, stopping and starting a child all apply to every provider's trace. `getAttributes()` and `getMetric()` read from the first provider's trace.
+The plugin's `startTrace` asks every provider for a trace and wraps them in one combined trace. Setting an attribute or metric, stopping and starting a child all apply to every provider's trace. `getAttributes()` and `getMetric()` read from the first provider's trace. If a provider fails to start a trace or a child trace, it gets a `NoOpTrace` for that trace and the others carry on.
 
 ### What the platform traces for you
 
@@ -205,10 +211,11 @@ flowchart TD
   FE --> F1["Feature: title · Init, one per feature"]
   F1 --> R1["Routes: title · Init"]
   FE --> FX["Feature Extensions · Init"]
+  FX --> FX1["Extension: title · Init, one per extension builder"]
   FE --> FR["Feature Routes · Init"]
 ```
 
-Each extension builder also gets an `Extension: <title> · Init` trace. These are started without a parent, so they appear as separate top-level traces rather than under `Feature Extensions`. If startup fails, the error is reported with `reportError` before the failure screen appears.
+Each extension builder's `Extension: <title> · Init` trace is a child of `Feature Extensions`. If startup fails, the error is reported with `reportError` before the failure screen appears.
 
 ## Uncaught errors
 
@@ -229,9 +236,8 @@ runApp(
 
 ## Behaviour and lifecycle
 
-- **Telemetry never crashes the app.** `reportError`, `reportFlutterError` and `reportMessage` call each provider separately. If a provider throws, synchronously or by returning a failed `Future`, the plugin prints `Vyuh: telemetry provider <Type> failed: <error>` with `debugPrint` and moves on. The other providers still get the report, and the `Future` you awaited completes normally.
-- **Only the report methods are guarded.** `startTrace`, `init` and `dispose` are not wrapped this way. A provider that throws there makes the call fail, so keep those methods safe.
-- **Startup.** As a preloaded plugin, it is initialized before the platform. `init()` runs every provider's `init()` at the same time. It is not re-initialized when the platform restarts.
+- **Telemetry never crashes the app.** The plugin calls each provider separately in `init`, `dispose`, `reportError`, `reportFlutterError`, `reportMessage`, `startTrace`, child traces and trace `stop`. If a provider throws, synchronously or by returning a failed `Future`, the plugin prints `Vyuh: telemetry provider <Type> failed: <error>` with `debugPrint` and moves on. The other providers carry on, and the `Future` you awaited completes normally. A provider that fails to start a trace gets a `NoOpTrace` in its place.
+- **Startup.** As a preloaded plugin, it is initialized before the platform. `init()` runs every provider's `init()` at the same time. Once it has started, it keeps running when the platform restarts. If the telemetry plugin itself fails to start, the app shows its startup failure screen, and Restart tries it again.
 - **Init once.** Concurrent `init()` calls share one run. A failed `init()` can be retried.
 - **Dispose.** `vyuh.dispose()` calls each provider's `dispose()`.
 
@@ -242,11 +248,11 @@ runApp(
 `ConsoleLoggerTelemetryProvider` prints to the console with the `logger` package:
 
 - `reportMessage` prints at the matching level (fatal, error, warning, info, debug, trace).
-- `reportError` and `reportFlutterError` print the error and stack trace.
-- `params` and `fatal` are ignored.
+- `reportError` and `reportFlutterError` print the error and stack trace, at the error level, or at the fatal level when `fatal` is `true`.
+- `params`, when given, are added after the message: `message {key: value}`.
 - **Traces are no-ops.** Its `startTrace` returns a `NoOpTrace`, so you won't see trace timing in the console.
 
-See the [console telemetry package page](/framework/console-telemetry) for details.
+See the [console telemetry package page](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console) for details.
 
 ## Testing
 
@@ -478,9 +484,7 @@ final class CrashReporterTelemetryProvider implements TelemetryProvider {
     LogLevel? level = LogLevel.info,
   }) async {
     // Most crash reporters only want warnings and above.
-    if (level == LogLevel.warning ||
-        level == LogLevel.error ||
-        level == LogLevel.fatal) {
+    if (level != null && level.index >= LogLevel.warning.index) {
       await _send('message', {'message': message, 'level': level?.name});
     }
   }
@@ -496,7 +500,7 @@ final class CrashReporterTelemetryProvider implements TelemetryProvider {
 
 Tips:
 
-- The report methods may throw; the plugin contains it. Still, avoid throwing from `startTrace`, `init` and `dispose`, which are not contained.
+- Your provider may throw; the plugin logs it and carries on with the other providers. A failed `startTrace` or `startChild` is replaced by a `NoOpTrace`.
 - Don't call `vyuh.log` or `vyuh.telemetry` from inside your own provider. That reports back into the plugin and can loop.
 - If you have nothing to trace, return `NoOpTrace()` from `startTrace`, like the console provider does.
 

@@ -77,3 +77,5 @@ Future<bool> has(String key);
 ```dart
 Future<bool> delete(String key);
 ```
+
+Returns false when `key` did not exist, as `StoragePlugin.delete` says.

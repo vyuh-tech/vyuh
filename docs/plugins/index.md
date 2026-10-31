@@ -42,10 +42,10 @@ The implementation packages:
 
 | Package | Provides |
 |---|---|
-| [`vyuh_plugin_storage_hive`](/framework/hive-storage) | `HiveStoragePlugin` |
-| [`vyuh_plugin_storage_shared_preferences`](/framework/shared-preferences-storage) | `SharedPreferencesStoragePlugin` |
-| [`vyuh_plugin_storage_secure`](/framework/secure-storage) | `FlutterSecureStoragePlugin` |
-| [`vyuh_plugin_telemetry_provider_console`](/framework/console-telemetry) | `ConsoleLoggerTelemetryProvider` |
+| [`vyuh_plugin_storage_hive`](https://pub.dev/packages/vyuh_plugin_storage_hive) | `HiveStoragePlugin` |
+| [`vyuh_plugin_storage_shared_preferences`](https://pub.dev/packages/vyuh_plugin_storage_shared_preferences) | `SharedPreferencesStoragePlugin` |
+| [`vyuh_plugin_storage_secure`](https://pub.dev/packages/vyuh_plugin_storage_secure) | `FlutterSecureStoragePlugin` |
+| [`vyuh_plugin_telemetry_provider_console`](https://pub.dev/packages/vyuh_plugin_telemetry_provider_console) | `ConsoleLoggerTelemetryProvider` |
 
 ::: info Content and CMS
 The content plugin is not part of the core. CMS-driven apps add it from
@@ -112,7 +112,10 @@ Code that must also run without `runApp`, such as an embedded
 Plugins start before any feature, so a feature's `init` can use all of them.
 
 1. **Preloaded plugins** start first: events, networking, telemetry and
-   analytics. They're needed while everything else starts.
+   analytics. They're needed while everything else starts. If one fails, the
+   app shows its startup failure screen instead of crashing, and Restart
+   tries the failed plugin again. Preloaded plugins that started keep running
+   across restarts.
 2. **The remaining plugins** start together.
 3. **Features** start, in dependency order.
 

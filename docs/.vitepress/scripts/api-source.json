@@ -1372,7 +1372,7 @@
           },
           {
             "signature": "Future<void> initOnce()",
-            "doc": "Initializes all analytics providers.\n\nThis is called automatically when the plugin is initialized.\nEach provider's initialization is handled independently."
+            "doc": "Initializes all analytics providers.\n\nThis is called automatically when the plugin is initialized.\nA provider that fails to initialize is logged and skipped."
           },
           {
             "signature": "Future<void> disposeOnce()",
@@ -1524,11 +1524,11 @@
           },
           {
             "signature": "void setCurrentUser(User user)",
-            "doc": ""
+            "doc": "Sets the signed-in user, adds it to [userChanges] and emits a\n[UserChangedEvent], so features can react with an `EventHandler` or\nre-check their redirects with `refreshOn: [UserChangedEvent]`."
           },
           {
             "signature": "Future<void> dispose()",
-            "doc": ""
+            "doc": "Signs the plugin out locally: [currentUser] is [User.unknown] again."
           },
           {
             "signature": "Future<void> init()",
@@ -1576,7 +1576,7 @@
           },
           {
             "signature": "Future<bool> refreshSession()",
-            "doc": "Attempts to refresh the current session token.\n\nCalled by the network layer when a 401 is received, giving the auth\nplugin a chance to refresh the token before the caller retries.\nReturns `true` if the token was successfully refreshed.\nDefault implementation returns `false` (no refresh support)."
+            "doc": "Attempts to refresh the current session token.\n\nNothing in Vyuh calls this automatically: call it from your own code,\nfor example after a request returns 401, then retry the request.\nReturns `true` if the token was successfully refreshed.\nDefault implementation returns `false` (no refresh support)."
           },
           {
             "signature": "Future<void> deleteAccount()",
@@ -1587,7 +1587,7 @@
       {
         "name": "BuildFailureView",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 334,
+        "line": 344,
         "doc": "Shown in release builds in place of a widget that failed to build.\nSmall, quiet and themed, so one broken widget does not break the page.",
         "signature": "class BuildFailureView extends StatelessWidget",
         "members": [
@@ -1663,7 +1663,7 @@
         "name": "DefaultEnvPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/env/default_env_plugin.dart",
         "line": 4,
-        "doc": "",
+        "doc": "Reads configuration from a `.env` asset through `flutter_dotenv`.\n\nIt loads into flutter_dotenv's global `dotenv`, so use one\n[DefaultEnvPlugin] per app.",
         "signature": "final class DefaultEnvPlugin extends EnvPlugin",
         "members": [
           {
@@ -1672,7 +1672,7 @@
           },
           {
             "signature": "final Map<String, String> defaults",
-            "doc": ""
+            "doc": "Values used when the env file doesn't set a key. Values in the file\nalways win."
           },
           {
             "signature": "DefaultEnvPlugin({this.fileName = '.env', this.defaults = const {}})",
@@ -1707,7 +1707,7 @@
       {
         "name": "DefaultEventPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 107,
+        "line": 108,
         "doc": "Default implementation of [EventPlugin] using the event_bus package.\n\nThis implementation provides a simple and efficient event bus that:\n- Supports multiple subscribers\n- Handles event type safety\n- Provides automatic cleanup\n\nExample:\n```dart\nfinal plugins = PluginDescriptor(\n  event: DefaultEventPlugin(),\n);\n```",
         "signature": "final class DefaultEventPlugin extends EventPlugin",
         "members": [
@@ -1724,7 +1724,7 @@
             "doc": ""
           },
           {
-            "signature": "void once<T extends VyuhEvent>(VyuhEventListener<T> listener)",
+            "signature": "DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener)",
             "doc": ""
           },
           {
@@ -1858,7 +1858,7 @@
       {
         "name": "DisposeFunction",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 101,
+        "line": 102,
         "doc": "A function that can be called to dispose of (cancel) an event subscription.",
         "signature": "typedef DisposeFunction = void Function();",
         "members": []
@@ -1941,8 +1941,8 @@
             "doc": "Subscribe to events of type [T].\n\nReturns a dispose function that can be called to cancel the subscription.\nThe [listener] will be called whenever an event of type [T] is emitted.\n\nExample:\n```dart\nfinal dispose = vyuh.event.on<UserEvent>((event) {\n  print('User event: ${event.name}');\n});\n```"
           },
           {
-            "signature": "void once<T extends VyuhEvent>(VyuhEventListener<T> listener)",
-            "doc": "Subscribe to a single occurrence of an event of type [T].\n\nThe [listener] will be called only once when an event of type [T]\nis emitted, then the subscription will be automatically cancelled.\n\nExample:\n```dart\nvyuh.event.once<AppStartEvent>((event) {\n  print('App started at ${event.timestamp}');\n});\n```"
+            "signature": "DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener)",
+            "doc": "Subscribe to a single occurrence of an event of type [T].\n\nThe [listener] will be called only once when an event of type [T]\nis emitted, then the subscription will be automatically cancelled.\nCall the returned function to cancel it before the event arrives.\n\nExample:\n```dart\nvyuh.event.once<AppStartEvent>((event) {\n  print('App started at ${event.timestamp}');\n});\n```"
           },
           {
             "signature": "void emit<T extends VyuhEvent>(T event)",
@@ -2076,7 +2076,7 @@
       {
         "name": "FailureCard",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 228,
+        "line": 234,
         "doc": "The default inline failure, used inside a page for a part that failed.",
         "signature": "class FailureCard extends StatelessWidget",
         "members": [
@@ -2369,10 +2369,14 @@
         "members": [
           {
             "signature": "final String? debugLabel",
-            "doc": ""
+            "doc": "A name for this container, shown by [toString] to tell scoped\ncontainers apart while debugging."
           },
           {
             "signature": "GetItDIPlugin({this.debugLabel})",
+            "doc": ""
+          },
+          {
+            "signature": "String toString()",
             "doc": ""
           },
           {
@@ -2445,13 +2449,13 @@
       {
         "name": "HttpNetworkPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart",
-        "line": 30,
+        "line": 33,
         "doc": "",
         "signature": "final class HttpNetworkPlugin extends NetworkPlugin",
         "members": [
           {
             "signature": "HttpNetworkPlugin({Client? client, RetryOptions? retryOptions, Duration? timeout, this._webIncludeCredentials = true})",
-            "doc": "Creates an HTTP network plugin.\n\n[_webIncludeCredentials] - When true and running on web, uses browser's fetch API\nwith credentials: 'include' to send HTTP-only cookies with cross-origin requests.\nThis is essential for session-based authentication with HTTP-only cookies."
+            "doc": "Creates an HTTP network plugin.\n\nEvery request, including [read], [readBytes] and [send], fails with a\n[TimeoutException] after [timeout] (30 seconds by default). Requests\nother than [send] are retried on socket errors and timeouts, as\n[retryOptions] says (3 attempts by default). [send] is not retried,\nbecause a streamed request can only be sent once.\n\n[webIncludeCredentials] - When true and running on web, uses browser's fetch API\nwith credentials: 'include' to send HTTP-only cookies with cross-origin requests.\nThis is essential for session-based authentication with HTTP-only cookies."
           },
           {
             "signature": "Future<void> init()",
@@ -2487,7 +2491,7 @@
           },
           {
             "signature": "void close()",
-            "doc": ""
+            "doc": "Does nothing. The client is shared by every feature, so only the\nplatform closes it, when it disposes the plugin."
           },
           {
             "signature": "Future<String> read(Uri url, {Map<String, String>? headers})",
@@ -2510,6 +2514,88 @@
         "doc": "A builder for an image placeholder widget.\n\nThis builder is called to create a placeholder widget while an image is loading.\nThe [width] and [height] parameters specify the desired dimensions of the\nplaceholder.\n\nExample:\n```dart\nImagePlaceholderBuilder builder = (context, {width, height}) => Container(\n  width: width,\n  height: height,\n  color: Colors.grey[300],\n);\n```",
         "signature": "typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,",
         "members": []
+      },
+      {
+        "name": "InMemorySecureStoragePlugin",
+        "file": "packages/system/vyuh_core/lib/plugin/storage/in_memory_secure_storage_plugin.dart",
+        "line": 5,
+        "doc": "A simple in-memory secure storage plugin that stores data in a Map.\n\nThis plugin is primarily intended for testing and development purposes.\nData is stored in memory and will be lost when the application is restarted.\nWhile this plugin extends SecureStoragePlugin, it does NOT actually encrypt the data.\nDo not use this plugin for storing sensitive information in production.",
+        "signature": "final class InMemorySecureStoragePlugin extends SecureStoragePlugin with InitOncePlugin",
+        "members": [
+          {
+            "signature": "InMemorySecureStoragePlugin()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<dynamic> read(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<dynamic> write(String key, dynamic value)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<bool> has(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<bool> delete(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> clear()",
+            "doc": "Clears all data from the secure storage.\n\nThis is useful for testing purposes to reset the storage state."
+          },
+          {
+            "signature": "Future<void> initOnce()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> disposeOnce()",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "InMemoryStoragePlugin",
+        "file": "packages/system/vyuh_core/lib/plugin/storage/in_memory_storage_plugin.dart",
+        "line": 5,
+        "doc": "A simple in-memory storage plugin that stores data in a Map.\n\nThis plugin is primarily intended for testing and development purposes.\nData is stored in memory and will be lost when the application is restarted.\nDo not use this plugin for storing sensitive information in production.",
+        "signature": "final class InMemoryStoragePlugin extends StoragePlugin with InitOncePlugin",
+        "members": [
+          {
+            "signature": "InMemoryStoragePlugin()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<dynamic> read(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<dynamic> write(String key, dynamic value)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<bool> has(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<bool> delete(String key)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> clear()",
+            "doc": "Clears all data from the storage.\n\nThis is useful for testing purposes to reset the storage state."
+          },
+          {
+            "signature": "Future<void> initOnce()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> disposeOnce()",
+            "doc": ""
+          }
+        ]
       },
       {
         "name": "InitOncePlugin",
@@ -2678,8 +2764,8 @@
             "doc": "Register a feature's translation configuration\n\nThis should be called during feature initialization.\nThe plugin will:\n1. Initialize the feature's translations with the current locale\n2. Register the callback for future locale changes"
           },
           {
-            "signature": "Future<bool> setLocale(Locale locale)",
-            "doc": "Set the application locale"
+            "signature": "Future<bool> setLocale(Locale requested)",
+            "doc": "Set the application locale. The match is by language, and the\nconfigured locale for that language becomes current, so `hi_IN` sets\nthe app's `hi`. Returns false for an unsupported language."
           },
           {
             "signature": "Future<void> useDeviceLocale()",
@@ -2719,15 +2805,15 @@
         "name": "LogLevel",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/telemetry_plugin.dart",
         "line": 7,
-        "doc": "",
-        "signature": "enum LogLevel { debug, info, trace, warning, error, fatal }",
+        "doc": "How severe a log message is, from least to most severe, so levels can be\ncompared by [index].",
+        "signature": "enum LogLevel { trace, debug, info, warning, error, fatal }",
         "members": []
       },
       {
         "name": "Logger",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/logger.dart",
         "line": 3,
-        "doc": "",
+        "doc": "Leveled logging over the telemetry plugin. Every message goes to\n`reportMessage` as text; [error] and [fatal] also report their error, with\nits stack trace, through `reportError`.",
         "signature": "abstract interface class Logger",
         "members": [
           {
@@ -2747,7 +2833,7 @@
             "doc": ""
           },
           {
-            "signature": "void error(dynamic message, {Object? error})",
+            "signature": "void error(dynamic message, {Object? error, StackTrace? stackTrace})",
             "doc": ""
           },
           {
@@ -2759,7 +2845,7 @@
       {
         "name": "LoggerInterface",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/logger.dart",
-        "line": 54,
+        "line": 62,
         "doc": "A convenience wrapper to provide a Logger interface to the Telemetry reportMessage() calls.",
         "signature": "extension LoggerInterface on VyuhBinding",
         "members": [
@@ -2836,7 +2922,7 @@
       {
         "name": "NamedBindings",
         "file": "packages/system/vyuh_core/lib/runtime/vyuh_binding.dart",
-        "line": 120,
+        "line": 144,
         "doc": "The same named accessors as `vyuh.*`, for code that must also run in\nwidget mode, where `runApp` (and so `vyuh`) is not used.",
         "signature": "extension NamedBindings on VyuhBinding",
         "members": [
@@ -3119,6 +3205,51 @@
         ]
       },
       {
+        "name": "NoOpEnvPlugin",
+        "file": "packages/system/vyuh_core/lib/plugin/env/noop_env_plugin.dart",
+        "line": 3,
+        "doc": "The default environment plugin: it holds no values. [get] throws and\n[maybeGet] returns its fallback.",
+        "signature": "final class NoOpEnvPlugin extends EnvPlugin",
+        "members": [
+          {
+            "signature": "final String fileName",
+            "doc": ""
+          },
+          {
+            "signature": "final Map<String, String> defaults",
+            "doc": ""
+          },
+          {
+            "signature": "NoOpEnvPlugin({this.fileName = '.env', this.defaults = const {}})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "Map<String, String> all()",
+            "doc": ""
+          },
+          {
+            "signature": "dynamic clear()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "String get(String key, {String? fallback})",
+            "doc": ""
+          },
+          {
+            "signature": "String? maybeGet(String key, {String? fallback})",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "NoOpTelemetryProvider",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart",
         "line": 4,
@@ -3199,7 +3330,7 @@
       {
         "name": "OAuthType",
         "file": "packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart",
-        "line": 115,
+        "line": 135,
         "doc": "",
         "signature": "enum OAuthType { google, apple, meta, github, twitter, linkedin, microsoft, custom }",
         "members": [
@@ -3212,7 +3343,7 @@
       {
         "name": "PlatformLoggerInterface",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/logger.dart",
-        "line": 60,
+        "line": 68,
         "doc": "",
         "signature": "extension PlatformLoggerInterface on VyuhPlatform",
         "members": [
@@ -3311,7 +3442,7 @@
       {
         "name": "PluginDescriptor",
         "file": "packages/system/vyuh_core/lib/plugin/plugin_descriptor.dart",
-        "line": 8,
+        "line": 4,
         "doc": "A descriptor for configuring the plugin system in a Vyuh application.\n\nThe [PluginDescriptor] manages the registration and initialization of all plugins\nin the application and provides type-safe access to plugin instances.\n\nPlugins are organized into several categories:\n- Core System Plugins:\n  - [DIPlugin]: Dependency injection\n  - [AnalyticsPlugin]: User analytics\n  - [TelemetryPlugin]: Application telemetry\n  - [NetworkPlugin]: Network communication\n  - [AuthPlugin]: Authentication\n  - [NavigationPlugin]: Routing and navigation\n  - [EnvPlugin]: Environment configuration\n  - [EventPlugin]: Event system\n  - [StoragePlugin]: Data persistence\n  - [SecureStoragePlugin]: Secure Data persistence\n- Custom Plugins: Additional plugins via [others]\n\nEach plugin type has a default implementation that is used if not explicitly\nprovided. Custom implementations can be provided for any plugin type.\n\nExample:\n```dart\nfinal plugins = PluginDescriptor(\n  analytics: MyCustomAnalyticsPlugin(),\n  auth: MyCustomAuthPlugin(),\n  others: [MyCustomPlugin()],\n);\n```\n\nPlugins marked [PreloadedPlugin] initialize before the platform. The default\napp platform initializes the remaining plugins concurrently. There is no\nautomatic dependency graph between plugins.",
         "signature": "final class PluginDescriptor",
         "members": [
@@ -3691,7 +3822,7 @@
       {
         "name": "TelemetryPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/telemetry_plugin.dart",
-        "line": 30,
+        "line": 32,
         "doc": "The default implementation for a Telemetry Plugin.",
         "signature": "final class TelemetryPlugin extends Plugin with PreloadedPlugin, InitOncePlugin implements TelemetryProvider",
         "members": [
@@ -3837,6 +3968,31 @@
         ]
       },
       {
+        "name": "UnknownAuthPlugin",
+        "file": "packages/system/vyuh_core/lib/plugin/auth/anonymous_auth_plugin.dart",
+        "line": 3,
+        "doc": "An authentication plugin that does not support any authentication methods.",
+        "signature": "final class UnknownAuthPlugin extends AuthPlugin",
+        "members": [
+          {
+            "signature": "UnknownAuthPlugin()",
+            "doc": "Creates an instance of [UnknownAuthPlugin]."
+          },
+          {
+            "signature": "User get currentUser",
+            "doc": ""
+          },
+          {
+            "signature": "String get refreshToken",
+            "doc": ""
+          },
+          {
+            "signature": "String get token",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "User",
         "file": "packages/system/vyuh_core/lib/plugin/auth/user.dart",
         "line": 3,
@@ -3886,6 +4042,23 @@
           {
             "signature": "static const dynamic unknown",
             "doc": "A constant unknown user."
+          }
+        ]
+      },
+      {
+        "name": "UserChangedEvent",
+        "file": "packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart",
+        "line": 125,
+        "doc": "Emitted whenever an [AuthPlugin] sets the current user: on sign-in,\nsign-out and profile changes. [data] is the new user, which is\n[User.unknown] after sign-out.",
+        "signature": "final class UserChangedEvent extends VyuhEvent<User>",
+        "members": [
+          {
+            "signature": "UserChangedEvent(User user)",
+            "doc": ""
+          },
+          {
+            "signature": "User get user",
+            "doc": "The new current user."
           }
         ]
       },
@@ -3945,7 +4118,7 @@
       {
         "name": "VyuhBranding",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 444,
+        "line": 457,
         "doc": "\"Powered by Vyuh\", shown when the theme allows it.",
         "signature": "class VyuhBranding extends StatelessWidget",
         "members": [
@@ -3962,7 +4135,7 @@
       {
         "name": "VyuhEvent",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 72,
+        "line": 73,
         "doc": "Base class for all events in a Vyuh application.\n\nEvents represent discrete occurrences in the application that other\ncomponents might be interested in. They can carry optional data\nand are automatically timestamped.\n\nExample:\n```dart\nclass UserLoggedInEvent extends VyuhEvent<UserData> {\n  UserLoggedInEvent({required UserData data})\n    : super(name: 'user.logged_in', data: data);\n}\n```",
         "signature": "class VyuhEvent<T>",
         "members": [
@@ -3987,7 +4160,7 @@
       {
         "name": "VyuhEventListener",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 104,
+        "line": 105,
         "doc": "A function that handles events of type [T].",
         "signature": "typedef VyuhEventListener<T extends VyuhEvent> = void Function(T event);",
         "members": []
@@ -4223,7 +4396,7 @@
       {
         "name": "VyuhTheme",
         "file": "packages/system/vyuh_core/lib/runtime/theme.dart",
-        "line": 5,
+        "line": 6,
         "doc": "The app's themes, given once to [PlatformWidgetBuilder.theme].\n\nThe framework uses it everywhere it draws its own UI: the loading screen\nbefore the app starts, the startup failure screen, the default app root,\nloaders, error views and placeholders. Apps that build their own root in\n`appBuilder` should pass the same values to their `MaterialApp`.\n\n```dart\nrunApp(\n  platformWidgetBuilder: PlatformWidgetBuilder.system.copyWith(\n    theme: VyuhTheme(light: MyDesign.light, dark: MyDesign.dark),\n  ),\n  features: () => [...],\n);\n```",
         "signature": "final class VyuhTheme",
         "members": [
@@ -4260,7 +4433,7 @@
       {
         "name": "VyuhThemeExtension",
         "file": "packages/system/vyuh_core/lib/runtime/theme.dart",
-        "line": 57,
+        "line": 58,
         "doc": "Design tokens for the UI the framework draws itself.\n\nAdd it to your `ThemeData.extensions` to restyle loaders, error views and\nplaceholders. Every token you leave out falls back to a value derived from\nthe theme's [ColorScheme], so the defaults follow light and dark mode.\n\n```dart\nThemeData(\n  colorSchemeSeed: brand,\n  extensions: const [\n    VyuhThemeExtension(showPoweredBy: false, loaderDelay: Duration(milliseconds: 300)),\n  ],\n)\n```\n\nRead the resolved tokens with [VyuhThemeExtension.of].",
         "signature": "final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension>",
         "members": [
@@ -4317,7 +4490,27 @@
             "doc": "Whether the app loader shows \"Powered by Vyuh\"."
           },
           {
-            "signature": "const VyuhThemeExtension({this.appLoaderBackground, this.loaderColor, this.routeLoaderBackground, this.placeholderBackground, this.placeholderForeground, this.failureBackground, this.failureForeground, this.debugBackground, this.debugForeground, this.debugBorder, this.radius, this.loaderDelay, this.showPoweredBy})",
+            "signature": "final TextStyle? failureTitleStyle",
+            "doc": "Text style of failure titles, merged over the theme's headline (pages)\nor title (inline cards) style."
+          },
+          {
+            "signature": "final TextStyle? failureMessageStyle",
+            "doc": "Text style of failure messages, merged over the theme's body style."
+          },
+          {
+            "signature": "final Map<FailureKind, IconData>? failureIcons",
+            "doc": "Icons for failure kinds. Kinds left out keep their default icon."
+          },
+          {
+            "signature": "final double? failureIconSize",
+            "doc": "Size of the icon on full-page failures."
+          },
+          {
+            "signature": "final double? failureMaxWidth",
+            "doc": "Maximum width of the content on full-page failures."
+          },
+          {
+            "signature": "const VyuhThemeExtension({this.appLoaderBackground, this.loaderColor, this.routeLoaderBackground, this.placeholderBackground, this.placeholderForeground, this.failureBackground, this.failureForeground, this.debugBackground, this.debugForeground, this.debugBorder, this.radius, this.loaderDelay, this.showPoweredBy, this.failureTitleStyle, this.failureMessageStyle, this.failureIcons, this.failureIconSize, this.failureMaxWidth})",
             "doc": ""
           },
           {
@@ -4329,7 +4522,7 @@
             "doc": "The tokens for [context]: the theme's extension, with every missing\ntoken filled from its color scheme."
           },
           {
-            "signature": "VyuhThemeExtension copyWith({Color? appLoaderBackground, Color? loaderColor, Color? routeLoaderBackground, Color? placeholderBackground, Color? placeholderForeground, Color? failureBackground, Color? failureForeground, Color? debugBackground, Color? debugForeground, Color? debugBorder, double? radius, Duration? loaderDelay, bool? showPoweredBy})",
+            "signature": "VyuhThemeExtension copyWith({Color? appLoaderBackground, Color? loaderColor, Color? routeLoaderBackground, Color? placeholderBackground, Color? placeholderForeground, Color? failureBackground, Color? failureForeground, Color? debugBackground, Color? debugForeground, Color? debugBorder, double? radius, Duration? loaderDelay, bool? showPoweredBy, TextStyle? failureTitleStyle, TextStyle? failureMessageStyle, Map<FailureKind, IconData>? failureIcons, double? failureIconSize, double? failureMaxWidth})",
             "doc": ""
           },
           {
@@ -10986,11 +11179,11 @@
           },
           {
             "signature": "Future<dynamic> read(String key)",
-            "doc": ""
+            "doc": "Returns the stored value of any type (values written by this plugin\nare strings), or null when [key] is missing."
           },
           {
             "signature": "Future<dynamic> write(String key, dynamic value)",
-            "doc": ""
+            "doc": "Stores `value.toString()` and returns that string. Writing null deletes\n[key] and returns null."
           },
           {
             "signature": "Future<bool> has(String key)",
@@ -10998,7 +11191,7 @@
           },
           {
             "signature": "Future<bool> delete(String key)",
-            "doc": ""
+            "doc": "Returns false when [key] did not exist, as [StoragePlugin.delete] says."
           }
         ]
       }
@@ -11017,7 +11210,7 @@
         "members": [
           {
             "signature": "FlutterSecureStoragePlugin({AndroidOptions? androidOptions, IOSOptions? iOSOptions, WebOptions? webOptions, MacOsOptions? macOSOptions, LinuxOptions? linuxOptions, WindowsOptions? windowsOptions})",
-            "doc": "Creates a new instance of [FlutterSecureStoragePlugin] with platform-specific options.\n\nEach platform can be configured with its own set of options:\n\n* [androidOptions] - Android configuration:\n  - `encryptedSharedPreferences`: Use EncryptedSharedPreferences (recommended)\n  - `sharedPreferencesName`: Custom name for preferences file\n  - `preferencesKeyPrefix`: Prefix for all stored keys\n\n* [iOSOptions] - iOS configuration:\n  - `accessibility`: When the keychain item should be accessible\n  - `synchronizable`: Enable iCloud keychain sync\n  - `groupId`: App Group ID for shared access\n\n* [macOSOptions] - macOS configuration:\n  - Similar to iOS options\n  - Supports keychain sharing and accessibility\n\n* [webOptions] - Web configuration:\n  - `dbName`: Name for IndexedDB database\n  - `publicKey`: Optional encryption key\n\n* [linuxOptions] - Linux configuration:\n  - Uses Secret Service API\n  - Requires running D-Bus session\n\n* [windowsOptions] - Windows configuration:\n  - Uses Windows DPAPI\n  - Data is tied to current user account\n\nExample:\n```dart\nfinal plugin = FlutterSecureStoragePlugin(\n  androidOptions: const AndroidOptions(\n    encryptedSharedPreferences: true,\n  ),\n  iOSOptions: const IOSOptions(\n    accessibility: KeychainAccessibility.first_unlock,\n  ),\n);\n```"
+            "doc": "Creates a new instance of [FlutterSecureStoragePlugin] with optional\nplatform-specific options from `flutter_secure_storage`, which this\npackage re-exports. Platforms without options use the package defaults.\n\nExample:\n```dart\nfinal plugin = FlutterSecureStoragePlugin(\n  androidOptions: const AndroidOptions(storageNamespace: 'my_app'),\n  iOSOptions: const IOSOptions(\n    accessibility: KeychainAccessibility.first_unlock,\n  ),\n);\n```"
           },
           {
             "signature": "Future<void> initOnce()",
@@ -11028,8 +11221,8 @@
             "doc": "Reads a value from secure storage.\n\nReturns the value associated with [key] if it exists, null otherwise.\nThe value is returned as a String, regardless of the original type.\n\nExample:\n```dart\nfinal value = await storage.read('settings.theme');\nif (value != null) {\n  print('Theme setting: $value');\n}\n```\n\nSee also:\n* [write] - Store a value\n* [has] - Check if a key exists"
           },
           {
-            "signature": "Future<void> write(String key, dynamic value)",
-            "doc": "Writes a value to secure storage.\n\nThe [value] is converted to a string before storage. If [value] is null,\nthe [key] will be deleted from storage.\n\nExample:\n```dart\n// Store a string\nawait storage.write('user.name', 'John Doe');\n\n// Store a number\nawait storage.write('app.version', 2.1);\n\n// Store JSON\nawait storage.write('user.preferences', jsonEncode(prefs));\n\n// Delete by writing null\nawait storage.write('temp.key', null);\n```\n\nSee also:\n* [read] - Read a stored value\n* [delete] - Delete a stored value"
+            "signature": "Future<String?> write(String key, dynamic value)",
+            "doc": "Writes a value to secure storage.\n\nThe [value] is converted to a string before storage, and that string is\nreturned. If [value] is null, the [key] is deleted and null is returned.\n\nExample:\n```dart\n// Store a string\nawait storage.write('user.name', 'John Doe');\n\n// Store a number\nawait storage.write('app.version', 2.1);\n\n// Store JSON\nawait storage.write('user.preferences', jsonEncode(prefs));\n\n// Delete by writing null\nawait storage.write('temp.key', null);\n```\n\nSee also:\n* [read] - Read a stored value\n* [delete] - Delete a stored value"
           },
           {
             "signature": "Future<bool> has(String key)",
@@ -11041,7 +11234,7 @@
           },
           {
             "signature": "Future<void> disposeOnce()",
-            "doc": ""
+            "doc": "Releases the plugin. Stored values stay on the device; using the plugin\nagain needs another [init]."
           }
         ]
       }
@@ -11143,7 +11336,7 @@
           },
           {
             "signature": "Future<bool> delete(String key)",
-            "doc": ""
+            "doc": "Returns false when [key] did not exist, as [StoragePlugin.delete] says."
           }
         ]
       }
@@ -11236,7 +11429,7 @@
         "file": "packages/vyuh_cli/lib/version.dart",
         "line": 2,
         "doc": "",
-        "signature": "const packageVersion = '0.2.0';",
+        "signature": "const packageVersion = '0.3.1';",
         "members": []
       }
     ]
