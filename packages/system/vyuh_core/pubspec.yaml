@@ -1,7 +1,7 @@
 name: vyuh_core
 resolution: workspace
 description: The core library for the Vyuh framework which contains the base types and runtime.
-version: 2.1.0
+version: 3.0.0
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/system/vyuh_core
 issue_tracker: https://github.com/vyuh-tech/vyuh/issues
@@ -39,4 +39,4 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^6.0.0
   mocktail: ^1.0.4
-  vyuh_test: ^1.4.3
+  vyuh_test: ^1.4.4

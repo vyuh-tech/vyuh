@@ -1,3 +1,10 @@
+## 4.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**(vyuh_feature_auth): publish to pub.dev again.
+ - **BREAKING** **FEAT**: make vyuh_core CMS-free and move content into vyuh_extension_content.
+
 ## 3.0.3
 
 - Remove CDX dependencies and use Material UI input decorations directly.

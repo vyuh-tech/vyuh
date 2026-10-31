@@ -1,3 +1,10 @@
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: make vyuh_core CMS-free and move content into vyuh_extension_content.
+ - **BREAKING** **FEAT**(vyuh_core): declarative feature hooks, themed failure recovery and one theme.
+
 ## 2.1.0
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.

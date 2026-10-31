@@ -1,3 +1,9 @@
+## 0.3.0
+
+> Note: This release has breaking changes.
+
+ - **BREAKING** **FEAT**: make vyuh_core CMS-free and move content into vyuh_extension_content.
+
 ## 0.2.0
 
  - **FEAT**(cli): scaffold modular Apps features and plugins with optional CMS.
