@@ -1,3 +1,7 @@
+## 1.7.0
+
+ - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.
+
 ## 1.6.6
 
  - Update a dependency to the latest release.

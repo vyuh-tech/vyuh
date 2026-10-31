@@ -1,3 +1,7 @@
+## 3.2.0
+
+ - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.
+
 ## 3.1.0
 
  - **FIX**(vyuh_core): keep the back stack after a lazy load; no startup-failure flash.
