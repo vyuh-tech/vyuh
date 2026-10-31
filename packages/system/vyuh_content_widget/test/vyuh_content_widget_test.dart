@@ -19,6 +19,11 @@ void main() {
       VyuhContentBinding.init(
         plugins: PluginDescriptor(others: [mockContentPlugin]),
         descriptors: [],
+        // A visible loader, so tests can see the loading state without
+        // waiting for the default loader's delay.
+        widgetBuilder: PlatformWidgetBuilder.system.copyWith(
+          contentLoader: (_) => const Text('loading'),
+        ),
       );
 
       await VyuhBinding.instance.widgetReady;
@@ -66,9 +71,9 @@ void main() {
       );
 
       // Initially shows loading
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('loading'), findsOneWidget);
 
-      await tester.pump(const Duration(milliseconds: 200));
+      await settle(tester);
 
       // Verify mock was called with correct parameters
       verify(
@@ -80,7 +85,7 @@ void main() {
 
       // After loading, shows content
       expect(find.text('Mock Document'), findsOneWidget);
-      expect(find.byType(CircularProgressIndicator), findsNothing);
+      expect(find.text('loading'), findsNothing);
     });
 
     testWidgets('builds document list', (tester) async {
@@ -109,10 +114,9 @@ void main() {
       );
 
       // Initially shows loading
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('loading'), findsOneWidget);
 
-      // Wait for the async operation to complete and widget to rebuild
-      await tester.pump(); // Process current frame
+      await settle(tester);
 
       expect(find.text('Mock Document 1'), findsOneWidget);
       expect(find.text('Mock Document 2'), findsOneWidget);
@@ -140,17 +144,13 @@ void main() {
       );
 
       // Initially shows loading
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('loading'), findsOneWidget);
 
-      // Wait for the async operation to complete and widget to rebuild
-      await tester.pump(); // Process current frame
-      await tester.pump(
-        const Duration(milliseconds: 100),
-      ); // Wait for async work
-      await tester.pump(); // Process frame after async work
+      await settle(tester);
 
-      // Should show error state
-      expect(find.text('Error: Failed to fetch'), findsOneWidget);
+      // Shows the error view, with a way to retry.
+      expect(find.text('Failed to load content'), findsOneWidget);
+      expect(find.text('Try again'), findsOneWidget);
     });
   });
 }

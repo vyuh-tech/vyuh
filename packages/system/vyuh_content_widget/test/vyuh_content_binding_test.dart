@@ -42,19 +42,22 @@ void main() {
     test('standardDescriptors includes required descriptors', () {
       final descriptors = VyuhContentBinding.standardDescriptors;
 
-      // Should have system descriptor and content descriptor
-      expect(descriptors.length, equals(2));
+      // A single content descriptor, for Document.
+      expect(descriptors.length, equals(1));
 
-      // Content descriptor should include Document
-      final contentDescriptor = descriptors[1];
+      final contentDescriptor = descriptors[0];
       expect(contentDescriptor.contents?.length, equals(1));
       expect(contentDescriptor.contentBuilders?.length, equals(1));
 
       // Verify Document descriptor and builder
-      expect(contentDescriptor.contents?[0].schemaType,
-          equals(Document.schemaName));
-      expect(contentDescriptor.contentBuilders?[0],
-          equals(Document.contentBuilder));
+      expect(
+        contentDescriptor.contents?[0].schemaType,
+        equals(Document.schemaName),
+      );
+      expect(
+        contentDescriptor.contentBuilders?[0],
+        equals(Document.contentBuilder),
+      );
     });
 
     test('content getter returns VyuhBinding content plugin', () async {

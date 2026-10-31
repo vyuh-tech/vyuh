@@ -139,7 +139,7 @@ Params: ${widget.queryParams}
   void didUpdateWidget(covariant VyuhContentWidget<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.query != widget.query ||
-        oldWidget.queryParams != widget.queryParams) {
+        !mapEquals(oldWidget.queryParams, widget.queryParams)) {
       _fetchContent();
       return;
     }
