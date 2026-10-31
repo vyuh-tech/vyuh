@@ -26,6 +26,7 @@ const SECTIONS: Record<string, string> = {
   intro: 'Getting started',
   concepts: 'Concepts',
   guides: 'Guides',
+  plugins: 'Plugins',
   framework: 'Framework',
   api: 'API reference',
   cms: 'CMS integration',

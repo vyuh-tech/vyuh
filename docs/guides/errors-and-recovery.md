@@ -35,7 +35,7 @@ final class VyuhFailure {
 ```
 
 The same object reaches telemetry, the
-[failure events](events#system-events), and the error view.
+[failure events](/plugins/events#system-events), and the error view.
 
 ## What the user sees
 

@@ -18,7 +18,7 @@ flowchart TD
 
 ## When features hear about it
 
-A feature's [event handlers](/guides/events) and
+A feature's [event handlers](/plugins/events) and
 [redirects](/guides/routes-and-navigation#feature-redirects) start before any
 feature's `init` runs, and stop when the feature is disposed. The platform
 emits these events as it goes:

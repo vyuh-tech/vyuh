@@ -53,7 +53,7 @@ Follow [Compose features](compose-features) to add a second descriptor and share
 
 ## Choose your plugins
 
-Pass a `PluginDescriptor` to Vyuh’s `runApp` when you want a concrete network, auth, storage, or telemetry implementation. Consult the [plugin guide](/guides/using-plugins) and [core API](/api/vyuh-core) for available capability slots.
+Pass a `PluginDescriptor` to Vyuh’s `runApp` when you want a concrete network, auth, storage, or telemetry implementation. Consult the [plugin guide](/plugins/) and [core API](/api/vyuh-core) for available capability slots.
 
 ## Troubleshooting
 

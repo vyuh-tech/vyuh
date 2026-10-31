@@ -18,6 +18,37 @@ flowchart LR
   Bus --> Redirects["Redirect refresh triggers"]
 ```
 
+## The event plugin
+
+| | |
+|---|---|
+| Contract | `EventPlugin` |
+| Default implementation | `DefaultEventPlugin` (built on [event_bus](https://pub.dev/packages/event_bus)) |
+| Accessor | `vyuh.event` |
+| `PluginDescriptor` slot | `event` |
+| Implementations | `DefaultEventPlugin`, or your own |
+
+Every app gets a `DefaultEventPlugin`; you only fill the `event` slot to swap
+in your own. It is a **preloaded** plugin, so it starts before the platform
+and every other plugin. That is why system events such as
+`SystemInitStartedEvent` can be delivered at all.
+
+The contract has three methods:
+
+| Method | What it does |
+|---|---|
+| `on<T>(listener)` | Calls `listener` for every event of type `T` (or a subtype). Returns a `DisposeFunction` that cancels the subscription |
+| `once<T>(listener)` | Calls `listener` for the next event of type `T` only, then cancels itself. Returns nothing, so you can't cancel it early |
+| `emit<T>(event)` | Sends `event` to every listener of its type |
+
+All events extend `VyuhEvent<T>`, which has a `name`, an optional `data`
+payload of type `T`, and a `timestamp` set when the event is created.
+
+Delivery is **asynchronous**: `emit` returns straight away and listeners run
+shortly after (see [Delivery](#delivery)). `DefaultEventPlugin.init()` creates
+a fresh bus and `dispose()` destroys it, so listeners don't survive a restart;
+calling `on` or `emit` before `init()` throws.
+
 ## Declare handlers on a feature
 
 The recommended way to listen is declaratively, with `FeatureDescriptor.events`.
@@ -61,7 +92,7 @@ The platform emits these events. All of them extend `SystemEvent`, so
 | `SystemInitFailedEvent` | Platform init failed | `failure` |
 | `RouteFailureEvent` | A route could not be shown, reported once per failure | `failure` |
 
-`failure` is a [`VyuhFailure`](errors-and-recovery#the-failure-model): the same
+`failure` is a [`VyuhFailure`](/guides/errors-and-recovery#the-failure-model): the same
 object the error views show, with a `kind`, a user-facing `title` and `message`,
 the `location`, and the underlying `error`.
 
@@ -83,7 +114,7 @@ vyuh.event.emit(UserSignedOutEvent());
 
 Feature events are the glue between features. The account feature emits
 `UserSignedOutEvent`; a cart feature handles it, and so can a
-[redirect](routes-and-navigation#feature-redirects) that sends signed-out users
+[redirect](/guides/routes-and-navigation#feature-redirects) that sends signed-out users
 to the login page. Neither feature imports the other.
 
 ## Listen imperatively
@@ -118,9 +149,63 @@ by the line after `emit`. In widget tests, pump the tester before asserting.
 
 A listener that throws does not stop other listeners from running.
 
+## Testing
+
+In a widget test, run the app and wait with `getReady` from
+[`vyuh_test`](/api/vyuh-test). Because delivery is asynchronous, pump (or
+`await pumpEventQueue()`) after `emit` before you assert:
+
+```dart
+import 'package:flutter_test/flutter_test.dart';
+import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_test/vyuh_test.dart';
+
+void main() {
+  tearDown(() async {
+    if (VyuhBinding.instance.initialized) await vyuh.dispose();
+  });
+
+  testWidgets('handles sign-out', (tester) async {
+    var signedOut = 0;
+    runApp(
+      features: () => [
+        FeatureDescriptor(
+          name: 'cart',
+          title: 'Cart',
+          events: [EventHandler<UserSignedOutEvent>((_) => signedOut++)],
+        ),
+      ],
+    );
+    await vyuh.getReady(tester);
+
+    vyuh.event.emit(UserSignedOutEvent());
+    await tester.pump();
+
+    expect(signedOut, 1);
+  });
+}
+```
+
+For a unit test without an app, create a `DefaultEventPlugin()` and call
+`await plugin.init()` before using it.
+
+## Write your own
+
+Extend `EventPlugin` and implement `on`, `once`, `emit`, `init` and
+`dispose`, then pass it in the `event` slot. Keep it preloaded (the base class
+already mixes in `PreloadedPlugin`), match listeners by type including
+subtypes, so `EventHandler<SystemEvent>` still sees every system event, and
+make sure the function returned by `on` really cancels. See
+[writing a plugin](/plugins/custom-plugins).
+
 ## See also
 
-- [Errors and recovery](errors-and-recovery) for the failure events in context
-- [Routes and navigation](routes-and-navigation#feature-redirects) for
+- [EventPlugin API](/api/vyuh-core#eventplugin),
+  [DefaultEventPlugin](/api/vyuh-core#defaulteventplugin),
+  [VyuhEvent](/api/vyuh-core#vyuhevent)
+- [Errors and recovery](/guides/errors-and-recovery) for the failure events in context
+- [Routes and navigation](/guides/routes-and-navigation#feature-redirects) for
   event-driven redirects
+- [Authentication](/plugins/authentication#react-to-sign-in-across-features)
+  for turning sign-in into an event
 - [Startup and lifecycle](/concepts/runtime-lifecycle) for when each event fires

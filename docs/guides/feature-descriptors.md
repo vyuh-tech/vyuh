@@ -40,7 +40,7 @@ A feature can act on the whole app, not only on its own routes:
 
 - `events` declares typed `EventHandler<T>` listeners. The platform subscribes
   them before `init` and cancels them on dispose or restart. See
-  [events](/guides/events).
+  [events](/plugins/events).
 - `redirects` adds `FeatureRedirect`s to the app's redirect chain. They
   re-run on chosen events or listenables. See
   [feature redirects](/guides/routes-and-navigation#feature-redirects).

@@ -500,34 +500,8 @@ export default defineConfig({
           "link": "/guides/routes-and-navigation"
         },
         {
-          "text": "Plugins & State",
-          "collapsed": true,
-          "items": [
-            {
-              "text": "Using Plugins",
-              "link": "/guides/using-plugins"
-            },
-            { "text": "Networking", "link": "/guides/capabilities/networking" },
-            { "text": "Authentication", "link": "/guides/capabilities/authentication" },
-            { "text": "Storage", "link": "/guides/capabilities/storage" },
-            { "text": "Secure storage", "link": "/guides/capabilities/secure-storage" },
-            { "text": "Analytics", "link": "/guides/capabilities/analytics" },
-            { "text": "Telemetry and logging", "link": "/guides/capabilities/telemetry" },
-            { "text": "Environment configuration", "link": "/guides/capabilities/environment" },
-            { "text": "Dependency injection", "link": "/guides/capabilities/dependency-injection" },
-            {
-              "text": "Custom Plugins",
-              "link": "/guides/custom-plugins"
-            },
-            {
-              "text": "Feature Flags",
-              "link": "/guides/feature-flags"
-            },
-            {
-              "text": "State Management",
-              "link": "/guides/mobx-state-management"
-            }
-          ]
+          "text": "State Management",
+          "link": "/guides/mobx-state-management"
         },
         {
           "text": "Platform",
@@ -546,16 +520,8 @@ export default defineConfig({
               "link": "/guides/errors-and-recovery"
             },
             {
-              "text": "Internationalization",
-              "link": "/guides/i18n"
-            },
-            {
               "text": "Dependency Injection",
               "link": "/guides/scoped-di"
-            },
-            {
-              "text": "Events",
-              "link": "/guides/events"
             },
             {
               "text": "Adding Packages",
@@ -567,6 +533,26 @@ export default defineConfig({
           "text": "Best Practices",
           "link": "/guides/best-practices"
         }
+      ]
+    },
+    {
+      "text": "Plugins",
+      "collapsed": true,
+      "items": [
+        { "text": "Overview", "link": "/plugins/" },
+        { "text": "Dependency Injection", "link": "/plugins/dependency-injection" },
+        { "text": "Networking", "link": "/plugins/networking" },
+        { "text": "Authentication", "link": "/plugins/authentication" },
+        { "text": "Navigation", "link": "/plugins/navigation" },
+        { "text": "Events", "link": "/plugins/events" },
+        { "text": "Storage", "link": "/plugins/storage" },
+        { "text": "Secure Storage", "link": "/plugins/secure-storage" },
+        { "text": "Environment", "link": "/plugins/environment" },
+        { "text": "Analytics", "link": "/plugins/analytics" },
+        { "text": "Telemetry and Logging", "link": "/plugins/telemetry" },
+        { "text": "Locale and Translations", "link": "/plugins/locale" },
+        { "text": "Feature Flags", "link": "/plugins/feature-flags" },
+        { "text": "Writing a Plugin", "link": "/plugins/custom-plugins" }
       ]
     },
     {

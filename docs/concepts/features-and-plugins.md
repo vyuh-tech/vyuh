@@ -67,4 +67,4 @@ Reusing a feature means reusing the package and its declared public contribution
 - Use stable public routes and contributions instead of another feature’s private implementation.
 - Dispose feature-owned state and subscriptions in its lifecycle hook.
 
-Continue with [descriptors and builders](descriptors-and-builders), [designing features](/guides/designing-features), [using plugins](/guides/using-plugins), and the [core API](/api/vyuh-core).
+Continue with [descriptors and builders](descriptors-and-builders), [designing features](/guides/designing-features), [using plugins](/plugins/), and the [core API](/api/vyuh-core).

@@ -97,7 +97,7 @@ How the chain works:
 - **Failure isolation.** A redirect that throws is reported to telemetry and
   skipped, so one broken feature can't block navigation.
 
-Redirects pair naturally with [events](events): the feature that owns a state
+Redirects pair naturally with [events](/plugins/events): the feature that owns a state
 change emits an event, and any feature that cares lists it in `refreshOn`.
 
 ## Unmatched locations

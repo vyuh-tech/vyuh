@@ -72,7 +72,7 @@ void main() {
 
 Use `init` to register long-lived feature services and `dispose` to release subscriptions and owned resources. Add feature names to `dependencies` when initialization reads another feature’s services. Independent features initialize concurrently; list order alone is not an initialization dependency.
 
-Keep widget-local state in widgets. Use [dependency injection](scoped-di) for services shared by feature screens, [plugins](using-plugins) for app-wide capabilities, and [MobX](mobx-state-management) when you need reactive stores.
+Keep widget-local state in widgets. Use [dependency injection](scoped-di) for services shared by feature screens, [plugins](/plugins/) for app-wide capabilities, and [MobX](mobx-state-management) when you need reactive stores.
 
 ## Keep it portable
 

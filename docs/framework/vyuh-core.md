@@ -33,11 +33,11 @@ Use [the quick start](/intro/get-started) for a complete first app and [feature 
 
 Plugins expose network, storage, secure storage, auth, navigation, DI, events, analytics, environment, and telemetry contracts. The app selects implementations; features consume their contracts.
 
-Unspecified named slots use `PluginDescriptor.system` defaults. Custom capabilities go in `others` and are retrieved through `vyuh.getPlugin<T>()`. Read [using plugins](/guides/using-plugins) and [custom plugins](/guides/custom-plugins).
+Unspecified named slots use `PluginDescriptor.system` defaults. Custom capabilities go in `others` and are retrieved through `vyuh.getPlugin<T>()`. Read [using plugins](/plugins/) and [custom plugins](/plugins/custom-plugins).
 
 ## Events, redirects and failures
 
-- **Events.** The platform emits typed lifecycle events: started, feature loaded or failed, ready, init failed, route failure. Features declare handlers for them and for each other's events. See [events](/guides/events).
+- **Events.** The platform emits typed lifecycle events: started, feature loaded or failed, ready, init failed, route failure. Features declare handlers for them and for each other's events. See [events](/plugins/events).
 - **Redirects.** Features add redirects that compose into one chain and re-run when their events or listenables fire. See [feature redirects](/guides/routes-and-navigation#feature-redirects).
 - **Failures.** Every failure is a `VyuhFailure`, reported once and shown with a way out: Try again, Back, Go home or Restart. See [errors and recovery](/guides/errors-and-recovery).
 

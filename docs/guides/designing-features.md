@@ -43,4 +43,4 @@ flowchart BT
   Inventory["Inventory feature"] --> Team
 ```
 
-Continue with [feature descriptors](feature-descriptors), [using plugins](using-plugins), and the [counter example](/examples/counter).
+Continue with [feature descriptors](feature-descriptors), [using plugins](/plugins/), and the [counter example](/examples/counter).

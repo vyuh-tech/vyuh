@@ -72,4 +72,4 @@ The first app supplies companion destinations through `insightsPath` and `bookma
 
 Portable features receive app-specific destinations and configuration rather than hard-code routes owned by an optional companion. A production adapter can persist or fetch entries while preserving the contract, with loading and failure behavior added explicitly to that contract.
 
-See [Why Vyuh?](/concepts/why-vyuh), [custom plugins](/guides/custom-plugins), and the [core API](/api/vyuh-core) for the contracts used here.
+See [Why Vyuh?](/concepts/why-vyuh), [custom plugins](/plugins/custom-plugins), and the [core API](/api/vyuh-core) for the contracts used here.

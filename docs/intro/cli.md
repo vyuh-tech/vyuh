@@ -74,7 +74,7 @@ final plugins = PluginDescriptor(others: [CatalogSearchPlugin()]);
 final search = vyuh.getPlugin<CatalogSearchPlugin>();
 ```
 
-Add the capability methods your features need. Dispose resources owned by the plugin in `disposeOnce`. This scaffold creates a custom capability; implementing a built-in system contract such as `StoragePlugin` requires that contract’s methods and its named descriptor slot. See [custom plugins](/guides/custom-plugins).
+Add the capability methods your features need. Dispose resources owned by the plugin in `disposeOnce`. This scaffold creates a custom capability; implementing a built-in system contract such as `StoragePlugin` requires that contract’s methods and its named descriptor slot. See [custom plugins](/plugins/custom-plugins).
 
 ## Check and maintain tooling
 
