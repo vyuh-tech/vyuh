@@ -10,14 +10,16 @@ class _UnknownContentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final tokens = VyuhThemeExtension.of(context);
+    final foreground = tokens.debugForeground!;
 
     return Container(
       margin: const EdgeInsets.all(8.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.red.shade100,
-        border: Border.all(color: Colors.red.shade300),
-        borderRadius: BorderRadius.circular(8.0),
+        color: tokens.debugBackground,
+        border: Border.all(color: tokens.debugBorder!),
+        borderRadius: BorderRadius.circular(tokens.radius!),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -25,17 +27,13 @@ class _UnknownContentView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(
-                _getFailureIcon(),
-                color: Colors.red.shade700,
-                size: 24,
-              ),
+              Icon(_getFailureIcon(), color: foreground, size: 24),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   _getFailureTitle(),
                   style: theme.textTheme.titleMedium?.copyWith(
-                    color: Colors.red.shade800,
+                    color: foreground,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -47,16 +45,14 @@ class _UnknownContentView extends StatelessWidget {
             'Schema Type: ${failure.schemaType}',
             style: theme.textTheme.bodyMedium?.copyWith(
               fontFamily: 'monospace',
-              color: Colors.red.shade700,
+              color: foreground,
             ),
           ),
           if (failure.description != null) ...[
             const SizedBox(height: 4),
             Text(
               failure.description!,
-              style: theme.textTheme.bodySmall?.copyWith(
-                color: Colors.red.shade600,
-              ),
+              style: theme.textTheme.bodySmall?.copyWith(color: foreground),
             ),
           ],
           if (_getFailureDetails() != null) ...[
@@ -64,7 +60,7 @@ class _UnknownContentView extends StatelessWidget {
             Text(
               _getFailureDetails()!,
               style: theme.textTheme.bodySmall?.copyWith(
-                color: Colors.red.shade600,
+                color: foreground,
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -74,20 +70,20 @@ class _UnknownContentView extends StatelessWidget {
             Text(
               'Suggestions:',
               style: theme.textTheme.bodySmall?.copyWith(
-                color: Colors.red.shade700,
+                color: foreground,
                 fontWeight: FontWeight.w600,
               ),
             ),
             const SizedBox(height: 2),
-            ...failure.suggestions!.map((suggestion) => Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 2.0),
-                  child: Text(
-                    '• $suggestion',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: Colors.red.shade600,
-                    ),
-                  ),
-                )),
+            ...failure.suggestions!.map(
+              (suggestion) => Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 2.0),
+                child: Text(
+                  '• $suggestion',
+                  style: theme.textTheme.bodySmall?.copyWith(color: foreground),
+                ),
+              ),
+            ),
           ],
         ],
       ),

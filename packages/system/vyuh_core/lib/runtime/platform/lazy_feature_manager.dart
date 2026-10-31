@@ -14,6 +14,9 @@ final class _LazyFeatureManager {
   /// Lazy features that have been fully loaded and activated.
   final Set<String> _loaded = {};
 
+  /// Every registered lazy descriptor, kept after loading for failure text.
+  final Map<String, LazyFeatureDescriptor> _descriptors = {};
+
   int _generation = 0;
   final Set<Future<void>> _activations = {};
 
@@ -23,6 +26,7 @@ final class _LazyFeatureManager {
   void registerLazyFeatures(List<LazyFeatureDescriptor> features) {
     for (final feature in features) {
       _pending[feature.name] = feature;
+      _descriptors[feature.name] = feature;
     }
     final visited = <String>{};
     final visiting = <String>{};
@@ -104,10 +108,23 @@ final class _LazyFeatureManager {
       throw StateError('No lazy feature registered with name: $name');
     }
 
-    final pending = _loadAndActivate(lazy, _generation);
+    final generation = _generation;
+    final pending = _loadAndActivate(lazy, generation);
     _loading[name] = pending;
     try {
       await pending;
+      _emit(FeatureLoadedEvent(featureName: name, isLazy: true));
+    } catch (error, stack) {
+      // A load cancelled by dispose or restart is not a feature failure.
+      if (generation == _generation) {
+        _emit(
+          FeatureLoadFailedEvent(
+            featureName: name,
+            failure: _failureFor(lazy, error, stack),
+          ),
+        );
+      }
+      rethrow;
     } finally {
       if (identical(_loading[name], pending)) {
         _loading.remove(name);
@@ -186,6 +203,42 @@ final class _LazyFeatureManager {
     _pending.remove(name);
   }
 
+  /// Emits a lifecycle event without ever masking the caller's outcome.
+  static void _emit(SystemEvent event) {
+    try {
+      vyuh.event.emit(event);
+    } catch (error, stack) {
+      debugPrint('Vyuh: could not emit ${event.name}: $error\n$stack');
+    }
+  }
+
+  static VyuhFailure _failureFor(
+    LazyFeatureDescriptor lazy,
+    Object error,
+    StackTrace? stack, [
+    Uri? location,
+  ]) => error is _FeatureDisabledException
+      ? VyuhFailure(
+          kind: FailureKind.featureDisabled,
+          title: VyuhStrings.current.featureDisabledTitle(lazy.title),
+          message: VyuhStrings.current.featureDisabledMessage,
+          error: error,
+          location: location,
+          featureName: lazy.name,
+        )
+      : VyuhFailure(
+          kind: FailureKind.featureLoad,
+          title: VyuhStrings.current.featureLoadFailedTitle(lazy.title),
+          message: VyuhStrings.current.checkConnectionMessage,
+          error: error,
+          stackTrace: stack,
+          location: location,
+          featureName: lazy.name,
+        );
+
+  /// The registered descriptor for [name], loaded or pending.
+  LazyFeatureDescriptor? descriptor(String name) => _descriptors[name];
+
   /// Whether a lazy feature has been loaded.
   bool isLoaded(String name) => _loaded.contains(name);
 
@@ -215,6 +268,7 @@ final class _LazyFeatureManager {
     _pending.clear();
     _loading.clear();
     _loaded.clear();
+    _descriptors.clear();
   }
 }
 
@@ -236,8 +290,7 @@ class _LazyLoadingPage extends flutter.StatefulWidget {
 }
 
 class _LazyLoadingPageState extends flutter.State<_LazyLoadingPage> {
-  Object? _error;
-  StackTrace? _stackTrace;
+  VyuhFailure? _failure;
 
   @override
   void initState() {
@@ -255,10 +308,15 @@ class _LazyLoadingPageState extends flutter.State<_LazyLoadingPage> {
         vyuh.router.go(widget.targetLocation);
       }
     } catch (e, st) {
-      if (mounted) {
+      final lazy = widget.manager.descriptor(widget.featureName);
+      if (mounted && lazy != null) {
         setState(() {
-          _error = e;
-          _stackTrace = st;
+          _failure = _LazyFeatureManager._failureFor(
+            lazy,
+            e,
+            st,
+            Uri.tryParse(widget.targetLocation),
+          );
         });
       }
     }
@@ -266,34 +324,25 @@ class _LazyLoadingPageState extends flutter.State<_LazyLoadingPage> {
 
   @override
   flutter.Widget build(flutter.BuildContext context) {
-    if (_error != null) {
-      if (_error is _FeatureDisabledException) {
-        final disabled = _error as _FeatureDisabledException;
-        return vyuh.widgetBuilder.routeErrorView(
-          context,
-          title: 'Feature Not Available',
-          subtitle: disabled.featureName,
-          error: 'The feature "${disabled.featureName}" is currently disabled.',
-        );
-      }
-
-      return vyuh.widgetBuilder.routeErrorView(
-        context,
-        title: 'Failed to load feature',
-        subtitle: widget.featureName,
-        error: _error,
-        stackTrace: _stackTrace,
-        onRetry: () {
-          setState(() {
-            _error = null;
-            _stackTrace = null;
-          });
-          _loadAndNavigate();
-        },
+    final failure = _failure;
+    if (failure != null) {
+      return RouteFailureView(
+        // A new key reports the failure again after a failed retry.
+        key: flutter.ObjectKey(failure),
+        failure: failure,
+        onRetry: failure.kind == FailureKind.featureDisabled
+            ? null
+            : () {
+                setState(() => _failure = null);
+                _loadAndNavigate();
+              },
       );
     }
 
-    return vyuh.widgetBuilder.appLoader(context);
+    return vyuh.widgetBuilder.routeLoader(
+      context,
+      Uri.tryParse(widget.targetLocation),
+    );
   }
 }
 

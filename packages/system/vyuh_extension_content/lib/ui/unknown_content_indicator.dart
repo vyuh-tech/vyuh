@@ -150,9 +150,11 @@ class _UnknownContentWrapper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final tokens = VyuhThemeExtension.of(context);
+    final scheme = Theme.of(context).colorScheme;
     Widget wrappedChild = Container(
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.red.shade600, width: 2),
+        border: Border.all(color: tokens.debugBorder!, width: 2),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Stack(
@@ -164,11 +166,11 @@ class _UnknownContentWrapper extends StatelessWidget {
             right: 4,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.red.shade600,
+                color: tokens.debugBorder,
                 shape: BoxShape.circle,
               ),
               padding: const EdgeInsets.all(4),
-              child: Icon(Icons.warning_rounded, color: Colors.white, size: 16),
+              child: Icon(Icons.warning_rounded, color: scheme.onError, size: 16),
             ),
           ),
         ],
@@ -187,20 +189,22 @@ class _UnknownContentWrapper extends StatelessWidget {
 
   void _showDetailDialog(BuildContext context) {
     final issues = _collectIssues();
+    final tokens = VyuhThemeExtension.of(context);
+    final foreground = tokens.debugForeground!;
 
     showDialog(
       context: context,
       barrierDismissible: true,
       builder: (dialogContext) => AlertDialog(
-        backgroundColor: Colors.red.shade50,
+        backgroundColor: tokens.debugBackground,
         icon: Icon(
           Icons.warning_amber_rounded,
-          color: Colors.red.shade700,
+          color: foreground,
           size: 48,
         ),
         title: Text(
           'Unknown Content Detected',
-          style: TextStyle(color: Colors.red.shade900),
+          style: TextStyle(color: foreground),
         ),
         content: SizedBox(
           width: 400,
@@ -211,7 +215,7 @@ class _UnknownContentWrapper extends StatelessWidget {
               Text(
                 'This ${contentItem.schemaType} contains unknown type registrations:',
                 style: TextStyle(
-                  color: Colors.red.shade800,
+                  color: foreground,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -222,7 +226,7 @@ class _UnknownContentWrapper extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(issue.icon, color: Colors.red.shade700, size: 16),
+                      Icon(issue.icon, color: foreground, size: 16),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Column(
@@ -231,7 +235,7 @@ class _UnknownContentWrapper extends StatelessWidget {
                             Text(
                               issue.type,
                               style: TextStyle(
-                                color: Colors.red.shade800,
+                                color: foreground,
                                 fontWeight: FontWeight.w500,
                                 fontSize: 13,
                               ),
@@ -243,15 +247,15 @@ class _UnknownContentWrapper extends StatelessWidget {
                                 vertical: 2,
                               ),
                               decoration: BoxDecoration(
-                                color: Colors.red.shade100,
+                                color: tokens.debugBackground,
                                 borderRadius: BorderRadius.circular(3),
-                                border: Border.all(color: Colors.red.shade300),
+                                border: Border.all(color: tokens.debugBorder!),
                               ),
                               child: Text(
                                 issue.schemaType,
                                 style: TextStyle(
                                   fontFamily: 'monospace',
-                                  color: Colors.red.shade900,
+                                  color: foreground,
                                   fontSize: 11,
                                 ),
                               ),
@@ -267,7 +271,7 @@ class _UnknownContentWrapper extends StatelessWidget {
               Text(
                 'Register TypeDescriptors for these schema types to fix.',
                 style: TextStyle(
-                  color: Colors.red.shade700,
+                  color: foreground,
                   fontSize: 12,
                   fontStyle: FontStyle.italic,
                 ),

@@ -33,7 +33,7 @@ class _FallbackRouteNotifier extends StatelessWidget {
           title: const Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.warning_amber, color: Colors.redAccent),
+              Icon(Icons.warning_amber_rounded),
               SizedBox(width: 8),
               Text('Missing Route'),
             ],
@@ -46,9 +46,9 @@ class _FallbackRouteNotifier extends StatelessWidget {
               Text(
                 'Using a fallback Page for "$path"',
                 textAlign: TextAlign.center,
-                style: Theme.of(
-                  context,
-                ).textTheme.labelMedium?.apply(color: Colors.redAccent),
+                style: Theme.of(context).textTheme.labelMedium?.apply(
+                  color: Theme.of(context).colorScheme.error,
+                ),
               ),
               Expanded(child: child),
               const PoweredByWidget(),

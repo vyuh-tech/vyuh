@@ -5,21 +5,45 @@ import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// How URLs look on the web. Has no effect on other platforms.
+enum RouterUrlStyle {
+  /// `example.com/#/orders` (Flutter's default).
+  hash,
+
+  /// `example.com/orders`. Your host must serve the app for every path.
+  path,
+}
+
 final class DefaultNavigationPlugin extends NavigationPlugin {
   GoRouter _router = GoRouter(routes: []);
 
   var _routingConfig = RoutingConfigNotifier([]);
-  static g.GoRouterRedirect? _redirect;
+
+  /// The global redirect for this router, run before every feature redirect.
+  final g.GoRouterRedirect? redirect;
+
+  static g.GoRouterRedirect? _legacyRedirect;
+
+  g.GoRouterRedirect? get _redirect => redirect ?? _legacyRedirect;
 
   final bool includeFallbackRoute;
 
   var _initialized = false;
   final List<g.RouteBase> _initialRoutes = [];
+  VoidCallback? _stopWatchingRedirects;
 
+  /// Creates the GoRouter-based navigation plugin.
+  ///
+  /// * [redirect]: a global redirect, run before every feature redirect.
+  /// * [urlStyle]: hash or path URLs on the web. Applied immediately, so
+  ///   create the plugin before `runApp`.
+  /// * [urlReflectsImperativeAPIs]: whether `push` and friends update the
+  ///   browser URL.
   DefaultNavigationPlugin({
     this.includeFallbackRoute = true,
     final bool urlReflectsImperativeAPIs = false,
-    g.GoRouterRedirect? redirect,
+    this.redirect,
+    RouterUrlStyle? urlStyle,
   }) : super(
          name: 'vyuh.plugin.navigation.default',
          title: 'Default Navigation Plugin (GoRouter)',
@@ -28,8 +52,13 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       enableURLReflectsImperativeAPIs();
     }
 
-    if (redirect != null) {
-      setRouterRedirect(redirect);
+    switch (urlStyle) {
+      case RouterUrlStyle.path:
+        usePathStrategy();
+      case RouterUrlStyle.hash:
+        useHashStrategy();
+      case null:
+        break;
     }
   }
 
@@ -48,8 +77,12 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     strategy.setUrlStrategy(const strategy.HashUrlStrategy());
   }
 
+  @Deprecated(
+    'Pass redirect to the DefaultNavigationPlugin constructor, or contribute '
+    'FeatureDescriptor.redirects. This global applies to every instance.',
+  )
   static void setRouterRedirect(g.GoRouterRedirect redirect) {
-    _redirect = redirect;
+    _legacyRedirect = redirect;
   }
 
   @override
@@ -63,7 +96,10 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     }
 
     final allRoutes = _finalizeRoutes([...routes, ..._initialRoutes]);
-    _routingConfig = RoutingConfigNotifier(allRoutes, redirect: _redirect);
+    _routingConfig = RoutingConfigNotifier(
+      allRoutes,
+      redirect: _composedRedirect,
+    );
 
     final observers = vyuh.plugins
         .whereType<RouteObservers>()
@@ -77,16 +113,21 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: kDebugMode,
       observers: observers,
-      errorBuilder: (context, state) => vyuh.widgetBuilder.routeErrorView(
-        context,
-        title: 'Failed to load route',
-        subtitle: state.matchedLocation,
-        error: state.error,
-        onRetry: () {
-          vyuh.tracker.init(vyuh.tracker.currentState.value);
-        },
+      errorBuilder: (context, state) => RouteFailureView(
+        failure: VyuhFailure(
+          kind: FailureKind.notFound,
+          title: VyuhStrings.current.pageNotFoundTitle,
+          message: VyuhStrings.current.noRouteMessage(state.uri),
+          error: state.error,
+          location: state.uri,
+        ),
+        // Re-run matching and redirects for the current location only.
+        onRetry: () => _router.refresh(),
       ),
     );
+
+    _stopWatchingRedirects?.call();
+    _stopWatchingRedirects = watchRedirectTriggers(() => _router.refresh());
 
     _initialized = true;
   }
@@ -148,13 +189,24 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   Future<void> init() {
     _initialized = false;
     _initialRoutes.clear();
-    _routingConfig = RoutingConfigNotifier(_initialRoutes, redirect: _redirect);
+    _routingConfig = RoutingConfigNotifier(
+      _initialRoutes,
+      redirect: _composedRedirect,
+    );
 
     return Future.value();
   }
 
+  /// The global redirect first, then every feature redirect in order.
+  Future<String?> _composedRedirect(
+    BuildContext context,
+    g.GoRouterState state,
+  ) => featureRedirects.evaluate(context, state, base: _redirect);
+
   @override
   Future<void> dispose() {
+    _stopWatchingRedirects?.call();
+    _stopWatchingRedirects = null;
     if (_initialized) {
       _router.dispose();
       _routingConfig.dispose();

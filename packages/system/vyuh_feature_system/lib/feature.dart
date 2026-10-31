@@ -17,14 +17,27 @@ import 'package:vyuh_feature_system/content/video_player.dart';
 import 'package:vyuh_feature_system/content_modifiers/theme_modifier.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
+ThemeService? _themeService;
+
 final feature = FeatureDescriptor(
   name: 'system',
   title: 'System',
   description: 'The core building blocks of the framework',
   icon: Icons.hub,
   init: () async {
-    VyuhBinding.instance.di.register(ThemeService());
+    // Start from the app's theme, so there is one source of truth.
+    _themeService?.dispose();
+    final themeService = _themeService = ThemeService.fromTheme(
+      VyuhBinding.instance.widgetBuilder.theme,
+    );
+    VyuhBinding.instance.di.register(themeService);
     VyuhBinding.instance.di.register(BreakpointService());
+  },
+  // Held here, not looked up in DI: on restart the platform resets plugins
+  // (DI included) before it disposes the previous features.
+  dispose: () async {
+    _themeService?.dispose();
+    _themeService = null;
   },
   routes: () => _routes,
   extensions: [descriptor],

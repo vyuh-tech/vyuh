@@ -64,6 +64,6 @@ void main() {
 
     expect(tester.takeException(), isNull);
     expect(vc.vyuh.tracker.error, isStateError);
-    expect(find.text('Failed to load app'), findsOneWidget);
+    expect(find.text('The app could not start'), findsOneWidget);
   });
 }

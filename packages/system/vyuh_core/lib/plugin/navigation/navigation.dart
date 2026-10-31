@@ -14,6 +14,54 @@ abstract class NavigationPlugin extends Plugin {
 
   NavigationPlugin({required super.name, required super.title});
 
+  /// Redirects contributed by features through [FeatureDescriptor.redirects].
+  ///
+  /// The platform adds and removes entries as features start and stop.
+  /// Implementations evaluate them with [RedirectRegistry.evaluate] and call
+  /// [watchRedirectTriggers] so they re-run when their triggers fire.
+  final RedirectRegistry featureRedirects = RedirectRegistry();
+
+  /// Calls [refresh] whenever a feature redirect's trigger fires: one of its
+  /// `refreshOn` events is emitted, or its `listenable` notifies. Also calls
+  /// [refresh] when the set of redirects changes. Returns a function that
+  /// stops watching.
+  @protected
+  VoidCallback watchRedirectTriggers(VoidCallback refresh) {
+    Listenable? merged;
+
+    void rewatch() {
+      merged?.removeListener(refresh);
+      final listenables = featureRedirects.listenables;
+      merged = listenables.isEmpty ? null : Listenable.merge(listenables);
+      merged?.addListener(refresh);
+    }
+
+    void onRedirectsChanged() {
+      rewatch();
+      refresh();
+    }
+
+    rewatch();
+    featureRedirects.addListener(onRedirectsChanged);
+    final cancelEvents = vyuh.event.on<VyuhEvent>((event) {
+      if (featureRedirects.refreshesOn(event.runtimeType)) refresh();
+    });
+
+    return () {
+      cancelEvents();
+      featureRedirects.removeListener(onRedirectsChanged);
+      merged?.removeListener(refresh);
+      merged = null;
+    };
+  }
+
+  /// The location of the home route, used by error views to offer a way
+  /// back. Set by the platform from `runApp(homeLocation: ...)`.
+  String homeLocation = '/';
+
+  /// Navigates to [homeLocation].
+  void goHome() => go(homeLocation);
+
   void initRouter({
     String? initialLocation,
     required List<g.RouteBase> routes,

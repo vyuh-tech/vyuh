@@ -1,9 +1,6 @@
 part of 'run_app.dart';
 
-enum _RunMode {
-  app,
-  widget;
-}
+enum _RunMode { app, widget }
 
 final class VyuhBinding {
   VyuhBinding._();
@@ -79,8 +76,10 @@ final class VyuhBinding {
     _initialized = true;
   }
 
-  Future<void> _appInit(
-      {PluginDescriptor? plugins, PlatformWidgetBuilder? widgetBuilder}) async {
+  Future<void> _appInit({
+    PluginDescriptor? plugins,
+    PlatformWidgetBuilder? widgetBuilder,
+  }) async {
     if (_initialized) {
       return;
     }
@@ -119,6 +118,8 @@ final class VyuhBinding {
   T? get<T extends Plugin>() => _pluginDescriptor.get<T>();
 }
 
+/// The same named accessors as `vyuh.*`, for code that must also run in
+/// widget mode, where `runApp` (and so `vyuh`) is not used.
 extension NamedBindings on VyuhBinding {
   /// The content plugin, responsible for managing content-related operations.
   ContentPlugin get content => _pluginDescriptor.get<ContentPlugin>()!;
@@ -145,4 +146,20 @@ extension NamedBindings on VyuhBinding {
 
   /// The event plugin, for managing and emitting events within the platform.
   EventPlugin get event => _pluginDescriptor.get<EventPlugin>()!;
+
+  /// The authentication plugin.
+  AuthPlugin get auth => _pluginDescriptor.get<AuthPlugin>()!;
+
+  /// The navigation plugin.
+  NavigationPlugin get router => _pluginDescriptor.get<NavigationPlugin>()!;
+
+  /// The locale plugin, or null when it is not registered.
+  LocalePlugin? get locale => _pluginDescriptor.get<LocalePlugin>();
+
+  /// The storage plugin, for general key-value persistence.
+  StoragePlugin get storage => _pluginDescriptor.get<StoragePlugin>()!;
+
+  /// The secure storage plugin, for secrets such as tokens.
+  SecureStoragePlugin get secureStorage =>
+      _pluginDescriptor.get<SecureStoragePlugin>()!;
 }

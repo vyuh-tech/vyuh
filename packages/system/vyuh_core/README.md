@@ -40,7 +40,11 @@ the extension mechanism.
   app usage
 - **Dependency Injection** 💉: Simple yet powerful DI system for managing
   dependencies
-- **Event System** 📡: Pub/sub event system for decoupled communication
+- **Event System** 📡: Typed events, with lifecycle events from the platform
+  and declarative per-feature handlers
+- **Errors and recovery** 🛟: Themed failure views that always offer a way out,
+  reported once to telemetry and as events
+- **Theming** 🎨: One `VyuhTheme` for every framework screen, plus design tokens
 - **Storage** 💾: Persistent storage capabilities for local data
 - **Environment Variables** 🔧: Flexible configuration system for managing
   environment-specific settings
@@ -84,30 +88,39 @@ void main() {
 ### Feature Definition
 
 Features are the building blocks of your application. Each feature is
-self-contained with its own routes, UI components, and business logic. Features
-can be developed and tested independently, then composed together to create the
-full application.
+self-contained with its own routes, UI and business logic, and can also act on
+the whole app through event handlers and redirects. The platform starts and
+stops all of it with the feature, so there is nothing to clean up by hand.
 
 ```dart
 import 'package:vyuh_core/vyuh_core.dart';
 
 final feature = FeatureDescriptor(
-  name: 'feature_name',
-  title: 'Feature Title',
-  description: 'Feature description',
-  icon: Icons.feature_icon,
-  routes: () async {
-    return [
-      GoRoute(
-        path: '/feature-path',
-        builder: (context, state) {
-          return const FeatureWidget();
-        },
-      ),
-    ];
-  },
+  name: 'account',
+  title: 'Account',
+  routes: () => [
+    GoRoute(path: '/account', builder: (_, _) => const AccountPage()),
+  ],
+  // App-level listeners, subscribed before init and removed on dispose.
+  events: [
+    EventHandler<SystemReadyEvent>((_) => restoreSession()),
+  ],
+  // App-wide redirects that re-run when their triggers fire.
+  redirects: [
+    FeatureRedirect(
+      name: 'require-sign-in',
+      refreshOn: [UserSignedOutEvent],
+      redirect: (_, state) =>
+          !signedIn && state.matchedLocation.startsWith('/account')
+              ? '/login'
+              : null,
+    ),
+  ],
 );
 ```
+
+Lazy features (`LazyFeatureDescriptor`) get the same behaviour when they
+activate.
 
 ### Plugin Configuration
 
@@ -273,7 +286,13 @@ vyuh.router.go('/your-route');
 
 // Go back
 vyuh.router.pop();
+
+// Go to the home route (runApp's homeLocation)
+vyuh.router.goHome();
 ```
+
+Features add app-wide redirects with `FeatureDescriptor.redirects`. See
+[Routes and navigation](https://docs.vyuh.tech/guides/routes-and-navigation#feature-redirects).
 
 ### State Management with MobX 💫
 
@@ -320,20 +339,19 @@ final service = vyuh.di.get<MyService>();
 
 ### Event System 📡
 
-Use the event system for decoupled communication between different parts of your
-app.
+Features declare typed listeners with `FeatureDescriptor.events` (see above).
+For shorter-lived listeners, subscribe directly and cancel with the returned
+function:
 
 ```dart
-import 'package:vyuh_core/vyuh_core.dart' as vyuh;
-
-// Subscribe to events
-vyuh.events.on<UserLoggedIn>((event) {
-  // Handle event
-});
-
-// Publish events
-vyuh.events.emit(UserLoggedIn(userId: '123'));
+final cancel = vyuh.event.on<UserSignedOutEvent>((event) { /* ... */ });
+vyuh.event.emit(UserSignedOutEvent());
+cancel();
 ```
+
+The platform emits `SystemEvent`s for its lifecycle: `SystemInitStartedEvent`,
+`FeatureLoadedEvent`, `FeatureLoadFailedEvent`, `SystemReadyEvent`,
+`SystemInitFailedEvent` and `RouteFailureEvent`. Delivery is asynchronous.
 
 ### Storage 💾
 
@@ -361,85 +379,42 @@ final apiKey = vyuh.env.get('API_KEY');
 final isDev = vyuh.env.get('IS_DEV', defaultValue: false);
 ```
 
-### Platform Widgets 🎨
+### Theme, errors and platform widgets 🎨
 
-Customize the app's root widget and other platform-specific UI components. The
-`defaultPlatformWidgetBuilder` provides default implementations that you can
-customize using `copyWith`:
+Give the framework your theme once. The loading screen, the startup failure
+screen, the default app root, loaders, error views and placeholders all follow
+it in light and dark mode:
 
 ```dart
-import 'package:vyuh_core/vyuh_core.dart' as vyuh;
-import 'package:flutter_mobx/flutter_mobx.dart';
-
 vyuh.runApp(
-  platformWidgetBuilder:
-      vyuh.defaultPlatformWidgetBuilder.copyWith(
-        // Customize the root app widget
-        appBuilder: (platform) {
-          return Observer(
-            builder: (_) {
-              return MaterialApp.router(
-                title: 'Your App',
-                theme: YourTheme.light,
-                darkTheme: YourTheme.dark,
-                debugShowCheckedModeBanner: false,
-                routerConfig: platform.router.instance,
-              );
-            },
-          );
-        },
-        // Custom app loader shown during initial app load
-        appLoader: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        // Custom content loader shown when loading content
-        contentLoader: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        // Custom route loader shown during route transitions
-        routeLoader: (context, color) {
-          return DefaultRouteLoader(
-            progressColor: color,
-          );
-        },
-        // Custom error view for route errors
-        routeErrorView: (context, error) {
-          return Center(
-            child: Text('Route Error: $error'),
-          );
-        },
-        // Custom error view for general errors
-        errorView: (context, error) {
-          return Center(
-            child: Text('Error: $error'),
-          );
-        },
-        // Custom image placeholder
-        imagePlaceholder: (context) {
-          return const Center(
-            child: Icon(Icons.image),
-          );
-        },
-      ),
-  // ... other configurations
+  homeLocation: '/', // where "Go home" leads from any failure
+  platformWidgetBuilder: vyuh.PlatformWidgetBuilder.system.copyWith(
+    theme: vyuh.VyuhTheme(light: MyDesign.light, dark: MyDesign.dark),
+  ),
+  features: () => [...],
 );
 ```
 
-The platform widget builder allows you to customize:
+Every route failure has a way out: Try again, Back, Go home, or Restart app,
+whichever applies. A missing route, a failed lazy feature, a failed CMS page and
+a failed startup all work this way. Failures are reported once to telemetry
+and as a `RouteFailureEvent`. Error details show only in debug builds.
 
-- `appBuilder`: The root app widget (typically MaterialApp.router)
-- `appLoader`: Shown during initial app load
-- `contentLoader`: Shown when loading content
-- `routeLoader`: Shown during route transitions
-- `routeErrorView`: Shown when a route fails to load
-- `errorView`: Shown for general errors
-- `imagePlaceholder`: Default placeholder for images
+Restyle the defaults with `VyuhThemeExtension` tokens in your `ThemeData`, or
+replace any builder with `copyWith`:
 
-Each of these has a default implementation that you can override as needed.
+- `appBuilder`: the root app widget; read `platform.widgetBuilder.theme`
+- `appLoader`, `routeLoader`, `contentLoader`: loaders
+- `routeErrorView`: full-page failures (`FailurePage` by default)
+- `errorView`: inline failures (`FailureCard` by default)
+- `unknown`: debug view for unregistered content
+- `imagePlaceholder`: image placeholder
+- `theme`: the app's `VyuhTheme`
+
+Inside a custom error view, `VyuhFailureScope.maybeOf(context)` gives the full
+`VyuhFailure` and `FailureActions` tells you which actions apply. See
+[Theming](https://docs.vyuh.tech/guides/theming) and
+[Errors and recovery](https://docs.vyuh.tech/guides/errors-and-recovery).
 
 ## Learn More 📚
 

@@ -19,6 +19,7 @@ final class _PlatformInitTracker implements SystemInitTracker {
 
   @override
   Future<void> init([InitState initialState = InitState.notStarted]) {
+    final isRestart = currentState.value != InitState.notStarted;
     return runInAction(() {
       /// The loader is being created with a Future<void> first just to set the value.
       /// This happens very early in the bootstrapping process.
@@ -26,6 +27,7 @@ final class _PlatformInitTracker implements SystemInitTracker {
       /// ready before they do their work.
       _loader.value = ObservableFuture(Future.value()).then((_) async {
         final trace = await vyuh.telemetry.startTrace('Platform', 'Init');
+        _LazyFeatureManager._emit(SystemInitStartedEvent(isRestart: isRestart));
 
         try {
           await _initLoop(initialState, trace);
@@ -33,6 +35,17 @@ final class _PlatformInitTracker implements SystemInitTracker {
           vyuh.event.emit(SystemReadyEvent());
         } catch (exception, trace) {
           vyuh.telemetry.reportError(exception, stackTrace: trace);
+          _LazyFeatureManager._emit(
+            SystemInitFailedEvent(
+              VyuhFailure(
+                kind: FailureKind.init,
+                title: VyuhStrings.current.appStartFailedTitle,
+                message: VyuhStrings.current.appStartFailedMessage,
+                error: exception,
+                stackTrace: trace,
+              ),
+            ),
+          );
 
           runInAction(() => currentState.value = InitState.error);
 
