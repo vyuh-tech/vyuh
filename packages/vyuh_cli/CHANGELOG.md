@@ -1,3 +1,7 @@
+## 0.3.1
+
+ - **FIX**(vyuh_cli): generated features start with a passing test.
+
 ## 0.3.0
 
 > Note: This release has breaking changes.

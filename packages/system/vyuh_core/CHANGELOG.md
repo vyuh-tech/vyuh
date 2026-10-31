@@ -1,3 +1,7 @@
+## 3.0.1
+
+ - **FIX**(vyuh_core): contain telemetry failures; map device locales; let .env win over defaults.
+
 ## 3.0.0
 
 > Note: This release has breaking changes.

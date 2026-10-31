@@ -1,3 +1,7 @@
+## 3.0.1
+
+ - **FIX**(vyuh_content_widget): don't refetch when the parent rebuilds.
+
 ## 3.0.0
 
 > Note: This release has breaking changes.
