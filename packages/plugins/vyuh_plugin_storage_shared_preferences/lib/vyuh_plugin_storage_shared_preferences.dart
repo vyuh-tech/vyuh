@@ -21,24 +21,38 @@ final class SharedPreferencesStoragePlugin extends StoragePlugin
     _prefs = null;
   }
 
+  /// The preferences, or a clear error when used before [init] or after
+  /// [dispose] instead of silently dropping the operation.
+  SharedPreferences get _store =>
+      _prefs ??
+      (throw StateError(
+        '$title is not initialized. Register it in PluginDescriptor, or call '
+        'init() before using it.',
+      ));
+
+  /// Returns the stored value of any type (values written by this plugin
+  /// are strings), or null when [key] is missing.
   @override
   Future<dynamic> read(String key) async {
-    return _prefs?.getString(key);
+    return _store.get(key);
   }
 
   @override
   Future<dynamic> write(String key, dynamic value) async {
-    await _prefs?.setString(key, value.toString());
+    await _store.setString(key, value.toString());
     return value;
   }
 
   @override
   Future<bool> has(String key) async {
-    return _prefs?.containsKey(key) ?? false;
+    return _store.containsKey(key);
   }
 
+  /// Returns false when [key] did not exist, as [StoragePlugin.delete] says.
   @override
   Future<bool> delete(String key) async {
-    return await _prefs?.remove(key) ?? false;
+    final store = _store;
+    if (!store.containsKey(key)) return false;
+    return store.remove(key);
   }
 }
