@@ -62,14 +62,14 @@ Register the Sanity content provider as part of the plugin configuration:
 void main() {
   vyuh.runApp(
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(
+      others: [DefaultContentPlugin(
         provider: SanityContentProvider.withConfig(
           config: SanityConfig(
             projectId: 'your-project-id',
             dataset: 'production',
           ),
         ),
-      ),
+      )],
     ),
     features: () => [
       system.feature,
@@ -83,6 +83,7 @@ void main() {
 
 - `sanity_client` -- Low-level Sanity API client
 - `vyuh_core` -- Core framework types
+- `vyuh_extension_content` -- The `ContentProvider` contract it implements
 - `vyuh_cache` -- Caching layer for content responses
 - `cached_network_image` -- Efficient image loading and caching
 

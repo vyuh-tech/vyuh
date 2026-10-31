@@ -22,6 +22,31 @@ flowchart LR
 
 This package provides the core types for integrating with a headless CMS, which includes the Content plugin, the CMS building blocks, and the UI for rendering a route from a CMS.
 
+`vyuh_core` has no CMS types. Everything about content lives here: `ContentItem`, `LayoutConfiguration`, `ContentModifierConfiguration`, `TypeDescriptor`, `ContentPlugin`, `ContentProvider`, the `ObjectReference`/`ImageReference`/`FileReference` types, `RouteBase`, `ContentFailure`, `CMSRoute` and `defaultRoutePageBuilder`.
+
+## Adding the CMS to an app
+
+The content plugin is an ordinary plugin. Register it in `others`, and add the system feature, which brings the CMS routes:
+
+```dart
+import 'package:vyuh_core/vyuh_core.dart' as vc;
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
+import 'package:vyuh_feature_system/vyuh_feature_system.dart' as system;
+
+void main() {
+  vc.runApp(
+    plugins: vc.PluginDescriptor(
+      others: [DefaultContentPlugin(provider: myContentProvider)],
+    ),
+    features: () => [system.feature, myFeature],
+  );
+}
+```
+
+- **`vyuh.content`** and **`VyuhBinding.instance.content`** are extensions from this package. Import it wherever you use them. When no content plugin is registered they return a `NoOpContentPlugin`, which shows an error view that explains how to configure one.
+- **Unmatched URLs.** `cmsFallbackRoute` is a catch-all route (`NavigationPlugin.catchAllPath`) that asks the CMS for any location no other route matches. The system feature contributes it. The router always places a catch-all route last. Without it, unmatched locations show the framework's not-found page.
+- **Missing types.** When a content type, layout, modifier, action or condition isn't registered, the plugin shows `UnknownContentView`. Replace it with `DefaultContentPlugin(unknown: (context, failure) => ...)`.
+
 ## Content Plugin
 
 This is the default implementation for the `ContentPlugin`, and it works with a `ContentProvider` to do most of the heavy lifting. The `ContentPlugin` maintains the type registry of all the content items that will be fetched from the CMS, whereas the `ContentProvider` takes care of fetching a single route or fetching specific documents from the headless CMS.

@@ -274,7 +274,7 @@
       {
         "name": "AuthUserCardLayout",
         "file": "packages/system/vyuh_feature_auth/lib/auth_user_card_layout.dart",
-        "line": 9,
+        "line": 10,
         "doc": "",
         "signature": "final class AuthUserCardLayout extends LayoutConfiguration<vf.Card>",
         "members": [
@@ -407,7 +407,7 @@
       {
         "name": "EmailPasswordForm",
         "file": "packages/system/vyuh_feature_auth/lib/content/email_password_form.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "final class EmailPasswordForm extends ContentItem",
         "members": [
@@ -464,7 +464,7 @@
       {
         "name": "EmailPasswordFormDescriptor",
         "file": "packages/system/vyuh_feature_auth/lib/content/email_password_form.dart",
-        "line": 47,
+        "line": 46,
         "doc": "",
         "signature": "final class EmailPasswordFormDescriptor extends ContentDescriptor",
         "members": [
@@ -527,7 +527,7 @@
       {
         "name": "ForgotPasswordForm",
         "file": "packages/system/vyuh_feature_auth/lib/content/forgot_password_form.dart",
-        "line": 8,
+        "line": 7,
         "doc": "",
         "signature": "final class ForgotPasswordForm extends ContentItem",
         "members": [
@@ -663,7 +663,7 @@
       {
         "name": "HintActionAlignment",
         "file": "packages/system/vyuh_feature_auth/lib/content/hint_action_text.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "enum HintActionAlignment { start, end, center }",
         "members": [
@@ -676,7 +676,7 @@
       {
         "name": "HintActionText",
         "file": "packages/system/vyuh_feature_auth/lib/content/hint_action_text.dart",
-        "line": 26,
+        "line": 25,
         "doc": "",
         "signature": "final class HintActionText extends ContentItem",
         "members": [
@@ -717,7 +717,7 @@
       {
         "name": "HintActionTextDefaultLayout",
         "file": "packages/system/vyuh_feature_auth/lib/content/hint_action_text.dart",
-        "line": 63,
+        "line": 62,
         "doc": "",
         "signature": "final class HintActionTextDefaultLayout extends LayoutConfiguration<HintActionText>",
         "members": [
@@ -746,7 +746,7 @@
       {
         "name": "HintActionTextDescriptor",
         "file": "packages/system/vyuh_feature_auth/lib/content/hint_action_text.dart",
-        "line": 58,
+        "line": 57,
         "doc": "",
         "signature": "final class HintActionTextDescriptor extends ContentDescriptor",
         "members": [
@@ -999,7 +999,7 @@
       {
         "name": "PhoneOtpForm",
         "file": "packages/system/vyuh_feature_auth/lib/content/phone_otp_form.dart",
-        "line": 8,
+        "line": 7,
         "doc": "",
         "signature": "final class PhoneOtpForm extends ContentItem",
         "members": [
@@ -1044,7 +1044,7 @@
       {
         "name": "PhoneOtpFormDescriptor",
         "file": "packages/system/vyuh_feature_auth/lib/content/phone_otp_form.dart",
-        "line": 40,
+        "line": 39,
         "doc": "",
         "signature": "final class PhoneOtpFormDescriptor extends ContentDescriptor",
         "members": [
@@ -1057,7 +1057,7 @@
       {
         "name": "ProfileCard",
         "file": "packages/system/vyuh_feature_auth/lib/content/profile_card.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "final class ProfileCard extends ContentItem",
         "members": [
@@ -1094,7 +1094,7 @@
       {
         "name": "ProfileCardLayout",
         "file": "packages/system/vyuh_feature_auth/lib/content/profile_form_layout.dart",
-        "line": 15,
+        "line": 16,
         "doc": "",
         "signature": "final class ProfileCardLayout extends LayoutConfiguration<ProfileCard>",
         "members": [
@@ -1123,7 +1123,7 @@
       {
         "name": "ProfileFormDescriptor",
         "file": "packages/system/vyuh_feature_auth/lib/content/profile_card.dart",
-        "line": 37,
+        "line": 36,
         "doc": "",
         "signature": "final class ProfileFormDescriptor extends ContentDescriptor",
         "members": [
@@ -1165,7 +1165,7 @@
       {
         "name": "UsernamePasswordForm",
         "file": "packages/system/vyuh_feature_auth/lib/content/username_password_form.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "final class UsernamePasswordForm extends ContentItem",
         "members": [
@@ -1222,7 +1222,7 @@
       {
         "name": "UsernamePasswordFormDescriptor",
         "file": "packages/system/vyuh_feature_auth/lib/content/username_password_form.dart",
-        "line": 47,
+        "line": 46,
         "doc": "",
         "signature": "final class UsernamePasswordFormDescriptor extends ContentDescriptor",
         "members": [
@@ -1348,23 +1348,6 @@
     "path": "packages/system/vyuh_core",
     "symbols": [
       {
-        "name": "ActionFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 92,
-        "doc": "Failure when an action configuration registration is missing.\n\nThis occurs when content references an action that has no registered\nTypeDescriptor in the action system.",
-        "signature": "final class ActionFailure extends ContentFailure",
-        "members": [
-          {
-            "signature": "final Map<String, dynamic>? actionConfig",
-            "doc": "The action configuration that failed to resolve"
-          },
-          {
-            "signature": "const ActionFailure({required super.schemaType, this.actionConfig, super.jsonPayload, super.description, super.suggestions})",
-            "doc": ""
-          }
-        ]
-      },
-      {
         "name": "AnalyticsPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/analytics/analytics_plugin.dart",
         "line": 6,
@@ -1457,7 +1440,7 @@
       {
         "name": "AppBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 11,
+        "line": 9,
         "doc": "A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.\n\nThis builder is called once during app initialization to create the root widget.\nThe [platform] parameter provides access to the Vyuh platform instance.\n\nExample:\n```dart\nAppBuilder builder = (platform) => MaterialApp(\n  home: MyHomePage(),\n  theme: platform.theme,\n);\n```",
         "signature": "typedef AppBuilder = Widget Function(BuildContext context, VyuhPlatform platform);",
         "members": []
@@ -1604,7 +1587,7 @@
       {
         "name": "BuildFailureView",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 324,
+        "line": 334,
         "doc": "Shown in release builds in place of a widget that failed to build.\nSmall, quiet and themed, so one broken widget does not break the page.",
         "signature": "class BuildFailureView extends StatelessWidget",
         "members": [
@@ -1618,327 +1601,6 @@
           },
           {
             "signature": "Widget build(BuildContext context)",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "CMSPathResolver",
-        "file": "packages/system/vyuh_core/lib/runtime/cms_route.dart",
-        "line": 5,
-        "doc": "A function that resolves a CMS path from a local path. This is useful when\nmultiple local routes use a single template path on the CMS. For example:\n(Local path) /blog/:slug -> /blog (CMS path)",
-        "signature": "typedef CMSPathResolver = String Function(String path);",
-        "members": []
-      },
-      {
-        "name": "CMSRoute",
-        "file": "packages/system/vyuh_core/lib/runtime/cms_route.dart",
-        "line": 12,
-        "doc": "A route purely meant to identify CMS pages. Use it to distinguish between the way\nlocal routes and CMS routes are handled.",
-        "signature": "final class CMSRoute extends GoRoute",
-        "members": [
-          {
-            "signature": "final CMSPathResolver cmsPathResolver",
-            "doc": "A function that resolves a CMS path from a local path."
-          },
-          {
-            "signature": "CMSRoute({required super.path, this.cmsPathResolver = _identityPathResolver, super.builder, GoRouterPageBuilder? pageBuilder, super.parentNavigatorKey, super.name, super.onExit, super.redirect, super.routes})",
-            "doc": "Creates a new CMS route."
-          }
-        ]
-      },
-      {
-        "name": "Category",
-        "file": "packages/system/vyuh_core/lib/plugin/content/route_base.dart",
-        "line": 101,
-        "doc": "A category for organizing routes.\n\nCategories help structure routes in a hierarchical manner.\nThey can be used to:\n- Group related routes\n- Create navigation menus\n- Filter and sort routes\n\nExample:\n```dart\nfinal category = Category(\n  title: 'Blog',\n  description: 'Blog posts and articles',\n  icon: Icons.article,\n);\n```",
-        "signature": "class Category implements SchemaItem",
-        "members": [
-          {
-            "signature": "String get schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "final String identifier",
-            "doc": ""
-          },
-          {
-            "signature": "final String title",
-            "doc": ""
-          },
-          {
-            "signature": "final LayoutConfiguration? layout",
-            "doc": ""
-          },
-          {
-            "signature": "final List<ContentModifierConfiguration>? modifiers",
-            "doc": ""
-          },
-          {
-            "signature": "static List<ContentModifierConfiguration>? modifierList(dynamic json)",
-            "doc": ""
-          },
-          {
-            "signature": "Category({required this.identifier, required this.title, this.layout, this.modifiers})",
-            "doc": ""
-          },
-          {
-            "signature": "factory Category.fromJson(Map<String, dynamic> json)",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "ConditionFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 109,
-        "doc": "Failure when a condition configuration registration is missing.\n\nThis occurs when content references a condition that has no registered\nTypeDescriptor in the condition system.",
-        "signature": "final class ConditionFailure extends ContentFailure",
-        "members": [
-          {
-            "signature": "final Map<String, dynamic>? conditionConfig",
-            "doc": "The condition configuration that failed to resolve"
-          },
-          {
-            "signature": "const ConditionFailure({required super.schemaType, this.conditionConfig, super.jsonPayload, super.description, super.suggestions})",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "ContainerItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 194,
-        "doc": "Represents a container item that can contain other content items.\n\nContainer items are used to create hierarchical content structures.\nThey can hold multiple child content items and provide:\n- Layout organization\n- Common styling or behavior\n- Grouped content management\n\nExample use cases:\n- Page sections\n- Grid or list containers\n- Tab containers",
-        "signature": "abstract interface class ContainerItem implements ContentItem",
-        "members": []
-      },
-      {
-        "name": "ContentFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 1,
-        "doc": "Base class for content-related failures in the Vyuh framework.\n\nThis class hierarchy provides a unified way to handle missing or invalid\ncontent registrations, layouts, modifiers, actions, and conditions.\nInstead of scattered error handling, all content failures route through\nthe platform widget builder's unknown content handler.",
-        "signature": "abstract class ContentFailure",
-        "members": [
-          {
-            "signature": "final String schemaType",
-            "doc": "The schema type that failed to resolve"
-          },
-          {
-            "signature": "final Map<String, dynamic>? jsonPayload",
-            "doc": "The original JSON payload that caused the failure (if available)"
-          },
-          {
-            "signature": "final String? description",
-            "doc": "Human-readable description of the failure"
-          },
-          {
-            "signature": "final List<String>? suggestions",
-            "doc": "Optional suggestions for resolving the failure"
-          },
-          {
-            "signature": "const ContentFailure({required this.schemaType, this.jsonPayload, this.description, this.suggestions})",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "ContentItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 25,
-        "doc": "The base class for all content items in Vyuh.\n\nA content item represents a piece of content that can be:\n- Fetched from a Content Management System (CMS)\n- Rendered on screen with a specific layout\n- Modified with content modifiers\n- Organized in a content hierarchy\n\nContent items are the building blocks of a Vyuh application's content.\nThey combine data from the CMS with presentation logic to create\nrich, interactive user interfaces.\n\nExample:\n```dart\n@JsonSerializable()\nclass BlogPost extends ContentItem {\n  static const schemaName = 'blog.post';\n\n  final String title;\n  final String content;\n\n  BlogPost({\n    required this.title,\n    required this.content,\n    super.layout,\n    super.modifiers,\n  }) : super(schemaType: schemaName);\n}\n```",
-        "signature": "abstract class ContentItem implements SchemaItem",
-        "members": [
-          {
-            "signature": "final String schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "final LayoutConfiguration? layout",
-            "doc": "The layout configuration for the content item."
-          },
-          {
-            "signature": "final List<ContentModifierConfiguration>? modifiers",
-            "doc": ""
-          },
-          {
-            "signature": "static List<ContentModifierConfiguration>? modifierList(dynamic json)",
-            "doc": ""
-          },
-          {
-            "signature": "ContentItem? parent",
-            "doc": "The parent content item of this content item. This is used internally by the content system."
-          },
-          {
-            "signature": "ContentItem({required this.schemaType, required this.layout, required this.modifiers})",
-            "doc": "Creates an instance of [ContentItem]."
-          },
-          {
-            "signature": "factory ContentItem.fromJson(Map<String, dynamic> json)",
-            "doc": "Converts the JSON representation of the content item to an instance of [ContentItem]."
-          },
-          {
-            "signature": "void setParent(Iterable<ContentItem?> children)",
-            "doc": "Sets the parent content item for the given list of children."
-          },
-          {
-            "signature": "LayoutConfiguration? getLayout()",
-            "doc": "Gets the layout to use for the [ContentItem]. By default its the [layout] itself.\nHowever this acts as an extension point for custom [ContentItem]s\nthat may have a different strategy for applying layouts."
-          },
-          {
-            "signature": "List<ContentModifierConfiguration>? getModifiers()",
-            "doc": "Gets the modifiers to use for the [ContentItem]. By default its the [modifiers] itself.\nHowever this acts as an extension point for custom [ContentItem]s\nthat may have a different strategy for applying modifiers."
-          }
-        ]
-      },
-      {
-        "name": "ContentItemFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 28,
-        "doc": "Failure when a ContentItem type registration is missing.\n\nThis occurs when JSON from the CMS contains a schema type that has no\nregistered TypeDescriptor in the content system.\n\nExample:\n```dart\nContentItemFailure(\n  schemaType: 'blog.post',\n  jsonPayload: {'_type': 'blog.post', 'title': 'My Post'},\n  description: 'No TypeDescriptor registered for blog.post',\n)\n```",
-        "signature": "final class ContentItemFailure extends ContentFailure",
-        "members": [
-          {
-            "signature": "const ContentItemFailure({required super.schemaType, super.jsonPayload, super.description, super.suggestions})",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "ContentModifierConfiguration",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 110,
-        "doc": "Configuration for modifying content presentation.\n\nContent modifiers allow you to wrap content items with additional\nfunctionality or styling. They can be used to add:\n- Animation effects\n- Layout modifications\n- Interaction handlers\n- Debug overlays\n\nModifiers are applied in order, wrapping the content item's widget\ntree from inside out.\n\nExample:\n```dart\nclass FadeInModifier extends ContentModifierConfiguration {\n  @override\n  Widget build(BuildContext context, Widget child, ContentItem content) {\n    return FadeInAnimation(child: child);\n  }\n}\n```",
-        "signature": "abstract class ContentModifierConfiguration implements SchemaItem",
-        "members": [
-          {
-            "signature": "final String schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "ContentModifierConfiguration({required this.schemaType})",
-            "doc": ""
-          },
-          {
-            "signature": "factory ContentModifierConfiguration.fromJson(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Widget build(BuildContext context, Widget child, ContentItem content)",
-            "doc": "Builds the modifier widget tree for the given content item.\n\nThis method is called by the content system to apply the modifier\nto the content item's widget tree."
-          }
-        ]
-      },
-      {
-        "name": "ContentPlugin",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_plugin.dart",
-        "line": 4,
-        "doc": "The base class for a Content Plugin",
-        "signature": "abstract class ContentPlugin extends Plugin",
-        "members": [
-          {
-            "signature": "final ContentProvider provider",
-            "doc": "The ContentProvider for this plugin"
-          },
-          {
-            "signature": "ContentPlugin({required this.provider, required super.name, required super.title})",
-            "doc": "Creates a new ContentPlugin with the given provider, name, and title"
-          },
-          {
-            "signature": "Map<Type, Map<String, TypeDescriptor>> get typeRegistry",
-            "doc": "The type registry that maps types to their descriptors.\nThis stores the descriptors for LayoutConfiguration, ActionConfiguration, ConditionConfiguration and\npossibly others in the future."
-          },
-          {
-            "signature": "Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout})",
-            "doc": "Builds a Widget for the given content. You can pass in an optional [layout]\nto override the default layout"
-          },
-          {
-            "signature": "Widget buildRoute(BuildContext context, {Uri? url, String? routeId})",
-            "doc": "Builds a Widget for the given route url or id. This is used for top-level documents called routes.\nThese could represent a page, dialog or a conditional-route."
-          },
-          {
-            "signature": "void attach(ExtensionBuilder extBuilder)",
-            "doc": "Sets up the plugin with the ContentExtensionBuilder.\nThe plugin relies on the ContentExtensionBuilder to do its work."
-          },
-          {
-            "signature": "T? fromJson<T>(Map<String, dynamic> json)",
-            "doc": "Converts the given json to an item of type T"
-          },
-          {
-            "signature": "void register<T>(TypeDescriptor<T> descriptor)",
-            "doc": "Registers the given type descriptor"
-          },
-          {
-            "signature": "bool isRegistered<T>(String schemaType)",
-            "doc": "Checks if the given schema type is registered for type T"
-          }
-        ]
-      },
-      {
-        "name": "ContentProvider",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_provider.dart",
-        "line": 5,
-        "doc": "",
-        "signature": "abstract class ContentProvider",
-        "members": [
-          {
-            "signature": "final String name",
-            "doc": ""
-          },
-          {
-            "signature": "final String title",
-            "doc": ""
-          },
-          {
-            "signature": "final LiveContentProvider live",
-            "doc": ""
-          },
-          {
-            "signature": "ContentProvider({required this.name, required this.title, this.live = const NoOpLiveContentProvider()})",
-            "doc": ""
-          },
-          {
-            "signature": "bool get supportsLive",
-            "doc": ""
-          },
-          {
-            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "String schemaType(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          },
-          {
-            "signature": "ImageProvider? image(final ImageReference imageRef, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format})",
-            "doc": ""
-          },
-          {
-            "signature": "Uri? fileUrl(final FileReference fileRef)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
             "doc": ""
           }
         ]
@@ -2078,17 +1740,17 @@
       {
         "name": "DefaultNavigationPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
-        "line": 8,
+        "line": 17,
         "doc": "",
         "signature": "final class DefaultNavigationPlugin extends NavigationPlugin",
         "members": [
           {
-            "signature": "final bool includeFallbackRoute",
-            "doc": ""
+            "signature": "final g.GoRouterRedirect? redirect",
+            "doc": "The global redirect for this router, run before every feature redirect."
           },
           {
-            "signature": "DefaultNavigationPlugin({this.includeFallbackRoute = true, final bool urlReflectsImperativeAPIs = false, g.GoRouterRedirect? redirect})",
-            "doc": ""
+            "signature": "DefaultNavigationPlugin({final bool urlReflectsImperativeAPIs = false, this.redirect, RouterUrlStyle? urlStyle})",
+            "doc": "Creates the GoRouter-based navigation plugin.\n\n* [redirect]: a global redirect, run before every feature redirect.\n* [urlStyle]: hash or path URLs on the web. Applied immediately, so\n  create the plugin before `runApp`.\n* [urlReflectsImperativeAPIs]: whether `push` and friends update the\n  browser URL."
           },
           {
             "signature": "GoRouter get instance",
@@ -2202,14 +1864,6 @@
         "members": []
       },
       {
-        "name": "DocumentItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 19,
-        "doc": "The base interface for all schema-driven document items.\n\nDocument items represent top-level content documents in the CMS.\nThey are typically the main content types that users create and manage.",
-        "signature": "abstract interface class DocumentItem implements SchemaItem",
-        "members": []
-      },
-      {
         "name": "EnvPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/env/env_plugin.dart",
         "line": 3,
@@ -2241,7 +1895,7 @@
       {
         "name": "ErrorViewBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 104,
+        "line": 102,
         "doc": "A builder for an error view widget.\n\nThis builder is called when an error occurs in the application.\nIt provides detailed error information and optional retry/restart functionality.\n\nExample:\n```dart\nErrorViewBuilder builder = (\n  context, {\n  required title,\n  error,\n  stackTrace,\n  retryLabel,\n  onRetry,\n  subtitle,\n  showRestart,\n}) => ErrorView(\n  title: title,\n  subtitle: subtitle,\n  onRetry: onRetry,\n  showRestart: showRestart,\n);\n```",
         "signature": "typedef ErrorViewBuilder = Widget Function( BuildContext context,",
         "members": []
@@ -2422,8 +2076,8 @@
       {
         "name": "FailureCard",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 224,
-        "doc": "The default inline failure, used inside a page for a piece of content.",
+        "line": 228,
+        "doc": "The default inline failure, used inside a page for a part that failed.",
         "signature": "class FailureCard extends StatelessWidget",
         "members": [
           {
@@ -2570,10 +2224,10 @@
           },
           {
             "signature": "RouteBuilderFunction? get routes",
-            "doc": "The routes for the feature."
+            "doc": "The routes for the feature, or null when it contributes none. Features\nthat only add event handlers, redirects, extensions or services can\nleave this out."
           },
           {
-            "signature": "FeatureDescriptor({required this.name, required this.title, this.description, this.icon, this.init, this.dispose, required RouteBuilderFunction routes, this.extensions, this.extensionBuilders, this.dependencies = const [], this.events = const [], this.redirects = const []})",
+            "signature": "FeatureDescriptor({required this.name, required this.title, this.description, this.icon, this.init, this.dispose, RouteBuilderFunction? routes, this.extensions, this.extensionBuilders, this.dependencies = const [], this.events = const [], this.redirects = const []})",
             "doc": "Creates a new FeatureDescriptor."
           }
         ]
@@ -2704,47 +2358,6 @@
         "line": 12,
         "doc": "The builder function that creates a set of features.",
         "signature": "typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();",
-        "members": []
-      },
-      {
-        "name": "FieldName",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_plugin.dart",
-        "line": 47,
-        "doc": "",
-        "signature": "enum FieldName { id, type, key, ref, updatedAt, createdAt }",
-        "members": []
-      },
-      {
-        "name": "FileReference",
-        "file": "packages/system/vyuh_core/lib/plugin/content/reference.dart",
-        "line": 38,
-        "doc": "A reference to a file asset in the content management system.\n\nThis class represents a file reference that can be used in content models.\nIt supports file assets like PDFs, documents, or other binary files.\n\nExample:\n```dart\nfinal fileRef = FileReference(\n  type: 'file',\n  asset: ObjectReference(type: 'reference', ref: 'file-abc123'),\n);\n```",
-        "signature": "class FileReference",
-        "members": [
-          {
-            "signature": "final String type",
-            "doc": ""
-          },
-          {
-            "signature": "final ObjectReference? asset",
-            "doc": ""
-          },
-          {
-            "signature": "FileReference({required this.type, required this.asset})",
-            "doc": ""
-          },
-          {
-            "signature": "factory FileReference.fromJson(final Map<String, dynamic> json)",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "FromJsonConverter",
-        "file": "packages/system/vyuh_core/lib/plugin/content/type_descriptor.dart",
-        "line": 1,
-        "doc": "Function type for converting JSON data to a typed object.\n\nTakes a JSON map as input and returns a nullable instance of type [T].\nThis is typically implemented using generated fromJson methods from\njson_serializable.\n\nExample:\n```dart\nfinal converter = BlogPost.fromJson;\nfinal post = converter({'title': 'Hello', 'content': 'World'});\n```",
-        "signature": "typedef FromJsonConverter<T> = T? Function(Map<String, dynamic> json);",
         "members": []
       },
       {
@@ -2893,39 +2506,10 @@
       {
         "name": "ImagePlaceholderBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 55,
+        "line": 53,
         "doc": "A builder for an image placeholder widget.\n\nThis builder is called to create a placeholder widget while an image is loading.\nThe [width] and [height] parameters specify the desired dimensions of the\nplaceholder.\n\nExample:\n```dart\nImagePlaceholderBuilder builder = (context, {width, height}) => Container(\n  width: width,\n  height: height,\n  color: Colors.grey[300],\n);\n```",
         "signature": "typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,",
         "members": []
-      },
-      {
-        "name": "ImageReference",
-        "file": "packages/system/vyuh_core/lib/plugin/content/reference.dart",
-        "line": 6,
-        "doc": "A reference to an image asset in the content management system.\n\nThis class represents an image reference that can be used in content models.\nIt supports both direct asset references and Sanity-specific image assets.\n\nExample:\n```dart\nfinal imageRef = ImageReference(\n  type: 'image',\n  asset: ObjectReference(type: 'reference', ref: 'image-abc123'),\n);\n```",
-        "signature": "class ImageReference",
-        "members": [
-          {
-            "signature": "final String type",
-            "doc": ""
-          },
-          {
-            "signature": "final ObjectReference? asset",
-            "doc": ""
-          },
-          {
-            "signature": "final String? sanityAsset",
-            "doc": ""
-          },
-          {
-            "signature": "ImageReference({required this.type, required this.asset, this.sanityAsset})",
-            "doc": ""
-          },
-          {
-            "signature": "factory ImageReference.fromJson(final Map<String, dynamic> json)",
-            "doc": ""
-          }
-        ]
       },
       {
         "name": "InitOncePlugin",
@@ -2963,56 +2547,6 @@
         "doc": "The possible states of the system initialization.",
         "signature": "enum InitState { notStarted, plugins, features, ready, error }",
         "members": []
-      },
-      {
-        "name": "LayoutConfiguration",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 147,
-        "doc": "Base class for configuring the visual layout of a content item.\n\nLayout configurations define how a content item should be presented\non screen. They handle:\n- Visual structure and arrangement\n- Responsive design\n- Theme integration\n- Content-specific styling\n\nEach content type can have multiple layout variants, allowing the\nsame content to be displayed differently in different contexts.\n\nExample:\n```dart\nclass BlogPostLayout extends LayoutConfiguration<BlogPost> {\n  @override\n  Widget build(BuildContext context, BlogPost content) {\n    return Column(\n      children: [\n        Text(content.title, style: Theme.of(context).textTheme.headlineLarge),\n        Text(content.content),\n      ],\n    );\n  }\n}\n```",
-        "signature": "abstract class LayoutConfiguration<T extends ContentItem> implements SchemaItem",
-        "members": [
-          {
-            "signature": "final String schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "final Type contentType",
-            "doc": ""
-          },
-          {
-            "signature": "LayoutConfiguration({required this.schemaType})",
-            "doc": "Creates an instance of [LayoutConfiguration]."
-          },
-          {
-            "signature": "factory LayoutConfiguration.fromJson(Map<String, dynamic> json)",
-            "doc": "Converts the JSON representation of the layout configuration to an instance of [LayoutConfiguration]."
-          },
-          {
-            "signature": "Widget build(BuildContext context, T content)",
-            "doc": "Builds the layout widget tree for the given content item.\n\nThis method is called by the content system to render the content item\nwith the specified layout."
-          }
-        ]
-      },
-      {
-        "name": "LayoutFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 50,
-        "doc": "Failure when a layout for a registered content type is missing.\n\nThis occurs when a ContentItem has been successfully deserialized but\nno layout configuration can be found to render it.",
-        "signature": "final class LayoutFailure extends ContentFailure",
-        "members": [
-          {
-            "signature": "final String contentSchemaType",
-            "doc": "The content type that needs a layout"
-          },
-          {
-            "signature": "final String? requestedLayoutType",
-            "doc": "The specific layout type that was requested (if any)"
-          },
-          {
-            "signature": "const LayoutFailure({required super.schemaType, required this.contentSchemaType, this.requestedLayoutType, super.jsonPayload, super.description, super.suggestions})",
-            "doc": ""
-          }
-        ]
       },
       {
         "name": "LazyFeatureDescriptor",
@@ -3068,106 +2602,12 @@
         "members": []
       },
       {
-        "name": "LiveContentProvider",
-        "file": "packages/system/vyuh_core/lib/plugin/content/live_content_provider.dart",
-        "line": 3,
-        "doc": "An interface for plugins that provide live content.\n\nLive content providers are used in conjunction with the content system\nto provide content that is fetched and updated in real-time.\nIt supports all modes of fetching content: by ID, by query, or by route.",
-        "signature": "abstract class LiveContentProvider",
-        "members": [
-          {
-            "signature": "final String title",
-            "doc": "The title of the live content provider."
-          },
-          {
-            "signature": "const LiveContentProvider({required this.title})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          },
-          {
-            "signature": "Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false})",
-            "doc": "Fetches content by ID."
-          },
-          {
-            "signature": "Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
-            "doc": "Fetches content by query, returning a single item."
-          },
-          {
-            "signature": "Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
-            "doc": "Fetches content by query, returning a list of items."
-          },
-          {
-            "signature": "Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false})",
-            "doc": "Fetches content by route."
-          }
-        ]
-      },
-      {
         "name": "Loader",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 26,
-        "doc": "A builder for a widget that is shown when the app is loading.\n\nThis builder is called to create a loading indicator during app initialization\nor when loading content. The [context] parameter provides access to the\ncurrent build context.\n\nExample:\n```dart\nLoader loader = (context) => const Center(\n  child: CircularProgressIndicator(),\n);\n```",
+        "line": 24,
+        "doc": "A builder for a widget that is shown when the app is loading.\n\nThis builder is called to create a loading indicator during app initialization\nor while a part of a page loads. The [context] parameter provides access to the\ncurrent build context.\n\nExample:\n```dart\nLoader loader = (context) => const Center(\n  child: CircularProgressIndicator(),\n);\n```",
         "signature": "typedef Loader = Widget Function(BuildContext context);",
         "members": []
-      },
-      {
-        "name": "LocalContentProvider",
-        "file": "packages/system/vyuh_core/lib/plugin/content/local_content_provider.dart",
-        "line": 6,
-        "doc": "",
-        "signature": "final class LocalContentProvider extends ContentProvider",
-        "members": [
-          {
-            "signature": "LocalContentProvider()",
-            "doc": ""
-          },
-          {
-            "signature": "String schemaType(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Uri? fileUrl(FileReference fileRef)",
-            "doc": ""
-          },
-          {
-            "signature": "ImageProvider<Object>? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          }
-        ]
       },
       {
         "name": "LocaleConfiguration",
@@ -3394,37 +2834,12 @@
         ]
       },
       {
-        "name": "ModifierFailure",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_failure.dart",
-        "line": 71,
-        "doc": "Failure when a content modifier registration is missing.\n\nThis occurs when applying a chain of modifiers to content and one\nof the modifiers in the chain cannot be resolved.",
-        "signature": "final class ModifierFailure extends ContentFailure",
-        "members": [
-          {
-            "signature": "final List<String> modifierChain",
-            "doc": "The complete chain of modifiers being applied"
-          },
-          {
-            "signature": "final int failedIndex",
-            "doc": "The index in the modifier chain where the failure occurred"
-          },
-          {
-            "signature": "const ModifierFailure({required super.schemaType, required this.modifierChain, required this.failedIndex, super.jsonPayload, super.description, super.suggestions})",
-            "doc": ""
-          }
-        ]
-      },
-      {
         "name": "NamedBindings",
         "file": "packages/system/vyuh_core/lib/runtime/vyuh_binding.dart",
-        "line": 122,
-        "doc": "",
+        "line": 120,
+        "doc": "The same named accessors as `vyuh.*`, for code that must also run in\nwidget mode, where `runApp` (and so `vyuh`) is not used.",
         "signature": "extension NamedBindings on VyuhBinding",
         "members": [
-          {
-            "signature": "ContentPlugin get content",
-            "doc": "The content plugin, responsible for managing content-related operations."
-          },
           {
             "signature": "DIPlugin get di",
             "doc": "The dependency injection plugin, providing dependency injection services."
@@ -3452,6 +2867,26 @@
           {
             "signature": "EventPlugin get event",
             "doc": "The event plugin, for managing and emitting events within the platform."
+          },
+          {
+            "signature": "AuthPlugin get auth",
+            "doc": "The authentication plugin."
+          },
+          {
+            "signature": "NavigationPlugin get router",
+            "doc": "The navigation plugin."
+          },
+          {
+            "signature": "LocalePlugin? get locale",
+            "doc": "The locale plugin, or null when it is not registered."
+          },
+          {
+            "signature": "StoragePlugin get storage",
+            "doc": "The storage plugin, for general key-value persistence."
+          },
+          {
+            "signature": "SecureStoragePlugin get secureStorage",
+            "doc": "The secure storage plugin, for secrets such as tokens."
           }
         ]
       },
@@ -3459,13 +2894,9 @@
         "name": "NamedPlugins",
         "file": "packages/system/vyuh_core/lib/runtime/platform/vyuh_platform.dart",
         "line": 86,
-        "doc": "Provides convenient accessors for named plugins within the Vyuh platform.",
+        "doc": "Named accessors for the system plugins: `vyuh.router`, `vyuh.auth`, ...\n\nUse these in apps and features. Code that must also run in widget mode\n(an embedded widget without `runApp`) uses the identical accessors on\n`VyuhBinding.instance` instead.",
         "signature": "extension NamedPlugins on VyuhPlatform",
         "members": [
-          {
-            "signature": "ContentPlugin get content",
-            "doc": "The content plugin, responsible for managing content-related operations."
-          },
           {
             "signature": "DIPlugin get di",
             "doc": "The dependency injection plugin, providing dependency injection services."
@@ -3505,13 +2936,21 @@
           {
             "signature": "LocalePlugin? get locale",
             "doc": "The locale plugin, providing access to locale settings.\nCan be null if the plugin is not registered."
+          },
+          {
+            "signature": "StoragePlugin get storage",
+            "doc": "The storage plugin, for general key-value persistence."
+          },
+          {
+            "signature": "SecureStoragePlugin get secureStorage",
+            "doc": "The secure storage plugin, for secrets such as tokens."
           }
         ]
       },
       {
         "name": "NavigationPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/navigation.dart",
-        "line": 7,
+        "line": 6,
         "doc": "",
         "signature": "abstract class NavigationPlugin extends Plugin",
         "members": [
@@ -3520,8 +2959,8 @@
             "doc": ""
           },
           {
-            "signature": "static final dynamic fallbackRoute",
-            "doc": ""
+            "signature": "static const dynamic catchAllPath",
+            "doc": "The path of a catch-all route. A feature can contribute one `GoRoute`\nwith this path to handle every location no other route matches; the\nrouter always places it last. Without one, unmatched locations show the\nnot-found [RouteFailureView]."
           },
           {
             "signature": "NavigationPlugin({required super.name, required super.title})",
@@ -3680,145 +3119,6 @@
         ]
       },
       {
-        "name": "NoOpContentPlugin",
-        "file": "packages/system/vyuh_core/lib/plugin/content/noop_content_plugin.dart",
-        "line": 17,
-        "doc": "",
-        "signature": "final class NoOpContentPlugin extends ContentPlugin",
-        "members": [
-          {
-            "signature": "NoOpContentPlugin()",
-            "doc": ""
-          },
-          {
-            "signature": "Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout})",
-            "doc": ""
-          },
-          {
-            "signature": "Widget buildRoute(BuildContext context, {Uri? url, String? routeId})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          },
-          {
-            "signature": "bool isRegistered<T>(String schemaType)",
-            "doc": ""
-          },
-          {
-            "signature": "dynamic register<T>(TypeDescriptor<T> descriptor)",
-            "doc": ""
-          },
-          {
-            "signature": "void attach(ExtensionBuilder extBuilder)",
-            "doc": ""
-          },
-          {
-            "signature": "T? fromJson<T>(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Map<Type, Map<String, TypeDescriptor>> get typeRegistry",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "NoOpContentProvider",
-        "file": "packages/system/vyuh_core/lib/plugin/content/noop_content_provider.dart",
-        "line": 4,
-        "doc": "",
-        "signature": "final class NoOpContentProvider extends ContentProvider",
-        "members": [
-          {
-            "signature": "NoOpContentProvider()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "ImageProvider? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          },
-          {
-            "signature": "String schemaType(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
-            "doc": ""
-          },
-          {
-            "signature": "Uri? fileUrl(FileReference fileRef)",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "NoOpLiveContentProvider",
-        "file": "packages/system/vyuh_core/lib/plugin/content/live_content_provider.dart",
-        "line": 48,
-        "doc": "A no-op implementation of [LiveContentProvider].\nIs used internally to ensure the Developer is using it correctly by giving proper errors\nand hints",
-        "signature": "final class NoOpLiveContentProvider extends LiveContentProvider",
-        "members": [
-          {
-            "signature": "const NoOpLiveContentProvider()",
-            "doc": ""
-          },
-          {
-            "signature": "Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false})",
-            "doc": ""
-          },
-          {
-            "signature": "Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
-            "doc": ""
-          },
-          {
-            "signature": "Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
-            "doc": ""
-          },
-          {
-            "signature": "Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init()",
-            "doc": ""
-          }
-        ]
-      },
-      {
         "name": "NoOpTelemetryProvider",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart",
         "line": 4,
@@ -3910,31 +3210,6 @@
         ]
       },
       {
-        "name": "ObjectReference",
-        "file": "packages/system/vyuh_core/lib/plugin/content/reference.dart",
-        "line": 66,
-        "doc": "A reference to any content object in the content management system.\n\nThis class represents a generic reference to any content item. It is used\nto establish relationships between content items, such as references to\nimages, files, or other content types.\n\nThe [type] field indicates the type of reference (e.g., 'reference', 'image').\nThe [ref] field contains the unique identifier of the referenced content.\n\nExample:\n```dart\nfinal ref = ObjectReference(\n  type: 'reference',\n  ref: 'content-abc123',\n);\n```",
-        "signature": "class ObjectReference",
-        "members": [
-          {
-            "signature": "final String type",
-            "doc": ""
-          },
-          {
-            "signature": "final String ref",
-            "doc": ""
-          },
-          {
-            "signature": "ObjectReference({required this.type, required this.ref})",
-            "doc": ""
-          },
-          {
-            "signature": "factory ObjectReference.fromJson(Map<String, dynamic> json)",
-            "doc": ""
-          }
-        ]
-      },
-      {
         "name": "PlatformLoggerInterface",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/logger.dart",
         "line": 60,
@@ -3950,8 +3225,8 @@
       {
         "name": "PlatformWidgetBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 160,
-        "doc": "A builder for platform-specific widgets used throughout the Vyuh application.\n\nThis class provides a centralized way to customize the appearance and behavior\nof common UI components in a Vyuh application. It includes builders for:\n- App root widget ([appBuilder])\n- Loading indicators ([appLoader], [contentLoader], [routeLoader])\n- Error views ([errorView], [routeErrorView])\n- Unknown content handling ([unknown])\n- Image placeholders ([imagePlaceholder])\n\nUse [copyWith] to create a modified version of an existing builder:\n```dart\nfinal customBuilder = defaultPlatformWidgetBuilder.copyWith(\n  appLoader: (context) => MyCustomLoader(),\n  errorView: (context, {title, error}) => MyCustomErrorView(title: title),\n  unknown: (context, failure) => MyCustomUnknownWidget(failure: failure),\n);\n```",
+        "line": 137,
+        "doc": "A builder for platform-specific widgets used throughout the Vyuh application.\n\nThis class provides a centralized way to customize the appearance and behavior\nof common UI components in a Vyuh application. It includes builders for:\n- App root widget ([appBuilder])\n- Loading indicators ([appLoader], [contentLoader], [routeLoader])\n- Error views ([errorView], [routeErrorView])\n- Image placeholders ([imagePlaceholder])\n\nUse [copyWith] to create a modified version of an existing builder:\n```dart\nfinal customBuilder = defaultPlatformWidgetBuilder.copyWith(\n  appLoader: (context) => MyCustomLoader(),\n  errorView: (context, {title, error}) => MyCustomErrorView(title: title),\n);\n```",
         "signature": "class PlatformWidgetBuilder",
         "members": [
           {
@@ -3964,7 +3239,7 @@
           },
           {
             "signature": "final Loader contentLoader",
-            "doc": "A loader widget that is shown when the content is loading."
+            "doc": "An inline loader, shown while a part of a page (a section, a list, an\nimage) loads. Unlike [routeLoader] it does not take over the page."
           },
           {
             "signature": "final RouteLoader routeLoader",
@@ -3983,19 +3258,19 @@
             "doc": "A builder for the error view widget."
           },
           {
-            "signature": "final UnknownContentBuilder unknown",
-            "doc": "A builder for unknown content failures."
-          },
-          {
             "signature": "final VyuhTheme theme",
             "doc": "The app's themes. Used by the default [appBuilder], and by the loading\nand failure screens shown before the app itself is built, so the very\nfirst frame already matches the app. See [VyuhTheme]."
           },
           {
-            "signature": "PlatformWidgetBuilder({required this.appBuilder, required this.appLoader, required this.contentLoader, required this.routeLoader, required this.errorView, required this.routeErrorView, required this.imagePlaceholder, required this.unknown, VyuhTheme? theme})",
+            "signature": "final VyuhStrings strings",
+            "doc": "Every user-facing string the framework shows. See [VyuhStrings]."
+          },
+          {
+            "signature": "PlatformWidgetBuilder({required this.appBuilder, required this.appLoader, required this.contentLoader, required this.routeLoader, required this.errorView, required this.routeErrorView, required this.imagePlaceholder, VyuhTheme? theme, this.strings = const VyuhStrings()})",
             "doc": "Creates a new [PlatformWidgetBuilder] instance."
           },
           {
-            "signature": "PlatformWidgetBuilder copyWith({AppBuilder? appBuilder, Loader? appLoader, Loader? contentLoader, RouteLoader? routeLoader, ImagePlaceholderBuilder? imagePlaceholder, RouteErrorViewBuilder? routeErrorView, ErrorViewBuilder? errorView, UnknownContentBuilder? unknown, VyuhTheme? theme})",
+            "signature": "PlatformWidgetBuilder copyWith({AppBuilder? appBuilder, Loader? appLoader, Loader? contentLoader, RouteLoader? routeLoader, ImagePlaceholderBuilder? imagePlaceholder, RouteErrorViewBuilder? routeErrorView, ErrorViewBuilder? errorView, VyuhTheme? theme, VyuhStrings? strings})",
             "doc": "Creates a copy of this [PlatformWidgetBuilder] but with the given fields"
           },
           {
@@ -4037,7 +3312,7 @@
         "name": "PluginDescriptor",
         "file": "packages/system/vyuh_core/lib/plugin/plugin_descriptor.dart",
         "line": 8,
-        "doc": "A descriptor for configuring the plugin system in a Vyuh application.\n\nThe [PluginDescriptor] manages the registration and initialization of all plugins\nin the application and provides type-safe access to plugin instances.\n\nPlugins are organized into several categories:\n- Core System Plugins:\n  - [DIPlugin]: Dependency injection\n  - [ContentPlugin]: Content management\n  - [AnalyticsPlugin]: User analytics\n  - [TelemetryPlugin]: Application telemetry\n  - [NetworkPlugin]: Network communication\n  - [AuthPlugin]: Authentication\n  - [NavigationPlugin]: Routing and navigation\n  - [EnvPlugin]: Environment configuration\n  - [EventPlugin]: Event system\n  - [StoragePlugin]: Data persistence\n  - [SecureStoragePlugin]: Secure Data persistence\n- Custom Plugins: Additional plugins via [others]\n\nEach plugin type has a default implementation that is used if not explicitly\nprovided. Custom implementations can be provided for any plugin type.\n\nExample:\n```dart\nfinal plugins = PluginDescriptor(\n  analytics: MyCustomAnalyticsPlugin(),\n  auth: MyCustomAuthPlugin(),\n  others: [MyCustomPlugin()],\n);\n```\n\nPlugins marked [PreloadedPlugin] initialize before the platform. The default\napp platform initializes the remaining plugins concurrently. There is no\nautomatic dependency graph between plugins.",
+        "doc": "A descriptor for configuring the plugin system in a Vyuh application.\n\nThe [PluginDescriptor] manages the registration and initialization of all plugins\nin the application and provides type-safe access to plugin instances.\n\nPlugins are organized into several categories:\n- Core System Plugins:\n  - [DIPlugin]: Dependency injection\n  - [AnalyticsPlugin]: User analytics\n  - [TelemetryPlugin]: Application telemetry\n  - [NetworkPlugin]: Network communication\n  - [AuthPlugin]: Authentication\n  - [NavigationPlugin]: Routing and navigation\n  - [EnvPlugin]: Environment configuration\n  - [EventPlugin]: Event system\n  - [StoragePlugin]: Data persistence\n  - [SecureStoragePlugin]: Secure Data persistence\n- Custom Plugins: Additional plugins via [others]\n\nEach plugin type has a default implementation that is used if not explicitly\nprovided. Custom implementations can be provided for any plugin type.\n\nExample:\n```dart\nfinal plugins = PluginDescriptor(\n  analytics: MyCustomAnalyticsPlugin(),\n  auth: MyCustomAuthPlugin(),\n  others: [MyCustomPlugin()],\n);\n```\n\nPlugins marked [PreloadedPlugin] initialize before the platform. The default\napp platform initializes the remaining plugins concurrently. There is no\nautomatic dependency graph between plugins.",
         "signature": "final class PluginDescriptor",
         "members": [
           {
@@ -4045,7 +3320,7 @@
             "doc": ""
           },
           {
-            "signature": "PluginDescriptor({final DIPlugin? di, final ContentPlugin? content, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others})",
+            "signature": "PluginDescriptor({final DIPlugin? di, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others})",
             "doc": ""
           },
           {
@@ -4118,85 +3393,12 @@
       {
         "name": "Restartable",
         "file": "packages/system/vyuh_core/lib/runtime/platform/vyuh_platform.dart",
-        "line": 124,
+        "line": 131,
         "doc": "Restart the platform, re-running the initialization process.",
         "signature": "extension Restartable on VyuhPlatform",
         "members": [
           {
             "signature": "Future<void> restart()",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "RootItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 208,
-        "doc": "Represents a root item that is the root of a content tree.\n\nRoot items are special container items that serve as the entry point\nfor a content tree. They typically represent:\n- Pages\n- Screens\n- Top-level content structures\n\nRoot items are directly managed by the content system and can be\nfetched by their unique identifiers.",
-        "signature": "abstract interface class RootItem implements ContainerItem",
-        "members": []
-      },
-      {
-        "name": "RouteBase",
-        "file": "packages/system/vyuh_core/lib/plugin/content/route_base.dart",
-        "line": 9,
-        "doc": "Base class for all route content items in Vyuh.\n\nRoutes represent navigable content in a Vyuh application. They combine\ncontent from the CMS with routing configuration to create dynamic,\ncontent-driven navigation.\n\nKey features:\n- Content-driven routing using CMS data\n- Customizable route types and transitions\n- Category-based organization\n- Lifecycle management",
-        "signature": "abstract class RouteBase extends ContentItem implements RootItem",
-        "members": [
-          {
-            "signature": "final String title",
-            "doc": "The title of the route, displayed in navigation UI."
-          },
-          {
-            "signature": "final String path",
-            "doc": "The URL path for this route.\nThis is used to match URLs and generate links."
-          },
-          {
-            "signature": "final Category? category",
-            "doc": "Optional category for organizing routes."
-          },
-          {
-            "signature": "final RouteTypeConfiguration? routeType",
-            "doc": "Configuration for how this route should be presented.\nDefines transitions, animations, and other route-specific behavior."
-          },
-          {
-            "signature": "final String id",
-            "doc": "Unique identifier for this route."
-          },
-          {
-            "signature": "final DateTime updatedAt",
-            "doc": "When this route was last updated in the CMS."
-          },
-          {
-            "signature": "final DateTime createdAt",
-            "doc": "When this route was created in the CMS."
-          },
-          {
-            "signature": "RouteBase({required super.schemaType, this.routeType, required this.title, required this.path, this.category, required this.createdAt, required this.updatedAt, required this.id, required super.layout, required super.modifiers})",
-            "doc": ""
-          },
-          {
-            "signature": "factory RouteBase.fromJson(Map<String, dynamic> json)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<RouteBase?> init(BuildContext context)",
-            "doc": "Initialize the route when it becomes active.\n\nThis is called when the route is first navigated to.\nUse this to set up any route-specific state or resources.\nReturn null to prevent the route from being shown."
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": "Clean up the route when it is no longer active.\n\nThis is called when navigating away from the route.\nUse this to clean up any resources initialized in [init]."
-          },
-          {
-            "signature": "Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey])",
-            "doc": "Create a Flutter page for this route.\n\nThis method combines the route's content with its configuration\nto create a Flutter page that can be used in navigation.\nThe [pageKey] is used for Flutter's page-based navigation system."
-          },
-          {
-            "signature": "LayoutConfiguration? getLayout()",
-            "doc": ""
-          },
-          {
-            "signature": "List<ContentModifierConfiguration>? getModifiers()",
             "doc": ""
           }
         ]
@@ -4212,7 +3414,7 @@
       {
         "name": "RouteErrorViewBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 72,
+        "line": 70,
         "doc": "A builder for a route error view widget.\n\nThis builder is called when an error occurs during route navigation.\nIt provides detailed error information and optional retry functionality.\n\nExample:\n```dart\nRouteErrorViewBuilder builder = (\n  context, {\n  required title,\n  retryLabel,\n  onRetry,\n  error,\n  stackTrace,\n  subtitle,\n}) => ErrorView(\n  title: title,\n  subtitle: subtitle,\n  onRetry: onRetry,\n);\n```",
         "signature": "typedef RouteErrorViewBuilder = Widget Function( BuildContext context,",
         "members": []
@@ -4221,7 +3423,7 @@
         "name": "RouteFailureEvent",
         "file": "packages/system/vyuh_core/lib/runtime/platform/events.dart",
         "line": 75,
-        "doc": "Emitted once each time a route cannot be shown: no match, a failed CMS\nfetch, a missing document or a failed lazy feature.",
+        "doc": "Emitted once each time a route cannot be shown: no match, a page that\nfailed to load or a failed lazy feature.",
         "signature": "final class RouteFailureEvent extends SystemEvent<VyuhFailure>",
         "members": [
           {
@@ -4264,38 +3466,9 @@
         ]
       },
       {
-        "name": "RouteLifecycleConfiguration",
-        "file": "packages/system/vyuh_core/lib/plugin/content/route_base.dart",
-        "line": 176,
-        "doc": "Configuration for managing route lifecycle events.\n\nRoute lifecycle configurations handle the initialization and cleanup\nof route-specific resources. They can:\n- Load route-specific data\n- Set up route state\n- Clean up resources\n- Handle route-specific events\n\nExample:\n```dart\nclass BlogLifecycle extends RouteLifecycleConfiguration {\n  @override\n  Future<void> init(BuildContext context, RouteBase route) async {\n    await loadBlogData();\n  }\n\n  @override\n  Future<void> dispose() async {\n    await saveBlogState();\n  }\n}\n```",
-        "signature": "abstract class RouteLifecycleConfiguration implements SchemaItem",
-        "members": [
-          {
-            "signature": "final String schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "final String? title",
-            "doc": ""
-          },
-          {
-            "signature": "RouteLifecycleConfiguration({this.title, required this.schemaType})",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> init(BuildContext context, RouteBase route)",
-            "doc": ""
-          },
-          {
-            "signature": "Future<void> dispose()",
-            "doc": ""
-          }
-        ]
-      },
-      {
         "name": "RouteLoader",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 40,
+        "line": 38,
         "doc": "A builder for a widget that is shown when a route is loading.\n\nThis builder is called when navigating between routes. The [url] parameter\ncontains the destination URL, and [routeId] contains the unique identifier\nfor the route.\n\nExample:\n```dart\nRouteLoader loader = (context, url, routeId) => Center(\n  child: Text('Loading $url...'),\n);\n```",
         "signature": "typedef RouteLoader = Widget Function(BuildContext context, [Uri? url, String? routeId]);",
         "members": []
@@ -4314,34 +3487,17 @@
         ]
       },
       {
-        "name": "RouteTypeConfiguration",
-        "file": "packages/system/vyuh_core/lib/plugin/content/route_base.dart",
-        "line": 145,
-        "doc": "Configuration for how a route should be presented.\n\nRoute type configurations define the visual and behavioral aspects\nof route transitions. They control:\n- Page transitions and animations\n- Route presentation mode (full-screen, modal, etc.)\n- Route-specific UI elements\n\nExample:\n```dart\nclass FadeRouteType extends RouteTypeConfiguration {\n  @override\n  Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]) {\n    return FadePage(\n      child: child,\n      key: pageKey,\n    );\n  }\n}\n```",
-        "signature": "abstract class RouteTypeConfiguration implements SchemaItem",
-        "members": [
-          {
-            "signature": "final String? title",
-            "doc": ""
-          },
-          {
-            "signature": "final String schemaType",
-            "doc": ""
-          },
-          {
-            "signature": "RouteTypeConfiguration({this.title, required this.schemaType})",
-            "doc": ""
-          },
-          {
-            "signature": "Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey])",
-            "doc": ""
-          }
-        ]
+        "name": "RouterUrlStyle",
+        "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
+        "line": 8,
+        "doc": "How URLs look on the web. Has no effect on other platforms.",
+        "signature": "enum RouterUrlStyle { hash, path }",
+        "members": []
       },
       {
         "name": "RoutingConfigNotifier",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
-        "line": 275,
+        "line": 301,
         "doc": "",
         "signature": "final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig>",
         "members": [
@@ -4356,19 +3512,6 @@
           {
             "signature": "void setRoutes(List<g.RouteBase> routes)",
             "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "SchemaItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 5,
-        "doc": "The base interface for all schema-driven content items.\n\nSchema items are the foundation of Vyuh's content system. They represent\nany content that is defined by a schema in the CMS (Content Management System).\nAll content items must implement this interface to be compatible with the\ncontent system.",
-        "signature": "abstract interface class SchemaItem",
-        "members": [
-          {
-            "signature": "String get schemaType",
-            "doc": "The schema type of the content item.\n\nThis should match the type name defined in the CMS schema.\nFor example: 'blog.post', 'product.detail', etc."
           }
         ]
       },
@@ -4694,96 +3837,6 @@
         ]
       },
       {
-        "name": "TypeDescriptor",
-        "file": "packages/system/vyuh_core/lib/plugin/content/type_descriptor.dart",
-        "line": 14,
-        "doc": "Describes a schema type and its serialization behavior.\n\nType descriptors are used by the content system to:\n- Register content types with their schema names\n- Convert JSON data to typed objects\n- Provide metadata about content types\n- Generate preview instances for design tools\n\nEach content type should have a corresponding TypeDescriptor that\ndefines how to create instances from JSON data.\n\nExample:\n```dart\nstatic final typeDescriptor = TypeDescriptor(\n  schemaType: 'blog.post',\n  fromJson: BlogPost.fromJson,\n  title: 'Blog Post',\n  preview: () => BlogPost(\n    title: 'Preview Post',\n    content: 'This is a preview',\n  ),\n);\n```",
-        "signature": "class TypeDescriptor<T>",
-        "members": [
-          {
-            "signature": "final String title",
-            "doc": "Human-readable name for this type.\n\nUsed in UI components and error messages."
-          },
-          {
-            "signature": "final String schemaType",
-            "doc": "Schema type identifier from the CMS.\n\nMust match the type name defined in the CMS schema.\nFor example: 'blog.post', 'product.detail'"
-          },
-          {
-            "signature": "final FromJsonConverter<T> fromJson",
-            "doc": "Function to convert JSON data to an instance of [T].\n\nThis is typically the generated fromJson method from\njson_serializable."
-          },
-          {
-            "signature": "final T Function()? preview",
-            "doc": "Optional function to create a preview instance.\n\nUsed by design tools to show sample content without\nfetching from the CMS."
-          },
-          {
-            "signature": "final Type type",
-            "doc": "The runtime type of [T]."
-          },
-          {
-            "signature": "String? get sourceFeature",
-            "doc": ""
-          },
-          {
-            "signature": "void setSourceFeature(String? featureName)",
-            "doc": "Updates the source feature for this type descriptor.\n\nThis is called internally by the content system and\nshould not be called directly."
-          },
-          {
-            "signature": "TypeDescriptor({required this.schemaType, required this.fromJson, required this.title, this.preview})",
-            "doc": "Creates a new type descriptor.\n\n- [schemaType]: The CMS schema type name\n- [fromJson]: Function to convert JSON to [T]\n- [title]: Human-readable name\n- [preview]: Optional preview instance generator"
-          },
-          {
-            "signature": "bool ==(Object other)",
-            "doc": ""
-          },
-          {
-            "signature": "int get hashCode",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "UnknownContentBuilder",
-        "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 139,
-        "doc": "A builder for unknown content failures.\n\nThis builder is called when content-related operations fail due to missing\nregistrations, layouts, modifiers, actions, or conditions. It provides a\nunified way to handle all content failures across the framework.\n\nExample:\n```dart\nUnknownContentBuilder builder = (context, failure) {\n  switch (failure) {\n    case ContentItemFailure():\n      return ContentErrorWidget(failure: failure);\n    case LayoutFailure():\n      return LayoutErrorWidget(failure: failure);\n    // ... handle other failure types\n  }\n};\n```",
-        "signature": "typedef UnknownContentBuilder = Widget Function(BuildContext context, ContentFailure failure);",
-        "members": []
-      },
-      {
-        "name": "UnknownContentItem",
-        "file": "packages/system/vyuh_core/lib/plugin/content/content_item.dart",
-        "line": 220,
-        "doc": "Internal marker class for unknown content items.\n\nThis is used internally when ContentItem.fromJson encounters an unknown\nschema type. It gets converted to a ContentItemFailure by DefaultContentPlugin.",
-        "signature": "final class UnknownContentItem extends ContentItem",
-        "members": [
-          {
-            "signature": "static const dynamic schemaName",
-            "doc": ""
-          },
-          {
-            "signature": "final String missingSchemaType",
-            "doc": ""
-          },
-          {
-            "signature": "final Map<String, dynamic> jsonPayload",
-            "doc": ""
-          },
-          {
-            "signature": "UnknownContentItem({required this.missingSchemaType, required this.jsonPayload})",
-            "doc": ""
-          }
-        ]
-      },
-      {
-        "name": "UnknownPlaceholderFactory",
-        "file": "packages/system/vyuh_core/lib/plugin/content/serialization.dart",
-        "line": 4,
-        "doc": "Factory function for creating unknown placeholders for different types.\nThis is set by the extension_content package to provide unknown placeholders\nfor ActionConfiguration, ConditionConfiguration, etc.",
-        "signature": "typedef UnknownPlaceholderFactory = SchemaItem? Function( Type type, String missingSchemaType, Map<String, dynamic> jsonPayload, );",
-        "members": []
-      },
-      {
         "name": "User",
         "file": "packages/system/vyuh_core/lib/plugin/auth/user.dart",
         "line": 3,
@@ -4847,7 +3900,7 @@
       {
         "name": "VyuhBinding",
         "file": "packages/system/vyuh_core/lib/runtime/vyuh_binding.dart",
-        "line": 8,
+        "line": 5,
         "doc": "",
         "signature": "final class VyuhBinding",
         "members": [
@@ -4877,7 +3930,7 @@
           },
           {
             "signature": "void widgetInit({PluginDescriptor? plugins, PlatformWidgetBuilder? widgetBuilder, required ExtensionBuilder extensionBuilder, required List<ExtensionDescriptor> extensionDescriptors, Future<void> Function(VyuhBinding)? onReady})",
-            "doc": "Purely meant to be called with running Vyuh in widget-mode, using `VyuhContentWidget`.\nThere is a convenience API inside `vyuh_extension_content` to make this easier.\nUse the `VyuhContentBinding.init()` instead.\n\nMake sure to call this before calling Flutter's `runApp()`.\n\n!!! NOTE !!!\n============\nDO NOT call this when using the Vyuh framework directly."
+            "doc": "Runs Vyuh in widget mode: plugins and one extension builder, without\n`runApp`, features or a router. Packages that embed Vyuh widgets in a\nnon-Vyuh app wrap this in their own binding API.\n\nMake sure to call this before calling Flutter's `runApp()`.\n\n!!! NOTE !!!\n============\nDO NOT call this when using the Vyuh framework directly."
           },
           {
             "signature": "Future<void> dispose()",
@@ -4892,7 +3945,7 @@
       {
         "name": "VyuhBranding",
         "file": "packages/system/vyuh_core/lib/runtime/failure_view.dart",
-        "line": 421,
+        "line": 444,
         "doc": "\"Powered by Vyuh\", shown when the theme allows it.",
         "signature": "class VyuhBranding extends StatelessWidget",
         "members": [
@@ -5079,6 +4132,95 @@
         ]
       },
       {
+        "name": "VyuhStrings",
+        "file": "packages/system/vyuh_core/lib/runtime/strings.dart",
+        "line": 4,
+        "doc": "Every user-facing string the framework shows: failure titles and\nmessages, recovery actions and accessibility labels.\n\nSet it once on [PlatformWidgetBuilder.strings] to translate or reword:\n\n```dart\nPlatformWidgetBuilder.system.copyWith(\n  strings: const VyuhStrings(\n    tryAgain: 'Réessayer',\n    goHome: 'Accueil',\n  ),\n)\n```\n\nFor a locale that changes at runtime, build the strings from your\nlocalizations wherever you create the widget builder.",
+        "signature": "final class VyuhStrings",
+        "members": [
+          {
+            "signature": "final String tryAgain",
+            "doc": "Retry button."
+          },
+          {
+            "signature": "final String goHome",
+            "doc": "Go-home button."
+          },
+          {
+            "signature": "final String restartApp",
+            "doc": "Restart button, the last-resort recovery."
+          },
+          {
+            "signature": "final String details",
+            "doc": "Heading of the debug-only details panel."
+          },
+          {
+            "signature": "final String loading",
+            "doc": "Accessibility label of loaders."
+          },
+          {
+            "signature": "final String contentUnavailable",
+            "doc": "Accessibility label of the placeholder for a widget that failed to build."
+          },
+          {
+            "signature": "final String appStartFailedTitle",
+            "doc": "Title when the app fails to start."
+          },
+          {
+            "signature": "final String appStartFailedMessage",
+            "doc": "Message when the app fails to start."
+          },
+          {
+            "signature": "final String pageNotFoundTitle",
+            "doc": "Title when no route matches, or a page does not exist."
+          },
+          {
+            "signature": "final String Function(Uri location) noRouteMessage",
+            "doc": "Message when no route matches [location]."
+          },
+          {
+            "signature": "final String pageLoadFailedTitle",
+            "doc": "Title when a page could not be loaded."
+          },
+          {
+            "signature": "final String contentNotFoundTitle",
+            "doc": "Title when a part of a page does not exist."
+          },
+          {
+            "signature": "final String contentLoadFailedTitle",
+            "doc": "Title when a part of a page could not be loaded."
+          },
+          {
+            "signature": "final String checkConnectionMessage",
+            "doc": "Message for failures that a retry may fix."
+          },
+          {
+            "signature": "final String missingMessage",
+            "doc": "Message for something that is missing."
+          },
+          {
+            "signature": "final String Function(String featureTitle) featureLoadFailedTitle",
+            "doc": "Title when the lazy feature titled [featureTitle] fails to load."
+          },
+          {
+            "signature": "final String Function(String featureTitle) featureDisabledTitle",
+            "doc": "Title when the lazy feature titled [featureTitle] is turned off."
+          },
+          {
+            "signature": "final String featureDisabledMessage",
+            "doc": "Message when a lazy feature is turned off."
+          },
+          {
+            "signature": "const VyuhStrings({this.tryAgain = 'Try again', this.goHome = 'Go home', this.restartApp = 'Restart app', this.details = 'Details (debug only)', this.loading = 'Loading', this.contentUnavailable = 'Content unavailable', this.appStartFailedTitle = 'The app could not start', this.appStartFailedMessage = 'Something went wrong while starting up.', this.pageNotFoundTitle = 'Page not found', this.noRouteMessage = _noRouteMessage, this.pageLoadFailedTitle = 'This page could not be loaded', this.contentNotFoundTitle = 'Content not found', this.contentLoadFailedTitle = 'This content could not be loaded', this.checkConnectionMessage = 'Check your connection and try again.', this.missingMessage = 'It may have been moved or removed.', this.featureLoadFailedTitle = _featureLoadFailedTitle, this.featureDisabledTitle = _featureDisabledTitle, this.featureDisabledMessage = 'This part of the app is turned off right now.'})",
+            "doc": ""
+          },
+          {
+            "signature": "static VyuhStrings get current",
+            "doc": "The strings of the running app, or the defaults when none is running."
+          }
+        ]
+      },
+      {
         "name": "VyuhTheme",
         "file": "packages/system/vyuh_core/lib/runtime/theme.dart",
         "line": 5,
@@ -5118,7 +4260,7 @@
       {
         "name": "VyuhThemeExtension",
         "file": "packages/system/vyuh_core/lib/runtime/theme.dart",
-        "line": 55,
+        "line": 57,
         "doc": "Design tokens for the UI the framework draws itself.\n\nAdd it to your `ThemeData.extensions` to restyle loaders, error views and\nplaceholders. Every token you leave out falls back to a value derived from\nthe theme's [ColorScheme], so the defaults follow light and dark mode.\n\n```dart\nThemeData(\n  colorSchemeSeed: brand,\n  extensions: const [\n    VyuhThemeExtension(showPoweredBy: false, loaderDelay: Duration(milliseconds: 300)),\n  ],\n)\n```\n\nRead the resolved tokens with [VyuhThemeExtension.of].",
         "signature": "final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension>",
         "members": [
@@ -5152,7 +4294,7 @@
           },
           {
             "signature": "final Color? debugBackground",
-            "doc": "Background of debug-only diagnostics such as unknown content."
+            "doc": "Background of debug-only diagnostics."
           },
           {
             "signature": "final Color? debugForeground",
@@ -5213,46 +4355,6 @@
         "members": []
       },
       {
-        "name": "defaultRoutePageBuilder",
-        "file": "packages/system/vyuh_core/lib/runtime/cms_route.dart",
-        "line": 36,
-        "doc": "The default page builder for CMS routes.",
-        "signature": "Page<dynamic> defaultRoutePageBuilder(BuildContext context, GoRouterState state, {Widget Function(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child)? transitionsBuilder, Duration? transitionDuration})",
-        "members": []
-      },
-      {
-        "name": "fieldKeyMap",
-        "file": "packages/system/vyuh_core/lib/plugin/content/local_content_provider.dart",
-        "line": 4,
-        "doc": "",
-        "signature": "const fieldKeyMap =",
-        "members": []
-      },
-      {
-        "name": "listFromJson",
-        "file": "packages/system/vyuh_core/lib/plugin/content/serialization.dart",
-        "line": 83,
-        "doc": "Converts a JSON list to a nullable-list of [SchemaItem] instances of type [T].\n\nThis helper is used when deserializing an array of items from JSON.\nEach item in the array is converted to type [T].\n\nExample:\n```dart\nfinal json = [\n  {'title': 'Post 1', '_type': 'blog.post'},\n  {'title': 'Post 2', '_type': 'blog.post'},\n];\nfinal posts = listFromJson<BlogPost>(json);\n```\n\nReturns null if the input is null.\nThrows [ArgumentError] if the input is not a List.",
-        "signature": "List<T>? listFromJson<T extends SchemaItem>(dynamic json)",
-        "members": []
-      },
-      {
-        "name": "messages",
-        "file": "packages/system/vyuh_core/lib/plugin/content/noop_content_plugin.dart",
-        "line": 4,
-        "doc": "",
-        "signature": "final messages =",
-        "members": []
-      },
-      {
-        "name": "readValue",
-        "file": "packages/system/vyuh_core/lib/plugin/content/serialization.dart",
-        "line": 149,
-        "doc": "Reads a value from a JSON object using the provided key.\n\nThis helper provides a consistent way to access values from JSON\nobjects across different content providers.\n\nExample:\n```dart\nfinal json = {'title': 'My Post'};\nfinal title = readValue(json, 'title');\n```\n\nReturns null if:\n- The input is null\n- The key does not exist\n- The value is null",
-        "signature": "Object? readValue(dynamic json, String key)",
-        "members": []
-      },
-      {
         "name": "reportFailure",
         "file": "packages/system/vyuh_core/lib/runtime/failure.dart",
         "line": 75,
@@ -5266,22 +4368,6 @@
         "line": 40,
         "doc": "The main entry point to kick off the Vyuh Application.\nThis function should be called from the main function of the application.\nIt initializes the Vyuh Platform and runs the application with given features and plugins.\n\n* `features`: A builder function that returns a list of [FeatureDescriptor] objects. These are loaded eagerly at startup.\n* `lazyFeatures`: Optional. A builder function that returns a list of [LazyFeatureDescriptor] objects. These are loaded on-demand when their routes are first navigated to, enabling web code splitting via Dart's `deferred as` imports.\n* `plugins`: Optional. A [PluginDescriptor] object that specifies the plugins to be used. If not provided, defaults to [PluginDescriptor.system].\n* `platformWidgetBuilder`: Optional. A builder function that returns a platform-specific widget. If not provided, defaults to [defaultPlatformWidgetBuilder].\n* `initialLocation`:  Optional. The initial location to open in the app.\n* `homeLocation`: Optional. Where error views send the user with \"Go home\". Defaults to `initialLocation`, then `/`.\n* `captureErrors`: Optional, defaults to `true`. Routes uncaught Flutter and platform errors to telemetry and, in release builds, shows a themed placeholder for widgets that fail to build.\n* `appRunner`: Optional. A custom [AppRunner] function to control how the app is launched.\n  This allows integrating with packages like `scaled_app`, `device_preview`, or custom\n  error zone wrapping. If not provided, defaults to [defaultAppRunner].",
         "signature": "void runApp({required FeaturesBuilder features, LazyFeaturesBuilder? lazyFeatures, PluginDescriptor? plugins, PlatformWidgetBuilder? platformWidgetBuilder, String? initialLocation, String? homeLocation, bool captureErrors = true, AppRunner? appRunner})",
-        "members": []
-      },
-      {
-        "name": "setUnknownPlaceholderFactory",
-        "file": "packages/system/vyuh_core/lib/plugin/content/serialization.dart",
-        "line": 17,
-        "doc": "Sets the factory for creating unknown placeholders.",
-        "signature": "void setUnknownPlaceholderFactory(UnknownPlaceholderFactory factory)",
-        "members": []
-      },
-      {
-        "name": "typeFromFirstOfListJson",
-        "file": "packages/system/vyuh_core/lib/plugin/content/serialization.dart",
-        "line": 22,
-        "doc": "Converts a JSON object to a nullable-instance of [SchemaItem] of type [T].\n\nThis helper is used when deserializing a single item from a JSON array.\nIt takes the first item from the array and converts it to type [T].\n\nExample:\n```dart\nfinal json = [{'title': 'Post 1', '_type': 'blog.post'}];\nfinal post = typeFromFirstOfListJson<BlogPost>(json);\n```\n\nReturns null if:\n- The input is null\n- The input array is empty\n- The type conversion fails",
-        "signature": "T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json)",
         "members": []
       },
       {
@@ -5369,6 +4455,89 @@
         ]
       },
       {
+        "name": "ActionFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 92,
+        "doc": "Failure when an action configuration registration is missing.\n\nThis occurs when content references an action that has no registered\nTypeDescriptor in the action system.",
+        "signature": "final class ActionFailure extends ContentFailure",
+        "members": [
+          {
+            "signature": "final Map<String, dynamic>? actionConfig",
+            "doc": "The action configuration that failed to resolve"
+          },
+          {
+            "signature": "const ActionFailure({required super.schemaType, this.actionConfig, super.jsonPayload, super.description, super.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "CMSPathResolver",
+        "file": "packages/system/vyuh_extension_content/lib/routing/cms_route.dart",
+        "line": 6,
+        "doc": "A function that resolves a CMS path from a local path. This is useful when\nmultiple local routes use a single template path on the CMS. For example:\n(Local path) /blog/:slug -> /blog (CMS path)",
+        "signature": "typedef CMSPathResolver = String Function(String path);",
+        "members": []
+      },
+      {
+        "name": "CMSRoute",
+        "file": "packages/system/vyuh_extension_content/lib/routing/cms_route.dart",
+        "line": 13,
+        "doc": "A route purely meant to identify CMS pages. Use it to distinguish between the way\nlocal routes and CMS routes are handled.",
+        "signature": "final class CMSRoute extends GoRoute",
+        "members": [
+          {
+            "signature": "final CMSPathResolver cmsPathResolver",
+            "doc": "A function that resolves a CMS path from a local path."
+          },
+          {
+            "signature": "CMSRoute({required super.path, this.cmsPathResolver = _identityPathResolver, super.builder, GoRouterPageBuilder? pageBuilder, super.parentNavigatorKey, super.name, super.onExit, super.redirect, super.routes})",
+            "doc": "Creates a new CMS route."
+          }
+        ]
+      },
+      {
+        "name": "Category",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/route_base.dart",
+        "line": 102,
+        "doc": "A category for organizing routes.\n\nCategories help structure routes in a hierarchical manner.\nThey can be used to:\n- Group related routes\n- Create navigation menus\n- Filter and sort routes\n\nExample:\n```dart\nfinal category = Category(\n  title: 'Blog',\n  description: 'Blog posts and articles',\n  icon: Icons.article,\n);\n```",
+        "signature": "class Category implements SchemaItem",
+        "members": [
+          {
+            "signature": "String get schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "final String identifier",
+            "doc": ""
+          },
+          {
+            "signature": "final String title",
+            "doc": ""
+          },
+          {
+            "signature": "final LayoutConfiguration? layout",
+            "doc": ""
+          },
+          {
+            "signature": "final List<ContentModifierConfiguration>? modifiers",
+            "doc": ""
+          },
+          {
+            "signature": "static List<ContentModifierConfiguration>? modifierList(dynamic json)",
+            "doc": ""
+          },
+          {
+            "signature": "Category({required this.identifier, required this.title, this.layout, this.modifiers})",
+            "doc": ""
+          },
+          {
+            "signature": "factory Category.fromJson(Map<String, dynamic> json)",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "Condition",
         "file": "packages/system/vyuh_extension_content/lib/content/condition.dart",
         "line": 9,
@@ -5415,6 +4584,44 @@
           {
             "signature": "Future<String?> execute(BuildContext context)",
             "doc": "Evaluates this condition configuration.\n\nThe [context] parameter provides access to the widget tree.\n\nReturns:\n- null if the condition passes\n- an error message string if the condition fails"
+          }
+        ]
+      },
+      {
+        "name": "ConditionFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 109,
+        "doc": "Failure when a condition configuration registration is missing.\n\nThis occurs when content references a condition that has no registered\nTypeDescriptor in the condition system.",
+        "signature": "final class ConditionFailure extends ContentFailure",
+        "members": [
+          {
+            "signature": "final Map<String, dynamic>? conditionConfig",
+            "doc": "The condition configuration that failed to resolve"
+          },
+          {
+            "signature": "const ConditionFailure({required super.schemaType, this.conditionConfig, super.jsonPayload, super.description, super.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "ContainerItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 195,
+        "doc": "Represents a container item that can contain other content items.\n\nContainer items are used to create hierarchical content structures.\nThey can hold multiple child content items and provide:\n- Layout organization\n- Common styling or behavior\n- Grouped content management\n\nExample use cases:\n- Page sections\n- Grid or list containers\n- Tab containers",
+        "signature": "abstract interface class ContainerItem implements ContentItem",
+        "members": []
+      },
+      {
+        "name": "ContentBindingAccessor",
+        "file": "packages/system/vyuh_extension_content/lib/plugin/accessors.dart",
+        "line": 16,
+        "doc": "`VyuhBinding.instance.content`: the same as `vyuh.content`, for code that\nalso runs in widget mode (`VyuhContentWidget`, without `runApp`).",
+        "signature": "extension ContentBindingAccessor on VyuhBinding",
+        "members": [
+          {
+            "signature": "ContentPlugin get content",
+            "doc": "The content plugin, or a [NoOpContentPlugin] when none is registered."
           }
         ]
       },
@@ -5623,6 +4830,253 @@
         ]
       },
       {
+        "name": "ContentFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 1,
+        "doc": "Base class for content-related failures in the Vyuh framework.\n\nThis class hierarchy provides a unified way to handle missing or invalid\ncontent registrations, layouts, modifiers, actions, and conditions.\nInstead of scattered error handling, all content failures route through\nthe platform widget builder's unknown content handler.",
+        "signature": "abstract class ContentFailure",
+        "members": [
+          {
+            "signature": "final String schemaType",
+            "doc": "The schema type that failed to resolve"
+          },
+          {
+            "signature": "final Map<String, dynamic>? jsonPayload",
+            "doc": "The original JSON payload that caused the failure (if available)"
+          },
+          {
+            "signature": "final String? description",
+            "doc": "Human-readable description of the failure"
+          },
+          {
+            "signature": "final List<String>? suggestions",
+            "doc": "Optional suggestions for resolving the failure"
+          },
+          {
+            "signature": "const ContentFailure({required this.schemaType, this.jsonPayload, this.description, this.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "ContentItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 26,
+        "doc": "The base class for all content items in Vyuh.\n\nA content item represents a piece of content that can be:\n- Fetched from a Content Management System (CMS)\n- Rendered on screen with a specific layout\n- Modified with content modifiers\n- Organized in a content hierarchy\n\nContent items are the building blocks of a Vyuh application's content.\nThey combine data from the CMS with presentation logic to create\nrich, interactive user interfaces.\n\nExample:\n```dart\n@JsonSerializable()\nclass BlogPost extends ContentItem {\n  static const schemaName = 'blog.post';\n\n  final String title;\n  final String content;\n\n  BlogPost({\n    required this.title,\n    required this.content,\n    super.layout,\n    super.modifiers,\n  }) : super(schemaType: schemaName);\n}\n```",
+        "signature": "abstract class ContentItem implements SchemaItem",
+        "members": [
+          {
+            "signature": "final String schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "final LayoutConfiguration? layout",
+            "doc": "The layout configuration for the content item."
+          },
+          {
+            "signature": "final List<ContentModifierConfiguration>? modifiers",
+            "doc": ""
+          },
+          {
+            "signature": "static List<ContentModifierConfiguration>? modifierList(dynamic json)",
+            "doc": ""
+          },
+          {
+            "signature": "ContentItem? parent",
+            "doc": "The parent content item of this content item. This is used internally by the content system."
+          },
+          {
+            "signature": "ContentItem({required this.schemaType, required this.layout, required this.modifiers})",
+            "doc": "Creates an instance of [ContentItem]."
+          },
+          {
+            "signature": "factory ContentItem.fromJson(Map<String, dynamic> json)",
+            "doc": "Converts the JSON representation of the content item to an instance of [ContentItem]."
+          },
+          {
+            "signature": "void setParent(Iterable<ContentItem?> children)",
+            "doc": "Sets the parent content item for the given list of children."
+          },
+          {
+            "signature": "LayoutConfiguration? getLayout()",
+            "doc": "Gets the layout to use for the [ContentItem]. By default its the [layout] itself.\nHowever this acts as an extension point for custom [ContentItem]s\nthat may have a different strategy for applying layouts."
+          },
+          {
+            "signature": "List<ContentModifierConfiguration>? getModifiers()",
+            "doc": "Gets the modifiers to use for the [ContentItem]. By default its the [modifiers] itself.\nHowever this acts as an extension point for custom [ContentItem]s\nthat may have a different strategy for applying modifiers."
+          }
+        ]
+      },
+      {
+        "name": "ContentItemFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 28,
+        "doc": "Failure when a ContentItem type registration is missing.\n\nThis occurs when JSON from the CMS contains a schema type that has no\nregistered TypeDescriptor in the content system.\n\nExample:\n```dart\nContentItemFailure(\n  schemaType: 'blog.post',\n  jsonPayload: {'_type': 'blog.post', 'title': 'My Post'},\n  description: 'No TypeDescriptor registered for blog.post',\n)\n```",
+        "signature": "final class ContentItemFailure extends ContentFailure",
+        "members": [
+          {
+            "signature": "const ContentItemFailure({required super.schemaType, super.jsonPayload, super.description, super.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "ContentModifierConfiguration",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 111,
+        "doc": "Configuration for modifying content presentation.\n\nContent modifiers allow you to wrap content items with additional\nfunctionality or styling. They can be used to add:\n- Animation effects\n- Layout modifications\n- Interaction handlers\n- Debug overlays\n\nModifiers are applied in order, wrapping the content item's widget\ntree from inside out.\n\nExample:\n```dart\nclass FadeInModifier extends ContentModifierConfiguration {\n  @override\n  Widget build(BuildContext context, Widget child, ContentItem content) {\n    return FadeInAnimation(child: child);\n  }\n}\n```",
+        "signature": "abstract class ContentModifierConfiguration implements SchemaItem",
+        "members": [
+          {
+            "signature": "final String schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "ContentModifierConfiguration({required this.schemaType})",
+            "doc": ""
+          },
+          {
+            "signature": "factory ContentModifierConfiguration.fromJson(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Widget build(BuildContext context, Widget child, ContentItem content)",
+            "doc": "Builds the modifier widget tree for the given content item.\n\nThis method is called by the content system to apply the modifier\nto the content item's widget tree."
+          }
+        ]
+      },
+      {
+        "name": "ContentPlatformAccessor",
+        "file": "packages/system/vyuh_extension_content/lib/plugin/accessors.dart",
+        "line": 6,
+        "doc": "`vyuh.content`: the registered [ContentPlugin].\n\nRegister one with `PluginDescriptor(others: [DefaultContentPlugin(...)])`.\nWithout one, a [NoOpContentPlugin] answers, showing an error view that\nexplains how to configure content.",
+        "signature": "extension ContentPlatformAccessor on VyuhPlatform",
+        "members": [
+          {
+            "signature": "ContentPlugin get content",
+            "doc": "The content plugin, or a [NoOpContentPlugin] when none is registered."
+          }
+        ]
+      },
+      {
+        "name": "ContentPlugin",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
+        "line": 21,
+        "doc": "The base class for a Content Plugin.\n\nRegister it with `PluginDescriptor(others: [...])` and reach it through\n`vyuh.content` (or `VyuhBinding.instance.content` in widget mode).",
+        "signature": "abstract class ContentPlugin extends Plugin",
+        "members": [
+          {
+            "signature": "final ContentProvider provider",
+            "doc": "The ContentProvider for this plugin"
+          },
+          {
+            "signature": "final UnknownContentBuilder unknown",
+            "doc": "Builds the widget shown when a content type, layout, modifier, action or\ncondition is missing. Defaults to [UnknownContentView]."
+          },
+          {
+            "signature": "ContentPlugin({required this.provider, required super.name, required super.title, UnknownContentBuilder? unknown})",
+            "doc": "Creates a new ContentPlugin with the given provider, name, and title"
+          },
+          {
+            "signature": "Map<Type, Map<String, TypeDescriptor>> get typeRegistry",
+            "doc": "The type registry that maps types to their descriptors.\nThis stores the descriptors for LayoutConfiguration, ActionConfiguration, ConditionConfiguration and\npossibly others in the future."
+          },
+          {
+            "signature": "Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout})",
+            "doc": "Builds a Widget for the given content. You can pass in an optional [layout]\nto override the default layout"
+          },
+          {
+            "signature": "Widget buildRoute(BuildContext context, {Uri? url, String? routeId})",
+            "doc": "Builds a Widget for the given route url or id. This is used for top-level documents called routes.\nThese could represent a page, dialog or a conditional-route."
+          },
+          {
+            "signature": "void attach(ExtensionBuilder extBuilder)",
+            "doc": "Sets up the plugin with the ContentExtensionBuilder.\nThe plugin relies on the ContentExtensionBuilder to do its work."
+          },
+          {
+            "signature": "T? fromJson<T>(Map<String, dynamic> json)",
+            "doc": "Converts the given json to an item of type T"
+          },
+          {
+            "signature": "void register<T>(TypeDescriptor<T> descriptor)",
+            "doc": "Registers the given type descriptor"
+          },
+          {
+            "signature": "bool isRegistered<T>(String schemaType)",
+            "doc": "Checks if the given schema type is registered for type T"
+          }
+        ]
+      },
+      {
+        "name": "ContentProvider",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_provider.dart",
+        "line": 5,
+        "doc": "",
+        "signature": "abstract class ContentProvider",
+        "members": [
+          {
+            "signature": "final String name",
+            "doc": ""
+          },
+          {
+            "signature": "final String title",
+            "doc": ""
+          },
+          {
+            "signature": "final LiveContentProvider live",
+            "doc": ""
+          },
+          {
+            "signature": "ContentProvider({required this.name, required this.title, this.live = const NoOpLiveContentProvider()})",
+            "doc": ""
+          },
+          {
+            "signature": "bool get supportsLive",
+            "doc": ""
+          },
+          {
+            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "String schemaType(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "ImageProvider? image(final ImageReference imageRef, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format})",
+            "doc": ""
+          },
+          {
+            "signature": "Uri? fileUrl(final FileReference fileRef)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "DIExtension",
         "file": "packages/system/vyuh_extension_content/lib/ui/scoped_di_widget.dart",
         "line": 81,
@@ -5651,7 +5105,7 @@
             "doc": "Whether to allow manual refreshing of the route."
           },
           {
-            "signature": "DefaultContentPlugin({required super.provider, this.useLiveRoute = false, this.allowRouteRefresh = true})",
+            "signature": "DefaultContentPlugin({required super.provider, this.useLiveRoute = false, this.allowRouteRefresh = true, super.unknown})",
             "doc": ""
           },
           {
@@ -5695,7 +5149,7 @@
       {
         "name": "DocumentBuilder",
         "file": "packages/system/vyuh_extension_content/lib/ui/document_builder.dart",
-        "line": 8,
+        "line": 6,
         "doc": "A widget that builds UI based on document data fetched from a content provider.\n\nThis widget is responsible for fetching document data from a content provider\nand building UI based on that data. It supports both static and live document\nloading, and can be configured to allow refreshing the document.\n\nExample usage:\n```dart\n// Using the factory method to fetch by query\nDocumentBuilder.fromQuery<BlogPost>(\n  query: '*[_type == \"blog.post\" && slug.current == $slug][0]',\n  fromJson: BlogPost.fromJson,\n  allowRefresh: true,\n  isLive: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n\n// Using the factory method to fetch by ID\nDocumentBuilder.fromId<BlogPost>(\n  id: 'blog-post-123',\n  fromJson: BlogPost.fromJson,\n  allowRefresh: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n\n// Using a custom future\nDocumentBuilder<BlogPost>(\n  fetchDocument: () => myCustomFuture,\n  allowRefresh: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n```",
         "signature": "final class DocumentBuilder<T> extends StatelessWidget",
         "members": [
@@ -5736,7 +5190,11 @@
             "doc": "The location being shown, included in failure reports."
           },
           {
-            "signature": "const DocumentBuilder({super.key, required this.fetchDocument, this.liveDocument, this.liveDocumentFactory, required this.buildContent, this.allowRefresh = true, this.isLive = false, this.initDocument, this.isRoute = false, this.location})",
+            "signature": "final Object? requestKey",
+            "doc": "Identifies the document. When set, the builder refetches (or\nresubscribes) only when this value changes, not when the parent passes\nnew closures. The `fromRoute`, `fromQuery` and `fromId` factories set it."
+          },
+          {
+            "signature": "const DocumentBuilder({super.key, required this.fetchDocument, this.liveDocument, this.liveDocumentFactory, required this.buildContent, this.allowRefresh = true, this.isLive = false, this.initDocument, this.isRoute = false, this.location, this.requestKey})",
             "doc": "Creates a [DocumentBuilder] with a custom document fetching function."
           },
           {
@@ -5785,7 +5243,11 @@
             "doc": "The location being shown, included in failure reports."
           },
           {
-            "signature": "const DocumentFutureBuilder({super.key, required this.future, required this.buildContent, this.allowRefresh = true, this.isRoute = false, this.location})",
+            "signature": "final Object? requestKey",
+            "doc": "Identifies the document being fetched. When set, the builder refetches\nonly when this value changes, so a parent passing a new [future]\nclosure on every build doesn't trigger a refetch. When null, a new\n[future] function does."
+          },
+          {
+            "signature": "const DocumentFutureBuilder({super.key, required this.future, required this.buildContent, this.allowRefresh = true, this.isRoute = false, this.location, this.requestKey})",
             "doc": "Creates a [DocumentFutureBuilder]."
           },
           {
@@ -5793,6 +5255,14 @@
             "doc": ""
           }
         ]
+      },
+      {
+        "name": "DocumentItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 20,
+        "doc": "The base interface for all schema-driven document items.\n\nDocument items represent top-level content documents in the CMS.\nThey are typically the main content types that users create and manage.",
+        "signature": "abstract interface class DocumentItem implements SchemaItem",
+        "members": []
       },
       {
         "name": "DocumentStreamBuilder",
@@ -5840,6 +5310,405 @@
         ]
       },
       {
+        "name": "FieldName",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
+        "line": 73,
+        "doc": "",
+        "signature": "enum FieldName { id, type, key, ref, updatedAt, createdAt }",
+        "members": []
+      },
+      {
+        "name": "FileReference",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/reference.dart",
+        "line": 38,
+        "doc": "A reference to a file asset in the content management system.\n\nThis class represents a file reference that can be used in content models.\nIt supports file assets like PDFs, documents, or other binary files.\n\nExample:\n```dart\nfinal fileRef = FileReference(\n  type: 'file',\n  asset: ObjectReference(type: 'reference', ref: 'file-abc123'),\n);\n```",
+        "signature": "class FileReference",
+        "members": [
+          {
+            "signature": "final String type",
+            "doc": ""
+          },
+          {
+            "signature": "final ObjectReference? asset",
+            "doc": ""
+          },
+          {
+            "signature": "FileReference({required this.type, required this.asset})",
+            "doc": ""
+          },
+          {
+            "signature": "factory FileReference.fromJson(final Map<String, dynamic> json)",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "FromJsonConverter",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/type_descriptor.dart",
+        "line": 1,
+        "doc": "Function type for converting JSON data to a typed object.\n\nTakes a JSON map as input and returns a nullable instance of type [T].\nThis is typically implemented using generated fromJson methods from\njson_serializable.\n\nExample:\n```dart\nfinal converter = BlogPost.fromJson;\nfinal post = converter({'title': 'Hello', 'content': 'World'});\n```",
+        "signature": "typedef FromJsonConverter<T> = T? Function(Map<String, dynamic> json);",
+        "members": []
+      },
+      {
+        "name": "ImageReference",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/reference.dart",
+        "line": 6,
+        "doc": "A reference to an image asset in the content management system.\n\nThis class represents an image reference that can be used in content models.\nIt supports both direct asset references and Sanity-specific image assets.\n\nExample:\n```dart\nfinal imageRef = ImageReference(\n  type: 'image',\n  asset: ObjectReference(type: 'reference', ref: 'image-abc123'),\n);\n```",
+        "signature": "class ImageReference",
+        "members": [
+          {
+            "signature": "final String type",
+            "doc": ""
+          },
+          {
+            "signature": "final ObjectReference? asset",
+            "doc": ""
+          },
+          {
+            "signature": "final String? sanityAsset",
+            "doc": ""
+          },
+          {
+            "signature": "ImageReference({required this.type, required this.asset, this.sanityAsset})",
+            "doc": ""
+          },
+          {
+            "signature": "factory ImageReference.fromJson(final Map<String, dynamic> json)",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "LayoutConfiguration",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 148,
+        "doc": "Base class for configuring the visual layout of a content item.\n\nLayout configurations define how a content item should be presented\non screen. They handle:\n- Visual structure and arrangement\n- Responsive design\n- Theme integration\n- Content-specific styling\n\nEach content type can have multiple layout variants, allowing the\nsame content to be displayed differently in different contexts.\n\nExample:\n```dart\nclass BlogPostLayout extends LayoutConfiguration<BlogPost> {\n  @override\n  Widget build(BuildContext context, BlogPost content) {\n    return Column(\n      children: [\n        Text(content.title, style: Theme.of(context).textTheme.headlineLarge),\n        Text(content.content),\n      ],\n    );\n  }\n}\n```",
+        "signature": "abstract class LayoutConfiguration<T extends ContentItem> implements SchemaItem",
+        "members": [
+          {
+            "signature": "final String schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "final Type contentType",
+            "doc": ""
+          },
+          {
+            "signature": "LayoutConfiguration({required this.schemaType})",
+            "doc": "Creates an instance of [LayoutConfiguration]."
+          },
+          {
+            "signature": "factory LayoutConfiguration.fromJson(Map<String, dynamic> json)",
+            "doc": "Converts the JSON representation of the layout configuration to an instance of [LayoutConfiguration]."
+          },
+          {
+            "signature": "Widget build(BuildContext context, T content)",
+            "doc": "Builds the layout widget tree for the given content item.\n\nThis method is called by the content system to render the content item\nwith the specified layout."
+          }
+        ]
+      },
+      {
+        "name": "LayoutFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 50,
+        "doc": "Failure when a layout for a registered content type is missing.\n\nThis occurs when a ContentItem has been successfully deserialized but\nno layout configuration can be found to render it.",
+        "signature": "final class LayoutFailure extends ContentFailure",
+        "members": [
+          {
+            "signature": "final String contentSchemaType",
+            "doc": "The content type that needs a layout"
+          },
+          {
+            "signature": "final String? requestedLayoutType",
+            "doc": "The specific layout type that was requested (if any)"
+          },
+          {
+            "signature": "const LayoutFailure({required super.schemaType, required this.contentSchemaType, this.requestedLayoutType, super.jsonPayload, super.description, super.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "LiveContentProvider",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/live_content_provider.dart",
+        "line": 3,
+        "doc": "An interface for plugins that provide live content.\n\nLive content providers are used in conjunction with the content system\nto provide content that is fetched and updated in real-time.\nIt supports all modes of fetching content: by ID, by query, or by route.",
+        "signature": "abstract class LiveContentProvider",
+        "members": [
+          {
+            "signature": "final String title",
+            "doc": "The title of the live content provider."
+          },
+          {
+            "signature": "const LiveContentProvider({required this.title})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false})",
+            "doc": "Fetches content by ID."
+          },
+          {
+            "signature": "Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
+            "doc": "Fetches content by query, returning a single item."
+          },
+          {
+            "signature": "Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
+            "doc": "Fetches content by query, returning a list of items."
+          },
+          {
+            "signature": "Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false})",
+            "doc": "Fetches content by route."
+          }
+        ]
+      },
+      {
+        "name": "LocalContentProvider",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/local_content_provider.dart",
+        "line": 6,
+        "doc": "",
+        "signature": "final class LocalContentProvider extends ContentProvider",
+        "members": [
+          {
+            "signature": "LocalContentProvider()",
+            "doc": ""
+          },
+          {
+            "signature": "String schemaType(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Uri? fileUrl(FileReference fileRef)",
+            "doc": ""
+          },
+          {
+            "signature": "ImageProvider<Object>? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "ModifierFailure",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_failure.dart",
+        "line": 71,
+        "doc": "Failure when a content modifier registration is missing.\n\nThis occurs when applying a chain of modifiers to content and one\nof the modifiers in the chain cannot be resolved.",
+        "signature": "final class ModifierFailure extends ContentFailure",
+        "members": [
+          {
+            "signature": "final List<String> modifierChain",
+            "doc": "The complete chain of modifiers being applied"
+          },
+          {
+            "signature": "final int failedIndex",
+            "doc": "The index in the modifier chain where the failure occurred"
+          },
+          {
+            "signature": "const ModifierFailure({required super.schemaType, required this.modifierChain, required this.failedIndex, super.jsonPayload, super.description, super.suggestions})",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "NoOpContentPlugin",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/noop_content_plugin.dart",
+        "line": 18,
+        "doc": "",
+        "signature": "final class NoOpContentPlugin extends ContentPlugin",
+        "members": [
+          {
+            "signature": "NoOpContentPlugin()",
+            "doc": ""
+          },
+          {
+            "signature": "Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout})",
+            "doc": ""
+          },
+          {
+            "signature": "Widget buildRoute(BuildContext context, {Uri? url, String? routeId})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "bool isRegistered<T>(String schemaType)",
+            "doc": ""
+          },
+          {
+            "signature": "dynamic register<T>(TypeDescriptor<T> descriptor)",
+            "doc": ""
+          },
+          {
+            "signature": "void attach(ExtensionBuilder extBuilder)",
+            "doc": ""
+          },
+          {
+            "signature": "T? fromJson<T>(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Map<Type, Map<String, TypeDescriptor>> get typeRegistry",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "NoOpContentProvider",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/noop_content_provider.dart",
+        "line": 4,
+        "doc": "",
+        "signature": "final class NoOpContentProvider extends ContentProvider",
+        "members": [
+          {
+            "signature": "NoOpContentProvider()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "String fieldValue(String key, Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "ImageProvider? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          },
+          {
+            "signature": "String schemaType(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true})",
+            "doc": ""
+          },
+          {
+            "signature": "Uri? fileUrl(FileReference fileRef)",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "NoOpLiveContentProvider",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/live_content_provider.dart",
+        "line": 48,
+        "doc": "A no-op implementation of [LiveContentProvider].\nIs used internally to ensure the Developer is using it correctly by giving proper errors\nand hints",
+        "signature": "final class NoOpLiveContentProvider extends LiveContentProvider",
+        "members": [
+          {
+            "signature": "const NoOpLiveContentProvider()",
+            "doc": ""
+          },
+          {
+            "signature": "Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false})",
+            "doc": ""
+          },
+          {
+            "signature": "Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
+            "doc": ""
+          },
+          {
+            "signature": "Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false})",
+            "doc": ""
+          },
+          {
+            "signature": "Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init()",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "ObjectReference",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/reference.dart",
+        "line": 66,
+        "doc": "A reference to any content object in the content management system.\n\nThis class represents a generic reference to any content item. It is used\nto establish relationships between content items, such as references to\nimages, files, or other content types.\n\nThe [type] field indicates the type of reference (e.g., 'reference', 'image').\nThe [ref] field contains the unique identifier of the referenced content.\n\nExample:\n```dart\nfinal ref = ObjectReference(\n  type: 'reference',\n  ref: 'content-abc123',\n);\n```",
+        "signature": "class ObjectReference",
+        "members": [
+          {
+            "signature": "final String type",
+            "doc": ""
+          },
+          {
+            "signature": "final String ref",
+            "doc": ""
+          },
+          {
+            "signature": "ObjectReference({required this.type, required this.ref})",
+            "doc": ""
+          },
+          {
+            "signature": "factory ObjectReference.fromJson(Map<String, dynamic> json)",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "PreviewContext",
         "file": "packages/system/vyuh_extension_content/lib/preview/preview_context.dart",
         "line": 4,
@@ -5864,6 +5733,79 @@
           },
           {
             "signature": "bool updateShouldNotify(PreviewContext oldWidget)",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "RootItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 209,
+        "doc": "Represents a root item that is the root of a content tree.\n\nRoot items are special container items that serve as the entry point\nfor a content tree. They typically represent:\n- Pages\n- Screens\n- Top-level content structures\n\nRoot items are directly managed by the content system and can be\nfetched by their unique identifiers.",
+        "signature": "abstract interface class RootItem implements ContainerItem",
+        "members": []
+      },
+      {
+        "name": "RouteBase",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/route_base.dart",
+        "line": 10,
+        "doc": "Base class for all route content items in Vyuh.\n\nRoutes represent navigable content in a Vyuh application. They combine\ncontent from the CMS with routing configuration to create dynamic,\ncontent-driven navigation.\n\nKey features:\n- Content-driven routing using CMS data\n- Customizable route types and transitions\n- Category-based organization\n- Lifecycle management",
+        "signature": "abstract class RouteBase extends ContentItem implements RootItem",
+        "members": [
+          {
+            "signature": "final String title",
+            "doc": "The title of the route, displayed in navigation UI."
+          },
+          {
+            "signature": "final String path",
+            "doc": "The URL path for this route.\nThis is used to match URLs and generate links."
+          },
+          {
+            "signature": "final Category? category",
+            "doc": "Optional category for organizing routes."
+          },
+          {
+            "signature": "final RouteTypeConfiguration? routeType",
+            "doc": "Configuration for how this route should be presented.\nDefines transitions, animations, and other route-specific behavior."
+          },
+          {
+            "signature": "final String id",
+            "doc": "Unique identifier for this route."
+          },
+          {
+            "signature": "final DateTime updatedAt",
+            "doc": "When this route was last updated in the CMS."
+          },
+          {
+            "signature": "final DateTime createdAt",
+            "doc": "When this route was created in the CMS."
+          },
+          {
+            "signature": "RouteBase({required super.schemaType, this.routeType, required this.title, required this.path, this.category, required this.createdAt, required this.updatedAt, required this.id, required super.layout, required super.modifiers})",
+            "doc": ""
+          },
+          {
+            "signature": "factory RouteBase.fromJson(Map<String, dynamic> json)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<RouteBase?> init(BuildContext context)",
+            "doc": "Initialize the route when it becomes active.\n\nThis is called when the route is first navigated to.\nUse this to set up any route-specific state or resources.\nReturn null to prevent the route from being shown."
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": "Clean up the route when it is no longer active.\n\nThis is called when navigating away from the route.\nUse this to clean up any resources initialized in [init]."
+          },
+          {
+            "signature": "Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey])",
+            "doc": "Create a Flutter page for this route.\n\nThis method combines the route's content with its configuration\nto create a Flutter page that can be used in navigation.\nThe [pageKey] is used for Flutter's page-based navigation system."
+          },
+          {
+            "signature": "LayoutConfiguration? getLayout()",
+            "doc": ""
+          },
+          {
+            "signature": "List<ContentModifierConfiguration>? getModifiers()",
             "doc": ""
           }
         ]
@@ -5952,6 +5894,73 @@
         ]
       },
       {
+        "name": "RouteLifecycleConfiguration",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/route_base.dart",
+        "line": 177,
+        "doc": "Configuration for managing route lifecycle events.\n\nRoute lifecycle configurations handle the initialization and cleanup\nof route-specific resources. They can:\n- Load route-specific data\n- Set up route state\n- Clean up resources\n- Handle route-specific events\n\nExample:\n```dart\nclass BlogLifecycle extends RouteLifecycleConfiguration {\n  @override\n  Future<void> init(BuildContext context, RouteBase route) async {\n    await loadBlogData();\n  }\n\n  @override\n  Future<void> dispose() async {\n    await saveBlogState();\n  }\n}\n```",
+        "signature": "abstract class RouteLifecycleConfiguration implements SchemaItem",
+        "members": [
+          {
+            "signature": "final String schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "final String? title",
+            "doc": ""
+          },
+          {
+            "signature": "RouteLifecycleConfiguration({this.title, required this.schemaType})",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> init(BuildContext context, RouteBase route)",
+            "doc": ""
+          },
+          {
+            "signature": "Future<void> dispose()",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "RouteTypeConfiguration",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/route_base.dart",
+        "line": 146,
+        "doc": "Configuration for how a route should be presented.\n\nRoute type configurations define the visual and behavioral aspects\nof route transitions. They control:\n- Page transitions and animations\n- Route presentation mode (full-screen, modal, etc.)\n- Route-specific UI elements\n\nExample:\n```dart\nclass FadeRouteType extends RouteTypeConfiguration {\n  @override\n  Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]) {\n    return FadePage(\n      child: child,\n      key: pageKey,\n    );\n  }\n}\n```",
+        "signature": "abstract class RouteTypeConfiguration implements SchemaItem",
+        "members": [
+          {
+            "signature": "final String? title",
+            "doc": ""
+          },
+          {
+            "signature": "final String schemaType",
+            "doc": ""
+          },
+          {
+            "signature": "RouteTypeConfiguration({this.title, required this.schemaType})",
+            "doc": ""
+          },
+          {
+            "signature": "Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey])",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "SchemaItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 6,
+        "doc": "The base interface for all schema-driven content items.\n\nSchema items are the foundation of Vyuh's content system. They represent\nany content that is defined by a schema in the CMS (Content Management System).\nAll content items must implement this interface to be compatible with the\ncontent system.",
+        "signature": "abstract interface class SchemaItem",
+        "members": [
+          {
+            "signature": "String get schemaType",
+            "doc": "The schema type of the content item.\n\nThis should match the type name defined in the CMS schema.\nFor example: 'blog.post', 'product.detail', etc."
+          }
+        ]
+      },
+      {
         "name": "ScopedDIWidget",
         "file": "packages/system/vyuh_extension_content/lib/ui/scoped_di_widget.dart",
         "line": 4,
@@ -5998,6 +6007,55 @@
           {
             "signature": "List<ContentBuilder<ContentItem>>? contentBuilders()",
             "doc": "Returns a map of all content builders, where the key is the schemaType and\nthe value is the ContentBuilder."
+          }
+        ]
+      },
+      {
+        "name": "TypeDescriptor",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/type_descriptor.dart",
+        "line": 14,
+        "doc": "Describes a schema type and its serialization behavior.\n\nType descriptors are used by the content system to:\n- Register content types with their schema names\n- Convert JSON data to typed objects\n- Provide metadata about content types\n- Generate preview instances for design tools\n\nEach content type should have a corresponding TypeDescriptor that\ndefines how to create instances from JSON data.\n\nExample:\n```dart\nstatic final typeDescriptor = TypeDescriptor(\n  schemaType: 'blog.post',\n  fromJson: BlogPost.fromJson,\n  title: 'Blog Post',\n  preview: () => BlogPost(\n    title: 'Preview Post',\n    content: 'This is a preview',\n  ),\n);\n```",
+        "signature": "class TypeDescriptor<T>",
+        "members": [
+          {
+            "signature": "final String title",
+            "doc": "Human-readable name for this type.\n\nUsed in UI components and error messages."
+          },
+          {
+            "signature": "final String schemaType",
+            "doc": "Schema type identifier from the CMS.\n\nMust match the type name defined in the CMS schema.\nFor example: 'blog.post', 'product.detail'"
+          },
+          {
+            "signature": "final FromJsonConverter<T> fromJson",
+            "doc": "Function to convert JSON data to an instance of [T].\n\nThis is typically the generated fromJson method from\njson_serializable."
+          },
+          {
+            "signature": "final T Function()? preview",
+            "doc": "Optional function to create a preview instance.\n\nUsed by design tools to show sample content without\nfetching from the CMS."
+          },
+          {
+            "signature": "final Type type",
+            "doc": "The runtime type of [T]."
+          },
+          {
+            "signature": "String? get sourceFeature",
+            "doc": ""
+          },
+          {
+            "signature": "void setSourceFeature(String? featureName)",
+            "doc": "Updates the source feature for this type descriptor.\n\nThis is called internally by the content system and\nshould not be called directly."
+          },
+          {
+            "signature": "TypeDescriptor({required this.schemaType, required this.fromJson, required this.title, this.preview})",
+            "doc": "Creates a new type descriptor.\n\n- [schemaType]: The CMS schema type name\n- [fromJson]: Function to convert JSON to [T]\n- [title]: Human-readable name\n- [preview]: Optional preview instance generator"
+          },
+          {
+            "signature": "bool ==(Object other)",
+            "doc": ""
+          },
+          {
+            "signature": "int get hashCode",
+            "doc": ""
           }
         ]
       },
@@ -6060,9 +6118,17 @@
         ]
       },
       {
+        "name": "UnknownContentBuilder",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
+        "line": 5,
+        "doc": "Builds the widget shown for a [ContentFailure].\n\nExample:\n```dart\nUnknownContentBuilder builder = (context, failure) => switch (failure) {\n  ContentItemFailure() => ContentErrorWidget(failure: failure),\n  LayoutFailure() => LayoutErrorWidget(failure: failure),\n  _ => UnknownContentView(failure: failure),\n};\n```",
+        "signature": "typedef UnknownContentBuilder = Widget Function(BuildContext context, ContentFailure failure);",
+        "members": []
+      },
+      {
         "name": "UnknownContentDetector",
         "file": "packages/system/vyuh_extension_content/lib/ui/unknown_content_indicator.dart",
-        "line": 8,
+        "line": 7,
         "doc": "Utility functions for detecting unknown placeholders in content items.",
         "signature": "class UnknownContentDetector",
         "members": [
@@ -6095,7 +6161,7 @@
       {
         "name": "UnknownContentIndicator",
         "file": "packages/system/vyuh_extension_content/lib/ui/unknown_content_indicator.dart",
-        "line": 61,
+        "line": 60,
         "doc": "A widget that wraps content items to provide visual feedback when they\ncontain unknown actions, conditions, layouts, or modifiers.\n\nIn debug mode, this shows a visual indicator (red border + icon) to help\ndevelopers identify content items with missing type registrations.\n\nUsage:\n```dart\nreturn UnknownContentIndicator(\n  contentItem: card,\n  actions: [card.action, card.secondaryAction, card.tertiaryAction],\n  child: CardLayout(card: card),\n);\n```",
         "signature": "class UnknownContentIndicator extends StatelessWidget",
         "members": [
@@ -6134,6 +6200,31 @@
         ]
       },
       {
+        "name": "UnknownContentItem",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/content_item.dart",
+        "line": 221,
+        "doc": "Internal marker class for unknown content items.\n\nThis is used internally when ContentItem.fromJson encounters an unknown\nschema type. It gets converted to a ContentItemFailure by DefaultContentPlugin.",
+        "signature": "final class UnknownContentItem extends ContentItem",
+        "members": [
+          {
+            "signature": "static const dynamic schemaName",
+            "doc": ""
+          },
+          {
+            "signature": "final String missingSchemaType",
+            "doc": ""
+          },
+          {
+            "signature": "final Map<String, dynamic> jsonPayload",
+            "doc": ""
+          },
+          {
+            "signature": "UnknownContentItem({required this.missingSchemaType, required this.jsonPayload})",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "UnknownContentModifierConfiguration",
         "file": "packages/system/vyuh_extension_content/lib/plugin/unknown_placeholders.dart",
         "line": 87,
@@ -6158,6 +6249,27 @@
           },
           {
             "signature": "Widget build(BuildContext context, Widget child, ContentItem content)",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "UnknownContentView",
+        "file": "packages/system/vyuh_extension_content/lib/ui/unknown_content_view.dart",
+        "line": 5,
+        "doc": "The default view for a [ContentFailure]: a missing content type, layout,\nmodifier, action or condition. Styled like the framework's debug views.",
+        "signature": "class UnknownContentView extends StatelessWidget",
+        "members": [
+          {
+            "signature": "final ContentFailure failure",
+            "doc": "The failure to describe."
+          },
+          {
+            "signature": "const UnknownContentView({super.key, required this.failure})",
+            "doc": "Creates the view for [failure]."
+          },
+          {
+            "signature": "Widget build(BuildContext context)",
             "doc": ""
           }
         ]
@@ -6192,6 +6304,30 @@
         ]
       },
       {
+        "name": "UnknownPlaceholderFactory",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
+        "line": 5,
+        "doc": "Factory function for creating unknown placeholders for different types.\nThis is set by the extension_content package to provide unknown placeholders\nfor ActionConfiguration, ConditionConfiguration, etc.",
+        "signature": "typedef UnknownPlaceholderFactory = SchemaItem? Function( Type type, String missingSchemaType, Map<String, dynamic> jsonPayload, );",
+        "members": []
+      },
+      {
+        "name": "cmsFallbackPageBuilder",
+        "file": "packages/system/vyuh_extension_content/lib/routing/cms_fallback_route.dart",
+        "line": 20,
+        "doc": "The page builder of [cmsFallbackRoute]. In debug builds it marks the page\nas served by the fallback.",
+        "signature": "Page<dynamic> cmsFallbackPageBuilder(BuildContext context, g.GoRouterState state)",
+        "members": []
+      },
+      {
+        "name": "cmsFallbackRoute",
+        "file": "packages/system/vyuh_extension_content/lib/routing/cms_fallback_route.dart",
+        "line": 8,
+        "doc": "A catch-all route that asks the CMS for every location no other route\nmatches, so a page published in the CMS is reachable at its path without a\nlocal route.\n\nAdd it to a feature's routes; the router always places it last. The CMS\nsystem feature (`vyuh_feature_system`) contributes it for you. Without it,\nunmatched locations show the framework's not-found page.",
+        "signature": "final cmsFallbackRoute = g.GoRoute( path: NavigationPlugin.catchAllPath, pageBuilder: cmsFallbackPageBuilder, );",
+        "members": []
+      },
+      {
         "name": "createUnknownPlaceholder",
         "file": "packages/system/vyuh_extension_content/lib/plugin/unknown_placeholder_factory.dart",
         "line": 4,
@@ -6200,11 +6336,67 @@
         "members": []
       },
       {
+        "name": "defaultRoutePageBuilder",
+        "file": "packages/system/vyuh_extension_content/lib/routing/cms_route.dart",
+        "line": 37,
+        "doc": "The default page builder for CMS routes.",
+        "signature": "Page<dynamic> defaultRoutePageBuilder(BuildContext context, GoRouterState state, {Widget Function(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child)? transitionsBuilder, Duration? transitionDuration})",
+        "members": []
+      },
+      {
+        "name": "fieldKeyMap",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/local_content_provider.dart",
+        "line": 4,
+        "doc": "",
+        "signature": "const fieldKeyMap =",
+        "members": []
+      },
+      {
         "name": "initializeUnknownPlaceholderFactory",
         "file": "packages/system/vyuh_extension_content/lib/plugin/unknown_placeholder_factory.dart",
         "line": 54,
         "doc": "Initializes the unknown placeholder factory for the serialization system.\nThis should be called during app initialization.",
         "signature": "void initializeUnknownPlaceholderFactory()",
+        "members": []
+      },
+      {
+        "name": "listFromJson",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
+        "line": 84,
+        "doc": "Converts a JSON list to a nullable-list of [SchemaItem] instances of type [T].\n\nThis helper is used when deserializing an array of items from JSON.\nEach item in the array is converted to type [T].\n\nExample:\n```dart\nfinal json = [\n  {'title': 'Post 1', '_type': 'blog.post'},\n  {'title': 'Post 2', '_type': 'blog.post'},\n];\nfinal posts = listFromJson<BlogPost>(json);\n```\n\nReturns null if the input is null.\nThrows [ArgumentError] if the input is not a List.",
+        "signature": "List<T>? listFromJson<T extends SchemaItem>(dynamic json)",
+        "members": []
+      },
+      {
+        "name": "messages",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/noop_content_plugin.dart",
+        "line": 5,
+        "doc": "",
+        "signature": "final messages =",
+        "members": []
+      },
+      {
+        "name": "readValue",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
+        "line": 150,
+        "doc": "Reads a value from a JSON object using the provided key.\n\nThis helper provides a consistent way to access values from JSON\nobjects across different content providers.\n\nExample:\n```dart\nfinal json = {'title': 'My Post'};\nfinal title = readValue(json, 'title');\n```\n\nReturns null if:\n- The input is null\n- The key does not exist\n- The value is null",
+        "signature": "Object? readValue(dynamic json, String key)",
+        "members": []
+      },
+      {
+        "name": "setUnknownPlaceholderFactory",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
+        "line": 18,
+        "doc": "Sets the factory for creating unknown placeholders.",
+        "signature": "void setUnknownPlaceholderFactory(UnknownPlaceholderFactory factory)",
+        "members": []
+      },
+      {
+        "name": "typeFromFirstOfListJson",
+        "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
+        "line": 23,
+        "doc": "Converts a JSON object to a nullable-instance of [SchemaItem] of type [T].\n\nThis helper is used when deserializing a single item from a JSON array.\nIt takes the first item from the array and converts it to type [T].\n\nExample:\n```dart\nfinal json = [{'title': 'Post 1', '_type': 'blog.post'}];\nfinal post = typeFromFirstOfListJson<BlogPost>(json);\n```\n\nReturns null if:\n- The input is null\n- The input array is empty\n- The type conversion fails",
+        "signature": "T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json)",
         "members": []
       }
     ]
@@ -6216,7 +6408,7 @@
       {
         "name": "DefaultOnboardingLayout",
         "file": "packages/system/vyuh_feature_onboarding/lib/default_layout.dart",
-        "line": 9,
+        "line": 10,
         "doc": "",
         "signature": "final class DefaultOnboardingLayout extends LayoutConfiguration<OnboardingContent>",
         "members": [
@@ -6245,7 +6437,7 @@
       {
         "name": "OnboardingContent",
         "file": "packages/system/vyuh_feature_onboarding/lib/onboarding.dart",
-        "line": 24,
+        "line": 23,
         "doc": "",
         "signature": "final class OnboardingContent extends ContentItem",
         "members": [
@@ -6278,7 +6470,7 @@
       {
         "name": "OnboardingContentBuilder",
         "file": "packages/system/vyuh_feature_onboarding/lib/onboarding.dart",
-        "line": 15,
+        "line": 14,
         "doc": "",
         "signature": "final class OnboardingContentBuilder extends ContentBuilder<OnboardingContent>",
         "members": [
@@ -6291,7 +6483,7 @@
       {
         "name": "OnboardingDescriptor",
         "file": "packages/system/vyuh_feature_onboarding/lib/onboarding.dart",
-        "line": 10,
+        "line": 9,
         "doc": "",
         "signature": "final class OnboardingDescriptor extends ContentDescriptor",
         "members": [
@@ -6304,7 +6496,7 @@
       {
         "name": "OnboardingStep",
         "file": "packages/system/vyuh_feature_onboarding/lib/onboarding.dart",
-        "line": 48,
+        "line": 47,
         "doc": "",
         "signature": "final class OnboardingStep",
         "members": [
@@ -6339,7 +6531,7 @@
         "file": "packages/system/vyuh_feature_onboarding/lib/feature.dart",
         "line": 6,
         "doc": "",
-        "signature": "final feature = FeatureDescriptor( name: 'vyuh_feature_onboarding', title: 'Vyuh Feature Onboarding', description: 'Onboarding screens when user first opens the app.', icon: Icons.checklist, extensions: [ ContentExtensionDescriptor(contentBuilders: [OnboardingContentBuilder()]), ], routes: () => [], );",
+        "signature": "final feature = FeatureDescriptor( name: 'vyuh_feature_onboarding', title: 'Vyuh Feature Onboarding', description: 'Onboarding screens when user first opens the app.', icon: Icons.checklist, extensions: [ ContentExtensionDescriptor(contentBuilders: [OnboardingContentBuilder()]), ], );",
         "members": []
       }
     ]
@@ -6602,7 +6794,7 @@
       {
         "name": "DocumentBuilder",
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
-        "line": 10,
+        "line": 11,
         "doc": "A widget that renders a [Document] from the CMS.\n\nIt can display the document in a variety of ways, from a simple text\nrepresentation to a fully custom layout.\n\nIf the document is not found, the widget will display a \"Not Found\" message.",
         "signature": "typedef DocumentBuilder<T extends ContentItem> = Widget Function(BuildContext, T);",
         "members": []
@@ -6643,7 +6835,7 @@
       {
         "name": "DocumentListBuilder",
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
-        "line": 19,
+        "line": 20,
         "doc": "A widget that renders a list of [Document]s from the CMS.",
         "signature": "typedef DocumentListBuilder<T extends ContentItem> = Widget Function(BuildContext, List<T>);",
         "members": []
@@ -6688,7 +6880,7 @@
       {
         "name": "VyuhContentWidget",
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
-        "line": 23,
+        "line": 24,
         "doc": "A versatile content widget that handles both single and list content items.\nIt interacts with the [ContentPlugin] (either directly or via [VyuhBinding]) to fetch content from the CMS.",
         "signature": "class VyuhContentWidget<T extends ContentItem> extends StatefulWidget",
         "members": [
@@ -6876,7 +7068,7 @@
       {
         "name": "ActionCase",
         "file": "packages/system/vyuh_feature_system/lib/action/conditional_action.dart",
-        "line": 87,
+        "line": 86,
         "doc": "A case item that pairs a condition value with its corresponding action.\n\nUsed within [ConditionalAction] to define what action should be executed\nfor each condition value.\n\nExample:\n```dart\nfinal case = ActionCase(\n  value: 'mobile',\n  action: Action(\n    configurations: [\n      NavigationAction(url: '/mobile-view'),\n    ],\n  ),\n);\n```",
         "signature": "final class ActionCase",
         "members": [
@@ -6951,7 +7143,7 @@
       {
         "name": "BooleanCondition",
         "file": "packages/system/vyuh_feature_system/lib/condition/boolean.dart",
-        "line": 10,
+        "line": 9,
         "doc": "A simple boolean condition configuration with optional evaluation delay.\n\nFeatures:\n* Basic true/false evaluation\n* Configurable evaluation delay\n* String value conversion\n* Asynchronous evaluation\n\nExample:\n```dart\n// Simple boolean condition\nfinal condition = BooleanCondition(\n  value: true,\n);\n\n// With evaluation delay\nfinal condition = BooleanCondition(\n  value: true,\n  evaluationDelayInSeconds: 2,\n);\n\n// In a conditional content\nfinal conditional = Conditional(\n  condition: Condition(\n    configuration: BooleanCondition(value: true),\n  ),\n  cases: [\n    CaseItem(\n      value: 'true',\n      item: EnabledContent(),\n    ),\n    CaseItem(\n      value: 'false',\n      item: DisabledContent(),\n    ),\n  ],\n  defaultCase: 'false',\n);\n```\n\nThe condition:\n* Returns 'true' or 'false' as strings\n* Can delay evaluation for testing/simulation\n* Useful for simple toggles and flags",
         "signature": "final class BooleanCondition extends ConditionConfiguration",
         "members": [
@@ -7054,7 +7246,7 @@
       {
         "name": "Card",
         "file": "packages/system/vyuh_feature_system/lib/content/card/card.dart",
-        "line": 9,
+        "line": 8,
         "doc": "A card content item that can display various types of content in a card format.\n\nCards can include:\n* Title and description\n* Images (via URL or ImageReference)\n* Rich text content (PortableText)\n* Up to three actions (primary, secondary, tertiary) that can be configured\n  with multiple action configurations\n\nExample:\n```dart\nfinal card = Card(\n  title: 'My Card',\n  description: 'Card description',\n  imageUrl: Uri.parse('https://example.com/image.jpg'),\n  action: Action(\n    configurations: [\n      NavigationAction(\n        linkType: LinkType.route,\n        route: ObjectReference('route-id'),\n      ),\n      DelayAction(duration: Duration(milliseconds: 300)),\n    ],\n  ),\n);\n```\n\nCards can be used:\n* As standalone content items\n* Within groups or lists\n* Inside portable text blocks",
         "signature": "class Card extends ContentItem implements PortableBlockItem",
         "members": [
@@ -7123,7 +7315,7 @@
       {
         "name": "CardConditionalLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/card/card.dart",
-        "line": 116,
+        "line": 115,
         "doc": "A conditional layout for cards that adapts based on specified conditions.\n\nAllows defining different layouts for cards based on conditions like:\n* Screen size (compact vs expanded layouts)\n* Theme mode (light/dark specific layouts)\n* Content properties (image presence, action count)\n\nExample:\n```dart\nfinal layout = CardConditionalLayout(\n  cases: [\n    LayoutCaseItem(\n      value: 'mobile',\n      item: CompactCardLayout(),\n    ),\n    LayoutCaseItem(\n      value: 'desktop',\n      item: ExpandedCardLayout(),\n    ),\n  ],\n  defaultCase: 'desktop',\n  condition: ScreenSize(),\n);\n```",
         "signature": "final class CardConditionalLayout extends ConditionalLayout<Card>",
         "members": [
@@ -7148,7 +7340,7 @@
       {
         "name": "CardDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/card/card.dart",
-        "line": 96,
+        "line": 95,
         "doc": "Descriptor for configuring card content type in the system.\n\nAllows configuring:\n* Available layouts for cards (default, list item, button)\n* Custom layouts for specific use cases\n\nExample:\n```dart\nfinal descriptor = CardDescriptor(\n  layouts: [\n    DefaultCardLayout.typeDescriptor,\n    ListItemCardLayout.typeDescriptor,\n  ],\n);\n```",
         "signature": "class CardDescriptor extends ContentDescriptor",
         "members": [
@@ -7161,7 +7353,7 @@
       {
         "name": "Carousel",
         "file": "packages/system/vyuh_feature_system/lib/ui/carousel.dart",
-        "line": 6,
+        "line": 7,
         "doc": "",
         "signature": "class Carousel extends StatefulWidget",
         "members": [
@@ -7285,7 +7477,7 @@
       {
         "name": "ConditionalAction",
         "file": "packages/system/vyuh_feature_system/lib/action/conditional_action.dart",
-        "line": 9,
+        "line": 8,
         "doc": "An action configuration that executes different actions based on a condition.\n\nFeatures:\n* Dynamic action selection based on conditions\n* Multiple case handling with default fallback\n* Support for any action type in cases\n* Asynchronous condition evaluation\n\nExample:\n```dart\nfinal action = ConditionalAction(\n  condition: Condition(\n    configuration: ScreenSize(),\n  ),\n  cases: [\n    ActionCase(\n      value: 'mobile',\n      action: Action(\n        configurations: [\n          NavigationAction(url: '/mobile-view'),\n        ],\n      ),\n    ),\n    ActionCase(\n      value: 'desktop',\n      action: Action(\n        configurations: [\n          NavigationAction(url: '/desktop-view'),\n        ],\n      ),\n    ),\n  ],\n  defaultCase: 'mobile',\n);\n```",
         "signature": "class ConditionalAction extends ActionConfiguration",
         "members": [
@@ -7438,7 +7630,7 @@
       {
         "name": "ContentImage",
         "file": "packages/system/vyuh_feature_system/lib/ui/content_image.dart",
-        "line": 6,
+        "line": 7,
         "doc": "A widget for displaying images from various sources with advanced features.\n\nFeatures:\n* Network image caching\n* CMS image reference support\n* Responsive sizing\n* Loading and error states\n* Image format control\n* Color blending options\n\nExample:\n```dart\n// Network image\nContentImage(\n  url: 'https://example.com/image.jpg',\n  width: 300,\n  height: 200,\n  fit: BoxFit.cover,\n)\n\n// CMS image reference\nContentImage(\n  ref: imageReference,\n  format: 'webp',\n  fit: BoxFit.contain,\n)\n```\n\nThe widget automatically:\n* Handles device pixel ratio for optimal quality\n* Rounds dimensions for better caching\n* Provides fallback for missing images\n* Shows loading indicators",
         "signature": "class ContentImage extends StatelessWidget",
         "members": [
@@ -7495,7 +7687,7 @@
       {
         "name": "ContentItemsScrollView",
         "file": "packages/system/vyuh_feature_system/lib/ui/content_items_scrollview.dart",
-        "line": 5,
+        "line": 6,
         "doc": "",
         "signature": "class ContentItemsScrollView extends StatelessWidget",
         "members": [
@@ -7566,7 +7758,7 @@
       {
         "name": "DefaultCardLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/card/default_layout.dart",
-        "line": 12,
+        "line": 13,
         "doc": "",
         "signature": "class DefaultCardLayout extends LayoutConfiguration<e.Card>",
         "members": [
@@ -7632,7 +7824,7 @@
       {
         "name": "DefaultConditionalRouteLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/conditional_route/default_layout.dart",
-        "line": 6,
+        "line": 7,
         "doc": "",
         "signature": "class DefaultConditionalRouteLayout extends LayoutConfiguration<ConditionalRoute>",
         "members": [
@@ -7661,7 +7853,7 @@
       {
         "name": "DefaultDividerLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/divider.dart",
-        "line": 79,
+        "line": 78,
         "doc": "Default layout for divider content.\n\nFeatures:\n* Renders a horizontal line with configurable thickness\n* Applies optional padding/indent\n* Uses theme colors for the divider\n\nExample:\n```dart\nfinal layout = DefaultDividerLayout();\n```",
         "signature": "final class DefaultDividerLayout extends LayoutConfiguration<Divider>",
         "members": [
@@ -7690,7 +7882,7 @@
       {
         "name": "DefaultDocumentViewLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 61,
+        "line": 60,
         "doc": "",
         "signature": "final class DefaultDocumentViewLayout extends LayoutConfiguration<DocumentView>",
         "members": [
@@ -7719,7 +7911,7 @@
       {
         "name": "DefaultEmptyLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/empty.dart",
-        "line": 65,
+        "line": 64,
         "doc": "Default layout for empty content that renders nothing.\n\nThis layout always returns a [SizedBox.shrink] regardless of any\nconfiguration, ensuring the content takes up no space in the layout.\n\nExample:\n```dart\nfinal layout = DefaultEmptyLayout();\n```",
         "signature": "final class DefaultEmptyLayout extends LayoutConfiguration<Empty>",
         "members": [
@@ -7802,7 +7994,7 @@
       {
         "name": "DefaultRouteLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/route/default_layout.dart",
-        "line": 38,
+        "line": 37,
         "doc": "",
         "signature": "class DefaultRouteLayout extends LayoutConfiguration<Route>",
         "members": [
@@ -7929,7 +8121,7 @@
       {
         "name": "DisplayFieldMap",
         "file": "packages/system/vyuh_feature_system/lib/api_handler/json_path_api_configuration.dart",
-        "line": 13,
+        "line": 14,
         "doc": "Maps JSON fields to card display fields using JSON Path expressions.\n\nFeatures:\n* Title field mapping\n* Description field mapping\n* Image URL field mapping\n\nExample:\n```dart\nfinal fieldMap = DisplayFieldMap(\n  title: JSONPath('$.name'),\n  description: JSONPath('$.details'),\n  imageUrl: JSONPath('$.image.url'),\n);\n```",
         "signature": "final class DisplayFieldMap",
         "members": [
@@ -7958,7 +8150,7 @@
       {
         "name": "Divider",
         "file": "packages/system/vyuh_feature_system/lib/content/divider.dart",
-        "line": 10,
+        "line": 9,
         "doc": "A content item that renders a horizontal dividing line.\n\nFeatures:\n* Customizable thickness\n* Configurable padding/indent\n* Can be used in portable text blocks\n* Supports theme-based styling\n\nExample:\n```dart\nfinal divider = Divider(\n  thickness: 2.0,\n  indent: 16.0,\n);\n```\n\nThe divider can be used:\n* Between content sections\n* Inside portable text blocks\n* As a visual separator in layouts",
         "signature": "class Divider extends ContentItem implements PortableBlockItem",
         "members": [
@@ -7999,7 +8191,7 @@
       {
         "name": "DividerDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/divider.dart",
-        "line": 60,
+        "line": 59,
         "doc": "Descriptor for configuring divider content type in the system.\n\nAllows configuring:\n* Available layouts for dividers\n* Custom layouts for specific use cases\n\nExample:\n```dart\nfinal descriptor = DividerDescriptor(\n  layouts: [\n    DefaultDividerLayout.typeDescriptor,\n  ],\n);\n```",
         "signature": "class DividerDescriptor extends ContentDescriptor",
         "members": [
@@ -8012,7 +8204,7 @@
       {
         "name": "DocumentItemConfiguration",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart",
-        "line": 42,
+        "line": 41,
         "doc": "",
         "signature": "abstract class DocumentItemConfiguration<TDocument extends DocumentItem> implements SchemaItem",
         "members": [
@@ -8041,7 +8233,7 @@
       {
         "name": "DocumentListView",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart",
-        "line": 10,
+        "line": 9,
         "doc": "",
         "signature": "final class DocumentListView extends ContentItem",
         "members": [
@@ -8078,7 +8270,7 @@
       {
         "name": "DocumentListViewBuilder",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/ui/document_listview_builder.dart",
-        "line": 7,
+        "line": 8,
         "doc": "",
         "signature": "class DocumentListViewBuilder extends StatefulWidget",
         "members": [
@@ -8103,7 +8295,7 @@
       {
         "name": "DocumentListViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart",
-        "line": 57,
+        "line": 56,
         "doc": "",
         "signature": "class DocumentListViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8128,7 +8320,7 @@
       {
         "name": "DocumentLoadStrategy",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "enum DocumentLoadStrategy { reference, query }",
         "members": []
@@ -8136,7 +8328,7 @@
       {
         "name": "DocumentSectionView",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_section.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "final class DocumentSectionView extends ContentItem",
         "members": [
@@ -8169,7 +8361,7 @@
       {
         "name": "DocumentSectionViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_section.dart",
-        "line": 34,
+        "line": 33,
         "doc": "",
         "signature": "class DocumentSectionViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8186,7 +8378,7 @@
       {
         "name": "DocumentView",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 14,
+        "line": 13,
         "doc": "",
         "signature": "final class DocumentView extends ContentItem",
         "members": [
@@ -8235,7 +8427,7 @@
       {
         "name": "DocumentViewBuilder",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/ui/document_builder.dart",
-        "line": 6,
+        "line": 7,
         "doc": "",
         "signature": "class DocumentViewBuilder extends StatefulWidget",
         "members": [
@@ -8260,7 +8452,7 @@
       {
         "name": "DocumentViewBuilderState",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/ui/document_builder.dart",
-        "line": 19,
+        "line": 20,
         "doc": "",
         "signature": "class DocumentViewBuilderState extends State<DocumentViewBuilder>",
         "members": [
@@ -8285,7 +8477,7 @@
       {
         "name": "DocumentViewConditionalLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 143,
+        "line": 142,
         "doc": "",
         "signature": "final class DocumentViewConditionalLayout extends ConditionalLayout<DocumentView>",
         "members": [
@@ -8310,7 +8502,7 @@
       {
         "name": "DocumentViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 99,
+        "line": 98,
         "doc": "",
         "signature": "class DocumentViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8376,7 +8568,7 @@
       {
         "name": "Empty",
         "file": "packages/system/vyuh_feature_system/lib/content/empty.dart",
-        "line": 12,
+        "line": 11,
         "doc": "A content item that renders nothing, taking up no space in the layout.\n\nFeatures:\n* Zero-size rendering\n* Useful as a placeholder\n* Can be used as a fallback\n* Supports content modifiers\n\nExample:\n```dart\nfinal emptyContent = Empty();\n```\n\nCommon uses:\n* Default case in conditionals\n* Placeholder in optional content areas\n* Fallback when content is unavailable",
         "signature": "class Empty extends ContentItem",
         "members": [
@@ -8405,7 +8597,7 @@
       {
         "name": "EmptyDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/empty.dart",
-        "line": 51,
+        "line": 50,
         "doc": "Descriptor for configuring empty content type in the system.\n\nThe empty content type doesn't support custom layouts since it always\nrenders nothing.\n\nExample:\n```dart\nfinal descriptor = EmptyDescriptor();\n```",
         "signature": "class EmptyDescriptor extends ContentDescriptor",
         "members": [
@@ -8463,7 +8655,7 @@
       {
         "name": "GridGroupLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/group/grid_layout.dart",
-        "line": 9,
+        "line": 10,
         "doc": "",
         "signature": "final class GridGroupLayout extends LayoutConfiguration<Group>",
         "members": [
@@ -8504,7 +8696,7 @@
       {
         "name": "Group",
         "file": "packages/system/vyuh_feature_system/lib/content/group/group.dart",
-        "line": 12,
+        "line": 11,
         "doc": "A group content item that can contain and organize multiple content items.\n\nGroups can:\n* Display a collection of content items in various layouts\n* Have an optional title and description\n* Be used inside portable text blocks\n* Support different layouts (grid, list, carousel)\n\nExample:\n```dart\nfinal group = Group(\n  title: 'My Collection',\n  description: 'A collection of cards',\n  items: [\n    Card(title: 'First Card', description: 'Card 1'),\n    Card(title: 'Second Card', description: 'Card 2'),\n  ],\n  layout: GridGroupLayout(columns: 2),\n);\n```\n\nGroups can be used:\n* To organize related content items\n* Create grid or list layouts\n* Build carousels or slideshows\n* Inside portable text blocks",
         "signature": "class Group extends ContentItem implements PortableBlockItem, ContainerItem",
         "members": [
@@ -8549,7 +8741,7 @@
       {
         "name": "GroupConditionalLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/group/group.dart",
-        "line": 115,
+        "line": 114,
         "doc": "A conditional layout for groups that adapts based on specified conditions.\n\nAllows defining different layouts for groups based on conditions like:\n* Screen size (single column vs multi-column)\n* Theme mode (different spacing/padding)\n* Content count (grid vs list)\n\nExample:\n```dart\nfinal layout = GroupConditionalLayout(\n  cases: [\n    LayoutCaseItem(\n      value: 'mobile',\n      item: ListGroupLayout(),\n    ),\n    LayoutCaseItem(\n      value: 'desktop',\n      item: GridGroupLayout(columns: 3),\n    ),\n  ],\n  defaultCase: 'desktop',\n  condition: ScreenSize(),\n);\n```",
         "signature": "final class GroupConditionalLayout extends ConditionalLayout<Group>",
         "members": [
@@ -8574,7 +8766,7 @@
       {
         "name": "GroupDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/group/group.dart",
-        "line": 94,
+        "line": 93,
         "doc": "Descriptor for configuring group content type in the system.\n\nAllows configuring:\n* Available layouts for groups (default, grid, list, carousel)\n* Custom layouts for specific use cases\n\nExample:\n```dart\nfinal descriptor = GroupDescriptor(\n  layouts: [\n    DefaultGroupLayout.typeDescriptor,\n    GridGroupLayout.typeDescriptor,\n    CarouselGroupLayout.typeDescriptor,\n  ],\n);\n```",
         "signature": "class GroupDescriptor extends ContentDescriptor",
         "members": [
@@ -8641,7 +8833,7 @@
       {
         "name": "JsonPathApiConfiguration",
         "file": "packages/system/vyuh_feature_system/lib/api_handler/json_path_api_configuration.dart",
-        "line": 51,
+        "line": 52,
         "doc": "Configuration for fetching and transforming API data using JSON Path.\n\nFeatures:\n* HTTP request configuration (URL, headers, body)\n* JSON data extraction using JSON Path\n* Field mapping to card properties\n* List and single item handling\n* Error handling and fallbacks\n\nExample:\n```dart\nfinal config = JsonPathApiConfiguration(\n  url: 'https://api.example.com/items',\n  headers: {'Authorization': 'Bearer token'},\n  rootField: JSONPath('$.data.items'),\n  fieldMap: DisplayFieldMap(\n    title: JSONPath('$.name'),\n    description: JSONPath('$.details'),\n    imageUrl: JSONPath('$.image.url'),\n  ),\n);\n```\n\nThe configuration will:\n* Fetch data from the specified URL\n* Extract items using the root field path\n* Map JSON fields to card properties\n* Handle both array and single object responses\n* Create a list of cards with consistent layout",
         "signature": "final class JsonPathApiConfiguration extends ApiConfiguration<List<vf.Card>>",
         "members": [
@@ -8735,7 +8927,7 @@
       {
         "name": "LinkedRoute",
         "file": "packages/system/vyuh_feature_system/lib/content/route/tabs.dart",
-        "line": 71,
+        "line": 72,
         "doc": "",
         "signature": "final class LinkedRoute",
         "members": [
@@ -8768,7 +8960,7 @@
       {
         "name": "ListGroupLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/group/list_layout.dart",
-        "line": 9,
+        "line": 10,
         "doc": "",
         "signature": "final class ListGroupLayout extends LayoutConfiguration<Group>",
         "members": [
@@ -8834,7 +9026,7 @@
       {
         "name": "MenuAction",
         "file": "packages/system/vyuh_feature_system/lib/content/route/default_layout.dart",
-        "line": 25,
+        "line": 24,
         "doc": "",
         "signature": "class MenuAction",
         "members": [
@@ -8863,7 +9055,7 @@
       {
         "name": "MenuIconType",
         "file": "packages/system/vyuh_feature_system/lib/content/route/default_layout.dart",
-        "line": 9,
+        "line": 8,
         "doc": "",
         "signature": "enum MenuIconType { home, settings, category, account, menu }",
         "members": [
@@ -8921,7 +9113,7 @@
       {
         "name": "NavigateBack",
         "file": "packages/system/vyuh_feature_system/lib/action/navigate_back.dart",
-        "line": 11,
+        "line": 10,
         "doc": "",
         "signature": "final class NavigateBack extends ActionConfiguration",
         "members": [
@@ -9217,7 +9409,7 @@
       {
         "name": "QueryConfiguration",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 86,
+        "line": 85,
         "doc": "",
         "signature": "abstract class QueryConfiguration implements SchemaItem",
         "members": [
@@ -9408,7 +9600,7 @@
       {
         "name": "RouteRefreshAction",
         "file": "packages/system/vyuh_feature_system/lib/action/route_refresh.dart",
-        "line": 8,
+        "line": 7,
         "doc": "",
         "signature": "final class RouteRefreshAction extends ActionConfiguration",
         "members": [
@@ -9552,7 +9744,7 @@
       {
         "name": "TabsRouteLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/route/tabs.dart",
-        "line": 9,
+        "line": 10,
         "doc": "",
         "signature": "final class TabsRouteLayout extends LayoutConfiguration<vt.RouteBase>",
         "members": [
@@ -9751,7 +9943,7 @@
       {
         "name": "empty",
         "file": "packages/system/vyuh_feature_system/lib/content/empty.dart",
-        "line": 8,
+        "line": 7,
         "doc": "A reusable empty widget that takes up no space.\nUsed as a default fallback when no content should be rendered.",
         "signature": "const empty = SizedBox.shrink();",
         "members": []
@@ -9806,7 +9998,7 @@
       {
         "name": "SanityContentProvider",
         "file": "packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart",
-        "line": 25,
+        "line": 26,
         "doc": "",
         "signature": "final class SanityContentProvider extends ContentProvider",
         "members": [
@@ -9867,7 +10059,7 @@
       {
         "name": "fieldMap",
         "file": "packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart",
-        "line": 16,
+        "line": 17,
         "doc": "",
         "signature": "final Map<String, String> fieldMap =",
         "members": []
@@ -9875,7 +10067,7 @@
       {
         "name": "identity",
         "file": "packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart",
-        "line": 14,
+        "line": 15,
         "doc": "",
         "signature": "Map<String, dynamic> identity(Map<String, dynamic> json)",
         "members": []

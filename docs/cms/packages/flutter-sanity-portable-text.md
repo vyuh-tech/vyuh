@@ -63,7 +63,7 @@ PortableText(blocks: blocks)
 
 Configure styles, custom blocks, containers, and marks through `PortableTextConfig.shared`. The `PortableText` widget accepts `blocks` and an optional `listBuilder`; it does not take `blockRenderers` or `annotationHandlers`.
 
-The current `vyuh_core` package depends on this renderer library. That dependency does not select a CMS backend or activate the content system. The optional `vyuh_feature_system` package contributes a content item that uses it to render managed rich text.
+`vyuh_core` does not depend on this library. The CMS add-on, `vyuh_extension_content`, does; it doesn't select a CMS backend either. The optional `vyuh_feature_system` package contributes a content item that uses it to render managed rich text.
 
 ## Links
 

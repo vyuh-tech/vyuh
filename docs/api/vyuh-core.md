@@ -18,31 +18,7 @@ flowchart BT
 
 ## Choose a declaration
 
-[ActionFailure](#actionfailure) · [AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CMSPathResolver](#cmspathresolver) · [CMSRoute](#cmsroute) · [Category](#category) · [ConditionFailure](#conditionfailure) · [ContainerItem](#containeritem) · [ContentFailure](#contentfailure) · [ContentItem](#contentitem) · [ContentItemFailure](#contentitemfailure) · [ContentModifierConfiguration](#contentmodifierconfiguration) · [ContentPlugin](#contentplugin) · [ContentProvider](#contentprovider) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [DocumentItem](#documentitem) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [FieldName](#fieldname) · [FileReference](#filereference) · [FromJsonConverter](#fromjsonconverter) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [ImageReference](#imagereference) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LayoutConfiguration](#layoutconfiguration) · [LayoutFailure](#layoutfailure) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [LiveContentProvider](#livecontentprovider) · [Loader](#loader) · [LocalContentProvider](#localcontentprovider) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [ModifierFailure](#modifierfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpContentPlugin](#noopcontentplugin) · [NoOpContentProvider](#noopcontentprovider) · [NoOpLiveContentProvider](#nooplivecontentprovider) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [ObjectReference](#objectreference) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RootItem](#rootitem) · [RouteBase](#routebase) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLifecycleConfiguration](#routelifecycleconfiguration) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouteTypeConfiguration](#routetypeconfiguration) · [RoutingConfigNotifier](#routingconfignotifier) · [SchemaItem](#schemaitem) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [TypeDescriptor](#typedescriptor) · [UnknownContentBuilder](#unknowncontentbuilder) · [UnknownContentItem](#unknowncontentitem) · [UnknownPlaceholderFactory](#unknownplaceholderfactory) · [User](#user) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [defaultRoutePageBuilder](#defaultroutepagebuilder) · [fieldKeyMap](#fieldkeymap) · [listFromJson](#listfromjson) · [messages](#messages) · [readValue](#readvalue) · [reportFailure](#reportfailure) · [runApp](#runapp) · [setUnknownPlaceholderFactory](#setunknownplaceholderfactory) · [typeFromFirstOfListJson](#typefromfirstoflistjson) · [vyuh](#vyuh)
-
-## ActionFailure {#actionfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L92)
-
-Failure when an action configuration registration is missing.
-
-```dart
-final class ActionFailure extends ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-final Map<String, dynamic>? actionConfig;
-```
-
-The action configuration that failed to resolve
-
-```dart
-const ActionFailure({required super.schemaType, this.actionConfig, super.jsonPayload, super.description, super.suggestions});
-```
-
-
+[AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [Loader](#loader) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouterUrlStyle](#routerurlstyle) · [RoutingConfigNotifier](#routingconfignotifier) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [User](#user) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhStrings](#vyuhstrings) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [reportFailure](#reportfailure) · [runApp](#runapp) · [vyuh](#vyuh)
 
 ## AnalyticsPlugin {#analyticsplugin}
 
@@ -178,7 +154,7 @@ Clears the current user identification and associated traits. This should be cal
 
 ## AppBuilder {#appbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L11)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L9)
 
 A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.
 
@@ -390,7 +366,7 @@ Deletes the current user account.
 
 ## BuildFailureView {#buildfailureview}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L324)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L334)
 
 Shown in release builds in place of a widget that failed to build. Small, quiet and themed, so one broken widget does not break the page.
 
@@ -414,470 +390,6 @@ const BuildFailureView({super.key, required this.details});
 
 ```dart
 Widget build(BuildContext context);
-```
-
-
-
-## CMSPathResolver {#cmspathresolver}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/cms_route.dart#L5)
-
-A function that resolves a CMS path from a local path. This is useful when multiple local routes use a single template path on the CMS. For example: (Local path) /blog/:slug -&gt; /blog (CMS path)
-
-```dart
-typedef CMSPathResolver = String Function(String path);
-```
-
-## CMSRoute {#cmsroute}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/cms_route.dart#L12)
-
-A route purely meant to identify CMS pages. Use it to distinguish between the way local routes and CMS routes are handled.
-
-```dart
-final class CMSRoute extends GoRoute
-```
-
-Directly declared public members:
-
-```dart
-final CMSPathResolver cmsPathResolver;
-```
-
-A function that resolves a CMS path from a local path.
-
-```dart
-CMSRoute({required super.path, this.cmsPathResolver = _identityPathResolver, super.builder, GoRouterPageBuilder? pageBuilder, super.parentNavigatorKey, super.name, super.onExit, super.redirect, super.routes});
-```
-
-Creates a new CMS route.
-
-## Category {#category}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/route_base.dart#L101)
-
-A category for organizing routes.
-
-```dart
-class Category implements SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-String get schemaType;
-```
-
-
-
-```dart
-final String identifier;
-```
-
-
-
-```dart
-final String title;
-```
-
-
-
-```dart
-final LayoutConfiguration? layout;
-```
-
-
-
-```dart
-final List<ContentModifierConfiguration>? modifiers;
-```
-
-
-
-```dart
-static List<ContentModifierConfiguration>? modifierList(dynamic json);
-```
-
-
-
-```dart
-Category({required this.identifier, required this.title, this.layout, this.modifiers});
-```
-
-
-
-```dart
-factory Category.fromJson(Map<String, dynamic> json);
-```
-
-
-
-## ConditionFailure {#conditionfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L109)
-
-Failure when a condition configuration registration is missing.
-
-```dart
-final class ConditionFailure extends ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-final Map<String, dynamic>? conditionConfig;
-```
-
-The condition configuration that failed to resolve
-
-```dart
-const ConditionFailure({required super.schemaType, this.conditionConfig, super.jsonPayload, super.description, super.suggestions});
-```
-
-
-
-## ContainerItem {#containeritem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L194)
-
-Represents a container item that can contain other content items.
-
-```dart
-abstract interface class ContainerItem implements ContentItem
-```
-
-## ContentFailure {#contentfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L1)
-
-Base class for content-related failures in the Vyuh framework.
-
-```dart
-abstract class ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-final String schemaType;
-```
-
-The schema type that failed to resolve
-
-```dart
-final Map<String, dynamic>? jsonPayload;
-```
-
-The original JSON payload that caused the failure (if available)
-
-```dart
-final String? description;
-```
-
-Human-readable description of the failure
-
-```dart
-final List<String>? suggestions;
-```
-
-Optional suggestions for resolving the failure
-
-```dart
-const ContentFailure({required this.schemaType, this.jsonPayload, this.description, this.suggestions});
-```
-
-
-
-## ContentItem {#contentitem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L25)
-
-The base class for all content items in Vyuh.
-
-```dart
-abstract class ContentItem implements SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-final String schemaType;
-```
-
-
-
-```dart
-final LayoutConfiguration? layout;
-```
-
-The layout configuration for the content item.
-
-```dart
-final List<ContentModifierConfiguration>? modifiers;
-```
-
-
-
-```dart
-static List<ContentModifierConfiguration>? modifierList(dynamic json);
-```
-
-
-
-```dart
-ContentItem? parent;
-```
-
-The parent content item of this content item. This is used internally by the content system.
-
-```dart
-ContentItem({required this.schemaType, required this.layout, required this.modifiers});
-```
-
-Creates an instance of `ContentItem`.
-
-```dart
-factory ContentItem.fromJson(Map<String, dynamic> json);
-```
-
-Converts the JSON representation of the content item to an instance of `ContentItem`.
-
-```dart
-void setParent(Iterable<ContentItem?> children);
-```
-
-Sets the parent content item for the given list of children.
-
-```dart
-LayoutConfiguration? getLayout();
-```
-
-Gets the layout to use for the `ContentItem`. By default its the `layout` itself. However this acts as an extension point for custom `ContentItem`s that may have a different strategy for applying layouts.
-
-```dart
-List<ContentModifierConfiguration>? getModifiers();
-```
-
-Gets the modifiers to use for the `ContentItem`. By default its the `modifiers` itself. However this acts as an extension point for custom `ContentItem`s that may have a different strategy for applying modifiers.
-
-## ContentItemFailure {#contentitemfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L28)
-
-Failure when a ContentItem type registration is missing.
-
-```dart
-final class ContentItemFailure extends ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-const ContentItemFailure({required super.schemaType, super.jsonPayload, super.description, super.suggestions});
-```
-
-
-
-## ContentModifierConfiguration {#contentmodifierconfiguration}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L110)
-
-Configuration for modifying content presentation.
-
-```dart
-abstract class ContentModifierConfiguration implements SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-final String schemaType;
-```
-
-
-
-```dart
-ContentModifierConfiguration({required this.schemaType});
-```
-
-
-
-```dart
-factory ContentModifierConfiguration.fromJson(Map<String, dynamic> json);
-```
-
-
-
-```dart
-Widget build(BuildContext context, Widget child, ContentItem content);
-```
-
-Builds the modifier widget tree for the given content item.
-
-## ContentPlugin {#contentplugin}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_plugin.dart#L4)
-
-The base class for a Content Plugin
-
-```dart
-abstract class ContentPlugin extends Plugin
-```
-
-Directly declared public members:
-
-```dart
-final ContentProvider provider;
-```
-
-The ContentProvider for this plugin
-
-```dart
-ContentPlugin({required this.provider, required super.name, required super.title});
-```
-
-Creates a new ContentPlugin with the given provider, name, and title
-
-```dart
-Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
-```
-
-The type registry that maps types to their descriptors. This stores the descriptors for LayoutConfiguration, ActionConfiguration, ConditionConfiguration and possibly others in the future.
-
-```dart
-Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout});
-```
-
-Builds a Widget for the given content. You can pass in an optional `layout` to override the default layout
-
-```dart
-Widget buildRoute(BuildContext context, {Uri? url, String? routeId});
-```
-
-Builds a Widget for the given route url or id. This is used for top-level documents called routes. These could represent a page, dialog or a conditional-route.
-
-```dart
-void attach(ExtensionBuilder extBuilder);
-```
-
-Sets up the plugin with the ContentExtensionBuilder. The plugin relies on the ContentExtensionBuilder to do its work.
-
-```dart
-T? fromJson<T>(Map<String, dynamic> json);
-```
-
-Converts the given json to an item of type T
-
-```dart
-void register<T>(TypeDescriptor<T> descriptor);
-```
-
-Registers the given type descriptor
-
-```dart
-bool isRegistered<T>(String schemaType);
-```
-
-Checks if the given schema type is registered for type T
-
-## ContentProvider {#contentprovider}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_provider.dart#L5)
-
-Public declaration in this package.
-
-```dart
-abstract class ContentProvider
-```
-
-Directly declared public members:
-
-```dart
-final String name;
-```
-
-
-
-```dart
-final String title;
-```
-
-
-
-```dart
-final LiveContentProvider live;
-```
-
-
-
-```dart
-ContentProvider({required this.name, required this.title, this.live = const NoOpLiveContentProvider()});
-```
-
-
-
-```dart
-bool get supportsLive;
-```
-
-
-
-```dart
-String fieldValue(String key, Map<String, dynamic> json);
-```
-
-
-
-```dart
-String schemaType(Map<String, dynamic> json);
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
-```dart
-ImageProvider? image(final ImageReference imageRef, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format});
-```
-
-
-
-```dart
-Uri? fileUrl(final FileReference fileRef);
-```
-
-
-
-```dart
-Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true});
-```
-
-
-
-```dart
-Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true});
 ```
 
 
@@ -1076,7 +588,7 @@ Future<void> init();
 
 ## DefaultNavigationPlugin {#defaultnavigationplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L8)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L17)
 
 Public declaration in this package.
 
@@ -1087,16 +599,16 @@ final class DefaultNavigationPlugin extends NavigationPlugin
 Directly declared public members:
 
 ```dart
-final bool includeFallbackRoute;
+final g.GoRouterRedirect? redirect;
 ```
 
-
+The global redirect for this router, run before every feature redirect.
 
 ```dart
-DefaultNavigationPlugin({this.includeFallbackRoute = true, final bool urlReflectsImperativeAPIs = false, g.GoRouterRedirect? redirect});
+DefaultNavigationPlugin({final bool urlReflectsImperativeAPIs = false, this.redirect, RouterUrlStyle? urlStyle});
 ```
 
-
+Creates the GoRouter-based navigation plugin.
 
 ```dart
 GoRouter get instance;
@@ -1256,16 +768,6 @@ A function that can be called to dispose of (cancel) an event subscription.
 typedef DisposeFunction = void Function();
 ```
 
-## DocumentItem {#documentitem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L19)
-
-The base interface for all schema-driven document items.
-
-```dart
-abstract interface class DocumentItem implements SchemaItem
-```
-
 ## EnvPlugin {#envplugin}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/env/env_plugin.dart#L3)
@@ -1310,7 +812,7 @@ Clears all the environment variables.
 
 ## ErrorViewBuilder {#errorviewbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L104)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L102)
 
 A builder for an error view widget.
 
@@ -1572,9 +1074,9 @@ Restarts the platform. This rebuilds the whole app, so it is the last resort.
 
 ## FailureCard {#failurecard}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L224)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L228)
 
-The default inline failure, used inside a page for a piece of content.
+The default inline failure, used inside a page for a part that failed.
 
 ```dart
 class FailureCard extends StatelessWidget
@@ -1794,10 +1296,10 @@ Redirects this feature adds to the app's router, evaluated in feature order afte
 RouteBuilderFunction? get routes;
 ```
 
-The routes for the feature.
+The routes for the feature, or null when it contributes none. Features that only add event handlers, redirects, extensions or services can leave this out.
 
 ```dart
-FeatureDescriptor({required this.name, required this.title, this.description, this.icon, this.init, this.dispose, required RouteBuilderFunction routes, this.extensions, this.extensionBuilders, this.dependencies = const [], this.events = const [], this.redirects = const []});
+FeatureDescriptor({required this.name, required this.title, this.description, this.icon, this.init, this.dispose, RouteBuilderFunction? routes, this.extensions, this.extensionBuilders, this.dependencies = const [], this.events = const [], this.redirects = const []});
 ```
 
 Creates a new FeatureDescriptor.
@@ -1984,62 +1486,6 @@ The builder function that creates a set of features.
 
 ```dart
 typedef FeaturesBuilder = FutureOr<List<FeatureDescriptor>> Function();
-```
-
-## FieldName {#fieldname}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_plugin.dart#L47)
-
-Public declaration in this package.
-
-```dart
-enum FieldName { id, type, key, ref, updatedAt, createdAt }
-```
-
-## FileReference {#filereference}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/reference.dart#L38)
-
-A reference to a file asset in the content management system.
-
-```dart
-class FileReference
-```
-
-Directly declared public members:
-
-```dart
-final String type;
-```
-
-
-
-```dart
-final ObjectReference? asset;
-```
-
-
-
-```dart
-FileReference({required this.type, required this.asset});
-```
-
-
-
-```dart
-factory FileReference.fromJson(final Map<String, dynamic> json);
-```
-
-
-
-## FromJsonConverter {#fromjsonconverter}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/type_descriptor.dart#L1)
-
-Function type for converting JSON data to a typed object.
-
-```dart
-typedef FromJsonConverter<T> = T? Function(Map<String, dynamic> json);
 ```
 
 ## GetItDIPlugin {#getitdiplugin}
@@ -2254,55 +1700,13 @@ Future<StreamedResponse> send(BaseRequest request);
 
 ## ImagePlaceholderBuilder {#imageplaceholderbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L55)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L53)
 
 A builder for an image placeholder widget.
 
 ```dart
 typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
 ```
-
-## ImageReference {#imagereference}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/reference.dart#L6)
-
-A reference to an image asset in the content management system.
-
-```dart
-class ImageReference
-```
-
-Directly declared public members:
-
-```dart
-final String type;
-```
-
-
-
-```dart
-final ObjectReference? asset;
-```
-
-
-
-```dart
-final String? sanityAsset;
-```
-
-
-
-```dart
-ImageReference({required this.type, required this.asset, this.sanityAsset});
-```
-
-
-
-```dart
-factory ImageReference.fromJson(final Map<String, dynamic> json);
-```
-
-
 
 ## InitOncePlugin {#initonceplugin}
 
@@ -2355,78 +1759,6 @@ The possible states of the system initialization.
 ```dart
 enum InitState { notStarted, plugins, features, ready, error }
 ```
-
-## LayoutConfiguration {#layoutconfiguration}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L147)
-
-Base class for configuring the visual layout of a content item.
-
-```dart
-abstract class LayoutConfiguration<T extends ContentItem> implements SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-final String schemaType;
-```
-
-
-
-```dart
-final Type contentType;
-```
-
-
-
-```dart
-LayoutConfiguration({required this.schemaType});
-```
-
-Creates an instance of `LayoutConfiguration`.
-
-```dart
-factory LayoutConfiguration.fromJson(Map<String, dynamic> json);
-```
-
-Converts the JSON representation of the layout configuration to an instance of `LayoutConfiguration`.
-
-```dart
-Widget build(BuildContext context, T content);
-```
-
-Builds the layout widget tree for the given content item.
-
-## LayoutFailure {#layoutfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L50)
-
-Failure when a layout for a registered content type is missing.
-
-```dart
-final class LayoutFailure extends ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-final String contentSchemaType;
-```
-
-The content type that needs a layout
-
-```dart
-final String? requestedLayoutType;
-```
-
-The specific layout type that was requested (if any)
-
-```dart
-const LayoutFailure({required super.schemaType, required this.contentSchemaType, this.requestedLayoutType, super.jsonPayload, super.description, super.suggestions});
-```
-
-
 
 ## LazyFeatureDescriptor {#lazyfeaturedescriptor}
 
@@ -2504,153 +1836,15 @@ A builder that returns lazy feature descriptors.
 typedef LazyFeaturesBuilder = List<LazyFeatureDescriptor> Function();
 ```
 
-## LiveContentProvider {#livecontentprovider}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/live_content_provider.dart#L3)
-
-An interface for plugins that provide live content.
-
-```dart
-abstract class LiveContentProvider
-```
-
-Directly declared public members:
-
-```dart
-final String title;
-```
-
-The title of the live content provider.
-
-```dart
-const LiveContentProvider({required this.title});
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
-```dart
-Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false});
-```
-
-Fetches content by ID.
-
-```dart
-Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false});
-```
-
-Fetches content by query, returning a single item.
-
-```dart
-Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false});
-```
-
-Fetches content by query, returning a list of items.
-
-```dart
-Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false});
-```
-
-Fetches content by route.
-
 ## Loader {#loader}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L26)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L24)
 
 A builder for a widget that is shown when the app is loading.
 
 ```dart
 typedef Loader = Widget Function(BuildContext context);
 ```
-
-## LocalContentProvider {#localcontentprovider}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/local_content_provider.dart#L6)
-
-Public declaration in this package.
-
-```dart
-final class LocalContentProvider extends ContentProvider
-```
-
-Directly declared public members:
-
-```dart
-LocalContentProvider();
-```
-
-
-
-```dart
-String schemaType(Map<String, dynamic> json);
-```
-
-
-
-```dart
-String fieldValue(String key, Map<String, dynamic> json);
-```
-
-
-
-```dart
-Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true});
-```
-
-
-
-```dart
-Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true});
-```
-
-
-
-```dart
-Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-Uri? fileUrl(FileReference fileRef);
-```
-
-
-
-```dart
-ImageProvider<Object>? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format});
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
 
 ## LocaleConfiguration {#localeconfiguration}
 
@@ -2974,53 +2168,17 @@ const LogoutFailure(super.error);
 
 Create a new LogoutFailure with the given error.
 
-## ModifierFailure {#modifierfailure}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_failure.dart#L71)
-
-Failure when a content modifier registration is missing.
-
-```dart
-final class ModifierFailure extends ContentFailure
-```
-
-Directly declared public members:
-
-```dart
-final List<String> modifierChain;
-```
-
-The complete chain of modifiers being applied
-
-```dart
-final int failedIndex;
-```
-
-The index in the modifier chain where the failure occurred
-
-```dart
-const ModifierFailure({required super.schemaType, required this.modifierChain, required this.failedIndex, super.jsonPayload, super.description, super.suggestions});
-```
-
-
-
 ## NamedBindings {#namedbindings}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L122)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L120)
 
-Public declaration in this package.
+The same named accessors as `vyuh.*`, for code that must also run in widget mode, where `runApp` (and so `vyuh`) is not used.
 
 ```dart
 extension NamedBindings on VyuhBinding
 ```
 
 Directly declared public members:
-
-```dart
-ContentPlugin get content;
-```
-
-The content plugin, responsible for managing content-related operations.
 
 ```dart
 DIPlugin get di;
@@ -3064,23 +2222,47 @@ EventPlugin get event;
 
 The event plugin, for managing and emitting events within the platform.
 
+```dart
+AuthPlugin get auth;
+```
+
+The authentication plugin.
+
+```dart
+NavigationPlugin get router;
+```
+
+The navigation plugin.
+
+```dart
+LocalePlugin? get locale;
+```
+
+The locale plugin, or null when it is not registered.
+
+```dart
+StoragePlugin get storage;
+```
+
+The storage plugin, for general key-value persistence.
+
+```dart
+SecureStoragePlugin get secureStorage;
+```
+
+The secure storage plugin, for secrets such as tokens.
+
 ## NamedPlugins {#namedplugins}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform/vyuh_platform.dart#L86)
 
-Provides convenient accessors for named plugins within the Vyuh platform.
+Named accessors for the system plugins: `vyuh.router`, `vyuh.auth`, ...
 
 ```dart
 extension NamedPlugins on VyuhPlatform
 ```
 
 Directly declared public members:
-
-```dart
-ContentPlugin get content;
-```
-
-The content plugin, responsible for managing content-related operations.
 
 ```dart
 DIPlugin get di;
@@ -3142,9 +2324,21 @@ LocalePlugin? get locale;
 
 The locale plugin, providing access to locale settings. Can be null if the plugin is not registered.
 
+```dart
+StoragePlugin get storage;
+```
+
+The storage plugin, for general key-value persistence.
+
+```dart
+SecureStoragePlugin get secureStorage;
+```
+
+The secure storage plugin, for secrets such as tokens.
+
 ## NavigationPlugin {#navigationplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/navigation.dart#L7)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/navigation.dart#L6)
 
 Public declaration in this package.
 
@@ -3161,10 +2355,10 @@ GoRouter get instance;
 
 
 ```dart
-static final dynamic fallbackRoute;
+static const dynamic catchAllPath;
 ```
 
-
+The path of a catch-all route. A feature can contribute one `GoRoute` with this path to handle every location no other route matches; the router always places it last. Without one, unmatched locations show the not-found `RouteFailureView`.
 
 ```dart
 NavigationPlugin({required super.name, required super.title});
@@ -3394,210 +2588,6 @@ List<NavigatorObserver> get observers;
 
 
 
-## NoOpContentPlugin {#noopcontentplugin}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/noop_content_plugin.dart#L17)
-
-Public declaration in this package.
-
-```dart
-final class NoOpContentPlugin extends ContentPlugin
-```
-
-Directly declared public members:
-
-```dart
-NoOpContentPlugin();
-```
-
-
-
-```dart
-Widget buildContent<T extends ContentItem>(BuildContext context, T content, {LayoutConfiguration<T>? layout});
-```
-
-
-
-```dart
-Widget buildRoute(BuildContext context, {Uri? url, String? routeId});
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
-```dart
-bool isRegistered<T>(String schemaType);
-```
-
-
-
-```dart
-dynamic register<T>(TypeDescriptor<T> descriptor);
-```
-
-
-
-```dart
-void attach(ExtensionBuilder extBuilder);
-```
-
-
-
-```dart
-T? fromJson<T>(Map<String, dynamic> json);
-```
-
-
-
-```dart
-Map<Type, Map<String, TypeDescriptor>> get typeRegistry;
-```
-
-
-
-## NoOpContentProvider {#noopcontentprovider}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/noop_content_provider.dart#L4)
-
-Public declaration in this package.
-
-```dart
-final class NoOpContentProvider extends ContentProvider
-```
-
-Directly declared public members:
-
-```dart
-NoOpContentProvider();
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
-```dart
-Future<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-Future<RouteBase?> fetchRoute({String? path, String? routeId, bool useCache = true});
-```
-
-
-
-```dart
-Future<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool useCache = true});
-```
-
-
-
-```dart
-String fieldValue(String key, Map<String, dynamic> json);
-```
-
-
-
-```dart
-ImageProvider? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format});
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
-```dart
-String schemaType(Map<String, dynamic> json);
-```
-
-
-
-```dart
-Future<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool useCache = true});
-```
-
-
-
-```dart
-Uri? fileUrl(FileReference fileRef);
-```
-
-
-
-## NoOpLiveContentProvider {#nooplivecontentprovider}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/live_content_provider.dart#L48)
-
-A no-op implementation of `LiveContentProvider`. Is used internally to ensure the Developer is using it correctly by giving proper errors and hints
-
-```dart
-final class NoOpLiveContentProvider extends LiveContentProvider
-```
-
-Directly declared public members:
-
-```dart
-const NoOpLiveContentProvider();
-```
-
-
-
-```dart
-Stream<T?> fetchById<T>(String id, {required FromJsonConverter<T> fromJson, bool includeDrafts = false});
-```
-
-
-
-```dart
-Stream<T?> fetchSingle<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false});
-```
-
-
-
-```dart
-Stream<List<T>?> fetchMultiple<T>(String query, {required FromJsonConverter<T> fromJson, Map<String, String>? queryParams, bool includeDrafts = false});
-```
-
-
-
-```dart
-Stream<RouteBase?> fetchRoute({String? path, String? routeId, bool includeDrafts = false});
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
-```dart
-Future<void> init();
-```
-
-
-
 ## NoOpTelemetryProvider {#nooptelemetryprovider}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart#L4)
@@ -3730,42 +2720,6 @@ LoginMethod get loginMethod;
 
 
 
-## ObjectReference {#objectreference}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/reference.dart#L66)
-
-A reference to any content object in the content management system.
-
-```dart
-class ObjectReference
-```
-
-Directly declared public members:
-
-```dart
-final String type;
-```
-
-
-
-```dart
-final String ref;
-```
-
-
-
-```dart
-ObjectReference({required this.type, required this.ref});
-```
-
-
-
-```dart
-factory ObjectReference.fromJson(Map<String, dynamic> json);
-```
-
-
-
 ## PlatformLoggerInterface {#platformloggerinterface}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/logger.dart#L60)
@@ -3786,7 +2740,7 @@ Logger get log;
 
 ## PlatformWidgetBuilder {#platformwidgetbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L160)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L137)
 
 A builder for platform-specific widgets used throughout the Vyuh application.
 
@@ -3812,7 +2766,7 @@ A loader widget that is shown when the app is loading.
 final Loader contentLoader;
 ```
 
-A loader widget that is shown when the content is loading.
+An inline loader, shown while a part of a page (a section, a list, an image) loads. Unlike `routeLoader` it does not take over the page.
 
 ```dart
 final RouteLoader routeLoader;
@@ -3839,25 +2793,25 @@ final ErrorViewBuilder errorView;
 A builder for the error view widget.
 
 ```dart
-final UnknownContentBuilder unknown;
-```
-
-A builder for unknown content failures.
-
-```dart
 final VyuhTheme theme;
 ```
 
 The app's themes. Used by the default `appBuilder`, and by the loading and failure screens shown before the app itself is built, so the very first frame already matches the app. See `VyuhTheme`.
 
 ```dart
-PlatformWidgetBuilder({required this.appBuilder, required this.appLoader, required this.contentLoader, required this.routeLoader, required this.errorView, required this.routeErrorView, required this.imagePlaceholder, required this.unknown, VyuhTheme? theme});
+final VyuhStrings strings;
+```
+
+Every user-facing string the framework shows. See `VyuhStrings`.
+
+```dart
+PlatformWidgetBuilder({required this.appBuilder, required this.appLoader, required this.contentLoader, required this.routeLoader, required this.errorView, required this.routeErrorView, required this.imagePlaceholder, VyuhTheme? theme, this.strings = const VyuhStrings()});
 ```
 
 Creates a new `PlatformWidgetBuilder` instance.
 
 ```dart
-PlatformWidgetBuilder copyWith({AppBuilder? appBuilder, Loader? appLoader, Loader? contentLoader, RouteLoader? routeLoader, ImagePlaceholderBuilder? imagePlaceholder, RouteErrorViewBuilder? routeErrorView, ErrorViewBuilder? errorView, UnknownContentBuilder? unknown, VyuhTheme? theme});
+PlatformWidgetBuilder copyWith({AppBuilder? appBuilder, Loader? appLoader, Loader? contentLoader, RouteLoader? routeLoader, ImagePlaceholderBuilder? imagePlaceholder, RouteErrorViewBuilder? routeErrorView, ErrorViewBuilder? errorView, VyuhTheme? theme, VyuhStrings? strings});
 ```
 
 Creates a copy of this `PlatformWidgetBuilder` but with the given fields
@@ -3929,7 +2883,7 @@ List<Plugin> get plugins;
 
 
 ```dart
-PluginDescriptor({final DIPlugin? di, final ContentPlugin? content, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others});
+PluginDescriptor({final DIPlugin? di, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others});
 ```
 
 
@@ -4030,7 +2984,7 @@ Runs `base` then each feature redirect, returning the first location.
 
 ## Restartable {#restartable}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform/vyuh_platform.dart#L124)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform/vyuh_platform.dart#L131)
 
 Restart the platform, re-running the initialization process.
 
@@ -4042,112 +2996,6 @@ Directly declared public members:
 
 ```dart
 Future<void> restart();
-```
-
-
-
-## RootItem {#rootitem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L208)
-
-Represents a root item that is the root of a content tree.
-
-```dart
-abstract interface class RootItem implements ContainerItem
-```
-
-## RouteBase {#routebase}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/route_base.dart#L9)
-
-Base class for all route content items in Vyuh.
-
-```dart
-abstract class RouteBase extends ContentItem implements RootItem
-```
-
-Directly declared public members:
-
-```dart
-final String title;
-```
-
-The title of the route, displayed in navigation UI.
-
-```dart
-final String path;
-```
-
-The URL path for this route. This is used to match URLs and generate links.
-
-```dart
-final Category? category;
-```
-
-Optional category for organizing routes.
-
-```dart
-final RouteTypeConfiguration? routeType;
-```
-
-Configuration for how this route should be presented. Defines transitions, animations, and other route-specific behavior.
-
-```dart
-final String id;
-```
-
-Unique identifier for this route.
-
-```dart
-final DateTime updatedAt;
-```
-
-When this route was last updated in the CMS.
-
-```dart
-final DateTime createdAt;
-```
-
-When this route was created in the CMS.
-
-```dart
-RouteBase({required super.schemaType, this.routeType, required this.title, required this.path, this.category, required this.createdAt, required this.updatedAt, required this.id, required super.layout, required super.modifiers});
-```
-
-
-
-```dart
-factory RouteBase.fromJson(Map<String, dynamic> json);
-```
-
-
-
-```dart
-Future<RouteBase?> init(BuildContext context);
-```
-
-Initialize the route when it becomes active.
-
-```dart
-Future<void> dispose();
-```
-
-Clean up the route when it is no longer active.
-
-```dart
-Page<T> createPage<T>(BuildContext context, [LocalKey? pageKey]);
-```
-
-Create a Flutter page for this route.
-
-```dart
-LayoutConfiguration? getLayout();
-```
-
-
-
-```dart
-List<ContentModifierConfiguration>? getModifiers();
 ```
 
 
@@ -4164,7 +3012,7 @@ typedef RouteBuilderFunction = FutureOr<List<g.RouteBase>?> Function();
 
 ## RouteErrorViewBuilder {#routeerrorviewbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L72)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L70)
 
 A builder for a route error view widget.
 
@@ -4176,7 +3024,7 @@ typedef RouteErrorViewBuilder = Widget Function( BuildContext context,
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform/events.dart#L75)
 
-Emitted once each time a route cannot be shown: no match, a failed CMS fetch, a missing document or a failed lazy feature.
+Emitted once each time a route cannot be shown: no match, a page that failed to load or a failed lazy feature.
 
 ```dart
 final class RouteFailureEvent extends SystemEvent<VyuhFailure>
@@ -4238,51 +3086,9 @@ State<RouteFailureView> createState();
 
 
 
-## RouteLifecycleConfiguration {#routelifecycleconfiguration}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/route_base.dart#L176)
-
-Configuration for managing route lifecycle events.
-
-```dart
-abstract class RouteLifecycleConfiguration implements SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-final String schemaType;
-```
-
-
-
-```dart
-final String? title;
-```
-
-
-
-```dart
-RouteLifecycleConfiguration({this.title, required this.schemaType});
-```
-
-
-
-```dart
-Future<void> init(BuildContext context, RouteBase route);
-```
-
-
-
-```dart
-Future<void> dispose();
-```
-
-
-
 ## RouteLoader {#routeloader}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L40)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L38)
 
 A builder for a widget that is shown when a route is loading.
 
@@ -4308,45 +3114,19 @@ List<NavigatorObserver> get observers;
 
 
 
-## RouteTypeConfiguration {#routetypeconfiguration}
+## RouterUrlStyle {#routerurlstyle}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/route_base.dart#L145)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L8)
 
-Configuration for how a route should be presented.
-
-```dart
-abstract class RouteTypeConfiguration implements SchemaItem
-```
-
-Directly declared public members:
+How URLs look on the web. Has no effect on other platforms.
 
 ```dart
-final String? title;
+enum RouterUrlStyle { hash, path }
 ```
-
-
-
-```dart
-final String schemaType;
-```
-
-
-
-```dart
-RouteTypeConfiguration({this.title, required this.schemaType});
-```
-
-
-
-```dart
-Page<T> create<T>(Widget child, RouteBase route, [LocalKey? pageKey]);
-```
-
-
 
 ## RoutingConfigNotifier {#routingconfignotifier}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L275)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L301)
 
 Public declaration in this package.
 
@@ -4373,24 +3153,6 @@ void setRoutes(List<g.RouteBase> routes);
 ```
 
 
-
-## SchemaItem {#schemaitem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L5)
-
-The base interface for all schema-driven content items.
-
-```dart
-abstract interface class SchemaItem
-```
-
-Directly declared public members:
-
-```dart
-String get schemaType;
-```
-
-The schema type of the content item.
 
 ## SecureStoragePlugin {#securestorageplugin}
 
@@ -4854,134 +3616,6 @@ const TranslationRegistration({required this.name, required this.onLocaleChange}
 
 
 
-## TypeDescriptor {#typedescriptor}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/type_descriptor.dart#L14)
-
-Describes a schema type and its serialization behavior.
-
-```dart
-class TypeDescriptor<T>
-```
-
-Directly declared public members:
-
-```dart
-final String title;
-```
-
-Human-readable name for this type.
-
-```dart
-final String schemaType;
-```
-
-Schema type identifier from the CMS.
-
-```dart
-final FromJsonConverter<T> fromJson;
-```
-
-Function to convert JSON data to an instance of `T`.
-
-```dart
-final T Function()? preview;
-```
-
-Optional function to create a preview instance.
-
-```dart
-final Type type;
-```
-
-The runtime type of `T`.
-
-```dart
-String? get sourceFeature;
-```
-
-
-
-```dart
-void setSourceFeature(String? featureName);
-```
-
-Updates the source feature for this type descriptor.
-
-```dart
-TypeDescriptor({required this.schemaType, required this.fromJson, required this.title, this.preview});
-```
-
-Creates a new type descriptor.
-
-```dart
-bool ==(Object other);
-```
-
-
-
-```dart
-int get hashCode;
-```
-
-
-
-## UnknownContentBuilder {#unknowncontentbuilder}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L139)
-
-A builder for unknown content failures.
-
-```dart
-typedef UnknownContentBuilder = Widget Function(BuildContext context, ContentFailure failure);
-```
-
-## UnknownContentItem {#unknowncontentitem}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/content_item.dart#L220)
-
-Internal marker class for unknown content items.
-
-```dart
-final class UnknownContentItem extends ContentItem
-```
-
-Directly declared public members:
-
-```dart
-static const dynamic schemaName;
-```
-
-
-
-```dart
-final String missingSchemaType;
-```
-
-
-
-```dart
-final Map<String, dynamic> jsonPayload;
-```
-
-
-
-```dart
-UnknownContentItem({required this.missingSchemaType, required this.jsonPayload});
-```
-
-
-
-## UnknownPlaceholderFactory {#unknownplaceholderfactory}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/serialization.dart#L4)
-
-Factory function for creating unknown placeholders for different types. This is set by the extension_content package to provide unknown placeholders for ActionConfiguration, ConditionConfiguration, etc.
-
-```dart
-typedef UnknownPlaceholderFactory = SchemaItem? Function( Type type, String missingSchemaType, Map<String, dynamic> jsonPayload, );
-```
-
 ## User {#user}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/user.dart#L3)
@@ -5072,7 +3706,7 @@ typedef VoidFutureFunction = Future<void> Function();
 
 ## VyuhBinding {#vyuhbinding}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L8)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/vyuh_binding.dart#L5)
 
 Public declaration in this package.
 
@@ -5122,7 +3756,7 @@ bool get initialized;
 void widgetInit({PluginDescriptor? plugins, PlatformWidgetBuilder? widgetBuilder, required ExtensionBuilder extensionBuilder, required List<ExtensionDescriptor> extensionDescriptors, Future<void> Function(VyuhBinding)? onReady});
 ```
 
-Purely meant to be called with running Vyuh in widget-mode, using `VyuhContentWidget`. There is a convenience API inside `vyuh_extension_content` to make this easier. Use the `VyuhContentBinding.init()` instead.
+Runs Vyuh in widget mode: plugins and one extension builder, without `runApp`, features or a router. Packages that embed Vyuh widgets in a non-Vyuh app wrap this in their own binding API.
 
 ```dart
 Future<void> dispose();
@@ -5138,7 +3772,7 @@ T? get<T extends Plugin>();
 
 ## VyuhBranding {#vyuhbranding}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L421)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure_view.dart#L444)
 
 "Powered by Vyuh", shown when the theme allows it.
 
@@ -5410,6 +4044,138 @@ Future<void> dispose();
 
 
 
+## VyuhStrings {#vyuhstrings}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/strings.dart#L4)
+
+Every user-facing string the framework shows: failure titles and messages, recovery actions and accessibility labels.
+
+```dart
+final class VyuhStrings
+```
+
+Directly declared public members:
+
+```dart
+final String tryAgain;
+```
+
+Retry button.
+
+```dart
+final String goHome;
+```
+
+Go-home button.
+
+```dart
+final String restartApp;
+```
+
+Restart button, the last-resort recovery.
+
+```dart
+final String details;
+```
+
+Heading of the debug-only details panel.
+
+```dart
+final String loading;
+```
+
+Accessibility label of loaders.
+
+```dart
+final String contentUnavailable;
+```
+
+Accessibility label of the placeholder for a widget that failed to build.
+
+```dart
+final String appStartFailedTitle;
+```
+
+Title when the app fails to start.
+
+```dart
+final String appStartFailedMessage;
+```
+
+Message when the app fails to start.
+
+```dart
+final String pageNotFoundTitle;
+```
+
+Title when no route matches, or a page does not exist.
+
+```dart
+final String Function(Uri location) noRouteMessage;
+```
+
+Message when no route matches `location`.
+
+```dart
+final String pageLoadFailedTitle;
+```
+
+Title when a page could not be loaded.
+
+```dart
+final String contentNotFoundTitle;
+```
+
+Title when a part of a page does not exist.
+
+```dart
+final String contentLoadFailedTitle;
+```
+
+Title when a part of a page could not be loaded.
+
+```dart
+final String checkConnectionMessage;
+```
+
+Message for failures that a retry may fix.
+
+```dart
+final String missingMessage;
+```
+
+Message for something that is missing.
+
+```dart
+final String Function(String featureTitle) featureLoadFailedTitle;
+```
+
+Title when the lazy feature titled `featureTitle` fails to load.
+
+```dart
+final String Function(String featureTitle) featureDisabledTitle;
+```
+
+Title when the lazy feature titled `featureTitle` is turned off.
+
+```dart
+final String featureDisabledMessage;
+```
+
+Message when a lazy feature is turned off.
+
+```dart
+const VyuhStrings({this.tryAgain = 'Try again', this.goHome = 'Go home', this.restartApp = 'Restart app', this.details = 'Details (debug only)', this.loading = 'Loading', this.contentUnavailable = 'Content unavailable', this.appStartFailedTitle = 'The app could not start', this.appStartFailedMessage = 'Something went wrong while starting up.', this.pageNotFoundTitle = 'Page not found', this.noRouteMessage = _noRouteMessage, this.pageLoadFailedTitle = 'This page could not be loaded', this.contentNotFoundTitle = 'Content not found', this.contentLoadFailedTitle = 'This content could not be loaded', this.checkConnectionMessage = 'Check your connection and try again.', this.missingMessage = 'It may have been moved or removed.', this.featureLoadFailedTitle = _featureLoadFailedTitle, this.featureDisabledTitle = _featureDisabledTitle, this.featureDisabledMessage = 'This part of the app is turned off right now.'});
+```
+
+
+
+```dart
+static VyuhStrings get current;
+```
+
+The strings of the running app, or the defaults when none is running.
+
 ## VyuhTheme {#vyuhtheme}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L5)
@@ -5466,7 +4232,7 @@ A copy with the given fields replaced.
 
 ## VyuhThemeExtension {#vyuhthemeextension}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L55)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/theme.dart#L57)
 
 Design tokens for the UI the framework draws itself.
 
@@ -5522,7 +4288,7 @@ Icon and text color on `failureBackground`.
 final Color? debugBackground;
 ```
 
-Background of debug-only diagnostics such as unknown content.
+Background of debug-only diagnostics.
 
 ```dart
 final Color? debugForeground;
@@ -5604,56 +4370,6 @@ The default app runner that initializes Flutter bindings and runs the app using 
 void defaultAppRunner(Widget app)
 ```
 
-## defaultRoutePageBuilder {#defaultroutepagebuilder}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/cms_route.dart#L36)
-
-The default page builder for CMS routes.
-
-```dart
-Page<dynamic> defaultRoutePageBuilder(BuildContext context, GoRouterState state, {Widget Function(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child)? transitionsBuilder, Duration? transitionDuration})
-```
-
-## fieldKeyMap {#fieldkeymap}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/local_content_provider.dart#L4)
-
-Public declaration in this package.
-
-```dart
-const fieldKeyMap =
-```
-
-## listFromJson {#listfromjson}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/serialization.dart#L83)
-
-Converts a JSON list to a nullable-list of `SchemaItem` instances of type `T`.
-
-```dart
-List<T>? listFromJson<T extends SchemaItem>(dynamic json)
-```
-
-## messages {#messages}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/noop_content_plugin.dart#L4)
-
-Public declaration in this package.
-
-```dart
-final messages =
-```
-
-## readValue {#readvalue}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/serialization.dart#L149)
-
-Reads a value from a JSON object using the provided key.
-
-```dart
-Object? readValue(dynamic json, String key)
-```
-
 ## reportFailure {#reportfailure}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/failure.dart#L75)
@@ -5672,26 +4388,6 @@ The main entry point to kick off the Vyuh Application. This function should be c
 
 ```dart
 void runApp({required FeaturesBuilder features, LazyFeaturesBuilder? lazyFeatures, PluginDescriptor? plugins, PlatformWidgetBuilder? platformWidgetBuilder, String? initialLocation, String? homeLocation, bool captureErrors = true, AppRunner? appRunner})
-```
-
-## setUnknownPlaceholderFactory {#setunknownplaceholderfactory}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/serialization.dart#L17)
-
-Sets the factory for creating unknown placeholders.
-
-```dart
-void setUnknownPlaceholderFactory(UnknownPlaceholderFactory factory)
-```
-
-## typeFromFirstOfListJson {#typefromfirstoflistjson}
-
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/content/serialization.dart#L22)
-
-Converts a JSON object to a nullable-instance of `SchemaItem` of type `T`.
-
-```dart
-T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json)
 ```
 
 ## vyuh {#vyuh}

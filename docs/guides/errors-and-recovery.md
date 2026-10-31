@@ -14,7 +14,7 @@ When something fails, Vyuh does three things the same way everywhere:
 
 ```mermaid
 flowchart LR
-  Fail["Route, lazy feature, CMS fetch, startup"] --> Failure["VyuhFailure"]
+  Fail["Route, lazy feature, page load, startup"] --> Failure["VyuhFailure"]
   Failure --> Report["Telemetry + RouteFailureEvent (once)"]
   Failure --> View["Error view: Try again · Back · Go home · Restart"]
 ```
@@ -42,10 +42,10 @@ The same object reaches telemetry, the
 | Failure | View | Actions |
 |---|---|---|
 | A route has no match | Full page | Try again, Back, Go home |
-| A CMS page fails to load, or doesn't exist | Full page | Try again, Back, Go home |
+| A page fails to load, or doesn't exist (for example a CMS page) | Full page | Try again, Back, Go home |
 | A lazy feature fails to load | Full page | Try again, Back, Go home |
 | A lazy feature is turned off by its flag | Full page | Back, Go home |
-| A piece of content inside a page fails | Inline card | Try again |
+| A part of a page fails | Inline card | Try again |
 | The app fails to start | Full page | Restart app |
 | A widget throws while building (release builds) | Small placeholder | none |
 

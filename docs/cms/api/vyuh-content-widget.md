@@ -96,7 +96,7 @@ factory Document.fromJson(Map<String, dynamic> json);
 
 ## DocumentBuilder {#documentbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L10)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L11)
 
 A widget that renders a `Document` from the CMS.
 
@@ -154,7 +154,7 @@ Widget build(BuildContext context, Document content);
 
 ## DocumentListBuilder {#documentlistbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L19)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L20)
 
 A widget that renders a list of `Document`s from the CMS.
 
@@ -216,7 +216,7 @@ static Future<void> dispose();
 
 ## VyuhContentWidget {#vyuhcontentwidget}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L23)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L24)
 
 A versatile content widget that handles both single and list content items. It interacts with the `ContentPlugin` (either directly or via `VyuhBinding`) to fetch content from the CMS.
 

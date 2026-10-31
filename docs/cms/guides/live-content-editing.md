@@ -27,7 +27,7 @@ void main() async {
       blog.feature,
     ],
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(
+      others: [DefaultContentPlugin(
         useLiveRoute: true,
         provider: SanityContentProvider(
           SanityClient(
@@ -40,7 +40,7 @@ void main() async {
             ),
           ),
         ),
-      ),
+      )],
     ),
   );
 }
@@ -85,7 +85,7 @@ in your UI.
 
 ```dart
 plugins: PluginDescriptor(
-  content: DefaultContentPlugin(
+  others: [DefaultContentPlugin(
     useLiveRoute: true,
     allowRouteRefresh: true,
     provider: SanityContentProvider(
@@ -99,7 +99,7 @@ plugins: PluginDescriptor(
         ),
       ),
     ),
-  ),
+  )],
 ),
 ```
 

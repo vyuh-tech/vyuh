@@ -174,7 +174,7 @@ void main() async {
       blog.feature,
     ],
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(
+      others: [DefaultContentPlugin(
         provider: SanityContentProvider(
           SanityClient(
             SanityConfig(
@@ -184,7 +184,7 @@ void main() async {
             ),
           ),
         ),
-      ),
+      )],
     ),
   );
 }

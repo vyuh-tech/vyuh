@@ -70,7 +70,7 @@ typedef QueryRecord = (
 
 ## SanityContentProvider {#sanitycontentprovider}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L25)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L26)
 
 Public declaration in this package.
 
@@ -160,7 +160,7 @@ Uri? fileUrl(FileReference fileRef);
 
 ## fieldMap {#fieldmap}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L16)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L17)
 
 Public declaration in this package.
 
@@ -170,7 +170,7 @@ final Map<String, String> fieldMap =
 
 ## identity {#identity}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L14)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/vyuh_plugin_content_provider_sanity/lib/vyuh_plugin_content_provider_sanity.dart#L15)
 
 Public declaration in this package.
 

@@ -100,9 +100,19 @@ How the chain works:
 Redirects pair naturally with [events](events): the feature that owns a state
 change emits an event, and any feature that cares lists it in `refreshOn`.
 
+## Unmatched locations
+
+A location no route matches shows the themed not-found page. To handle every
+unmatched location yourself, contribute one `GoRoute` whose path is
+`NavigationPlugin.catchAllPath` (`/:path(.*)`) from a feature. The router
+always places it last, so it never shadows another feature's routes. If more
+than one feature contributes a catch-all, the first one wins and a warning is
+logged. The [CMS add-on](/cms/packages/vyuh-extension-content) uses this to
+look up unmatched paths in the CMS.
+
 ## When a route fails
 
-No matching route, a failed CMS page and a failed lazy feature all show a
+No matching route, a page that fails to load and a failed lazy feature all show a
 themed failure page with Try again, Back and Go home. Each one is reported
 once as a `RouteFailureEvent`. Set the home route with
 `runApp(homeLocation: ...)`. See [errors and recovery](errors-and-recovery).

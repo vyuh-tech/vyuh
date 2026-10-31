@@ -23,7 +23,7 @@ flowchart LR
 
 ## DefaultOnboardingLayout {#defaultonboardinglayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/default_layout.dart#L9)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/default_layout.dart#L10)
 
 Public declaration in this package.
 
@@ -65,7 +65,7 @@ Widget build(BuildContext context, OnboardingContent content);
 
 ## OnboardingContent {#onboardingcontent}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L24)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L23)
 
 Public declaration in this package.
 
@@ -113,7 +113,7 @@ factory OnboardingContent.fromJson(Map<String, dynamic> json);
 
 ## OnboardingContentBuilder {#onboardingcontentbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L15)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L14)
 
 Public declaration in this package.
 
@@ -131,7 +131,7 @@ OnboardingContentBuilder();
 
 ## OnboardingDescriptor {#onboardingdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L10)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L9)
 
 Public declaration in this package.
 
@@ -149,7 +149,7 @@ OnboardingDescriptor({super.layouts});
 
 ## OnboardingStep {#onboardingstep}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L48)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_onboarding/lib/onboarding.dart#L47)
 
 Public declaration in this package.
 
@@ -202,5 +202,5 @@ factory OnboardingStep.fromJson(Map<String, dynamic> json);
 Public declaration in this package.
 
 ```dart
-final feature = FeatureDescriptor( name: 'vyuh_feature_onboarding', title: 'Vyuh Feature Onboarding', description: 'Onboarding screens when user first opens the app.', icon: Icons.checklist, extensions: [ ContentExtensionDescriptor(contentBuilders: [OnboardingContentBuilder()]), ], routes: () => [], );
+final feature = FeatureDescriptor( name: 'vyuh_feature_onboarding', title: 'Vyuh Feature Onboarding', description: 'Onboarding screens when user first opens the app.', icon: Icons.checklist, extensions: [ ContentExtensionDescriptor(contentBuilders: [OnboardingContentBuilder()]), ], );
 ```

@@ -13,7 +13,7 @@ of ownership.
 |---|---|---|
 | **App** (`runApp`) | Which features and plugins exist, the theme, initial and home routes | Feature behaviour |
 | **Feature** (`FeatureDescriptor`) | A product slice: routes, UI, state, event handlers, redirects, extension contributions | Shared infrastructure, other features' internals |
-| **Plugin** (`PluginDescriptor`) | One shared capability behind a contract: DI, navigation, content, auth, network, storage, telemetry, analytics, events, env, flags, locale | Product behaviour |
+| **Plugin** (`PluginDescriptor`) | One shared capability behind a contract: DI, navigation, auth, network, storage, telemetry, analytics, events, env, flags, locale | Product behaviour |
 | **Extension** (`ExtensionDescriptor` + `ExtensionBuilder`) | A registry many features contribute to, aggregated by one builder | — |
 
 ## Principles
@@ -47,6 +47,12 @@ of ownership.
 7. **One way to reach plugins.** `vyuh.router`, `vyuh.auth`, `vyuh.storage`
    and so on in apps and features. `VyuhBinding.instance.*` has the same
    accessors, for code that must also run in widget mode (no `runApp`).
+8. **The CMS is an add-on.** `vyuh_core` has no content types. Content items,
+   layouts, `ContentPlugin`, `ContentProvider`, `CMSRoute` and the
+   `vyuh.content` accessor live in `vyuh_extension_content`. Apps opt in with
+   `PluginDescriptor(others: [DefaultContentPlugin(provider: ...)])` and
+   `vyuh_feature_system`, which contributes `cmsFallbackRoute` (unmatched
+   URL → CMS page). Never add a CMS concept to core.
 
 ## Recipes
 
@@ -120,6 +126,12 @@ re-init), expose it through a named extension on `VyuhPlatform`, and pass it
 in `PluginDescriptor(others: [...])`. System plugin types go in their named
 slot, never in `others`.
 
+### A catch-all route
+
+A feature may contribute one `GoRoute(path: NavigationPlugin.catchAllPath)`.
+The router always places it last; without one, unmatched locations show the
+not-found `RouteFailureView`.
+
 ### A route that cannot be shown
 
 Return `RouteFailureView(failure: VyuhFailure(kind: ..., title: ..., location: state.uri))`.
@@ -166,8 +178,10 @@ For other failures call `reportFailure(failure)` where it happens, never in
 
 - Core runtime: `packages/system/vyuh_core/lib/` (`runtime/` for the platform,
   failures and theme; `plugin/` for contracts; `feature_hooks.dart`)
-- CMS content runtime: `packages/system/vyuh_extension_content`
-- Built-in content types, actions and `ThemeService`: `packages/system/vyuh_feature_system`
+- CMS add-on (content model, content plugin/provider contracts, `CMSRoute`,
+  `cmsFallbackRoute`, `vyuh.content`): `packages/system/vyuh_extension_content`
+- Built-in content types, actions, `ThemeService` and the CMS catch-all
+  route: `packages/system/vyuh_feature_system`
 - Docs site (VitePress): `docs/`. Guides are in `docs/guides/`, concepts in
   `docs/concepts/`
 - Review notes: `audits/`
