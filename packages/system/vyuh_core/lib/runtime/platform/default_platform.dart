@@ -266,9 +266,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     router.homeLocation = homeLocation ?? initialLocation ?? '/';
     router.initRouter(
       routes: routes,
+      // A deep link. flutter_test cannot set the route name of
+      // PlatformDispatcher.instance, only of its own test dispatcher.
       initialLocation: _userInitialLocation == '/'
           ? initialLocation ?? '/'
-          : _userInitialLocation,
+          : _userInitialLocation, // coverage:ignore-line
       rootNavigatorKey: _rootNavigatorKey,
     );
   }
@@ -466,6 +468,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     // flutter_test owns these handlers and checks they are restored after
     // each test, so leave them alone there.
     if (_errorHandlersInstalled || isFlutterTest) return;
+    // coverage:ignore-start
     _errorHandlersInstalled = true;
 
     final previousFlutterHandler = FlutterError.onError;
@@ -487,6 +490,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     if (!kDebugMode) {
       ErrorWidget.builder = (details) => BuildFailureView(details: details);
     }
+    // coverage:ignore-end
   }
 
   /// Topologically sort features based on their [FeatureDescriptor.dependencies].

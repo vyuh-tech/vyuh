@@ -64,9 +64,12 @@ final class HttpNetworkPlugin extends NetworkPlugin {
       return;
     }
 
-    // Use BrowserClient for web when credentials are needed
+    // Use BrowserClient for web when credentials are needed.
+    // kIsWeb is a compile-time constant, so the VM drops this branch.
+    // coverage:ignore-start
     if (kIsWeb && _webIncludeCredentials) {
       _client = createWebClient();
+      // coverage:ignore-end
     } else {
       _client = Client();
     }

@@ -242,13 +242,6 @@ final class _LazyFeatureManager {
   /// Whether a lazy feature has been loaded.
   bool isLoaded(String name) => _loaded.contains(name);
 
-  /// Whether a feature name is registered as lazy (loaded or pending).
-  bool isLazyFeature(String name) =>
-      _pending.containsKey(name) || _loaded.contains(name);
-
-  /// All lazy feature names (pending + loaded).
-  Iterable<String> get allNames => {..._pending.keys, ..._loaded};
-
   /// Wait for entered activation hooks to clean up before services are disposed.
   Future<void> drainActivations() async {
     await Future.wait(
