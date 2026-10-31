@@ -160,25 +160,31 @@ class FailurePage extends StatelessWidget {
           child: SingleChildScrollView(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 480),
+              constraints: BoxConstraints(maxWidth: tokens.failureMaxWidth!),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  _FailureIcon(kind: failure?.kind, size: 40, tokens: tokens),
+                  _FailureIcon(
+                    kind: failure?.kind,
+                    size: tokens.failureIconSize!,
+                    tokens: tokens,
+                  ),
                   const SizedBox(height: 24),
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.headlineSmall,
+                    style: theme.textTheme.headlineSmall?.merge(
+                      tokens.failureTitleStyle,
+                    ),
                   ),
                   if (message != null) ...[
                     const SizedBox(height: 8),
                     Text(
                       message!,
                       textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge?.copyWith(
-                        color: theme.colorScheme.onSurfaceVariant,
-                      ),
+                      style: theme.textTheme.bodyLarge
+                          ?.copyWith(color: theme.colorScheme.onSurfaceVariant)
+                          .merge(tokens.failureMessageStyle),
                     ),
                   ],
                   const SizedBox(height: 32),
@@ -251,6 +257,10 @@ class FailureCard extends StatelessWidget {
     final theme = Theme.of(context);
     final tokens = VyuhThemeExtension.of(context);
     final foreground = tokens.failureForeground!;
+    final kind = VyuhFailureScope.maybeOf(context)?.kind;
+    final icon =
+        (kind == null ? null : tokens.failureIcons?[kind]) ??
+        Icons.error_outline_rounded;
 
     return Padding(
       padding: const EdgeInsets.all(8),
@@ -265,14 +275,14 @@ class FailureCard extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Icon(Icons.error_outline_rounded, color: foreground),
+                  Icon(icon, color: foreground),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
                       title,
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: foreground,
-                      ),
+                      style: theme.textTheme.titleMedium
+                          ?.copyWith(color: foreground)
+                          .merge(tokens.failureTitleStyle),
                     ),
                   ),
                 ],
@@ -283,9 +293,9 @@ class FailureCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 36),
                   child: Text(
                     message!,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: foreground,
-                    ),
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(color: foreground)
+                        .merge(tokens.failureMessageStyle),
                   ),
                 ),
               ],
@@ -375,13 +385,16 @@ class _FailureIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final icon = switch (kind) {
-      FailureKind.notFound => Icons.explore_off_rounded,
-      FailureKind.featureDisabled => Icons.block_rounded,
-      FailureKind.featureLoad => Icons.cloud_off_rounded,
-      FailureKind.init => Icons.power_off_rounded,
-      _ => Icons.error_outline_rounded,
-    };
+    final custom = kind == null ? null : tokens.failureIcons?[kind];
+    final icon =
+        custom ??
+        switch (kind) {
+          FailureKind.notFound => Icons.explore_off_rounded,
+          FailureKind.featureDisabled => Icons.block_rounded,
+          FailureKind.featureLoad => Icons.cloud_off_rounded,
+          FailureKind.init => Icons.power_off_rounded,
+          _ => Icons.error_outline_rounded,
+        };
     return DecoratedBox(
       decoration: BoxDecoration(
         color: tokens.failureBackground,

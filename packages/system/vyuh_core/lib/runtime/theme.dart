@@ -1,6 +1,7 @@
 import 'dart:ui' show lerpDouble;
 
 import 'package:material_ui/material_ui.dart';
+import 'package:vyuh_core/runtime/failure.dart' show FailureKind;
 
 /// The app's themes, given once to [PlatformWidgetBuilder.theme].
 ///
@@ -112,6 +113,22 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
   /// Whether the app loader shows "Powered by Vyuh".
   final bool? showPoweredBy;
 
+  /// Text style of failure titles, merged over the theme's headline (pages)
+  /// or title (inline cards) style.
+  final TextStyle? failureTitleStyle;
+
+  /// Text style of failure messages, merged over the theme's body style.
+  final TextStyle? failureMessageStyle;
+
+  /// Icons for failure kinds. Kinds left out keep their default icon.
+  final Map<FailureKind, IconData>? failureIcons;
+
+  /// Size of the icon on full-page failures.
+  final double? failureIconSize;
+
+  /// Maximum width of the content on full-page failures.
+  final double? failureMaxWidth;
+
   const VyuhThemeExtension({
     this.appLoaderBackground,
     this.loaderColor,
@@ -126,6 +143,11 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
     this.radius,
     this.loaderDelay,
     this.showPoweredBy,
+    this.failureTitleStyle,
+    this.failureMessageStyle,
+    this.failureIcons,
+    this.failureIconSize,
+    this.failureMaxWidth,
   });
 
   /// Fully resolved tokens for [scheme].
@@ -143,6 +165,9 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
     radius: 12,
     loaderDelay: const Duration(milliseconds: 200),
     showPoweredBy: true,
+    failureIcons: const {},
+    failureIconSize: 40,
+    failureMaxWidth: 480,
   );
 
   /// The tokens for [context]: the theme's extension, with every missing
@@ -168,6 +193,11 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
     radius: other.radius ?? radius,
     loaderDelay: other.loaderDelay ?? loaderDelay,
     showPoweredBy: other.showPoweredBy ?? showPoweredBy,
+    failureTitleStyle: other.failureTitleStyle ?? failureTitleStyle,
+    failureMessageStyle: other.failureMessageStyle ?? failureMessageStyle,
+    failureIcons: {...?failureIcons, ...?other.failureIcons},
+    failureIconSize: other.failureIconSize ?? failureIconSize,
+    failureMaxWidth: other.failureMaxWidth ?? failureMaxWidth,
   );
 
   @override
@@ -185,6 +215,11 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
     double? radius,
     Duration? loaderDelay,
     bool? showPoweredBy,
+    TextStyle? failureTitleStyle,
+    TextStyle? failureMessageStyle,
+    Map<FailureKind, IconData>? failureIcons,
+    double? failureIconSize,
+    double? failureMaxWidth,
   }) => VyuhThemeExtension(
     appLoaderBackground: appLoaderBackground ?? this.appLoaderBackground,
     loaderColor: loaderColor ?? this.loaderColor,
@@ -199,6 +234,11 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
     radius: radius ?? this.radius,
     loaderDelay: loaderDelay ?? this.loaderDelay,
     showPoweredBy: showPoweredBy ?? this.showPoweredBy,
+    failureTitleStyle: failureTitleStyle ?? this.failureTitleStyle,
+    failureMessageStyle: failureMessageStyle ?? this.failureMessageStyle,
+    failureIcons: failureIcons ?? this.failureIcons,
+    failureIconSize: failureIconSize ?? this.failureIconSize,
+    failureMaxWidth: failureMaxWidth ?? this.failureMaxWidth,
   );
 
   @override
@@ -242,6 +282,19 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
       radius: lerpDouble(radius, other.radius, t),
       loaderDelay: t < 0.5 ? loaderDelay : other.loaderDelay,
       showPoweredBy: t < 0.5 ? showPoweredBy : other.showPoweredBy,
+      failureTitleStyle: TextStyle.lerp(
+        failureTitleStyle,
+        other.failureTitleStyle,
+        t,
+      ),
+      failureMessageStyle: TextStyle.lerp(
+        failureMessageStyle,
+        other.failureMessageStyle,
+        t,
+      ),
+      failureIcons: t < 0.5 ? failureIcons : other.failureIcons,
+      failureIconSize: lerpDouble(failureIconSize, other.failureIconSize, t),
+      failureMaxWidth: lerpDouble(failureMaxWidth, other.failureMaxWidth, t),
     );
   }
 }

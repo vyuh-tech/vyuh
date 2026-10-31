@@ -154,8 +154,9 @@ PlatformWidgetBuilder.system.copyWith(
 );
 ```
 
-To keep the default design but restyle it, use [theme tokens](theming)
-instead. The default widgets `FailurePage` and `FailureCard` are public, so you
+To keep the default design but restyle it, use [theme tokens](theming#framework-tokens)
+instead: colours, radius, title and message styles, an icon per failure
+kind, icon size and page width. The default widgets `FailurePage` and `FailureCard` are public, so you
 can also reuse them.
 
 ## Show a failure from your own code

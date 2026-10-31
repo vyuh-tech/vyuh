@@ -104,6 +104,21 @@ ThemeData(
 | `radius` | Cards, placeholders, diagnostics | `12` |
 | `loaderDelay` | Wait before a route or content loader appears, so fast loads don't flash | `200ms` |
 | `showPoweredBy` | "Powered by Vyuh" on the app loader | `true` |
+| `failureTitleStyle` | Failure titles, merged over the headline (pages) or title (cards) style | theme text style |
+| `failureMessageStyle` | Failure messages, merged over the body style | theme text style |
+| `failureIcons` | An icon per `FailureKind`; kinds left out keep their default | built-in icons |
+| `failureIconSize` | Icon size on full-page failures | `40` |
+| `failureMaxWidth` | Content width on full-page failures | `480` |
+
+For example, to brand the failure views without replacing them:
+
+```dart
+VyuhThemeExtension(
+  failureTitleStyle: TextStyle(fontFamily: 'Brand', fontWeight: FontWeight.w700),
+  failureIcons: {FailureKind.notFound: Icons.travel_explore},
+  failureMaxWidth: 560,
+)
+```
 
 Read the resolved tokens in your own widgets with
 `VyuhThemeExtension.of(context)`.
