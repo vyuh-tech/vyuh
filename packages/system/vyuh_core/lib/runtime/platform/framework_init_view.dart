@@ -28,16 +28,16 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
           loadedApp = vyuh.widgetBuilder.appBuilder(context, vyuh);
         }
 
-        final child = status == null || status == FutureStatus.pending
-            ? vyuh.widgetBuilder.appLoader(context)
-            : vyuh.widgetBuilder.routeErrorView(
-                context,
-                title: 'Failed to load app',
-                error: vyuh.tracker.error,
-              );
+        // On the web the browser's path (a deep link on reload) is this
+        // app's initial route. Only the loaded app's router can match it, so
+        // every route name opens the one loading page; the router reads the
+        // path again once the app has loaded.
         final pendingApp = MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: child,
+          onGenerateInitialRoutes: (initialRoute) => [
+            _pendingRoute(RouteSettings(name: initialRoute)),
+          ],
+          onGenerateRoute: _pendingRoute,
         );
 
         return AnimatedSwitcher(
@@ -47,6 +47,33 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
           },
           child: loadedApp ?? pendingApp,
         );
+      },
+    );
+  }
+
+  Route<void> _pendingRoute(RouteSettings settings) => MaterialPageRoute(
+    settings: settings,
+    builder: (_) => const _PendingView(),
+  );
+}
+
+/// The loader while the app loads, and the failure if it does not.
+class _PendingView extends StatelessWidget {
+  const _PendingView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      name: 'Framework Pending',
+      builder: (context) {
+        final status = vyuh.tracker.status;
+        return status == null || status == FutureStatus.pending
+            ? vyuh.widgetBuilder.appLoader(context)
+            : vyuh.widgetBuilder.routeErrorView(
+                context,
+                title: 'Failed to load app',
+                error: vyuh.tracker.error,
+              );
       },
     );
   }
