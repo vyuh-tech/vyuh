@@ -26,8 +26,6 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
   g.GoRouterRedirect? get _redirect => redirect ?? _legacyRedirect;
 
-  final bool includeFallbackRoute;
-
   var _initialized = false;
   final List<g.RouteBase> _initialRoutes = [];
   VoidCallback? _stopWatchingRedirects;
@@ -40,7 +38,6 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   /// * [urlReflectsImperativeAPIs]: whether `push` and friends update the
   ///   browser URL.
   DefaultNavigationPlugin({
-    this.includeFallbackRoute = true,
     final bool urlReflectsImperativeAPIs = false,
     this.redirect,
     RouterUrlStyle? urlStyle,
@@ -158,31 +155,25 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     replaceRoutes([...currentRoutes, ...routes]);
   }
 
+  /// Keeps one catch-all route (path [NavigationPlugin.catchAllPath]) and
+  /// moves it to the end, so it only sees locations no other route matches.
   List<g.RouteBase> _finalizeRoutes(List<g.RouteBase> routes) {
-    if (includeFallbackRoute) {
-      final fallbackRoutes = routes
-          .where((r) {
-            final isFallbackRoute = r == NavigationPlugin.fallbackRoute;
-            final hasFallbackPath =
-                r is GoRoute && r.path == NavigationPlugin.fallbackRoute.path;
-            return isFallbackRoute || hasFallbackPath;
-          })
-          .toList(growable: false);
+    bool isCatchAll(g.RouteBase r) =>
+        r is GoRoute && r.path == NavigationPlugin.catchAllPath;
 
-      if (fallbackRoutes.isNotEmpty) {
-        vyuh.log.warn(
-          ('We found one or more fallback Routes "/:path(.*)", which will be removed'),
-        );
-      }
-
-      for (final route in fallbackRoutes) {
-        routes.remove(route);
-      }
-
-      return [...routes, NavigationPlugin.fallbackRoute];
+    final catchAll = routes.where(isCatchAll).toList(growable: false);
+    if (catchAll.isEmpty) {
+      return routes;
     }
 
-    return routes;
+    if (catchAll.length > 1) {
+      vyuh.log.warn(
+        'Found ${catchAll.length} catch-all routes "${NavigationPlugin.catchAllPath}". '
+        'Only the first one is used.',
+      );
+    }
+
+    return [...routes.where((r) => !isCatchAll(r)), catchAll.first];
   }
 
   @override

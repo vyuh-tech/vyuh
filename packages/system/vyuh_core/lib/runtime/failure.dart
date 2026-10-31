@@ -8,7 +8,7 @@ enum FailureKind {
   /// No route matched the location.
   notFound,
 
-  /// A route matched but its content could not be loaded.
+  /// A route matched but its page could not be loaded.
   route,
 
   /// A lazy feature failed to download or activate.
@@ -17,7 +17,7 @@ enum FailureKind {
   /// A lazy feature is turned off by its feature flag.
   featureDisabled,
 
-  /// A piece of content inside a page failed.
+  /// A part of a page (a section or a widget) failed; shown inline.
   content,
 
   /// Anything else.

@@ -106,6 +106,6 @@ final class UnknownConditionalLayout<T extends ContentItem>
       ],
     );
 
-    return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    return VyuhBinding.instance.content.unknown(context, failure);
   }
 }

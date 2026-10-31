@@ -3,7 +3,6 @@ import 'package:feature_conference/content/sponsor.dart';
 import 'package:feature_conference/content/venue.dart';
 import 'package:feature_conference/layouts/edition_layout.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'edition.g.dart';

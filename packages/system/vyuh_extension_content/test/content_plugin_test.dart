@@ -35,7 +35,7 @@ void main() {
             extensionBuilders: [extBuilder],
           ),
         ],
-        plugins: PluginDescriptor(content: plugin),
+        plugins: PluginDescriptor(others: [plugin]),
       );
     }
 

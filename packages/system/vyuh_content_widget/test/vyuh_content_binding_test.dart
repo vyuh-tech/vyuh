@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vyuh_content_widget/vyuh_content_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import 'utils.dart';
 
@@ -23,7 +24,7 @@ void main() {
       var readyCallbackInvoked = false;
 
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         widgetBuilder: mockWidgetBuilder,
         onReady: (_) async {
           readyCallbackInvoked = true;
@@ -58,7 +59,7 @@ void main() {
 
     test('content getter returns VyuhBinding content plugin', () async {
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         descriptors: [],
       );
 
@@ -69,7 +70,7 @@ void main() {
 
     test('widgetBuilder getter returns VyuhBinding widget builder', () async {
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         widgetBuilder: mockWidgetBuilder,
         descriptors: [],
       );

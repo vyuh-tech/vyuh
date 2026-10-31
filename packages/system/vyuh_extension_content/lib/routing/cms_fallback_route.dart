@@ -3,8 +3,23 @@ import 'package:go_router/go_router.dart' as g;
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-Page<dynamic> fallbackRoutePageBuilder(
+/// A catch-all route that asks the CMS for every location no other route
+/// matches, so a page published in the CMS is reachable at its path without a
+/// local route.
+///
+/// Add it to a feature's routes; the router always places it last. The CMS
+/// system feature (`vyuh_feature_system`) contributes it for you. Without it,
+/// unmatched locations show the framework's not-found page.
+final cmsFallbackRoute = g.GoRoute(
+  path: NavigationPlugin.catchAllPath,
+  pageBuilder: cmsFallbackPageBuilder,
+);
+
+/// The page builder of [cmsFallbackRoute]. In debug builds it marks the page
+/// as served by the fallback.
+Page<dynamic> cmsFallbackPageBuilder(
   BuildContext context,
   g.GoRouterState state,
 ) {

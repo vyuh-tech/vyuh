@@ -38,7 +38,7 @@ void runWidgetBook({
   runApp(
     features: features,
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(provider: NoOpContentProvider()),
+      others: [DefaultContentPlugin(provider: NoOpContentProvider())],
       env: DefaultEnvPlugin(),
     ),
     platformWidgetBuilder: PlatformWidgetBuilder.system.copyWith(

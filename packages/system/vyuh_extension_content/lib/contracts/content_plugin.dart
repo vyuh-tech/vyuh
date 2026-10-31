@@ -1,17 +1,43 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-/// The base class for a Content Plugin
+/// Builds the widget shown for a [ContentFailure].
+///
+/// Example:
+/// ```dart
+/// UnknownContentBuilder builder = (context, failure) => switch (failure) {
+///   ContentItemFailure() => ContentErrorWidget(failure: failure),
+///   LayoutFailure() => LayoutErrorWidget(failure: failure),
+///   _ => UnknownContentView(failure: failure),
+/// };
+/// ```
+typedef UnknownContentBuilder =
+    Widget Function(BuildContext context, ContentFailure failure);
+
+Widget _defaultUnknownBuilder(BuildContext context, ContentFailure failure) =>
+    UnknownContentView(failure: failure);
+
+/// The base class for a Content Plugin.
+///
+/// Register it with `PluginDescriptor(others: [...])` and reach it through
+/// `vyuh.content` (or `VyuhBinding.instance.content` in widget mode).
 abstract class ContentPlugin extends Plugin {
   /// The ContentProvider for this plugin
   final ContentProvider provider;
+
+  /// Builds the widget shown when a content type, layout, modifier, action or
+  /// condition is missing. Defaults to [UnknownContentView].
+  final UnknownContentBuilder unknown;
 
   /// Creates a new ContentPlugin with the given provider, name, and title
   ContentPlugin({
     required this.provider,
     required super.name,
     required super.title,
-  }) : super();
+    UnknownContentBuilder? unknown,
+  }) : unknown = unknown ?? _defaultUnknownBuilder,
+       super();
 
   /// The type registry that maps types to their descriptors.
   /// This stores the descriptors for LayoutConfiguration, ActionConfiguration, ConditionConfiguration and

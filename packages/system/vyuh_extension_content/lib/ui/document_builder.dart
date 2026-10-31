@@ -1,9 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-import 'document_future_builder.dart';
-import 'document_stream_builder.dart';
-import 'scoped_di_widget.dart';
 
 /// A widget that builds UI based on document data fetched from a content provider.
 ///

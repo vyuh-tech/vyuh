@@ -102,7 +102,7 @@ PluginDescriptor _getPlugins() {
       urlStyle: vc.RouterUrlStyle.path,
       urlReflectsImperativeAPIs: true,
     ),
-    content: DefaultContentPlugin(
+    others: [DefaultContentPlugin(
       useLiveRoute: true,
       allowRouteRefresh: true,
       provider: SanityContentProvider.withConfig(
@@ -116,7 +116,7 @@ PluginDescriptor _getPlugins() {
         ),
         cacheDuration: const Duration(seconds: 5),
       ),
-    ),
+    )],
     env: vc.DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
     telemetry: vc.TelemetryPlugin(

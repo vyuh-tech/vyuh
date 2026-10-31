@@ -1,11 +1,15 @@
-part of '../platform_widget_builder.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-/// Default implementation of unknown content widget that provides consistent
-/// styling with other error views in the framework.
-class _UnknownContentView extends StatelessWidget {
+/// The default view for a [ContentFailure]: a missing content type, layout,
+/// modifier, action or condition. Styled like the framework's debug views.
+class UnknownContentView extends StatelessWidget {
+  /// The failure to describe.
   final ContentFailure failure;
 
-  const _UnknownContentView({required this.failure});
+  /// Creates the view for [failure].
+  const UnknownContentView({super.key, required this.failure});
 
   @override
   Widget build(BuildContext context) {

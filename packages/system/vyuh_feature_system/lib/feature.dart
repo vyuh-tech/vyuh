@@ -237,4 +237,6 @@ final _routes = [
       );
     },
   ),
+  // Any location no other route matches is looked up in the CMS.
+  cmsFallbackRoute,
 ];

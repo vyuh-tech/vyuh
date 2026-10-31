@@ -26,7 +26,7 @@ void main() {
       ).thenAnswer((_) async => Document(title: 'Mock Document'));
 
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         descriptors: [],
       );
 

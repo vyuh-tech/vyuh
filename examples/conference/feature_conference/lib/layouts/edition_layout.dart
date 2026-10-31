@@ -2,6 +2,7 @@ import 'package:feature_conference/content/sponsor.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' hide Card;
 
 import '../content/edition.dart';

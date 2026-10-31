@@ -225,7 +225,7 @@ class FailurePage extends StatelessWidget {
   }
 }
 
-/// The default inline failure, used inside a page for a piece of content.
+/// The default inline failure, used inside a page for a part that failed.
 class FailureCard extends StatelessWidget {
   final String title;
   final String? message;

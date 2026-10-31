@@ -1,9 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_extension_content/content/action.dart' as vyuh_action;
-import 'package:vyuh_extension_content/content/condition.dart';
-import 'package:vyuh_extension_content/plugin/unknown_placeholders.dart';
 
 /// Utility functions for detecting unknown placeholders in content items.
 class UnknownContentDetector {

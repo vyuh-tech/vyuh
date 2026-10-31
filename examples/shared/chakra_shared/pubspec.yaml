@@ -15,6 +15,7 @@ dependencies:
 
   # vyuh packages
   vyuh_core: ^2.1.0
+  vyuh_extension_content: ^2.1.0
   vyuh_feature_system: ^2.0.2
   youtube_player_iframe: ^6.0.2
   html: ^0.15.4

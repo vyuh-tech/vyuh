@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 final feature = FeatureDescriptor(
   name: 'root',

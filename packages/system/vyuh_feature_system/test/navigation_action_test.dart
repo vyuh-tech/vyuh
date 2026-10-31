@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart' as core;
+import 'package:vyuh_extension_content/vyuh_extension_content.dart' as core;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/action/navigation.dart';
 import 'package:vyuh_feature_system/action/route_refresh.dart';
@@ -71,7 +72,7 @@ void main() {
       features: () => [],
       appRunner: (_) {},
       plugins: core.PluginDescriptor(
-        content: _Content(provider),
+        others: [_Content(provider)],
         navigation: navigation,
       ),
     );

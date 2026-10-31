@@ -1,16 +1,16 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/plugin/navigation/fallback_route_page_builder.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class NavigationPlugin extends Plugin {
   GoRouter get instance;
 
-  static final fallbackRoute = GoRoute(
-    path: '/:path(.*)',
-    pageBuilder: fallbackRoutePageBuilder,
-  );
+  /// The path of a catch-all route. A feature can contribute one `GoRoute`
+  /// with this path to handle every location no other route matches; the
+  /// router always places it last. Without one, unmatched locations show the
+  /// not-found [RouteFailureView].
+  static const catchAllPath = '/:path(.*)';
 
   NavigationPlugin({required super.name, required super.title});
 

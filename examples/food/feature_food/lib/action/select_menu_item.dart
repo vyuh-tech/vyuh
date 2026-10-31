@@ -4,7 +4,6 @@ import 'package:feature_food/routes.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'select_menu_item.g.dart';

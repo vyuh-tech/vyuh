@@ -32,7 +32,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: MockContentProvider()),
+          others: [DefaultContentPlugin(provider: MockContentProvider())],
         ),
       );
 

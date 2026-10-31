@@ -93,7 +93,7 @@ final class VyuhThemeExtension extends ThemeExtension<VyuhThemeExtension> {
   /// Icon and text color on [failureBackground].
   final Color? failureForeground;
 
-  /// Background of debug-only diagnostics such as unknown content.
+  /// Background of debug-only diagnostics.
   final Color? debugBackground;
 
   /// Text color of debug-only diagnostics.

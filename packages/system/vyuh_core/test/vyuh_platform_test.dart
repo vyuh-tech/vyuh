@@ -183,7 +183,6 @@ void main() {
       expect(vyuh.network, isNotNull);
       expect(vyuh.router, isNotNull);
       expect(vyuh.env, isNotNull);
-      expect(vyuh.content, isNotNull);
       expect(vyuh.auth, isNotNull);
       expect(vyuh.di, isNotNull);
       expect(vyuh.featureFlag, isNull);

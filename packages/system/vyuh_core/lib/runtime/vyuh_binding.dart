@@ -25,9 +25,9 @@ final class VyuhBinding {
   bool _initialized = false;
   bool get initialized => _initialized;
 
-  /// Purely meant to be called with running Vyuh in widget-mode, using `VyuhContentWidget`.
-  /// There is a convenience API inside `vyuh_extension_content` to make this easier.
-  /// Use the `VyuhContentBinding.init()` instead.
+  /// Runs Vyuh in widget mode: plugins and one extension builder, without
+  /// `runApp`, features or a router. Packages that embed Vyuh widgets in a
+  /// non-Vyuh app wrap this in their own binding API.
   ///
   /// Make sure to call this before calling Flutter's `runApp()`.
   ///
@@ -66,8 +66,7 @@ final class VyuhBinding {
         await plugin.init();
       }
 
-      // Time to associate the ContentPlugin with the ContentExtensionBuilder. This keeps
-      // track of the type registry and helps in building ContentItems
+      // Let the extension builder register its contributions.
       await _extensionBuilder.init(extensionDescriptors);
 
       await onReady?.call(VyuhBinding.instance);
@@ -121,9 +120,6 @@ final class VyuhBinding {
 /// The same named accessors as `vyuh.*`, for code that must also run in
 /// widget mode, where `runApp` (and so `vyuh`) is not used.
 extension NamedBindings on VyuhBinding {
-  /// The content plugin, responsible for managing content-related operations.
-  ContentPlugin get content => _pluginDescriptor.get<ContentPlugin>()!;
-
   /// The dependency injection plugin, providing dependency injection services.
   DIPlugin get di => _pluginDescriptor.get<DIPlugin>()!;
 

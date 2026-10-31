@@ -72,8 +72,8 @@ final class FeatureLoadFailedEvent extends SystemEvent<VyuhFailure> {
     : super(name: 'vyuh.event.featureLoadFailed', data: failure);
 }
 
-/// Emitted once each time a route cannot be shown: no match, a failed CMS
-/// fetch, a missing document or a failed lazy feature.
+/// Emitted once each time a route cannot be shown: no match, a page that
+/// failed to load or a failed lazy feature.
 final class RouteFailureEvent extends SystemEvent<VyuhFailure> {
   /// The failure, including the location that failed.
   final VyuhFailure failure;

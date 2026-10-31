@@ -52,10 +52,10 @@ final class VyuhStrings {
   /// Title when a page could not be loaded.
   final String pageLoadFailedTitle;
 
-  /// Title when content inside a page does not exist.
+  /// Title when a part of a page does not exist.
   final String contentNotFoundTitle;
 
-  /// Title when content inside a page could not be loaded.
+  /// Title when a part of a page could not be loaded.
   final String contentLoadFailedTitle;
 
   /// Message for failures that a retry may fix.

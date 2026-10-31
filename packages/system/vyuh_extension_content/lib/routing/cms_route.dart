@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart' hide RouteBase;
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 /// A function that resolves a CMS path from a local path. This is useful when
 /// multiple local routes use a single template path on the CMS. For example:

@@ -86,12 +86,9 @@ abstract class VyuhPlatform {
 /// Named accessors for the system plugins: `vyuh.router`, `vyuh.auth`, ...
 ///
 /// Use these in apps and features. Code that must also run in widget mode
-/// (`VyuhContentWidget`, without `runApp`) uses the identical accessors on
+/// (an embedded widget without `runApp`) uses the identical accessors on
 /// `VyuhBinding.instance` instead.
 extension NamedPlugins on VyuhPlatform {
-  /// The content plugin, responsible for managing content-related operations.
-  ContentPlugin get content => getPlugin<ContentPlugin>()!;
-
   /// The dependency injection plugin, providing dependency injection services.
   DIPlugin get di => getPlugin<DIPlugin>()!;
 

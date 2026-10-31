@@ -13,7 +13,6 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// Plugins are organized into several categories:
 /// - Core System Plugins:
 ///   - [DIPlugin]: Dependency injection
-///   - [ContentPlugin]: Content management
 ///   - [AnalyticsPlugin]: User analytics
 ///   - [TelemetryPlugin]: Application telemetry
 ///   - [NetworkPlugin]: Network communication
@@ -48,7 +47,6 @@ final class PluginDescriptor {
 
   PluginDescriptor({
     final DIPlugin? di,
-    final ContentPlugin? content,
     final AnalyticsPlugin? analytics,
     final TelemetryPlugin? telemetry,
     final NetworkPlugin? network,
@@ -63,7 +61,6 @@ final class PluginDescriptor {
     final otherPlugins = others ?? <Plugin>[];
     for (final plugin in otherPlugins) {
       if (plugin is DIPlugin ||
-          plugin is ContentPlugin ||
           plugin is AnalyticsPlugin ||
           plugin is TelemetryPlugin ||
           plugin is NetworkPlugin ||
@@ -84,7 +81,6 @@ final class PluginDescriptor {
     _plugins.addAll(
       [
         di ?? system.get<DIPlugin>(),
-        content ?? system.get<ContentPlugin>(),
         analytics ?? system.get<AnalyticsPlugin>(),
         telemetry ?? system.get<TelemetryPlugin>(),
         network ?? system.get<NetworkPlugin>(),
@@ -102,7 +98,6 @@ final class PluginDescriptor {
 
   static final systemPluginTypes = [
     DIPlugin,
-    ContentPlugin,
     AnalyticsPlugin,
     TelemetryPlugin,
     NetworkPlugin,
@@ -116,7 +111,6 @@ final class PluginDescriptor {
 
   static final system = PluginDescriptor(
     di: GetItDIPlugin(),
-    content: NoOpContentPlugin(),
     analytics: AnalyticsPlugin(providers: [NoOpAnalyticsProvider()]),
     telemetry: TelemetryPlugin(providers: [NoOpTelemetryProvider()]),
     network: HttpNetworkPlugin(),

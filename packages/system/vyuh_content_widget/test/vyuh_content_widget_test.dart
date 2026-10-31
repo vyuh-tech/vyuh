@@ -17,7 +17,7 @@ void main() {
       mockContentProvider = mock.$2;
 
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         descriptors: [],
       );
 

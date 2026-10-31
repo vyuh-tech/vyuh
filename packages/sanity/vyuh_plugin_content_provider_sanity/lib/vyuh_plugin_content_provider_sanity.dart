@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_cache/vyuh_cache.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_plugin_content_provider_sanity/exception.dart';
 
 part 'live_provider.dart';
