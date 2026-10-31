@@ -29,6 +29,9 @@ class TestFlux extends Fake implements EventFlux {
     bool logReceivedData = false,
     List<http.MultipartFile>? files,
     bool multipartRequest = false,
+    List<EventFluxInterceptor>? interceptors,
+    Future<void>? abortTrigger,
+    WebConfig? webConfig,
   }) {
     connected = onSuccessCallback;
     failed = onError;

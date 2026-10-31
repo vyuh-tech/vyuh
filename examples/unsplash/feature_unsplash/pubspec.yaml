@@ -19,7 +19,7 @@ dependencies:
   vyuh_core: ^2.1.0
   vyuh_feature_system: ^2.0.2
   vyuh_extension_content: ^2.1.0
-  unsplash_client: ^3.0.0
+  unsplash_client: ^4.0.0
   flutter_blurhash: ^0.9.1
   photo_view: ^0.15.0
   intl: ^0.20.2
