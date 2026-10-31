@@ -66,8 +66,9 @@ final class _FailingLoadedEvents extends vc.EventPlugin {
   ) => inner.on<T>(listener);
 
   @override
-  void once<T extends vc.VyuhEvent>(vc.VyuhEventListener<T> listener) =>
-      inner.once<T>(listener);
+  vc.DisposeFunction once<T extends vc.VyuhEvent>(
+    vc.VyuhEventListener<T> listener,
+  ) => inner.once<T>(listener);
 
   @override
   Future<void> init() => inner.init();

@@ -1,6 +1,10 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vyuh_core/plugin/env/env_plugin.dart';
 
+/// Reads configuration from a `.env` asset through `flutter_dotenv`.
+///
+/// It loads into flutter_dotenv's global `dotenv`, so use one
+/// [DefaultEnvPlugin] per app.
 final class DefaultEnvPlugin extends EnvPlugin {
   final String fileName;
 
@@ -23,7 +27,7 @@ final class DefaultEnvPlugin extends EnvPlugin {
   }
 
   @override
-  Map<String, String> all() => dotenv.env;
+  Map<String, String> all() => Map.unmodifiable(dotenv.env);
 
   @override
   clear() {

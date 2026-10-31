@@ -58,7 +58,7 @@ class LocalePlugin extends Plugin {
 
   LocalePlugin({required this.locales, this._defaultLocale})
     : assert(locales.isNotEmpty, 'At least one locale must be provided'),
-      super(name: 'locale', title: 'Internationalization') {
+      super(name: 'vyuh.plugin.locale', title: 'Internationalization') {
     currentLocale = Observable((_defaultLocale ?? locales.first).locale);
   }
 
@@ -87,11 +87,15 @@ class LocalePlugin extends Plugin {
     });
   }
 
-  /// Set the application locale
-  Future<bool> setLocale(Locale locale) async {
-    if (!_isLocaleSupported(locale)) {
+  /// Set the application locale. The match is by language, and the
+  /// configured locale for that language becomes current, so `hi_IN` sets
+  /// the app's `hi`. Returns false for an unsupported language.
+  Future<bool> setLocale(Locale requested) async {
+    final config = _getConfig(requested.languageCode);
+    if (config == null) {
       return false;
     }
+    final locale = config.locale;
 
     // Set loading state
     runInAction(() => isLoadingLocale.value = true);
@@ -153,11 +157,6 @@ class LocalePlugin extends Plugin {
     }
   }
 
-  /// Check if a locale is supported
-  bool _isLocaleSupported(Locale locale) {
-    return locales.any((l) => l.languageCode == locale.languageCode);
-  }
-
   /// Check if a specific locale is currently active
   bool isLocaleActive(Locale locale) {
     return currentLocale.value.languageCode == locale.languageCode;
@@ -187,7 +186,7 @@ class LocalePlugin extends Plugin {
 
     if (savedLocaleCode != null) {
       final savedLocale = Locale(savedLocaleCode);
-      if (_isLocaleSupported(savedLocale)) {
+      if (_getConfig(savedLocale.languageCode) != null) {
         await setLocale(savedLocale);
       } else {
         await useDeviceLocale();
@@ -201,5 +200,6 @@ class LocalePlugin extends Plugin {
   Future<void> dispose() async {
     _registrations.clear();
     _prefs = null;
+    runInAction(() => currentLocale.value = defaultLocale.locale);
   }
 }

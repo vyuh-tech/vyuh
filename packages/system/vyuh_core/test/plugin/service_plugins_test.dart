@@ -6,10 +6,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:vyuh_core/plugin/env/noop_env_plugin.dart';
 import 'package:vyuh_core/plugin/network/http_network_plugin_stub.dart';
-import 'package:vyuh_core/plugin/storage/in_memory_secure_storage_plugin.dart';
-import 'package:vyuh_core/plugin/storage/in_memory_storage_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class _Observer extends NavigatorObserver {}
@@ -323,7 +320,7 @@ void main() {
       await env.init();
 
       expect(env.all(), isEmpty);
-      expect(env.maybeGet('A', fallback: 'b'), isNull);
+      expect(env.maybeGet('A', fallback: 'b'), 'b');
       expect(() => env.get('A'), throwsUnsupportedError);
 
       env.clear();
@@ -398,15 +395,18 @@ void main() {
       expect(await response.stream.bytesToString(), 'sent payload');
     });
 
-    test('close closes the client and allows a fresh init', () async {
+    test('close leaves the shared client open; dispose closes it', () async {
       var closed = false;
       final client = _ClosingClient(() => closed = true);
       final network = HttpNetworkPlugin(client: client);
 
       network.close();
+      expect(closed, isFalse);
+
+      await network.dispose();
       expect(closed, isTrue);
 
-      // The plugin is no longer initialized, so init makes a new client.
+      // Disposed, so init makes a new client.
       await network.init();
       await network.dispose();
     });

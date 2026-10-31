@@ -37,10 +37,18 @@ final class SharedPreferencesStoragePlugin extends StoragePlugin
     return _store.get(key);
   }
 
+  /// Stores `value.toString()` and returns that string. Writing null deletes
+  /// [key] and returns null.
   @override
   Future<dynamic> write(String key, dynamic value) async {
-    await _store.setString(key, value.toString());
-    return value;
+    final store = _store;
+    if (value == null) {
+      await store.remove(key);
+      return null;
+    }
+    final text = value.toString();
+    await store.setString(key, text);
+    return text;
   }
 
   @override

@@ -1,5 +1,7 @@
 import 'package:vyuh_core/plugin/env/env_plugin.dart';
 
+/// The default environment plugin: it holds no values. [get] throws and
+/// [maybeGet] returns its fallback.
 final class NoOpEnvPlugin extends EnvPlugin {
   final String fileName;
   final Map<String, String> defaults;
@@ -26,5 +28,5 @@ final class NoOpEnvPlugin extends EnvPlugin {
   }
 
   @override
-  String? maybeGet(String key, {String? fallback}) => null;
+  String? maybeGet(String key, {String? fallback}) => fallback;
 }

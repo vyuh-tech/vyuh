@@ -126,7 +126,8 @@ void main() {
     await plugin.dispose();
   });
 
-  test('using the plugin before init or after dispose is a clear error', () async {
+  test('using the plugin before init or after dispose is a clear error',
+      () async {
     final plugin = HiveStoragePlugin(boxName: 'lifecycle');
     expect(() => plugin.read('key'), throwsStateError);
     expect(() => plugin.write('key', 'value'), throwsStateError);
@@ -138,6 +139,24 @@ void main() {
     await plugin.dispose();
 
     expect(() => plugin.read('key'), throwsStateError);
+  });
+
+  test('plugins sharing a box name close it only when the last one stops',
+      () async {
+    final first = HiveStoragePlugin(boxName: 'shared');
+    final second = HiveStoragePlugin(boxName: 'shared');
+    await first.init();
+    await second.init();
+
+    await first.dispose();
+    expect(Hive.isBoxOpen('shared'), isTrue);
+    expect(await second.write('key', 'value'), 'value');
+
+    await second.dispose();
+    expect(Hive.isBoxOpen('shared'), isFalse);
+
+    // Disposing again is harmless.
+    await second.dispose();
   });
 
   test('dispose closes the box', () async {

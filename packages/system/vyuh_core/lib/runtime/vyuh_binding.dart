@@ -90,13 +90,37 @@ final class VyuhBinding {
     _pluginDescriptor = plugins ?? PluginDescriptor.system;
     final effectivePlugins = _pluginDescriptor.plugins;
 
-    final preLoadedPlugins = effectivePlugins.whereType<PreloadedPlugin>();
-
-    for (final plugin in preLoadedPlugins) {
-      await plugin.init();
-    }
+    // A failure here must not stop the app from drawing its first frame.
+    // It is kept and raised by the platform's startup, so the user sees the
+    // startup failure screen, and Restart tries the plugin again.
+    await _initPreloadedPlugins(
+      effectivePlugins.whereType<PreloadedPlugin>().toList(),
+    );
 
     _initialized = true;
+  }
+
+  /// Preloaded plugins that failed to initialize, with their errors.
+  final Map<Plugin, (Object, StackTrace)> _preloadFailures = {};
+
+  Future<void> _initPreloadedPlugins(List<Plugin> plugins) async {
+    for (final plugin in plugins) {
+      try {
+        await plugin.init();
+        _preloadFailures.remove(plugin);
+      } catch (error, stack) {
+        _preloadFailures[plugin] = (error, stack);
+      }
+    }
+  }
+
+  /// Throws the first preloaded plugin failure, if any. With [retry], the
+  /// failed plugins are initialized again first. Preloaded plugins that
+  /// started keep running across restarts.
+  Future<void> _ensurePreloadedPlugins({required bool retry}) async {
+    if (retry) await _initPreloadedPlugins(_preloadFailures.keys.toList());
+    final failure = _preloadFailures.values.firstOrNull;
+    if (failure != null) Error.throwWithStackTrace(failure.$1, failure.$2);
   }
 
   Future<void> dispose() async {

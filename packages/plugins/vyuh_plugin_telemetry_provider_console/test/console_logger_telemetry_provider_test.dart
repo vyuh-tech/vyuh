@@ -88,13 +88,13 @@ void main() {
       expect(events.single.level, Level.info);
     });
 
-    test('accepts params without printing them', () async {
+    test('prints params after the message', () async {
       final output = await capturePrint(
         () => provider.reportMessage('with params', params: {'id': 'p1'}),
       );
 
       expect(output, contains('with params'));
-      expect(output, isNot(contains('p1')));
+      expect(output, contains('with params {id: p1}'));
     });
   });
 
@@ -111,12 +111,13 @@ void main() {
         ),
       );
 
-      expect(output, contains('Error observed'));
+      expect(output, contains('Error observed {id: e1}'));
       expect(output, contains('Bad state: boom'));
       expect(output, contains('failingFunction'));
 
+      // A fatal error is logged at the fatal level.
       final event = events.single;
-      expect(event.level, Level.error);
+      expect(event.level, Level.fatal);
       expect(event.error, isA<StateError>());
       expect(event.stackTrace, same(stack));
     });
@@ -128,6 +129,7 @@ void main() {
 
       expect(output, contains('Error observed'));
       expect(output, contains('plain failure'));
+      expect(events.single.level, Level.error);
       expect(events.single.stackTrace, isNull);
     });
   });
@@ -152,7 +154,7 @@ void main() {
       expect(output, contains('buildWidget'));
 
       final event = events.single;
-      expect(event.level, Level.error);
+      expect(event.level, Level.fatal);
       expect(event.error, same(details.exception));
       expect(event.stackTrace, same(stack));
     });

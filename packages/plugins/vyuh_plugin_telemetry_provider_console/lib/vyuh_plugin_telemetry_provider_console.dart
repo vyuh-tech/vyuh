@@ -40,13 +40,18 @@ final class ConsoleLoggerTelemetryProvider implements TelemetryProvider {
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,
       bool fatal = false}) async {
-    _logger.e('Error observed', error: exception, stackTrace: stackTrace);
+    final message = _withParams('Error observed', params);
+    if (fatal) {
+      _logger.f(message, error: exception, stackTrace: stackTrace);
+    } else {
+      _logger.e(message, error: exception, stackTrace: stackTrace);
+    }
   }
 
   @override
   Future<void> reportFlutterError(FlutterErrorDetails details,
       {bool fatal = false}) async {
-    _logger.e('''
+    (fatal ? _logger.f : _logger.e)('''
 Flutter Error observed in ${details.library}
 -----
 ${details.summary}
@@ -56,6 +61,7 @@ ${details.summary}
   @override
   Future<void> reportMessage(String message,
       {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) async {
+    message = _withParams(message, params);
     switch (level) {
       case LogLevel.fatal:
         _logger.f(message);
@@ -86,6 +92,9 @@ ${details.summary}
     return NoOpTrace();
   }
 }
+
+String _withParams(String message, Map<String, dynamic>? params) =>
+    params == null || params.isEmpty ? message : '$message $params';
 
 Logger _createLogger() {
   return Logger(

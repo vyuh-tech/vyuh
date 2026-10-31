@@ -10,6 +10,9 @@ import 'package:vyuh_core/vyuh_core.dart';
 import 'http_network_plugin_stub.dart'
     if (dart.library.html) 'http_network_plugin_web.dart';
 
+@Deprecated(
+  'Not used by HttpNetworkPlugin. Pass timeout and retryOptions to it instead.',
+)
 final class HttpNetworkConfig {
   final Duration timeout;
   final int maxRetryAttempts;
@@ -37,7 +40,13 @@ final class HttpNetworkPlugin extends NetworkPlugin {
 
   /// Creates an HTTP network plugin.
   ///
-  /// [_webIncludeCredentials] - When true and running on web, uses browser's fetch API
+  /// Every request, including [read], [readBytes] and [send], fails with a
+  /// [TimeoutException] after [timeout] (30 seconds by default). Requests
+  /// other than [send] are retried on socket errors and timeouts, as
+  /// [retryOptions] says (3 attempts by default). [send] is not retried,
+  /// because a streamed request can only be sent once.
+  ///
+  /// [webIncludeCredentials] - When true and running on web, uses browser's fetch API
   /// with credentials: 'include' to send HTTP-only cookies with cross-origin requests.
   /// This is essential for session-based authentication with HTTP-only cookies.
   HttpNetworkPlugin({
@@ -118,7 +127,7 @@ final class HttpNetworkPlugin extends NetworkPlugin {
       _withRetryAndTimeout(() =>
           _client.patch(url, headers: headers, body: body, encoding: encoding));
 
-  Future<Response> _withRetryAndTimeout(Future<Response> Function() fn) =>
+  Future<T> _withRetryAndTimeout<T>(Future<T> Function() fn) =>
       _retryOptions.retry(
         () => fn().timeout(_timeout),
         retryIf: (e) {
@@ -129,20 +138,20 @@ final class HttpNetworkPlugin extends NetworkPlugin {
         },
       );
 
+  /// Does nothing. The client is shared by every feature, so only the
+  /// platform closes it, when it disposes the plugin.
   @override
-  void close() {
-    _client.close();
-    _initialized = false;
-  }
+  void close() {}
 
   @override
   Future<String> read(Uri url, {Map<String, String>? headers}) =>
-      _client.read(url, headers: headers);
+      _withRetryAndTimeout(() => _client.read(url, headers: headers));
 
   @override
   Future<Uint8List> readBytes(Uri url, {Map<String, String>? headers}) =>
-      _client.readBytes(url, headers: headers);
+      _withRetryAndTimeout(() => _client.readBytes(url, headers: headers));
 
   @override
-  Future<StreamedResponse> send(BaseRequest request) => _client.send(request);
+  Future<StreamedResponse> send(BaseRequest request) =>
+      _client.send(request).timeout(_timeout);
 }

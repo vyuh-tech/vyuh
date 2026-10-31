@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart' show Icons;
-import 'package:vyuh_core/plugin/auth/anonymous_auth_plugin.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 final class _TestAuthPlugin extends AuthPlugin {

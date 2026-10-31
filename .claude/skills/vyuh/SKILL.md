@@ -29,12 +29,16 @@ of ownership.
 3. **The platform owns lifecycle.** Order: preloaded plugins → plugins →
    feature hooks (events, redirects) → feature `init` in dependency order →
    extensions → routes → `SystemReadyEvent`. Dispose and restart reverse it:
-   features stop first, while their plugins still exist.
+   features stop first, while their plugins still exist. Preloaded plugins
+   keep running across restarts; one that failed to start fails startup and
+   is retried by Restart.
    Lazy features follow the same lifecycle when they activate, and roll back
    completely if activation fails.
 4. **Reactive by events.** State changes that other features care about are
    typed `VyuhEvent`s. Handlers and redirect refreshes subscribe to them.
    Use MobX or Listenables inside a feature; use events between features.
+   Sign-in and sign-out already emit `UserChangedEvent`: refresh redirects
+   with `refreshOn: [UserChangedEvent]` instead of defining your own.
 5. **Every failure has a way out.** Failures are `VyuhFailure`s, reported
    once (telemetry plus `RouteFailureEvent`) and shown in the app's theme with
    Try again, Back, Go home or Restart, whichever applies. Never a dead end,

@@ -10,10 +10,16 @@ import 'package:vyuh_core/vyuh_core.dart';
 final class GetItDIPlugin extends DIPlugin {
   final _instance = GetIt.asNewInstance();
 
+  /// A name for this container, shown by [toString] to tell scoped
+  /// containers apart while debugging.
   final String? debugLabel;
 
   GetItDIPlugin({this.debugLabel})
       : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
+
+  @override
+  String toString() =>
+      debugLabel == null ? 'GetItDIPlugin' : 'GetItDIPlugin($debugLabel)';
 
   @override
   Future<void> init() => _instance.reset();

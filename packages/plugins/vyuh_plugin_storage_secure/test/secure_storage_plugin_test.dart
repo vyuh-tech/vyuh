@@ -68,6 +68,20 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
   });
 
+  test('using the plugin before init or after dispose is a clear error',
+      () async {
+    final plugin = FlutterSecureStoragePlugin();
+    expect(() => plugin.read('key'), throwsStateError);
+    expect(() => plugin.write('key', 'v'), throwsStateError);
+    expect(() => plugin.has('key'), throwsStateError);
+    expect(() => plugin.delete('key'), throwsStateError);
+
+    await plugin.init();
+    expect(await plugin.write('key', 42), '42');
+    await plugin.dispose();
+    expect(() => plugin.read('key'), throwsStateError);
+  });
+
   test('describes itself as a secure storage plugin', () {
     final plugin = FlutterSecureStoragePlugin();
 

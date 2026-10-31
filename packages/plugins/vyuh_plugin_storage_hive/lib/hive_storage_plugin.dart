@@ -20,12 +20,25 @@ final class HiveStoragePlugin extends StoragePlugin with InitOncePlugin {
   Future<void> initOnce() async {
     await Hive.initFlutter();
     _box = await Hive.openBox(boxName);
+    _openCounts[boxName] = (_openCounts[boxName] ?? 0) + 1;
   }
+
+  /// Hive returns the same box to every plugin that opens a name, so the
+  /// box closes only when the last of them is disposed.
+  static final Map<String, int> _openCounts = {};
 
   @override
   Future<void> disposeOnce() async {
-    await _box?.close();
+    final box = _box;
     _box = null;
+    if (box == null) return;
+    final remaining = (_openCounts[boxName] ?? 1) - 1;
+    if (remaining > 0) {
+      _openCounts[boxName] = remaining;
+      return;
+    }
+    _openCounts.remove(boxName);
+    await box.close();
   }
 
   /// The open box, or a clear error when used before [init] or after

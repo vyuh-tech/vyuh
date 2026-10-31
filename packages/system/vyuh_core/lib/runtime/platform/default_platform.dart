@@ -213,7 +213,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           name: 'Feature Extensions',
           operation: 'Init',
           parentTrace: trace,
-          fn: (_) => _initFeatureExtensions(_features),
+          fn: (extensionsTrace) =>
+              _initFeatureExtensions(_features, extensionsTrace),
         );
 
         return telemetry.trace<void>(
@@ -275,7 +276,10 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     );
   }
 
-  Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
+  Future<void> _initFeatureExtensions(
+    List<FeatureDescriptor> features,
+    Trace? parentTrace,
+  ) async {
     final disposeFutures = <Future<void>>[];
 
     final builders = features.expand(
@@ -332,6 +336,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       await telemetry.trace(
         name: 'Extension: ${builder.title}',
         operation: 'Init',
+        parentTrace: parentTrace,
         fn: (_) =>
             builder.init(extensions[entry.key] ?? <ExtensionDescriptor>[]),
       );

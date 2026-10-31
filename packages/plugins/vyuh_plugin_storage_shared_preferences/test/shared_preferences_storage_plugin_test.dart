@@ -28,14 +28,24 @@ void main() {
     await plugin.dispose();
   });
 
+  test('writing null deletes the key', () async {
+    final plugin = SharedPreferencesStoragePlugin();
+    await plugin.init();
+
+    await plugin.write('gone', 'value');
+    expect(await plugin.write('gone', null), isNull);
+    expect(await plugin.has('gone'), isFalse);
+    await plugin.dispose();
+  });
+
   test('non-string values are stored as their string form', () async {
     final plugin = SharedPreferencesStoragePlugin();
     await plugin.init();
 
-    // write echoes the original value, but storage keeps toString().
-    expect(await plugin.write('count', 42), 42);
-    expect(await plugin.write('enabled', true), true);
-    expect(await plugin.write('ratio', 1.5), 1.5);
+    // write returns what it stored: the value's toString().
+    expect(await plugin.write('count', 42), '42');
+    expect(await plugin.write('enabled', true), 'true');
+    expect(await plugin.write('ratio', 1.5), '1.5');
 
     expect(await plugin.read('count'), '42');
     expect(await plugin.read('enabled'), 'true');

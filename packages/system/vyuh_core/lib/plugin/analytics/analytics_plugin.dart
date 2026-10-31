@@ -61,20 +61,16 @@ final class AnalyticsPlugin extends Plugin
   /// Initializes all analytics providers.
   ///
   /// This is called automatically when the plugin is initialized.
-  /// Each provider's initialization is handled independently.
+  /// A provider that fails to initialize is logged and skipped.
   @override
-  Future<void> initOnce() {
-    return Future.wait(providers.map((e) => e.init()));
-  }
+  Future<void> initOnce() => _fanOut((provider) => provider.init());
 
   /// Disposes all analytics providers.
   ///
   /// This is called automatically when the plugin is disposed.
   /// Each provider's cleanup is handled independently.
   @override
-  Future<void> disposeOnce() {
-    return Future.wait(providers.map((e) => e.dispose()));
-  }
+  Future<void> disposeOnce() => _fanOut((provider) => provider.dispose());
 
   /// Reports an analytics event to all providers.
   ///
@@ -89,12 +85,8 @@ final class AnalyticsPlugin extends Plugin
   /// );
   /// ```
   @override
-  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) {
-    final futures =
-        providers.map((provider) => provider.reportEvent(name, params: params));
-
-    return Future.wait(futures);
-  }
+  Future<void> reportEvent(String name, {Map<String, dynamic>? params}) =>
+      _fanOut((provider) => provider.reportEvent(name, params: params));
 
   /// Identifies a user across all analytics providers.
   ///
@@ -109,20 +101,26 @@ final class AnalyticsPlugin extends Plugin
   /// );
   /// ```
   @override
-  Future<void> identifyUser(String userId, {Map<String, dynamic>? traits}) {
-    final futures = providers.map(
-      (provider) => provider.identifyUser(userId, traits: traits),
-    );
-    return Future.wait(futures);
-  }
+  Future<void> identifyUser(String userId, {Map<String, dynamic>? traits}) =>
+      _fanOut((provider) => provider.identifyUser(userId, traits: traits));
 
   /// Resets the user identity across all analytics providers.
   ///
   /// This is typically called when the user logs out or is no longer
   /// identifiable.
   @override
-  Future<void> resetUser() {
-    final futures = providers.map((provider) => provider.resetUser());
-    return Future.wait(futures);
+  Future<void> resetUser() => _fanOut((provider) => provider.resetUser());
+
+  /// Calls every provider. A provider that fails, synchronously or
+  /// asynchronously, is logged and skipped: analytics must never crash the
+  /// app, and one broken provider must not stop the others.
+  Future<void> _fanOut(Future<void> Function(AnalyticsProvider) call) {
+    return Future.wait(providers.map((provider) {
+      return Future.sync(() => call(provider)).catchError(
+        (Object error, StackTrace stack) => debugPrint(
+          'Vyuh: analytics provider ${provider.runtimeType} failed: $error',
+        ),
+      );
+    }));
   }
 }

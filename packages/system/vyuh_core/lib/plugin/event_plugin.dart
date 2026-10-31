@@ -46,6 +46,7 @@ abstract class EventPlugin extends Plugin with PreloadedPlugin {
   ///
   /// The [listener] will be called only once when an event of type [T]
   /// is emitted, then the subscription will be automatically cancelled.
+  /// Call the returned function to cancel it before the event arrives.
   ///
   /// Example:
   /// ```dart
@@ -53,7 +54,7 @@ abstract class EventPlugin extends Plugin with PreloadedPlugin {
   ///   print('App started at ${event.timestamp}');
   /// });
   /// ```
-  void once<T extends VyuhEvent>(VyuhEventListener<T> listener);
+  DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener);
 
   /// Emit an event to all subscribers.
   ///
@@ -140,13 +141,16 @@ final class DefaultEventPlugin extends EventPlugin {
   }
 
   @override
-  void once<T extends VyuhEvent>(VyuhEventListener<T> listener) {
+  DisposeFunction once<T extends VyuhEvent>(VyuhEventListener<T> listener) {
     late final StreamSubscription<T> subscription;
     subscription = _eventBus!.on<T>().listen((event) {
-      listener(event);
-
       subscription.cancel();
+      listener(event);
     });
+
+    return () {
+      subscription.cancel();
+    };
   }
 
   @override
