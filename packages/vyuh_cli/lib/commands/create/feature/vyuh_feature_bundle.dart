@@ -45,7 +45,7 @@ final vyuhFeatureBundle = MasonBundle.fromJson(<String, dynamic>{
     },
     {
       "path": "{{ name.snakeCase() }}/test/{{ name.snakeCase() }}_test.dart",
-      "data": "Cg==",
+      "data": "aW1wb3J0ICdwYWNrYWdlOmZsdXR0ZXJfdGVzdC9mbHV0dGVyX3Rlc3QuZGFydCc7CmltcG9ydCAncGFja2FnZTp7eyBuYW1lLnNuYWtlQ2FzZSgpIH19L3t7IG5hbWUuc25ha2VDYXNlKCkgfX0uZGFydCc7Cgp2b2lkIG1haW4oKSB7CiAgdGVzdCgnZXhwb3NlcyB0aGUge3sgbmFtZS5zbmFrZUNhc2UoKSB9fSBmZWF0dXJlJywgKCkgewogICAgZXhwZWN0KGZlYXR1cmUubmFtZSwgJ3t7IG5hbWUuc25ha2VDYXNlKCkgfX0nKTsKICAgIGV4cGVjdChmZWF0dXJlLnJvdXRlcywgaXNOb3ROdWxsKTsKICB9KTsKfQo=",
       "type": "text"
     }
   ],

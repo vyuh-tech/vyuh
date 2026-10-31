@@ -70,7 +70,7 @@ final vyuhProjectBundle = MasonBundle.fromJson(<String, dynamic>{
     },
     {
       "path": "{{ name.snakeCase() }}/features/counter/feature_counter/test/feature_counter_test.dart",
-      "data": "Cg==",
+      "data": "aW1wb3J0ICdwYWNrYWdlOmZlYXR1cmVfY291bnRlci9mZWF0dXJlX2NvdW50ZXIuZGFydCc7CmltcG9ydCAncGFja2FnZTpmbHV0dGVyX3Rlc3QvZmx1dHRlcl90ZXN0LmRhcnQnOwoKdm9pZCBtYWluKCkgewogIHRlc3QoJ2V4cG9zZXMgdGhlIGNvdW50ZXIgZmVhdHVyZScsICgpIHsKICAgIGV4cGVjdChmZWF0dXJlLm5hbWUsICdjb3VudGVyJyk7CiAgICBleHBlY3QoZmVhdHVyZS50aXRsZSwgaXNOb3RFbXB0eSk7CiAgICBleHBlY3QoZmVhdHVyZS5yb3V0ZXMsIGlzTm90TnVsbCk7CiAgfSk7Cn0K",
       "type": "text"
     },
     {
