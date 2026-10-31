@@ -1,3 +1,8 @@
+## 3.1.0
+
+ - **FIX**(vyuh_core): keep the back stack after a lazy load; no startup-failure flash.
+ - **FEAT**(vyuh_core): theme tokens for failure titles, messages, icons and size.
+
 ## 3.0.1
 
  - **FIX**(vyuh_core): contain telemetry failures; map device locales; let .env win over defaults.

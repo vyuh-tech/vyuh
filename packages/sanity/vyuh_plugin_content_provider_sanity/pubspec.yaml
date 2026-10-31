@@ -1,7 +1,7 @@
 name: vyuh_plugin_content_provider_sanity
 resolution: workspace
 description: A Content Provider for the Vyuh Framework that reads documents from Sanity.io.
-version: 2.0.1
+version: 2.0.2
 
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/sanity/vyuh_plugin_content_provider_sanity
@@ -22,8 +22,8 @@ dependencies:
   flutter:
     sdk: flutter
   sanity_client: ^1.9.3
-  vyuh_core: ^3.0.1
-  vyuh_extension_content: ^3.0.1
+  vyuh_core: ^3.1.0
+  vyuh_extension_content: ^3.0.2
   vyuh_cache: ^1.6.0
   cached_network_image: ^4.0.0
   cached_network_image_platform_interface: ^5.0.0
