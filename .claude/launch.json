@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "docs",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "--filter", "vyuh-docs", "dev", "--port", "4173", "--host", "127.0.0.1"],
+      "port": 4173
+    }
+  ]
+}

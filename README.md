@@ -260,11 +260,20 @@ We welcome contributions from the community! Please check out our [CONTRIBUTING.
 
 ### Setup
 
-1. We use [melos](https://melos.invertase.dev/) for managing our monorepo and [pnpm](https://pnpm.io/) for package management. Make sure you have both installed.
+1. Install [Flutter](https://flutter.dev), [Bun](https://bun.sh) and
+   [Node.js](https://nodejs.org) 25 or later. Bun installs and runs the
+   JavaScript packages (docs, Sanity schemas and Studio); Node runs the tools
+   themselves.
 
-2. Clone the repository and run `pnpm install` to install dependencies.
+2. Clone the repository, then install everything from the repo root:
 
-3. Run `melos bootstrap` to set up the workspace.
+   ```bash
+   flutter pub get   # Dart workspace: all packages, apps and examples
+   bun install       # JavaScript workspace: docs, schemas, studio
+   ```
+
+3. Run the docs locally with `bun run docs`. Releases use
+   [melos](https://melos.invertase.dev/) (`melos version`).
 
 ### Running the Demo
 
@@ -279,7 +288,7 @@ To run the Vyuh Demo:
 To start the Sanity Studio:
 
 1. Navigate to the `apps/demo-studio` directory.
-2. Run `pnpm run dev` to start the Sanity Studio development server.
+2. Run `bun run dev` to start the Sanity Studio development server.
 
 ## License
 
