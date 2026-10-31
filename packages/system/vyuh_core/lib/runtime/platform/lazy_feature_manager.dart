@@ -296,9 +296,11 @@ class _LazyLoadingPageState extends flutter.State<_LazyLoadingPage> {
       await widget.manager.loadFeature(widget.featureName);
 
       if (mounted) {
-        // Feature loaded — real routes are now registered.
-        // Re-navigate to trigger GoRouter matching with real routes.
-        vyuh.router.go(widget.targetLocation);
+        // The real routes are registered. Re-match the current navigation
+        // stack against them, so this placeholder is replaced where it
+        // stands. `go` here would discard the stack, and Back would no
+        // longer return to where the user came from.
+        vyuh.router.instance.refresh();
       }
     } catch (e, st) {
       final lazy = widget.manager.descriptor(widget.featureName);

@@ -70,8 +70,10 @@ class _PendingView extends StatelessWidget {
     return Observer(
       name: 'Framework Pending',
       builder: (context) {
-        final status = vyuh.tracker.status;
-        if (status == null || status == FutureStatus.pending) {
+        // Only a failed boot is a failure. When boot succeeds this screen
+        // may still be fading out while the app fades in, so it keeps
+        // showing the loader rather than reading success as a failure.
+        if (vyuh.tracker.status != FutureStatus.rejected) {
           return vyuh.widgetBuilder.appLoader(context);
         }
 
