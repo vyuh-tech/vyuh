@@ -73,32 +73,39 @@ final class TelemetryPlugin extends Plugin
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,
       bool fatal = false}) {
-    final futures = providers.map((provider) => provider.reportError(
+    return _fanOut((provider) => provider.reportError(
           exception,
           stackTrace: stackTrace,
           params: params,
           fatal: fatal,
         ));
-
-    return Future.wait(futures);
   }
 
   @override
   Future<void> reportFlutterError(FlutterErrorDetails details,
       {bool fatal = false}) {
-    final futures = providers
-        .map((provider) => provider.reportFlutterError(details, fatal: fatal));
-
-    return Future.wait(futures);
+    return _fanOut(
+        (provider) => provider.reportFlutterError(details, fatal: fatal));
   }
 
   @override
   Future<void> reportMessage(String message,
       {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) {
-    final futures = providers.map((provider) =>
+    return _fanOut((provider) =>
         provider.reportMessage(message, params: params, level: level));
+  }
 
-    return Future.wait(futures);
+  /// Sends a report to every provider. A provider that fails, synchronously
+  /// or asynchronously, is logged and skipped: telemetry must never crash
+  /// the app it observes, and one broken provider must not stop the others.
+  Future<void> _fanOut(Future<void> Function(TelemetryProvider) report) {
+    return Future.wait(providers.map((provider) {
+      return Future.sync(() => report(provider)).catchError(
+        (Object error, StackTrace stack) => debugPrint(
+          'Vyuh: telemetry provider ${provider.runtimeType} failed: $error',
+        ),
+      );
+    }));
   }
 
   /// Runs a function with a trace. This is useful for wrapping functions that

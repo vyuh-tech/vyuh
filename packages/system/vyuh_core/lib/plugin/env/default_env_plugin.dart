@@ -3,6 +3,9 @@ import 'package:vyuh_core/plugin/env/env_plugin.dart';
 
 final class DefaultEnvPlugin extends EnvPlugin {
   final String fileName;
+
+  /// Values used when the env file doesn't set a key. Values in the file
+  /// always win.
   final Map<String, String> defaults;
 
   DefaultEnvPlugin({this.fileName = '.env', this.defaults = const {}})
@@ -10,7 +13,13 @@ final class DefaultEnvPlugin extends EnvPlugin {
 
   @override
   Future<void> init() async {
-    await dotenv.load(fileName: fileName, mergeWith: defaults);
+    // dotenv's mergeWith would let these override the file, so add them
+    // only for keys the file doesn't set.
+    await dotenv.load(fileName: fileName);
+    final env = dotenv.env;
+    for (final entry in defaults.entries) {
+      env.putIfAbsent(entry.key, () => entry.value);
+    }
   }
 
   @override

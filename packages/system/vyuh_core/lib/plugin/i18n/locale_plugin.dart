@@ -138,18 +138,10 @@ class LocalePlugin extends Plugin {
   Future<void> useDeviceLocale() async {
     final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
-    if (_isLocaleSupported(deviceLocale)) {
-      await setLocale(deviceLocale);
-    } else {
-      // Try to match language code only (ignore country code)
-      final languageLocale = Locale(deviceLocale.languageCode);
-      if (_isLocaleSupported(languageLocale)) {
-        await setLocale(languageLocale);
-      } else {
-        // Default to configured default locale
-        await setLocale(defaultLocale.locale);
-      }
-    }
+    // Use the configured locale for the device's language (so `hi_IN`
+    // becomes the app's `hi`), or the default when it isn't supported.
+    final config = _getConfig(deviceLocale.languageCode);
+    await setLocale(config?.locale ?? defaultLocale.locale);
   }
 
   /// Get configuration for a specific language code
