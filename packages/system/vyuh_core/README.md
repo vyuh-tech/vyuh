@@ -222,6 +222,33 @@ vyuh.router.goHome();
 Features add app-wide redirects with `FeatureDescriptor.redirects`. See
 [Routes and navigation](https://docs.vyuh.tech/guides/routes-and-navigation#feature-redirects).
 
+Applications own route trees and shell composition. `DefaultNavigationPlugin`
+forwards go_router entry guards, redirect limits, refresh listenables, custom
+exception/error pages, extra codecs, restoration scopes, focus, browser-history
+and initial-platform-location policy. Dynamic route replacement preserves guards.
+
+Use `ShellRoute` for shared boundaries and `StatefulShellRoute` for independent
+navigation branches. Configure retention once on the navigation plugin, then
+use its container builder in application-owned route trees:
+
+```dart
+final navigation = DefaultNavigationPlugin(maxRetainedBranches: 3);
+
+StatefulShellRoute(
+  navigatorContainerBuilder: navigation.branchContainerBuilder,
+  builder: (_, _, shell) => ApplicationShell(body: shell),
+  branches: applicationBranches,
+)
+```
+
+The default capacity is three, including the active branch. Unvisited branches
+stay unmounted; the least recently used inactive branch is evicted at capacity.
+Eviction disposes page widget state and subscriptions, while go_router retains
+route history. Revisiting reconstructs the page. This is not a byte-based memory
+limit and does not manage repository/query caches or background services. Widgets
+must release their resources in `dispose`. Set capacity to one for minimal UI
+retention. Branch preload does not provide deferred code delivery.
+
 ### State Management with MobX 💫
 
 Vyuh comes with built-in support for MobX, providing reactive state management

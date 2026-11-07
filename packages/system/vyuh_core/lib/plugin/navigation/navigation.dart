@@ -12,7 +12,40 @@ abstract class NavigationPlugin extends Plugin {
   /// not-found [RouteFailureView].
   static const catchAllPath = '/:path(.*)';
 
-  NavigationPlugin({required super.name, required super.title});
+  /// Default live navigator budget, including the active branch.
+  static const defaultMaxRetainedBranches = 3;
+
+  /// Maximum mounted stateful-shell branches. Query caches are independent.
+  final int maxRetainedBranches;
+
+  NavigationPlugin({
+    required super.name,
+    required super.title,
+    this.maxRetainedBranches = defaultMaxRetainedBranches,
+  }) {
+    if (maxRetainedBranches < 1) {
+      throw ArgumentError.value(
+        maxRetainedBranches,
+        'maxRetainedBranches',
+        'must be positive',
+      );
+    }
+  }
+
+  /// Plug directly into StatefulShellRoute.navigatorContainerBuilder. The
+  /// application supplies the route tree; the plugin applies navigation policy.
+  g.ShellNavigationContainerBuilder get branchContainerBuilder =>
+      _buildBranches;
+
+  Widget _buildBranches(
+    BuildContext context,
+    g.StatefulNavigationShell shell,
+    List<Widget> children,
+  ) => NavigationBranchContainer(
+    currentIndex: shell.currentIndex,
+    maxRetainedBranches: maxRetainedBranches,
+    children: children,
+  );
 
   /// Redirects contributed by features through [FeatureDescriptor.redirects].
   ///

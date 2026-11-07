@@ -1,3 +1,10 @@
+## 3.3.0
+
+- Add NavigationBranchContainer for bounded, lazy, least-recently-used retention of stateful shell navigator widgets, with application-selected capacity.
+
+- Expose go_router entry guards, refresh triggers, exception/page builders, extra codecs, restoration, focus, history and initial-link policy through the default navigation plugin.
+- Preserve entry guards and redirect limits when routes are replaced dynamically. Application route trees and shell composition remain application-owned.
+
 ## 3.2.0
 
  - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.
