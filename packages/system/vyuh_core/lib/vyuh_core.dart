@@ -67,6 +67,7 @@ export 'plugin/feature_flag.dart';
 export 'plugin/i18n/i18n.dart';
 export 'plugin/navigation/default_navigation_plugin.dart';
 export 'plugin/navigation/navigation.dart';
+export 'plugin/navigation/navigation_branch_container.dart';
 export 'plugin/network/http_network_plugin.dart';
 export 'plugin/network/network_plugin.dart';
 export 'plugin/plugin.dart';

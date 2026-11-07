@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_web_plugins/url_strategy.dart' as strategy;
@@ -22,6 +24,19 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   /// The global redirect for this router, run before every feature redirect.
   final g.GoRouterRedirect? redirect;
 
+  /// Intercepts transitions before redirect evaluation.
+  final g.OnEnter? onEnter;
+  final int redirectLimit;
+  final Listenable? refreshListenable;
+  final g.GoExceptionHandler? onException;
+  final g.GoRouterWidgetBuilder? errorBuilder;
+  final g.GoRouterPageBuilder? errorPageBuilder;
+  final Codec<Object?, Object?>? extraCodec;
+  final String? restorationScopeId;
+  final bool requestFocus;
+  final bool routerNeglect;
+  final bool overridePlatformDefaultLocation;
+
   static g.GoRouterRedirect? _legacyRedirect;
 
   g.GoRouterRedirect? get _redirect => redirect ?? _legacyRedirect;
@@ -40,6 +55,18 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   DefaultNavigationPlugin({
     final bool urlReflectsImperativeAPIs = false,
     this.redirect,
+    super.maxRetainedBranches,
+    this.onEnter,
+    this.redirectLimit = 5,
+    this.refreshListenable,
+    this.onException,
+    this.errorBuilder,
+    this.errorPageBuilder,
+    this.extraCodec,
+    this.restorationScopeId,
+    this.requestFocus = true,
+    this.routerNeglect = false,
+    this.overridePlatformDefaultLocation = false,
     RouterUrlStyle? urlStyle,
   }) : super(
          name: 'vyuh.plugin.navigation.default',
@@ -96,6 +123,8 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     _routingConfig = RoutingConfigNotifier(
       allRoutes,
       redirect: _composedRedirect,
+      onEnter: onEnter,
+      redirectLimit: redirectLimit,
     );
 
     final observers = vyuh.plugins
@@ -110,17 +139,17 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
       navigatorKey: rootNavigatorKey,
       debugLogDiagnostics: kDebugMode,
       observers: observers,
-      errorBuilder: (context, state) => RouteFailureView(
-        failure: VyuhFailure(
-          kind: FailureKind.notFound,
-          title: VyuhStrings.current.pageNotFoundTitle,
-          message: VyuhStrings.current.noRouteMessage(state.uri),
-          error: state.error,
-          location: state.uri,
-        ),
-        // Re-run matching and redirects for the current location only.
-        onRetry: () => _router.refresh(),
-      ),
+      refreshListenable: refreshListenable,
+      onException: onException,
+      errorPageBuilder: onException == null ? errorPageBuilder : null,
+      extraCodec: extraCodec,
+      restorationScopeId: restorationScopeId,
+      requestFocus: requestFocus,
+      routerNeglect: routerNeglect,
+      overridePlatformDefaultLocation: overridePlatformDefaultLocation,
+      errorBuilder: onException != null || errorPageBuilder != null
+          ? null
+          : errorBuilder ?? _buildError,
     );
 
     _stopWatchingRedirects?.call();
@@ -128,6 +157,18 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
     _initialized = true;
   }
+
+  Widget _buildError(BuildContext context, GoRouterState state) =>
+      RouteFailureView(
+        failure: VyuhFailure(
+          kind: FailureKind.notFound,
+          title: VyuhStrings.current.pageNotFoundTitle,
+          message: VyuhStrings.current.noRouteMessage(state.uri),
+          error: state.error,
+          location: state.uri,
+        ),
+        onRetry: () => _router.refresh(),
+      );
 
   @override
   replaceRoutes(List<g.RouteBase> routes) {
@@ -183,6 +224,8 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
     _routingConfig = RoutingConfigNotifier(
       _initialRoutes,
       redirect: _composedRedirect,
+      onEnter: onEnter,
+      redirectLimit: redirectLimit,
     );
 
     return Future.value();
@@ -300,17 +343,29 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
 
 final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig> {
   final g.GoRouterRedirect? redirect;
+  final g.OnEnter? onEnter;
+  final int redirectLimit;
 
-  RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect})
-    : super(
-        redirect == null
-            ? g.RoutingConfig(routes: routes)
-            : g.RoutingConfig(routes: routes, redirect: redirect),
-      );
+  RoutingConfigNotifier(
+    List<g.RouteBase> routes, {
+    this.redirect,
+    this.onEnter,
+    this.redirectLimit = 5,
+  }) : super(_configuration(routes, redirect, onEnter, redirectLimit));
 
   void setRoutes(List<g.RouteBase> routes) {
-    value = redirect == null
-        ? g.RoutingConfig(routes: routes)
-        : g.RoutingConfig(routes: routes, redirect: redirect!);
+    value = _configuration(routes, redirect, onEnter, redirectLimit);
   }
+
+  static g.RoutingConfig _configuration(
+    List<g.RouteBase> routes,
+    g.GoRouterRedirect? redirect,
+    g.OnEnter? onEnter,
+    int redirectLimit,
+  ) => g.RoutingConfig(
+    routes: routes,
+    onEnter: onEnter,
+    redirect: redirect ?? (_, _) => null,
+    redirectLimit: redirectLimit,
+  );
 }
