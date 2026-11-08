@@ -28,20 +28,18 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
           loadedApp = vyuh.widgetBuilder.appBuilder(context, vyuh);
         }
 
-        // On the web the browser's path (a deep link on reload) is this
-        // app's initial route. Only the loaded app's router can match it, so
-        // every route name opens the one loading page; the router reads the
-        // path again once the app has loaded.
+        // The loading surface must not create a Navigator. A temporary
+        // Navigator selects single-entry browser history while the loaded
+        // Router selects multi-entry history. Their overlap during the fade
+        // can strand navigation messages waiting for a browser traversal.
+        // The loaded app alone owns the initial deep link and browser history.
         final theme = vyuh.widgetBuilder.theme;
         final pendingApp = MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: theme.light,
           darkTheme: theme.dark,
           themeMode: theme.mode,
-          onGenerateInitialRoutes: (initialRoute) => [
-            _pendingRoute(RouteSettings(name: initialRoute)),
-          ],
-          onGenerateRoute: _pendingRoute,
+          builder: (_, _) => const _PendingView(),
         );
 
         return AnimatedSwitcher(
@@ -54,11 +52,6 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
       },
     );
   }
-
-  Route<void> _pendingRoute(RouteSettings settings) => MaterialPageRoute(
-    settings: settings,
-    builder: (_) => const _PendingView(),
-  );
 }
 
 /// The loader while the app loads, and the failure if it does not.

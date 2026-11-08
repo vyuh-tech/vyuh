@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -47,6 +50,67 @@ void main() {
       '/items/42',
     );
     expect(find.text('Item 42'), findsOneWidget);
+  });
+
+  testWidgets('slow startup leaves browser history to the loaded router', (
+    tester,
+  ) async {
+    reloadAt(tester, '/items/42');
+    final ready = Completer<void>();
+    final navigation = <MethodCall>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+      SystemChannels.navigation,
+      (call) async => navigation.add(call),
+    );
+    addTearDown(() {
+      tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(
+        SystemChannels.navigation,
+        null,
+      );
+    });
+
+    vc.runApp(
+      features: () => [
+        vc.FeatureDescriptor(
+          name: 'slow-start',
+          title: 'Slow start',
+          init: () => ready.future,
+        ),
+        items(),
+      ],
+      initialLocation: '/home',
+    );
+    await tester.pump();
+    await tester.pump(const Duration(seconds: 1));
+
+    expect(find.byType(Navigator), findsNothing);
+    expect(
+      navigation.where((call) => call.method == 'selectSingleEntryHistory'),
+      isEmpty,
+    );
+    expect(tester.takeException(), isNull);
+
+    ready.complete();
+    await vc.vyuh.getReady(tester);
+    await tester.pumpAndSettle();
+    expect(find.text('Item 42'), findsOneWidget);
+
+    vc.vyuh.router.instance.go('/home');
+    await tester.pumpAndSettle();
+    expect(find.text('Home'), findsOneWidget);
+    expect(find.byType(Navigator), findsOneWidget);
+    expect(
+      navigation.where((call) => call.method == 'selectSingleEntryHistory'),
+      isEmpty,
+    );
+    expect(
+      navigation
+          .where((call) => call.method == 'routeInformationUpdated')
+          .last
+          .arguments['uri'],
+      '/home',
+    );
+    expect(tester.takeException(), isNull);
   });
 
   testWidgets('a startup failure on a deep link shows the failure, not the '
