@@ -1,3 +1,8 @@
+## 3.4.0
+
+ - **FIX**(core): keep startup loader out of browser history.
+ - **FEAT**(core): configure bounded routing retention and router options ([#60](https://github.com/vyuh-tech/vyuh/issues/60)).
+
 ## 3.3.0
 
 - Add NavigationBranchContainer for bounded, lazy, least-recently-used retention of stateful shell navigator widgets, with application-selected capacity.
