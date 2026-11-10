@@ -1,6 +1,7 @@
 import 'package:feature_puzzles/api/model/level.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 final class PuzzleClient {
   final Map<String, ObservableFuture<Level?>> _levelFutures = {};

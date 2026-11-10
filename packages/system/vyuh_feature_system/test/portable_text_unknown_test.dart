@@ -21,7 +21,7 @@ void main() {
     () async {
       VyuhBinding.instance.widgetInit(
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: SchemaProvider()),
+          others: [DefaultContentPlugin(provider: SchemaProvider())],
         ),
         extensionBuilder: ContentExtensionBuilder(),
         extensionDescriptors: [],

@@ -4,7 +4,7 @@ import 'package:feature_tmdb/content/enums/config_enum.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 /// Returns a function that executes [fn] only once and returns its result.
 /// Subsequent calls return the result of [empty].

@@ -80,7 +80,7 @@ final class UnknownLayoutConfiguration<T extends ContentItem>
       ],
     );
 
-    return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    return VyuhBinding.instance.content.unknown(context, failure);
   }
 }
 
@@ -113,6 +113,6 @@ final class UnknownContentModifierConfiguration
       ],
     );
 
-    return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+    return VyuhBinding.instance.content.unknown(context, failure);
   }
 }

@@ -1,5 +1,5 @@
 import 'package:material_ui/material_ui.dart';
-import 'package:vyuh_core/plugin/content/content_item.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 /// A widget that displays a card indicating no preview is available for a content item or layout.
 ///

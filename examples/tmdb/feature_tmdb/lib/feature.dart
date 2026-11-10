@@ -21,6 +21,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/content_extension_descriptor.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 final feature = FeatureDescriptor(

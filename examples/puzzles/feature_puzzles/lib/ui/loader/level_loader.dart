@@ -5,6 +5,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 class LevelContentLoader extends StatelessWidget {
   const LevelContentLoader({super.key});

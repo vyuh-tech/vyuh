@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart' as go;
-import 'package:vyuh_core/runtime/cms_route.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 List<go.GoRoute> routes() {
   return [

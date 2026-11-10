@@ -1,0 +1,35 @@
+{
+  "name": "vyuh-docs",
+  "version": "1.1.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vitepress dev --host",
+    "build": "bun run docs:structure && bun run docs:diagrams && vitepress build",
+    "preview": "vitepress preview",
+    "postinstall": "node .vitepress/scripts/copy-rive-runtime.mjs",
+    "docs:api": "dart --packages=../.dart_tool/package_config.json ../tools/generate_api_reference.dart .. .vitepress/scripts/api-source.json && bun .vitepress/scripts/generate-api.ts",
+    "docs:examples": "bun .vitepress/scripts/sync-examples.ts",
+    "docs:diagrams": "node .vitepress/scripts/check-diagrams.mjs",
+    "docs:structure": "node .vitepress/scripts/check-docs-structure.mjs"
+  },
+  "devDependencies": {
+    "@fontsource/dm-sans": "5.3.0",
+    "@iconify/vue": "^5.0.4",
+    "@resvg/resvg-js": "2.6.2",
+    "happy-dom": "^21.0.4",
+    "satori": "0.63.2",
+    "vitepress": "2.0.0-alpha.21",
+    "vue": "^3.5.44"
+  },
+  "dependencies": {
+    "@rive-app/canvas": "^2.49.0",
+    "@tailwindcss/typography": "^0.5.20",
+    "@tailwindcss/vite": "^4.3.3",
+    "mermaid": "^12.2.0",
+    "tailwindcss": "^4.3.3"
+  },
+  "engines": {
+    "node": ">=25"
+  }
+}

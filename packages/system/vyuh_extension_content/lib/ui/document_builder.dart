@@ -1,9 +1,7 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-import 'document_future_builder.dart';
-import 'document_stream_builder.dart';
-import 'scoped_di_widget.dart';
 
 /// A widget that builds UI based on document data fetched from a content provider.
 ///
@@ -60,6 +58,18 @@ final class DocumentBuilder<T> extends StatelessWidget {
   /// This allows for document-specific initialization logic.
   final Future<T?> Function(BuildContext context, T document)? initDocument;
 
+  /// Whether this document is a whole route. A route that fails shows a
+  /// full page with Back and Go home; other content fails inline.
+  final bool isRoute;
+
+  /// The location being shown, included in failure reports.
+  final Uri? location;
+
+  /// Identifies the document. When set, the builder refetches (or
+  /// resubscribes) only when this value changes, not when the parent passes
+  /// new closures. The `fromRoute`, `fromQuery` and `fromId` factories set it.
+  final Object? requestKey;
+
   /// Creates a [DocumentBuilder] with a custom document fetching function.
   const DocumentBuilder({
     super.key,
@@ -70,6 +80,9 @@ final class DocumentBuilder<T> extends StatelessWidget {
     this.allowRefresh = true,
     this.isLive = false,
     this.initDocument,
+    this.isRoute = false,
+    this.location,
+    this.requestKey,
   });
 
   /// Creates a [DocumentBuilder] that fetches a document by query.
@@ -102,6 +115,13 @@ final class DocumentBuilder<T> extends StatelessWidget {
       buildContent: buildContent,
       allowRefresh: allowRefresh,
       isLive: isLive,
+      requestKey: (
+        'query',
+        query,
+        _paramsKey(queryParams),
+        includeDrafts,
+        isLive,
+      ),
       initDocument: initDocument,
     );
   }
@@ -131,6 +151,7 @@ final class DocumentBuilder<T> extends StatelessWidget {
       buildContent: buildContent,
       allowRefresh: allowRefresh,
       isLive: isLive,
+      requestKey: ('id', id, includeDrafts, isLive),
       initDocument: initDocument,
     );
   }
@@ -167,6 +188,9 @@ final class DocumentBuilder<T> extends StatelessWidget {
       buildContent: buildContent,
       allowRefresh: allowRefresh,
       isLive: isLive,
+      requestKey: ('route', url, routeId, includeDrafts, isLive),
+      isRoute: true,
+      location: url,
     );
   }
 
@@ -192,6 +216,9 @@ final class DocumentBuilder<T> extends StatelessWidget {
   Widget _buildStaticDocument(BuildContext context) {
     return DocumentFutureBuilder<T>(
       allowRefresh: allowRefresh,
+      isRoute: isRoute,
+      location: location,
+      requestKey: requestKey,
       future: () {
         return fetchDocument().then(
           (document) =>
@@ -257,9 +284,13 @@ class _LiveDocumentState<T> extends State<_LiveDocument<T>> {
   @override
   void didUpdateWidget(_LiveDocument<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.owner.liveDocument != widget.owner.liveDocument ||
-        oldWidget.owner.liveDocumentFactory !=
-            widget.owner.liveDocumentFactory) {
+    final oldOwner = oldWidget.owner, owner = widget.owner;
+    final keyed = oldOwner.requestKey != null || owner.requestKey != null;
+    final changed = keyed
+        ? oldOwner.requestKey != owner.requestKey
+        : oldOwner.liveDocument != owner.liveDocument ||
+              oldOwner.liveDocumentFactory != owner.liveDocumentFactory;
+    if (changed) {
       _generation++;
       _stream = widget.owner.liveDocumentFactory == null
           ? _map(widget.owner.liveDocument!)
@@ -278,13 +309,24 @@ class _LiveDocumentState<T> extends State<_LiveDocument<T>> {
             key: ValueKey(_generation),
             stream: _stream!,
             allowRefresh: owner.allowRefresh,
+            isRoute: owner.isRoute,
+            location: owner.location,
             buildContent: owner.buildContent,
           )
         : DocumentStreamBuilder<T>.refreshable(
             key: ValueKey(_generation),
             streamFactory: _createStream,
             allowRefresh: owner.allowRefresh,
+            isRoute: owner.isRoute,
+            location: owner.location,
             buildContent: owner.buildContent,
           );
   }
+}
+
+/// A stable, order-independent key for query parameters.
+String? _paramsKey(Map<String, String>? params) {
+  if (params == null) return null;
+  final keys = params.keys.toList()..sort();
+  return keys.map((k) => '$k=${params[k]}').join('&');
 }

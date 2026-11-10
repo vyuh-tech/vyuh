@@ -6,6 +6,8 @@ import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
+import 'document_failure.dart';
+
 /// A widget that builds UI based on a future of document data.
 ///
 /// This widget is suitable for fetching document content from the CMS once, and then
@@ -21,12 +23,28 @@ class DocumentFutureBuilder<T> extends StatefulWidget {
   /// Whether to allow refreshing the document, with the overlay Refresh button.
   final bool allowRefresh;
 
+  /// Whether this document is a whole route. A route that fails shows a
+  /// full page with Back and Go home; other content fails inline.
+  final bool isRoute;
+
+  /// The location being shown, included in failure reports.
+  final Uri? location;
+
+  /// Identifies the document being fetched. When set, the builder refetches
+  /// only when this value changes, so a parent passing a new [future]
+  /// closure on every build doesn't trigger a refetch. When null, a new
+  /// [future] function does.
+  final Object? requestKey;
+
   /// Creates a [DocumentFutureBuilder].
   const DocumentFutureBuilder({
     super.key,
     required this.future,
     required this.buildContent,
     this.allowRefresh = true,
+    this.isRoute = false,
+    this.location,
+    this.requestKey,
   });
 
   @override
@@ -46,7 +64,11 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
   @override
   void didUpdateWidget(DocumentFutureBuilder<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.future != widget.future) _refresh();
+    final keyed = oldWidget.requestKey != null || widget.requestKey != null;
+    final changed = keyed
+        ? oldWidget.requestKey != widget.requestKey
+        : oldWidget.future != widget.future;
+    if (changed) _refresh();
   }
 
   Future<T?> _refresh() {
@@ -59,7 +81,53 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
   }
 
   ObservableFuture<T?> _fetchDocument() {
-    return ObservableFuture(Future<T?>.sync(widget.future));
+    final isRoute = widget.isRoute;
+    // Inline failures are reported here, once per fetch. Route failures
+    // report themselves through RouteFailureView.
+    return ObservableFuture(
+      Future<T?>.sync(widget.future).then(
+        (document) {
+          if (document == null && !isRoute) {
+            reportFailure(
+              documentFailure(isRoute: false, location: widget.location),
+              emitRouteEvent: false,
+            );
+          }
+          return document;
+        },
+        onError: (Object error, StackTrace stack) {
+          if (!isRoute) {
+            reportFailure(
+              documentFailure(
+                isRoute: false,
+                location: widget.location,
+                error: error,
+                stackTrace: stack,
+              ),
+              emitRouteEvent: false,
+            );
+          }
+          Error.throwWithStackTrace(error, stack);
+        },
+      ),
+    );
+  }
+
+  /// One failure object per fetch, so route failures report exactly once.
+  VyuhFailure? _failure;
+  ObservableFuture<T?>? _failureSource;
+
+  VyuhFailure _failureFor(ObservableFuture<T?> future) {
+    if (!identical(_failureSource, future)) {
+      _failureSource = future;
+      _failure = documentFailure(
+        isRoute: widget.isRoute,
+        location: widget.location,
+        error: future.status == FutureStatus.rejected ? future.error : null,
+        stackTrace: null,
+      );
+    }
+    return _failure!;
   }
 
   @override
@@ -69,25 +137,22 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
       child: Observer(
         builder: (context) {
           final status = _tracker.value?.status;
-          final errorMsg = 'Failed to load document';
 
           // Handle different future statuses
           switch (status) {
             case null || FutureStatus.pending:
-              return VyuhBinding.instance.widgetBuilder.contentLoader(context);
+              return widget.isRoute
+                  ? vyuh.widgetBuilder.routeLoader(context, widget.location)
+                  : vyuh.widgetBuilder.contentLoader(context);
 
             case FutureStatus.fulfilled:
               final document = _tracker.value?.value;
 
               if (document == null) {
-                final exception = Exception(errorMsg);
-
-                VyuhBinding.instance.telemetry.reportError(exception);
-
-                return VyuhBinding.instance.widgetBuilder.errorView(
+                return buildDocumentFailure(
                   context,
-                  title: 'Failed to load document from CMS',
-                  error: exception,
+                  failure: _failureFor(_tracker.value!),
+                  isRoute: widget.isRoute,
                   onRetry: _refresh,
                 );
               }
@@ -99,13 +164,10 @@ class _DocumentFutureBuilderState<T> extends State<DocumentFutureBuilder<T>> {
                   : widget.buildContent(context, document);
 
             case FutureStatus.rejected:
-              final error = _tracker.value?.error;
-              VyuhBinding.instance.telemetry.reportError(error);
-
-              return VyuhBinding.instance.widgetBuilder.errorView(
+              return buildDocumentFailure(
                 context,
-                title: errorMsg,
-                error: error,
+                failure: _failureFor(_tracker.value!),
+                isRoute: widget.isRoute,
                 onRetry: _refresh,
               );
           }

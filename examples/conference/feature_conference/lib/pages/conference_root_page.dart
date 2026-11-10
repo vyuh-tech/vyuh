@@ -3,6 +3,7 @@ import 'package:feature_conference/layouts/conference_card_layout.dart';
 import 'package:feature_conference/widgets/conference_route_scaffold.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import '../content/conference.dart';
 

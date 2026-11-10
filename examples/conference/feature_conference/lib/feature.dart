@@ -1,6 +1,5 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/content_extension_descriptor.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import 'api/conference_api.dart';

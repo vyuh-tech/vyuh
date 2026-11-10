@@ -1,4 +1,26 @@
+/// The CMS add-on for Vyuh: content items, layouts, the content plugin and
+/// provider contracts, CMS routes and the builders that render them.
+///
+/// Register a content plugin with `PluginDescriptor(others: [DefaultContentPlugin(...)])`
+/// and reach it through `vyuh.content`.
 library;
+
+export 'contracts/content_failure.dart';
+export 'contracts/content_item.dart';
+export 'contracts/content_plugin.dart';
+export 'contracts/content_provider.dart';
+export 'contracts/live_content_provider.dart';
+export 'contracts/local_content_provider.dart';
+export 'contracts/noop_content_plugin.dart';
+export 'contracts/noop_content_provider.dart';
+export 'contracts/reference.dart';
+export 'contracts/route_base.dart';
+export 'contracts/serialization.dart';
+export 'contracts/type_descriptor.dart';
+export 'plugin/accessors.dart';
+export 'routing/cms_fallback_route.dart';
+export 'routing/cms_route.dart';
+export 'ui/unknown_content_view.dart';
 
 export 'content/action.dart';
 export 'content/condition.dart';

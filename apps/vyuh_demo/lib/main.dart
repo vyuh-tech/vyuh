@@ -66,17 +66,24 @@ void main() async {
       ),
     ],
     platformWidgetBuilder: vc.PlatformWidgetBuilder.system.copyWith(
+      // One theme for the loading screen, error views and the app. The
+      // system feature's ThemeService starts from it too.
+      theme: vc.VyuhTheme(
+        light: DesignSystem.lightTheme,
+        dark: DesignSystem.darkTheme,
+      ),
       appBuilder: (_, platform) {
         return Observer(
           builder: (_) {
-            var mode = platform.di.get<system.ThemeService>().currentMode.value;
+            final themes = platform.widgetBuilder.theme;
+            final mode = platform.di.get<system.ThemeService>().currentMode.value;
 
             return MaterialApp.router(
               title: 'Vyuh Demo',
               themeMode: mode,
               debugShowCheckedModeBanner: false,
-              theme: DesignSystem.lightTheme,
-              darkTheme: DesignSystem.darkTheme,
+              theme: themes.light,
+              darkTheme: themes.dark,
               routerConfig: platform.router.instance,
             );
           },
@@ -89,12 +96,13 @@ void main() async {
 PluginDescriptor _getPlugins() {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Ensure all imperatively navigated URLs are shown in the URL bar
-  vc.DefaultNavigationPlugin.enableURLReflectsImperativeAPIs();
-  vc.DefaultNavigationPlugin.usePathStrategy();
-
   return PluginDescriptor(
-    content: DefaultContentPlugin(
+    // Path URLs, and imperative navigation (push) shown in the URL bar.
+    navigation: vc.DefaultNavigationPlugin(
+      urlStyle: vc.RouterUrlStyle.path,
+      urlReflectsImperativeAPIs: true,
+    ),
+    others: [DefaultContentPlugin(
       useLiveRoute: true,
       allowRouteRefresh: true,
       provider: SanityContentProvider.withConfig(
@@ -108,7 +116,7 @@ PluginDescriptor _getPlugins() {
         ),
         cacheDuration: const Duration(seconds: 5),
       ),
-    ),
+    )],
     env: vc.DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
     telemetry: vc.TelemetryPlugin(

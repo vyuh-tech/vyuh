@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart' as go;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 import 'routes_test.mocks.dart';
 

@@ -185,4 +185,109 @@ void main() {
       }
     },
   );
+
+  testWidgets(
+    'a route that fails shows a full failure page and reports it once',
+    (tester) async {
+      await start(tester);
+      final failures = <vc.VyuhFailure>[];
+      final cancel = vc.vyuh.event.on<vc.RouteFailureEvent>(
+        (event) => failures.add(event.failure),
+      );
+      late StateSetter rebuild;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: StatefulBuilder(
+            builder: (context, setState) {
+              rebuild = setState;
+              return DocumentFutureBuilder<String>(
+                isRoute: true,
+                location: Uri.parse('/broken'),
+                requestKey: '/broken',
+                // A new closure on every build, as real parents pass.
+                future: () => Future.error(StateError('offline')),
+                buildContent: (_, document) => Text(document),
+              );
+            },
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(find.text('This page could not be loaded'), findsOneWidget);
+      expect(find.text('Try again'), findsOneWidget);
+      // No router here, so restarting is the way out.
+      expect(find.text('Restart app'), findsOneWidget);
+
+      rebuild(() {});
+      await tester.pumpAndSettle();
+      expect(failures, hasLength(1));
+      expect(failures.single.kind, vc.FailureKind.route);
+      expect(failures.single.location, Uri.parse('/broken'));
+      cancel();
+    },
+  );
+
+  testWidgets('content that fails inside a page fails inline, without a '
+      'route failure event', (tester) async {
+    await start(tester);
+    var routeFailures = 0;
+    final cancel = vc.vyuh.event.on<vc.RouteFailureEvent>(
+      (_) => routeFailures++,
+    );
+    await tester.pumpWidget(
+      MaterialApp(
+        home: Scaffold(
+          body: DocumentFutureBuilder<String>(
+            future: () => Future.error(StateError('offline')),
+            buildContent: (_, document) => Text(document),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.textContaining('error: Bad state: offline'), findsOneWidget);
+    expect(routeFailures, 0);
+    cancel();
+  });
+
+  testWidgets('a keyed document is not refetched when its parent rebuilds', (
+    tester,
+  ) async {
+    await start(tester);
+    var fetches = 0;
+    var key = 'a';
+    late StateSetter rebuild;
+    await tester.pumpWidget(
+      MaterialApp(
+        home: StatefulBuilder(
+          builder: (context, setState) {
+            rebuild = setState;
+            return DocumentFutureBuilder<String>(
+              requestKey: key,
+              future: () async {
+                fetches++;
+                return 'doc $key';
+              },
+              buildContent: (_, document) => Text(document),
+            );
+          },
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(fetches, 1);
+
+    rebuild(() {});
+    await tester.pumpAndSettle();
+    rebuild(() {});
+    await tester.pumpAndSettle();
+    expect(fetches, 1, reason: 'new closures alone must not refetch');
+
+    rebuild(() => key = 'b');
+    await tester.pumpAndSettle();
+    expect(fetches, 2);
+    expect(find.text('doc b'), findsOneWidget);
+  });
 }

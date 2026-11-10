@@ -23,6 +23,16 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   /// The initial Location that will be used by the router
   final String? initialLocation;
 
+  /// Where error views send the user with "Go home".
+  final String? homeLocation;
+
+  /// Whether to route uncaught errors to telemetry and show themed
+  /// fallbacks for widgets that fail to build.
+  final bool captureErrors;
+
+  /// Event subscriptions of each running feature, cancelled when it stops.
+  final Map<String, List<DisposeFunction>> _featureSubscriptions = {};
+
   @override
   GlobalKey<NavigatorState> get rootNavigatorKey => _rootNavigatorKey;
 
@@ -56,6 +66,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     required this._widgetBuilder,
     required this._appRunner,
     this.initialLocation,
+    this.homeLocation,
+    this.captureErrors = true,
   }) {
     _tracker = _PlatformInitTracker(this);
     _lazyFeatureManager = _LazyFeatureManager(this);
@@ -70,6 +82,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
     _userInitialLocation = PlatformDispatcher.instance.defaultRouteName;
 
+    if (captureErrors) _installErrorHandlers();
+
     _appRunner(const _FrameworkInitView());
   }
 
@@ -79,12 +93,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       return;
     }
 
-    _lazyFeatureManager.reset();
-    await _lazyFeatureManager.drainActivations();
-
-    for (final feature in _features.reversed) {
-      await feature.dispose?.call();
-    }
+    await _disposeFeatures();
     for (final builder in _featureExtensionBuilderMap.values) {
       await builder.dispose();
     }
@@ -103,6 +112,10 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
     operation: 'Init',
     parentTrace: parentTrace,
     fn: (trace) async {
+      // On restart, stop the previous features while the services they use
+      // still exist, then reset the plugins.
+      await _disposeFeatures();
+
       // Only run init on non-preloaded plugins
       final effectivePlugins = plugins.whereNot((p) => p is PreloadedPlugin);
 
@@ -126,11 +139,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
 
   @override
   Future<void> initFeatures(Trace parentTrace) async {
-    _lazyFeatureManager.reset();
-    await _lazyFeatureManager.drainActivations();
-    for (final feature in _features.reversed) {
-      await feature.dispose?.call();
-    }
+    // A no-op when initPlugins already stopped them.
+    await _disposeFeatures();
 
     return telemetry.trace<void>(
       name: 'Features',
@@ -169,6 +179,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
         // Topologically sort eager features by dependencies
         _features = _topologicalSort(_features);
 
+        // Start app-level hooks first, so features hear events emitted
+        // while other features initialize.
+        for (final feature in _features) {
+          _startFeatureHooks(feature);
+        }
+
         final initFns = _features.map(
           (feature) => telemetry.trace<List<g.RouteBase>>(
             name: 'Feature: ${feature.title}',
@@ -179,7 +195,11 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
                 for (final dependency in feature.dependencies) {
                   await _readyFeatures[dependency];
                 }
-                return _initFeature(feature, trace);
+                final routes = await _initFeature(feature, trace);
+                _LazyFeatureManager._emit(
+                  FeatureLoadedEvent(featureName: feature.name, isLazy: false),
+                );
+                return routes;
               }();
 
               _readyFeatures[feature.name] = future;
@@ -193,7 +213,8 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
           name: 'Feature Extensions',
           operation: 'Init',
           parentTrace: trace,
-          fn: (_) => _initFeatureExtensions(_features),
+          fn: (extensionsTrace) =>
+              _initFeatureExtensions(_features, extensionsTrace),
         );
 
         return telemetry.trace<void>(
@@ -243,16 +264,22 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
   Future<void> _initRouter(List<g.RouteBase> routes) async {
     _rootNavigatorKey = GlobalKey<NavigatorState>();
 
+    router.homeLocation = homeLocation ?? initialLocation ?? '/';
     router.initRouter(
       routes: routes,
+      // A deep link. flutter_test cannot set the route name of
+      // PlatformDispatcher.instance, only of its own test dispatcher.
       initialLocation: _userInitialLocation == '/'
           ? initialLocation ?? '/'
-          : _userInitialLocation,
+          : _userInitialLocation, // coverage:ignore-line
       rootNavigatorKey: _rootNavigatorKey,
     );
   }
 
-  Future<void> _initFeatureExtensions(List<FeatureDescriptor> features) async {
+  Future<void> _initFeatureExtensions(
+    List<FeatureDescriptor> features,
+    Trace? parentTrace,
+  ) async {
     final disposeFutures = <Future<void>>[];
 
     final builders = features.expand(
@@ -309,6 +336,7 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       await telemetry.trace(
         name: 'Extension: ${builder.title}',
         operation: 'Init',
+        parentTrace: parentTrace,
         fn: (_) =>
             builder.init(extensions[entry.key] ?? <ExtensionDescriptor>[]),
       );
@@ -360,9 +388,12 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       replacingRoutes = true;
       router.replaceRoutes([...routes, ...featureRoutes]);
       checkActive();
+      _startFeatureHooks(feature);
       _features.add(feature);
       _readyFeatures[feature.name] = Future.value();
     } catch (error, stack) {
+      _features.remove(feature);
+      _stopFeatureHooks(feature.name);
       // Restore routing even if a custom navigation plugin mutates then throws.
       if (replacingRoutes && originalRoutes != null) {
         try {
@@ -385,6 +416,86 @@ final class _DefaultVyuhPlatform extends VyuhPlatform {
       }
       Error.throwWithStackTrace(error, stack);
     }
+  }
+
+  /// Stops every running feature, in reverse order: cancels in-flight lazy
+  /// loads, removes event handlers and redirects, then runs `dispose`.
+  /// A feature whose `dispose` throws is reported and the rest still stop.
+  Future<void> _disposeFeatures() async {
+    _lazyFeatureManager.reset();
+    await _lazyFeatureManager.drainActivations();
+    _stopAllFeatureHooks();
+
+    final running = _features.reversed.toList();
+    _features = [];
+    _readyFeatures.clear();
+    for (final feature in running) {
+      try {
+        await feature.dispose?.call();
+      } catch (error, stack) {
+        try {
+          telemetry.reportError(error, stackTrace: stack);
+        } catch (_) {}
+      }
+    }
+  }
+
+  /// Subscribes the feature's event handlers and adds its redirects.
+  void _startFeatureHooks(FeatureDescriptor feature) {
+    _stopFeatureHooks(feature.name);
+    _featureSubscriptions[feature.name] = [
+      for (final handler in feature.events) handler.subscribe(event),
+    ];
+    router.featureRedirects.add(feature.name, feature.redirects);
+  }
+
+  /// Cancels the feature's event handlers and removes its redirects.
+  void _stopFeatureHooks(String featureName) {
+    for (final cancel in _featureSubscriptions.remove(featureName) ?? []) {
+      cancel();
+    }
+    router.featureRedirects.remove(featureName);
+  }
+
+  void _stopAllFeatureHooks() {
+    for (final name in _featureSubscriptions.keys.toList()) {
+      _stopFeatureHooks(name);
+    }
+    router.featureRedirects.clear();
+  }
+
+  static bool _errorHandlersInstalled = false;
+
+  /// Sends uncaught Flutter and platform errors to telemetry, keeping any
+  /// handlers that were already installed. In release builds a widget that
+  /// fails to build shows a themed placeholder instead of a grey box.
+  void _installErrorHandlers() {
+    // flutter_test owns these handlers and checks they are restored after
+    // each test, so leave them alone there.
+    if (_errorHandlersInstalled || isFlutterTest) return;
+    // coverage:ignore-start
+    _errorHandlersInstalled = true;
+
+    final previousFlutterHandler = FlutterError.onError;
+    FlutterError.onError = (details) {
+      try {
+        telemetry.reportFlutterError(details);
+      } catch (_) {}
+      (previousFlutterHandler ?? FlutterError.presentError)(details);
+    };
+
+    final previousPlatformHandler = PlatformDispatcher.instance.onError;
+    PlatformDispatcher.instance.onError = (error, stack) {
+      try {
+        telemetry.reportError(error, stackTrace: stack);
+      } catch (_) {}
+      return previousPlatformHandler?.call(error, stack) ?? false;
+    };
+
+    if (!kDebugMode) {
+      ErrorWidget.builder = (details) => BuildFailureView(details: details);
+    }
+    // coverage:ignore-end
   }
 
   /// Topologically sort features based on their [FeatureDescriptor.dependencies].

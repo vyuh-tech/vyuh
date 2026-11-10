@@ -1,9 +1,6 @@
 part of 'run_app.dart';
 
-enum _RunMode {
-  app,
-  widget;
-}
+enum _RunMode { app, widget }
 
 final class VyuhBinding {
   VyuhBinding._();
@@ -28,9 +25,9 @@ final class VyuhBinding {
   bool _initialized = false;
   bool get initialized => _initialized;
 
-  /// Purely meant to be called with running Vyuh in widget-mode, using `VyuhContentWidget`.
-  /// There is a convenience API inside `vyuh_extension_content` to make this easier.
-  /// Use the `VyuhContentBinding.init()` instead.
+  /// Runs Vyuh in widget mode: plugins and one extension builder, without
+  /// `runApp`, features or a router. Packages that embed Vyuh widgets in a
+  /// non-Vyuh app wrap this in their own binding API.
   ///
   /// Make sure to call this before calling Flutter's `runApp()`.
   ///
@@ -69,8 +66,7 @@ final class VyuhBinding {
         await plugin.init();
       }
 
-      // Time to associate the ContentPlugin with the ContentExtensionBuilder. This keeps
-      // track of the type registry and helps in building ContentItems
+      // Let the extension builder register its contributions.
       await _extensionBuilder.init(extensionDescriptors);
 
       await onReady?.call(VyuhBinding.instance);
@@ -79,8 +75,10 @@ final class VyuhBinding {
     _initialized = true;
   }
 
-  Future<void> _appInit(
-      {PluginDescriptor? plugins, PlatformWidgetBuilder? widgetBuilder}) async {
+  Future<void> _appInit({
+    PluginDescriptor? plugins,
+    PlatformWidgetBuilder? widgetBuilder,
+  }) async {
     if (_initialized) {
       return;
     }
@@ -92,13 +90,37 @@ final class VyuhBinding {
     _pluginDescriptor = plugins ?? PluginDescriptor.system;
     final effectivePlugins = _pluginDescriptor.plugins;
 
-    final preLoadedPlugins = effectivePlugins.whereType<PreloadedPlugin>();
-
-    for (final plugin in preLoadedPlugins) {
-      await plugin.init();
-    }
+    // A failure here must not stop the app from drawing its first frame.
+    // It is kept and raised by the platform's startup, so the user sees the
+    // startup failure screen, and Restart tries the plugin again.
+    await _initPreloadedPlugins(
+      effectivePlugins.whereType<PreloadedPlugin>().toList(),
+    );
 
     _initialized = true;
+  }
+
+  /// Preloaded plugins that failed to initialize, with their errors.
+  final Map<Plugin, (Object, StackTrace)> _preloadFailures = {};
+
+  Future<void> _initPreloadedPlugins(List<Plugin> plugins) async {
+    for (final plugin in plugins) {
+      try {
+        await plugin.init();
+        _preloadFailures.remove(plugin);
+      } catch (error, stack) {
+        _preloadFailures[plugin] = (error, stack);
+      }
+    }
+  }
+
+  /// Throws the first preloaded plugin failure, if any. With [retry], the
+  /// failed plugins are initialized again first. Preloaded plugins that
+  /// started keep running across restarts.
+  Future<void> _ensurePreloadedPlugins({required bool retry}) async {
+    if (retry) await _initPreloadedPlugins(_preloadFailures.keys.toList());
+    final failure = _preloadFailures.values.firstOrNull;
+    if (failure != null) Error.throwWithStackTrace(failure.$1, failure.$2);
   }
 
   Future<void> dispose() async {
@@ -119,10 +141,9 @@ final class VyuhBinding {
   T? get<T extends Plugin>() => _pluginDescriptor.get<T>();
 }
 
+/// The same named accessors as `vyuh.*`, for code that must also run in
+/// widget mode, where `runApp` (and so `vyuh`) is not used.
 extension NamedBindings on VyuhBinding {
-  /// The content plugin, responsible for managing content-related operations.
-  ContentPlugin get content => _pluginDescriptor.get<ContentPlugin>()!;
-
   /// The dependency injection plugin, providing dependency injection services.
   DIPlugin get di => _pluginDescriptor.get<DIPlugin>()!;
 
@@ -145,4 +166,20 @@ extension NamedBindings on VyuhBinding {
 
   /// The event plugin, for managing and emitting events within the platform.
   EventPlugin get event => _pluginDescriptor.get<EventPlugin>()!;
+
+  /// The authentication plugin.
+  AuthPlugin get auth => _pluginDescriptor.get<AuthPlugin>()!;
+
+  /// The navigation plugin.
+  NavigationPlugin get router => _pluginDescriptor.get<NavigationPlugin>()!;
+
+  /// The locale plugin, or null when it is not registered.
+  LocalePlugin? get locale => _pluginDescriptor.get<LocalePlugin>();
+
+  /// The storage plugin, for general key-value persistence.
+  StoragePlugin get storage => _pluginDescriptor.get<StoragePlugin>()!;
+
+  /// The secure storage plugin, for secrets such as tokens.
+  SecureStoragePlugin get secureStorage =>
+      _pluginDescriptor.get<SecureStoragePlugin>()!;
 }

@@ -1,8 +1,15 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:vyuh_core/plugin/env/env_plugin.dart';
 
+/// Reads configuration from a `.env` asset through `flutter_dotenv`.
+///
+/// It loads into flutter_dotenv's global `dotenv`, so use one
+/// [DefaultEnvPlugin] per app.
 final class DefaultEnvPlugin extends EnvPlugin {
   final String fileName;
+
+  /// Values used when the env file doesn't set a key. Values in the file
+  /// always win.
   final Map<String, String> defaults;
 
   DefaultEnvPlugin({this.fileName = '.env', this.defaults = const {}})
@@ -10,11 +17,17 @@ final class DefaultEnvPlugin extends EnvPlugin {
 
   @override
   Future<void> init() async {
-    await dotenv.load(fileName: fileName, mergeWith: defaults);
+    // dotenv's mergeWith would let these override the file, so add them
+    // only for keys the file doesn't set.
+    await dotenv.load(fileName: fileName);
+    final env = dotenv.env;
+    for (final entry in defaults.entries) {
+      env.putIfAbsent(entry.key, () => entry.value);
+    }
   }
 
   @override
-  Map<String, String> all() => dotenv.env;
+  Map<String, String> all() => Map.unmodifiable(dotenv.env);
 
   @override
   clear() {

@@ -1,8 +1,7 @@
 name: vyuh_feature_auth
 resolution: workspace
 description: Provides the Auth feature for your Vyuh project.
-version: 3.0.3
-publish_to: https://pub.vyuh.tech
+version: 4.0.3
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh
 
@@ -16,9 +15,9 @@ dependencies:
     sdk: flutter
   go_router: ^18.0.1
   collection: ^1.18.0
-  vyuh_core: ^2.1.0
-  vyuh_feature_system: ^2.0.2
-  vyuh_extension_content: ^2.1.0
+  vyuh_core: ^3.2.0
+  vyuh_feature_system: ^3.0.3
+  vyuh_extension_content: ^3.0.3
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
   reactive_forms: ^18.2.2

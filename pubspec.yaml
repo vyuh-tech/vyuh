@@ -46,13 +46,15 @@ dev_dependencies:
   path: ^1.9.1
   cli_launcher: ^0.3.2
   flutter_lints: ^6.0.0
-  melos: ^8.6.0
+  melos: ^8.10.0
   pubspec_parse: ^1.3.0
   mason_logger: ^0.3.1
 
+
 dependency_overrides:
-  # Melos requires cli_util 0.5; launcher_icons still declares 0.4.
-  cli_util: ^0.5.1
+  # flutter_launcher_icons (vyuh_demo) still declares cli_util ^0.4.1, even in
+  # its latest release. Everything else, melos included, accepts 0.6.
+  cli_util: ^0.6.0
 
 melos:
   name: vyuh

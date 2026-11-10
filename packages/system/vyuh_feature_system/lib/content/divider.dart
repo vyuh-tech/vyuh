@@ -2,7 +2,6 @@ import 'package:flutter_sanity_portable_text/flutter_sanity_portable_text.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:material_ui/material_ui.dart' as f;
 import 'package:material_ui/material_ui.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'divider.g.dart';

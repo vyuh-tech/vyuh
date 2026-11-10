@@ -1,6 +1,5 @@
 import 'package:feature_conference/layouts/track_layout.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'track.g.dart';

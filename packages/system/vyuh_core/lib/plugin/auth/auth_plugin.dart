@@ -32,17 +32,27 @@ abstract class AuthPlugin extends Plugin {
     return controller.stream;
   }
 
+  /// Sets the signed-in user, adds it to [userChanges] and emits a
+  /// [UserChangedEvent], so features can react with an `EventHandler` or
+  /// re-check their redirects with `refreshOn: [UserChangedEvent]`.
   @protected
   @nonVirtual
   void setCurrentUser(User user) {
     _currentUser = user;
     controller.add(user);
+    try {
+      VyuhBinding.instance.event.emit(UserChangedEvent(user));
+    } catch (_) {
+      // No event plugin yet, such as a plugin used on its own in a test.
+    }
   }
 
+  /// Signs the plugin out locally: [currentUser] is [User.unknown] again.
   @override
   @mustCallSuper
   Future<void> dispose() async {
     _initialized = false;
+    _currentUser = User.unknown;
     unawaited(controller.close());
   }
 
@@ -101,8 +111,8 @@ abstract class AuthPlugin extends Plugin {
 
   /// Attempts to refresh the current session token.
   ///
-  /// Called by the network layer when a 401 is received, giving the auth
-  /// plugin a chance to refresh the token before the caller retries.
+  /// Nothing in Vyuh calls this automatically: call it from your own code,
+  /// for example after a request returns 401, then retry the request.
   /// Returns `true` if the token was successfully refreshed.
   /// Default implementation returns `false` (no refresh support).
   Future<bool> refreshSession() => Future.value(false);
@@ -110,6 +120,16 @@ abstract class AuthPlugin extends Plugin {
   /// Deletes the current user account.
   Future<void> deleteAccount() =>
       Future.error(UnimplementedError(_errorMessage('deleteAccount()')));
+}
+
+/// Emitted whenever an [AuthPlugin] sets the current user: on sign-in,
+/// sign-out and profile changes. [data] is the new user, which is
+/// [User.unknown] after sign-out.
+final class UserChangedEvent extends VyuhEvent<User> {
+  UserChangedEvent(User user) : super(name: 'vyuh.auth.user_changed', data: user);
+
+  /// The new current user.
+  User get user => data!;
 }
 
 enum OAuthType {

@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:vyuh_core/plugin/content/reference.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'schedule.g.dart';
 

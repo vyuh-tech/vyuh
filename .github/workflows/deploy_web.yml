@@ -1,4 +1,4 @@
-name: Deploy Web App
+name: Deploy Demo App
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
-    name: Deploy to Cloudflare Pages
+    name: Deploy demo app to Cloudflare Pages
     steps:
       - uses: actions/checkout@v4
 
@@ -30,11 +30,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '25'
-      - uses: pnpm/action-setup@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          version: '10.13.1'
+          bun-version: '1.4.4'
       - name: Install deployment tooling
-        run: pnpm install --filter vyuh --frozen-lockfile
+        run: bun install --frozen-lockfile
       - name: Make .env file
         env:
           TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
@@ -57,8 +57,9 @@ jobs:
         id: deployment
         uses: cloudflare/wrangler-action@v3
         with:
-          packageManager: pnpm
+          packageManager: bun
           wranglerVersion: '4.145.0'
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy apps/vyuh_demo/build/web --project-name=vyuh-demo
+

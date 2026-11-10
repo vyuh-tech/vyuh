@@ -1,12 +1,20 @@
 {
   "name": "vyuh",
   "version": "1.0.0",
-  "description": "",
-  "scripts": {
-    "publish-packages": "changeset version && pnpm --recursive --filter \"./schemas/*\" build && changeset publish",
-    "build": "pnpm --recursive --if-present build"
-  },
   "private": true,
+  "description": "",
+  "workspaces": [
+    "apps/*",
+    "docs",
+    "schemas/*",
+    "examples/*/*"
+  ],
+  "scripts": {
+    "publish-packages": "changeset version && bun run --filter './schemas/*' build && changeset publish",
+    "build": "bun run --filter '*' build",
+    "docs": "bun run --filter vyuh-docs dev",
+    "docs:build": "bun run --filter vyuh-docs build"
+  },
   "keywords": [],
   "author": {
     "email": "pavan@vyuh.tech",
@@ -23,17 +31,15 @@
   "dependencies": {
     "@changesets/cli": "^3.0.3"
   },
-  "packageManager": "pnpm@10.13.1",
-  "pnpm": {
-    "overrides": {
-      "sanity": "^6.17.0",
-      "react": "^19.3.0",
-      "react-dom": "^19.3.0",
-      "@sanity/types": "^6.17.0"
-    },
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "esbuild"
-    ]
-  }
+  "overrides": {
+    "sanity": "^6.17.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "@sanity/types": "^6.17.0"
+  },
+  "trustedDependencies": [
+    "@swc/core",
+    "esbuild",
+    "workerd"
+  ]
 }

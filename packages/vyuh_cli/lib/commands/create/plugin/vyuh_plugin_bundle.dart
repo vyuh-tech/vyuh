@@ -15,7 +15,7 @@ final vyuhPluginBundle = MasonBundle.fromJson(<String, dynamic>{
     },
     {
       "path": "{{ name.snakeCase() }}/pubspec.yaml",
-      "data": "bmFtZToge3sgbmFtZS5zbmFrZUNhc2UoKSB9fQpkZXNjcmlwdGlvbjoge3t7ZGVzY3JpcHRpb25fbGl0ZXJhbH19fQp2ZXJzaW9uOiAxLjAuMApwdWJsaXNoX3RvOiBub25lCmVudmlyb25tZW50OgogIHNkazogJz49My4xMi4wIDw0LjAuMCcKICBmbHV0dGVyOiAnPj0zLjQ3LjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgdnl1aF9jb3JlOiBeMi4xLjAKZGV2X2RlcGVuZGVuY2llczoKICBmbHV0dGVyX3Rlc3Q6CiAgICBzZGs6IGZsdXR0ZXIKICBmbHV0dGVyX2xpbnRzOiBeNi4wLjAK",
+      "data": "bmFtZToge3sgbmFtZS5zbmFrZUNhc2UoKSB9fQpkZXNjcmlwdGlvbjoge3t7ZGVzY3JpcHRpb25fbGl0ZXJhbH19fQp2ZXJzaW9uOiAxLjAuMApwdWJsaXNoX3RvOiBub25lCmVudmlyb25tZW50OgogIHNkazogJz49My4xMi4wIDw0LjAuMCcKICBmbHV0dGVyOiAnPj0zLjQ3LjAnCmRlcGVuZGVuY2llczoKICBmbHV0dGVyOgogICAgc2RrOiBmbHV0dGVyCiAgdnl1aF9jb3JlOiBeMy4wLjAKZGV2X2RlcGVuZGVuY2llczoKICBmbHV0dGVyX3Rlc3Q6CiAgICBzZGs6IGZsdXR0ZXIKICBmbHV0dGVyX2xpbnRzOiBeNi4wLjAK",
       "type": "text"
     },
     {

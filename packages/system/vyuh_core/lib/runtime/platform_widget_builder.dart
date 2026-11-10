@@ -1,14 +1,10 @@
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
-import 'platform/powered_by_widget.dart';
-
 part 'platform/default_route_loader.dart';
 part 'platform/error_view.dart';
-part 'platform/unknown_content_view.dart';
 
 /// A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.
 ///
@@ -28,7 +24,7 @@ typedef AppBuilder =
 /// A builder for a widget that is shown when the app is loading.
 ///
 /// This builder is called to create a loading indicator during app initialization
-/// or when loading content. The [context] parameter provides access to the
+/// or while a part of a page loads. The [context] parameter provides access to the
 /// current build context.
 ///
 /// Example:
@@ -138,27 +134,6 @@ typedef ErrorViewBuilder =
       bool showRestart,
     });
 
-/// A builder for unknown content failures.
-///
-/// This builder is called when content-related operations fail due to missing
-/// registrations, layouts, modifiers, actions, or conditions. It provides a
-/// unified way to handle all content failures across the framework.
-///
-/// Example:
-/// ```dart
-/// UnknownContentBuilder builder = (context, failure) {
-///   switch (failure) {
-///     case ContentItemFailure():
-///       return ContentErrorWidget(failure: failure);
-///     case LayoutFailure():
-///       return LayoutErrorWidget(failure: failure);
-///     // ... handle other failure types
-///   }
-/// };
-/// ```
-typedef UnknownContentBuilder =
-    Widget Function(BuildContext context, ContentFailure failure);
-
 /// A builder for platform-specific widgets used throughout the Vyuh application.
 ///
 /// This class provides a centralized way to customize the appearance and behavior
@@ -166,7 +141,6 @@ typedef UnknownContentBuilder =
 /// - App root widget ([appBuilder])
 /// - Loading indicators ([appLoader], [contentLoader], [routeLoader])
 /// - Error views ([errorView], [routeErrorView])
-/// - Unknown content handling ([unknown])
 /// - Image placeholders ([imagePlaceholder])
 ///
 /// Use [copyWith] to create a modified version of an existing builder:
@@ -174,7 +148,6 @@ typedef UnknownContentBuilder =
 /// final customBuilder = defaultPlatformWidgetBuilder.copyWith(
 ///   appLoader: (context) => MyCustomLoader(),
 ///   errorView: (context, {title, error}) => MyCustomErrorView(title: title),
-///   unknown: (context, failure) => MyCustomUnknownWidget(failure: failure),
 /// );
 /// ```
 class PlatformWidgetBuilder {
@@ -185,7 +158,8 @@ class PlatformWidgetBuilder {
   /// A loader widget that is shown when the app is loading.
   final Loader appLoader;
 
-  /// A loader widget that is shown when the content is loading.
+  /// An inline loader, shown while a part of a page (a section, a list, an
+  /// image) loads. Unlike [routeLoader] it does not take over the page.
   final Loader contentLoader;
 
   /// A loader widget that is shown when a route is loading.
@@ -200,8 +174,13 @@ class PlatformWidgetBuilder {
   /// A builder for the error view widget.
   final ErrorViewBuilder errorView;
 
-  /// A builder for unknown content failures.
-  final UnknownContentBuilder unknown;
+  /// The app's themes. Used by the default [appBuilder], and by the loading
+  /// and failure screens shown before the app itself is built, so the very
+  /// first frame already matches the app. See [VyuhTheme].
+  final VyuhTheme theme;
+
+  /// Every user-facing string the framework shows. See [VyuhStrings].
+  final VyuhStrings strings;
 
   /// Creates a new [PlatformWidgetBuilder] instance.
   PlatformWidgetBuilder({
@@ -212,8 +191,9 @@ class PlatformWidgetBuilder {
     required this.errorView,
     required this.routeErrorView,
     required this.imagePlaceholder,
-    required this.unknown,
-  });
+    VyuhTheme? theme,
+    this.strings = const VyuhStrings(),
+  }) : theme = theme ?? VyuhTheme.system;
 
   /// Creates a copy of this [PlatformWidgetBuilder] but with the given fields
   PlatformWidgetBuilder copyWith({
@@ -224,7 +204,8 @@ class PlatformWidgetBuilder {
     ImagePlaceholderBuilder? imagePlaceholder,
     RouteErrorViewBuilder? routeErrorView,
     ErrorViewBuilder? errorView,
-    UnknownContentBuilder? unknown,
+    VyuhTheme? theme,
+    VyuhStrings? strings,
   }) {
     return PlatformWidgetBuilder(
       appBuilder: appBuilder ?? this.appBuilder,
@@ -234,87 +215,42 @@ class PlatformWidgetBuilder {
       errorView: errorView ?? this.errorView,
       routeErrorView: routeErrorView ?? this.routeErrorView,
       imagePlaceholder: imagePlaceholder ?? this.imagePlaceholder,
-      unknown: unknown ?? this.unknown,
+      theme: theme ?? this.theme,
+      strings: strings ?? this.strings,
     );
   }
 
+  /// The framework defaults: a Material app root using [theme], themed
+  /// loaders, and error views that always offer a way back.
   static final system = PlatformWidgetBuilder(
     appBuilder: (_, platform) {
+      final theme = platform.widgetBuilder.theme;
       return MaterialApp.router(
-        theme: ThemeData.light(useMaterial3: true),
+        theme: theme.light,
+        darkTheme: theme.dark,
+        themeMode: theme.mode,
+        debugShowCheckedModeBanner: false,
         routerConfig: platform.router.instance,
       );
     },
-    appLoader: (_) => const _DefaultRouteLoader(
-      delay: Duration(milliseconds: 0),
-      backgroundColor: Colors.black,
-      progressColor: Colors.white,
-    ),
-    routeLoader: (_, [_, _]) => const _DefaultRouteLoader(
-      delay: Duration(milliseconds: 0),
-      backgroundColor: Colors.white30,
-    ),
-    contentLoader: (_) => const Center(
-      child: Padding(
-        padding: EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            RepaintBoundary(child: CircularProgressIndicator()),
-            PoweredByWidget(),
-          ],
+    appLoader: (_) => const _DefaultLoader(fullScreen: true),
+    routeLoader: (_, [_, _]) => const _DefaultLoader(),
+    contentLoader: (_) => const _DefaultLoader(linear: false),
+    imagePlaceholder: (context, {width, height}) {
+      final tokens = VyuhThemeExtension.of(context);
+      return Container(
+        width: width,
+        height: height,
+        color: tokens.placeholderBackground,
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.image_not_supported_rounded,
+          color: tokens.placeholderForeground,
+          size: 32,
         ),
-      ),
-    ),
-    imagePlaceholder: (_, {width, height}) => Container(
-      width: width,
-      height: height,
-      decoration: const BoxDecoration(color: Colors.black12),
-      padding: const EdgeInsets.all(20.0),
-      child: const Icon(
-        Icons.image_not_supported_rounded,
-        color: Colors.grey,
-        size: 32,
-      ),
-    ),
-    errorView:
-        (
-          _, {
-          required title,
-          retryLabel,
-          onRetry,
-          subtitle,
-          error,
-          stackTrace,
-          showRestart = true,
-        }) => Center(
-          child: _ErrorView(
-            title: title,
-            subtitle: subtitle,
-            error: error,
-            stackTrace: stackTrace,
-            retryLabel: retryLabel,
-            onRetry: onRetry,
-          ),
-        ),
-    routeErrorView:
-        (
-          _, {
-          required title,
-          onRetry,
-          retryLabel,
-          subtitle,
-          error,
-          stackTrace,
-        }) => _ErrorViewScaffold(
-          title: title,
-          subtitle: subtitle,
-          error: error,
-          stackTrace: stackTrace,
-          onRetry: onRetry,
-          retryLabel: retryLabel,
-          showRestart: true,
-        ),
-    unknown: (context, failure) => _UnknownContentView(failure: failure),
+      );
+    },
+    errorView: _defaultErrorView,
+    routeErrorView: _defaultRouteErrorView,
   );
 }

@@ -1,3 +1,36 @@
+## 3.4.0
+
+ - **FIX**(core): keep startup loader out of browser history.
+ - **FEAT**(core): configure bounded routing retention and router options ([#60](https://github.com/vyuh-tech/vyuh/issues/60)).
+
+## 3.3.0
+
+- Add NavigationBranchContainer for bounded, lazy, least-recently-used retention of stateful shell navigator widgets, with application-selected capacity.
+
+- Expose go_router entry guards, refresh triggers, exception/page builders, extra codecs, restoration, focus, history and initial-link policy through the default navigation plugin.
+- Preserve entry guards and redirect limits when routes are replaced dynamically. Application route trees and shell composition remain application-owned.
+
+## 3.2.0
+
+ - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.
+
+## 3.1.0
+
+ - **FIX**(vyuh_core): keep the back stack after a lazy load; no startup-failure flash.
+ - **FEAT**(vyuh_core): theme tokens for failure titles, messages, icons and size.
+
+## 3.0.1
+
+ - **FIX**(vyuh_core): contain telemetry failures; map device locales; let .env win over defaults.
+
+## 3.0.0
+
+> Note: This release has breaking changes.
+
+ - **FIX**(vyuh_core): a deep link loads without the "could not navigate to initial route" error.
+ - **BREAKING** **FEAT**: make vyuh_core CMS-free and move content into vyuh_extension_content.
+ - **BREAKING** **FEAT**(vyuh_core): declarative feature hooks, themed failure recovery and one theme.
+
 ## 2.1.0
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.

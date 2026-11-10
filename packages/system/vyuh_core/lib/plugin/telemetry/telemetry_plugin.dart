@@ -4,16 +4,18 @@ import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+/// How severe a log message is, from least to most severe, so levels can be
+/// compared by [index].
 enum LogLevel {
+  /// The log level for trace messages.
+  /// These are generally used for fine-grained debugging.
+  trace,
+
   /// The log level for debug messages.
   debug,
 
   /// The log level for info messages. This is the default level.
   info,
-
-  /// The log level for trace messages.
-  /// These are generally used for fine-grained debugging.
-  trace,
 
   /// The log level for warning messages.
   /// Use this for guiding the developer on correct usage of the concerned API.
@@ -45,14 +47,10 @@ final class TelemetryPlugin extends Plugin
         );
 
   @override
-  Future<void> initOnce() async {
-    await Future.wait(providers.map((e) => e.init()));
-  }
+  Future<void> initOnce() => _fanOut((provider) => provider.init());
 
   @override
-  Future<void> disposeOnce() {
-    return Future.wait(providers.map((e) => e.dispose()));
-  }
+  Future<void> disposeOnce() => _fanOut((provider) => provider.dispose());
 
   @override
   Future<Trace> startTrace(
@@ -60,10 +58,10 @@ final class TelemetryPlugin extends Plugin
     String operation, {
     LogLevel? level = LogLevel.info,
   }) async {
-    final traceFutures = providers
-        .map((p) => p.startTrace(name, operation, level: level))
-        .toList(growable: false);
-    final traces = await Future.wait(traceFutures);
+    final traces = await _startTraces(
+      providers,
+      (provider) => provider.startTrace(name, operation, level: level),
+    );
 
     return _CompositeTrace(traces, providers: providers);
   }
@@ -73,32 +71,37 @@ final class TelemetryPlugin extends Plugin
       {StackTrace? stackTrace,
       Map<String, dynamic>? params,
       bool fatal = false}) {
-    final futures = providers.map((provider) => provider.reportError(
+    return _fanOut((provider) => provider.reportError(
           exception,
           stackTrace: stackTrace,
           params: params,
           fatal: fatal,
         ));
-
-    return Future.wait(futures);
   }
 
   @override
   Future<void> reportFlutterError(FlutterErrorDetails details,
       {bool fatal = false}) {
-    final futures = providers
-        .map((provider) => provider.reportFlutterError(details, fatal: fatal));
-
-    return Future.wait(futures);
+    return _fanOut(
+        (provider) => provider.reportFlutterError(details, fatal: fatal));
   }
 
   @override
   Future<void> reportMessage(String message,
       {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) {
-    final futures = providers.map((provider) =>
+    return _fanOut((provider) =>
         provider.reportMessage(message, params: params, level: level));
+  }
 
-    return Future.wait(futures);
+  /// Sends a report to every provider. A provider that fails, synchronously
+  /// or asynchronously, is logged and skipped: telemetry must never crash
+  /// the app it observes, and one broken provider must not stop the others.
+  Future<void> _fanOut(Future<void> Function(TelemetryProvider) report) {
+    return Future.wait(providers.map((provider) {
+      return Future.sync(() => report(provider)).catchError(
+        (Object error, StackTrace stack) => _logFailure(provider, error),
+      );
+    }));
   }
 
   /// Runs a function with a trace. This is useful for wrapping functions that
@@ -122,7 +125,7 @@ final class TelemetryPlugin extends Plugin
 
       return value;
     } catch (ex, stackTrace) {
-      reportError(ex, stackTrace: stackTrace);
+      await reportError(ex, stackTrace: stackTrace);
       rethrow;
     } finally {
       await trace.stop();
@@ -161,7 +164,13 @@ final class _CompositeTrace extends Trace {
   }
 
   @override
-  Future<void> stop() => Future.wait(traces.map((e) => e.stop()));
+  Future<void> stop() => Future.wait(
+    traces.map(
+      (trace) => Future.sync(trace.stop).catchError(
+        (Object error, StackTrace stack) => _logFailure(trace, error),
+      ),
+    ),
+  );
 
   @override
   Future<Trace> startChild(
@@ -169,10 +178,31 @@ final class _CompositeTrace extends Trace {
     String operation, {
     LogLevel? level = LogLevel.info,
   }) async {
-    final childTraceFutures =
-        traces.map((trace) => trace.startChild(name, operation, level: level));
-    final childTraces = await Future.wait(childTraceFutures);
+    final childTraces = await _startTraces(
+      traces,
+      (trace) => trace.startChild(name, operation, level: level),
+    );
 
     return _CompositeTrace(childTraces, providers: providers);
   }
 }
+
+/// Starts a trace on each source. A source that fails gets a [NoOpTrace], so
+/// one broken provider never stops the traced work.
+Future<List<Trace>> _startTraces<T extends Object>(
+  List<T> sources,
+  Future<Trace> Function(T source) start,
+) => Future.wait(
+  sources.map(
+    (source) => Future.sync(() => start(source)).catchError((
+      Object error,
+      StackTrace stack,
+    ) {
+      _logFailure(source, error);
+      return NoOpTrace();
+    }),
+  ),
+);
+
+void _logFailure(Object source, Object error) =>
+    debugPrint('Vyuh: telemetry provider ${source.runtimeType} failed: $error');
