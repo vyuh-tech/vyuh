@@ -1,3 +1,8 @@
+## 2.2.0
+
+ - **FIX**(portable_text): memoize derived config in PortableTextStyleOverride.
+ - **FEAT**(portable_text): per-subtree config via PortableTextTheme.
+
 ## 2.1.0
 
  - **FEAT**(portable_text): expose block index to BlockContainerBuilder.

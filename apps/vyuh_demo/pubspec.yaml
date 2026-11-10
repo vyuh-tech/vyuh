@@ -21,7 +21,7 @@ dependencies:
 
   # Sanity Integration
   sanity_client: ^1.9.3
-  flutter_sanity_portable_text: ^2.1.0
+  flutter_sanity_portable_text: ^2.2.0
 
   # Vyuh Framework
   vyuh_core: ^3.2.0
