@@ -14,12 +14,7 @@ class PortableTextBlock extends StatelessWidget {
   /// The model representing the block of Portable Text.
   final TextBlockItem model;
 
-  /// The position of this block within its parent list (0-based). Passed on to
-  /// the [BlockContainerBuilder] so containers can vary by position (e.g. drop
-  /// leading space on the first block). Defaults to 0 for standalone use.
-  final int index;
-
-  const PortableTextBlock({super.key, required this.model, this.index = 0});
+  const PortableTextBlock({super.key, required this.model});
 
   @override
   Widget build(final BuildContext context) {
@@ -42,7 +37,7 @@ class PortableTextBlock extends StatelessWidget {
         config.blockContainers[model.style] ??
         PortableTextConfig.defaultBlockContainerBuilder;
 
-    final child = builder(context, content, index);
+    final child = builder(context, content);
 
     final leftPadding = model.listItem == null
         ? 0.0
