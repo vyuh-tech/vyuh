@@ -512,8 +512,10 @@ class MyApp extends StatelessWidget {
 Widget columnBuilder(BuildContext context, List<PortableBlockItem> blocks) {
   return Column(
     children: blocks
-        .map(
-            (block) => PortableTextConfig.shared.buildBlock(context, block))
+        .asMap()
+        .entries
+        .map((entry) =>
+            PortableTextConfig.shared.buildBlock(context, entry.value, entry.key))
         .toList(),
   );
 }

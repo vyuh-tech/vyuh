@@ -7,11 +7,18 @@ typedef TextStyleBuilder =
     TextStyle Function(BuildContext context, TextStyle base);
 
 /// A function that builds a widget for a Portable block container.
-typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);
+///
+/// [index] is the position of the block within its parent list (0-based), which
+/// lets containers vary by position — e.g. suppressing leading space on the
+/// first block.
+typedef BlockContainerBuilder =
+    Widget Function(BuildContext context, Widget child, int index);
 
 /// A function that builds a widget for a Portable block item.
+///
+/// [index] is the position of the block within its parent list (0-based).
 typedef BlockWidgetBuilder =
-    Widget Function(BuildContext context, PortableBlockItem item);
+    Widget Function(BuildContext context, PortableBlockItem item, int index);
 
 /// A function that builds an InlineSpan for a single bullet mark. Using the
 /// [TextBlockItem]'s listItem, listItemIndex and level, the bullet can be customized as needed.
@@ -151,7 +158,11 @@ final class PortableTextConfig {
   /// Builds a block widget for the given Portable block item.
   /// The block widget is determined by the block type of the item. If the block type is not found in the
   /// block widgets, an error view is rendered with a message indicating the missing block type.
-  Widget buildBlock(final BuildContext context, final PortableBlockItem item) {
+  Widget buildBlock(
+    final BuildContext context,
+    final PortableBlockItem item,
+    final int index,
+  ) {
     final type = item.blockType;
 
     final builder = blocks[type];
@@ -159,7 +170,7 @@ final class PortableTextConfig {
       return ErrorView(message: 'Missing builder for block "$type"');
     }
 
-    return builder(context, item);
+    return builder(context, item, index);
   }
 
   /// Resets the shared instance of the [PortableTextConfig] to the default configuration.
@@ -221,7 +232,7 @@ final class PortableTextConfig {
   }
 
   static BlockContainerBuilder defaultBlockContainerBuilder =
-      (final BuildContext context, final Widget child) {
+      (final BuildContext context, final Widget child, final int index) {
         return child;
       };
 
@@ -323,26 +334,30 @@ final class PortableTextConfig {
 
   /// The default block containers used by the shared instance of [PortableTextConfig].
   static final Map<String, BlockContainerBuilder> defaultBlockContainers = {
-    'blockquote': (final BuildContext context, final Widget child) {
-      final theme = Theme.of(context);
+    'blockquote':
+        (final BuildContext context, final Widget child, final int index) {
+          final theme = Theme.of(context);
 
-      return Container(
-        padding: const EdgeInsets.symmetric(vertical: 4),
-        decoration: BoxDecoration(
-          border: Border(
-            left: BorderSide(color: theme.colorScheme.secondary, width: 4),
-          ),
-        ),
-        child: Padding(padding: const EdgeInsets.only(left: 8), child: child),
-      );
-    },
+          return Container(
+            padding: const EdgeInsets.symmetric(vertical: 4),
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(color: theme.colorScheme.secondary, width: 4),
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 8),
+              child: child,
+            ),
+          );
+        },
   };
 
   /// The default block widgets used by the shared instance of [PortableTextConfig].
   /// The default block is a single [PortableTextBlock], named as "block".
   static final Map<String, BlockWidgetBuilder> defaultBlocks = {
-    'block': (final context, final item) =>
-        PortableTextBlock(model: item as TextBlockItem),
+    'block': (final context, final item, final index) =>
+        PortableTextBlock(model: item as TextBlockItem, index: index),
   };
 }
 

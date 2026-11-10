@@ -62,7 +62,7 @@ void main() {
     WidgetTester tester,
   ) async {
     PortableTextConfig.shared.blocks[_CustomBlockItem.schemaName] =
-        (context, item) {
+        (context, item, index) {
           return const Text('Hello, World');
         };
 
@@ -80,7 +80,7 @@ void main() {
       return const TextStyle(color: Colors.red);
     };
     PortableTextConfig.shared.blockContainers['custom-block'] =
-        (context, child) {
+        (context, child, index) {
           return Container(color: Colors.red, child: child);
         };
 
