@@ -3,7 +3,7 @@
     <img src="https://github.com/vyuh-tech.png" alt="Vyuh Logo" height="128" />
   </a>
   <h1 align="center">Vyuh Framework</h1>
-  <p align="center">Build Modular, Scalable, CMS-driven Flutter Apps</p>
+  <p align="center">Build Modular, Scalable Flutter Apps</p>
   <p align="center">
     <a href="https://docs.vyuh.tech">Docs</a> |
     <a href="https://vyuh.tech">Website</a>
@@ -15,10 +15,12 @@
 [![vyuh_core](https://img.shields.io/pub/v/vyuh_core.svg?label=vyuh_core&logo=dart&color=blue&style=for-the-badge)](https://pub.dev/packages/vyuh_core)
 
 The core library for the Vyuh framework, providing essential building blocks and
-runtime functionality for building modular, scalable, CMS-driven Flutter
-applications. This package is the foundation of the Vyuh ecosystem, offering a
-robust plugin architecture, modular features, and an optional CMS-driven UI via
-the extension mechanism.
+runtime functionality for building modular, scalable Flutter applications.
+This package is the foundation of the Vyuh ecosystem, offering a robust plugin
+architecture and modular features. It has no CMS dependency: CMS-driven UI is
+an optional add-on
+([`vyuh_extension_content`](https://pub.dev/packages/vyuh_extension_content))
+built on the extension mechanism.
 
 ## Features ✨
 
@@ -26,11 +28,10 @@ the extension mechanism.
   into independent features, each encapsulating its own routes, UI, and business
   logic. Compose your app by assembling these features together.
 - **Plugin Architecture** 🔌: Extensible plugin system for features like
-  navigation, networking, telemetry, and content management
-- **Content Management** 📝: Modular content provider system for handling
-  different content types. Default support is for
-  [Sanity.io CMS](https://www.sanity.io/). The Provider interface can also be
-  used to add support for other CMS integrations.
+  navigation, networking, storage, auth and telemetry
+- **Extensions** 🧩: Features contribute to shared registries through
+  `ExtensionDescriptor` and `ExtensionBuilder`. The optional CMS add-on is
+  built this way.
 - **Navigation** 🧭: Advanced routing capabilities using Go Router
 - **State Management** 💫: Integrated MobX for reactive state management. You
   are also free to use your own State Management solution.
@@ -40,7 +41,11 @@ the extension mechanism.
   app usage
 - **Dependency Injection** 💉: Simple yet powerful DI system for managing
   dependencies
-- **Event System** 📡: Pub/sub event system for decoupled communication
+- **Event System** 📡: Typed events, with lifecycle events from the platform
+  and declarative per-feature handlers
+- **Errors and recovery** 🛟: Themed failure views that always offer a way out,
+  reported once to telemetry and as events
+- **Theming** 🎨: One `VyuhTheme` for every framework screen, plus design tokens
 - **Storage** 💾: Persistent storage capabilities for local data
 - **Environment Variables** 🔧: Flexible configuration system for managing
   environment-specific settings
@@ -84,35 +89,44 @@ void main() {
 ### Feature Definition
 
 Features are the building blocks of your application. Each feature is
-self-contained with its own routes, UI components, and business logic. Features
-can be developed and tested independently, then composed together to create the
-full application.
+self-contained with its own routes, UI and business logic, and can also act on
+the whole app through event handlers and redirects. The platform starts and
+stops all of it with the feature, so there is nothing to clean up by hand.
 
 ```dart
 import 'package:vyuh_core/vyuh_core.dart';
 
 final feature = FeatureDescriptor(
-  name: 'feature_name',
-  title: 'Feature Title',
-  description: 'Feature description',
-  icon: Icons.feature_icon,
-  routes: () async {
-    return [
-      GoRoute(
-        path: '/feature-path',
-        builder: (context, state) {
-          return const FeatureWidget();
-        },
-      ),
-    ];
-  },
+  name: 'account',
+  title: 'Account',
+  routes: () => [
+    GoRoute(path: '/account', builder: (_, _) => const AccountPage()),
+  ],
+  // App-level listeners, subscribed before init and removed on dispose.
+  events: [
+    EventHandler<SystemReadyEvent>((_) => restoreSession()),
+  ],
+  // App-wide redirects that re-run when their triggers fire.
+  redirects: [
+    FeatureRedirect(
+      name: 'require-sign-in',
+      refreshOn: [UserSignedOutEvent],
+      redirect: (_, state) =>
+          !signedIn && state.matchedLocation.startsWith('/account')
+              ? '/login'
+              : null,
+    ),
+  ],
 );
 ```
+
+Lazy features (`LazyFeatureDescriptor`) get the same behaviour when they
+activate.
 
 ### Plugin Configuration
 
 Plugins extend the core functionality of your app. The plugin system is flexible
-and allows you to configure various aspects like content management, environment
+and allows you to configure various aspects like navigation, environment
 variables, and telemetry. You can also create custom plugins for specific needs.
 
 Plugins are described with the `PluginDescriptor` class.
@@ -126,10 +140,6 @@ PluginDescriptor _getPlugins() {
   vyuh.DefaultNavigationPlugin.usePathStrategy();
 
   return PluginDescriptor(
-    // Configure content plugin
-    content: vyuh.DefaultContentPlugin(
-      provider: yourContentProvider,
-    ),
     // Configure environment plugin
     env: vyuh.DefaultEnvPlugin(),
     // Configure telemetry
@@ -140,81 +150,12 @@ PluginDescriptor _getPlugins() {
 }
 ```
 
-### Custom Content Types 📝
+### Using a CMS 📝
 
-A Content type represents a specific type of content that can be managed by the
-content management system. You can create custom content types and layouts for
-your app.
-
-```dart
-import 'package:json_annotation/json_annotation.dart';
-import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/vyuh_extension_content.dart';
-
-part 'my_card.g.dart';
-
-@JsonSerializable()
-final class MyCard extends ContentItem {
-  static const schemaName = 'myCard';
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    title: 'My Card',
-    fromJson: MyCard.fromJson,
-  );
-
-  static final contentBuilder = ContentBuilder(
-    content: typeDescriptor,
-    defaultLayout: CustomCardLayout(),
-    defaultLayoutDescriptor: CustomCardLayout.typeDescriptor,
-  );
-
-  final String title;
-  final ImageReference? image;
-  final String description;
-  final List<Action> actions;
-
-  MyCard({
-    required super.id,
-    required this.title,
-    this.image,
-    required this.description,
-    this.actions = const [],
-  }) : super(schemaType: schemaName);
-
-  factory MyCard.fromJson(Map<String, dynamic> json) => _$MyCardFromJson(json);
-}
-```
-
-### Custom Content Layout 🎨
-
-Layouts are used to configure the visual layout of a content item. You can have
-a default layout and also create custom layouts for your content types.
-
-```dart
-@JsonSerializable()
-final class CustomCardLayout extends LayoutConfiguration<MyCard> {
-  static const schemaName = '${MyCard.schemaName}.layout.custom';
-  static final typeDescriptor = TypeDescriptor(
-    schemaType: schemaName,
-    title: 'Custom Layout',
-    fromJson: CustomCardLayout.fromJson,
-  );
-
-  CustomCardLayout() : super(schemaType: schemaName);
-
-  @override
-  Widget build(BuildContext context, MyCard content) {
-    return Card(
-      child: Column(
-        children: [
-          Text(content.title),
-          ContentImage(ref: content.image),
-        ],
-      ),
-    );
-  }
-}
-```
+Content types, layouts and CMS-driven routes are not part of `vyuh_core`. Add
+[`vyuh_extension_content`](https://pub.dev/packages/vyuh_extension_content)
+and register its plugin with `PluginDescriptor(others: [DefaultContentPlugin(provider: ...)])`.
+See the [CMS docs](https://docs.vyuh.tech/cms/).
 
 ### Analytics 📊
 
@@ -273,7 +214,40 @@ vyuh.router.go('/your-route');
 
 // Go back
 vyuh.router.pop();
+
+// Go to the home route (runApp's homeLocation)
+vyuh.router.goHome();
 ```
+
+Features add app-wide redirects with `FeatureDescriptor.redirects`. See
+[Routes and navigation](https://docs.vyuh.tech/guides/routes-and-navigation#feature-redirects).
+
+Applications own route trees and shell composition. `DefaultNavigationPlugin`
+forwards go_router entry guards, redirect limits, refresh listenables, custom
+exception/error pages, extra codecs, restoration scopes, focus, browser-history
+and initial-platform-location policy. Dynamic route replacement preserves guards.
+
+Use `ShellRoute` for shared boundaries and `StatefulShellRoute` for independent
+navigation branches. Configure retention once on the navigation plugin, then
+use its container builder in application-owned route trees:
+
+```dart
+final navigation = DefaultNavigationPlugin(maxRetainedBranches: 3);
+
+StatefulShellRoute(
+  navigatorContainerBuilder: navigation.branchContainerBuilder,
+  builder: (_, _, shell) => ApplicationShell(body: shell),
+  branches: applicationBranches,
+)
+```
+
+The default capacity is three, including the active branch. Unvisited branches
+stay unmounted; the least recently used inactive branch is evicted at capacity.
+Eviction disposes page widget state and subscriptions, while go_router retains
+route history. Revisiting reconstructs the page. This is not a byte-based memory
+limit and does not manage repository/query caches or background services. Widgets
+must release their resources in `dispose`. Set capacity to one for minimal UI
+retention. Branch preload does not provide deferred code delivery.
 
 ### State Management with MobX 💫
 
@@ -320,20 +294,19 @@ final service = vyuh.di.get<MyService>();
 
 ### Event System 📡
 
-Use the event system for decoupled communication between different parts of your
-app.
+Features declare typed listeners with `FeatureDescriptor.events` (see above).
+For shorter-lived listeners, subscribe directly and cancel with the returned
+function:
 
 ```dart
-import 'package:vyuh_core/vyuh_core.dart' as vyuh;
-
-// Subscribe to events
-vyuh.events.on<UserLoggedIn>((event) {
-  // Handle event
-});
-
-// Publish events
-vyuh.events.emit(UserLoggedIn(userId: '123'));
+final cancel = vyuh.event.on<UserSignedOutEvent>((event) { /* ... */ });
+vyuh.event.emit(UserSignedOutEvent());
+cancel();
 ```
+
+The platform emits `SystemEvent`s for its lifecycle: `SystemInitStartedEvent`,
+`FeatureLoadedEvent`, `FeatureLoadFailedEvent`, `SystemReadyEvent`,
+`SystemInitFailedEvent` and `RouteFailureEvent`. Delivery is asynchronous.
 
 ### Storage 💾
 
@@ -361,85 +334,42 @@ final apiKey = vyuh.env.get('API_KEY');
 final isDev = vyuh.env.get('IS_DEV', defaultValue: false);
 ```
 
-### Platform Widgets 🎨
+### Theme, errors and platform widgets 🎨
 
-Customize the app's root widget and other platform-specific UI components. The
-`defaultPlatformWidgetBuilder` provides default implementations that you can
-customize using `copyWith`:
+Give the framework your theme once. The loading screen, the startup failure
+screen, the default app root, loaders, error views and placeholders all follow
+it in light and dark mode:
 
 ```dart
-import 'package:vyuh_core/vyuh_core.dart' as vyuh;
-import 'package:flutter_mobx/flutter_mobx.dart';
-
 vyuh.runApp(
-  platformWidgetBuilder:
-      vyuh.defaultPlatformWidgetBuilder.copyWith(
-        // Customize the root app widget
-        appBuilder: (platform) {
-          return Observer(
-            builder: (_) {
-              return MaterialApp.router(
-                title: 'Your App',
-                theme: YourTheme.light,
-                darkTheme: YourTheme.dark,
-                debugShowCheckedModeBanner: false,
-                routerConfig: platform.router.instance,
-              );
-            },
-          );
-        },
-        // Custom app loader shown during initial app load
-        appLoader: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        // Custom content loader shown when loading content
-        contentLoader: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-        // Custom route loader shown during route transitions
-        routeLoader: (context, color) {
-          return DefaultRouteLoader(
-            progressColor: color,
-          );
-        },
-        // Custom error view for route errors
-        routeErrorView: (context, error) {
-          return Center(
-            child: Text('Route Error: $error'),
-          );
-        },
-        // Custom error view for general errors
-        errorView: (context, error) {
-          return Center(
-            child: Text('Error: $error'),
-          );
-        },
-        // Custom image placeholder
-        imagePlaceholder: (context) {
-          return const Center(
-            child: Icon(Icons.image),
-          );
-        },
-      ),
-  // ... other configurations
+  homeLocation: '/', // where "Go home" leads from any failure
+  platformWidgetBuilder: vyuh.PlatformWidgetBuilder.system.copyWith(
+    theme: vyuh.VyuhTheme(light: MyDesign.light, dark: MyDesign.dark),
+  ),
+  features: () => [...],
 );
 ```
 
-The platform widget builder allows you to customize:
+Every route failure has a way out: Try again, Back, Go home, or Restart app,
+whichever applies. A missing route, a failed lazy feature, a page that fails to
+load and a failed startup all work this way. Failures are reported once to telemetry
+and as a `RouteFailureEvent`. Error details show only in debug builds.
 
-- `appBuilder`: The root app widget (typically MaterialApp.router)
-- `appLoader`: Shown during initial app load
-- `contentLoader`: Shown when loading content
-- `routeLoader`: Shown during route transitions
-- `routeErrorView`: Shown when a route fails to load
-- `errorView`: Shown for general errors
-- `imagePlaceholder`: Default placeholder for images
+Restyle the defaults with `VyuhThemeExtension` tokens in your `ThemeData`, or
+replace any builder with `copyWith`:
 
-Each of these has a default implementation that you can override as needed.
+- `appBuilder`: the root app widget; read `platform.widgetBuilder.theme`
+- `appLoader`, `routeLoader`, `contentLoader`: loaders (`contentLoader` is the
+  inline one, for a part of a page)
+- `routeErrorView`: full-page failures (`FailurePage` by default)
+- `errorView`: inline failures (`FailureCard` by default)
+- `imagePlaceholder`: image placeholder
+- `theme`: the app's `VyuhTheme`
+
+Inside a custom error view, `VyuhFailureScope.maybeOf(context)` gives the full
+`VyuhFailure` and `FailureActions` tells you which actions apply. See
+[Theming](https://docs.vyuh.tech/guides/theming) and
+[Errors and recovery](https://docs.vyuh.tech/guides/errors-and-recovery).
 
 ## Learn More 📚
 

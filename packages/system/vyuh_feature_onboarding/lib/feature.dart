@@ -11,5 +11,4 @@ final feature = FeatureDescriptor(
   extensions: [
     ContentExtensionDescriptor(contentBuilders: [OnboardingContentBuilder()]),
   ],
-  routes: () => [],
 );

@@ -42,9 +42,20 @@ final class FeatureDescriptor {
   /// no ordering constraint is applied.
   final List<String> dependencies;
 
-  final RouteBuilderFunction _routes;
+  /// App-level event listeners. The platform subscribes them before the
+  /// feature's `init` runs and cancels them on dispose, restart, or a failed
+  /// lazy activation. See [EventHandler] and [SystemEvent].
+  final List<EventHandler> events;
 
-  /// The routes for the feature.
+  /// Redirects this feature adds to the app's router, evaluated in feature
+  /// order after the global redirect. See [FeatureRedirect].
+  final List<FeatureRedirect> redirects;
+
+  final RouteBuilderFunction? _routes;
+
+  /// The routes for the feature, or null when it contributes none. Features
+  /// that only add event handlers, redirects, extensions or services can
+  /// leave this out.
   RouteBuilderFunction? get routes => _routes;
 
   /// Creates a new FeatureDescriptor.
@@ -55,11 +66,13 @@ final class FeatureDescriptor {
     this.icon,
     this.init,
     this.dispose,
-    required RouteBuilderFunction routes,
+    RouteBuilderFunction? routes,
     this.extensions,
     this.extensionBuilders,
     this.dependencies = const [],
-  }) : _routes = _runOnce(routes) {
+    this.events = const [],
+    this.redirects = const [],
+  }) : _routes = routes == null ? null : _runOnce(routes) {
     // Set the source feature in all extension builders
     for (final extensionBuilder in extensionBuilders ?? <ExtensionBuilder>[]) {
       extensionBuilder.setSourceFeature(name);

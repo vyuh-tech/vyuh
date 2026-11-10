@@ -98,7 +98,7 @@ void main() {
     );
     VyuhBinding.instance.widgetInit(
       plugins: PluginDescriptor(
-        content: DefaultContentPlugin(provider: fixtures.MockContentProvider()),
+        others: [DefaultContentPlugin(provider: fixtures.MockContentProvider())],
       ),
       extensionBuilder: builder,
       extensionDescriptors: [

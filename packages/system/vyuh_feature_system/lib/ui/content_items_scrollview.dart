@@ -1,6 +1,7 @@
 import 'package:flutter/rendering.dart' show ScrollCacheExtent;
 import 'package:flutter/widgets.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 class ContentItemsScrollView extends StatelessWidget {
   const ContentItemsScrollView({super.key, required this.items});

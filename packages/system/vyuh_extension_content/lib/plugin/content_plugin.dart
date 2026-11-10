@@ -21,6 +21,7 @@ final class DefaultContentPlugin extends ContentPlugin {
     required super.provider,
     this.useLiveRoute = false,
     this.allowRouteRefresh = true,
+    super.unknown,
   }) : super(name: 'vyuh.plugin.content', title: 'Content Plugin');
 
   @override
@@ -46,7 +47,7 @@ final class DefaultContentPlugin extends ContentPlugin {
           'Verify the schema type matches the registered type',
         ],
       );
-      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+      return unknown(context, failure);
     }
 
     final builder = _extensionBuilder!.contentBuilder(content.schemaType);
@@ -59,7 +60,7 @@ final class DefaultContentPlugin extends ContentPlugin {
         description: 'No ContentBuilder registered for this schema type',
         suggestions: ['Register a ContentBuilder for ${content.schemaType}'],
       );
-      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+      return unknown(context, failure);
     }
 
     Widget contentWidget;
@@ -77,7 +78,7 @@ final class DefaultContentPlugin extends ContentPlugin {
           'Check if the layout type is properly exported',
         ],
       );
-      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+      return unknown(context, failure);
     }
 
     try {
@@ -94,7 +95,7 @@ final class DefaultContentPlugin extends ContentPlugin {
           'Verify layout implementation for ${layout?.schemaType ?? 'default layout'}',
         ],
       );
-      return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+      return unknown(context, failure);
     }
 
     final modifiers = content.getModifiers();
@@ -116,7 +117,7 @@ final class DefaultContentPlugin extends ContentPlugin {
               'Check if the modifier type is properly exported',
             ],
           );
-          return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+          return unknown(context, failure);
         }
       }
 
@@ -140,7 +141,7 @@ final class DefaultContentPlugin extends ContentPlugin {
             'Verify modifier compatibility with content type ${content.schemaType}',
           ],
         );
-        return VyuhBinding.instance.widgetBuilder.unknown(context, failure);
+        return unknown(context, failure);
       }
     }
 

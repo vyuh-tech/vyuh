@@ -18,37 +18,23 @@ A secure storage plugin for the Vyuh framework that provides encrypted key-value
 storage for sensitive information using platform-specific secure storage
 mechanisms:
 
-- iOS: Keychain
-- Android: EncryptedSharedPreferences
-- Web: LocalStorage with encryption
-- macOS: Keychain
+- iOS and macOS: Keychain
+- Android: encrypted storage backed by the Android Keystore
+- Web: encrypted browser storage
 - Linux: Secret Service API
 - Windows: Windows Credential Manager
 
-## Features ✨
-
-- **Platform-specific Secure Storage** 🛡️: Uses the most secure storage
-  mechanism available on each platform
-- **Encrypted Data** 🔒: All data is encrypted before storage
-- **Simple API** 🎯: Easy-to-use key-value storage interface
-- **Configurable Options** ⚙️: Platform-specific configuration options for
-  fine-tuned control
-- **Null Safety** ✅: Built with sound null safety
-
-## Installation 📦
-
-Add this to your package's `pubspec.yaml` file:
+## Installation
 
 ```yaml
 dependencies:
-  vyuh_plugin_storage_secure: ^1.1.0
+  vyuh_plugin_storage_secure: ^1.6.0
 ```
 
-## Usage 💡
+## Setup
 
-### Basic Setup
-
-Configure secure storage in your Vyuh application:
+The package re-exports the platform option classes of
+`flutter_secure_storage`, so you don't need to depend on it directly.
 
 ```dart
 import 'package:vyuh_core/vyuh_core.dart' as vyuh;
@@ -56,78 +42,32 @@ import 'package:vyuh_plugin_storage_secure/vyuh_plugin_storage_secure.dart';
 
 void main() {
   vyuh.runApp(
-    plugins: PluginDescriptor(
+    plugins: vyuh.PluginDescriptor(
       secureStorage: FlutterSecureStoragePlugin(
-        androidOptions: const AndroidOptions(
-          encryptedSharedPreferences: true,
-        ),
-      ),
-      // ... other plugins
-    ),
-    // ... other configuration
-  );
-}
-```
-
-### Using the Plugin
-
-Access the secure storage plugin:
-
-```dart
-final storage = vyuh.platform.getPlugin<SecureStoragePlugin>();
-
-// Store sensitive data
-await storage.write('auth.token', 'your-secure-token');
-
-// Read stored data
-final token = await storage.read('auth.token');
-print('Token: $token');
-
-// Check if key exists
-final hasToken = await storage.has('auth.token');
-if (hasToken) {
-  // Key exists
-}
-
-// Delete data
-final deleted = await storage.delete('auth.token');
-if (deleted) {
-  // Key was successfully deleted
-}
-```
-
-### Platform-specific Configuration
-
-Configure platform-specific options when creating the plugin:
-
-```dart
-void main() {
-  vyuh.runApp(
-    plugins: PluginDescriptor(
-      secureStorage: FlutterSecureStoragePlugin(
-        androidOptions: const AndroidOptions(
-          encryptedSharedPreferences: true,
-        ),
         iOSOptions: const IOSOptions(
           accessibility: KeychainAccessibility.first_unlock,
         ),
-        // ... other platform options
       ),
     ),
+    features: () => [/* ... */],
   );
 }
 ```
 
-## Platform Support 🌍
+## Usage
 
-| Platform | Storage Mechanism          | Encryption                 |
-| -------- | -------------------------- | -------------------------- |
-| Android  | EncryptedSharedPreferences | AES-256 with CBC           |
-| iOS      | Keychain                   | Hardware-backed encryption |
-| Web      | LocalStorage               | AES encryption in memory   |
-| macOS    | Keychain                   | Hardware-backed encryption |
-| Linux    | Secret Service API         | System-provided encryption |
-| Windows  | Credential Manager         | System-provided encryption |
+```dart
+final storage = vyuh.vyuh.secureStorage;
+
+await storage.write('auth.token', 'your-secure-token'); // returns the stored string
+final token = await storage.read('auth.token');          // String?
+final hasToken = await storage.has('auth.token');
+final deleted = await storage.delete('auth.token');      // false if it wasn't there
+```
+
+Values are stored as strings: `write` stores `value.toString()` and returns
+it. Writing `null` deletes the key. Using the plugin before `init` or after
+`dispose` throws a `StateError`.
 
 ## Contributing 🤝
 

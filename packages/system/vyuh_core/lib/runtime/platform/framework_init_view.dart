@@ -28,16 +28,18 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
           loadedApp = vyuh.widgetBuilder.appBuilder(context, vyuh);
         }
 
-        final child = status == null || status == FutureStatus.pending
-            ? vyuh.widgetBuilder.appLoader(context)
-            : vyuh.widgetBuilder.routeErrorView(
-                context,
-                title: 'Failed to load app',
-                error: vyuh.tracker.error,
-              );
+        // The loading surface must not create a Navigator. A temporary
+        // Navigator selects single-entry browser history while the loaded
+        // Router selects multi-entry history. Their overlap during the fade
+        // can strand navigation messages waiting for a browser traversal.
+        // The loaded app alone owns the initial deep link and browser history.
+        final theme = vyuh.widgetBuilder.theme;
         final pendingApp = MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: child,
+          theme: theme.light,
+          darkTheme: theme.dark,
+          themeMode: theme.mode,
+          builder: (_, _) => const _PendingView(),
         );
 
         return AnimatedSwitcher(
@@ -46,6 +48,48 @@ class _FrameworkInitViewState extends State<_FrameworkInitView> {
             return FadeTransition(opacity: animation, child: child);
           },
           child: loadedApp ?? pendingApp,
+        );
+      },
+    );
+  }
+}
+
+/// The loader while the app loads, and the failure if it does not.
+class _PendingView extends StatelessWidget {
+  const _PendingView();
+
+  @override
+  Widget build(BuildContext context) {
+    return Observer(
+      name: 'Framework Pending',
+      builder: (context) {
+        // Only a failed boot is a failure. When boot succeeds this screen
+        // may still be fading out while the app fades in, so it keeps
+        // showing the loader rather than reading success as a failure.
+        if (vyuh.tracker.status != FutureStatus.rejected) {
+          return vyuh.widgetBuilder.appLoader(context);
+        }
+
+        // Telemetry and SystemInitFailedEvent already reported this, so
+        // show it without reporting it again.
+        final failure = VyuhFailure(
+          kind: FailureKind.init,
+          title: vyuh.widgetBuilder.strings.appStartFailedTitle,
+          message: vyuh.widgetBuilder.strings.appStartFailedMessage,
+          error: vyuh.tracker.error,
+        );
+        return VyuhFailureScope(
+          failure: failure,
+          child: Builder(
+            builder: (context) => vyuh.widgetBuilder.routeErrorView(
+              context,
+              title: failure.title,
+              subtitle: failure.message,
+              error: failure.error,
+              retryLabel: vyuh.widgetBuilder.strings.restartApp,
+              onRetry: () => vyuh.tracker.init(),
+            ),
+          ),
         );
       },
     );

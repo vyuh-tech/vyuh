@@ -1,3 +1,19 @@
+## 1.5.0
+
+ - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.
+
+## 1.4.6
+
+ - Update a dependency to the latest release.
+
+## 1.4.5
+
+ - **FIX**(storage): fail clearly before init, and report missing keys on delete.
+
+## 1.4.4
+
+ - Update a dependency to the latest release.
+
 ## 1.4.3
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.

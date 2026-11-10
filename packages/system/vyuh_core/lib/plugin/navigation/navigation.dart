@@ -1,18 +1,99 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:go_router/go_router.dart' as g;
 import 'package:go_router/go_router.dart';
-import 'package:vyuh_core/plugin/navigation/fallback_route_page_builder.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
 abstract class NavigationPlugin extends Plugin {
   GoRouter get instance;
 
-  static final fallbackRoute = GoRoute(
-    path: '/:path(.*)',
-    pageBuilder: fallbackRoutePageBuilder,
+  /// The path of a catch-all route. A feature can contribute one `GoRoute`
+  /// with this path to handle every location no other route matches; the
+  /// router always places it last. Without one, unmatched locations show the
+  /// not-found [RouteFailureView].
+  static const catchAllPath = '/:path(.*)';
+
+  /// Default live navigator budget, including the active branch.
+  static const defaultMaxRetainedBranches = 3;
+
+  /// Maximum mounted stateful-shell branches. Query caches are independent.
+  final int maxRetainedBranches;
+
+  NavigationPlugin({
+    required super.name,
+    required super.title,
+    this.maxRetainedBranches = defaultMaxRetainedBranches,
+  }) {
+    if (maxRetainedBranches < 1) {
+      throw ArgumentError.value(
+        maxRetainedBranches,
+        'maxRetainedBranches',
+        'must be positive',
+      );
+    }
+  }
+
+  /// Plug directly into StatefulShellRoute.navigatorContainerBuilder. The
+  /// application supplies the route tree; the plugin applies navigation policy.
+  g.ShellNavigationContainerBuilder get branchContainerBuilder =>
+      _buildBranches;
+
+  Widget _buildBranches(
+    BuildContext context,
+    g.StatefulNavigationShell shell,
+    List<Widget> children,
+  ) => NavigationBranchContainer(
+    currentIndex: shell.currentIndex,
+    maxRetainedBranches: maxRetainedBranches,
+    children: children,
   );
 
-  NavigationPlugin({required super.name, required super.title});
+  /// Redirects contributed by features through [FeatureDescriptor.redirects].
+  ///
+  /// The platform adds and removes entries as features start and stop.
+  /// Implementations evaluate them with [RedirectRegistry.evaluate] and call
+  /// [watchRedirectTriggers] so they re-run when their triggers fire.
+  final RedirectRegistry featureRedirects = RedirectRegistry();
+
+  /// Calls [refresh] whenever a feature redirect's trigger fires: one of its
+  /// `refreshOn` events is emitted, or its `listenable` notifies. Also calls
+  /// [refresh] when the set of redirects changes. Returns a function that
+  /// stops watching.
+  @protected
+  VoidCallback watchRedirectTriggers(VoidCallback refresh) {
+    Listenable? merged;
+
+    void rewatch() {
+      merged?.removeListener(refresh);
+      final listenables = featureRedirects.listenables;
+      merged = listenables.isEmpty ? null : Listenable.merge(listenables);
+      merged?.addListener(refresh);
+    }
+
+    void onRedirectsChanged() {
+      rewatch();
+      refresh();
+    }
+
+    rewatch();
+    featureRedirects.addListener(onRedirectsChanged);
+    final cancelEvents = vyuh.event.on<VyuhEvent>((event) {
+      if (featureRedirects.refreshesOn(event.runtimeType)) refresh();
+    });
+
+    return () {
+      cancelEvents();
+      featureRedirects.removeListener(onRedirectsChanged);
+      merged?.removeListener(refresh);
+      merged = null;
+    };
+  }
+
+  /// The location of the home route, used by error views to offer a way
+  /// back. Set by the platform from `runApp(homeLocation: ...)`.
+  String homeLocation = '/';
+
+  /// Navigates to [homeLocation].
+  void goHome() => go(homeLocation);
 
   void initRouter({
     String? initialLocation,

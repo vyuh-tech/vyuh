@@ -9,6 +9,9 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 
+import 'platform/env/test_env_stub.dart'
+    if (dart.library.io) 'platform/env/test_env_io.dart';
+
 part 'platform/default_platform.dart';
 part 'platform/framework_init_view.dart';
 part 'platform/lazy_feature_manager.dart';
@@ -43,6 +46,8 @@ void defaultAppRunner(Widget app) {
 /// * `plugins`: Optional. A [PluginDescriptor] object that specifies the plugins to be used. If not provided, defaults to [PluginDescriptor.system].
 /// * `platformWidgetBuilder`: Optional. A builder function that returns a platform-specific widget. If not provided, defaults to [defaultPlatformWidgetBuilder].
 /// * `initialLocation`:  Optional. The initial location to open in the app.
+/// * `homeLocation`: Optional. Where error views send the user with "Go home". Defaults to `initialLocation`, then `/`.
+/// * `captureErrors`: Optional, defaults to `true`. Routes uncaught Flutter and platform errors to telemetry and, in release builds, shows a themed placeholder for widgets that fail to build.
 /// * `appRunner`: Optional. A custom [AppRunner] function to control how the app is launched.
 ///   This allows integrating with packages like `scaled_app`, `device_preview`, or custom
 ///   error zone wrapping. If not provided, defaults to [defaultAppRunner].
@@ -52,6 +57,8 @@ void runApp({
   PluginDescriptor? plugins,
   PlatformWidgetBuilder? platformWidgetBuilder,
   String? initialLocation,
+  String? homeLocation,
+  bool captureErrors = true,
   AppRunner? appRunner,
 }) async {
   final widgetBuilder = platformWidgetBuilder ?? PlatformWidgetBuilder.system;
@@ -62,6 +69,8 @@ void runApp({
     pluginDescriptor: plugins ?? PluginDescriptor.system,
     widgetBuilder: widgetBuilder,
     initialLocation: initialLocation,
+    homeLocation: homeLocation,
+    captureErrors: captureErrors,
     appRunner: appRunner ?? defaultAppRunner,
   );
 

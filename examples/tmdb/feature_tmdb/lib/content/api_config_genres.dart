@@ -7,7 +7,7 @@ import 'package:material_ui/material_ui.dart' as f;
 import 'package:material_ui/material_ui.dart' hide Action;
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/content/action.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'api_config_genres.g.dart';

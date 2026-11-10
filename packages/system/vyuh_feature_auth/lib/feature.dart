@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart' as go;
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/content_extension_descriptor.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_auth/auth_user_card_layout.dart';
 import 'package:vyuh_feature_auth/content/email_password_form.dart';
 import 'package:vyuh_feature_auth/content/forgot_password_form.dart';

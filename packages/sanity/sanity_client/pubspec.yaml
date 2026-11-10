@@ -1,7 +1,7 @@
 name: sanity_client
 resolution: workspace
 description: Native Dart client to run GROQ queries and fetch documents from Sanity.io
-version: 1.9.2
+version: 1.9.3
 
 homepage: https://vyuh.tech
 repository: https://github.com/vyuh-tech/vyuh/tree/main/packages/sanity/sanity_client
@@ -23,7 +23,7 @@ dependencies:
     sdk: flutter
   json_annotation: ^4.9.0
   http: ^1.1.0
-  eventflux: ^2.2.1
+  eventflux: ^3.0.2
 
 dev_dependencies:
   flutter_test:
@@ -32,5 +32,3 @@ dev_dependencies:
   json_serializable: ^6.8.0
   build_runner: ^2.4.6
   mocktail: ^1.0.0
-
-flutter:

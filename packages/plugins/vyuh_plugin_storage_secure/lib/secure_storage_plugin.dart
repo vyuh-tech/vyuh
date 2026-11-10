@@ -36,7 +36,14 @@ import 'package:vyuh_core/vyuh_core.dart';
 /// * [InitOncePlugin] - Mixin for plugin initialization
 class FlutterSecureStoragePlugin extends SecureStoragePlugin
     with InitOncePlugin {
-  late FlutterSecureStorage _storage;
+  FlutterSecureStorage? _storage;
+
+  FlutterSecureStorage get _store =>
+      _storage ??
+      (throw StateError(
+        'FlutterSecureStoragePlugin is not initialized. '
+        'Call init() before using it, and do not use it after dispose().',
+      ));
 
   final AndroidOptions? _androidOptions;
   final IOSOptions? _iOSOptions;
@@ -45,42 +52,14 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   final LinuxOptions? _linuxOptions;
   final WindowsOptions? _windowsOptions;
 
-  /// Creates a new instance of [FlutterSecureStoragePlugin] with platform-specific options.
-  ///
-  /// Each platform can be configured with its own set of options:
-  ///
-  /// * [androidOptions] - Android configuration:
-  ///   - `encryptedSharedPreferences`: Use EncryptedSharedPreferences (recommended)
-  ///   - `sharedPreferencesName`: Custom name for preferences file
-  ///   - `preferencesKeyPrefix`: Prefix for all stored keys
-  ///
-  /// * [iOSOptions] - iOS configuration:
-  ///   - `accessibility`: When the keychain item should be accessible
-  ///   - `synchronizable`: Enable iCloud keychain sync
-  ///   - `groupId`: App Group ID for shared access
-  ///
-  /// * [macOSOptions] - macOS configuration:
-  ///   - Similar to iOS options
-  ///   - Supports keychain sharing and accessibility
-  ///
-  /// * [webOptions] - Web configuration:
-  ///   - `dbName`: Name for IndexedDB database
-  ///   - `publicKey`: Optional encryption key
-  ///
-  /// * [linuxOptions] - Linux configuration:
-  ///   - Uses Secret Service API
-  ///   - Requires running D-Bus session
-  ///
-  /// * [windowsOptions] - Windows configuration:
-  ///   - Uses Windows DPAPI
-  ///   - Data is tied to current user account
+  /// Creates a new instance of [FlutterSecureStoragePlugin] with optional
+  /// platform-specific options from `flutter_secure_storage`, which this
+  /// package re-exports. Platforms without options use the package defaults.
   ///
   /// Example:
   /// ```dart
   /// final plugin = FlutterSecureStoragePlugin(
-  ///   androidOptions: const AndroidOptions(
-  ///     encryptedSharedPreferences: true,
-  ///   ),
+  ///   androidOptions: const AndroidOptions(storageNamespace: 'my_app'),
   ///   iOSOptions: const IOSOptions(
   ///     accessibility: KeychainAccessibility.first_unlock,
   ///   ),
@@ -134,13 +113,13 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   /// * [has] - Check if a key exists
   @override
   Future<String?> read(String key) async {
-    return _storage.read(key: key);
+    return _store.read(key: key);
   }
 
   /// Writes a value to secure storage.
   ///
-  /// The [value] is converted to a string before storage. If [value] is null,
-  /// the [key] will be deleted from storage.
+  /// The [value] is converted to a string before storage, and that string is
+  /// returned. If [value] is null, the [key] is deleted and null is returned.
   ///
   /// Example:
   /// ```dart
@@ -161,12 +140,14 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   /// * [read] - Read a stored value
   /// * [delete] - Delete a stored value
   @override
-  Future<void> write(String key, dynamic value) async {
+  Future<String?> write(String key, dynamic value) async {
     if (value == null) {
       await delete(key);
-      return;
+      return null;
     }
-    await _storage.write(key: key, value: value.toString());
+    final text = value.toString();
+    await _store.write(key: key, value: text);
+    return text;
   }
 
   /// Checks if a key exists in secure storage.
@@ -189,8 +170,7 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   /// * [delete] - Delete a stored value
   @override
   Future<bool> has(String key) async {
-    final containsKey = await _storage.containsKey(key: key);
-    return containsKey;
+    return _store.containsKey(key: key);
   }
 
   /// Deletes a value from secure storage.
@@ -214,13 +194,17 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   /// * [has] - Check if a key exists
   @override
   Future<bool> delete(String key) async {
-    final exists = await has(key);
-    if (!exists) return false;
+    final store = _store;
+    if (!await store.containsKey(key: key)) return false;
 
-    await _storage.delete(key: key);
+    await store.delete(key: key);
     return true;
   }
 
+  /// Releases the plugin. Stored values stay on the device; using the plugin
+  /// again needs another [init].
   @override
-  Future<void> disposeOnce() async {}
+  Future<void> disposeOnce() async {
+    _storage = null;
+  }
 }

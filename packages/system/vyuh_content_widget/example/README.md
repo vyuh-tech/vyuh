@@ -21,7 +21,7 @@ final sanityProvider = SanityContentProvider.withConfig(
 VyuhContentBinding.init(
   plugins: PluginDescriptor(
       // Required Content Plugin
-      content: DefaultContentPlugin(provider: sanityProvider),
+      others: [DefaultContentPlugin(provider: sanityProvider)],
 
       // Optional Telemetry setup
       telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
@@ -182,7 +182,7 @@ them with `VyuhContentBinding`:
 void main() async {
   VyuhContentBinding.init(
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(provider: sanityProvider),
+      others: [DefaultContentPlugin(provider: sanityProvider)],
       telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
     ),
     widgetBuilder: PlatformWidgetBuilder.system.copyWith(

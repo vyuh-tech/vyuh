@@ -43,7 +43,7 @@ dependencies:
 void main() {
   VyuhContentBinding.init(
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(provider: sanityProvider),
+      others: [DefaultContentPlugin(provider: sanityProvider)],
     ),
   );
 

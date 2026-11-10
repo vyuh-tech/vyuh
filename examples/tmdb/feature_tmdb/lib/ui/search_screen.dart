@@ -10,6 +10,7 @@ import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tmdb_client/tmdb_client.dart';
 import 'package:vyuh_core/runtime/platform/vyuh_platform.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class SearchScreen extends StatefulWidget {

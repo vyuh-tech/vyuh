@@ -39,7 +39,7 @@ void main() async {
   // Initialize VyuhContentBinding with the Sanity provider and the default content feature.
   VyuhContentBinding.init(
     plugins: PluginDescriptor(
-      content: DefaultContentPlugin(provider: sanityProvider),
+      others: [DefaultContentPlugin(provider: sanityProvider)],
       telemetry: TelemetryPlugin(providers: [ConsoleLoggerTelemetryProvider()]),
     ),
     descriptors: [system.descriptor],

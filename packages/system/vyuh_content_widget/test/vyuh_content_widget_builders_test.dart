@@ -26,7 +26,7 @@ void main() {
       ).thenAnswer((_) async => Document(title: 'Mock Document'));
 
       VyuhContentBinding.init(
-        plugins: PluginDescriptor(content: mockContentPlugin),
+        plugins: PluginDescriptor(others: [mockContentPlugin]),
         descriptors: [],
       );
 
@@ -44,19 +44,22 @@ void main() {
         MaterialApp(home: VyuhContentWidget.fromDocument(identifier: 'test')),
       );
 
-      await tester.pumpAndSettle();
+      await settle(tester);
 
       // Verify mock was called with correct parameters
       verify(
         () => mockContentProvider.fetchSingle<Document>(
           any(that: contains('vyuh.document')),
           fromJson: Document.fromJson,
-          queryParams: any(that: containsPair('identifier', 'test')),
+          queryParams: any(
+            named: 'queryParams',
+            that: containsPair('identifier', 'test'),
+          ),
         ),
       ).called(1);
 
       // Verify that content is built using VyuhContentBinding
-      expect(find.widgetWithText(Text, 'Mock Document'), findsOneWidget);
+      expect(find.text('Mock Document'), findsOneWidget);
     });
 
     testWidgets('fromDocument uses custom builder when provided', (
@@ -71,14 +74,17 @@ void main() {
         ),
       );
 
-      await tester.pumpAndSettle();
+      await settle(tester);
 
       // Verify mock was called with correct parameters
       verify(
         () => mockContentProvider.fetchSingle<Document>(
           any(that: contains('vyuh.document')),
           fromJson: Document.fromJson,
-          queryParams: any(that: containsPair('identifier', 'test')),
+          queryParams: any(
+            named: 'queryParams',
+            that: containsPair('identifier', 'test'),
+          ),
         ),
       ).called(1);
 
@@ -92,14 +98,49 @@ void main() {
         MaterialApp(home: VyuhContentWidget.fromDocument(identifier: testId)),
       );
 
-      await tester.pumpAndSettle();
+      await settle(tester);
 
       // Verify mock was called with correct parameters
       verify(
         () => mockContentProvider.fetchSingle<Document>(
           any(that: contains('vyuh.document')),
           fromJson: Document.fromJson,
-          queryParams: any(that: containsPair('identifier', testId)),
+          queryParams: any(
+            named: 'queryParams',
+            that: containsPair('identifier', testId),
+          ),
+        ),
+      ).called(1);
+    });
+
+    testWidgets('fromDocument does not refetch when its parent rebuilds', (
+      tester,
+    ) async {
+      late StateSetter rebuild;
+      await tester.pumpWidget(
+        MaterialApp(
+          home: StatefulBuilder(
+            builder: (context, setState) {
+              rebuild = setState;
+              // A new queryParams map on every build, with the same entries.
+              return VyuhContentWidget.fromDocument(
+                identifier: 'test',
+                builder: (context, doc) => Text(doc.title ?? ''),
+              );
+            },
+          ),
+        ),
+      );
+      await settle(tester);
+
+      rebuild(() {});
+      await settle(tester);
+
+      verify(
+        () => mockContentProvider.fetchSingle<Document>(
+          any(),
+          fromJson: any(named: 'fromJson'),
+          queryParams: any(named: 'queryParams'),
         ),
       ).called(1);
     });

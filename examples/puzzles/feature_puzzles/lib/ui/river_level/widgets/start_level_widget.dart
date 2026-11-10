@@ -6,6 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/runtime/platform/powered_by_widget.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 class StartLevelWidget extends StatelessWidget {

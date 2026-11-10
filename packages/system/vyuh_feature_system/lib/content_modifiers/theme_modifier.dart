@@ -1,6 +1,8 @@
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'theme_modifier.g.dart';
@@ -61,8 +63,13 @@ final class ThemeModifier extends ContentModifierConfiguration {
   @override
   Widget build(BuildContext context, Widget child, ContentItem content) {
     final service = VyuhBinding.instance.di.get<ThemeService>();
-    final themeData = service.theme(mode);
 
-    return themeData != null ? Theme(data: themeData, child: child) : child;
+    // Rebuilds when the themes or the platform brightness change.
+    return Observer(
+      builder: (_) {
+        final themeData = service.theme(mode);
+        return themeData != null ? Theme(data: themeData, child: child) : child;
+      },
+    );
   }
 }

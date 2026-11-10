@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:feature_tmdb/content/dropdown_menu.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:material_ui/material_ui.dart';
-import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'drop_down_selection.g.dart';

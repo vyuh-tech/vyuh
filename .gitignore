@@ -16,7 +16,8 @@ pubspec_overrides.yaml
 mason-lock.json
 .mason
 *.lock
+# The JavaScript workspace lockfile is required for reproducible installs.
+!/bun.lock
 devtools_options.yaml
 
 
-.pnpm-store/

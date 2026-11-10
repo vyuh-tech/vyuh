@@ -1,0 +1,50 @@
+name: Deploy Docs
+
+# Publishes docs.vyuh.tech whenever the documentation changes on main.
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'docs/**'
+      - 'package.json'
+      - 'bun.lock'
+      - '.github/workflows/deploy_docs.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-docs
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Deploy docs to Cloudflare Pages
+    steps:
+      - uses: actions/checkout@v4
+
+      # VitePress runs on Node; Bun installs and runs the scripts.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '25'
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.4'
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun run docs:build
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          packageManager: bun
+          wranglerVersion: '4.145.0'
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy docs/.vitepress/dist --project-name=vyuh-docs --branch=main

@@ -1,5 +1,6 @@
 import 'package:feature_food/content/food_item.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 final class FoodApiClient {
   Future<FoodMenuItem?> fetchMenuItem(String id) {

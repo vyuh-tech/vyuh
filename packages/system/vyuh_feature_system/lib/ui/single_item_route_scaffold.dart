@@ -1,5 +1,6 @@
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart' as vf;
 
 /// A [Scaffold] that displays the first item in the body region of a [vf.Route].

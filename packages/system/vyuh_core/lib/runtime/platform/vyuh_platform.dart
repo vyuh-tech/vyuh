@@ -83,11 +83,12 @@ abstract class VyuhPlatform {
   Future<void> dispose();
 }
 
-/// Provides convenient accessors for named plugins within the Vyuh platform.
+/// Named accessors for the system plugins: `vyuh.router`, `vyuh.auth`, ...
+///
+/// Use these in apps and features. Code that must also run in widget mode
+/// (an embedded widget without `runApp`) uses the identical accessors on
+/// `VyuhBinding.instance` instead.
 extension NamedPlugins on VyuhPlatform {
-  /// The content plugin, responsible for managing content-related operations.
-  ContentPlugin get content => getPlugin<ContentPlugin>()!;
-
   /// The dependency injection plugin, providing dependency injection services.
   DIPlugin get di => getPlugin<DIPlugin>()!;
 
@@ -119,6 +120,12 @@ extension NamedPlugins on VyuhPlatform {
   /// The locale plugin, providing access to locale settings.
   /// Can be null if the plugin is not registered.
   LocalePlugin? get locale => getPlugin<LocalePlugin>();
+
+  /// The storage plugin, for general key-value persistence.
+  StoragePlugin get storage => getPlugin<StoragePlugin>()!;
+
+  /// The secure storage plugin, for secrets such as tokens.
+  SecureStoragePlugin get secureStorage => getPlugin<SecureStoragePlugin>()!;
 }
 
 /// Restart the platform, re-running the initialization process.

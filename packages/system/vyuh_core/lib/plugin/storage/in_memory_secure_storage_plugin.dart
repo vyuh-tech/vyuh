@@ -36,7 +36,9 @@ final class InMemorySecureStoragePlugin extends SecureStoragePlugin
 
   @override
   Future<bool> delete(String key) async {
-    return _storage.remove(key) != null;
+    if (!_storage.containsKey(key)) return false;
+    _storage.remove(key);
+    return true;
   }
 
   /// Clears all data from the secure storage.

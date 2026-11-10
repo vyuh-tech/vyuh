@@ -2,6 +2,7 @@ import 'dart:ui' show PlatformDispatcher;
 
 import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
+import 'package:vyuh_core/vyuh_core.dart' show VyuhTheme;
 
 /// Service for managing application themes and theme switching.
 ///
@@ -31,7 +32,25 @@ final class ThemeService {
     WidgetsBinding.instance.addObserver(_brightnessBridge);
   }
 
-  final Map<ThemeMode, ThemeData> _themeMap = {};
+  /// Creates a service seeded from the app's [VyuhTheme], so the themes and
+  /// starting mode match `PlatformWidgetBuilder.theme`.
+  factory ThemeService.fromTheme(VyuhTheme theme) {
+    final service = ThemeService();
+    service.setThemes({
+      ThemeMode.light: theme.light,
+      ThemeMode.dark: theme.dark ?? theme.light,
+    });
+    service.changeTheme(theme.mode);
+    return service;
+  }
+
+  /// Stops listening to platform brightness. Called when the system feature
+  /// is disposed.
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(_brightnessBridge);
+  }
+
+  final ObservableMap<ThemeMode, ThemeData> _themeMap = ObservableMap();
 
   /// The user's stated theme intent. Update through [changeTheme] /
   /// [toggleTheme]. Defaults to [ThemeMode.system].
@@ -97,12 +116,17 @@ final class ThemeService {
   /// });
   /// ```
   void setThemes(Map<ThemeMode, ThemeData> themes) {
-    _themeMap.addAll(themes);
+    runInAction(() => _themeMap.addAll(themes));
   }
 
-  /// Gets the theme data for the specified theme mode. Returns `null`
-  /// if no theme data is configured for the specified mode.
-  ThemeData? theme(ThemeMode mode) => _themeMap[mode];
+  /// Gets the theme data for the specified theme mode. [ThemeMode.system]
+  /// resolves through [currentMode]. Returns `null` if no theme data is
+  /// configured. Reactive: reads inside an `Observer` rebuild on change.
+  ThemeData? theme(ThemeMode mode) =>
+      _themeMap[mode == ThemeMode.system ? currentMode.value : mode];
+
+  /// The theme for [currentMode].
+  ThemeData? get currentTheme => theme(currentMode.value);
 }
 
 /// [WidgetsBindingObserver] that pumps [PlatformDispatcher.platformBrightness]

@@ -1,7 +1,7 @@
 import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 part 'simulated_delay_lifecycle_handler.g.dart';
 

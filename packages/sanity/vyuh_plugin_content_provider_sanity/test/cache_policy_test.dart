@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:sanity_client/sanity_client.dart';
 import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 import 'package:vyuh_plugin_content_provider_sanity/vyuh_plugin_content_provider_sanity.dart';
 
 class _TestExtensions extends ExtensionBuilder<ExtensionDescriptor> {
@@ -50,7 +51,7 @@ void main() {
 
   setUp(() async {
     VyuhBinding.instance.widgetInit(
-        plugins: PluginDescriptor(content: _TestContentPlugin()),
+        plugins: PluginDescriptor(others: [_TestContentPlugin()]),
         extensionBuilder: _TestExtensions(),
         extensionDescriptors: []);
     await VyuhBinding.instance.widgetReady;

@@ -58,7 +58,7 @@ class LocalePlugin extends Plugin {
 
   LocalePlugin({required this.locales, this._defaultLocale})
     : assert(locales.isNotEmpty, 'At least one locale must be provided'),
-      super(name: 'locale', title: 'Internationalization') {
+      super(name: 'vyuh.plugin.locale', title: 'Internationalization') {
     currentLocale = Observable((_defaultLocale ?? locales.first).locale);
   }
 
@@ -87,11 +87,15 @@ class LocalePlugin extends Plugin {
     });
   }
 
-  /// Set the application locale
-  Future<bool> setLocale(Locale locale) async {
-    if (!_isLocaleSupported(locale)) {
+  /// Set the application locale. The match is by language, and the
+  /// configured locale for that language becomes current, so `hi_IN` sets
+  /// the app's `hi`. Returns false for an unsupported language.
+  Future<bool> setLocale(Locale requested) async {
+    final config = _getConfig(requested.languageCode);
+    if (config == null) {
       return false;
     }
+    final locale = config.locale;
 
     // Set loading state
     runInAction(() => isLoadingLocale.value = true);
@@ -138,18 +142,10 @@ class LocalePlugin extends Plugin {
   Future<void> useDeviceLocale() async {
     final deviceLocale = WidgetsBinding.instance.platformDispatcher.locale;
 
-    if (_isLocaleSupported(deviceLocale)) {
-      await setLocale(deviceLocale);
-    } else {
-      // Try to match language code only (ignore country code)
-      final languageLocale = Locale(deviceLocale.languageCode);
-      if (_isLocaleSupported(languageLocale)) {
-        await setLocale(languageLocale);
-      } else {
-        // Default to configured default locale
-        await setLocale(defaultLocale.locale);
-      }
-    }
+    // Use the configured locale for the device's language (so `hi_IN`
+    // becomes the app's `hi`), or the default when it isn't supported.
+    final config = _getConfig(deviceLocale.languageCode);
+    await setLocale(config?.locale ?? defaultLocale.locale);
   }
 
   /// Get configuration for a specific language code
@@ -159,11 +155,6 @@ class LocalePlugin extends Plugin {
     } catch (_) {
       return null;
     }
-  }
-
-  /// Check if a locale is supported
-  bool _isLocaleSupported(Locale locale) {
-    return locales.any((l) => l.languageCode == locale.languageCode);
   }
 
   /// Check if a specific locale is currently active
@@ -195,7 +186,7 @@ class LocalePlugin extends Plugin {
 
     if (savedLocaleCode != null) {
       final savedLocale = Locale(savedLocaleCode);
-      if (_isLocaleSupported(savedLocale)) {
+      if (_getConfig(savedLocale.languageCode) != null) {
         await setLocale(savedLocale);
       } else {
         await useDeviceLocale();
@@ -209,5 +200,6 @@ class LocalePlugin extends Plugin {
   Future<void> dispose() async {
     _registrations.clear();
     _prefs = null;
+    runInAction(() => currentLocale.value = defaultLocale.locale);
   }
 }

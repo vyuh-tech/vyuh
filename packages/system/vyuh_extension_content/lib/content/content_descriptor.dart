@@ -1,4 +1,4 @@
-import 'package:vyuh_core/vyuh_core.dart';
+import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 typedef ContentDescriptorFactory<T extends ContentItem> = ContentDescriptor
     Function({List<TypeDescriptor<LayoutConfiguration<T>>>? layouts});

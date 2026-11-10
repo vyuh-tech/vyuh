@@ -37,7 +37,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: contentProvider),
+          others: [DefaultContentPlugin(provider: contentProvider)],
         ),
       );
 
@@ -63,7 +63,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: contentProvider),
+          others: [DefaultContentPlugin(provider: contentProvider)],
         ),
       );
 
@@ -97,7 +97,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: contentProvider),
+          others: [DefaultContentPlugin(provider: contentProvider)],
         ),
       );
 
@@ -135,7 +135,7 @@ void main() {
             ),
           ],
           plugins: PluginDescriptor(
-            content: DefaultContentPlugin(provider: contentProvider),
+            others: [DefaultContentPlugin(provider: contentProvider)],
           ),
         );
         await vyuh.getReady(tester);
@@ -162,7 +162,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: contentProvider),
+          others: [DefaultContentPlugin(provider: contentProvider)],
         ),
       );
       await vyuh.getReady(tester);
@@ -195,7 +195,7 @@ void main() {
           ),
         ],
         plugins: PluginDescriptor(
-          content: DefaultContentPlugin(provider: contentProvider),
+          others: [DefaultContentPlugin(provider: contentProvider)],
         ),
       );
 
