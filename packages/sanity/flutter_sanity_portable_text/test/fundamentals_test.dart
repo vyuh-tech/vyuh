@@ -35,14 +35,8 @@ void main() {
       ) {
         return Column(
           children: blocks
-              .asMap()
-              .entries
               .map(
-                (entry) => PortableTextConfig.shared.buildBlock(
-                  context,
-                  entry.value,
-                  entry.key,
-                ),
+                (block) => PortableTextConfig.shared.buildBlock(context, block),
               )
               .toList(),
         );

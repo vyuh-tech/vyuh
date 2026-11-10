@@ -111,7 +111,7 @@ void _registerCustomMark() {
 }
 
 void _registerCustomBlock() {
-  PortableTextConfig.shared.blocks['custom'] = (context, item, _) {
+  PortableTextConfig.shared.blocks['custom'] = (context, item) {
     final theme = Theme.of(context);
     final custom = item as CustomBlockItem;
     final style = theme.textTheme.bodyMedium?.apply(
