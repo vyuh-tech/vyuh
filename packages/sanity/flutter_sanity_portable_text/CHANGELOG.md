@@ -1,3 +1,7 @@
+## 2.1.0
+
+ - **FEAT**(portable_text): expose block index to BlockContainerBuilder.
+
 ## 2.0.0
 
 > Note: This release has breaking changes.
