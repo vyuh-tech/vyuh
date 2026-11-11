@@ -10,6 +10,7 @@
 /// - Custom mark definitions
 /// - Custom text mark recognizers
 /// - Shared config across all Portable Text Widgets
+/// - Per-subtree config overrides via [PortableTextTheme] / [PortableTextStyleOverride]
 ///
 library;
 
@@ -18,4 +19,5 @@ export 'model/text_block.dart';
 export 'ui/portable_block_index.dart';
 export 'ui/portable_text_block.dart';
 export 'ui/portable_text_config.dart';
+export 'ui/portable_text_theme.dart';
 export 'ui/portable_text_widget.dart';

@@ -18,7 +18,7 @@ class PortableTextBlock extends StatelessWidget {
 
   @override
   Widget build(final BuildContext context) {
-    final config = PortableTextConfig.shared;
+    final config = PortableTextConfig.of(context);
 
     final spans = model.children
         .map((final span) => _buildInlineSpan(span, Theme.of(context), context))
@@ -54,7 +54,7 @@ class PortableTextBlock extends StatelessWidget {
     final ThemeData theme,
     final BuildContext context,
   ) {
-    final config = PortableTextConfig.shared;
+    final config = PortableTextConfig.of(context);
 
     // Step 1: Start with the base style
     final baseStyle =
