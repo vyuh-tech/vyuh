@@ -93,7 +93,14 @@ final class PortableTextConfig {
   /// Builds a block widget for the given Portable block item.
   /// The block widget is determined by the block type of the item. If the block type is not found in the
   /// block widgets, an error view is rendered with a message indicating the missing block type.
-  Widget buildBlock(final BuildContext context, final PortableBlockItem item) {
+  ///
+  /// When [index] is given, the block is wrapped in a [PortableBlockIndex] so its builder and
+  /// block container can read their position with [PortableBlockIndex.maybeOf].
+  Widget buildBlock(
+    final BuildContext context,
+    final PortableBlockItem item, [
+    final int? index,
+  ]) {
     final type = item.blockType;
 
     final builder = blocks[type];
@@ -101,7 +108,14 @@ final class PortableTextConfig {
       return ErrorView(message: 'Missing builder for block "$type"');
     }
 
-    return builder(context, item);
+    if (index == null) {
+      return builder(context, item);
+    }
+
+    return PortableBlockIndex(
+      index: index,
+      child: Builder(builder: (final context) => builder(context, item)),
+    );
   }
 
   /// Resets the shared instance of the [PortableTextConfig] to the default configuration.

@@ -73,6 +73,32 @@ void main() {
     expect(find.text('Hello, World'), findsOneWidget);
   });
 
+  testWidgets('Block containers read the block index', (
+    WidgetTester tester,
+  ) async {
+    final indices = <int?>[];
+    PortableTextConfig.shared.blockContainers['indexed-block'] =
+        (context, child) {
+          indices.add(PortableBlockIndex.maybeOf(context));
+          return child;
+        };
+
+    final blocks = [
+      TextBlockItem(
+        children: [Span(text: 'First')],
+        style: 'indexed-block',
+      ),
+      TextBlockItem(
+        children: [Span(text: 'Second')],
+        style: 'indexed-block',
+      ),
+    ];
+
+    await tester.pumpWidget(MaterialApp(home: PortableText(blocks: blocks)));
+
+    expect(indices, [0, 1]);
+  });
+
   testWidgets('PortableText can apply a custom blockContainer', (
     WidgetTester tester,
   ) async {

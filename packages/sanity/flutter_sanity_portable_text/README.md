@@ -522,6 +522,25 @@ final text = PortableText(blocks: [...], listBuilder: columnBuilder);
 
 ```
 
+### Varying a block by its position
+
+The default list builder passes each block's position to `buildBlock`. Builders
+and block containers read it with `PortableBlockIndex.maybeOf(context)`, e.g. to
+drop the top spacing of the first heading:
+
+```dart
+PortableTextConfig.shared.blockContainers['h2'] = (context, child) {
+  final isFirst = PortableBlockIndex.maybeOf(context) == 0;
+  return Padding(
+    padding: EdgeInsets.only(top: isFirst ? 0 : 24),
+    child: child,
+  );
+};
+```
+
+A custom list builder passes the index itself:
+`PortableTextConfig.shared.buildBlock(context, block, index)`.
+
 ## Exploring further
 
 There are several other features which have been excluded from the examples
