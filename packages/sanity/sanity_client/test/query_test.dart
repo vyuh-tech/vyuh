@@ -33,7 +33,7 @@ void main() {
   });
 
   test('Request is constructed properly', () async {
-    final httpClient = MockClient((final req) async {
+    final httpClient = MockClient((req) async {
       expect(req.url.host, contains('$project.apicdn.sanity.io'));
       expect(
         req.url.path,
@@ -51,7 +51,7 @@ void main() {
   });
 
   test('Params are being sent properly', () async {
-    final httpClient = MockClient((final req) async {
+    final httpClient = MockClient((req) async {
       expect(
           req.url.query,
           contains(
@@ -75,7 +75,7 @@ void main() {
   });
 
   test('Correct domain is used when CDN is false', () async {
-    final httpClient = MockClient((final req) async {
+    final httpClient = MockClient((req) async {
       expect(req.url.host, contains('$project.api.sanity.io'));
       return http.Response(_sanityResponse, 200);
     });
@@ -117,7 +117,7 @@ void main() {
       ),
     };
 
-    final httpClient = MockClient((final req) async {
+    final httpClient = MockClient((req) async {
       final query = req.url.queryParameters['query'];
       return pairs[query]?.$1 ?? http.Response('', 200);
     });
@@ -152,7 +152,7 @@ void main() {
 
   test('Parses results for valid query, with results as a Map', () async {
     final httpClient = MockClient(
-      (final request) async => http.Response(
+      (request) async => http.Response(
         '''
       {
         "ms": 20,
@@ -173,7 +173,7 @@ void main() {
 
   test('Parses results for valid query, with results as a List', () async {
     final httpClient = MockClient(
-      (final request) async => http.Response(
+      (request) async => http.Response(
         '''
       {
         "ms": 20,

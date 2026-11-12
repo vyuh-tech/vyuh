@@ -156,7 +156,7 @@ class CreateProjectCommand extends BaseCreateCommand {
       'cms': cms,
       'org_name': orgName,
       'platforms': (argResults['platforms'] as List<String>).join(','),
-      if (applicationId != null) 'application_id': applicationId
+      'application_id': ?applicationId
     });
 
     return vars;

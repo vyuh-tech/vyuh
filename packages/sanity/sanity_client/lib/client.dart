@@ -27,8 +27,8 @@ final class SanityClient {
   /// parameters to provide a custom HTTP client or URL builder.
   SanityClient(
     this.config, {
-    final http.Client? httpClient,
-    final UrlBuilder? urlBuilder,
+    http.Client? httpClient,
+    UrlBuilder? urlBuilder,
   })  : urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
         httpClient = httpClient ?? http.Client(),
         _requestHeaders = {
@@ -87,12 +87,12 @@ final class SanityClient {
   //ignore: long-parameter-list
   /// Return the associated image url
   Uri imageUrl(
-    final String imageRefId, {
-    final int? width,
-    final int? height,
-    final int? devicePixelRatio,
-    final int? quality,
-    final String? format,
+    String imageRefId, {
+    int? width,
+    int? height,
+    int? devicePixelRatio,
+    int? quality,
+    String? format,
   }) =>
       urlBuilder.imageUrl(
         imageRefId,
@@ -106,7 +106,7 @@ final class SanityClient {
       );
 
   /// Return the associated object url
-  Uri fileUrl(final String fileRefId) => urlBuilder.fileUrl(fileRefId);
+  Uri fileUrl(String fileRefId) => urlBuilder.fileUrl(fileRefId);
 
   /// Fetches the associated datasets with this project
   Future<List<SanityDataset>> datasets() async {
@@ -116,7 +116,7 @@ final class SanityClient {
     final response = await httpClient.get(uri, headers: _requestHeaders);
     final datasets = (jsonDecode(response.body) as List<dynamic>)
         .map(
-          (final json) => SanityDataset.fromJson(json as Map<String, dynamic>),
+          (json) => SanityDataset.fromJson(json as Map<String, dynamic>),
         )
         .toList(growable: false);
 
@@ -124,7 +124,7 @@ final class SanityClient {
   }
 
   SanityQueryResponse _getQueryResult(
-    final http.Response response, {
+    http.Response response, {
     required int clientTimeMs,
   }) {
     switch (response.statusCode) {

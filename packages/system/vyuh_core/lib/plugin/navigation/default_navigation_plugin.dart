@@ -53,7 +53,7 @@ final class DefaultNavigationPlugin extends NavigationPlugin {
   /// * [urlReflectsImperativeAPIs]: whether `push` and friends update the
   ///   browser URL.
   DefaultNavigationPlugin({
-    final bool urlReflectsImperativeAPIs = false,
+    bool urlReflectsImperativeAPIs = false,
     this.redirect,
     super.maxRetainedBranches,
     this.onEnter,

@@ -19,11 +19,11 @@ class PortableTextTheme extends InheritedWidget {
   });
 
   /// The [PortableTextConfig] of the nearest [PortableTextTheme] ancestor, or `null` if none.
-  static PortableTextConfig? maybeOf(final BuildContext context) =>
+  static PortableTextConfig? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<PortableTextTheme>()?.config;
 
   @override
-  bool updateShouldNotify(final PortableTextTheme oldWidget) =>
+  bool updateShouldNotify(PortableTextTheme oldWidget) =>
       config != oldWidget.config;
 }
 
@@ -67,7 +67,7 @@ class _PortableTextStyleOverrideState extends State<PortableTextStyleOverride> {
   PortableTextConfig? _derived;
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final base = PortableTextConfig.of(context);
 
     // Recompute (and mint a new config) only when the inherited config or the
@@ -81,7 +81,7 @@ class _PortableTextStyleOverrideState extends State<PortableTextStyleOverride> {
       final wrapped = <String, TextStyleBuilder>{
         for (final entry in widget.styles.entries)
           if (base.styles[entry.key] case final builder?)
-            entry.key: (final ctx, final inherited) =>
+            entry.key: (ctx, inherited) =>
                 entry.value(builder(ctx, inherited)),
       };
       _derived = base.copyWith(styles: wrapped);

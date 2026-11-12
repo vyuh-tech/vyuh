@@ -6,7 +6,7 @@ const dataset = 'test-dataset';
 const token = 'test-token';
 
 SanityClient getClient({
-  final Client? httpClient,
+  Client? httpClient,
   String? apiVersion,
   bool? explainQuery,
   Perspective? perspective = Perspective.published,

@@ -16,14 +16,14 @@ abstract base class SanityException implements Exception {
 /// Exception thrown when a document is not found.
 final class FetchDataException extends SanityException {
   /// Creates a new fetch data exception.
-  FetchDataException([final String? message])
+  FetchDataException([String? message])
       : super(message, 'Error during communication: ');
 }
 
 /// Exception when the request is invalid.
 final class BadRequestException extends SanityException {
   /// Creates a new bad request exception.
-  BadRequestException([final String? message])
+  BadRequestException([String? message])
       : super(message, 'Invalid request: ');
 }
 
@@ -31,20 +31,20 @@ final class BadRequestException extends SanityException {
 /// in the Authorization header.
 final class UnauthorizedException extends SanityException {
   /// Creates a new unauthorized exception.
-  UnauthorizedException([final String? message])
+  UnauthorizedException([String? message])
       : super(message, 'Unauthorized: ');
 }
 
 /// Exception when the request is forbidden.
 final class InvalidReferenceException extends SanityException {
   /// Creates a new invalid reference exception.
-  InvalidReferenceException([final String? message])
+  InvalidReferenceException([String? message])
       : super(message, 'Invalid reference: ');
 }
 
 /// Exception when connecting to the live subscription.
 final class LiveConnectException extends SanityException {
   /// Creates a new live connect exception.
-  LiveConnectException([final String? message])
+  LiveConnectException([String? message])
       : super(message, 'Error connecting to live subscription: ');
 }

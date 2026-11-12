@@ -6,8 +6,8 @@ description: Console logger telemetry provider for Vyuh
 version: 1.5.0
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
-  flutter: ">=3.10.0"
+  sdk: '>=3.14.0 <4.0.0'
+  flutter: '>=3.50.0'
 
 dependencies:
   flutter:

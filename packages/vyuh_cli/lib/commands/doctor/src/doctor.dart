@@ -6,9 +6,9 @@ class Doctor {
   final Logger _logger;
 
   Doctor({
-    required Logger logger,
+    required this._logger,
     this.cms = 'none',
-  }) : _logger = logger;
+  });
 
   final String cms;
 

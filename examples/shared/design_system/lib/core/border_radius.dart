@@ -11,7 +11,7 @@ class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
   final double medium;
   final double large;
   final double xLarge;
-  double full(final double width) => 0.5 * width;
+  double full(double width) => 0.5 * width;
 
   const BorderRadius({
     this.none = 0.0,
@@ -26,14 +26,14 @@ class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
 
   @override
   flutter.ThemeExtension<BorderRadius> copyWith({
-    final double? none,
-    final double? xxSmall,
-    final double? xSmall,
-    final double? small,
-    final double? normal,
-    final double? medium,
-    final double? large,
-    final double? xLarge,
+    double? none,
+    double? xxSmall,
+    double? xSmall,
+    double? small,
+    double? normal,
+    double? medium,
+    double? large,
+    double? xLarge,
   }) => BorderRadius(
     none: none ?? this.none,
     xxSmall: xxSmall ?? this.xxSmall,
@@ -47,8 +47,8 @@ class BorderRadius extends flutter.ThemeExtension<BorderRadius> {
 
   @override
   flutter.ThemeExtension<BorderRadius> lerp(
-    final flutter.ThemeExtension<BorderRadius>? other,
-    final double t,
+    flutter.ThemeExtension<BorderRadius>? other,
+    double t,
   ) {
     if (other is! BorderRadius) {
       return this;

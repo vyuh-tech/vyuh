@@ -25,14 +25,14 @@ class AspectRatio extends flutter.ThemeExtension<AspectRatio> {
 
   @override
   flutter.ThemeExtension<AspectRatio> copyWith({
-    final double? nineToSixteen,
-    final double? fourToFive,
-    final double? oneToOne,
-    final double? fourToThree,
-    final double? threeToTwo,
-    final double? sixteenToNine,
-    final double? twoToOne,
-    final double? fourToOne,
+    double? nineToSixteen,
+    double? fourToFive,
+    double? oneToOne,
+    double? fourToThree,
+    double? threeToTwo,
+    double? sixteenToNine,
+    double? twoToOne,
+    double? fourToOne,
   }) => AspectRatio(
     nineToSixteen: nineToSixteen ?? this.nineToSixteen,
     fourToFive: fourToFive ?? this.fourToFive,
@@ -46,8 +46,8 @@ class AspectRatio extends flutter.ThemeExtension<AspectRatio> {
 
   @override
   flutter.ThemeExtension<AspectRatio> lerp(
-    final flutter.ThemeExtension<AspectRatio>? other,
-    final double t,
+    flutter.ThemeExtension<AspectRatio>? other,
+    double t,
   ) {
     if (other is! AspectRatio) {
       return this;

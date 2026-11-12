@@ -8,7 +8,7 @@ import 'util.dart';
 void main() {
   test('Can fetch datasets', () async {
     final httpClient = MockClient(
-      (final request) async => http.Response(
+      (request) async => http.Response(
         '''
       [
           { "name": "test-1", "aclMode": "none" },
@@ -33,7 +33,7 @@ void main() {
 
     // Hashcodes also match
     expect(
-      response.map((final x) => x.hashCode),
+      response.map((x) => x.hashCode),
       equals([
         SanityDataset(name: 'test-1', aclMode: 'none').hashCode,
         SanityDataset(name: 'test-2', aclMode: 'none').hashCode,
@@ -43,7 +43,7 @@ void main() {
 
   test('Can deal with empty datasets', () async {
     final httpClient = MockClient(
-      (final request) async => http.Response(
+      (request) async => http.Response(
         '''
       []
       ''',

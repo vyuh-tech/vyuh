@@ -15,11 +15,11 @@ class SanityDataset {
   SanityDataset({required this.name, required this.aclMode});
 
   /// Creates a new Sanity dataset from a JSON map.
-  factory SanityDataset.fromJson(final Map<String, dynamic> json) =>
+  factory SanityDataset.fromJson(Map<String, dynamic> json) =>
       _$SanityDatasetFromJson(json);
 
   @override
-  bool operator ==(final Object other) =>
+  bool operator ==(Object other) =>
       identical(this, other) ||
       other is SanityDataset && aclMode == other.aclMode && name == other.name;
 

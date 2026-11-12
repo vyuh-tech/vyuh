@@ -32,21 +32,21 @@ class Sizing extends flutter.ThemeExtension<Sizing> {
   final double quarter;
   final double half;
   final double base;
-  double width20(final double width) => 0.2 * width;
-  double width23(final double width) => 0.23 * width;
-  double width31(final double width) => 0.31 * width;
-  double width36(final double width) => 0.36 * width;
-  double width43(final double width) => 0.43 * width;
-  double width49(final double width) => 0.49 * width;
-  double width53(final double width) => 0.53 * width;
-  double width62(final double width) => 0.62 * width;
-  double width64(final double width) => 0.64 * width;
-  double width67(final double width) => 0.67 * width;
-  double width80(final double width) => 0.8 * width;
-  double width88(final double width) => 0.88 * width;
-  double width91(final double width) => 0.91 * width;
-  double width95(final double width) => 0.95 * width;
-  double widthFull(final double width) => 1.0 * width;
+  double width20(double width) => 0.2 * width;
+  double width23(double width) => 0.23 * width;
+  double width31(double width) => 0.31 * width;
+  double width36(double width) => 0.36 * width;
+  double width43(double width) => 0.43 * width;
+  double width49(double width) => 0.49 * width;
+  double width53(double width) => 0.53 * width;
+  double width62(double width) => 0.62 * width;
+  double width64(double width) => 0.64 * width;
+  double width67(double width) => 0.67 * width;
+  double width80(double width) => 0.8 * width;
+  double width88(double width) => 0.88 * width;
+  double width91(double width) => 0.91 * width;
+  double width95(double width) => 0.95 * width;
+  double widthFull(double width) => 1.0 * width;
 
   const Sizing({
     this.s2 = 8.0,
@@ -82,35 +82,35 @@ class Sizing extends flutter.ThemeExtension<Sizing> {
 
   @override
   flutter.ThemeExtension<Sizing> copyWith({
-    final double? s2,
-    final double? s3,
-    final double? s4,
-    final double? s5,
-    final double? s6,
-    final double? s7,
-    final double? s8,
-    final double? s9,
-    final double? s10,
-    final double? s12,
-    final double? s13,
-    final double? s14,
-    final double? s15,
-    final double? s16,
-    final double? s17,
-    final double? s18,
-    final double? s20,
-    final double? s22,
-    final double? s28,
-    final double? s31,
-    final double? s32,
-    final double? s36,
-    final double? s50,
-    final double? s64,
-    final double? s70,
-    final double? s74,
-    final double? quarter,
-    final double? half,
-    final double? base,
+    double? s2,
+    double? s3,
+    double? s4,
+    double? s5,
+    double? s6,
+    double? s7,
+    double? s8,
+    double? s9,
+    double? s10,
+    double? s12,
+    double? s13,
+    double? s14,
+    double? s15,
+    double? s16,
+    double? s17,
+    double? s18,
+    double? s20,
+    double? s22,
+    double? s28,
+    double? s31,
+    double? s32,
+    double? s36,
+    double? s50,
+    double? s64,
+    double? s70,
+    double? s74,
+    double? quarter,
+    double? half,
+    double? base,
   }) => Sizing(
     s2: s2 ?? this.s2,
     s3: s3 ?? this.s3,
@@ -145,8 +145,8 @@ class Sizing extends flutter.ThemeExtension<Sizing> {
 
   @override
   flutter.ThemeExtension<Sizing> lerp(
-    final flutter.ThemeExtension<Sizing>? other,
-    final double t,
+    flutter.ThemeExtension<Sizing>? other,
+    double t,
   ) {
     if (other is! Sizing) {
       return this;

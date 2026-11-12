@@ -17,10 +17,10 @@ class BorderWidth extends flutter.ThemeExtension<BorderWidth> {
 
   @override
   flutter.ThemeExtension<BorderWidth> copyWith({
-    final double? none,
-    final double? small,
-    final double? medium,
-    final double? large,
+    double? none,
+    double? small,
+    double? medium,
+    double? large,
   }) => BorderWidth(
     none: none ?? this.none,
     small: small ?? this.small,
@@ -30,8 +30,8 @@ class BorderWidth extends flutter.ThemeExtension<BorderWidth> {
 
   @override
   flutter.ThemeExtension<BorderWidth> lerp(
-    final flutter.ThemeExtension<BorderWidth>? other,
-    final double t,
+    flutter.ThemeExtension<BorderWidth>? other,
+    double t,
   ) {
     if (other is! BorderWidth) {
       return this;

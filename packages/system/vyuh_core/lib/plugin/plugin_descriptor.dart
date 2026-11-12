@@ -42,17 +42,17 @@ final class PluginDescriptor {
   List<Plugin> get plugins => List.unmodifiable(_plugins);
 
   PluginDescriptor({
-    final DIPlugin? di,
-    final AnalyticsPlugin? analytics,
-    final TelemetryPlugin? telemetry,
-    final NetworkPlugin? network,
-    final AuthPlugin? auth,
-    final NavigationPlugin? navigation,
-    final EnvPlugin? env,
-    final EventPlugin? event,
-    final StoragePlugin? storage,
-    final SecureStoragePlugin? secureStorage,
-    final List<Plugin>? others,
+    DIPlugin? di,
+    AnalyticsPlugin? analytics,
+    TelemetryPlugin? telemetry,
+    NetworkPlugin? network,
+    AuthPlugin? auth,
+    NavigationPlugin? navigation,
+    EnvPlugin? env,
+    EventPlugin? event,
+    StoragePlugin? storage,
+    SecureStoragePlugin? secureStorage,
+    List<Plugin>? others,
   }) {
     final otherPlugins = others ?? <Plugin>[];
     for (final plugin in otherPlugins) {
@@ -123,7 +123,7 @@ final class PluginDescriptor {
       return _pluginsMap[T] as T?;
     }
 
-    final plugin = _plugins.firstWhereOrNull((final plugin) => plugin is T);
+    final plugin = _plugins.firstWhereOrNull((plugin) => plugin is T);
 
     _pluginsMap[T] = plugin;
 

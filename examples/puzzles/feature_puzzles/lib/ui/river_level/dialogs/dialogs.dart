@@ -12,7 +12,7 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 void showWinDialog(
   BuildContext context, {
-  required final ConfettiController confettiController,
+  required ConfettiController confettiController,
   required VoidCallback onPlayAgain,
   required String score,
 }) {
@@ -79,7 +79,7 @@ void showWinDialog(
   );
 }
 
-void showWarningDialog(BuildContext context, {required final String message}) {
+void showWarningDialog(BuildContext context, {required String message}) {
   showDialog(
     context: context,
     builder: (context) {

@@ -65,7 +65,7 @@ class TextBlockItem implements PortableBlockItem {
     this.listItemIndex,
   }) : key = key ?? nanoid();
 
-  factory TextBlockItem.fromJson(final Map<String, dynamic> json) =>
+  factory TextBlockItem.fromJson(Map<String, dynamic> json) =>
       _$TextBlockItemFromJson(json);
 }
 
@@ -90,7 +90,7 @@ class Span {
     this.marks = const <String>[],
   });
 
-  factory Span.fromJson(final Map<String, dynamic> json) =>
+  factory Span.fromJson(Map<String, dynamic> json) =>
       _$SpanFromJson(json);
 }
 
@@ -99,10 +99,10 @@ class Span {
 /// This runs at JSON-parse time with no [BuildContext], so it must read the context-free
 /// [PortableTextConfig.shared] registry rather than a per-subtree config. Mark *styling* is
 /// still resolved per subtree at render time via `PortableTextConfig.of(context)`.
-List<MarkDef> _markDefsFromJson(final List<dynamic> json) {
+List<MarkDef> _markDefsFromJson(List<dynamic> json) {
   final markDefs = PortableTextConfig.shared.markDefs;
 
-  final items = json.map((final item) {
+  final items = json.map((item) {
     final json = item as Map<String, dynamic>;
     final type = item['_type'] as String;
 

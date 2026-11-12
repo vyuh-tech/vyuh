@@ -57,6 +57,6 @@ abstract class MarkDef {
   MarkDef({required this.key, required this.type});
 
   /// Converts a [MarkDef] to a JSON map. Should be implemented by subclasses.
-  factory MarkDef.fromJson(final Map<String, dynamic> json) =>
+  factory MarkDef.fromJson(Map<String, dynamic> json) =>
       throw UnsupportedError('This should be implemented by the subclass.');
 }

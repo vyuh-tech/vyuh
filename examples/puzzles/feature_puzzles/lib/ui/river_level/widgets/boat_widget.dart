@@ -14,7 +14,7 @@ class BoatWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(final BuildContext context) => Container(
+  Widget build(BuildContext context) => Container(
     constraints: constraints,
     decoration: const BoxDecoration(
       image: DecorationImage(

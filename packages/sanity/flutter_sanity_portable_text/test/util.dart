@@ -32,7 +32,7 @@ class CustomMarkDef extends MarkDef {
   CustomMarkDef({required this.color, required super.key})
     : super(type: schemaName);
 
-  factory CustomMarkDef.fromJson(final Map<String, dynamic> json) {
+  factory CustomMarkDef.fromJson(Map<String, dynamic> json) {
     return CustomMarkDef(color: Color(json['color']), key: json['_key']);
   }
 }

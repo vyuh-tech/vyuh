@@ -66,19 +66,13 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
   /// );
   /// ```
   FlutterSecureStoragePlugin({
-    AndroidOptions? androidOptions,
-    IOSOptions? iOSOptions,
-    WebOptions? webOptions,
-    MacOsOptions? macOSOptions,
-    LinuxOptions? linuxOptions,
-    WindowsOptions? windowsOptions,
-  })  : _androidOptions = androidOptions,
-        _iOSOptions = iOSOptions,
-        _webOptions = webOptions,
-        _macOSOptions = macOSOptions,
-        _linuxOptions = linuxOptions,
-        _windowsOptions = windowsOptions,
-        super(
+    this._androidOptions,
+    this._iOSOptions,
+    this._webOptions,
+    this._macOSOptions,
+    this._linuxOptions,
+    this._windowsOptions,
+  })  : super(
           name: 'vyuh.plugin.storage.secure',
           title: 'Secure Storage Plugin',
         );

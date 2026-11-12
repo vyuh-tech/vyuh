@@ -31,7 +31,7 @@ class _RiverLevelState extends State<RiverLevel> {
     );
     store = RiverLevelStore(level: widget.level)..init();
     _disposeReaction = reaction((_) => store.levelEndReason.value, (
-      final reason,
+      reason,
     ) {
       if (reason != null) {
         if (reason.won) {

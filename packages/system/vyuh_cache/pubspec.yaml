@@ -12,7 +12,7 @@ topics:
   - system
 
 environment:
-  sdk: '>=3.6.0 <4.0.0'
+  sdk: '>=3.14.0 <4.0.0'
 
 dependencies:
   crypto: ^3.0.3

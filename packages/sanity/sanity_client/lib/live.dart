@@ -61,7 +61,7 @@ extension LiveConnect on SanityClient {
           final requestGeneration = generation;
           try {
             final response = await fetch(query, params: {
-              if (params != null) ...params,
+              ...?params,
               'lastLiveEventId': lastEventId ?? '',
             });
             if (!cancelled && requestGeneration == generation && !pending) {

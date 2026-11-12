@@ -17,10 +17,10 @@ class PortableBlockIndex extends InheritedWidget {
 
   /// The index of the enclosing block, or `null` when the block was built
   /// without an index.
-  static int? maybeOf(final BuildContext context) =>
+  static int? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<PortableBlockIndex>()?.index;
 
   @override
-  bool updateShouldNotify(final PortableBlockIndex oldWidget) =>
+  bool updateShouldNotify(PortableBlockIndex oldWidget) =>
       index != oldWidget.index;
 }

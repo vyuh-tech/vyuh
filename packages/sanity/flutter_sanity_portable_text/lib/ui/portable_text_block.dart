@@ -17,11 +17,11 @@ class PortableTextBlock extends StatelessWidget {
   const PortableTextBlock({super.key, required this.model});
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     final config = PortableTextConfig.of(context);
 
     final spans = model.children
-        .map((final span) => _buildInlineSpan(span, Theme.of(context), context))
+        .map((span) => _buildInlineSpan(span, Theme.of(context), context))
         .toList(growable: false);
 
     final content = Text.rich(
@@ -50,9 +50,9 @@ class PortableTextBlock extends StatelessWidget {
   }
 
   InlineSpan _buildInlineSpan(
-    final Span span,
-    final ThemeData theme,
-    final BuildContext context,
+    Span span,
+    ThemeData theme,
+    BuildContext context,
   ) {
     final config = PortableTextConfig.of(context);
 
@@ -82,7 +82,7 @@ class PortableTextBlock extends StatelessWidget {
 
       /// Custom marks (aka annotations)
       final markDef = model.markDefs.firstWhereOrNull(
-        (final element) => element.key == mark,
+        (element) => element.key == mark,
       );
 
       // A custom mark exists on this span but no corresponding markDef was found
@@ -135,7 +135,7 @@ You can rely on TextStyles instead for custom styling.''');
     return inlineSpan ?? TextSpan(text: span.text, style: style);
   }
 
-  WidgetSpan _errorSpan(final String message, {final bool asBlock = true}) {
+  WidgetSpan _errorSpan(String message, {bool asBlock = true}) {
     return WidgetSpan(
       child: ErrorView(message: message, asBlock: asBlock),
     );

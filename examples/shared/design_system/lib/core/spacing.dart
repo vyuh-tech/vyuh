@@ -41,22 +41,22 @@ class Spacing extends flutter.ThemeExtension<Spacing> {
 
   @override
   flutter.ThemeExtension<Spacing> copyWith({
-    final double? s0,
-    final double? s1,
-    final double? s2,
-    final double? s4,
-    final double? s8,
-    final double? s12,
-    final double? s16,
-    final double? s20,
-    final double? s24,
-    final double? s32,
-    final double? s40,
-    final double? s48,
-    final double? s56,
-    final double? s64,
-    final double? s72,
-    final double? s80,
+    double? s0,
+    double? s1,
+    double? s2,
+    double? s4,
+    double? s8,
+    double? s12,
+    double? s16,
+    double? s20,
+    double? s24,
+    double? s32,
+    double? s40,
+    double? s48,
+    double? s56,
+    double? s64,
+    double? s72,
+    double? s80,
   }) => Spacing(
     s0: s0 ?? this.s0,
     s1: s1 ?? this.s1,
@@ -78,8 +78,8 @@ class Spacing extends flutter.ThemeExtension<Spacing> {
 
   @override
   flutter.ThemeExtension<Spacing> lerp(
-    final flutter.ThemeExtension<Spacing>? other,
-    final double t,
+    flutter.ThemeExtension<Spacing>? other,
+    double t,
   ) {
     if (other is! Spacing) {
       return this;

@@ -27,7 +27,7 @@ class PortableText extends StatelessWidget {
   ) => defaultListBuilder(context, blocks: blocks);
 
   @override
-  Widget build(final BuildContext context) => listBuilder(context, blocks);
+  Widget build(BuildContext context) => listBuilder(context, blocks);
 }
 
 /// Default container-builder for PortableText blocks.
@@ -45,7 +45,7 @@ Widget defaultListBuilder(
     shrinkWrap: shrinkwrap,
     itemCount: blocks.length,
     padding: EdgeInsets.zero,
-    itemBuilder: (final context, final index) =>
+    itemBuilder: (context, index) =>
         PortableTextConfig.of(context).buildBlock(context, blocks[index], index),
   );
 }

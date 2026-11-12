@@ -60,7 +60,7 @@ void main() {
 
 void _registerCustomBlockStyle() {
   PortableTextConfig.shared.styles['custom-style'] =
-      (final BuildContext context, final TextStyle base) {
+      (BuildContext context, TextStyle base) {
         final theme = Theme.of(context);
 
         return base.copyWith(

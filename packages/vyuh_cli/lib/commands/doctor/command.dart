@@ -4,8 +4,8 @@ import 'package:vyuh_cli/commands/doctor/src/doctor.dart';
 
 final class DoctorCommand extends Command<int> {
   DoctorCommand({
-    required Logger logger,
-  }) : _logger = logger {
+    required this._logger,
+  }) {
     argParser.addOption('cms',
         defaultsTo: 'none',
         allowed: ['none', 'sanity'],

@@ -15,7 +15,7 @@ class RiverWidget extends StatelessWidget {
   });
 
   @override
-  Widget build(final BuildContext context) => AspectRatio(
+  Widget build(BuildContext context) => AspectRatio(
     aspectRatio: aspectRatio,
     child: GestureDetector(
       onTap: onTap,

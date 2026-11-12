@@ -74,7 +74,7 @@ final class PortableTextConfig {
 
   /// Returns the nearest [PortableTextConfig] supplied by a [PortableTextTheme] ancestor,
   /// falling back to [shared] when none is present. Mirrors `Theme.of`.
-  static PortableTextConfig of(final BuildContext context) =>
+  static PortableTextConfig of(BuildContext context) =>
       PortableTextTheme.maybeOf(context) ?? shared;
 
   /// Returns a copy of this config with the given fields overridden.
@@ -89,14 +89,14 @@ final class PortableTextConfig {
   /// which custom deserializer runs at JSON-parse time — that always reads the context-free
   /// [shared] registry (see `_markDefsFromJson`).
   PortableTextConfig copyWith({
-    final Map<String, TextStyleBuilder>? styles,
-    final Map<String, BlockWidgetBuilder>? blocks,
-    final Map<String, BlockContainerBuilder>? blockContainers,
-    final Map<String, MarkDefDescriptor>? markDefs,
-    final double? listIndent,
-    final EdgeInsets? itemPadding,
-    final TextStyle? Function(BuildContext)? baseStyle,
-    final BulletRenderer? bulletRenderer,
+    Map<String, TextStyleBuilder>? styles,
+    Map<String, BlockWidgetBuilder>? blocks,
+    Map<String, BlockContainerBuilder>? blockContainers,
+    Map<String, MarkDefDescriptor>? markDefs,
+    double? listIndent,
+    EdgeInsets? itemPadding,
+    TextStyle? Function(BuildContext)? baseStyle,
+    BulletRenderer? bulletRenderer,
   }) {
     final config = PortableTextConfig();
     config.styles
@@ -129,14 +129,14 @@ final class PortableTextConfig {
 
   /// Applies the custom configuration to the shared instance of the [PortableTextConfig].
   void apply({
-    final double listIndent = defaultListIndent,
-    final EdgeInsets itemPadding = defaultItemPadding,
-    final BulletRenderer? bulletRenderer,
-    final Map<String, TextStyleBuilder>? styles,
-    final Map<String, BlockContainerBuilder>? blockContainers,
-    final Map<String, BlockWidgetBuilder>? blocks,
-    final Map<String, MarkDefDescriptor>? markDefs,
-    final TextStyle? Function(BuildContext)? baseStyle,
+    double listIndent = defaultListIndent,
+    EdgeInsets itemPadding = defaultItemPadding,
+    BulletRenderer? bulletRenderer,
+    Map<String, TextStyleBuilder>? styles,
+    Map<String, BlockContainerBuilder>? blockContainers,
+    Map<String, BlockWidgetBuilder>? blocks,
+    Map<String, MarkDefDescriptor>? markDefs,
+    TextStyle? Function(BuildContext)? baseStyle,
   }) {
     this.listIndent = listIndent;
     this.bulletRenderer = bulletRenderer ?? defaultBulletRenderer;
@@ -155,9 +155,9 @@ final class PortableTextConfig {
   /// When [index] is given, the block is wrapped in a [PortableBlockIndex] so its builder and
   /// block container can read their position with [PortableBlockIndex.maybeOf].
   Widget buildBlock(
-    final BuildContext context,
-    final PortableBlockItem item, [
-    final int? index,
+    BuildContext context,
+    PortableBlockItem item, [
+    int? index,
   ]) {
     final type = item.blockType;
 
@@ -172,7 +172,7 @@ final class PortableTextConfig {
 
     return PortableBlockIndex(
       index: index,
-      child: Builder(builder: (final context) => builder(context, item)),
+      child: Builder(builder: (context) => builder(context, item)),
     );
   }
 
@@ -198,7 +198,7 @@ final class PortableTextConfig {
   static const defaultListIndent = 16.0;
   static const defaultItemPadding = EdgeInsets.only(bottom: 8);
   static BulletRenderer defaultBulletRenderer =
-      (final BuildContext context, final TextBlockItem model) {
+      (BuildContext context, TextBlockItem model) {
         final textStyle = PortableTextConfig.of(context).baseStyle(context);
 
         switch (model.listItem) {
@@ -235,7 +235,7 @@ final class PortableTextConfig {
   }
 
   static BlockContainerBuilder defaultBlockContainerBuilder =
-      (final BuildContext context, final Widget child) {
+      (BuildContext context, Widget child) {
         return child;
       };
 
@@ -243,69 +243,69 @@ final class PortableTextConfig {
   static final Map<String, TextStyleBuilder> defaultStyles = {
     'h1':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.headlineLarge),
     'h2':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.headlineMedium),
     'h3':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.headlineSmall),
     'h4':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.titleLarge),
     'h5':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.titleMedium),
     'h6':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.titleSmall),
     'blockquote':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(color: Theme.of(context).colorScheme.primary),
     'normal':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.merge(Theme.of(context).textTheme.bodyMedium),
     'em':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(fontStyle: FontStyle.italic),
     'strong':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(fontWeight: FontWeight.bold),
     'code':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(
           fontFamily: 'monospace',
           fontFamilyFallback: ['Courier New'],
@@ -313,9 +313,9 @@ final class PortableTextConfig {
         ),
     'strike-through':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
@@ -324,9 +324,9 @@ final class PortableTextConfig {
         ),
     'underline':
         (
-          final BuildContext context,
-          final TextStyle base, [
-          final MarkDef? mark,
+          BuildContext context,
+          TextStyle base, [
+          MarkDef? mark,
         ]) => base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
@@ -337,7 +337,7 @@ final class PortableTextConfig {
 
   /// The default block containers used by the shared instance of [PortableTextConfig].
   static final Map<String, BlockContainerBuilder> defaultBlockContainers = {
-    'blockquote': (final BuildContext context, final Widget child) {
+    'blockquote': (BuildContext context, Widget child) {
       final theme = Theme.of(context);
 
       return Container(
@@ -355,7 +355,7 @@ final class PortableTextConfig {
   /// The default block widgets used by the shared instance of [PortableTextConfig].
   /// The default block is a single [PortableTextBlock], named as "block".
   static final Map<String, BlockWidgetBuilder> defaultBlocks = {
-    'block': (final context, final item) =>
+    'block': (context, item) =>
         PortableTextBlock(model: item as TextBlockItem),
   };
 }

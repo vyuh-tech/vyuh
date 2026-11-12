@@ -24,16 +24,16 @@ abstract class ContentProvider {
   Future<void> dispose();
 
   ImageProvider? image(
-    final ImageReference imageRef, {
-    final int? width,
-    final int? height,
-    final int? devicePixelRatio,
-    final int? quality,
-    final String? format,
+    ImageReference imageRef, {
+    int? width,
+    int? height,
+    int? devicePixelRatio,
+    int? quality,
+    String? format,
   });
 
   Uri? fileUrl(
-    final FileReference fileRef,
+    FileReference fileRef,
   );
 
   Future<T?> fetchById<T>(

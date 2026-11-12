@@ -31,7 +31,7 @@ class ImageReference {
     this.sanityAsset,
   });
 
-  factory ImageReference.fromJson(final Map<String, dynamic> json) =>
+  factory ImageReference.fromJson(Map<String, dynamic> json) =>
       _$ImageReferenceFromJson(json);
 }
 
@@ -59,7 +59,7 @@ class FileReference {
     required this.asset,
   });
 
-  factory FileReference.fromJson(final Map<String, dynamic> json) =>
+  factory FileReference.fromJson(Map<String, dynamic> json) =>
       _$FileReferenceFromJson(json);
 }
 

@@ -135,7 +135,7 @@ class _ParsedReference {
   final String format;
 
   // example refId: image-Tb9Ew8CXIwaY6R1kjMvI0uRR-2000x3000-jpg
-  factory _ParsedReference.from(final String refId) {
+  factory _ParsedReference.from(String refId) {
     final parts = refId.split('-');
     assert(parts.length == 4, 'Invalid image reference: $refId');
 

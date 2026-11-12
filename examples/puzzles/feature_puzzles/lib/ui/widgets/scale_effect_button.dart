@@ -35,7 +35,7 @@ class _ScaleEffectButtonState extends State<ScaleEffectButton>
   }
 
   @override
-  Widget build(final BuildContext context) => GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
     onTap: () async {
       await _controller.reverse();
       await _controller.fling();

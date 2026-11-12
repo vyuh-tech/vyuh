@@ -68,7 +68,7 @@ final class Cache<V> {
     ];
     final result = Future.wait(predecessors).then((_) => operation());
     final tail =
-        result.then<void>((_) {}, onError: (Object _, StackTrace __) {});
+        result.then<void>((_) {}, onError: (Object _, StackTrace _) {});
     _storageTails[key] = tail;
     unawaited(tail.then((_) {
       if (identical(_storageTails[key], tail)) _storageTails.remove(key);
@@ -80,7 +80,7 @@ final class Cache<V> {
     final result = Future.wait([_clearBarrier, ..._storageTails.values])
         .then((_) => config.storage.clear());
     _clearBarrier =
-        result.then<void>((_) {}, onError: (Object _, StackTrace __) {});
+        result.then<void>((_) {}, onError: (Object _, StackTrace _) {});
     return result;
   }
 
