@@ -7,5 +7,5 @@ part of 'phone_otp_form_layout.dart';
 // **************************************************************************
 
 DefaultPhoneOtpFormLayout _$DefaultPhoneOtpFormLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultPhoneOtpFormLayout();
+  Map<String, dynamic> json,
+) => DefaultPhoneOtpFormLayout();

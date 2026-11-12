@@ -7,23 +7,23 @@ part of 'conditional.dart';
 // **************************************************************************
 
 Conditional _$ConditionalFromJson(Map<String, dynamic> json) => Conditional(
-      cases: (json['cases'] as List<dynamic>?)
-              ?.map((e) =>
-                  CaseItem<SchemaItem>.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      condition: json['condition'] == null
-          ? null
-          : Condition.fromJson(json['condition'] as Map<String, dynamic>),
-      defaultCase: json['defaultCase'] as String?,
-      showPending: json['showPending'] as bool? ?? false,
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  cases:
+      (json['cases'] as List<dynamic>?)
+          ?.map((e) => CaseItem<SchemaItem>.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [],
+  condition: json['condition'] == null
+      ? null
+      : Condition.fromJson(json['condition'] as Map<String, dynamic>),
+  defaultCase: json['defaultCase'] as String?,
+  showPending: json['showPending'] as bool? ?? false,
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 CaseItem<T> _$CaseItemFromJson<T extends SchemaItem>(
-        Map<String, dynamic> json) =>
-    CaseItem<T>(
-      value: json['value'] as String?,
-      item: typeFromFirstOfListJson(json['item']),
-    );
+  Map<String, dynamic> json,
+) => CaseItem<T>(
+  value: json['value'] as String?,
+  item: typeFromFirstOfListJson(json['item']),
+);

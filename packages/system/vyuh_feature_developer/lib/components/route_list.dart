@@ -113,9 +113,8 @@ class _PathList extends StatelessWidget {
                     Expanded(
                       child: Text(
                         path.$1,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyMedium?.apply(fontFamily: 'Courier'),
+                        style: Theme.of(context).textTheme.bodyMedium
+                            ?.apply(fontFamily: 'Courier'),
                       ),
                     ),
                   ],

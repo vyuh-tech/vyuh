@@ -7,10 +7,8 @@ class FlutterValidator extends DoctorValidator {
   String get installHelp => 'https://flutter.dev/docs/get-started/install';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'flutter',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'flutter');
 
   @override
   String extractVersion(String output) {

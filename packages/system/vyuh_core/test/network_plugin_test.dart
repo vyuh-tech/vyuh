@@ -89,8 +89,9 @@ void main() {
       when(() => mockClient.head(any()))
           .thenAnswer((_) async => Response('', 200));
 
-      final response =
-          await vyuh.network.head(Uri.parse('https://example.com'));
+      final response = await vyuh.network.head(
+        Uri.parse('https://example.com'),
+      );
       expect(response.statusCode, equals(200));
 
       verify(() => mockClient.head(any())).called(1);
@@ -124,8 +125,9 @@ void main() {
       final bytes = Uint8List.fromList([1, 2, 3, 4]);
       when(() => mockClient.readBytes(any())).thenAnswer((_) async => bytes);
 
-      final content =
-          await vyuh.network.readBytes(Uri.parse('https://example.com'));
+      final content = await vyuh.network.readBytes(
+        Uri.parse('https://example.com'),
+      );
       expect(content, equals(bytes));
 
       verify(() => mockClient.readBytes(any())).called(1);
@@ -192,12 +194,10 @@ void main() {
       );
       await pumpEventQueue();
 
-      when(() => mockClient.get(any())).thenAnswer(
-        (_) async {
-          await Future.delayed(const Duration(milliseconds: 200));
-          return Response('', 200);
-        },
-      );
+      when(() => mockClient.get(any())).thenAnswer((_) async {
+        await Future.delayed(const Duration(milliseconds: 200));
+        return Response('', 200);
+      });
 
       expect(
         () => vyuh.network.get(Uri.parse('https://example.com')),

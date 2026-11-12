@@ -76,7 +76,10 @@ void main() async {
         return Observer(
           builder: (_) {
             final themes = platform.widgetBuilder.theme;
-            final mode = platform.di.get<system.ThemeService>().currentMode.value;
+            final mode = platform.di
+                .get<system.ThemeService>()
+                .currentMode
+                .value;
 
             return MaterialApp.router(
               title: 'Vyuh Demo',
@@ -102,21 +105,22 @@ PluginDescriptor _getPlugins() {
       urlStyle: vc.RouterUrlStyle.path,
       urlReflectsImperativeAPIs: true,
     ),
-    others: [DefaultContentPlugin(
-      useLiveRoute: true,
-      allowRouteRefresh: true,
-      provider: SanityContentProvider.withConfig(
-        config: SanityConfig(
-          projectId: '8b76lu9s',
-          dataset: 'production',
-          perspective: Perspective.drafts,
-          useCdn: false,
-          token:
-              'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
+    others: [
+      DefaultContentPlugin(
+        useLiveRoute: true,
+        allowRouteRefresh: true,
+        provider: SanityContentProvider.withConfig(
+          config: SanityConfig(
+            projectId: '8b76lu9s',
+            dataset: 'production',
+            perspective: Perspective.drafts,
+            useCdn: false,
+            token: 'skt2tSTitRob9TonNNubWg09bg0dACmwE0zHxSePlJisRuF1mWJOvgg3ZF68CAWrqtSIOzewbc56dGavACyznDTsjm30ws874WoSH3E5wPMFrqVW8C0Hc0pJGzpYQiehfL9GTRrIyoO3y2aBQIxHpegGspzxAevZcchleelaH5uM6LAnOJT1',
+          ),
+          cacheDuration: const Duration(seconds: 5),
         ),
-        cacheDuration: const Duration(seconds: 5),
       ),
-    )],
+    ],
     env: vc.DefaultEnvPlugin(),
     auth: ChakraAuthPlugin(),
     telemetry: vc.TelemetryPlugin(

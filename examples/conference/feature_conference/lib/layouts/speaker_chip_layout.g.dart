@@ -7,6 +7,4 @@ part of 'speaker_chip_layout.dart';
 // **************************************************************************
 
 SpeakerChipLayout _$SpeakerChipLayoutFromJson(Map<String, dynamic> json) =>
-    SpeakerChipLayout(
-      mini: json['mini'] as bool? ?? false,
-    );
+    SpeakerChipLayout(mini: json['mini'] as bool? ?? false);

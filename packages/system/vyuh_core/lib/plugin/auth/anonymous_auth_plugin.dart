@@ -4,10 +4,7 @@ import 'package:vyuh_core/vyuh_core.dart';
 final class UnknownAuthPlugin extends AuthPlugin {
   /// Creates an instance of [UnknownAuthPlugin].
   UnknownAuthPlugin()
-      : super(
-          title: 'Unknown Auth Plugin',
-          name: 'vyuh.plugin.auth.unknown',
-        );
+    : super(title: 'Unknown Auth Plugin', name: 'vyuh.plugin.auth.unknown');
 
   @override
   User get currentUser => User.unknown;

@@ -8,7 +8,9 @@ import '../runtime/helpers.dart';
 final class _FailingProvider extends Mock implements vc.TelemetryProvider {}
 
 void main() {
-  setUpAll(() => registerFallbackValue(const FlutterErrorDetails(exception: 0)));
+  setUpAll(
+    () => registerFallbackValue(const FlutterErrorDetails(exception: 0)),
+  );
 
   late List<String> logs;
   late DebugPrintCallback originalDebugPrint;
@@ -46,9 +48,8 @@ void main() {
         level: any(named: 'level'),
       ),
     ).thenAnswer((_) => Future.error(StateError('network down')));
-    when(
-      () => failing.reportFlutterError(any(), fatal: any(named: 'fatal')),
-    ).thenAnswer((_) => Future.error(StateError('network down')));
+    when(() => failing.reportFlutterError(any(), fatal: any(named: 'fatal')))
+        .thenAnswer((_) => Future.error(StateError('network down')));
     final healthy = RecordingTelemetry();
     final telemetry = vc.TelemetryPlugin(providers: [failing, healthy]);
 

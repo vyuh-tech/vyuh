@@ -6,6 +6,5 @@ part of 'condition.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(
-      configuration: typeFromFirstOfListJson(json['configuration']),
-    );
+Condition _$ConditionFromJson(Map<String, dynamic> json) =>
+    Condition(configuration: typeFromFirstOfListJson(json['configuration']));

@@ -25,7 +25,7 @@ class _TestRoute implements RouteBase {
 
 class _TestContentPlugin extends ContentPlugin {
   _TestContentPlugin()
-      : super(provider: NoOpContentProvider(), name: 'test', title: 'Test');
+    : super(provider: NoOpContentProvider(), name: 'test', title: 'Test');
 
   @override
   Future<void> init() async {}
@@ -51,25 +51,32 @@ void main() {
 
   setUp(() async {
     VyuhBinding.instance.widgetInit(
-        plugins: PluginDescriptor(others: [_TestContentPlugin()]),
-        extensionBuilder: _TestExtensions(),
-        extensionDescriptors: []);
+      plugins: PluginDescriptor(others: [_TestContentPlugin()]),
+      extensionBuilder: _TestExtensions(),
+      extensionDescriptors: [],
+    );
     await VyuhBinding.instance.widgetReady;
     requests = 0;
-    provider = SanityContentProvider(SanityClient(
-      SanityConfig(
-          projectId: 'test', dataset: 'production', apiVersion: 'v2025-02-19'),
-      httpClient: MockClient((request) async {
-        requests++;
-        return http.Response(
+    provider = SanityContentProvider(
+      SanityClient(
+        SanityConfig(
+          projectId: 'test',
+          dataset: 'production',
+          apiVersion: 'v2025-02-19',
+        ),
+        httpClient: MockClient((request) async {
+          requests++;
+          return http.Response(
             jsonEncode({
               'ms': 1,
               'query': request.url.queryParameters['query'],
               'result': {'_id': 'doc', '_type': 'test', 'revision': requests},
             }),
-            200);
-      }),
-    ));
+            200,
+          );
+        }),
+      ),
+    );
   });
 
   tearDown(() async {
@@ -81,8 +88,11 @@ void main() {
     await provider.fetchById('doc', fromJson: identity);
     await provider.fetchById('doc', fromJson: identity);
     expect(requests, 1);
-    final fresh =
-        await provider.fetchById('doc', fromJson: identity, useCache: false);
+    final fresh = await provider.fetchById(
+      'doc',
+      fromJson: identity,
+      useCache: false,
+    );
     expect(requests, 2);
     expect(fresh?['revision'], 2);
   });

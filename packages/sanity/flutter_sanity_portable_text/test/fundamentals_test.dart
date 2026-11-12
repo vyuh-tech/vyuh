@@ -142,9 +142,8 @@ void main() {
           (span) =>
               span.style?.fontSize != null &&
               span.style?.fontSize ==
-                  PortableTextConfig.defaultBaseStyle(
-                    navKey.currentContext!,
-                  )?.fontSize,
+                  PortableTextConfig.defaultBaseStyle(navKey.currentContext!)
+                      ?.fontSize,
         ),
         isNotNull,
       );

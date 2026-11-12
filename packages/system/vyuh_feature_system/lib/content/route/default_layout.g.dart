@@ -7,13 +7,14 @@ part of 'default_layout.dart';
 // **************************************************************************
 
 MenuAction _$MenuActionFromJson(Map<String, dynamic> json) => MenuAction(
-      title: json['title'] as String? ?? '',
-      icon: $enumDecodeNullable(_$MenuIconTypeEnumMap, json['icon']) ??
-          MenuIconType.home,
-      action: json['action'] == null
-          ? null
-          : Action.fromJson(json['action'] as Map<String, dynamic>),
-    );
+  title: json['title'] as String? ?? '',
+  icon:
+      $enumDecodeNullable(_$MenuIconTypeEnumMap, json['icon']) ??
+      MenuIconType.home,
+  action: json['action'] == null
+      ? null
+      : Action.fromJson(json['action'] as Map<String, dynamic>),
+);
 
 const _$MenuIconTypeEnumMap = {
   MenuIconType.home: 'home',

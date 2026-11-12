@@ -169,7 +169,11 @@ class _UnknownContentWrapper extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               padding: const EdgeInsets.all(4),
-              child: Icon(Icons.warning_rounded, color: scheme.onError, size: 16),
+              child: Icon(
+                Icons.warning_rounded,
+                color: scheme.onError,
+                size: 16,
+              ),
             ),
           ),
         ],
@@ -196,11 +200,7 @@ class _UnknownContentWrapper extends StatelessWidget {
       barrierDismissible: true,
       builder: (dialogContext) => AlertDialog(
         backgroundColor: tokens.debugBackground,
-        icon: Icon(
-          Icons.warning_amber_rounded,
-          color: foreground,
-          size: 48,
-        ),
+        icon: Icon(Icons.warning_amber_rounded, color: foreground, size: 48),
         title: Text(
           'Unknown Content Detected',
           style: TextStyle(color: foreground),

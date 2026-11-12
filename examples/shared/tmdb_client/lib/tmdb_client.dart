@@ -33,16 +33,17 @@ final class TMDBClient {
   Uri _apiUrl(String path) {
     final suffix = path.contains('?') ? '&' : '?';
     return Uri.parse(
-        'https://api.themoviedb.org/3/$path${suffix}api_key=$apiKey');
+      'https://api.themoviedb.org/3/$path${suffix}api_key=$apiKey',
+    );
   }
 
   static String? Function(String? value) imageFromJson(
-          String imageSizePrefix) =>
-      (String? value) {
-        if (value == null) {
-          return null;
-        }
+    String imageSizePrefix,
+  ) => (String? value) {
+    if (value == null) {
+      return null;
+    }
 
-        return 'https://image.tmdb.org/t/p/$imageSizePrefix$value';
-      };
+    return 'https://image.tmdb.org/t/p/$imageSizePrefix$value';
+  };
 }

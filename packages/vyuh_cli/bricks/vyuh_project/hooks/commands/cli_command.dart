@@ -18,7 +18,8 @@ abstract base class CliCommand {
       final result = await operation();
       if (result is ProcessResult && result.exitCode != 0) {
         throw StateError(
-            '$startMessage failed (exit ${result.exitCode}): ${result.stderr}');
+          '$startMessage failed (exit ${result.exitCode}): ${result.stderr}',
+        );
       }
     } catch (_) {
       progress.fail('$startMessage failed');

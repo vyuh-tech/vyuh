@@ -7,10 +7,8 @@ import 'package:vyuh_cli/command_runner.dart';
 import 'package:vyuh_cli/version.dart';
 
 class UpdateCommand extends Command<int> {
-  UpdateCommand({
-    required this._logger,
-    PubUpdater? pubUpdater,
-  })  : _pubUpdater = pubUpdater ?? PubUpdater();
+  UpdateCommand({required this._logger, PubUpdater? pubUpdater})
+    : _pubUpdater = pubUpdater ?? PubUpdater();
 
   final Logger _logger;
   final PubUpdater _pubUpdater;

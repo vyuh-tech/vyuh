@@ -32,9 +32,7 @@ abstract class ContentProvider {
     String? format,
   });
 
-  Uri? fileUrl(
-    FileReference fileRef,
-  );
+  Uri? fileUrl(FileReference fileRef);
 
   Future<T?> fetchById<T>(
     String id, {

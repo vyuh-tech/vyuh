@@ -15,7 +15,7 @@ final class GetItDIPlugin extends DIPlugin {
   final String? debugLabel;
 
   GetItDIPlugin({this.debugLabel})
-      : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
+    : super(name: 'vyuh.plugin.di.getIt', title: 'GetIt DI Plugin');
 
   @override
   String toString() =>

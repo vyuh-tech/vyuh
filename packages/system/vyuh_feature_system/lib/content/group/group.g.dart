@@ -7,22 +7,23 @@ part of 'group.dart';
 // **************************************************************************
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      title: json['title'] as String?,
-      description: json['description'] as String?,
-      items: (json['items'] as List<dynamic>?)
-              ?.map((e) => ContentItem.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  title: json['title'] as String?,
+  description: json['description'] as String?,
+  items:
+      (json['items'] as List<dynamic>?)
+          ?.map((e) => ContentItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [],
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 GroupConditionalLayout _$GroupConditionalLayoutFromJson(
-        Map<String, dynamic> json) =>
-    GroupConditionalLayout(
-      cases: (json['cases'] as List<dynamic>)
-          .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      defaultCase: json['defaultCase'] as String,
-      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => GroupConditionalLayout(
+  cases: (json['cases'] as List<dynamic>)
+      .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  defaultCase: json['defaultCase'] as String,
+  condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
+);

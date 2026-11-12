@@ -7,6 +7,4 @@ part of 'list_item_layout.dart';
 // **************************************************************************
 
 ListItemCardLayout _$ListItemCardLayoutFromJson(Map<String, dynamic> json) =>
-    ListItemCardLayout(
-      title: json['title'] as String? ?? '',
-    );
+    ListItemCardLayout(title: json['title'] as String? ?? '');

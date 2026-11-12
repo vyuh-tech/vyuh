@@ -7,9 +7,9 @@ part of 'query_configurations.dart';
 // **************************************************************************
 
 WonderListQueryConfiguration _$WonderListQueryConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    WonderListQueryConfiguration();
+  Map<String, dynamic> json,
+) => WonderListQueryConfiguration();
 
 WonderQueryConfiguration _$WonderQueryConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    WonderQueryConfiguration();
+  Map<String, dynamic> json,
+) => WonderQueryConfiguration();

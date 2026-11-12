@@ -28,10 +28,13 @@ final class CreateCommand extends Command<int> {
         generatorFromBrick: generatorFromBrick,
       ),
     );
-    addSubcommand(CreatePluginCommand(
+    addSubcommand(
+      CreatePluginCommand(
         logger: logger,
         generatorFromBundle: generatorFromBundle,
-        generatorFromBrick: generatorFromBrick));
+        generatorFromBrick: generatorFromBrick,
+      ),
+    );
     addSubcommand(
       CreateSanitySchemaCommand(
         logger: logger,

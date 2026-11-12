@@ -12,8 +12,10 @@ import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 ///   _ => UnknownContentView(failure: failure),
 /// };
 /// ```
-typedef UnknownContentBuilder =
-    Widget Function(BuildContext context, ContentFailure failure);
+typedef UnknownContentBuilder = Widget Function(
+  BuildContext context,
+  ContentFailure failure,
+);
 
 Widget _defaultUnknownBuilder(BuildContext context, ContentFailure failure) =>
     UnknownContentView(failure: failure);

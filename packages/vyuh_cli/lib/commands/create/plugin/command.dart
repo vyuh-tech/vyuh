@@ -21,11 +21,15 @@ final class CreatePluginCommand extends BaseCreateCommand {
     super.setupArgParser();
     argParser
       ..addOption('title', help: 'Plugin display title.')
-      ..addOption('description',
-          help: 'Capability description.',
-          defaultsTo: 'A shared Vyuh capability.')
-      ..addOption('class-name',
-          help: 'Public plugin class (defaults to <Name>Plugin).');
+      ..addOption(
+        'description',
+        help: 'Capability description.',
+        defaultsTo: 'A shared Vyuh capability.',
+      )
+      ..addOption(
+        'class-name',
+        help: 'Public plugin class (defaults to <Name>Plugin).',
+      );
   }
 
   String get pluginName => argResults.rest.first;
@@ -81,8 +85,9 @@ final class CreatePluginCommand extends BaseCreateCommand {
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory =
-        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+    final directory = outputDirectory != null
+        ? Directory(outputDirectory!)
+        : Directory('.');
 
     return directory;
   }
@@ -91,8 +96,9 @@ final class CreatePluginCommand extends BaseCreateCommand {
   Map<String, dynamic> getTemplateVars() {
     final vars = super.getTemplateVars();
     vars['name'] = pluginName;
-    vars['title_literal'] =
-        jsonEncode(argResults['title'] ?? pluginName.titleCase);
+    vars['title_literal'] = jsonEncode(
+      argResults['title'] ?? pluginName.titleCase,
+    );
     vars['description_literal'] = jsonEncode(argResults['description']);
     vars['class_name'] =
         argResults['class-name'] ?? '${pluginName.pascalCase}Plugin';

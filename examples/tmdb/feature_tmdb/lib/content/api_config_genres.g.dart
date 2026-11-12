@@ -7,10 +7,10 @@ part of 'api_config_genres.dart';
 // **************************************************************************
 
 ApiConfigGenreSelection _$ApiConfigGenreSelectionFromJson(
-        Map<String, dynamic> json) =>
-    ApiConfigGenreSelection(
-      allowModeToggle: json['allowModeToggle'] as bool? ?? false,
-      action: json['action'] == null
-          ? null
-          : Action.fromJson(json['action'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => ApiConfigGenreSelection(
+  allowModeToggle: json['allowModeToggle'] as bool? ?? false,
+  action: json['action'] == null
+      ? null
+      : Action.fromJson(json['action'] as Map<String, dynamic>),
+);

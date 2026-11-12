@@ -16,8 +16,9 @@ final class SanityCommand extends CliCommand {
 
     await trackOperation(
       context,
-      startMessage:
-          p.normalize('Setting up the Sanity project @ apps/$studioName'),
+      startMessage: p.normalize(
+        'Setting up the Sanity project @ apps/$studioName',
+      ),
       endMessage: p.normalize('Sanity project ready @ apps/$studioName'),
       operation: () async {
         final sanityCreateResult = await Process.run(
@@ -46,19 +47,21 @@ final class SanityCommand extends CliCommand {
           exit(1);
         }
 
-        await trackOperation(context,
-            startMessage: p.normalize('Adding NPM packages @ apps/$studioName'),
-            endMessage: p.normalize('Added NPM packages @ apps/$studioName'),
-            operation: () async => Process.run(
-                  'pnpm',
-                  [
-                    'add',
-                    ...('@vyuh/sanity-schema-core @vyuh/sanity-schema-system @vyuh/sanity-plugin-structure'
-                        .split(' ')),
-                  ],
-                  workingDirectory: p.normalize('$appName/apps/$studioName'),
-                  runInShell: true,
-                ));
+        await trackOperation(
+          context,
+          startMessage: p.normalize('Adding NPM packages @ apps/$studioName'),
+          endMessage: p.normalize('Added NPM packages @ apps/$studioName'),
+          operation: () async => Process.run(
+            'pnpm',
+            [
+              'add',
+              ...('@vyuh/sanity-schema-core @vyuh/sanity-schema-system @vyuh/sanity-plugin-structure'
+                  .split(' ')),
+            ],
+            workingDirectory: p.normalize('$appName/apps/$studioName'),
+            runInShell: true,
+          ),
+        );
       },
     );
   }

@@ -15,15 +15,12 @@ class ConferenceApi {
   ConferenceApi(this._provider);
 
   Future<List<Conference>> conferences() async {
-    final conferences = await _provider.fetchMultiple(
-      '''
+    final conferences = await _provider.fetchMultiple('''
 *[_type == "${Conference.schemaName}"]{
   ...,
   "slug": slug.current,
 }
-''',
-      fromJson: Conference.fromJson,
-    );
+''', fromJson: Conference.fromJson);
 
     return conferences ?? [];
   }
@@ -36,9 +33,7 @@ class ConferenceApi {
         "slug": slug.current
       }[0]
       ''',
-      queryParams: {
-        'conferenceId': conferenceId,
-      },
+      queryParams: {'conferenceId': conferenceId},
       fromJson: Conference.fromJson,
     );
 
@@ -59,9 +54,7 @@ class ConferenceApi {
         },
       } | order(startDate desc)
     ''',
-      queryParams: {
-        'conferenceId': conferenceId,
-      },
+      queryParams: {'conferenceId': conferenceId},
       fromJson: Edition.fromJson,
     );
 
@@ -69,7 +62,8 @@ class ConferenceApi {
   }
 
   Future<Edition?> edition({required String id}) async {
-    final edition = await _provider.fetchSingle('''
+    final edition = await _provider.fetchSingle(
+      '''
       *[_type == "${Edition.schemaName}" && _id == \$id][0] {
         ...,
         "slug": slug.current,
@@ -89,9 +83,10 @@ class ConferenceApi {
           },
         }
       }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Edition.fromJson);
+    ''',
+      queryParams: {'id': id},
+      fromJson: Edition.fromJson,
+    );
     return edition;
   }
 
@@ -132,7 +127,8 @@ class ConferenceApi {
   }
 
   Future<Session?> session({required String id}) async {
-    final session = await _provider.fetchSingle('''
+    final session = await _provider.fetchSingle(
+      '''
       *[_type == "${Session.schemaName}" && _id == \$id][0] {
         ...,
         "slug": slug.current,
@@ -146,9 +142,10 @@ class ConferenceApi {
           "slug": slug.current,
         }
       }
-    ''', queryParams: {
-      'id': id,
-    }, fromJson: Session.fromJson);
+    ''',
+      queryParams: {'id': id},
+      fromJson: Session.fromJson,
+    );
 
     return session;
   }
@@ -166,9 +163,7 @@ class ConferenceApi {
   "slug": slug.current
 }
     ''',
-      queryParams: {
-        'editionId': editionId,
-      },
+      queryParams: {'editionId': editionId},
       fromJson: Speaker.fromJson,
     );
 
@@ -203,9 +198,7 @@ class ConferenceApi {
   "slug": slug.current,
 }
     ''',
-      queryParams: {
-        'editionId': editionId,
-      },
+      queryParams: {'editionId': editionId},
       fromJson: Track.fromJson,
     );
 
@@ -235,9 +228,7 @@ class ConferenceApi {
         "slug": slug.current
       }
       ''',
-      queryParams: {
-        'editionId': editionId,
-      },
+      queryParams: {'editionId': editionId},
       fromJson: Sponsor.fromJson,
     );
 
@@ -251,9 +242,7 @@ class ConferenceApi {
         rooms
       }
       ''',
-      queryParams: {
-        'venueId': venueId,
-      },
+      queryParams: {'venueId': venueId},
       fromJson: Room.fromJson,
     );
 

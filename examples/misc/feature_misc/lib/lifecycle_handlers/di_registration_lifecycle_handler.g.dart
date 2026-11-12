@@ -7,5 +7,5 @@ part of 'di_registration_lifecycle_handler.dart';
 // **************************************************************************
 
 DIRegistrationLifecycleHandler _$DIRegistrationLifecycleHandlerFromJson(
-        Map<String, dynamic> json) =>
-    DIRegistrationLifecycleHandler();
+  Map<String, dynamic> json,
+) => DIRegistrationLifecycleHandler();

@@ -106,10 +106,7 @@ abstract class BaseCreateCommand extends Command<int> {
       logger: logger,
     );
 
-    await template.onGenerateComplete(
-      logger,
-      target.dir,
-    );
+    await template.onGenerateComplete(logger, target.dir);
 
     return ExitCode.success.code;
   }

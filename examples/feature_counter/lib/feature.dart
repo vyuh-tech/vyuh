@@ -43,10 +43,8 @@ class _CounterState extends State<_Counter> {
           Observer(
             builder: (_) => Text(
               '${counter.value}',
-              style: Theme.of(context).textTheme.displayLarge?.apply(
-                fontFamily: 'Courier New',
-                fontWeightDelta: 2,
-              ),
+              style: Theme.of(context).textTheme.displayLarge
+                  ?.apply(fontFamily: 'Courier New', fontWeightDelta: 2),
               textAlign: TextAlign.center,
             ),
           ),

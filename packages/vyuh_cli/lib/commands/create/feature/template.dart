@@ -7,11 +7,11 @@ import 'package:vyuh_cli/utils/utils.dart';
 
 class FeatureTemplate extends Template {
   FeatureTemplate()
-      : super(
-          name: 'feature',
-          bundle: vyuhFeatureBundle,
-          help: 'Generate a Vyuh Feature as a Flutter package.',
-        );
+    : super(
+        name: 'feature',
+        bundle: vyuhFeatureBundle,
+        help: 'Generate a Vyuh Feature as a Flutter package.',
+      );
 
   @override
   Future<void> onGenerateComplete(Logger logger, Directory outputDir) async {

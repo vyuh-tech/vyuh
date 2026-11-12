@@ -33,14 +33,15 @@ final class SanityContentProvider extends ContentProvider {
   SanityContentProvider(
     SanityClient client, {
     this.cacheDuration = const Duration(minutes: 5),
-  })  : _client = client,
-        _cache = Cache(
-            CacheConfig(storage: MemoryCacheStorage(), ttl: cacheDuration)),
-        super(
-          name: 'vyuh.content.provider.sanity',
-          title: 'Sanity Content Provider',
-          live: _SanityLiveContentProvider(),
-        ) {
+  }) : _client = client,
+       _cache = Cache(
+         CacheConfig(storage: MemoryCacheStorage(), ttl: cacheDuration),
+       ),
+       super(
+         name: 'vyuh.content.provider.sanity',
+         title: 'Sanity Content Provider',
+         live: _SanityLiveContentProvider(),
+       ) {
     _processor = _QueryProcessor(client: _client);
 
     final liveProvider = live as _SanityLiveContentProvider;
@@ -140,20 +141,24 @@ final class SanityContentProvider extends ContentProvider {
 
     final url = _client.urlBuilder.queryUrl(query, params: queryParams);
     final response = await (useCache
-        ? _cache.build(url.toString(),
-            generateValue: () => _client.fetch(query, params: queryParams))
+        ? _cache.build(
+            url.toString(),
+            generateValue: () => _client.fetch(query, params: queryParams),
+          )
         : _client.fetch(query, params: queryParams));
 
     return response;
   }
 
   @override
-  ImageProvider? image(ImageReference imageRef,
-      {int? width,
-      int? height,
-      int? devicePixelRatio,
-      int? quality,
-      String? format}) {
+  ImageProvider? image(
+    ImageReference imageRef, {
+    int? width,
+    int? height,
+    int? devicePixelRatio,
+    int? quality,
+    String? format,
+  }) {
     final ref = imageRef.asset?.ref;
     if (ref == null) {
       return null;

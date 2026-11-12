@@ -10,13 +10,13 @@ final class WonderClient {
     required this.unsplashAccessKey,
     required this.unsplashSecretKey,
   }) : _unsplash = UnsplashClient(
-          settings: ClientSettings(
-            credentials: AppCredentials(
-              accessKey: unsplashAccessKey,
-              secretKey: unsplashSecretKey,
-            ),
-          ),
-        );
+         settings: ClientSettings(
+           credentials: AppCredentials(
+             accessKey: unsplashAccessKey,
+             secretKey: unsplashSecretKey,
+           ),
+         ),
+       );
 
   Future<List<Photo>> fetchPhotos(String unsplashCollectionId) async {
     final collection = await _unsplash.collections

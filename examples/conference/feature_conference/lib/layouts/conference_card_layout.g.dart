@@ -7,5 +7,5 @@ part of 'conference_card_layout.dart';
 // **************************************************************************
 
 ConferenceCardLayout _$ConferenceCardLayoutFromJson(
-        Map<String, dynamic> json) =>
-    ConferenceCardLayout();
+  Map<String, dynamic> json,
+) => ConferenceCardLayout();

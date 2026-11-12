@@ -9,7 +9,8 @@ part of 'text_block.dart';
 TextBlockItem _$TextBlockItemFromJson(Map<String, dynamic> json) =>
     TextBlockItem(
       key: json['_key'] as String?,
-      children: (json['children'] as List<dynamic>?)
+      children:
+          (json['children'] as List<dynamic>?)
               ?.map((e) => Span.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <Span>[],
@@ -29,9 +30,9 @@ const _$ListItemTypeEnumMap = {
 };
 
 Span _$SpanFromJson(Map<String, dynamic> json) => Span(
-      type: json['_type'] as String? ?? Span.schemaName,
-      text: json['text'] as String? ?? '',
-      marks:
-          (json['marks'] as List<dynamic>?)?.map((e) => e as String).toList() ??
-              const <String>[],
-    );
+  type: json['_type'] as String? ?? Span.schemaName,
+  text: json['text'] as String? ?? '',
+  marks:
+      (json['marks'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+      const <String>[],
+);

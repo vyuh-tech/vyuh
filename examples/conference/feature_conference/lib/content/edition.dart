@@ -12,10 +12,7 @@ class EditionSponsor {
   final Sponsor? sponsor;
   final SponsorLevel level;
 
-  EditionSponsor({
-    this.sponsor,
-    this.level = SponsorLevel.bronze,
-  });
+  EditionSponsor({this.sponsor, this.level = SponsorLevel.bronze});
 
   factory EditionSponsor.fromJson(Map<String, dynamic> json) =>
       _$EditionSponsorFromJson(json);

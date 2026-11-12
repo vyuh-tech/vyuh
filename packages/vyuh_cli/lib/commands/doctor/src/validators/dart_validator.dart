@@ -7,10 +7,8 @@ class DartValidator extends DoctorValidator {
   String get installHelp => 'https://dart.dev/get-dart';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'dart',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'dart');
 
   @override
   String extractVersion(String output) {

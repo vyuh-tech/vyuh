@@ -13,7 +13,7 @@ final class DefaultEnvPlugin extends EnvPlugin {
   final Map<String, String> defaults;
 
   DefaultEnvPlugin({this.fileName = '.env', this.defaults = const {}})
-      : super(name: 'vyuh.env.default', title: 'Default Environment Plugin');
+    : super(name: 'vyuh.env.default', title: 'Default Environment Plugin');
 
   @override
   Future<void> init() async {

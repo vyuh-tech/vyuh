@@ -20,27 +20,39 @@ final class PersonApi {
   }
 
   Future<ListResponse<MovieShortInfo>> movieCredits(int peopleId) async {
-    final response =
-        await vyuh.network.get(apiUrl('person/$peopleId/movie_credits'));
+    final response = await vyuh.network.get(
+      apiUrl('person/$peopleId/movie_credits'),
+    );
 
     final data = jsonDecode(response.body);
     final list = List<MovieShortInfo>.from(
-        data['cast'].map((x) => MovieShortInfo.fromJson(x)));
+      data['cast'].map((x) => MovieShortInfo.fromJson(x)),
+    );
 
     return ListResponse(
-        page: 1, results: list, totalResults: list.length, totalPages: 1);
+      page: 1,
+      results: list,
+      totalResults: list.length,
+      totalPages: 1,
+    );
   }
 
   Future<ListResponse<SeriesShortInfo>> tvCredits(int peopleId) async {
-    final response =
-        await vyuh.network.get(apiUrl('person/$peopleId/tv_credits'));
+    final response = await vyuh.network.get(
+      apiUrl('person/$peopleId/tv_credits'),
+    );
 
     final data = jsonDecode(response.body);
     final list = List<SeriesShortInfo>.from(
-        data['cast'].map((x) => SeriesShortInfo.fromJson(x)));
+      data['cast'].map((x) => SeriesShortInfo.fromJson(x)),
+    );
 
     return ListResponse(
-        page: 1, results: list, totalResults: list.length, totalPages: 1);
+      page: 1,
+      results: list,
+      totalResults: list.length,
+      totalPages: 1,
+    );
   }
 }
 

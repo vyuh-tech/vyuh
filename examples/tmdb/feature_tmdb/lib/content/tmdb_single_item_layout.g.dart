@@ -7,8 +7,8 @@ part of 'tmdb_single_item_layout.dart';
 // **************************************************************************
 
 TmdbSingleItemLayout _$TmdbSingleItemLayoutFromJson(
-        Map<String, dynamic> json) =>
-    TmdbSingleItemLayout(
-      title: json['title'] as String?,
-      subtitle: json['subtitle'] as String?,
-    );
+  Map<String, dynamic> json,
+) => TmdbSingleItemLayout(
+  title: json['title'] as String?,
+  subtitle: json['subtitle'] as String?,
+);

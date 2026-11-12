@@ -7,16 +7,19 @@ part of 'series_detail_section.dart';
 // **************************************************************************
 
 SeriesDetailSectionLayout _$SeriesDetailSectionLayoutFromJson(
-        Map<String, dynamic> json) =>
-    SeriesDetailSectionLayout();
+  Map<String, dynamic> json,
+) => SeriesDetailSectionLayout();
 
 SeriesDetailSection _$SeriesDetailSectionFromJson(Map<String, dynamic> json) =>
     SeriesDetailSection(
       type:
           $enumDecodeNullable(_$SeriesDetailSectionTypeEnumMap, json['type']) ??
-              SeriesDetailSectionType.hero,
-      representation: $enumDecodeNullable(
-              _$ListRepresentationEnumMap, json['representation']) ??
+          SeriesDetailSectionType.hero,
+      representation:
+          $enumDecodeNullable(
+            _$ListRepresentationEnumMap,
+            json['representation'],
+          ) ??
           ListRepresentation.short,
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),

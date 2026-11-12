@@ -22,12 +22,10 @@ const description =
 /// {@endtemplate}
 class VyuhCliCommandRunner extends CompletionCommandRunner<int> {
   /// {@macro vyuh_cli_command_runner}
-  VyuhCliCommandRunner({
-    Logger? logger,
-    PubUpdater? pubUpdater,
-  })  : _logger = logger ?? Logger(),
-        _pubUpdater = pubUpdater ?? PubUpdater(),
-        super(executableName, description) {
+  VyuhCliCommandRunner({Logger? logger, PubUpdater? pubUpdater})
+    : _logger = logger ?? Logger(),
+      _pubUpdater = pubUpdater ?? PubUpdater(),
+      super(executableName, description) {
     // Add root options and flags
     argParser
       ..addFlag(
@@ -137,11 +135,9 @@ class VyuhCliCommandRunner extends CompletionCommandRunner<int> {
       if (!isUpToDate) {
         _logger
           ..info('')
-          ..info(
-            '''
+          ..info('''
 ${lightYellow.wrap('Update available!')} ${lightCyan.wrap(packageVersion)} \u2192 ${lightCyan.wrap(latestVersion)}
-Run ${lightCyan.wrap('$executableName update')} to update''',
-          );
+Run ${lightCyan.wrap('$executableName update')} to update''');
       }
     } catch (_) {}
   }

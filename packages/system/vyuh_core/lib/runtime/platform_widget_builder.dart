@@ -18,8 +18,10 @@ part 'platform/error_view.dart';
 ///   theme: platform.theme,
 /// );
 /// ```
-typedef AppBuilder =
-    Widget Function(BuildContext context, VyuhPlatform platform);
+typedef AppBuilder = Widget Function(
+  BuildContext context,
+  VyuhPlatform platform,
+);
 
 /// A builder for a widget that is shown when the app is loading.
 ///
@@ -47,8 +49,11 @@ typedef Loader = Widget Function(BuildContext context);
 ///   child: Text('Loading $url...'),
 /// );
 /// ```
-typedef RouteLoader =
-    Widget Function(BuildContext context, [Uri? url, String? routeId]);
+typedef RouteLoader = Widget Function(
+  BuildContext context, [
+  Uri? url,
+  String? routeId,
+]);
 
 /// A builder for an image placeholder widget.
 ///
@@ -64,8 +69,11 @@ typedef RouteLoader =
 ///   color: Colors.grey[300],
 /// );
 /// ```
-typedef ImagePlaceholderBuilder =
-    Widget Function(BuildContext context, {double? width, double? height});
+typedef ImagePlaceholderBuilder = Widget Function(
+  BuildContext context, {
+  double? width,
+  double? height,
+});
 
 /// A builder for a route error view widget.
 ///
@@ -88,16 +96,15 @@ typedef ImagePlaceholderBuilder =
 ///   onRetry: onRetry,
 /// );
 /// ```
-typedef RouteErrorViewBuilder =
-    Widget Function(
-      BuildContext context, {
-      required String title,
-      String? retryLabel,
-      VoidCallback? onRetry,
-      dynamic error,
-      StackTrace? stackTrace,
-      String? subtitle,
-    });
+typedef RouteErrorViewBuilder = Widget Function(
+  BuildContext context, {
+  required String title,
+  String? retryLabel,
+  VoidCallback? onRetry,
+  dynamic error,
+  StackTrace? stackTrace,
+  String? subtitle,
+});
 
 /// A builder for an error view widget.
 ///
@@ -122,17 +129,16 @@ typedef RouteErrorViewBuilder =
 ///   showRestart: showRestart,
 /// );
 /// ```
-typedef ErrorViewBuilder =
-    Widget Function(
-      BuildContext context, {
-      required String title,
-      dynamic error,
-      StackTrace? stackTrace,
-      String? retryLabel,
-      VoidCallback? onRetry,
-      String? subtitle,
-      bool showRestart,
-    });
+typedef ErrorViewBuilder = Widget Function(
+  BuildContext context, {
+  required String title,
+  dynamic error,
+  StackTrace? stackTrace,
+  String? retryLabel,
+  VoidCallback? onRetry,
+  String? subtitle,
+  bool showRestart,
+});
 
 /// A builder for platform-specific widgets used throughout the Vyuh application.
 ///

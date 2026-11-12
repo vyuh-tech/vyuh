@@ -8,8 +8,11 @@ part 'invoke_action.g.dart';
 final class InvokeActionMarkDef extends MarkDef {
   final Action action;
 
-  InvokeActionMarkDef(
-      {required this.action, required super.key, required super.type});
+  InvokeActionMarkDef({
+    required this.action,
+    required super.key,
+    required super.type,
+  });
 
   factory InvokeActionMarkDef.fromJson(Map<String, dynamic> json) =>
       _$InvokeActionMarkDefFromJson(json);

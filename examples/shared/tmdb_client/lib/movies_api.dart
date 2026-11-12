@@ -25,8 +25,9 @@ final class MovieApi {
       'page=1',
       'sort_by=popularity.desc',
     ].join('&');
-    final response =
-        await vyuh.network.get(apiUrl('discover/movie?$queryParams'));
+    final response = await vyuh.network.get(
+      apiUrl('discover/movie?$queryParams'),
+    );
 
     final data = jsonDecode(response.body);
     return ListResponse<MovieShortInfo>.fromJson(data);
@@ -68,8 +69,9 @@ final class MovieApi {
   }
 
   Future<ListResponse<MovieShortInfo>> recommendations(int movieId) async {
-    final response =
-        await vyuh.network.get(apiUrl('movie/$movieId/recommendations'));
+    final response = await vyuh.network.get(
+      apiUrl('movie/$movieId/recommendations'),
+    );
 
     final data = jsonDecode(response.body);
     return ListResponse<MovieShortInfo>.fromJson(data);

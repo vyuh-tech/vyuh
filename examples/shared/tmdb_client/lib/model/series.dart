@@ -39,14 +39,14 @@ final class Series extends FeaturedShow {
   factory Series.fromJson(Map<String, dynamic> json) => _$SeriesFromJson(json);
 
   SeriesShortInfo shortInfo() => SeriesShortInfo(
-        id: id,
-        title: name,
-        overview: overview,
-        posterImage: posterImage,
-        releaseDate: firstAirDate,
-        voteAverage: voteAverage,
-        voteCount: voteCount,
-      );
+    id: id,
+    title: name,
+    overview: overview,
+    posterImage: posterImage,
+    releaseDate: firstAirDate,
+    voteAverage: voteAverage,
+    voteCount: voteCount,
+  );
 }
 
 @JsonSerializable()

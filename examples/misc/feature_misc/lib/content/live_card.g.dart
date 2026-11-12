@@ -7,14 +7,14 @@ part of 'live_card.dart';
 // **************************************************************************
 
 LiveCard _$LiveCardFromJson(Map<String, dynamic> json) => LiveCard(
-      document: json['document'] == null
-          ? null
-          : ObjectReference.fromJson(json['document'] as Map<String, dynamic>),
-      includeDrafts: json['includeDrafts'] as bool? ?? false,
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  document: json['document'] == null
+      ? null
+      : ObjectReference.fromJson(json['document'] as Map<String, dynamic>),
+  includeDrafts: json['includeDrafts'] as bool? ?? false,
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 LiveCardDefaultLayout _$LiveCardDefaultLayoutFromJson(
-        Map<String, dynamic> json) =>
-    LiveCardDefaultLayout();
+  Map<String, dynamic> json,
+) => LiveCardDefaultLayout();

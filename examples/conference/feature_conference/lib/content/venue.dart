@@ -90,10 +90,7 @@ class VenueCoordinates {
   final double latitude;
   final double longitude;
 
-  VenueCoordinates({
-    required this.latitude,
-    required this.longitude,
-  });
+  VenueCoordinates({required this.latitude, required this.longitude});
 
   factory VenueCoordinates.fromJson(Map<String, dynamic> json) =>
       _$VenueCoordinatesFromJson(json);

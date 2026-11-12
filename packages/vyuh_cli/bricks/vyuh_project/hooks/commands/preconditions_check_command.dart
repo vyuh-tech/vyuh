@@ -24,17 +24,20 @@ final class PreConditionsCheckCommand extends CliCommand {
     final required = [
       'flutter',
       'dart',
-      if (context.vars['cms'] == 'sanity') 'pnpm'
+      if (context.vars['cms'] == 'sanity') 'pnpm',
     ];
     context.logger.alert(
-        'Checking for availability of programs (${required.join(', ')})...');
+      'Checking for availability of programs (${required.join(', ')})...',
+    );
 
     for (final program in required) {
       final result = await which(program);
 
       if (result == null) {
-        context.logger.err(programs[program] ??
-            '$program is not installed. Add it to your PATH.');
+        context.logger.err(
+          programs[program] ??
+              '$program is not installed. Add it to your PATH.',
+        );
         exit(1);
       }
     }

@@ -7,20 +7,21 @@ part of 'settings.dart';
 // **************************************************************************
 
 Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
-      title: json['title'] as String,
-      tabs: (json['tabs'] as List<dynamic>?)
-              ?.map((e) => TabInfo.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          [],
-    );
+  title: json['title'] as String,
+  tabs:
+      (json['tabs'] as List<dynamic>?)
+          ?.map((e) => TabInfo.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      [],
+);
 
 TabInfo _$TabInfoFromJson(Map<String, dynamic> json) => TabInfo(
-      title: json['title'] as String,
-      path: json['path'] as String,
-      iconIdentifier: $enumDecodeNullable(
-              _$IconIdentifierEnumMap, json['iconIdentifier']) ??
-          IconIdentifier.home,
-    );
+  title: json['title'] as String,
+  path: json['path'] as String,
+  iconIdentifier:
+      $enumDecodeNullable(_$IconIdentifierEnumMap, json['iconIdentifier']) ??
+      IconIdentifier.home,
+);
 
 const _$IconIdentifierEnumMap = {
   IconIdentifier.home: 'home',

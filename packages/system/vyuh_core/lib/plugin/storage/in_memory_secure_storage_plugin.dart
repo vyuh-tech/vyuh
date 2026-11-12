@@ -13,10 +13,10 @@ final class InMemorySecureStoragePlugin extends SecureStoragePlugin
   final Map<String, dynamic> _storage = {};
 
   InMemorySecureStoragePlugin()
-      : super(
-          name: 'vyuh.plugin.secureStorage.memory',
-          title: 'In-Memory Secure Storage',
-        );
+    : super(
+        name: 'vyuh.plugin.secureStorage.memory',
+        title: 'In-Memory Secure Storage',
+      );
 
   @override
   Future<dynamic> read(String key) async {

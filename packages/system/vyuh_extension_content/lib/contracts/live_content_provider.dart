@@ -52,32 +52,34 @@ final class NoOpLiveContentProvider extends LiveContentProvider {
   const NoOpLiveContentProvider() : super(title: 'No Op Live Provider');
 
   @override
-  Stream<T?> fetchById<T>(String id,
-          {required FromJsonConverter<T> fromJson,
-          bool includeDrafts = false}) =>
-      _error('fetchById');
+  Stream<T?> fetchById<T>(
+    String id, {
+    required FromJsonConverter<T> fromJson,
+    bool includeDrafts = false,
+  }) => _error('fetchById');
 
   @override
-  Stream<T?> fetchSingle<T>(String query,
-          {required FromJsonConverter<T> fromJson,
-          Map<String, String>? queryParams,
-          bool includeDrafts = false}) =>
-      _error('fetchSingle');
+  Stream<T?> fetchSingle<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool includeDrafts = false,
+  }) => _error('fetchSingle');
 
   @override
-  Stream<List<T>?> fetchMultiple<T>(String query,
-          {required FromJsonConverter<T> fromJson,
-          Map<String, String>? queryParams,
-          bool includeDrafts = false}) =>
-      _error('fetchMultiple');
+  Stream<List<T>?> fetchMultiple<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool includeDrafts = false,
+  }) => _error('fetchMultiple');
 
   @override
   Stream<RouteBase?> fetchRoute({
     String? path,
     String? routeId,
     bool includeDrafts = false,
-  }) =>
-      _error('fetchRoute');
+  }) => _error('fetchRoute');
 
   @override
   Future<void> dispose() async {}

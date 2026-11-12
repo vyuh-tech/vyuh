@@ -66,8 +66,11 @@ T? typeFromFirstOfListJson<T extends SchemaItem>(dynamic json) {
 
   // For other types, we need to use the factory method approach
   // Since we can't import extension_content types here, we use a callback system
-  final unknownPlaceholder =
-      _unknownPlaceholderFactory?.call(T, schemaType, jsonItem);
+  final unknownPlaceholder = _unknownPlaceholderFactory?.call(
+    T,
+    schemaType,
+    jsonItem,
+  );
 
   if (unknownPlaceholder != null) {
     return unknownPlaceholder as T?;
@@ -115,8 +118,9 @@ List<T>? listFromJson<T extends SchemaItem>(dynamic json) {
         }
 
         // Create appropriate unknown placeholder based on type
-        final schemaType =
-            VyuhBinding.instance.content.provider.schemaType(itemJson);
+        final schemaType = VyuhBinding.instance.content.provider.schemaType(
+          itemJson,
+        );
 
         // For ContentItem, we already have UnknownContentItem
         if (T == ContentItem) {
@@ -127,8 +131,11 @@ List<T>? listFromJson<T extends SchemaItem>(dynamic json) {
         }
 
         // For other types, use the factory method approach
-        final unknownPlaceholder =
-            _unknownPlaceholderFactory?.call(T, schemaType, itemJson);
+        final unknownPlaceholder = _unknownPlaceholderFactory?.call(
+          T,
+          schemaType,
+          itemJson,
+        );
 
         if (unknownPlaceholder != null) {
           return unknownPlaceholder as T;

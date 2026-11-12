@@ -2,7 +2,6 @@ import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
-
 /// A widget that builds UI based on document data fetched from a content provider.
 ///
 /// This widget is responsible for fetching document data from a content provider

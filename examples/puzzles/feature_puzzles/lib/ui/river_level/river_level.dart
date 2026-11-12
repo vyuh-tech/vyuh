@@ -30,9 +30,7 @@ class _RiverLevelState extends State<RiverLevel> {
       duration: const Duration(seconds: 3),
     );
     store = RiverLevelStore(level: widget.level)..init();
-    _disposeReaction = reaction((_) => store.levelEndReason.value, (
-      reason,
-    ) {
+    _disposeReaction = reaction((_) => store.levelEndReason.value, (reason) {
       if (reason != null) {
         if (reason.won) {
           showWinDialog(

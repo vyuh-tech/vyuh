@@ -30,12 +30,10 @@ final class TrackLayout extends LayoutConfiguration<Track> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId = GoRouterState.of(
-          context,
-        ).pathParameters['conferenceId']!;
-        final editionId = GoRouterState.of(
-          context,
-        ).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(context)
+            .pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(context)
+            .pathParameters['editionId']!;
 
         vyuh.router.push(
           '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}',

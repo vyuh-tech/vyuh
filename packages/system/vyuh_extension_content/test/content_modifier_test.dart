@@ -1,4 +1,5 @@
 import 'utils.dart' as fixtures;
+
 import 'package:flutter/widgets.dart' hide runApp;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:vyuh_core/vyuh_core.dart';
@@ -119,7 +120,9 @@ void main() {
     );
     VyuhBinding.instance.widgetInit(
       plugins: PluginDescriptor(
-        others: [DefaultContentPlugin(provider: fixtures.MockContentProvider())],
+        others: [
+          DefaultContentPlugin(provider: fixtures.MockContentProvider()),
+        ],
       ),
       extensionBuilder: builder,
       extensionDescriptors: [

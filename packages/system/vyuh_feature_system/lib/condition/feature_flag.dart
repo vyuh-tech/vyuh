@@ -66,9 +66,10 @@ final class FeatureFlagCondition extends ConditionConfiguration {
 
   final FlagDataType dataType;
 
-  FeatureFlagCondition(
-      {this.flagName = '', this.dataType = FlagDataType.string})
-      : super(schemaType: schemaName);
+  FeatureFlagCondition({
+    this.flagName = '',
+    this.dataType = FlagDataType.string,
+  }) : super(schemaType: schemaName);
 
   factory FeatureFlagCondition.fromJson(Map<String, dynamic> json) =>
       _$FeatureFlagConditionFromJson(json);
@@ -101,9 +102,4 @@ final class FeatureFlagCondition extends ConditionConfiguration {
 /// * [number] - Integer values
 /// * [boolean] - Boolean values
 /// * [json] - JSON object values
-enum FlagDataType {
-  string,
-  number,
-  boolean,
-  json,
-}
+enum FlagDataType { string, number, boolean, json }

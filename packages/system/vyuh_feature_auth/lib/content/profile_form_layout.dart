@@ -146,9 +146,8 @@ class _LoggedInUser extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      DateFormat(
-                        'MMM d, yyyy hh:mm:ss a',
-                      ).format(user.creationTime!),
+                      DateFormat('MMM d, yyyy hh:mm:ss a')
+                          .format(user.creationTime!),
                     ),
                   ],
                 ),
@@ -162,9 +161,8 @@ class _LoggedInUser extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      DateFormat(
-                        'MMM d, yyyy hh:mm:ss a',
-                      ).format(user.lastSignInTime!),
+                      DateFormat('MMM d, yyyy hh:mm:ss a')
+                          .format(user.lastSignInTime!),
                     ),
                   ],
                 ),

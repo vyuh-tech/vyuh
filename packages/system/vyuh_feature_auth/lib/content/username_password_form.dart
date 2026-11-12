@@ -45,8 +45,8 @@ final class UsernamePasswordForm extends ContentItem {
 
 final class UsernamePasswordFormDescriptor extends ContentDescriptor {
   UsernamePasswordFormDescriptor({super.layouts})
-      : super(
-          schemaType: UsernamePasswordForm.schemaName,
-          title: 'Username Password Form',
-        );
+    : super(
+        schemaType: UsernamePasswordForm.schemaName,
+        title: 'Username Password Form',
+      );
 }

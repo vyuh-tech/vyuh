@@ -7,35 +7,35 @@ part of 'venue.dart';
 // **************************************************************************
 
 Venue _$VenueFromJson(Map<String, dynamic> json) => Venue(
-      id: json['_id'] as String,
-      title: json['title'] as String? ?? 'Conference Center',
-      slug: json['slug'] as String,
-      description: json['description'] == null
-          ? null
-          : PortableTextContent.fromJson(
-              json['description'] as Map<String, dynamic>),
-      address: json['address'] == null
-          ? null
-          : VenueAddress.fromJson(json['address'] as Map<String, dynamic>),
-      coordinates: json['coordinates'] == null
-          ? null
-          : VenueCoordinates.fromJson(
-              json['coordinates'] as Map<String, dynamic>),
-      website: json['website'] as String?,
-      phone: json['phone'] as String?,
-      email: json['email'] as String?,
-      rooms: (json['rooms'] as List<dynamic>?)
-          ?.map((e) => Room.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      amenities: (json['amenities'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$VenueAmenityEnumMap, e))
-          .toList(),
-      image: json['image'] == null
-          ? null
-          : ImageReference.fromJson(json['image'] as Map<String, dynamic>),
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  id: json['_id'] as String,
+  title: json['title'] as String? ?? 'Conference Center',
+  slug: json['slug'] as String,
+  description: json['description'] == null
+      ? null
+      : PortableTextContent.fromJson(
+          json['description'] as Map<String, dynamic>,
+        ),
+  address: json['address'] == null
+      ? null
+      : VenueAddress.fromJson(json['address'] as Map<String, dynamic>),
+  coordinates: json['coordinates'] == null
+      ? null
+      : VenueCoordinates.fromJson(json['coordinates'] as Map<String, dynamic>),
+  website: json['website'] as String?,
+  phone: json['phone'] as String?,
+  email: json['email'] as String?,
+  rooms: (json['rooms'] as List<dynamic>?)
+      ?.map((e) => Room.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  amenities: (json['amenities'] as List<dynamic>?)
+      ?.map((e) => $enumDecode(_$VenueAmenityEnumMap, e))
+      .toList(),
+  image: json['image'] == null
+      ? null
+      : ImageReference.fromJson(json['image'] as Map<String, dynamic>),
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 const _$VenueAmenityEnumMap = {
   VenueAmenity.freeWifi: 'free-wifi',
@@ -66,12 +66,12 @@ const _$VenueAmenityEnumMap = {
 };
 
 VenueAddress _$VenueAddressFromJson(Map<String, dynamic> json) => VenueAddress(
-      street: json['street'] as String,
-      city: json['city'] as String,
-      state: json['state'] as String,
-      country: json['country'] as String,
-      postalCode: json['postalCode'] as String,
-    );
+  street: json['street'] as String,
+  city: json['city'] as String,
+  state: json['state'] as String,
+  country: json['country'] as String,
+  postalCode: json['postalCode'] as String,
+);
 
 VenueCoordinates _$VenueCoordinatesFromJson(Map<String, dynamic> json) =>
     VenueCoordinates(

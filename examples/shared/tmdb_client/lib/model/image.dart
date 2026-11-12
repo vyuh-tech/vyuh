@@ -25,50 +25,19 @@ final class TMDBImage {
   late final image = posterImageFromPath(path);
   late final originalImage = posterImageOriginalFromPath(path);
 
-  TMDBImage({
-    required this.path,
-    this.width,
-    this.height,
-    this.aspectRatio,
-  });
+  TMDBImage({required this.path, this.width, this.height, this.aspectRatio});
 
   factory TMDBImage.fromJson(Map<String, dynamic> json) =>
       _$TMDBImageFromJson(json);
 }
 
-enum PosterImageSize {
-  w92,
-  w154,
-  w185,
-  w342,
-  w500,
-  w780,
-  original,
-}
+enum PosterImageSize { w92, w154, w185, w342, w500, w780, original }
 
-enum BackdropImageSize {
-  w300,
-  w780,
-  w1280,
-  original,
-}
+enum BackdropImageSize { w300, w780, w1280, original }
 
-enum LogoImageSize {
-  w45,
-  w92,
-  w154,
-  w185,
-  w300,
-  w500,
-  original,
-}
+enum LogoImageSize { w45, w92, w154, w185, w300, w500, original }
 
-enum ProfileImageSize {
-  w45,
-  w185,
-  h632,
-  original,
-}
+enum ProfileImageSize { w45, w185, h632, original }
 
 String? Function(String? value) imageFromPath(String imageSizePrefix) =>
     (String? value) {

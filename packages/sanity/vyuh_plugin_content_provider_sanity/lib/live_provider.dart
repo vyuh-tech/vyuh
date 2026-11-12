@@ -10,30 +10,40 @@ class _SanityLiveContentProvider extends LiveContentProvider {
   }
 
   @override
-  Stream<T?> fetchById<T>(String id,
-      {required FromJsonConverter<T> fromJson, bool includeDrafts = false}) {
+  Stream<T?> fetchById<T>(
+    String id, {
+    required FromJsonConverter<T> fromJson,
+    bool includeDrafts = false,
+  }) {
     final record = processor.id(id);
     return processor.client
-        .fetchLive(record.query,
-            params: record.params, includeDrafts: includeDrafts)
+        .fetchLive(
+          record.query,
+          params: record.params,
+          includeDrafts: includeDrafts,
+        )
         .map((response) => processor.processSingle(response, fromJson));
   }
 
   @override
-  Stream<T?> fetchSingle<T>(String query,
-      {required FromJsonConverter<T> fromJson,
-      Map<String, String>? queryParams,
-      bool includeDrafts = false}) {
+  Stream<T?> fetchSingle<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool includeDrafts = false,
+  }) {
     return processor.client
         .fetchLive(query, params: queryParams, includeDrafts: includeDrafts)
         .map((response) => processor.processSingle(response, fromJson));
   }
 
   @override
-  Stream<List<T>?> fetchMultiple<T>(String query,
-      {required FromJsonConverter<T> fromJson,
-      Map<String, String>? queryParams,
-      bool includeDrafts = false}) {
+  Stream<List<T>?> fetchMultiple<T>(
+    String query, {
+    required FromJsonConverter<T> fromJson,
+    Map<String, String>? queryParams,
+    bool includeDrafts = false,
+  }) {
     return processor.client
         .fetchLive(query, params: queryParams, includeDrafts: includeDrafts)
         .map((response) => processor.processMultiple(response, fromJson));
@@ -53,8 +63,9 @@ class _SanityLiveContentProvider extends LiveContentProvider {
           params: record.params,
           includeDrafts: includeDrafts,
         )
-        .map((response) =>
-            processor.processSingle(response, RouteBase.fromJson));
+        .map(
+          (response) => processor.processSingle(response, RouteBase.fromJson),
+        );
   }
 
   @override

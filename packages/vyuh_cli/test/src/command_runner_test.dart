@@ -17,7 +17,8 @@ class _MockPubUpdater extends Mock implements PubUpdater {}
 
 const latestVersion = '0.0.0';
 
-final updatePrompt = '''
+final updatePrompt =
+    '''
 ${lightYellow.wrap('Update available!')} ${lightCyan.wrap(packageVersion)} \u2192 ${lightCyan.wrap(latestVersion)}
 Run ${lightCyan.wrap('$executableName update')} to update''';
 
@@ -30,9 +31,8 @@ void main() {
     setUp(() {
       pubUpdater = _MockPubUpdater();
 
-      when(
-        () => pubUpdater.getLatestVersion(any()),
-      ).thenAnswer((_) async => packageVersion);
+      when(() => pubUpdater.getLatestVersion(any()))
+          .thenAnswer((_) async => packageVersion);
 
       logger = _MockLogger();
 
@@ -43,33 +43,27 @@ void main() {
     });
 
     test('shows update message when newer version exists', () async {
-      when(
-        () => pubUpdater.getLatestVersion(any()),
-      ).thenAnswer((_) async => latestVersion);
+      when(() => pubUpdater.getLatestVersion(any()))
+          .thenAnswer((_) async => latestVersion);
 
       final result = await commandRunner.run(['--version']);
       expect(result, equals(ExitCode.success.code));
       verify(() => logger.info(updatePrompt)).called(1);
     });
 
-    test(
-      'Does not show update message when the shell calls the '
-      'completion command',
-      () async {
-        when(
-          () => pubUpdater.getLatestVersion(any()),
-        ).thenAnswer((_) async => latestVersion);
+    test('Does not show update message when the shell calls the '
+        'completion command', () async {
+      when(() => pubUpdater.getLatestVersion(any()))
+          .thenAnswer((_) async => latestVersion);
 
-        final result = await commandRunner.run(['completion']);
-        expect(result, equals(ExitCode.success.code));
-        verifyNever(() => logger.info(updatePrompt));
-      },
-    );
+      final result = await commandRunner.run(['completion']);
+      expect(result, equals(ExitCode.success.code));
+      verifyNever(() => logger.info(updatePrompt));
+    });
 
     test('does not show update message when using update command', () async {
-      when(
-        () => pubUpdater.getLatestVersion(any()),
-      ).thenAnswer((_) async => latestVersion);
+      when(() => pubUpdater.getLatestVersion(any()))
+          .thenAnswer((_) async => latestVersion);
       when(
         () => pubUpdater.update(
           packageName: packageName,
@@ -98,12 +92,14 @@ void main() {
       verifyNever(() => logger.info(updatePrompt));
     });
 
-    test('can be instantiated without an explicit analytics/logger instance',
-        () {
-      final commandRunner = VyuhCliCommandRunner();
-      expect(commandRunner, isNotNull);
-      expect(commandRunner, isA<CompletionCommandRunner<int>>());
-    });
+    test(
+      'can be instantiated without an explicit analytics/logger instance',
+      () {
+        final commandRunner = VyuhCliCommandRunner();
+        expect(commandRunner, isNotNull);
+        expect(commandRunner, isA<CompletionCommandRunner<int>>());
+      },
+    );
 
     test('handles FormatException', () async {
       const exception = FormatException('oops!');

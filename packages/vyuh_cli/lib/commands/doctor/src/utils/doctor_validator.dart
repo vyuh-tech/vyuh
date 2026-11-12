@@ -23,22 +23,14 @@ abstract class DoctorValidator {
 class ValidationResult {
   /// [ValidationResult.type] should only equal [ValidationResult.success]
   /// if no [messages] are hints or errors.
-  ValidationResult(
-    this.type,
-    this.messages, {
-    this.statusInfo,
-  });
+  ValidationResult(this.type, this.messages, {this.statusInfo});
 
   factory ValidationResult.crash(Object error, [StackTrace? stackTrace]) {
-    return ValidationResult(
-      ValidationType.crash,
-      <ValidationMessage>[
-        const ValidationMessage.error(UserMessages.doctorError),
-        ValidationMessage.error('$error'),
-        if (stackTrace != null) ValidationMessage('$stackTrace'),
-      ],
-      statusInfo: UserMessages.doctorCrash,
-    );
+    return ValidationResult(ValidationType.crash, <ValidationMessage>[
+      const ValidationMessage.error(UserMessages.doctorError),
+      ValidationMessage.error('$error'),
+      if (stackTrace != null) ValidationMessage('$stackTrace'),
+    ], statusInfo: UserMessages.doctorCrash);
   }
 
   final ValidationType type;
@@ -48,20 +40,20 @@ class ValidationResult {
   final List<ValidationMessage> messages;
 
   String get leadingIcon => switch (type) {
-        ValidationType.crash => '🚧',
-        ValidationType.missing => '🧐',
-        ValidationType.success => '✅',
-        ValidationType.notAvailable || ValidationType.partial => '⌛',
-      };
+    ValidationType.crash => '🚧',
+    ValidationType.missing => '🧐',
+    ValidationType.success => '✅',
+    ValidationType.notAvailable || ValidationType.partial => '⌛',
+  };
 
   /// The string representation of the type.
   String get typeStr => switch (type) {
-        ValidationType.crash => 'crash',
-        ValidationType.missing => 'missing',
-        ValidationType.success => 'installed',
-        ValidationType.notAvailable => 'notAvailable',
-        ValidationType.partial => 'partial',
-      };
+    ValidationType.crash => 'crash',
+    ValidationType.missing => 'missing',
+    ValidationType.success => 'installed',
+    ValidationType.notAvailable => 'notAvailable',
+    ValidationType.partial => 'partial',
+  };
 
   @override
   String toString() {
@@ -71,13 +63,13 @@ class ValidationResult {
 
 class ValidationMessage {
   const ValidationMessage(this.message)
-      : type = ValidationMessageType.information;
+    : type = ValidationMessageType.information;
 
   const ValidationMessage.error(this.message)
-      : type = ValidationMessageType.error;
+    : type = ValidationMessageType.error;
 
   const ValidationMessage.warning(this.message)
-      : type = ValidationMessageType.warning;
+    : type = ValidationMessageType.warning;
 
   final ValidationMessageType type;
   final String message;
@@ -89,10 +81,10 @@ class ValidationMessage {
   bool get isInformation => type == ValidationMessageType.information;
 
   String get indicator => switch (type) {
-        ValidationMessageType.error => '🚩',
-        ValidationMessageType.warning => '⚠️',
-        ValidationMessageType.information => '👉',
-      };
+    ValidationMessageType.error => '🚩',
+    ValidationMessageType.warning => '⚠️',
+    ValidationMessageType.information => '👉',
+  };
 
   @override
   String toString() => message.isNotEmpty ? '   $indicator $message' : message;

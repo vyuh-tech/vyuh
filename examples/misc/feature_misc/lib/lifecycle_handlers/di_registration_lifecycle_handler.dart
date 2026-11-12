@@ -13,13 +13,14 @@ final class TestStore {
 @JsonSerializable()
 final class DIRegistrationLifecycleHandler extends RouteLifecycleConfiguration {
   DIRegistrationLifecycleHandler()
-      : super(schemaType: 'misc.lifecycleHandler.diRegistration');
+    : super(schemaType: 'misc.lifecycleHandler.diRegistration');
 
   static const schemaName = 'misc.lifecycleHandler.diRegistration';
   static final typeDescriptor = TypeDescriptor(
-      schemaType: schemaName,
-      fromJson: DIRegistrationLifecycleHandler.fromJson,
-      title: 'DI Registration Lifecycle Handler');
+    schemaType: schemaName,
+    fromJson: DIRegistrationLifecycleHandler.fromJson,
+    title: 'DI Registration Lifecycle Handler',
+  );
 
   factory DIRegistrationLifecycleHandler.fromJson(Map<String, dynamic> json) =>
       _$DIRegistrationLifecycleHandlerFromJson(json);

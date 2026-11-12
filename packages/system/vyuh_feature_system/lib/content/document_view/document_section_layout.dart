@@ -22,8 +22,8 @@ final class DefaultDocumentSectionViewLayout
   DefaultDocumentSectionViewLayout() : super(schemaType: schemaName);
 
   factory DefaultDocumentSectionViewLayout.fromJson(
-          Map<String, dynamic> json) =>
-      _$DefaultDocumentSectionViewLayoutFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$DefaultDocumentSectionViewLayoutFromJson(json);
 
   @override
   Widget build(BuildContext context, DocumentSectionView content) {
@@ -37,23 +37,25 @@ final class DefaultDocumentSectionViewLayout
 
     final docWidgetState = DocumentViewBuilderState.of(context);
 
-    return Observer(builder: (context) {
-      final snapshot = docWidgetState.document<DocumentItem>();
+    return Observer(
+      builder: (context) {
+        final snapshot = docWidgetState.document<DocumentItem>();
 
-      if (snapshot.status == FutureStatus.pending) {
-        return VyuhBinding.instance.widgetBuilder.contentLoader(context);
-      }
+        if (snapshot.status == FutureStatus.pending) {
+          return VyuhBinding.instance.widgetBuilder.contentLoader(context);
+        }
 
-      if (snapshot.result == FutureStatus.rejected) {
-        return VyuhBinding.instance.widgetBuilder.errorView(
-          context,
-          title: 'No document found',
-          error: snapshot.error,
-        );
-      }
+        if (snapshot.result == FutureStatus.rejected) {
+          return VyuhBinding.instance.widgetBuilder.errorView(
+            context,
+            title: 'No document found',
+            error: snapshot.error,
+          );
+        }
 
-      return content.configuration!.build(context, snapshot.result!);
-    });
+        return content.configuration!.build(context, snapshot.result!);
+      },
+    );
   }
 }
 
@@ -76,6 +78,6 @@ final class DocumentSectionViewConditionalLayout
   }) : super(schemaType: schemaName);
 
   factory DocumentSectionViewConditionalLayout.fromJson(
-          Map<String, dynamic> json) =>
-      _$DocumentSectionViewConditionalLayoutFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$DocumentSectionViewConditionalLayoutFromJson(json);
 }

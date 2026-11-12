@@ -166,9 +166,8 @@ class _DefaultAccordionViewState extends State<DefaultAccordionView> {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         item.title,
-                        style: Theme.of(context).textTheme.bodyMedium?.apply(
-                          fontWeightDelta: isExpanded ? 3 : 0,
-                        ),
+                        style: Theme.of(context).textTheme.bodyMedium
+                            ?.apply(fontWeightDelta: isExpanded ? 3 : 0),
                       ),
                     ),
                     body: Padding(

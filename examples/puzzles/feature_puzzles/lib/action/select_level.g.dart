@@ -7,9 +7,8 @@ part of 'select_level.dart';
 // **************************************************************************
 
 SelectLevel _$SelectLevelFromJson(Map<String, dynamic> json) => SelectLevel(
-      level: json['puzzleLevel'] == null
-          ? null
-          : ObjectReference.fromJson(
-              json['puzzleLevel'] as Map<String, dynamic>),
-      isAwaited: json['isAwaited'] as bool? ?? false,
-    );
+  level: json['puzzleLevel'] == null
+      ? null
+      : ObjectReference.fromJson(json['puzzleLevel'] as Map<String, dynamic>),
+  isAwaited: json['isAwaited'] as bool? ?? false,
+);

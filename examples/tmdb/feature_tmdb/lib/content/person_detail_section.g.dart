@@ -7,8 +7,8 @@ part of 'person_detail_section.dart';
 // **************************************************************************
 
 PersonDetailSectionLayout _$PersonDetailSectionLayoutFromJson(
-        Map<String, dynamic> json) =>
-    PersonDetailSectionLayout();
+  Map<String, dynamic> json,
+) => PersonDetailSectionLayout();
 
 PersonDetailSection _$PersonDetailSectionFromJson(Map<String, dynamic> json) =>
     PersonDetailSection(

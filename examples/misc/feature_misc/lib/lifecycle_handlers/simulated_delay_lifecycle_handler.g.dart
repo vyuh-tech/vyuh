@@ -7,7 +7,7 @@ part of 'simulated_delay_lifecycle_handler.dart';
 // **************************************************************************
 
 SimulatedDelayLifecycleHandler _$SimulatedDelayLifecycleHandlerFromJson(
-        Map<String, dynamic> json) =>
-    SimulatedDelayLifecycleHandler(
-      delay: (json['delay'] as num?)?.toInt() ?? 1,
-    );
+  Map<String, dynamic> json,
+) => SimulatedDelayLifecycleHandler(
+  delay: (json['delay'] as num?)?.toInt() ?? 1,
+);

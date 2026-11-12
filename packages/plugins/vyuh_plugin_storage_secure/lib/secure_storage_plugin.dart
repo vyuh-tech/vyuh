@@ -72,10 +72,10 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin
     this._macOSOptions,
     this._linuxOptions,
     this._windowsOptions,
-  })  : super(
-          name: 'vyuh.plugin.storage.secure',
-          title: 'Secure Storage Plugin',
-        );
+  }) : super(
+         name: 'vyuh.plugin.storage.secure',
+         title: 'Secure Storage Plugin',
+       );
 
   @override
   Future<void> initOnce() async {

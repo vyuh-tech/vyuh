@@ -33,8 +33,9 @@ final class ContentExtensionDescriptor extends ExtensionDescriptor {
       td.setSourceFeature(sourceFeature);
     }
 
-    for (final td in contentModifiers ??
-        <TypeDescriptor<ContentModifierConfiguration>>[]) {
+    for (final td
+        in contentModifiers ??
+            <TypeDescriptor<ContentModifierConfiguration>>[]) {
       td.setSourceFeature(sourceFeature);
     }
 

@@ -7,21 +7,25 @@ part of 'document_view.dart';
 // **************************************************************************
 
 DocumentView _$DocumentViewFromJson(Map<String, dynamic> json) => DocumentView(
-      title: json['title'] as String?,
-      reference: json['reference'] == null
-          ? null
-          : ObjectReference.fromJson(json['reference'] as Map<String, dynamic>),
-      loadStrategy: $enumDecodeNullable(
-              _$DocumentLoadStrategyEnumMap, json['loadStrategy']) ??
-          DocumentLoadStrategy.reference,
-      items: (json['items'] as List<dynamic>?)
-              ?.map((e) => ContentItem.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
-      query: typeFromFirstOfListJson(json['query']),
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  title: json['title'] as String?,
+  reference: json['reference'] == null
+      ? null
+      : ObjectReference.fromJson(json['reference'] as Map<String, dynamic>),
+  loadStrategy:
+      $enumDecodeNullable(
+        _$DocumentLoadStrategyEnumMap,
+        json['loadStrategy'],
+      ) ??
+      DocumentLoadStrategy.reference,
+  items:
+      (json['items'] as List<dynamic>?)
+          ?.map((e) => ContentItem.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const [],
+  query: typeFromFirstOfListJson(json['query']),
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 const _$DocumentLoadStrategyEnumMap = {
   DocumentLoadStrategy.reference: 'reference',
@@ -29,15 +33,15 @@ const _$DocumentLoadStrategyEnumMap = {
 };
 
 DefaultDocumentViewLayout _$DefaultDocumentViewLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultDocumentViewLayout();
+  Map<String, dynamic> json,
+) => DefaultDocumentViewLayout();
 
 DocumentViewConditionalLayout _$DocumentViewConditionalLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DocumentViewConditionalLayout(
-      cases: (json['cases'] as List<dynamic>)
-          .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      defaultCase: json['defaultCase'] as String,
-      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => DocumentViewConditionalLayout(
+  cases: (json['cases'] as List<dynamic>)
+      .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  defaultCase: json['defaultCase'] as String,
+  condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
+);

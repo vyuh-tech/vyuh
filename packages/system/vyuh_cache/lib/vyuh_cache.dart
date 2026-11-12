@@ -64,23 +64,29 @@ final class Cache<V> {
   Future<T> _withStorage<T>(String key, Future<T> Function() operation) {
     final predecessors = [
       _clearBarrier,
-      if (_storageTails[key] != null) _storageTails[key]!
+      if (_storageTails[key] != null) _storageTails[key]!,
     ];
     final result = Future.wait(predecessors).then((_) => operation());
-    final tail =
-        result.then<void>((_) {}, onError: (Object _, StackTrace _) {});
+    final tail = result.then<void>(
+      (_) {},
+      onError: (Object _, StackTrace _) {},
+    );
     _storageTails[key] = tail;
-    unawaited(tail.then((_) {
-      if (identical(_storageTails[key], tail)) _storageTails.remove(key);
-    }));
+    unawaited(
+      tail.then((_) {
+        if (identical(_storageTails[key], tail)) _storageTails.remove(key);
+      }),
+    );
     return result;
   }
 
   Future<void> _clearStorage() {
     final result = Future.wait([_clearBarrier, ..._storageTails.values])
         .then((_) => config.storage.clear());
-    _clearBarrier =
-        result.then<void>((_) {}, onError: (Object _, StackTrace _) {});
+    _clearBarrier = result.then<void>(
+      (_) {},
+      onError: (Object _, StackTrace _) {},
+    );
     return result;
   }
 
@@ -136,7 +142,10 @@ final class Cache<V> {
   }
 
   Future<V?> _generate(
-      String key, CacheValueBuilder<V> generateValue, Object token) async {
+    String key,
+    CacheValueBuilder<V> generateValue,
+    Object token,
+  ) async {
     final value = await generateValue();
     if (value != null) {
       try {
@@ -157,32 +166,34 @@ final class Cache<V> {
   /// Returns null if the value is not found or expired.
   ///
   Future<V?> get(String key) => _withStorage(key, () async {
-        final entry = await config.storage.get(key);
-        if (entry != null && entry.isExpired) {
-          await config.storage.delete(key);
-          return null;
-        }
-        return entry?.value;
-      });
+    final entry = await config.storage.get(key);
+    if (entry != null && entry.isExpired) {
+      await config.storage.delete(key);
+      return null;
+    }
+    return entry?.value;
+  });
 
   /// Check if a value is in the cache.
   ///
   /// Returns false if the value is not found or expired.
   ///
   Future<bool> has(String key) => _withStorage(key, () async {
-        final entry = await config.storage.get(key);
-        if (entry == null) return false;
-        if (!entry.isExpired) return true;
-        await config.storage.delete(key);
-        return false;
-      });
+    final entry = await config.storage.get(key);
+    if (entry == null) return false;
+    if (!entry.isExpired) return true;
+    await config.storage.delete(key);
+    return false;
+  });
 
   /// Set a value in the cache.
   ///
   Future<void> set(String key, V value) {
     _invalidate(key);
     return _withStorage(
-        key, () => config.storage.set(key, CacheEntry(value, config.ttl)));
+      key,
+      () => config.storage.set(key, CacheEntry(value, config.ttl)),
+    );
   }
 
   /// Remove a value from the cache.

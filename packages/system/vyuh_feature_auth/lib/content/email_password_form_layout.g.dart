@@ -7,5 +7,5 @@ part of 'email_password_form_layout.dart';
 // **************************************************************************
 
 DefaultEmailPasswordFormLayout _$DefaultEmailPasswordFormLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultEmailPasswordFormLayout();
+  Map<String, dynamic> json,
+) => DefaultEmailPasswordFormLayout();

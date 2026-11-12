@@ -7,5 +7,5 @@ part of 'default_layout.dart';
 // **************************************************************************
 
 DefaultProductCardLayout _$DefaultProductCardLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultProductCardLayout();
+  Map<String, dynamic> json,
+) => DefaultProductCardLayout();

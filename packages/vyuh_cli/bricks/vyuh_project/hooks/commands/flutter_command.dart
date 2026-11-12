@@ -34,7 +34,8 @@ final class FlutterCommand extends CliCommand {
               file.path.endsWith('.java') ||
               file.path.endsWith('.xml')) {
             await file.writeAsString(
-                (await file.readAsString()).replaceAll(original, id));
+              (await file.readAsString()).replaceAll(original, id),
+            );
           }
         }
       }
@@ -46,31 +47,33 @@ final class FlutterCommand extends CliCommand {
     String name,
     String description,
     String appName,
-  ) =>
-      trackOperation(
-        context,
-        startMessage: path.normalize(
-          'Setting up the Flutter project @ apps/$appName',
-        ),
-        endMessage: path.normalize('Flutter project ready @ apps/$appName'),
-        operation: () => Process.run(
-          'flutter',
-          [
-            'create',
-            name.snakeCase,
-            '--template=app',
-            '--no-pub',
-            '--platforms=${context.vars['platforms'] ?? 'ios,android,web'}',
-            '--org=${context.vars['org_name'] ?? 'com.example.vyuh'}',
-            '--description=$description',
-          ],
-          workingDirectory: path.normalize('$appName/apps'),
-          runInShell: true,
-        ),
-      );
+  ) => trackOperation(
+    context,
+    startMessage: path.normalize(
+      'Setting up the Flutter project @ apps/$appName',
+    ),
+    endMessage: path.normalize('Flutter project ready @ apps/$appName'),
+    operation: () => Process.run(
+      'flutter',
+      [
+        'create',
+        name.snakeCase,
+        '--template=app',
+        '--no-pub',
+        '--platforms=${context.vars['platforms'] ?? 'ios,android,web'}',
+        '--org=${context.vars['org_name'] ?? 'com.example.vyuh'}',
+        '--description=$description',
+      ],
+      workingDirectory: path.normalize('$appName/apps'),
+      runInShell: true,
+    ),
+  );
 
   Future<void> _addPackages(
-      HookContext context, String name, String appName) async {
+    HookContext context,
+    String name,
+    String appName,
+  ) async {
     final pubspec = File('$appName/apps/$appName/pubspec.yaml');
     final editor = YamlEditor(await pubspec.readAsString())
       ..update(['resolution'], 'workspace');
@@ -170,8 +173,7 @@ final class FlutterCommand extends CliCommand {
     await testFile.writeAsString('');
 
     // Delete the overrides folder
-    await Directory.fromUri(
-      Uri.parse('./$appName/overrides'),
-    ).delete(recursive: true);
+    await Directory.fromUri(Uri.parse('./$appName/overrides'))
+        .delete(recursive: true);
   }
 }

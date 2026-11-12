@@ -14,9 +14,7 @@ Future<void> run(HookContext context) async {
     operation: () async {
       await Process.run(
         'pnpm',
-        [
-          'install',
-        ],
+        ['install'],
         workingDirectory: folderName,
         runInShell: true,
       );

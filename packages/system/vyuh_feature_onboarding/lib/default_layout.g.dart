@@ -7,5 +7,5 @@ part of 'default_layout.dart';
 // **************************************************************************
 
 DefaultOnboardingLayout _$DefaultOnboardingLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultOnboardingLayout();
+  Map<String, dynamic> json,
+) => DefaultOnboardingLayout();

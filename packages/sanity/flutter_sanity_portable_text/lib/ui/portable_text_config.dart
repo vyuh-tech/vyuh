@@ -3,15 +3,19 @@ import 'package:material_ui/material_ui.dart';
 import '../flutter_sanity_portable_text.dart';
 
 /// A function that builds a text style for a Portable Text block or span.
-typedef TextStyleBuilder =
-    TextStyle Function(BuildContext context, TextStyle base);
+typedef TextStyleBuilder = TextStyle Function(
+  BuildContext context,
+  TextStyle base,
+);
 
 /// A function that builds a widget for a Portable block container.
 typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);
 
 /// A function that builds a widget for a Portable block item.
-typedef BlockWidgetBuilder =
-    Widget Function(BuildContext context, PortableBlockItem item);
+typedef BlockWidgetBuilder = Widget Function(
+  BuildContext context,
+  PortableBlockItem item,
+);
 
 /// A function that builds an InlineSpan for a single bullet mark. Using the
 /// [TextBlockItem]'s listItem, listItemIndex and level, the bullet can be customized as needed.
@@ -241,93 +245,41 @@ final class PortableTextConfig {
 
   /// The default text styles used by the shared instance of [PortableTextConfig].
   static final Map<String, TextStyleBuilder> defaultStyles = {
-    'h1':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.headlineLarge),
-    'h2':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.headlineMedium),
-    'h3':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.headlineSmall),
-    'h4':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.titleLarge),
-    'h5':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.titleMedium),
-    'h6':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.titleSmall),
-    'blockquote':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(color: Theme.of(context).colorScheme.primary),
-    'normal':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.merge(Theme.of(context).textTheme.bodyMedium),
-    'em':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(fontStyle: FontStyle.italic),
-    'strong':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(fontWeight: FontWeight.bold),
-    'code':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(
+    'h1': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.headlineLarge),
+    'h2': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.headlineMedium),
+    'h3': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.headlineSmall),
+    'h4': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.titleLarge),
+    'h5': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.titleMedium),
+    'h6': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.titleSmall),
+    'blockquote': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(color: Theme.of(context).colorScheme.primary),
+    'normal': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.merge(Theme.of(context).textTheme.bodyMedium),
+    'em': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(fontStyle: FontStyle.italic),
+    'strong': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(fontWeight: FontWeight.bold),
+    'code': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(
           fontFamily: 'monospace',
           fontFamilyFallback: ['Courier New'],
           fontWeight: FontWeight.bold,
         ),
-    'strike-through':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(
+    'strike-through': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
             TextDecoration.lineThrough,
           ]),
         ),
-    'underline':
-        (
-          BuildContext context,
-          TextStyle base, [
-          MarkDef? mark,
-        ]) => base.copyWith(
+    'underline': (BuildContext context, TextStyle base, [MarkDef? mark]) =>
+        base.copyWith(
           decoration: TextDecoration.combine([
             if (base.decoration != null) base.decoration!,
             TextDecoration.underline,
@@ -355,8 +307,7 @@ final class PortableTextConfig {
   /// The default block widgets used by the shared instance of [PortableTextConfig].
   /// The default block is a single [PortableTextBlock], named as "block".
   static final Map<String, BlockWidgetBuilder> defaultBlocks = {
-    'block': (context, item) =>
-        PortableTextBlock(model: item as TextBlockItem),
+    'block': (context, item) => PortableTextBlock(model: item as TextBlockItem),
   };
 }
 

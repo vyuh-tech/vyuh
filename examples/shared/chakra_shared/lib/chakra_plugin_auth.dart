@@ -13,43 +13,53 @@ final class ChakraUser extends User {
 
 final class ChakraAuthPlugin extends AuthPlugin {
   ChakraAuthPlugin()
-      : super(name: 'chakra.plugin.auth', title: 'Chakra Auth Plugin');
+    : super(name: 'chakra.plugin.auth', title: 'Chakra Auth Plugin');
 
   @override
-  Future<void> loginWithPhoneOtp(
-      {required String phoneNumber, required String otp}) async {
+  Future<void> loginWithPhoneOtp({
+    required String phoneNumber,
+    required String otp,
+  }) async {
     await Future.delayed(const Duration(seconds: 1));
 
-    setCurrentUser(ChakraUser(
-      id: 'chakra-user',
-      name: 'Chakra User',
-      phoneNumber: phoneNumber,
-      loginMethod: LoginMethod.phoneOtp,
-    ));
+    setCurrentUser(
+      ChakraUser(
+        id: 'chakra-user',
+        name: 'Chakra User',
+        phoneNumber: phoneNumber,
+        loginMethod: LoginMethod.phoneOtp,
+      ),
+    );
   }
 
   @override
-  Future<void> loginWithEmailPassword(
-      {required String email, required String password}) async {
+  Future<void> loginWithEmailPassword({
+    required String email,
+    required String password,
+  }) async {
     await Future.delayed(const Duration(seconds: 1));
 
-    setCurrentUser(ChakraUser(
-      id: 'chakra-user',
-      name: 'Chakra User',
-      email: email,
-      loginMethod: LoginMethod.emailPassword,
-    ));
+    setCurrentUser(
+      ChakraUser(
+        id: 'chakra-user',
+        name: 'Chakra User',
+        email: email,
+        loginMethod: LoginMethod.emailPassword,
+      ),
+    );
   }
 
   @override
   Future<void> loginWithOAuth(OAuthType type) async {
     await Future.delayed(const Duration(seconds: 1));
 
-    setCurrentUser(ChakraUser(
-      id: 'chakra-user',
-      name: 'Chakra User',
-      loginMethod: type.loginMethod,
-    ));
+    setCurrentUser(
+      ChakraUser(
+        id: 'chakra-user',
+        name: 'Chakra User',
+        loginMethod: type.loginMethod,
+      ),
+    );
   }
 
   @override

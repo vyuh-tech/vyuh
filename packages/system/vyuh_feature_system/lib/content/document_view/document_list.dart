@@ -24,12 +24,8 @@ final class DocumentListView extends ContentItem {
 
   static final contentBuilder = _DocumentListViewContentBuilder();
 
-  DocumentListView({
-    this.listItem,
-    this.query,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName) {
+  DocumentListView({this.listItem, this.query, super.layout, super.modifiers})
+    : super(schemaType: schemaName) {
     assert(listItem != null, 'A list item configuration must be provided');
     assert(query != null, 'A query configuration must be provided');
   }
@@ -64,17 +60,18 @@ class DocumentListViewDescriptor extends ContentDescriptor {
     this.listItemConfigurations,
     super.layouts,
   }) : super(
-            schemaType: DocumentListView.schemaName,
-            title: 'Document List View');
+         schemaType: DocumentListView.schemaName,
+         title: 'Document List View',
+       );
 }
 
 final class _DocumentListViewContentBuilder extends ContentBuilder {
   _DocumentListViewContentBuilder()
-      : super(
-          content: DocumentListView.typeDescriptor,
-          defaultLayout: DefaultDocumentListViewLayout(),
-          defaultLayoutDescriptor: DefaultDocumentListViewLayout.typeDescriptor,
-        );
+    : super(
+        content: DocumentListView.typeDescriptor,
+        defaultLayout: DefaultDocumentListViewLayout(),
+        defaultLayoutDescriptor: DefaultDocumentListViewLayout.typeDescriptor,
+      );
 
   @override
   void init(List<ContentDescriptor> descriptors) {
@@ -94,16 +91,26 @@ final class _DocumentListViewContentBuilder extends ContentBuilder {
     final ds = descriptors.cast<DocumentListViewDescriptor>();
 
     registerDescriptors<DocumentItem>(
-      ds.expand((element) =>
-          element.documentTypes ?? <TypeDescriptor<DocumentItem>>[]),
+      ds.expand(
+        (element) => element.documentTypes ?? <TypeDescriptor<DocumentItem>>[],
+      ),
       checkUnique: true,
     );
 
-    registerDescriptors<QueryConfiguration>(ds.expand((element) =>
-        element.queryConfigurations ?? <TypeDescriptor<QueryConfiguration>>[]));
+    registerDescriptors<QueryConfiguration>(
+      ds.expand(
+        (element) =>
+            element.queryConfigurations ??
+            <TypeDescriptor<QueryConfiguration>>[],
+      ),
+    );
 
-    registerDescriptors<DocumentItemConfiguration>(ds.expand((element) =>
-        element.listItemConfigurations ??
-        <TypeDescriptor<DocumentItemConfiguration>>[]));
+    registerDescriptors<DocumentItemConfiguration>(
+      ds.expand(
+        (element) =>
+            element.listItemConfigurations ??
+            <TypeDescriptor<DocumentItemConfiguration>>[],
+      ),
+    );
   }
 }

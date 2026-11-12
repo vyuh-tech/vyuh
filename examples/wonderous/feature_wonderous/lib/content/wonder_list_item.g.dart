@@ -17,7 +17,5 @@ WonderMiniInfo _$WonderMiniInfoFromJson(Map<String, dynamic> json) =>
     );
 
 WonderListItemConfiguration _$WonderListItemConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    WonderListItemConfiguration(
-      title: json['title'] as String?,
-    );
+  Map<String, dynamic> json,
+) => WonderListItemConfiguration(title: json['title'] as String?);

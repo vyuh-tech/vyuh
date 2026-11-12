@@ -7,16 +7,18 @@ import 'package:vyuh_cli/utils/utils.dart';
 
 class PluginTemplate extends Template {
   PluginTemplate()
-      : super(
-            name: 'plugin',
-            bundle: vyuhPluginBundle,
-            help: 'Generate a shared capability package.');
+    : super(
+        name: 'plugin',
+        bundle: vyuhPluginBundle,
+        help: 'Generate a shared capability package.',
+      );
 
   @override
   Future<void> onGenerateComplete(Logger logger, Directory outputDir) async {
     templateSummary(
-        logger: logger,
-        outputDir: outputDir,
-        message: 'Created a shared capability plugin.');
+      logger: logger,
+      outputDir: outputDir,
+      message: 'Created a shared capability plugin.',
+    );
   }
 }

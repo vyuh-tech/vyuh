@@ -183,10 +183,9 @@ void main() {
     expect(vc.vyuh.router.featureRedirects.redirects, isEmpty);
 
     await tester.runAsync(() => vc.vyuh.loadFeature('legacy'));
-    expect(
-      vc.vyuh.router.featureRedirects.redirects.map((r) => r.name),
-      ['old-login'],
-    );
+    expect(vc.vyuh.router.featureRedirects.redirects.map((r) => r.name), [
+      'old-login',
+    ]);
   });
 
   testWidgets('a failed lazy feature reports once and offers a way home', (
@@ -202,7 +201,9 @@ void main() {
           title: 'Monitor',
           routes: () => [],
           events: [
-            vc.EventHandler<vc.RouteFailureEvent>((e) => failures.add(e.failure)),
+            vc.EventHandler<vc.RouteFailureEvent>(
+              (e) => failures.add(e.failure),
+            ),
           ],
         ),
       ],

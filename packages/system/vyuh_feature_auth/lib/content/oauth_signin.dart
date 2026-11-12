@@ -37,8 +37,5 @@ final class OAuthSignIn extends ContentItem {
 
 final class OAuthSignInDescriptor extends ContentDescriptor {
   OAuthSignInDescriptor({super.layouts})
-      : super(
-          schemaType: OAuthSignIn.schemaName,
-          title: 'OAuth Sign In',
-        );
+    : super(schemaType: OAuthSignIn.schemaName, title: 'OAuth Sign In');
 }

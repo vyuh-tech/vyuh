@@ -7,7 +7,7 @@ final class NoOpEnvPlugin extends EnvPlugin {
   final Map<String, String> defaults;
 
   NoOpEnvPlugin({this.fileName = '.env', this.defaults = const {}})
-      : super(name: 'vyuh.env.noop', title: 'No-Op Environment Plugin');
+    : super(name: 'vyuh.env.noop', title: 'No-Op Environment Plugin');
 
   @override
   Future<void> init() async {}
@@ -24,7 +24,8 @@ final class NoOpEnvPlugin extends EnvPlugin {
   @override
   String get(String key, {String? fallback}) {
     throw UnsupportedError(
-        'You are using a No-Op Environment Plugin, which does not support this operation.');
+      'You are using a No-Op Environment Plugin, which does not support this operation.',
+    );
   }
 
   @override

@@ -68,19 +68,21 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
   });
 
-  test('using the plugin before init or after dispose is a clear error',
-      () async {
-    final plugin = FlutterSecureStoragePlugin();
-    expect(() => plugin.read('key'), throwsStateError);
-    expect(() => plugin.write('key', 'v'), throwsStateError);
-    expect(() => plugin.has('key'), throwsStateError);
-    expect(() => plugin.delete('key'), throwsStateError);
+  test(
+    'using the plugin before init or after dispose is a clear error',
+    () async {
+      final plugin = FlutterSecureStoragePlugin();
+      expect(() => plugin.read('key'), throwsStateError);
+      expect(() => plugin.write('key', 'v'), throwsStateError);
+      expect(() => plugin.has('key'), throwsStateError);
+      expect(() => plugin.delete('key'), throwsStateError);
 
-    await plugin.init();
-    expect(await plugin.write('key', 42), '42');
-    await plugin.dispose();
-    expect(() => plugin.read('key'), throwsStateError);
-  });
+      await plugin.init();
+      expect(await plugin.write('key', 42), '42');
+      await plugin.dispose();
+      expect(() => plugin.read('key'), throwsStateError);
+    },
+  );
 
   test('describes itself as a secure storage plugin', () {
     final plugin = FlutterSecureStoragePlugin();
@@ -189,19 +191,21 @@ void main() {
       await plugin.dispose();
     });
 
-    test('a new plugin instance sees values written by an earlier one',
-        () async {
-      final first = FlutterSecureStoragePlugin();
-      await first.init();
-      await first.write('key', 'value');
-      await first.dispose();
+    test(
+      'a new plugin instance sees values written by an earlier one',
+      () async {
+        final first = FlutterSecureStoragePlugin();
+        await first.init();
+        await first.write('key', 'value');
+        await first.dispose();
 
-      final second = FlutterSecureStoragePlugin();
-      await second.init();
+        final second = FlutterSecureStoragePlugin();
+        await second.init();
 
-      expect(await second.read('key'), 'value');
-      await second.dispose();
-    });
+        expect(await second.read('key'), 'value');
+        await second.dispose();
+      },
+    );
 
     test('works with the package mock values helper', () async {
       FlutterSecureStorage.setMockInitialValues({'seeded': 'value'});
@@ -258,13 +262,13 @@ void main() {
       const web = WebOptions(dbName: 'vyuh_web');
 
       FlutterSecureStoragePlugin plugin() => FlutterSecureStoragePlugin(
-            androidOptions: android,
-            iOSOptions: ios,
-            macOSOptions: macOS,
-            windowsOptions: windows,
-            linuxOptions: linux,
-            webOptions: web,
-          );
+        androidOptions: android,
+        iOSOptions: ios,
+        macOSOptions: macOS,
+        windowsOptions: windows,
+        linuxOptions: linux,
+        webOptions: web,
+      );
 
       final androidParams = await optionsFor(TargetPlatform.android, plugin());
       expect(androidParams['preferencesKeyPrefix'], 'vyuh_android');
@@ -278,10 +282,7 @@ void main() {
       final windowsParams = await optionsFor(TargetPlatform.windows, plugin());
       expect(windowsParams['useBackwardCompatibility'], 'true');
 
-      expect(
-        await optionsFor(TargetPlatform.linux, plugin()),
-        linux.params,
-      );
+      expect(await optionsFor(TargetPlatform.linux, plugin()), linux.params);
     });
   });
 }

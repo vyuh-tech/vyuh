@@ -14,16 +14,16 @@ enum RoomFacility {
   ac;
 
   String get displayName => switch (this) {
-        RoomFacility.audio => 'Audio System',
-        RoomFacility.projector => 'Video Projector',
-        RoomFacility.whiteboard => 'Whiteboard',
-        RoomFacility.wifi => 'Internet/WiFi',
-        RoomFacility.recording => 'Video Recording',
-        RoomFacility.streaming => 'Live Streaming',
-        RoomFacility.accessible => 'Wheelchair Accessible',
-        RoomFacility.power => 'Power Outlets',
-        RoomFacility.ac => 'Air Conditioning',
-      };
+    RoomFacility.audio => 'Audio System',
+    RoomFacility.projector => 'Video Projector',
+    RoomFacility.whiteboard => 'Whiteboard',
+    RoomFacility.wifi => 'Internet/WiFi',
+    RoomFacility.recording => 'Video Recording',
+    RoomFacility.streaming => 'Live Streaming',
+    RoomFacility.accessible => 'Wheelchair Accessible',
+    RoomFacility.power => 'Power Outlets',
+    RoomFacility.ac => 'Air Conditioning',
+  };
 }
 
 @JsonSerializable()

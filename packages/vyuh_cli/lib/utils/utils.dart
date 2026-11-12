@@ -35,13 +35,16 @@ void templateSummary({
   );
 
   final projectPath = relativePath;
-  final projectPathLink =
-      link(uri: Uri.parse(projectPath), message: projectPath);
+  final projectPathLink = link(
+    uri: Uri.parse(projectPath),
+    message: projectPath,
+  );
 
   final readmePath = path.join(relativePath, 'README.md');
   final readmePathLink = link(uri: Uri.parse(readmePath), message: readmePath);
 
-  final details = '''
+  final details =
+      '''
   • To get started refer to $readmePathLink
   • Your code is in $projectPathLink
 ''';
@@ -50,7 +53,5 @@ void templateSummary({
     ..info('\n')
     ..created(message)
     ..info(details)
-    ..info(
-      lightGray.wrap(vyuhInfoText),
-    );
+    ..info(lightGray.wrap(vyuhInfoText));
 }

@@ -7,6 +7,6 @@ part of 'action.dart';
 // **************************************************************************
 
 Action _$ActionFromJson(Map<String, dynamic> json) => Action(
-      title: json['title'] as String?,
-      configurations: Action.configurationList(json['configurations']),
-    );
+  title: json['title'] as String?,
+  configurations: Action.configurationList(json['configurations']),
+);

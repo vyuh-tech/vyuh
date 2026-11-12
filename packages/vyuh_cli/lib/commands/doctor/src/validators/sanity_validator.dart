@@ -7,10 +7,8 @@ class SanityValidator extends DoctorValidator {
   String get installHelp => 'https://www.sanity.io/docs/installation';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'sanity',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'sanity');
 
   @override
   String extractVersion(String output) {

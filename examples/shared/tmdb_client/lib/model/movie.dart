@@ -38,14 +38,14 @@ final class Movie extends FeaturedShow {
   factory Movie.fromJson(Map<String, dynamic> json) => _$MovieFromJson(json);
 
   MovieShortInfo shortInfo() => MovieShortInfo(
-        id: id,
-        title: title,
-        overview: overview,
-        posterImage: posterImage,
-        releaseDate: releaseDate,
-        voteAverage: voteAverage,
-        voteCount: voteCount,
-      );
+    id: id,
+    title: title,
+    overview: overview,
+    posterImage: posterImage,
+    releaseDate: releaseDate,
+    voteAverage: voteAverage,
+    voteCount: voteCount,
+  );
 }
 
 @JsonSerializable()

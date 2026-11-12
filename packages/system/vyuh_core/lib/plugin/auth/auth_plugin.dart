@@ -26,7 +26,8 @@ abstract class AuthPlugin extends Plugin {
   Stream<User> get userChanges {
     if (!_initialized) {
       throw StateError(
-          'AuthPlugin is not yet initialized. Call init() before accessing userChanges.');
+        'AuthPlugin is not yet initialized. Call init() before accessing userChanges.',
+      );
     }
 
     return controller.stream;
@@ -77,30 +78,38 @@ abstract class AuthPlugin extends Plugin {
   Future<void> sendOtp({required String phoneNumber}) =>
       Future.error(UnimplementedError(_errorMessage('sendOtp()')));
 
-  Future<void> loginWithPhoneOtp(
-          {required String phoneNumber, required String otp}) =>
-      Future.error(UnimplementedError(_errorMessage('loginWithPhoneOtp()')));
+  Future<void> loginWithPhoneOtp({
+    required String phoneNumber,
+    required String otp,
+  }) => Future.error(UnimplementedError(_errorMessage('loginWithPhoneOtp()')));
 
-  Future<void> loginWithEmailPassword(
-          {required String email, required String password}) =>
-      Future.error(
-          UnimplementedError(_errorMessage('loginWithEmailPassword()')));
+  Future<void> loginWithEmailPassword({
+    required String email,
+    required String password,
+  }) => Future.error(
+    UnimplementedError(_errorMessage('loginWithEmailPassword()')),
+  );
 
-  Future<void> registerWithEmailPassword(
-          {required String email, required String password}) =>
-      Future.error(
-          UnimplementedError(_errorMessage('registerWithEmailPassword()')));
+  Future<void> registerWithEmailPassword({
+    required String email,
+    required String password,
+  }) => Future.error(
+    UnimplementedError(_errorMessage('registerWithEmailPassword()')),
+  );
 
-  Future<void> sendEmailLink(
-          {required String email, required String clientId}) =>
-      Future.error(UnimplementedError(_errorMessage('sendEmailLink()')));
+  Future<void> sendEmailLink({
+    required String email,
+    required String clientId,
+  }) => Future.error(UnimplementedError(_errorMessage('sendEmailLink()')));
 
   Future<void> sendPasswordResetEmail({required String email}) => Future.error(
-      UnimplementedError(_errorMessage('sendPasswordResetEmail()')));
+    UnimplementedError(_errorMessage('sendPasswordResetEmail()')),
+  );
 
-  Future<void> loginWithEmailLink(
-          {required String email, required String link}) =>
-      Future.error(UnimplementedError(_errorMessage('loginWithEmailLink()')));
+  Future<void> loginWithEmailLink({
+    required String email,
+    required String link,
+  }) => Future.error(UnimplementedError(_errorMessage('loginWithEmailLink()')));
 
   Future<void> loginWithOAuth(OAuthType type) =>
       Future.error(UnimplementedError(_errorMessage('loginWithOAuth()')));
@@ -126,7 +135,8 @@ abstract class AuthPlugin extends Plugin {
 /// sign-out and profile changes. [data] is the new user, which is
 /// [User.unknown] after sign-out.
 final class UserChangedEvent extends VyuhEvent<User> {
-  UserChangedEvent(User user) : super(name: 'vyuh.auth.user_changed', data: user);
+  UserChangedEvent(User user)
+    : super(name: 'vyuh.auth.user_changed', data: user);
 
   /// The new current user.
   User get user => data!;
@@ -143,13 +153,13 @@ enum OAuthType {
   custom;
 
   LoginMethod get loginMethod => switch (this) {
-        OAuthType.google => LoginMethod.google,
-        OAuthType.apple => LoginMethod.apple,
-        OAuthType.meta => LoginMethod.facebook,
-        OAuthType.github => LoginMethod.github,
-        OAuthType.twitter => LoginMethod.twitter,
-        OAuthType.linkedin => LoginMethod.linkedin,
-        OAuthType.microsoft => LoginMethod.microsoft,
-        OAuthType.custom => LoginMethod.custom,
-      };
+    OAuthType.google => LoginMethod.google,
+    OAuthType.apple => LoginMethod.apple,
+    OAuthType.meta => LoginMethod.facebook,
+    OAuthType.github => LoginMethod.github,
+    OAuthType.twitter => LoginMethod.twitter,
+    OAuthType.linkedin => LoginMethod.linkedin,
+    OAuthType.microsoft => LoginMethod.microsoft,
+    OAuthType.custom => LoginMethod.custom,
+  };
 }

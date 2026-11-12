@@ -8,14 +8,13 @@ enum _LiveEventType {
   message;
 
   static _LiveEventType fromEvent(EventFluxData event) => switch (event.event) {
-        'welcome' => _LiveEventType.welcome,
-        'restart' => _LiveEventType.restart,
-        'error' => _LiveEventType.error,
-        '' => event.data.isEmpty
-            ? _LiveEventType.keepAlive
-            : _LiveEventType.message,
-        _ => _LiveEventType.keepAlive,
-      };
+    'welcome' => _LiveEventType.welcome,
+    'restart' => _LiveEventType.restart,
+    'error' => _LiveEventType.error,
+    '' =>
+      event.data.isEmpty ? _LiveEventType.keepAlive : _LiveEventType.message,
+    _ => _LiveEventType.keepAlive,
+  };
 }
 
 extension LiveConnect on SanityClient {
@@ -29,12 +28,15 @@ extension LiveConnect on SanityClient {
     if (includeDrafts &&
         (config.perspective != Perspective.drafts || config.useCdn)) {
       throw ArgumentError(
-          'Draft live queries require the drafts perspective without CDN');
+        'Draft live queries require the drafts perspective without CDN',
+      );
     }
     final liveConfig = includeDrafts ? LiveConfig.withDrafts() : LiveConfig();
-    final uri =
-        SanityRequest(urlBuilder: urlBuilder, query: '', live: liveConfig)
-            .getUri;
+    final uri = SanityRequest(
+      urlBuilder: urlBuilder,
+      query: '',
+      live: liveConfig,
+    ).getUri;
     final headers = Map<String, String>.from(_requestHeaders)
       ..['Accept'] = 'text/event-stream';
     final flux = SanityConfig.createEventFlux();
@@ -60,10 +62,10 @@ extension LiveConnect on SanityClient {
           pending = false;
           final requestGeneration = generation;
           try {
-            final response = await fetch(query, params: {
-              ...?params,
-              'lastLiveEventId': lastEventId ?? '',
-            });
+            final response = await fetch(
+              query,
+              params: {...?params, 'lastLiveEventId': lastEventId ?? ''},
+            );
             if (!cancelled && requestGeneration == generation && !pending) {
               syncTags = response.syncTags;
               controller.add(response);
@@ -110,8 +112,10 @@ extension LiveConnect on SanityClient {
             EventFluxConnectionType.get,
             uri.toString(),
             autoReconnect: true,
-            reconnectConfig:
-                ReconnectConfig(mode: ReconnectMode.linear, maxAttempts: 5),
+            reconnectConfig: ReconnectConfig(
+              mode: ReconnectMode.linear,
+              maxAttempts: 5,
+            ),
             header: headers,
             httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
             tag: query,
@@ -123,7 +127,8 @@ extension LiveConnect on SanityClient {
               final stream = response?.stream;
               if (stream == null) {
                 report(
-                    LiveConnectException('No live stream for query: $query'));
+                  LiveConnectException('No live stream for query: $query'),
+                );
                 return;
               }
               generation++;

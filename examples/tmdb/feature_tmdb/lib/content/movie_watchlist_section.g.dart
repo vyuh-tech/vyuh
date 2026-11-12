@@ -7,12 +7,12 @@ part of 'movie_watchlist_section.dart';
 // **************************************************************************
 
 MovieWatchlistSection _$MovieWatchlistSectionFromJson(
-        Map<String, dynamic> json) =>
-    MovieWatchlistSection(
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  Map<String, dynamic> json,
+) => MovieWatchlistSection(
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 MovieWatchlistSectionLayout _$MovieWatchlistSectionLayoutFromJson(
-        Map<String, dynamic> json) =>
-    MovieWatchlistSectionLayout();
+  Map<String, dynamic> json,
+) => MovieWatchlistSectionLayout();

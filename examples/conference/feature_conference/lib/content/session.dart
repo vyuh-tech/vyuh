@@ -20,12 +20,7 @@ enum SessionFormat {
   outro,
 }
 
-enum SessionLevel {
-  beginner,
-  intermediate,
-  advanced,
-  all,
-}
+enum SessionLevel { beginner, intermediate, advanced, all }
 
 @JsonSerializable()
 class Session extends ContentItem {

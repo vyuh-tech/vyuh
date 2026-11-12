@@ -20,11 +20,8 @@ final class DocumentSectionView extends ContentItem {
 
   static final contentBuilder = _DocumentSectionViewContentBuilder();
 
-  DocumentSectionView({
-    this.configuration,
-    super.layout,
-    super.modifiers,
-  }) : super(schemaType: schemaName);
+  DocumentSectionView({this.configuration, super.layout, super.modifiers})
+    : super(schemaType: schemaName);
 
   factory DocumentSectionView.fromJson(Map<String, dynamic> json) =>
       _$DocumentSectionViewFromJson(json);
@@ -34,19 +31,20 @@ class DocumentSectionViewDescriptor extends ContentDescriptor {
   final List<TypeDescriptor<DocumentItemConfiguration>>? configurations;
 
   DocumentSectionViewDescriptor({this.configurations, super.layouts})
-      : super(
-            schemaType: DocumentSectionView.schemaName,
-            title: 'Document Section View');
+    : super(
+        schemaType: DocumentSectionView.schemaName,
+        title: 'Document Section View',
+      );
 }
 
 final class _DocumentSectionViewContentBuilder extends ContentBuilder {
   _DocumentSectionViewContentBuilder()
-      : super(
-          content: DocumentSectionView.typeDescriptor,
-          defaultLayout: DefaultDocumentSectionViewLayout(),
-          defaultLayoutDescriptor:
-              DefaultDocumentSectionViewLayout.typeDescriptor,
-        );
+    : super(
+        content: DocumentSectionView.typeDescriptor,
+        defaultLayout: DefaultDocumentSectionViewLayout(),
+        defaultLayoutDescriptor:
+            DefaultDocumentSectionViewLayout.typeDescriptor,
+      );
 
   @override
   void init(List<ContentDescriptor> descriptors) {
@@ -65,8 +63,12 @@ final class _DocumentSectionViewContentBuilder extends ContentBuilder {
   void _registerConfigurations(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentSectionViewDescriptor>();
 
-    registerDescriptors<DocumentItemConfiguration>(ds.expand((element) =>
-        element.configurations ??
-        <TypeDescriptor<DocumentItemConfiguration>>[]));
+    registerDescriptors<DocumentItemConfiguration>(
+      ds.expand(
+        (element) =>
+            element.configurations ??
+            <TypeDescriptor<DocumentItemConfiguration>>[],
+      ),
+    );
   }
 }

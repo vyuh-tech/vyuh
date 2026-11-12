@@ -249,9 +249,8 @@ class _VideoPlayerWidgetState extends State<VideoPlayerWidget> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.labelMedium?.apply(
-                        color: theme.colorScheme.onInverseSurface,
-                      ),
+                      style: Theme.of(context).textTheme.labelMedium
+                          ?.apply(color: theme.colorScheme.onInverseSurface),
                     ),
                   ),
               ],

@@ -11,16 +11,15 @@ SanityClient getClient({
   bool? explainQuery,
   Perspective? perspective = Perspective.published,
   bool? useCdn = true,
-}) =>
-    SanityClient(
-      SanityConfig(
-        projectId: project,
-        dataset: dataset,
-        token: token,
-        apiVersion: apiVersion,
-        explainQuery: explainQuery,
-        perspective: perspective,
-        useCdn: useCdn,
-      ),
-      httpClient: httpClient,
-    );
+}) => SanityClient(
+  SanityConfig(
+    projectId: project,
+    dataset: dataset,
+    token: token,
+    apiVersion: apiVersion,
+    explainQuery: explainQuery,
+    perspective: perspective,
+    useCdn: useCdn,
+  ),
+  httpClient: httpClient,
+);

@@ -12,37 +12,35 @@ DisplayFieldMap _$DisplayFieldMapFromJson(Map<String, dynamic> json) =>
       description: json['description'] == null
           ? null
           : JSONPath.fromJson(json['description']),
-      imageUrl:
-          json['imageUrl'] == null ? null : JSONPath.fromJson(json['imageUrl']),
+      imageUrl: json['imageUrl'] == null
+          ? null
+          : JSONPath.fromJson(json['imageUrl']),
     );
 
 JsonPathApiConfiguration _$JsonPathApiConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    JsonPathApiConfiguration(
-      title: json['title'] as String?,
-      url: json['url'] as String? ?? '',
-      headers: (json['headers'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(k, e as String),
-      ),
-      requestBody: (json['requestBody'] as List<dynamic>?)
-          ?.map((e) => _$recordConvert(
-                e,
-                ($jsonValue) => (
-                  $jsonValue[r'$1'] as String,
-                  $jsonValue[r'$2'] as String,
-                ),
-              ))
-          .toList(),
-      rootField: json['rootField'] == null
-          ? const JSONPath(r'$')
-          : JSONPath.fromJson(json['rootField']),
-      fieldMap: json['fieldMap'] == null
-          ? null
-          : DisplayFieldMap.fromJson(json['fieldMap'] as Map<String, dynamic>),
-    );
+  Map<String, dynamic> json,
+) => JsonPathApiConfiguration(
+  title: json['title'] as String?,
+  url: json['url'] as String? ?? '',
+  headers: (json['headers'] as Map<String, dynamic>?)?.map(
+    (k, e) => MapEntry(k, e as String),
+  ),
+  requestBody: (json['requestBody'] as List<dynamic>?)
+      ?.map(
+        (e) => _$recordConvert(
+          e,
+          ($jsonValue) =>
+              ($jsonValue[r'$1'] as String, $jsonValue[r'$2'] as String),
+        ),
+      )
+      .toList(),
+  rootField: json['rootField'] == null
+      ? const JSONPath(r'$')
+      : JSONPath.fromJson(json['rootField']),
+  fieldMap: json['fieldMap'] == null
+      ? null
+      : DisplayFieldMap.fromJson(json['fieldMap'] as Map<String, dynamic>),
+);
 
-$Rec _$recordConvert<$Rec>(
-  Object? value,
-  $Rec Function(Map) convert,
-) =>
+$Rec _$recordConvert<$Rec>(Object? value, $Rec Function(Map) convert) =>
     convert(value as Map<String, dynamic>);

@@ -5,10 +5,7 @@ import 'package:vyuh_cli/commands/doctor/src/validators/validators.dart';
 class Doctor {
   final Logger _logger;
 
-  Doctor({
-    required this._logger,
-    this.cms = 'none',
-  });
+  Doctor({required this._logger, this.cms = 'none'});
 
   final String cms;
 

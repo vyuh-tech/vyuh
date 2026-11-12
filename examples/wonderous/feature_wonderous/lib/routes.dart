@@ -1,7 +1,8 @@
 import 'package:go_router/go_router.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_core/vyuh_core.dart';
-import 'package:vyuh_extension_content/vyuh_extension_content.dart' hide RouteBase;
+import 'package:vyuh_extension_content/vyuh_extension_content.dart'
+    hide RouteBase;
 
 Future<List<RouteBase>> routes() async {
   return [

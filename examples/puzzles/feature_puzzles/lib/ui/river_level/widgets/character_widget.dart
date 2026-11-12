@@ -5,8 +5,10 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
-typedef CharacterTap =
-    void Function(Character character, {required Function(String) onError});
+typedef CharacterTap = void Function(
+  Character character, {
+  required Function(String) onError,
+});
 
 class CharacterWidget extends StatelessWidget {
   final Character character;

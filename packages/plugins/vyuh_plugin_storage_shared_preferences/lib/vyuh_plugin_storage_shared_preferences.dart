@@ -6,10 +6,10 @@ final class SharedPreferencesStoragePlugin extends StoragePlugin
   SharedPreferences? _prefs;
 
   SharedPreferencesStoragePlugin()
-      : super(
-          name: 'vyuh.plugin.storage.shared_preferences',
-          title: 'Storage Plugin for SharedPreferences',
-        );
+    : super(
+        name: 'vyuh.plugin.storage.shared_preferences',
+        title: 'Storage Plugin for SharedPreferences',
+      );
 
   @override
   Future<void> initOnce() async {

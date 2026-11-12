@@ -9,11 +9,7 @@ Future<void> run(HookContext context) async {
     startMessage: 'Running `melos bootstrap`',
     endMessage: 'Melos bootstrap completed',
     operation: () async {
-      await Process.run(
-        'melos',
-        ['bootstrap'],
-        runInShell: true,
-      );
+      await Process.run('melos', ['bootstrap'], runInShell: true);
     },
   );
 }

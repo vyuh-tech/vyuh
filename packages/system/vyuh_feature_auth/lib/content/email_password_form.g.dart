@@ -12,7 +12,7 @@ EmailPasswordForm _$EmailPasswordFormFromJson(Map<String, dynamic> json) =>
           json['showPasswordVisibilityToggle'] as bool? ?? false,
       actionType:
           $enumDecodeNullable(_$AuthActionTypeEnumMap, json['actionType']) ??
-              AuthActionType.signIn,
+          AuthActionType.signIn,
       showLoginError: json['showLoginError'] as bool? ?? true,
       action: json['action'] == null
           ? null
@@ -20,7 +20,8 @@ EmailPasswordForm _$EmailPasswordFormFromJson(Map<String, dynamic> json) =>
       forgotPasswordAction: json['forgotPasswordAction'] == null
           ? null
           : Action.fromJson(
-              json['forgotPasswordAction'] as Map<String, dynamic>),
+              json['forgotPasswordAction'] as Map<String, dynamic>,
+            ),
       signupAction: json['signupAction'] == null
           ? null
           : Action.fromJson(json['signupAction'] as Map<String, dynamic>),

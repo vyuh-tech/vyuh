@@ -7,30 +7,33 @@ part of 'session.dart';
 // **************************************************************************
 
 Session _$SessionFromJson(Map<String, dynamic> json) => Session(
-      id: json['_id'] as String,
-      title: json['title'] as String,
-      slug: json['slug'] as String?,
-      description: json['description'] == null
-          ? null
-          : PortableTextContent.fromJson(
-              json['description'] as Map<String, dynamic>),
-      duration: (json['duration'] as num?)?.toInt() ?? 0,
-      format: $enumDecodeNullable(_$SessionFormatEnumMap, json['format']) ??
-          SessionFormat.talk,
-      level: $enumDecodeNullable(_$SessionLevelEnumMap, json['level']) ??
-          SessionLevel.all,
-      edition: json['edition'] == null
-          ? null
-          : ObjectReference.fromJson(json['edition'] as Map<String, dynamic>),
-      speakers: (json['speakers'] as List<dynamic>?)
-          ?.map((e) => Speaker.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      tracks: (json['tracks'] as List<dynamic>?)
-          ?.map((e) => Track.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  id: json['_id'] as String,
+  title: json['title'] as String,
+  slug: json['slug'] as String?,
+  description: json['description'] == null
+      ? null
+      : PortableTextContent.fromJson(
+          json['description'] as Map<String, dynamic>,
+        ),
+  duration: (json['duration'] as num?)?.toInt() ?? 0,
+  format:
+      $enumDecodeNullable(_$SessionFormatEnumMap, json['format']) ??
+      SessionFormat.talk,
+  level:
+      $enumDecodeNullable(_$SessionLevelEnumMap, json['level']) ??
+      SessionLevel.all,
+  edition: json['edition'] == null
+      ? null
+      : ObjectReference.fromJson(json['edition'] as Map<String, dynamic>),
+  speakers: (json['speakers'] as List<dynamic>?)
+      ?.map((e) => Speaker.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  tracks: (json['tracks'] as List<dynamic>?)
+      ?.map((e) => Track.fromJson(e as Map<String, dynamic>))
+      .toList(),
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 const _$SessionFormatEnumMap = {
   SessionFormat.intro: 'intro',

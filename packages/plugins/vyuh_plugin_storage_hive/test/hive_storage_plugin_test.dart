@@ -19,11 +19,11 @@ void main() {
     documentsDir = Directory.systemTemp.createTempSync('vyuh_hive_test_');
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(_pathProviderChannel, (call) async {
-      if (call.method == 'getApplicationDocumentsDirectory') {
-        return documentsDir.path;
-      }
-      return null;
-    });
+          if (call.method == 'getApplicationDocumentsDirectory') {
+            return documentsDir.path;
+          }
+          return null;
+        });
   });
 
   tearDown(() async {
@@ -126,38 +126,42 @@ void main() {
     await plugin.dispose();
   });
 
-  test('using the plugin before init or after dispose is a clear error',
-      () async {
-    final plugin = HiveStoragePlugin(boxName: 'lifecycle');
-    expect(() => plugin.read('key'), throwsStateError);
-    expect(() => plugin.write('key', 'value'), throwsStateError);
-    expect(() => plugin.has('key'), throwsStateError);
-    expect(() => plugin.delete('key'), throwsStateError);
+  test(
+    'using the plugin before init or after dispose is a clear error',
+    () async {
+      final plugin = HiveStoragePlugin(boxName: 'lifecycle');
+      expect(() => plugin.read('key'), throwsStateError);
+      expect(() => plugin.write('key', 'value'), throwsStateError);
+      expect(() => plugin.has('key'), throwsStateError);
+      expect(() => plugin.delete('key'), throwsStateError);
 
-    await plugin.init();
-    await plugin.write('key', 'value');
-    await plugin.dispose();
+      await plugin.init();
+      await plugin.write('key', 'value');
+      await plugin.dispose();
 
-    expect(() => plugin.read('key'), throwsStateError);
-  });
+      expect(() => plugin.read('key'), throwsStateError);
+    },
+  );
 
-  test('plugins sharing a box name close it only when the last one stops',
-      () async {
-    final first = HiveStoragePlugin(boxName: 'shared');
-    final second = HiveStoragePlugin(boxName: 'shared');
-    await first.init();
-    await second.init();
+  test(
+    'plugins sharing a box name close it only when the last one stops',
+    () async {
+      final first = HiveStoragePlugin(boxName: 'shared');
+      final second = HiveStoragePlugin(boxName: 'shared');
+      await first.init();
+      await second.init();
 
-    await first.dispose();
-    expect(Hive.isBoxOpen('shared'), isTrue);
-    expect(await second.write('key', 'value'), 'value');
+      await first.dispose();
+      expect(Hive.isBoxOpen('shared'), isTrue);
+      expect(await second.write('key', 'value'), 'value');
 
-    await second.dispose();
-    expect(Hive.isBoxOpen('shared'), isFalse);
+      await second.dispose();
+      expect(Hive.isBoxOpen('shared'), isFalse);
 
-    // Disposing again is harmless.
-    await second.dispose();
-  });
+      // Disposing again is harmless.
+      await second.dispose();
+    },
+  );
 
   test('dispose closes the box', () async {
     final plugin = HiveStoragePlugin(boxName: 'closing');

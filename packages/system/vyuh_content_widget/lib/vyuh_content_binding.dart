@@ -35,13 +35,9 @@ final class VyuhContentBinding {
   /// content-types from the vyuh_feature_system package.
   static final standardDescriptors = [
     ContentExtensionDescriptor(
-      contents: [
-        Document.descriptor(),
-      ],
-      contentBuilders: [
-        Document.contentBuilder,
-      ],
-    )
+      contents: [Document.descriptor()],
+      contentBuilders: [Document.contentBuilder],
+    ),
   ];
 
   static Future<void> dispose() {

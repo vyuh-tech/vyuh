@@ -4,17 +4,11 @@ import 'package:sanity_client/sanity_client.dart';
 import 'util.dart';
 
 void main() {
-  for (var ref in [
-    'invalid-ref',
-    'imgInvalid-invalid-400x300-jpg',
-  ]) {
+  for (var ref in ['invalid-ref', 'imgInvalid-invalid-400x300-jpg']) {
     test('Invalid image-reference ($ref) throws exception', () {
-      expect(
-        () {
-          getClient().imageUrl(ref);
-        },
-        throwsA(const TypeMatcher<InvalidReferenceException>()),
-      );
+      expect(() {
+        getClient().imageUrl(ref);
+      }, throwsA(const TypeMatcher<InvalidReferenceException>()));
     });
   }
 
@@ -26,25 +20,17 @@ void main() {
     expect(url, contains('cdn.sanity.io/images/$project/$dataset/'));
   });
 
-  for (var ref in [
-    'invalid-ref',
-    'fileInvalid-invalid-jpg',
-  ]) {
+  for (var ref in ['invalid-ref', 'fileInvalid-invalid-jpg']) {
     test('Invalid file-reference ($ref) throws exception', () {
-      expect(
-        () {
-          getClient().fileUrl(ref);
-        },
-        throwsA(const TypeMatcher<AssertionError>()),
-      );
+      expect(() {
+        getClient().fileUrl(ref);
+      }, throwsA(const TypeMatcher<AssertionError>()));
     });
   }
 
   test('Valid file-reference generates proper file-url', () {
     final url = getClient()
-        .fileUrl(
-          'file-a3dabbe0f73305c46baeedadcea3e4f7b944a968-json',
-        )
+        .fileUrl('file-a3dabbe0f73305c46baeedadcea3e4f7b944a968-json')
         .toString();
     expect(url, contains('a3dabbe0f73305c46baeedadcea3e4f7b944a968.json'));
     expect(url, contains('cdn.sanity.io/files/$project/$dataset/'));

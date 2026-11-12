@@ -3,8 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:mobx/mobx.dart';
 
-typedef ScopedWidgetBuilder =
-    Widget Function(BuildContext context, AuthFlowScope scope);
+typedef ScopedWidgetBuilder = Widget Function(
+  BuildContext context,
+  AuthFlowScope scope,
+);
 
 final class AuthFlow extends StatefulWidget {
   final ScopedWidgetBuilder builder;

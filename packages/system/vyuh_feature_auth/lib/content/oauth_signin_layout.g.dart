@@ -8,9 +8,11 @@ part of 'oauth_signin_layout.dart';
 
 OAuthSignInLayout _$OAuthSignInLayoutFromJson(Map<String, dynamic> json) =>
     OAuthSignInLayout(
-      type: $enumDecodeNullable(_$OAuthLayoutTypeEnumMap, json['type']) ??
+      type:
+          $enumDecodeNullable(_$OAuthLayoutTypeEnumMap, json['type']) ??
           OAuthLayoutType.iconText,
-      direction: $enumDecodeNullable(_$AxisEnumMap, json['direction']) ??
+      direction:
+          $enumDecodeNullable(_$AxisEnumMap, json['direction']) ??
           Axis.vertical,
     );
 

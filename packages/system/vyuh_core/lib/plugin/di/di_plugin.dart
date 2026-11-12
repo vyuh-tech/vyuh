@@ -91,9 +91,10 @@ extension AsyncLazyDI on DIPlugin {
   ///   return MyService();
   /// }, name: 'myService');
   /// ```
-  void registerAsync<T extends Object>(Future<T> Function() fn,
-          {String? name}) =>
-      registerLazy<Future<T>>(fn, name: name);
+  void registerAsync<T extends Object>(
+    Future<T> Function() fn, {
+    String? name,
+  }) => registerLazy<Future<T>>(fn, name: name);
 
   /// Retrieves an asynchronously initialized dependency from the dependency injection container.
   ///

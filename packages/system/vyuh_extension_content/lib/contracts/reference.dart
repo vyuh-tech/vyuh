@@ -25,11 +25,7 @@ class ImageReference {
   @JsonKey(name: '_sanityAsset')
   final String? sanityAsset;
 
-  ImageReference({
-    required this.type,
-    required this.asset,
-    this.sanityAsset,
-  });
+  ImageReference({required this.type, required this.asset, this.sanityAsset});
 
   factory ImageReference.fromJson(Map<String, dynamic> json) =>
       _$ImageReferenceFromJson(json);
@@ -54,10 +50,7 @@ class FileReference {
 
   final ObjectReference? asset;
 
-  FileReference({
-    required this.type,
-    required this.asset,
-  });
+  FileReference({required this.type, required this.asset});
 
   factory FileReference.fromJson(Map<String, dynamic> json) =>
       _$FileReferenceFromJson(json);

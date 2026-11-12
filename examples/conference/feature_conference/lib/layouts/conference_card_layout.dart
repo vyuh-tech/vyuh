@@ -60,9 +60,8 @@ final class ConferenceCardLayout extends LayoutConfiguration<Conference> {
                   padding: const EdgeInsets.all(16),
                   child: Text(
                     content.title,
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: theme.colorScheme.onPrimary,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge
+                        ?.copyWith(color: theme.colorScheme.onPrimary),
                   ),
                 ),
               ),

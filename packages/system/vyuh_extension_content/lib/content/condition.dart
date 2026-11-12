@@ -110,10 +110,7 @@ abstract class ConditionConfiguration implements SchemaItem {
   final String? title;
 
   /// Creates a new condition configuration.
-  ConditionConfiguration({
-    required this.schemaType,
-    this.title,
-  });
+  ConditionConfiguration({required this.schemaType, this.title});
 
   /// Evaluates this condition configuration.
   ///

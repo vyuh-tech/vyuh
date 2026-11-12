@@ -7,10 +7,8 @@ class NodeValidator extends DoctorValidator {
   String get installHelp => 'https://nodejs.org/en/download';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'node',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'node');
 
   @override
   String extractVersion(String output) {

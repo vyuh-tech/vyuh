@@ -25,8 +25,7 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
     String name,
     String operation, {
     LogLevel? level = LogLevel.info,
-  }) async =>
-      NoOpTrace();
+  }) async => NoOpTrace();
 
   @override
   String get name => 'vyuh.plugin.telemetry.provider.noop';
@@ -46,16 +45,20 @@ final class NoOpTelemetryProvider implements TelemetryProvider {
   Future<void> init() => Future.value();
 
   @override
-  Future<void> reportError(exception,
-      {StackTrace? stackTrace,
-      Map<String, dynamic>? params,
-      bool fatal = false}) {
+  Future<void> reportError(
+    exception, {
+    StackTrace? stackTrace,
+    Map<String, dynamic>? params,
+    bool fatal = false,
+  }) {
     return Future.value();
   }
 
   @override
-  Future<void> reportFlutterError(FlutterErrorDetails details,
-      {bool fatal = false}) {
+  Future<void> reportFlutterError(
+    FlutterErrorDetails details, {
+    bool fatal = false,
+  }) {
     return Future.value();
   }
 

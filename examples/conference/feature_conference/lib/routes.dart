@@ -24,10 +24,7 @@ Future<List<RouteBase>> routes() async {
       builder: (context, state) {
         final speakerId = state.pathParameters['speakerId']!;
         final editionId = state.pathParameters['editionId']!;
-        return SpeakerDetailPage(
-          speakerId: speakerId,
-          editionId: editionId,
-        );
+        return SpeakerDetailPage(speakerId: speakerId, editionId: editionId);
       },
     ),
     GoRoute(
@@ -35,10 +32,7 @@ Future<List<RouteBase>> routes() async {
       builder: (context, state) {
         final trackId = state.pathParameters['trackId']!;
         final editionId = state.pathParameters['editionId']!;
-        return TrackDetailPage(
-          trackId: trackId,
-          editionId: editionId,
-        );
+        return TrackDetailPage(trackId: trackId, editionId: editionId);
       },
     ),
   ];
@@ -63,8 +57,11 @@ Future<List<RouteBase>> routes() async {
 
         // Potential paths will be .../[suffix] OR .../[suffix]/:id
         if (suffixes.contains(state.uri.pathSegments.last) ||
-            suffixes.contains(state.uri.pathSegments
-                .elementAt(state.uri.pathSegments.length - 2))) {
+            suffixes.contains(
+              state.uri.pathSegments.elementAt(
+                state.uri.pathSegments.length - 2,
+              ),
+            )) {
           return state.uri.toString();
         }
 

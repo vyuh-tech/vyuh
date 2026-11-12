@@ -10,14 +10,18 @@ final class _QueryProcessor {
   static String idMatchCondition(String id, {required bool includeDrafts}) =>
       '''*[_id == \$id${includeDrafts ? ' || _id == "drafts." + \$id' : ''}]''';
 
-  static final _routeTypes =
-      ["vyuh.route", "vyuh.conditionalRoute"].map((x) => '"$x"').join(', ');
+  static final _routeTypes = [
+    "vyuh.route",
+    "vyuh.conditionalRoute",
+  ].map((x) => '"$x"').join(', ');
 
-  static String get _routeFromPathQuery => '''
+  static String get _routeFromPathQuery =>
+      '''
 *[_type in [$_routeTypes] && path == \$path] | order(_type asc, _updatedAt desc) $_routeContentProjection
   ''';
 
-  static String _routeFromIdQuery(bool includeDrafts) => '''
+  static String _routeFromIdQuery(bool includeDrafts) =>
+      '''
 *[_id == \$routeId${includeDrafts ? ' || _id == "drafts." + \$routeId' : ''}] $_routeContentProjection
   ''';
 
@@ -34,36 +38,39 @@ final class _QueryProcessor {
   ''';
 
   QueryRecord id(String id) {
-    final condition = idMatchCondition(id,
-        includeDrafts: client.config.perspective == Perspective.raw);
+    final condition = idMatchCondition(
+      id,
+      includeDrafts: client.config.perspective == Perspective.raw,
+    );
 
     return (query: '$condition[0]', params: {'id': id});
   }
 
-  QueryRecord route({
-    String? path,
-    String? routeId,
-  }) {
+  QueryRecord route({String? path, String? routeId}) {
     debugAssertOneOfPathOrRouteId(path, routeId);
 
     if (path != null) {
       return (query: _routeFromPathQuery, params: {'path': path});
     }
 
-    final includeDrafts = client.config.perspective == Perspective.drafts ||
+    final includeDrafts =
+        client.config.perspective == Perspective.drafts ||
         client.config.perspective == Perspective.raw;
 
     return (
       query: _routeFromIdQuery(includeDrafts),
-      params: {'routeId': '$routeId'}
+      params: {'routeId': '$routeId'},
     );
   }
 
   List<T>? processMultiple<T>(
-      SanityQueryResponse? response, FromJsonConverter<T> fromJson) {
+    SanityQueryResponse? response,
+    FromJsonConverter<T> fromJson,
+  ) {
     if (response != null) {
       _log(
-          'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms');
+        'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms',
+      );
     }
 
     if (response == null) {
@@ -87,10 +94,13 @@ final class _QueryProcessor {
   }
 
   T? processSingle<T>(
-      SanityQueryResponse? response, FromJsonConverter<T> fromJson) {
+    SanityQueryResponse? response,
+    FromJsonConverter<T> fromJson,
+  ) {
     if (response != null) {
       _log(
-          'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms');
+        'Took server: ${response.info.serverTimeMs}ms, client: ${response.info.clientTimeMs}ms',
+      );
     }
 
     if (response == null || response.result == null) {

@@ -7,10 +7,7 @@ void main() {
   group('SanityConfig Assertions', () {
     test('Accepts valid configuration with defaults', () {
       expect(
-        () => SanityConfig(
-          projectId: project,
-          dataset: dataset,
-        ),
+        () => SanityConfig(projectId: project, dataset: dataset),
         returnsNormally,
       );
     });

@@ -24,8 +24,10 @@ final class SanityUrlBuilder extends UrlBuilder<SanityConfig> {
     assert(parts.length == 3, 'Invalid file reference: $fileRefId');
 
     final [prefix, id, format] = parts;
-    assert(prefix.toLowerCase() == 'file',
-        'Invalid file reference: $fileRefId. Must begin with "file"');
+    assert(
+      prefix.toLowerCase() == 'file',
+      'Invalid file reference: $fileRefId. Must begin with "file"',
+    );
 
     return '$id.$format';
   }
@@ -140,8 +142,10 @@ class _ParsedReference {
     assert(parts.length == 4, 'Invalid image reference: $refId');
 
     final [prefix, id, dimensions, format] = parts;
-    assert(prefix.toLowerCase() == 'image',
-        'Invalid image reference: $refId. Must begin with "image"');
+    assert(
+      prefix.toLowerCase() == 'image',
+      'Invalid image reference: $refId. Must begin with "image"',
+    );
 
     final [w, h] = dimensions.split('x');
 

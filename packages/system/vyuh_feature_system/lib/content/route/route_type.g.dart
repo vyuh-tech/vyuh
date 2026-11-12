@@ -8,7 +8,8 @@ part of 'route_type.dart';
 
 PageRouteType _$PageRouteTypeFromJson(Map<String, dynamic> json) =>
     PageRouteType(
-      behavior: $enumDecodeNullable(_$PageBehaviorEnumMap, json['behavior']) ??
+      behavior:
+          $enumDecodeNullable(_$PageBehaviorEnumMap, json['behavior']) ??
           PageBehavior.material,
     );
 
@@ -21,7 +22,7 @@ DialogRouteType _$DialogRouteTypeFromJson(Map<String, dynamic> json) =>
     DialogRouteType(
       behavior:
           $enumDecodeNullable(_$DialogBehaviorEnumMap, json['behavior']) ??
-              DialogBehavior.modalBottomSheet,
+          DialogBehavior.modalBottomSheet,
     );
 
 const _$DialogBehaviorEnumMap = {

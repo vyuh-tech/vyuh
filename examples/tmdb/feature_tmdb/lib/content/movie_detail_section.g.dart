@@ -10,9 +10,12 @@ MovieDetailSection _$MovieDetailSectionFromJson(Map<String, dynamic> json) =>
     MovieDetailSection(
       type:
           $enumDecodeNullable(_$MovieDetailSectionTypeEnumMap, json['type']) ??
-              MovieDetailSectionType.hero,
-      representation: $enumDecodeNullable(
-              _$ListRepresentationEnumMap, json['representation']) ??
+          MovieDetailSectionType.hero,
+      representation:
+          $enumDecodeNullable(
+            _$ListRepresentationEnumMap,
+            json['representation'],
+          ) ??
           ListRepresentation.short,
       layout: typeFromFirstOfListJson(json['layout']),
       modifiers: ContentItem.modifierList(json['modifiers']),
@@ -36,5 +39,5 @@ const _$ListRepresentationEnumMap = {
 };
 
 MovieDetailSectionLayout _$MovieDetailSectionLayoutFromJson(
-        Map<String, dynamic> json) =>
-    MovieDetailSectionLayout();
+  Map<String, dynamic> json,
+) => MovieDetailSectionLayout();

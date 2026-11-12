@@ -65,7 +65,7 @@ final class BooleanCondition extends ConditionConfiguration {
   final int evaluationDelayInSeconds;
 
   BooleanCondition({this.value = false, this.evaluationDelayInSeconds = 0})
-      : super(schemaType: schemaName);
+    : super(schemaType: schemaName);
 
   factory BooleanCondition.fromJson(Map<String, dynamic> json) =>
       _$BooleanConditionFromJson(json);

@@ -27,8 +27,10 @@ abstract class FeatureFlagPlugin<TSettings, TContext> extends Plugin {
   Future<double> getDouble(String featureName, {double defaultValue = 0.0});
 
   /// Returns the value of the feature flag as a JSON object represented by a Map.
-  Future<Map<String, dynamic>> getJson(String featureName,
-      {Map<String, dynamic> defaultValue = const {}});
+  Future<Map<String, dynamic>> getJson(
+    String featureName, {
+    Map<String, dynamic> defaultValue = const {},
+  });
 
   /// Sets the default values for the feature flags.
   /// This is useful when the plugin is first initialized and want to set defaults before fetching the actual values.

@@ -45,8 +45,8 @@ final class EmailPasswordForm extends ContentItem {
 
 final class EmailPasswordFormDescriptor extends ContentDescriptor {
   EmailPasswordFormDescriptor({super.layouts})
-      : super(
-          schemaType: EmailPasswordForm.schemaName,
-          title: 'Email Password Form',
-        );
+    : super(
+        schemaType: EmailPasswordForm.schemaName,
+        title: 'Email Password Form',
+      );
 }

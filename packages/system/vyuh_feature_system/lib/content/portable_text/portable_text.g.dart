@@ -16,5 +16,5 @@ PortableTextContent _$PortableTextContentFromJson(Map<String, dynamic> json) =>
     );
 
 DefaultPortableTextContentLayout _$DefaultPortableTextContentLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultPortableTextContentLayout();
+  Map<String, dynamic> json,
+) => DefaultPortableTextContentLayout();

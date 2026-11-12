@@ -13,8 +13,8 @@ final class PreviewContext extends InheritedWidget {
   });
 
   static PreviewContext? of(BuildContext context) {
-    final previewContext =
-        context.dependOnInheritedWidgetOfExactType<PreviewContext>();
+    final previewContext = context
+        .dependOnInheritedWidgetOfExactType<PreviewContext>();
 
     return previewContext;
   }

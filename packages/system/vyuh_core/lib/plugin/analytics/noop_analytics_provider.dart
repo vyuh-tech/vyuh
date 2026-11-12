@@ -24,8 +24,10 @@ final class NoOpAnalyticsProvider implements AnalyticsProvider {
   Future<void> reportEvent(String name, {Map<String, dynamic>? params}) async {}
 
   @override
-  Future<void> identifyUser(String userId,
-      {Map<String, dynamic>? traits}) async {}
+  Future<void> identifyUser(
+    String userId, {
+    Map<String, dynamic>? traits,
+  }) async {}
 
   @override
   Future<void> resetUser() async {}

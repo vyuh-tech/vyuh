@@ -7,10 +7,8 @@ class PnPmValidator extends DoctorValidator {
   String get installHelp => 'https://pnpm.io/installation';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'pnpm',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'pnpm');
 
   @override
   String extractVersion(String output) {

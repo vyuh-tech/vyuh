@@ -9,12 +9,8 @@ final class HiveStoragePlugin extends StoragePlugin with InitOncePlugin {
   ///
   /// The [boxName] parameter specifies the name of the Hive box to use for storage.
   /// If not provided, defaults to 'vyuh_storage'.
-  HiveStoragePlugin({
-    this.boxName = 'vyuh_storage',
-  }) : super(
-          name: 'vyuh.plugin.storage.hive',
-          title: 'Storage Plugin for Hive',
-        );
+  HiveStoragePlugin({this.boxName = 'vyuh_storage'})
+    : super(name: 'vyuh.plugin.storage.hive', title: 'Storage Plugin for Hive');
 
   @override
   Future<void> initOnce() async {
@@ -51,7 +47,6 @@ final class HiveStoragePlugin extends StoragePlugin with InitOncePlugin {
       ));
 
   @override
-
   /// Reads a value from the box with the given [key].
   ///
   /// Returns [null] if no value is associated with [key].

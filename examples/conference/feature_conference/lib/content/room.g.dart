@@ -7,15 +7,15 @@ part of 'room.dart';
 // **************************************************************************
 
 Room _$RoomFromJson(Map<String, dynamic> json) => Room(
-      title: json['title'] as String,
-      slug: json['slug'] as String,
-      description: json['description'] as String?,
-      capacity: (json['capacity'] as num?)?.toInt() ?? 50,
-      floor: (json['floor'] as num?)?.toInt() ?? 1,
-      facilities: (json['facilities'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$RoomFacilityEnumMap, e))
-          .toList(),
-    );
+  title: json['title'] as String,
+  slug: json['slug'] as String,
+  description: json['description'] as String?,
+  capacity: (json['capacity'] as num?)?.toInt() ?? 50,
+  floor: (json['floor'] as num?)?.toInt() ?? 1,
+  facilities: (json['facilities'] as List<dynamic>?)
+      ?.map((e) => $enumDecode(_$RoomFacilityEnumMap, e))
+      .toList(),
+);
 
 const _$RoomFacilityEnumMap = {
   RoomFacility.audio: 'audio',

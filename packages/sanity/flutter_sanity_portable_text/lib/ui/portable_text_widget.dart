@@ -2,8 +2,10 @@ import 'package:material_ui/material_ui.dart';
 
 import '../flutter_sanity_portable_text.dart';
 
-typedef BlockListBuilder =
-    Widget Function(BuildContext, List<PortableBlockItem>);
+typedef BlockListBuilder = Widget Function(
+  BuildContext,
+  List<PortableBlockItem>,
+);
 
 /// A widget that renders a list of PortableBlockItems. This widget is the main entry point for
 /// rendering Portable Text content. It is responsible for rendering the entire content of a Portable
@@ -46,6 +48,7 @@ Widget defaultListBuilder(
     itemCount: blocks.length,
     padding: EdgeInsets.zero,
     itemBuilder: (context, index) =>
-        PortableTextConfig.of(context).buildBlock(context, blocks[index], index),
+        PortableTextConfig.of(context)
+            .buildBlock(context, blocks[index], index),
   );
 }

@@ -46,9 +46,8 @@ class WonderEvent extends StatelessWidget {
               child: Text(
                 year,
                 textAlign: TextAlign.right,
-                style: Theme.of(
-                  context,
-                ).textTheme.titleLarge?.apply(color: Colors.black),
+                style: Theme.of(context).textTheme.titleLarge
+                    ?.apply(color: Colors.black),
               ),
             ),
             SizedBox(width: theme.sizing.s2),
@@ -58,9 +57,8 @@ class WonderEvent extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: theme.spacing.s8),
                 child: Text(
                   event.title,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.bodyMedium?.apply(color: Colors.black),
+                  style: Theme.of(context).textTheme.bodyMedium
+                      ?.apply(color: Colors.black),
                 ),
               ),
             ),

@@ -8,12 +8,11 @@ import 'package:vyuh_cli/utils/utils.dart';
 
 class ProjectTemplate extends Template {
   ProjectTemplate()
-      : super(
-          name: 'project',
-          bundle: vyuhProjectBundle,
-          help:
-              'Generate a modular Flutter App with a feature workspace and optional CMS integration.',
-        );
+    : super(
+        name: 'project',
+        bundle: vyuhProjectBundle,
+        help: 'Generate a modular Flutter App with a feature workspace and optional CMS integration.',
+      );
 
   @override
   Future<void> onGenerateComplete(Logger logger, Directory outputDir) async {

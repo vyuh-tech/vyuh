@@ -84,8 +84,9 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory =
-        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+    final directory = outputDirectory != null
+        ? Directory(outputDirectory!)
+        : Directory('.');
 
     return directory;
   }
@@ -93,10 +94,7 @@ final class CreateSanitySchemaCommand extends BaseCreateCommand {
   @override
   Map<String, dynamic> getTemplateVars() {
     final vars = super.getTemplateVars();
-    vars.addAll({
-      'name': featureName,
-      'cms': cms,
-    });
+    vars.addAll({'name': featureName, 'cms': cms});
     return vars;
   }
 }

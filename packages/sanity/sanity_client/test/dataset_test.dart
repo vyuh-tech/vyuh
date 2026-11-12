@@ -8,15 +8,12 @@ import 'util.dart';
 void main() {
   test('Can fetch datasets', () async {
     final httpClient = MockClient(
-      (request) async => http.Response(
-        '''
+      (request) async => http.Response('''
       [
           { "name": "test-1", "aclMode": "none" },
           { "name": "test-2", "aclMode": "none" }
       ]
-      ''',
-        200,
-      ),
+      ''', 200),
     );
 
     final client = getClient(httpClient: httpClient);
@@ -43,12 +40,9 @@ void main() {
 
   test('Can deal with empty datasets', () async {
     final httpClient = MockClient(
-      (request) async => http.Response(
-        '''
+      (request) async => http.Response('''
       []
-      ''',
-        200,
-      ),
+      ''', 200),
     );
 
     final client = getClient(httpClient: httpClient);

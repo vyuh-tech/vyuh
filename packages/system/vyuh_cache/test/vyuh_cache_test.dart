@@ -18,9 +18,12 @@ void main() {
   });
 
   test('concurrent misses share one generator and cache the result', () async {
-    final cache = Cache(CacheConfig(
+    final cache = Cache(
+      CacheConfig(
         storage: MemoryCacheStorage<String>(),
-        ttl: const Duration(minutes: 1)));
+        ttl: const Duration(minutes: 1),
+      ),
+    );
     final result = Completer<String>();
     var calls = 0;
     Future<String> generate() {
@@ -28,8 +31,10 @@ void main() {
       return result.future;
     }
 
-    final requests =
-        List.generate(10, (_) => cache.build('key', generateValue: generate));
+    final requests = List.generate(
+      10,
+      (_) => cache.build('key', generateValue: generate),
+    );
     await Future<void>.delayed(Duration.zero);
     expect(calls, 1);
     result.complete('fresh');
@@ -38,32 +43,47 @@ void main() {
   });
 
   test('a failed generator can be retried', () async {
-    final cache = Cache(CacheConfig(
+    final cache = Cache(
+      CacheConfig(
         storage: MemoryCacheStorage<String>(),
-        ttl: const Duration(minutes: 1)));
+        ttl: const Duration(minutes: 1),
+      ),
+    );
     await expectLater(
-        cache.build('key', generateValue: () async {
+      cache.build(
+        'key',
+        generateValue: () async {
           throw StateError('network failed');
-        }),
-        throwsStateError);
+        },
+      ),
+      throwsStateError,
+    );
     expect(
-        await cache.build('key', generateValue: () async => 'retry'), 'retry');
+      await cache.build('key', generateValue: () async => 'retry'),
+      'retry',
+    );
   });
 
   test('storage failures do not prevent a fresh result', () async {
-    final cache = Cache(CacheConfig(
-        storage: _FailingStorage(), ttl: const Duration(minutes: 1)));
+    final cache = Cache(
+      CacheConfig(storage: _FailingStorage(), ttl: const Duration(minutes: 1)),
+    );
     expect(
-        await cache.build('key', generateValue: () async => 'fresh'), 'fresh');
+      await cache.build('key', generateValue: () async => 'fresh'),
+      'fresh',
+    );
   });
 
   test('expiration cleanup completes before replacement is stored', () async {
     final storage = _DelayedDeleteStorage();
     await storage.set('key', CacheEntry('stale', Duration.zero));
-    final cache =
-        Cache(CacheConfig(storage: storage, ttl: const Duration(minutes: 1)));
+    final cache = Cache(
+      CacheConfig(storage: storage, ttl: const Duration(minutes: 1)),
+    );
     expect(
-        await cache.build('key', generateValue: () async => 'fresh'), 'fresh');
+      await cache.build('key', generateValue: () async => 'fresh'),
+      'fresh',
+    );
     expect(await cache.get('key'), 'fresh');
   });
 }
@@ -104,39 +124,55 @@ class _DelayedDeleteStorage implements CacheStorage<String> {
 void invalidationTests() {
   for (final clear in [false, true]) {
     test(
-        '${clear ? "clear" : "remove"} prevents an old generator from repopulating',
-        () async {
-      final cache = Cache(CacheConfig(
-          storage: MemoryCacheStorage<String>(),
-          ttl: const Duration(minutes: 1)));
-      final started = Completer<void>();
-      final old = Completer<String>();
-      final request = cache.build('key', generateValue: () {
-        started.complete();
-        return old.future;
-      });
-      await started.future;
-      if (clear) {
-        await cache.clear();
-      } else {
-        await cache.remove('key');
-      }
-      expect(await cache.build('key', generateValue: () async => 'new'), 'new');
-      old.complete('old');
-      expect(await request, 'old');
-      expect(await cache.get('key'), 'new');
-    });
+      '${clear ? "clear" : "remove"} prevents an old generator from repopulating',
+      () async {
+        final cache = Cache(
+          CacheConfig(
+            storage: MemoryCacheStorage<String>(),
+            ttl: const Duration(minutes: 1),
+          ),
+        );
+        final started = Completer<void>();
+        final old = Completer<String>();
+        final request = cache.build(
+          'key',
+          generateValue: () {
+            started.complete();
+            return old.future;
+          },
+        );
+        await started.future;
+        if (clear) {
+          await cache.clear();
+        } else {
+          await cache.remove('key');
+        }
+        expect(
+          await cache.build('key', generateValue: () async => 'new'),
+          'new',
+        );
+        old.complete('old');
+        expect(await request, 'old');
+        expect(await cache.get('key'), 'new');
+      },
+    );
   }
   test('explicit writes supersede pending generation', () async {
-    final cache = Cache(CacheConfig(
+    final cache = Cache(
+      CacheConfig(
         storage: MemoryCacheStorage<String>(),
-        ttl: const Duration(minutes: 1)));
+        ttl: const Duration(minutes: 1),
+      ),
+    );
     final started = Completer<void>();
     final result = Completer<String>();
-    final request = cache.build('key', generateValue: () {
-      started.complete();
-      return result.future;
-    });
+    final request = cache.build(
+      'key',
+      generateValue: () {
+        started.complete();
+        return result.future;
+      },
+    );
     await started.future;
     await cache.set('key', 'explicit');
     result.complete('old');
@@ -145,8 +181,9 @@ void invalidationTests() {
   });
   test('bounded memory storage evicts least recently used entries', () async {
     final storage = MemoryCacheStorage<String>(maxEntries: 2);
-    final cache =
-        Cache(CacheConfig(storage: storage, ttl: const Duration(minutes: 1)));
+    final cache = Cache(
+      CacheConfig(storage: storage, ttl: const Duration(minutes: 1)),
+    );
     await cache.set('a', 'a');
     await cache.set('b', 'b');
     await cache.get('a');
@@ -154,6 +191,8 @@ void invalidationTests() {
     expect(await cache.get('b'), isNull);
     expect(await storage.keys(), ['a', 'c']);
     expect(
-        () => MemoryCacheStorage<String>(maxEntries: 0), throwsArgumentError);
+      () => MemoryCacheStorage<String>(maxEntries: 0),
+      throwsArgumentError,
+    );
   });
 }

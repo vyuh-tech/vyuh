@@ -3,13 +3,13 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:vyuh_cli/commands/doctor/src/doctor.dart';
 
 final class DoctorCommand extends Command<int> {
-  DoctorCommand({
-    required this._logger,
-  }) {
-    argParser.addOption('cms',
-        defaultsTo: 'none',
-        allowed: ['none', 'sanity'],
-        help: 'Also check tooling for an optional CMS integration.');
+  DoctorCommand({required this._logger}) {
+    argParser.addOption(
+      'cms',
+      defaultsTo: 'none',
+      allowed: ['none', 'sanity'],
+      help: 'Also check tooling for an optional CMS integration.',
+    );
   }
 
   final Logger _logger;
@@ -28,8 +28,10 @@ final class DoctorCommand extends Command<int> {
 
   @override
   Future<int> run() async {
-    Doctor doctor =
-        Doctor(logger: _logger, cms: argResults?['cms'] as String? ?? 'none');
+    Doctor doctor = Doctor(
+      logger: _logger,
+      cms: argResults?['cms'] as String? ?? 'none',
+    );
     final bool success = await doctor.diagnose();
     return success ? ExitCode.success.code : ExitCode.tempFail.code;
   }

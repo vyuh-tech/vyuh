@@ -296,7 +296,11 @@ class UnknownPortableBlock extends vc.ContentItem implements PortableBlockItem {
   UnknownPortableBlock({
     required this.missingSchemaType,
     required this.jsonPayload,
-  }) : super(schemaType: 'vyuh.unknown.portable', layout: null, modifiers: null);
+  }) : super(
+         schemaType: 'vyuh.unknown.portable',
+         layout: null,
+         modifiers: null,
+       );
 }
 
 /// Default layout for portable text content.

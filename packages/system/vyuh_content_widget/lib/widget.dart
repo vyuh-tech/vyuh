@@ -14,12 +14,16 @@ import 'vyuh_content_binding.dart';
 /// representation to a fully custom layout.
 ///
 /// If the document is not found, the widget will display a "Not Found" message.
-typedef DocumentBuilder<T extends ContentItem> =
-    Widget Function(BuildContext, T);
+typedef DocumentBuilder<T extends ContentItem> = Widget Function(
+  BuildContext,
+  T,
+);
 
 /// A widget that renders a list of [Document]s from the CMS.
-typedef DocumentListBuilder<T extends ContentItem> =
-    Widget Function(BuildContext, List<T>);
+typedef DocumentListBuilder<T extends ContentItem> = Widget Function(
+  BuildContext,
+  List<T>,
+);
 
 /// A versatile content widget that handles both single and list content items.
 /// It interacts with the [ContentPlugin] (either directly or via [VyuhBinding]) to fetch content from the CMS.
@@ -64,15 +68,13 @@ class VyuhContentWidget<T extends ContentItem> extends StatefulWidget {
     String? query,
     Map<String, String>? queryParams,
     Widget Function(BuildContext, Document)? builder,
-  }) =>
-      VyuhContentWidget<Document>(
-            key: key,
-            query: query ?? _defaultSanityQuery,
-            queryParams: queryParams ?? {'identifier': identifier},
-            fromJson: Document.fromJson,
-            builder: builder ?? _defaultDocumentBuilder,
-          )
-          as VyuhContentWidget<T>;
+  }) => VyuhContentWidget<Document>(
+    key: key,
+    query: query ?? _defaultSanityQuery,
+    queryParams: queryParams ?? {'identifier': identifier},
+    fromJson: Document.fromJson,
+    builder: builder ?? _defaultDocumentBuilder,
+  ) as VyuhContentWidget<T>;
 
   static Widget _defaultDocumentBuilder(
     BuildContext context,

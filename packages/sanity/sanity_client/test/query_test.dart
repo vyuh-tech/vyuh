@@ -53,9 +53,11 @@ void main() {
   test('Params are being sent properly', () async {
     final httpClient = MockClient((req) async {
       expect(
-          req.url.query,
-          contains(
-              '${Uri.encodeComponent('\$test')}=${Uri.encodeComponent('"true"')}'));
+        req.url.query,
+        contains(
+          '${Uri.encodeComponent('\$test')}=${Uri.encodeComponent('"true"')}',
+        ),
+      );
       expect(req.url.query, contains('explain=true'));
       expect(req.url.toString(), contains('api.sanity.io'));
       expect(req.url.path, contains('v2024-02-16'));
@@ -97,23 +99,23 @@ void main() {
     final Map<String, (http.Response, TypeMatcher)> pairs = {
       'Bad query': (
         http.Response('', 400),
-        const TypeMatcher<BadRequestException>()
+        const TypeMatcher<BadRequestException>(),
       ),
       'Network 404': (
         http.Response('', 404),
-        const TypeMatcher<FetchDataException>()
+        const TypeMatcher<FetchDataException>(),
       ),
       'Bad query 500': (
         http.Response('', 500),
-        const TypeMatcher<FetchDataException>()
+        const TypeMatcher<FetchDataException>(),
       ),
       'Unauthorized 401': (
         http.Response('', 401),
-        const TypeMatcher<UnauthorizedException>()
+        const TypeMatcher<UnauthorizedException>(),
       ),
       'Unauthorized 403': (
         http.Response('', 403),
-        const TypeMatcher<UnauthorizedException>()
+        const TypeMatcher<UnauthorizedException>(),
       ),
     };
 
@@ -126,12 +128,9 @@ void main() {
 
     pairs.forEach((key, value) {
       test('Throws for $key', () {
-        expect(
-          () async {
-            await client.fetch(key);
-          },
-          throwsA(value.$2),
-        );
+        expect(() async {
+          await client.fetch(key);
+        }, throwsA(value.$2));
       });
     });
   });
@@ -144,24 +143,18 @@ void main() {
     } catch (e) {
       message = e.toString();
     }
-    expect(
-      message,
-      startsWith('Unauthorized: {'),
-    );
+    expect(message, startsWith('Unauthorized: {'));
   });
 
   test('Parses results for valid query, with results as a Map', () async {
     final httpClient = MockClient(
-      (request) async => http.Response(
-        '''
+      (request) async => http.Response('''
       {
         "ms": 20,
         "query": "",
         "result": {"_type": "someType"}
       }
-      ''',
-        200,
-      ),
+      ''', 200),
     );
 
     final client = getClient(httpClient: httpClient);
@@ -173,26 +166,24 @@ void main() {
 
   test('Parses results for valid query, with results as a List', () async {
     final httpClient = MockClient(
-      (request) async => http.Response(
-        '''
+      (request) async => http.Response('''
       {
         "ms": 20,
         "query": "",
         "result": [{"_type": "someType"}]
       }
-      ''',
-        200,
-      ),
+      ''', 200),
     );
 
     final client = getClient(httpClient: httpClient);
 
     final response = await client.fetch('valid query');
     expect(
-        response.result,
-        equals([
-          {'_type': 'someType'}
-        ]));
+      response.result,
+      equals([
+        {'_type': 'someType'},
+      ]),
+    );
     expect(response.info.serverTimeMs, equals(20));
   });
 
@@ -226,8 +217,10 @@ void main() {
 
       httpClient = MockClient((req) async {
         expect(req.method, equals('POST'));
-        expect(req.headers['Content-Type'],
-            equals('application/json; charset=UTF-8'));
+        expect(
+          req.headers['Content-Type'],
+          equals('application/json; charset=UTF-8'),
+        );
         return http.Response(_sanityResponse, 200);
       });
       client.setHttpClient(httpClient);
@@ -267,10 +260,7 @@ void main() {
         expect(req.method, equals('POST'));
 
         final body = jsonDecode(req.body) as Map<String, dynamic>;
-        expect(
-          body['params'],
-          containsPair('testParam', 'value'),
-        );
+        expect(body['params'], containsPair('testParam', 'value'));
         expect(body['query'], equals(largeQuery));
 
         return http.Response(_sanityResponse, 200);
@@ -285,10 +275,7 @@ void main() {
     test('includes token in request headers', () async {
       final client = getClient(
         httpClient: MockClient((request) async {
-          expect(
-            request.headers['Authorization'],
-            equals('Bearer $token'),
-          );
+          expect(request.headers['Authorization'], equals('Bearer $token'));
           return http.Response('{"ms":0,"query":"","result":{}}', 200);
         }),
       );
@@ -298,17 +285,11 @@ void main() {
     test('handles unauthorized requests', () async {
       final client = getClient(
         httpClient: MockClient((request) async {
-          return http.Response(
-            '{"error":{"description":"Unauthorized"}}',
-            401,
-          );
+          return http.Response('{"error":{"description":"Unauthorized"}}', 401);
         }),
       );
 
-      expect(
-        () => client.fetch('*'),
-        throwsA(isA<UnauthorizedException>()),
-      );
+      expect(() => client.fetch('*'), throwsA(isA<UnauthorizedException>()));
     });
   });
 }

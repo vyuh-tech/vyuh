@@ -13,9 +13,8 @@ final class ConferenceDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final conferenceId = GoRouterState.of(
-      context,
-    ).pathParameters['conferenceId']!;
+    final conferenceId = GoRouterState.of(context)
+        .pathParameters['conferenceId']!;
     final editionLayout = EditionSummaryLayout();
 
     return ConferenceRouteScaffold<(Conference?, List<Edition>)>(

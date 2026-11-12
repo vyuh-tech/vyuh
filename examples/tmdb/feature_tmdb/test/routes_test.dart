@@ -13,13 +13,10 @@ void main() {
   group('once function tests', () {
     test('once function should only execute the main function once', () {
       int counter = 0;
-      final testOnce = once<int>(
-        () {
-          counter++;
-          return counter;
-        },
-        () => 0,
-      );
+      final testOnce = once<int>(() {
+        counter++;
+        return counter;
+      }, () => 0);
 
       expect(testOnce(), equals(1));
       expect(testOnce(), equals(0));
@@ -57,9 +54,7 @@ void main() {
         equals('/tmdb/movie/list'),
       );
       expect(
-        mediaPathResolver(
-          '/home/movie/upcoming',
-        ),
+        mediaPathResolver('/home/movie/upcoming'),
         equals('/tmdb/movie/list'),
       );
       expect(

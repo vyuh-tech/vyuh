@@ -43,5 +43,5 @@ final class ProductCard extends ContentItem {
 
 final class ProductCardDescriptor extends ContentDescriptor {
   ProductCardDescriptor({super.layouts})
-      : super(schemaType: ProductCard.schemaName, title: 'Product Card');
+    : super(schemaType: ProductCard.schemaName, title: 'Product Card');
 }

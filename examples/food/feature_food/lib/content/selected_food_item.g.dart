@@ -13,5 +13,5 @@ SelectedFoodItem _$SelectedFoodItemFromJson(Map<String, dynamic> json) =>
     );
 
 DefaultFoodMenuItemLayout _$DefaultFoodMenuItemLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultFoodMenuItemLayout();
+  Map<String, dynamic> json,
+) => DefaultFoodMenuItemLayout();

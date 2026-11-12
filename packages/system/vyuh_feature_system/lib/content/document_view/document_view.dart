@@ -5,10 +5,7 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 
 part 'document_view.g.dart';
 
-enum DocumentLoadStrategy {
-  reference,
-  query,
-}
+enum DocumentLoadStrategy { reference, query }
 
 @JsonSerializable()
 final class DocumentView extends ContentItem {
@@ -41,13 +38,17 @@ final class DocumentView extends ContentItem {
     super.modifiers,
   }) : super(schemaType: schemaName) {
     if (loadStrategy == DocumentLoadStrategy.reference) {
-      assert(reference != null,
-          'A document-reference is required when the loadStrategy is set to "reference"');
+      assert(
+        reference != null,
+        'A document-reference is required when the loadStrategy is set to "reference"',
+      );
     }
 
     if (loadStrategy == DocumentLoadStrategy.query) {
-      assert(query != null,
-          'A query-configuration is required when the loadStrategy is set to "query"');
+      assert(
+        query != null,
+        'A query-configuration is required when the loadStrategy is set to "query"',
+      );
     }
 
     assert(items.isNotEmpty, 'There has to be at least one section to render.');
@@ -90,7 +91,8 @@ abstract class QueryConfiguration implements SchemaItem {
 
   factory QueryConfiguration.fromJson(Map<String, dynamic> json) =>
       throw UnimplementedError(
-          'This must be implemented by the QueryConfiguration subclass');
+        'This must be implemented by the QueryConfiguration subclass',
+      );
 
   String? buildQuery(BuildContext context);
 }
@@ -100,16 +102,16 @@ class DocumentViewDescriptor extends ContentDescriptor {
   final List<TypeDescriptor<QueryConfiguration>>? queries;
 
   DocumentViewDescriptor({this.queries, this.documentTypes, super.layouts})
-      : super(schemaType: DocumentView.schemaName, title: 'Document View');
+    : super(schemaType: DocumentView.schemaName, title: 'Document View');
 }
 
 final class _DocumentViewContentBuilder extends ContentBuilder {
   _DocumentViewContentBuilder()
-      : super(
-          content: DocumentView.typeDescriptor,
-          defaultLayout: DefaultDocumentViewLayout(),
-          defaultLayoutDescriptor: DefaultDocumentViewLayout.typeDescriptor,
-        );
+    : super(
+        content: DocumentView.typeDescriptor,
+        defaultLayout: DefaultDocumentViewLayout(),
+        defaultLayoutDescriptor: DefaultDocumentViewLayout.typeDescriptor,
+      );
 
   @override
   void init(List<ContentDescriptor> descriptors) {
@@ -128,12 +130,16 @@ final class _DocumentViewContentBuilder extends ContentBuilder {
   void _registerDocumentTypes(List<ContentDescriptor> descriptors) {
     final ds = descriptors.cast<DocumentViewDescriptor>();
 
-    registerDescriptors<QueryConfiguration>(ds.expand((element) =>
-        element.queries ?? <TypeDescriptor<QueryConfiguration>>[]));
+    registerDescriptors<QueryConfiguration>(
+      ds.expand(
+        (element) => element.queries ?? <TypeDescriptor<QueryConfiguration>>[],
+      ),
+    );
 
     registerDescriptors<DocumentItem>(
-      ds.expand((element) =>
-          element.documentTypes ?? <TypeDescriptor<DocumentItem>>[]),
+      ds.expand(
+        (element) => element.documentTypes ?? <TypeDescriptor<DocumentItem>>[],
+      ),
       checkUnique: true,
     );
   }

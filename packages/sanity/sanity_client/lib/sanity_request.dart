@@ -40,10 +40,7 @@ class SanityRequest {
 
   /// Strips the $-prefixes when submitting as json params via POST
   Map<String, dynamic> toPostBody() {
-    return {
-      'query': query,
-      'params': _stripDollarPrefixes(params),
-    };
+    return {'query': query, 'params': _stripDollarPrefixes(params)};
   }
 
   Map<String, String>? _stripDollarPrefixes(Map<String, String>? params) {

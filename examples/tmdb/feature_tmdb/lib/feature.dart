@@ -27,8 +27,7 @@ import 'package:vyuh_feature_system/vyuh_feature_system.dart';
 final feature = FeatureDescriptor(
   name: 'tmdb',
   title: 'TMDB',
-  description:
-      'Uses the TMDB API to show details of movies with ability to favorite and add to watchlists',
+  description: 'Uses the TMDB API to show details of movies with ability to favorite and add to watchlists',
   icon: Icons.movie_creation_outlined,
   init: () async {
     vyuh.di.register(TMDBClient(vyuh.env.get('TMDB_API_KEY')));

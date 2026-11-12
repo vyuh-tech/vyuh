@@ -10,16 +10,13 @@ Future<ValidationResult> commandVersionValidator(
   try {
     final result = Process.runSync(command, arguments);
     if (result.exitCode != 0) {
-      return ValidationResult(
-        ValidationType.missing,
-        [
-          const ValidationMessage(''),
-          const ValidationMessage.error(UserMessages.commandNotFound),
-          ValidationMessage.warning('${result.stdout}'),
-          ValidationMessage(validator.installInstructions),
-          const ValidationMessage(''),
-        ],
-      );
+      return ValidationResult(ValidationType.missing, [
+        const ValidationMessage(''),
+        const ValidationMessage.error(UserMessages.commandNotFound),
+        ValidationMessage.warning('${result.stdout}'),
+        ValidationMessage(validator.installInstructions),
+        const ValidationMessage(''),
+      ]);
     }
 
     return ValidationResult(
@@ -30,15 +27,12 @@ Future<ValidationResult> commandVersionValidator(
       ),
     );
   } on ProcessException catch (e) {
-    return ValidationResult(
-      ValidationType.missing,
-      [
-        const ValidationMessage(''),
-        ValidationMessage.error(UserMessages.exceptionMessage(e)),
-        ValidationMessage(validator.installInstructions),
-        const ValidationMessage(''),
-      ],
-    );
+    return ValidationResult(ValidationType.missing, [
+      const ValidationMessage(''),
+      ValidationMessage.error(UserMessages.exceptionMessage(e)),
+      ValidationMessage(validator.installInstructions),
+      const ValidationMessage(''),
+    ]);
   } catch (e, stackTrace) {
     return ValidationResult.crash(e, stackTrace);
   }

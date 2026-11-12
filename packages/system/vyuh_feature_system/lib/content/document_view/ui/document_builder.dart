@@ -18,16 +18,20 @@ class DocumentViewBuilder extends StatefulWidget {
 }
 
 class DocumentViewBuilderState extends State<DocumentViewBuilder> {
-  final _documentFuture =
-      Observable(ObservableFuture<DocumentItem?>(Future.value(null)));
+  final _documentFuture = Observable(
+    ObservableFuture<DocumentItem?>(Future.value(null)),
+  );
 
   @override
   void initState() {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      runInAction(() => _documentFuture.value =
-          ObservableFuture(_fetchDocument(context, widget.document)));
+      runInAction(
+        () => _documentFuture.value = ObservableFuture(
+          _fetchDocument(context, widget.document),
+        ),
+      );
     });
   }
 
@@ -55,28 +59,40 @@ class DocumentViewBuilderState extends State<DocumentViewBuilder> {
   }
 
   Future<DocumentItem?> _fetchDocument(
-      BuildContext context, DocumentView content) {
+    BuildContext context,
+    DocumentView content,
+  ) {
     switch (content.loadStrategy) {
       case DocumentLoadStrategy.reference:
         final documentId = content.reference?.ref;
         if (documentId == null) {
-          return Future.error(StateError(
-              'Document ID is null for document type: ${content.schemaType}'));
+          return Future.error(
+            StateError(
+              'Document ID is null for document type: ${content.schemaType}',
+            ),
+          );
         }
 
-        return VyuhBinding.instance.content.provider.fetchById(documentId,
-            fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>);
+        return VyuhBinding.instance.content.provider.fetchById(
+          documentId,
+          fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>,
+        );
 
       case DocumentLoadStrategy.query:
         final query = content.query?.buildQuery(context);
 
         if (query == null) {
-          return Future.error(StateError(
-              'Document query is null for document type: ${content.schemaType}'));
+          return Future.error(
+            StateError(
+              'Document query is null for document type: ${content.schemaType}',
+            ),
+          );
         }
 
-        return VyuhBinding.instance.content.provider.fetchSingle(query,
-            fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>);
+        return VyuhBinding.instance.content.provider.fetchSingle(
+          query,
+          fromJson: VyuhBinding.instance.content.fromJson<DocumentItem>,
+        );
     }
   }
 }

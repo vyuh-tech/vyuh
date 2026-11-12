@@ -148,9 +148,8 @@ class SearchListView<T> extends StatelessWidget {
       return Center(
         child: Text(
           'No Results Found',
-          style: Theme.of(context).textTheme.titleLarge!.copyWith(
-            color: Theme.of(context).colorScheme.outline,
-          ),
+          style: Theme.of(context).textTheme.titleLarge!
+              .copyWith(color: Theme.of(context).colorScheme.outline),
         ),
       );
     }

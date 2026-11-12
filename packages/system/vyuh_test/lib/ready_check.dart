@@ -10,11 +10,13 @@ extension ReadyCheck on VyuhPlatform {
   Future<void> getReady(WidgetTester tester) async {
     final completer = Completer<void>();
     when(
-        (_) =>
-            tracker.currentState.value == InitState.ready ||
-            tracker.currentState.value == InitState.error, () {
-      completer.complete();
-    });
+      (_) =>
+          tracker.currentState.value == InitState.ready ||
+          tracker.currentState.value == InitState.error,
+      () {
+        completer.complete();
+      },
+    );
 
     await tester.pumpAndSettle();
 

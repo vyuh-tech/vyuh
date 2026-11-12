@@ -27,5 +27,5 @@ const _$VideoLinkTypeEnumMap = {
 };
 
 VideoPlayerDefaultLayout _$VideoPlayerDefaultLayoutFromJson(
-        Map<String, dynamic> json) =>
-    VideoPlayerDefaultLayout();
+  Map<String, dynamic> json,
+) => VideoPlayerDefaultLayout();

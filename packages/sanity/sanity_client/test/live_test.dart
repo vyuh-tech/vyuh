@@ -45,13 +45,14 @@ class TestFlux extends Fake implements EventFlux {
 }
 
 http.Response response(String value) => http.Response(
-    jsonEncode({
-      'result': value,
-      'ms': 1,
-      'query': '*',
-      'syncTags': ['tag']
-    }),
-    200);
+  jsonEncode({
+    'result': value,
+    'ms': 1,
+    'query': '*',
+    'syncTags': ['tag'],
+  }),
+  200,
+);
 Future<void> flush() => Future<void>.delayed(Duration.zero);
 void main() {
   late TestFlux flux;
@@ -64,17 +65,24 @@ void main() {
   });
   test('bursts coalesce and suppress an obsolete result', () async {
     final requests = <Completer<http.Response>>[];
-    final client = getClient(httpClient: MockClient((_) {
-      final response = Completer<http.Response>();
-      requests.add(response);
-      return response.future;
-    }));
+    final client = getClient(
+      httpClient: MockClient((_) {
+        final response = Completer<http.Response>();
+        requests.add(response);
+        return response.future;
+      }),
+    );
     final values = <dynamic>[];
     final events = StreamController<EventFluxData>(sync: true);
-    final subscription =
-        client.fetchLive('*').listen((response) => values.add(response.result));
-    flux.connected!(EventFluxResponse(
-        status: EventFluxStatus.connected, stream: events.stream));
+    final subscription = client
+        .fetchLive('*')
+        .listen((response) => values.add(response.result));
+    flux.connected!(
+      EventFluxResponse(
+        status: EventFluxStatus.connected,
+        stream: events.stream,
+      ),
+    );
     events.add(EventFluxData(data: '', id: '1', event: 'welcome'));
     await flush();
     events.add(EventFluxData(data: '', id: '2', event: 'restart'));
@@ -93,10 +101,12 @@ void main() {
   });
   test('connection and malformed event errors reach the subscriber', () async {
     final errors = <Object>[];
-    final client =
-        getClient(httpClient: MockClient((_) async => response('value')));
-    final subscription =
-        client.fetchLive('*').listen((_) {}, onError: errors.add);
+    final client = getClient(
+      httpClient: MockClient((_) async => response('value')),
+    );
+    final subscription = client
+        .fetchLive('*')
+        .listen((_) {}, onError: errors.add);
     flux.failed!(EventFluxException(message: 'offline'));
     await flush();
     expect(errors.last, isA<LiveConnectException>());
@@ -105,59 +115,79 @@ void main() {
     await flush();
     expect(errors.single, isA<LiveConnectException>());
     final events = StreamController<EventFluxData>(sync: true);
-    flux.connected!(EventFluxResponse(
-        status: EventFluxStatus.connected, stream: events.stream));
+    flux.connected!(
+      EventFluxResponse(
+        status: EventFluxStatus.connected,
+        stream: events.stream,
+      ),
+    );
     events.add(EventFluxData(data: '{bad', id: '1', event: ''));
     await flush();
     expect(errors.last, isA<FormatException>());
     await subscription.cancel();
     await events.close();
   });
-  test(
-      'cancellation before connection prevents subscriptions and late publications',
-      () async {
-    final client =
-        getClient(httpClient: MockClient((_) async => response('value')));
+  test('cancellation before connection prevents subscriptions and late publications', () async {
+    final client = getClient(
+      httpClient: MockClient((_) async => response('value')),
+    );
     final events = StreamController<EventFluxData>.broadcast();
-    final subscription =
-        client.fetchLive('*').listen((_) => fail('cancelled query emitted'));
+    final subscription = client
+        .fetchLive('*')
+        .listen((_) => fail('cancelled query emitted'));
     await subscription.cancel();
-    flux.connected!(EventFluxResponse(
-        status: EventFluxStatus.connected, stream: events.stream));
+    flux.connected!(
+      EventFluxResponse(
+        status: EventFluxStatus.connected,
+        stream: events.stream,
+      ),
+    );
     expect(events.hasListener, isFalse);
     expect(flux.disconnects, greaterThanOrEqualTo(1));
     await events.close();
   });
   test(
-      'reconnection discards previous requests and cancels the old event stream',
-      () async {
-    final requests = <Completer<http.Response>>[];
-    final client = getClient(httpClient: MockClient((_) {
-      final response = Completer<http.Response>();
-      requests.add(response);
-      return response.future;
-    }));
-    final values = <dynamic>[];
-    final old = StreamController<EventFluxData>(sync: true),
-        next = StreamController<EventFluxData>(sync: true);
-    final subscription =
-        client.fetchLive('*').listen((response) => values.add(response.result));
-    flux.connected!(EventFluxResponse(
-        status: EventFluxStatus.connected, stream: old.stream));
-    old.add(EventFluxData(data: '', id: '1', event: 'welcome'));
-    await flush();
-    flux.connected!(EventFluxResponse(
-        status: EventFluxStatus.connected, stream: next.stream));
-    next.add(EventFluxData(data: '', id: '2', event: 'welcome'));
-    requests.first.complete(response('old'));
-    await flush();
-    expect(old.hasListener, isFalse);
-    expect(values, isEmpty);
-    requests.last.complete(response('new'));
-    await flush();
-    expect(values, ['new']);
-    await subscription.cancel();
-    await old.close();
-    await next.close();
-  });
+    'reconnection discards previous requests and cancels the old event stream',
+    () async {
+      final requests = <Completer<http.Response>>[];
+      final client = getClient(
+        httpClient: MockClient((_) {
+          final response = Completer<http.Response>();
+          requests.add(response);
+          return response.future;
+        }),
+      );
+      final values = <dynamic>[];
+      final old = StreamController<EventFluxData>(sync: true),
+          next = StreamController<EventFluxData>(sync: true);
+      final subscription = client
+          .fetchLive('*')
+          .listen((response) => values.add(response.result));
+      flux.connected!(
+        EventFluxResponse(
+          status: EventFluxStatus.connected,
+          stream: old.stream,
+        ),
+      );
+      old.add(EventFluxData(data: '', id: '1', event: 'welcome'));
+      await flush();
+      flux.connected!(
+        EventFluxResponse(
+          status: EventFluxStatus.connected,
+          stream: next.stream,
+        ),
+      );
+      next.add(EventFluxData(data: '', id: '2', event: 'welcome'));
+      requests.first.complete(response('old'));
+      await flush();
+      expect(old.hasListener, isFalse);
+      expect(values, isEmpty);
+      requests.last.complete(response('new'));
+      await flush();
+      expect(values, ['new']);
+      await subscription.cancel();
+      await old.close();
+      await next.close();
+    },
+  );
 }

@@ -149,9 +149,8 @@ void main(List<String> args) {
       });
     }
   }
-  File(
-    args[1],
-  ).writeAsStringSync(const JsonEncoder.withIndent('  ').convert(output));
+  File(args[1])
+      .writeAsStringSync(const JsonEncoder.withIndent('  ').convert(output));
   stdout.writeln(
     '${output.length} packages, ${output.fold<int>(0, (n, p) => n + (p['symbols'] as List).length)} public declarations',
   );

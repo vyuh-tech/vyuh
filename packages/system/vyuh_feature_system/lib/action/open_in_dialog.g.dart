@@ -11,8 +11,9 @@ OpenInDialogAction _$OpenInDialogActionFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
       behavior:
           $enumDecodeNullable(_$DialogBehaviorEnumMap, json['behavior']) ??
-              DialogBehavior.modalBottomSheet,
-      linkType: $enumDecodeNullable(_$LinkTypeEnumMap, json['linkType']) ??
+          DialogBehavior.modalBottomSheet,
+      linkType:
+          $enumDecodeNullable(_$LinkTypeEnumMap, json['linkType']) ??
           LinkType.url,
       url: json['url'] as String?,
       route: json['route'] == null
@@ -26,7 +27,4 @@ const _$DialogBehaviorEnumMap = {
   DialogBehavior.fullscreen: 'fullscreen',
 };
 
-const _$LinkTypeEnumMap = {
-  LinkType.url: 'url',
-  LinkType.route: 'route',
-};
+const _$LinkTypeEnumMap = {LinkType.url: 'url', LinkType.route: 'route'};

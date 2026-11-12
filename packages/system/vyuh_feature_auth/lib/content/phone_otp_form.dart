@@ -38,8 +38,5 @@ final class PhoneOtpForm extends ContentItem {
 
 final class PhoneOtpFormDescriptor extends ContentDescriptor {
   PhoneOtpFormDescriptor({super.layouts})
-      : super(
-          schemaType: PhoneOtpForm.schemaName,
-          title: 'Phone OTP Form',
-        );
+    : super(schemaType: PhoneOtpForm.schemaName, title: 'Phone OTP Form');
 }

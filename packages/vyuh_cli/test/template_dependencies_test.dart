@@ -13,28 +13,31 @@ void main() {
       final source = createBundle(Directory('bricks/${bundle.name}'));
       expect(bundle.toJson(), source.toJson());
     });
-    test('${bundle.name} generates a Material UI feature without CMS imports',
-        () async {
+    test('${bundle.name} generates a Material UI feature without CMS imports', () async {
       final directory = Directory.systemTemp.createTempSync('vyuh-template-');
       try {
         final generator = await MasonGenerator.fromBundle(bundle);
-        await generator.generate(DirectoryGeneratorTarget(directory),
-            vars: {'name': 'sample'});
+        await generator.generate(
+          DirectoryGeneratorTarget(directory),
+          vars: {'name': 'sample'},
+        );
         final pubspec = bundle.name == 'vyuh_feature'
             ? File('${directory.path}/sample/pubspec.yaml')
             : File(
-                '${directory.path}/sample/features/counter/feature_counter/pubspec.yaml');
+                '${directory.path}/sample/features/counter/feature_counter/pubspec.yaml',
+              );
         final text = pubspec.readAsStringSync();
         expect(text, contains('material_ui:'));
         for (final dependency in [
           'flutter_sanity_portable_text:',
           'vyuh_extension_content:',
-          'vyuh_feature_system:'
+          'vyuh_feature_system:',
         ]) {
           expect(text, isNot(contains(dependency)));
         }
-        for (final file
-            in bundle.files.where((file) => file.path.endsWith('.dart'))) {
+        for (final file in bundle.files.where(
+          (file) => file.path.endsWith('.dart'),
+        )) {
           final source = utf8.decode(base64.decode(file.data));
           expect(source, isNot(contains('package:flutter/material.dart')));
           expect(source, isNot(contains('package:vyuh_feature_system/')));

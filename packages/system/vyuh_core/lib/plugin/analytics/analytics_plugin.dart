@@ -53,10 +53,7 @@ final class AnalyticsPlugin extends Plugin
   /// );
   /// ```
   AnalyticsPlugin({required this.providers})
-      : super(
-          name: 'vyuh.plugin.analytics',
-          title: 'Analytics Plugin',
-        );
+    : super(name: 'vyuh.plugin.analytics', title: 'Analytics Plugin');
 
   /// Initializes all analytics providers.
   ///
@@ -115,12 +112,14 @@ final class AnalyticsPlugin extends Plugin
   /// asynchronously, is logged and skipped: analytics must never crash the
   /// app, and one broken provider must not stop the others.
   Future<void> _fanOut(Future<void> Function(AnalyticsProvider) call) {
-    return Future.wait(providers.map((provider) {
-      return Future.sync(() => call(provider)).catchError(
-        (Object error, StackTrace stack) => debugPrint(
-          'Vyuh: analytics provider ${provider.runtimeType} failed: $error',
-        ),
-      );
-    }));
+    return Future.wait(
+      providers.map((provider) {
+        return Future.sync(() => call(provider)).catchError(
+          (Object error, StackTrace stack) => debugPrint(
+            'Vyuh: analytics provider ${provider.runtimeType} failed: $error',
+          ),
+        );
+      }),
+    );
   }
 }

@@ -2,16 +2,9 @@ import 'package:go_router/go_router.dart' as go;
 import 'package:vyuh_extension_content/vyuh_extension_content.dart';
 
 List<go.GoRoute> routes() {
-  return [
-    FoodPath.menu,
-    FoodPath.menuItem,
-    FoodPath.menuDialog,
-  ]
+  return [FoodPath.menu, FoodPath.menuItem, FoodPath.menuDialog]
       .map(
-        (path) => go.GoRoute(
-          path: path,
-          pageBuilder: defaultRoutePageBuilder,
-        ),
+        (path) => go.GoRoute(path: path, pageBuilder: defaultRoutePageBuilder),
       )
       .toList();
 }

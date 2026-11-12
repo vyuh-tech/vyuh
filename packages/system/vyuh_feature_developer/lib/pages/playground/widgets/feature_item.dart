@@ -13,8 +13,5 @@ final class FeatureItem {
 
   /// Creates a new feature item.
   ///
-  const FeatureItem({
-    required this.title,
-    this.feature,
-  });
+  const FeatureItem({required this.title, this.feature});
 }

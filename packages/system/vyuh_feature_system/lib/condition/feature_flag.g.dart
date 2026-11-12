@@ -7,12 +7,13 @@ part of 'feature_flag.dart';
 // **************************************************************************
 
 FeatureFlagCondition _$FeatureFlagConditionFromJson(
-        Map<String, dynamic> json) =>
-    FeatureFlagCondition(
-      flagName: json['flagName'] as String? ?? '',
-      dataType: $enumDecodeNullable(_$FlagDataTypeEnumMap, json['dataType']) ??
-          FlagDataType.string,
-    );
+  Map<String, dynamic> json,
+) => FeatureFlagCondition(
+  flagName: json['flagName'] as String? ?? '',
+  dataType:
+      $enumDecodeNullable(_$FlagDataTypeEnumMap, json['dataType']) ??
+      FlagDataType.string,
+);
 
 const _$FlagDataTypeEnumMap = {
   FlagDataType.string: 'string',

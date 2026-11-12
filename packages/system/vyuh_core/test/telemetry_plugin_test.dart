@@ -24,28 +24,38 @@ class MockTelemetryProvider implements TelemetryProvider {
   Future<void> dispose() async {}
 
   @override
-  Future<void> reportMessage(String message,
-      {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) async {
+  Future<void> reportMessage(
+    String message, {
+    Map<String, dynamic>? params,
+    LogLevel? level = LogLevel.info,
+  }) async {
     messages.add(message);
   }
 
   @override
-  Future<void> reportError(dynamic exception,
-      {StackTrace? stackTrace,
-      Map<String, dynamic>? params,
-      bool fatal = false}) async {
+  Future<void> reportError(
+    dynamic exception, {
+    StackTrace? stackTrace,
+    Map<String, dynamic>? params,
+    bool fatal = false,
+  }) async {
     errors.add(exception);
   }
 
   @override
-  Future<void> reportFlutterError(FlutterErrorDetails details,
-      {bool fatal = false}) async {
+  Future<void> reportFlutterError(
+    FlutterErrorDetails details, {
+    bool fatal = false,
+  }) async {
     flutterErrors.add(details);
   }
 
   @override
-  Future<Trace> startTrace(String name, String operation,
-      {LogLevel? level = LogLevel.info}) async {
+  Future<Trace> startTrace(
+    String name,
+    String operation, {
+    LogLevel? level = LogLevel.info,
+  }) async {
     final trace = NoOpTrace();
     traces.add(trace);
     return trace;

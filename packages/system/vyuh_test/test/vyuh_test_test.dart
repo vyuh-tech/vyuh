@@ -10,9 +10,7 @@ void main() {
 
   testWidgets('getReady waits until the platform is ready', (tester) async {
     vc.runApp(
-      features: () => [
-        vc.FeatureDescriptor(name: 'home', title: 'Home'),
-      ],
+      features: () => [vc.FeatureDescriptor(name: 'home', title: 'Home')],
     );
     await vc.vyuh.getReady(tester);
 

@@ -13,7 +13,5 @@ GenresListResponse _$GenresListResponseFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Genre _$GenreFromJson(Map<String, dynamic> json) => Genre(
-      id: (json['id'] as num).toInt(),
-      name: json['name'] as String,
-    );
+Genre _$GenreFromJson(Map<String, dynamic> json) =>
+    Genre(id: (json['id'] as num).toInt(), name: json['name'] as String);

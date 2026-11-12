@@ -18,10 +18,11 @@ final class HttpNetworkConfig {
   final int maxRetryAttempts;
   final Duration maxRetryDelay;
 
-  const HttpNetworkConfig(
-      {required this.timeout,
-      required this.maxRetryAttempts,
-      required this.maxRetryDelay});
+  const HttpNetworkConfig({
+    required this.timeout,
+    required this.maxRetryAttempts,
+    required this.maxRetryDelay,
+  });
 
   static const standard = HttpNetworkConfig(
     timeout: Duration(seconds: 5),
@@ -54,13 +55,14 @@ final class HttpNetworkPlugin extends NetworkPlugin {
     RetryOptions? retryOptions,
     Duration? timeout,
     this._webIncludeCredentials = true,
-  })  : _retryOptions = retryOptions ??
-            const RetryOptions(
-              maxAttempts: 3,
-              delayFactor: Duration(milliseconds: 200),
-            ),
-        _timeout = timeout ?? const Duration(seconds: 30),
-        super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
+  }) : _retryOptions =
+           retryOptions ??
+           const RetryOptions(
+             maxAttempts: 3,
+             delayFactor: Duration(milliseconds: 200),
+           ),
+       _timeout = timeout ?? const Duration(seconds: 30),
+       super(name: 'vyuh.plugin.network.http', title: 'HTTP Network Plugin') {
     if (client != null) {
       _client = client;
       _initialized = true;
@@ -104,28 +106,44 @@ final class HttpNetworkPlugin extends NetworkPlugin {
       _withRetryAndTimeout(() => _client.head(url, headers: headers));
 
   @override
-  Future<Response> post(Uri url,
-          {Map<String, String>? headers, Object? body, Encoding? encoding}) =>
-      _withRetryAndTimeout(() =>
-          _client.post(url, headers: headers, body: body, encoding: encoding));
+  Future<Response> post(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  }) => _withRetryAndTimeout(
+    () => _client.post(url, headers: headers, body: body, encoding: encoding),
+  );
 
   @override
-  Future<Response> put(Uri url,
-          {Map<String, String>? headers, Object? body, Encoding? encoding}) =>
-      _withRetryAndTimeout(() =>
-          _client.put(url, headers: headers, body: body, encoding: encoding));
+  Future<Response> put(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  }) => _withRetryAndTimeout(
+    () => _client.put(url, headers: headers, body: body, encoding: encoding),
+  );
 
   @override
-  Future<Response> delete(Uri url,
-          {Map<String, String>? headers, Object? body, Encoding? encoding}) =>
-      _withRetryAndTimeout(() => _client.delete(url,
-          headers: headers, body: body, encoding: encoding));
+  Future<Response> delete(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  }) => _withRetryAndTimeout(
+    () => _client.delete(url, headers: headers, body: body, encoding: encoding),
+  );
 
   @override
-  Future<Response> patch(Uri url,
-          {Map<String, String>? headers, Object? body, Encoding? encoding}) =>
-      _withRetryAndTimeout(() =>
-          _client.patch(url, headers: headers, body: body, encoding: encoding));
+  Future<Response> patch(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  }) => _withRetryAndTimeout(
+    () => _client.patch(url, headers: headers, body: body, encoding: encoding),
+  );
 
   Future<T> _withRetryAndTimeout<T>(Future<T> Function() fn) =>
       _retryOptions.retry(

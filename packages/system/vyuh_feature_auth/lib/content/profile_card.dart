@@ -35,8 +35,5 @@ final class ProfileCard extends ContentItem {
 
 final class ProfileFormDescriptor extends ContentDescriptor {
   ProfileFormDescriptor({super.layouts})
-      : super(
-          schemaType: ProfileCard.schemaName,
-          title: 'Profile Card',
-        );
+    : super(schemaType: ProfileCard.schemaName, title: 'Profile Card');
 }

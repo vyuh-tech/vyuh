@@ -7,5 +7,5 @@ part of 'edition_summary_layout.dart';
 // **************************************************************************
 
 EditionSummaryLayout _$EditionSummaryLayoutFromJson(
-        Map<String, dynamic> json) =>
-    EditionSummaryLayout();
+  Map<String, dynamic> json,
+) => EditionSummaryLayout();

@@ -13,8 +13,11 @@ HintActionText _$HintActionTextFromJson(Map<String, dynamic> json) =>
       action: json['action'] == null
           ? null
           : Action.fromJson(json['action'] as Map<String, dynamic>),
-      alignment: $enumDecodeNullable(
-              _$HintActionAlignmentEnumMap, json['alignment']) ??
+      alignment:
+          $enumDecodeNullable(
+            _$HintActionAlignmentEnumMap,
+            json['alignment'],
+          ) ??
           HintActionAlignment.center,
       modifiers: ContentItem.modifierList(json['modifiers']),
     );
@@ -26,5 +29,5 @@ const _$HintActionAlignmentEnumMap = {
 };
 
 HintActionTextDefaultLayout _$HintActionTextDefaultLayoutFromJson(
-        Map<String, dynamic> json) =>
-    HintActionTextDefaultLayout();
+  Map<String, dynamic> json,
+) => HintActionTextDefaultLayout();

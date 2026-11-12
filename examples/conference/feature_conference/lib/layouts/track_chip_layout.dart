@@ -25,12 +25,10 @@ final class TrackChipLayout extends LayoutConfiguration<Track> {
   Widget build(BuildContext context, Track content) {
     return GestureDetector(
       onTap: () {
-        final conferenceId = GoRouterState.of(
-          context,
-        ).pathParameters['conferenceId']!;
-        final editionId = GoRouterState.of(
-          context,
-        ).pathParameters['editionId']!;
+        final conferenceId = GoRouterState.of(context)
+            .pathParameters['conferenceId']!;
+        final editionId = GoRouterState.of(context)
+            .pathParameters['editionId']!;
         vyuh.router.push(
           '/conferences/$conferenceId/editions/$editionId/tracks/${content.id}',
         );

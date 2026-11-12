@@ -68,15 +68,17 @@ final class ConditionalRoute extends RouteBase {
     }
 
     final value = (await condition?.execute(context)) ?? defaultCase;
-    final caseItem =
-        (cases ?? <CaseRouteItem>[]).firstWhereOrNull((x) => x.value == value);
+    final caseItem = (cases ?? <CaseRouteItem>[]).firstWhereOrNull(
+      (x) => x.value == value,
+    );
 
     final ref = caseItem?.item;
     RouteBase? leafRoute;
 
     if (ref != null) {
-      final route = await VyuhBinding.instance.content.provider
-          .fetchRoute(routeId: ref.ref);
+      final route = await VyuhBinding.instance.content.provider.fetchRoute(
+        routeId: ref.ref,
+      );
       if (!context.mounted) {
         return null;
       }
@@ -94,7 +96,8 @@ final class ConditionalRoute extends RouteBase {
 
 class ConditionalRouteDescriptor extends ContentDescriptor {
   ConditionalRouteDescriptor({super.layouts})
-      : super(
-            schemaType: ConditionalRoute.schemaName,
-            title: 'Conditional Route');
+    : super(
+        schemaType: ConditionalRoute.schemaName,
+        title: 'Conditional Route',
+      );
 }

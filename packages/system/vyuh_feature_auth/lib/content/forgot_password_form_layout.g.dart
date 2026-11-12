@@ -7,5 +7,5 @@ part of 'forgot_password_form_layout.dart';
 // **************************************************************************
 
 ForgotPasswordFormLayout _$ForgotPasswordFormLayoutFromJson(
-        Map<String, dynamic> json) =>
-    ForgotPasswordFormLayout();
+  Map<String, dynamic> json,
+) => ForgotPasswordFormLayout();

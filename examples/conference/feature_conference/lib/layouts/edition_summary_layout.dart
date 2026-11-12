@@ -27,9 +27,8 @@ final class EditionSummaryLayout extends LayoutConfiguration<Edition> {
 
     return GestureDetector(
       onTap: () {
-        final conferenceId = GoRouterState.of(
-          context,
-        ).pathParameters['conferenceId']!;
+        final conferenceId = GoRouterState.of(context)
+            .pathParameters['conferenceId']!;
 
         vyuh.router.go('/conferences/$conferenceId/editions/${content.id}');
       },

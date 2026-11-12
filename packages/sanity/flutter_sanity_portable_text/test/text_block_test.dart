@@ -8,8 +8,9 @@ void main() {
     PortableTextConfig.shared.reset();
   });
 
-  testWidgets('TextBlockItem can be loaded from json',
-      (WidgetTester tester) async {
+  testWidgets('TextBlockItem can be loaded from json', (
+    WidgetTester tester,
+  ) async {
     final block = TextBlockItem.fromJson({
       '_key': 'key',
       'style': 'normal',
@@ -18,7 +19,7 @@ void main() {
         {
           '_key': 'key',
           'text': 'World',
-          'marks': ['strong']
+          'marks': ['strong'],
         },
       ],
     });
@@ -31,43 +32,45 @@ void main() {
     expect(block.children[1].marks, ['strong']);
   });
 
-  testWidgets('TextBlockItem loaded from json has correct list-item properties',
-      (WidgetTester tester) async {
-    final block = TextBlockItem.fromJson({
-      'listItem': 'square',
-      'children': [
-        {'text': 'Hello, '},
-      ],
-    });
+  testWidgets(
+    'TextBlockItem loaded from json has correct list-item properties',
+    (WidgetTester tester) async {
+      final block = TextBlockItem.fromJson({
+        'listItem': 'square',
+        'children': [
+          {'text': 'Hello, '},
+        ],
+      });
 
-    expect(block.listItem, ListItemType.square);
+      expect(block.listItem, ListItemType.square);
 
-    final block2 = TextBlockItem.fromJson({
-      'listItem': 'bullet',
-      'children': [
-        {'text': 'Hello, '},
-      ],
-    });
+      final block2 = TextBlockItem.fromJson({
+        'listItem': 'bullet',
+        'children': [
+          {'text': 'Hello, '},
+        ],
+      });
 
-    expect(block2.listItem, ListItemType.bullet);
+      expect(block2.listItem, ListItemType.bullet);
 
-    final block3 = TextBlockItem.fromJson({
-      'listItem': 'number',
-      'children': [
-        {'text': 'Hello, '},
-      ],
-    });
+      final block3 = TextBlockItem.fromJson({
+        'listItem': 'number',
+        'children': [
+          {'text': 'Hello, '},
+        ],
+      });
 
-    expect(block3.listItem, ListItemType.number);
-  });
+      expect(block3.listItem, ListItemType.number);
+    },
+  );
 
   testWidgets('MarkDef can be loaded from json', (WidgetTester tester) async {
     PortableTextConfig.shared.markDefs[CustomMarkDef.schemaName] =
         MarkDefDescriptor(
-      schemaType: 'schemaType',
-      fromJson: (json) => CustomMarkDef.fromJson(json),
-      styleBuilder: (context, markDef, style) => style,
-    );
+          schemaType: 'schemaType',
+          fromJson: (json) => CustomMarkDef.fromJson(json),
+          styleBuilder: (context, markDef, style) => style,
+        );
 
     expect(() => MarkDef.fromJson({}), throwsUnsupportedError);
   });

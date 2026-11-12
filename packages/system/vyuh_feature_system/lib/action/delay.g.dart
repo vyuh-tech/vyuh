@@ -7,7 +7,7 @@ part of 'delay.dart';
 // **************************************************************************
 
 DelayAction _$DelayActionFromJson(Map<String, dynamic> json) => DelayAction(
-      milliseconds: (json['milliseconds'] as num?)?.toInt() ?? 0,
-      message: json['message'] as String? ?? '',
-      isAwaited: json['isAwaited'] as bool? ?? false,
-    );
+  milliseconds: (json['milliseconds'] as num?)?.toInt() ?? 0,
+  message: json['message'] as String? ?? '',
+  isAwaited: json['isAwaited'] as bool? ?? false,
+);

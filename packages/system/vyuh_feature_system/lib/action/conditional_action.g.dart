@@ -8,7 +8,8 @@ part of 'conditional_action.dart';
 
 ConditionalAction _$ConditionalActionFromJson(Map<String, dynamic> json) =>
     ConditionalAction(
-      cases: (json['cases'] as List<dynamic>?)
+      cases:
+          (json['cases'] as List<dynamic>?)
               ?.map((e) => ActionCase.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],
@@ -20,8 +21,8 @@ ConditionalAction _$ConditionalActionFromJson(Map<String, dynamic> json) =>
     );
 
 ActionCase _$ActionCaseFromJson(Map<String, dynamic> json) => ActionCase(
-      value: json['value'] as String?,
-      action: json['action'] == null
-          ? null
-          : Action.fromJson(json['action'] as Map<String, dynamic>),
-    );
+  value: json['value'] as String?,
+  action: json['action'] == null
+      ? null
+      : Action.fromJson(json['action'] as Map<String, dynamic>),
+);

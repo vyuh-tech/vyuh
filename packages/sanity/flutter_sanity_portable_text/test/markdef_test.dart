@@ -8,14 +8,15 @@ void main() {
     PortableTextConfig.shared.reset();
   });
 
-  testWidgets('TextBlockItem loaded from json has correct markDefs',
-      (WidgetTester tester) async {
+  testWidgets('TextBlockItem loaded from json has correct markDefs', (
+    WidgetTester tester,
+  ) async {
     PortableTextConfig.shared.markDefs[CustomMarkDef.schemaName] =
         MarkDefDescriptor(
-      schemaType: CustomMarkDef.schemaName,
-      fromJson: (json) => CustomMarkDef.fromJson(json),
-      styleBuilder: (context, markDef, style) => style,
-    );
+          schemaType: CustomMarkDef.schemaName,
+          fromJson: (json) => CustomMarkDef.fromJson(json),
+          styleBuilder: (context, markDef, style) => style,
+        );
 
     final block = TextBlockItem.fromJson({
       'children': [

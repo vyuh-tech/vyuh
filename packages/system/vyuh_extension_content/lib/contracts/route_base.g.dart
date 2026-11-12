@@ -7,8 +7,8 @@ part of 'route_base.dart';
 // **************************************************************************
 
 Category _$CategoryFromJson(Map<String, dynamic> json) => Category(
-      identifier: json['identifier'] as String,
-      title: json['title'] as String,
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: Category.modifierList(json['modifiers']),
-    );
+  identifier: json['identifier'] as String,
+  title: json['title'] as String,
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: Category.modifierList(json['modifiers']),
+);

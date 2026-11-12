@@ -26,7 +26,7 @@ enum LogLevel {
 
   /// The log level for fatal messages.
   /// This is only for the most severe errors, generally considered irrecoverable.
-  fatal
+  fatal,
 }
 
 /// The default implementation for a Telemetry Plugin.
@@ -41,10 +41,7 @@ final class TelemetryPlugin extends Plugin
 
   /// Creates a new [TelemetryPlugin].
   TelemetryPlugin({required this.providers})
-      : super(
-          name: 'vyuh.plugin.telemetry',
-          title: 'Telemetry Plugin',
-        );
+    : super(name: 'vyuh.plugin.telemetry', title: 'Telemetry Plugin');
 
   @override
   Future<void> initOnce() => _fanOut((provider) => provider.init());
@@ -67,41 +64,55 @@ final class TelemetryPlugin extends Plugin
   }
 
   @override
-  Future<void> reportError(exception,
-      {StackTrace? stackTrace,
-      Map<String, dynamic>? params,
-      bool fatal = false}) {
-    return _fanOut((provider) => provider.reportError(
-          exception,
-          stackTrace: stackTrace,
-          params: params,
-          fatal: fatal,
-        ));
-  }
-
-  @override
-  Future<void> reportFlutterError(FlutterErrorDetails details,
-      {bool fatal = false}) {
+  Future<void> reportError(
+    exception, {
+    StackTrace? stackTrace,
+    Map<String, dynamic>? params,
+    bool fatal = false,
+  }) {
     return _fanOut(
-        (provider) => provider.reportFlutterError(details, fatal: fatal));
+      (provider) => provider.reportError(
+        exception,
+        stackTrace: stackTrace,
+        params: params,
+        fatal: fatal,
+      ),
+    );
   }
 
   @override
-  Future<void> reportMessage(String message,
-      {Map<String, dynamic>? params, LogLevel? level = LogLevel.info}) {
-    return _fanOut((provider) =>
-        provider.reportMessage(message, params: params, level: level));
+  Future<void> reportFlutterError(
+    FlutterErrorDetails details, {
+    bool fatal = false,
+  }) {
+    return _fanOut(
+      (provider) => provider.reportFlutterError(details, fatal: fatal),
+    );
+  }
+
+  @override
+  Future<void> reportMessage(
+    String message, {
+    Map<String, dynamic>? params,
+    LogLevel? level = LogLevel.info,
+  }) {
+    return _fanOut(
+      (provider) =>
+          provider.reportMessage(message, params: params, level: level),
+    );
   }
 
   /// Sends a report to every provider. A provider that fails, synchronously
   /// or asynchronously, is logged and skipped: telemetry must never crash
   /// the app it observes, and one broken provider must not stop the others.
   Future<void> _fanOut(Future<void> Function(TelemetryProvider) report) {
-    return Future.wait(providers.map((provider) {
-      return Future.sync(() => report(provider)).catchError(
-        (Object error, StackTrace stack) => _logFailure(provider, error),
-      );
-    }));
+    return Future.wait(
+      providers.map((provider) {
+        return Future.sync(() => report(provider)).catchError(
+          (Object error, StackTrace stack) => _logFailure(provider, error),
+        );
+      }),
+    );
   }
 
   /// Runs a function with a trace. This is useful for wrapping functions that
@@ -194,13 +205,12 @@ Future<List<Trace>> _startTraces<T extends Object>(
   Future<Trace> Function(T source) start,
 ) => Future.wait(
   sources.map(
-    (source) => Future.sync(() => start(source)).catchError((
-      Object error,
-      StackTrace stack,
-    ) {
-      _logFailure(source, error);
-      return NoOpTrace();
-    }),
+    (source) =>
+        Future.sync(() => start(source))
+            .catchError((Object error, StackTrace stack) {
+              _logFailure(source, error);
+              return NoOpTrace();
+            }),
   ),
 );
 

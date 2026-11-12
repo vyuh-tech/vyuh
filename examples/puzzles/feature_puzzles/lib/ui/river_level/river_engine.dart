@@ -61,11 +61,7 @@ class RiverLevelEngine {
         (element) =>
             element.title.toLowerCase() == killCondition.victim.toLowerCase(),
       );
-      return LevelEndReason(
-        endReason,
-        killer: killer,
-        victim: victim,
-      );
+      return LevelEndReason(endReason, killer: killer, victim: victim);
     }
     return null;
   }

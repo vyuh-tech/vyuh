@@ -81,15 +81,11 @@ class _PortableTextStyleOverrideState extends State<PortableTextStyleOverride> {
       final wrapped = <String, TextStyleBuilder>{
         for (final entry in widget.styles.entries)
           if (base.styles[entry.key] case final builder?)
-            entry.key: (ctx, inherited) =>
-                entry.value(builder(ctx, inherited)),
+            entry.key: (ctx, inherited) => entry.value(builder(ctx, inherited)),
       };
       _derived = base.copyWith(styles: wrapped);
     }
 
-    return PortableTextTheme(
-      config: _derived!,
-      child: widget.child,
-    );
+    return PortableTextTheme(config: _derived!, child: widget.child);
   }
 }

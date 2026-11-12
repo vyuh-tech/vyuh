@@ -66,9 +66,8 @@ void showWinDialog(
           SizedBox(height: theme.spacing.s8),
           PuzzleButton(
             onTap: () {
-              Navigator.of(
-                context,
-              ).popUntil(ModalRoute.withName(PuzzlesPath.puzzles));
+              Navigator.of(context)
+                  .popUntil(ModalRoute.withName(PuzzlesPath.puzzles));
             },
             title: 'NEXT',
             color: theme.colorScheme.secondary,
@@ -109,9 +108,8 @@ void showLoseDialog(
 }) {
   showDialog(
     context: context,
-    barrierColor: Theme.of(
-      context,
-    ).colorScheme.onErrorContainer.withValues(alpha: 0.5),
+    barrierColor: Theme.of(context).colorScheme.onErrorContainer
+        .withValues(alpha: 0.5),
     builder: (context) {
       final theme = Theme.of(context);
       return AlertDialog(

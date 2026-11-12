@@ -25,16 +25,13 @@ final class SanityClient {
 
   /// Creates a new Sanity client with the provided configuration. Use the optional
   /// parameters to provide a custom HTTP client or URL builder.
-  SanityClient(
-    this.config, {
-    http.Client? httpClient,
-    UrlBuilder? urlBuilder,
-  })  : urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
-        httpClient = httpClient ?? http.Client(),
-        _requestHeaders = {
-          if (config.token != null) 'Authorization': 'Bearer ${config.token}',
-          'Accept': 'application/json',
-        };
+  SanityClient(this.config, {http.Client? httpClient, UrlBuilder? urlBuilder})
+    : urlBuilder = urlBuilder ?? SanityUrlBuilder(config),
+      httpClient = httpClient ?? http.Client(),
+      _requestHeaders = {
+        if (config.token != null) 'Authorization': 'Bearer ${config.token}',
+        'Accept': 'application/json',
+      };
 
   /// Set the HTTP client to use for fetching data
   void setHttpClient(http.Client client) {
@@ -93,17 +90,16 @@ final class SanityClient {
     int? devicePixelRatio,
     int? quality,
     String? format,
-  }) =>
-      urlBuilder.imageUrl(
-        imageRefId,
-        options: ImageOptions(
-          width: width,
-          height: height,
-          devicePixelRatio: devicePixelRatio,
-          quality: quality,
-          format: format,
-        ),
-      );
+  }) => urlBuilder.imageUrl(
+    imageRefId,
+    options: ImageOptions(
+      width: width,
+      height: height,
+      devicePixelRatio: devicePixelRatio,
+      quality: quality,
+      format: format,
+    ),
+  );
 
   /// Return the associated object url
   Uri fileUrl(String fileRefId) => urlBuilder.fileUrl(fileRefId);
@@ -111,13 +107,12 @@ final class SanityClient {
   /// Fetches the associated datasets with this project
   Future<List<SanityDataset>> datasets() async {
     final uri = Uri.parse(
-        'https://api.sanity.io/${config.apiVersion}/projects/${config.projectId}/datasets');
+      'https://api.sanity.io/${config.apiVersion}/projects/${config.projectId}/datasets',
+    );
 
     final response = await httpClient.get(uri, headers: _requestHeaders);
     final datasets = (jsonDecode(response.body) as List<dynamic>)
-        .map(
-          (json) => SanityDataset.fromJson(json as Map<String, dynamic>),
-        )
+        .map((json) => SanityDataset.fromJson(json as Map<String, dynamic>))
         .toList(growable: false);
 
     return datasets;
@@ -130,7 +125,8 @@ final class SanityClient {
     switch (response.statusCode) {
       case 200:
         final serverResponse = ServerResponse.fromJson(
-            jsonDecode(response.body) as Map<String, dynamic>);
+          jsonDecode(response.body) as Map<String, dynamic>,
+        );
 
         final (age, shard) = _extractFromHeaders(response);
 

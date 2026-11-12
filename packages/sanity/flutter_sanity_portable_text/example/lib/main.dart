@@ -181,8 +181,7 @@ class MyApp extends StatelessWidget {
                 TextBlockItem(
                   children: [
                     Span(
-                      text:
-                          '"The best way to predict the future is to invent it."',
+                      text: '"The best way to predict the future is to invent it."',
                     ),
                     Span(text: '\n- Steve Jobs'),
                   ],
@@ -192,8 +191,7 @@ class MyApp extends StatelessWidget {
                 TextBlockItem(
                   children: [
                     Span(
-                      text:
-                          'Supports all standard marks and styles, including support for:',
+                      text: 'Supports all standard marks and styles, including support for:',
                     ),
                   ],
                 ),
@@ -237,8 +235,7 @@ class MyApp extends StatelessWidget {
                     Span(text: 'We can also do '),
                     Span(text: 'custom marks!', marks: ['custom-key']),
                     Span(
-                      text:
-                          ' and report when a custom mark is not registered, such as:',
+                      text: ' and report when a custom mark is not registered, such as:',
                     ),
                     Span(text: ' this.', marks: ['missing-key']),
                   ],

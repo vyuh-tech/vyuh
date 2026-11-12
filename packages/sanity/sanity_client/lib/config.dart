@@ -45,7 +45,7 @@ final class SanityConfig {
     final parts = [
       today.year.toString(),
       today.month.toString().padLeft(2, '0'),
-      today.day.toString().padLeft(2, '0')
+      today.day.toString().padLeft(2, '0'),
     ].join('-');
 
     return 'v$parts';
@@ -62,18 +62,21 @@ final class SanityConfig {
     bool? useCdn,
     Perspective? perspective,
     bool? explainQuery,
-  })  : useCdn = useCdn ?? true,
-        apiVersion = apiVersion ?? defaultApiVersion,
-        perspective = perspective ?? Perspective.published,
-        explainQuery = explainQuery ?? false {
+  }) : useCdn = useCdn ?? true,
+       apiVersion = apiVersion ?? defaultApiVersion,
+       perspective = perspective ?? Perspective.published,
+       explainQuery = explainQuery ?? false {
     if (this.useCdn) {
-      assert(this.perspective == Perspective.published,
-          'When useCdn is true, perspective can only be set to published');
+      assert(
+        this.perspective == Perspective.published,
+        'When useCdn is true, perspective can only be set to published',
+      );
     } else {
       assert(
-          this.perspective == Perspective.raw ||
-              this.perspective == Perspective.drafts,
-          'When useCdn is false, perspective must be either raw or drafts');
+        this.perspective == Perspective.raw ||
+            this.perspective == Perspective.drafts,
+        'When useCdn is false, perspective must be either raw or drafts',
+      );
     }
 
     if (this.perspective != Perspective.published) {
@@ -84,7 +87,9 @@ Setup an API token, with Viewer access, in the Sanity Management Console.
 Without a valid token you will not be able to fetch data from Sanity.''');
     }
 
-    assert(RegExp(r'^v\d{4}-\d{2}-\d{2}$').hasMatch(this.apiVersion),
-        'Invalid API version provided. It should follow the format `vYYYY-MM-DD`');
+    assert(
+      RegExp(r'^v\d{4}-\d{2}-\d{2}$').hasMatch(this.apiVersion),
+      'Invalid API version provided. It should follow the format `vYYYY-MM-DD`',
+    );
   }
 }

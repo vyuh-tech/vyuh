@@ -7,16 +7,15 @@ part of 'document_section_layout.dart';
 // **************************************************************************
 
 DefaultDocumentSectionViewLayout _$DefaultDocumentSectionViewLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultDocumentSectionViewLayout();
+  Map<String, dynamic> json,
+) => DefaultDocumentSectionViewLayout();
 
 DocumentSectionViewConditionalLayout
-    _$DocumentSectionViewConditionalLayoutFromJson(Map<String, dynamic> json) =>
-        DocumentSectionViewConditionalLayout(
-          cases: (json['cases'] as List<dynamic>)
-              .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
-              .toList(),
-          defaultCase: json['defaultCase'] as String,
-          condition:
-              Condition.fromJson(json['condition'] as Map<String, dynamic>),
-        );
+_$DocumentSectionViewConditionalLayoutFromJson(Map<String, dynamic> json) =>
+    DocumentSectionViewConditionalLayout(
+      cases: (json['cases'] as List<dynamic>)
+          .map((e) => LayoutCaseItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      defaultCase: json['defaultCase'] as String,
+      condition: Condition.fromJson(json['condition'] as Map<String, dynamic>),
+    );

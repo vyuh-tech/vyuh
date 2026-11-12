@@ -110,8 +110,7 @@ final class _DefaultAPIContentLayout extends LayoutConfiguration<APIContent> {
       return VyuhBinding.instance.widgetBuilder.errorView(
         context,
         title: 'Missing API Configuration',
-        subtitle:
-            'Could not find a matching API Configuration. Please ensure it has been registered with the correct schema type.',
+        subtitle: 'Could not find a matching API Configuration. Please ensure it has been registered with the correct schema type.',
         showRestart: false,
       );
     }

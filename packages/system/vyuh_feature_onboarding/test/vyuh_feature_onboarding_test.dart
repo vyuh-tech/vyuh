@@ -4,9 +4,14 @@ import 'package:vyuh_feature_onboarding/vyuh_feature_onboarding.dart';
 
 void main() {
   test('the feature contributes the onboarding content builder', () {
-    expect(feature.routes, isNull, reason: 'onboarding adds content, not routes');
-    final contributions =
-        feature.extensions!.whereType<ContentExtensionDescriptor>().single;
+    expect(
+      feature.routes,
+      isNull,
+      reason: 'onboarding adds content, not routes',
+    );
+    final contributions = feature.extensions!
+        .whereType<ContentExtensionDescriptor>()
+        .single;
     expect(
       contributions.contentBuilders!.single,
       isA<OnboardingContentBuilder>(),

@@ -13,7 +13,7 @@ ShowSnackBarAction _$ShowSnackBarActionFromJson(Map<String, dynamic> json) =>
       showForSeconds: (json['showForSeconds'] as num?)?.toInt() ?? 3,
       behavior:
           $enumDecodeNullable(_$SnackBarBehaviorEnumMap, json['behavior']) ??
-              SnackBarBehavior.fixed,
+          SnackBarBehavior.fixed,
       isAwaited: json['isAwaited'] as bool? ?? false,
     );
 

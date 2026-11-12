@@ -7,13 +7,13 @@ part of 'drawer.dart';
 // **************************************************************************
 
 DrawerAction _$DrawerActionFromJson(Map<String, dynamic> json) => DrawerAction(
-      title: json['title'] as String?,
-      actionType:
-          $enumDecodeNullable(_$DrawerActionTypeEnumMap, json['actionType']) ??
-              DrawerActionType.open,
-      isEndDrawer: json['isEndDrawer'] as bool? ?? false,
-      isAwaited: json['isAwaited'] as bool? ?? false,
-    );
+  title: json['title'] as String?,
+  actionType:
+      $enumDecodeNullable(_$DrawerActionTypeEnumMap, json['actionType']) ??
+      DrawerActionType.open,
+  isEndDrawer: json['isEndDrawer'] as bool? ?? false,
+  isAwaited: json['isAwaited'] as bool? ?? false,
+);
 
 const _$DrawerActionTypeEnumMap = {
   DrawerActionType.open: 'open',

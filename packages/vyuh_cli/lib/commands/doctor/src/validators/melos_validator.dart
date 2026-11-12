@@ -8,10 +8,8 @@ class MelosValidator extends DoctorValidator {
       'https://melos.invertase.dev/~melos-latest/getting-started';
 
   @override
-  Future<ValidationResult> validate() => commandVersionValidator(
-        this,
-        command: 'melos',
-      );
+  Future<ValidationResult> validate() =>
+      commandVersionValidator(this, command: 'melos');
 
   @override
   String extractVersion(String output) {

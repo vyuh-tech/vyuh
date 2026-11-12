@@ -21,8 +21,7 @@ final class CreateItemCommand extends BaseCreateCommand {
     argParser.addOption(
       'feature',
       abbr: 'f',
-      help:
-          'The feature to add the content item to. If not specified, the item will be created without a feature context.',
+      help: 'The feature to add the content item to. If not specified, the item will be created without a feature context.',
     );
   }
 
@@ -90,7 +89,8 @@ final class CreateItemCommand extends BaseCreateCommand {
     } else if (featureName != null) {
       // Use feature directory if feature name is provided
       baseDir = Directory(
-          path.join('features', featureName!, 'feature_$featureName'));
+        path.join('features', featureName!, 'feature_$featureName'),
+      );
       if (!baseDir.existsSync()) {
         logger.err('Feature directory not found: ${baseDir.path}');
         throw Exception('Feature directory not found: ${baseDir.path}');
@@ -99,7 +99,8 @@ final class CreateItemCommand extends BaseCreateCommand {
       // Default to current directory if neither output directory nor feature name is provided
       baseDir = Directory('.');
       logger.info(
-          'No feature or output directory specified. Using current directory.');
+        'No feature or output directory specified. Using current directory.',
+      );
     }
 
     final contentDir = Directory(path.join(baseDir.path, 'lib', 'content'));
@@ -119,13 +120,11 @@ final class CreateItemCommand extends BaseCreateCommand {
     final result = await super.runGenerate(generator, targetDir);
 
     if (result == ExitCode.success.code) {
-      logger.info(
-        '''
+      logger.info('''
 Don't forget to:
 1. Run 'dart run build_runner build' to generate the JSON serialization code
 2. Register the ContentBuilder in your FeatureDescriptor with the ContentExtensionDescriptor()
-''',
-      );
+''');
     }
 
     return result;

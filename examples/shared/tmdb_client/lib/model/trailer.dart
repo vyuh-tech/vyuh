@@ -23,16 +23,17 @@ final class Trailer {
   @JsonKey(name: 'type')
   final String type;
 
-  Trailer(
-      {required this.name,
-      required this.key,
-      required this.site,
-      required this.type,
-      required this.iso_639_1,
-      required this.iso_3166_1,
-      required this.official,
-      required this.publishedAt,
-      required this.id});
+  Trailer({
+    required this.name,
+    required this.key,
+    required this.site,
+    required this.type,
+    required this.iso_639_1,
+    required this.iso_3166_1,
+    required this.official,
+    required this.publishedAt,
+    required this.id,
+  });
 
   factory Trailer.fromJson(Map<String, dynamic> json) =>
       _$TrailerFromJson(json);

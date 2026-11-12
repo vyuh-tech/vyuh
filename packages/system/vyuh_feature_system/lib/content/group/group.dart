@@ -42,23 +42,25 @@ class Group extends ContentItem implements PortableBlockItem, ContainerItem {
     schemaType: Group.schemaName,
     title: 'Group',
     fromJson: Group.fromJson,
-    preview: () => Group(items: [
-      Card(
-        title: 'One',
-        description: 'The first card',
-        imageUrl: Uri.parse('https://picsum.photos/200/150'),
-      ),
-      Card(
-        title: 'Two',
-        description: 'The second card',
-        imageUrl: Uri.parse('https://picsum.photos/200/150'),
-      ),
-      Card(
-        title: 'Three',
-        description: 'The third card',
-        imageUrl: Uri.parse('https://picsum.photos/200/150'),
-      ),
-    ]),
+    preview: () => Group(
+      items: [
+        Card(
+          title: 'One',
+          description: 'The first card',
+          imageUrl: Uri.parse('https://picsum.photos/200/150'),
+        ),
+        Card(
+          title: 'Two',
+          description: 'The second card',
+          imageUrl: Uri.parse('https://picsum.photos/200/150'),
+        ),
+        Card(
+          title: 'Three',
+          description: 'The third card',
+          imageUrl: Uri.parse('https://picsum.photos/200/150'),
+        ),
+      ],
+    ),
   );
 
   static final contentBuilder = ContentBuilder(
@@ -108,7 +110,7 @@ class Group extends ContentItem implements PortableBlockItem, ContainerItem {
 /// ```
 class GroupDescriptor extends ContentDescriptor {
   GroupDescriptor({super.layouts})
-      : super(schemaType: Group.schemaName, title: 'Group');
+    : super(schemaType: Group.schemaName, title: 'Group');
 }
 
 /// A conditional layout for groups that adapts based on specified conditions.

@@ -42,8 +42,9 @@ final class SeriesApi {
 
   Future<ListResponse<SeriesShortInfo>> recommendations(int seriesId) async {
     // await Future.delayed(const Duration(seconds: 1000));
-    final response =
-        await vyuh.network.get(apiUrl('tv/$seriesId/recommendations'));
+    final response = await vyuh.network.get(
+      apiUrl('tv/$seriesId/recommendations'),
+    );
 
     final data = jsonDecode(response.body);
     return ListResponse<SeriesShortInfo>.fromJson(data);

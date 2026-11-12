@@ -11,10 +11,7 @@ final class InMemoryStoragePlugin extends StoragePlugin with InitOncePlugin {
   final Map<String, dynamic> _storage = {};
 
   InMemoryStoragePlugin()
-      : super(
-          name: 'vyuh.plugin.storage.memory',
-          title: 'In-Memory Storage',
-        );
+    : super(name: 'vyuh.plugin.storage.memory', title: 'In-Memory Storage');
 
   @override
   Future<dynamic> read(String key) async {

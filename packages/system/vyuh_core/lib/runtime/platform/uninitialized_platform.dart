@@ -29,7 +29,7 @@ final class _UninitializedPlatform extends VyuhPlatform {
 
   @override
   ExtensionBuilder<ExtensionDescriptor>?
-      extensionBuilder<T extends ExtensionDescriptor>() => _error();
+  extensionBuilder<T extends ExtensionDescriptor>() => _error();
 
   @override
   GlobalKey<NavigatorState> get rootNavigatorKey => throw _error();
@@ -58,6 +58,7 @@ final class _UninitializedPlatform extends VyuhPlatform {
 }
 
 Never _error() => throw StateError(
-    '''You are using an uninitialized instance of the VyuhPlatform. 
+  '''You are using an uninitialized instance of the VyuhPlatform. 
     Please call runApp() in vyuh_core to get a correct instance.
-    ''');
+    ''',
+);

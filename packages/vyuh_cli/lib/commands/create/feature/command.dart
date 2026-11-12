@@ -21,8 +21,11 @@ final class CreateFeatureCommand extends BaseCreateCommand {
     super.setupArgParser();
     argParser
       ..addOption('title', help: 'Feature display title.')
-      ..addOption('description',
-          help: 'What the feature owns.', defaultsTo: 'A modular Vyuh feature.')
+      ..addOption(
+        'description',
+        help: 'What the feature owns.',
+        defaultsTo: 'A modular Vyuh feature.',
+      )
       ..addOption('route', help: 'Entry route (defaults to /<feature-name>).');
   }
 
@@ -78,8 +81,9 @@ final class CreateFeatureCommand extends BaseCreateCommand {
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory =
-        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+    final directory = outputDirectory != null
+        ? Directory(outputDirectory!)
+        : Directory('.');
 
     return directory;
   }
@@ -88,11 +92,14 @@ final class CreateFeatureCommand extends BaseCreateCommand {
   Map<String, dynamic> getTemplateVars() {
     final vars = super.getTemplateVars();
     vars['name'] = featureName;
-    vars['title_literal'] =
-        jsonEncode(argResults['title'] ?? featureName.titleCase);
+    vars['title_literal'] = jsonEncode(
+      argResults['title'] ?? featureName.titleCase,
+    );
     vars['description_literal'] = jsonEncode(argResults['description']);
-    vars['route_literal'] = jsonEncode(argResults['route'] ??
-        '/${featureName.replaceFirst(RegExp(r'^feature_'), '')}');
+    vars['route_literal'] = jsonEncode(
+      argResults['route'] ??
+          '/${featureName.replaceFirst(RegExp(r'^feature_'), '')}',
+    );
     return vars;
   }
 }

@@ -26,11 +26,7 @@ abstract base class BasePerson {
   @JsonKey(name: 'known_for_department')
   final String? knownForDepartment;
 
-  BasePerson({
-    required this.name,
-    required this.id,
-    this.knownForDepartment,
-  });
+  BasePerson({required this.name, required this.id, this.knownForDepartment});
 }
 
 @JsonSerializable()

@@ -8,7 +8,8 @@ part of 'theme_modifier.dart';
 
 ThemeModifier _$ThemeModifierFromJson(Map<String, dynamic> json) =>
     ThemeModifier(
-      mode: $enumDecodeNullable(_$ThemeModeEnumMap, json['mode']) ??
+      mode:
+          $enumDecodeNullable(_$ThemeModeEnumMap, json['mode']) ??
           ThemeMode.light,
     );
 

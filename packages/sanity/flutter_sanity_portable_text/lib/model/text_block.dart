@@ -90,8 +90,7 @@ class Span {
     this.marks = const <String>[],
   });
 
-  factory Span.fromJson(Map<String, dynamic> json) =>
-      _$SpanFromJson(json);
+  factory Span.fromJson(Map<String, dynamic> json) => _$SpanFromJson(json);
 }
 
 /// Resolves custom mark deserializers from [PortableTextConfig.shared].
@@ -102,15 +101,17 @@ class Span {
 List<MarkDef> _markDefsFromJson(List<dynamic> json) {
   final markDefs = PortableTextConfig.shared.markDefs;
 
-  final items = json.map((item) {
-    final json = item as Map<String, dynamic>;
-    final type = item['_type'] as String;
+  final items = json
+      .map((item) {
+        final json = item as Map<String, dynamic>;
+        final type = item['_type'] as String;
 
-    final descriptor = markDefs[type];
-    final builder = descriptor?.fromJson ?? MarkDef.fromJson;
+        final descriptor = markDefs[type];
+        final builder = descriptor?.fromJson ?? MarkDef.fromJson;
 
-    return builder(json);
-  }).toList(growable: false);
+        return builder(json);
+      })
+      .toList(growable: false);
 
   return items;
 }

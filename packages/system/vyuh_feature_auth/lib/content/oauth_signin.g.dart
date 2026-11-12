@@ -7,17 +7,18 @@ part of 'oauth_signin.dart';
 // **************************************************************************
 
 OAuthSignIn _$OAuthSignInFromJson(Map<String, dynamic> json) => OAuthSignIn(
-      authTypes: (json['authTypes'] as List<dynamic>?)
-              ?.map((e) => $enumDecode(_$OAuthTypeEnumMap, e))
-              .toList() ??
-          const [],
-      showLoginError: json['showLoginError'] as bool? ?? true,
-      action: json['action'] == null
-          ? null
-          : Action.fromJson(json['action'] as Map<String, dynamic>),
-      layout: typeFromFirstOfListJson(json['layout']),
-      modifiers: ContentItem.modifierList(json['modifiers']),
-    );
+  authTypes:
+      (json['authTypes'] as List<dynamic>?)
+          ?.map((e) => $enumDecode(_$OAuthTypeEnumMap, e))
+          .toList() ??
+      const [],
+  showLoginError: json['showLoginError'] as bool? ?? true,
+  action: json['action'] == null
+      ? null
+      : Action.fromJson(json['action'] as Map<String, dynamic>),
+  layout: typeFromFirstOfListJson(json['layout']),
+  modifiers: ContentItem.modifierList(json['modifiers']),
+);
 
 const _$OAuthTypeEnumMap = {
   OAuthType.google: 'google',

@@ -440,9 +440,7 @@ void main() {
       expect(find.text('page /lazy0'), findsOneWidget);
     });
 
-    testWidgets('a restart resets lazy features to load again', (
-      tester,
-    ) async {
+    testWidgets('a restart resets lazy features to load again', (tester) async {
       var loads = 0;
       vc.runApp(
         initialLocation: '/home',

@@ -19,7 +19,8 @@ ConditionalRoute _$ConditionalRouteFromJson(Map<String, dynamic> json) =>
       condition: json['condition'] == null
           ? null
           : Condition.fromJson(json['condition'] as Map<String, dynamic>),
-      cases: (json['cases'] as List<dynamic>?)
+      cases:
+          (json['cases'] as List<dynamic>?)
               ?.map((e) => CaseRouteItem.fromJson(e as Map<String, dynamic>))
               .toList() ??
           [],

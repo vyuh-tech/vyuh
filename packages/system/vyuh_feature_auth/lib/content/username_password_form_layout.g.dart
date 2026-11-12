@@ -7,5 +7,5 @@ part of 'username_password_form_layout.dart';
 // **************************************************************************
 
 DefaultUsernamePasswordFormLayout _$DefaultUsernamePasswordFormLayoutFromJson(
-        Map<String, dynamic> json) =>
-    DefaultUsernamePasswordFormLayout();
+  Map<String, dynamic> json,
+) => DefaultUsernamePasswordFormLayout();

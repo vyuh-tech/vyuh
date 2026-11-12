@@ -61,9 +61,8 @@ class _FallbackRouteNotifier extends StatelessWidget {
               Text(
                 'Using a fallback Page for "$path"',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium?.apply(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                style: Theme.of(context).textTheme.labelMedium
+                    ?.apply(color: Theme.of(context).colorScheme.error),
               ),
               Expanded(child: child),
               const PoweredByWidget(),

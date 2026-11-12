@@ -93,10 +93,7 @@ class VyuhEvent<T> {
   /// Optional data associated with the event.
   final T? data;
 
-  VyuhEvent({
-    required this.name,
-    this.data,
-  }) : timestamp = DateTime.now();
+  VyuhEvent({required this.name, this.data}) : timestamp = DateTime.now();
 }
 
 /// A function that can be called to dispose of (cancel) an event subscription.
@@ -122,7 +119,7 @@ final class DefaultEventPlugin extends EventPlugin {
   EventBus? _eventBus;
 
   DefaultEventPlugin()
-      : super(name: 'vyuh.plugin.event.default', title: 'Default Event Plugin');
+    : super(name: 'vyuh.plugin.event.default', title: 'Default Event Plugin');
 
   @override
   void emit<T extends VyuhEvent>(T event) {

@@ -39,8 +39,12 @@ abstract class NetworkPlugin extends Plugin
   /// - [body]: The request body (can be String, `List<int>`, or Map)
   /// - [encoding]: The encoding to use for the request body
   @override
-  Future<Response> post(Uri url,
-      {Map<String, String>? headers, Object? body, Encoding? encoding});
+  Future<Response> post(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  });
 
   /// Sends an HTTP PUT request to the given URL.
   ///
@@ -48,8 +52,12 @@ abstract class NetworkPlugin extends Plugin
   /// - [body]: The request body (can be String, `List<int>`, or Map)
   /// - [encoding]: The encoding to use for the request body
   @override
-  Future<Response> put(Uri url,
-      {Map<String, String>? headers, Object? body, Encoding? encoding});
+  Future<Response> put(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  });
 
   /// Sends an HTTP DELETE request to the given URL.
   ///
@@ -57,8 +65,12 @@ abstract class NetworkPlugin extends Plugin
   /// - [body]: Optional request body
   /// - [encoding]: The encoding to use for the request body
   @override
-  Future<Response> delete(Uri url,
-      {Map<String, String>? headers, Object? body, Encoding? encoding});
+  Future<Response> delete(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  });
 
   /// Sends an HTTP PATCH request to the given URL.
   ///
@@ -66,6 +78,10 @@ abstract class NetworkPlugin extends Plugin
   /// - [body]: The request body with changes to apply
   /// - [encoding]: The encoding to use for the request body
   @override
-  Future<Response> patch(Uri url,
-      {Map<String, String>? headers, Object? body, Encoding? encoding});
+  Future<Response> patch(
+    Uri url, {
+    Map<String, String>? headers,
+    Object? body,
+    Encoding? encoding,
+  });
 }

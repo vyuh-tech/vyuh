@@ -7,5 +7,5 @@ part of 'session_summary_layout.dart';
 // **************************************************************************
 
 SessionSummaryLayout _$SessionSummaryLayoutFromJson(
-        Map<String, dynamic> json) =>
-    SessionSummaryLayout();
+  Map<String, dynamic> json,
+) => SessionSummaryLayout();

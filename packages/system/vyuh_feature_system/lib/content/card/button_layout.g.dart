@@ -10,7 +10,7 @@ ButtonCardLayout _$ButtonCardLayoutFromJson(Map<String, dynamic> json) =>
     ButtonCardLayout(
       buttonType:
           $enumDecodeNullable(_$ButtonTypeEnumMap, json['buttonType']) ??
-              ButtonType.filled,
+          ButtonType.filled,
       isStretched: json['isStretched'] as bool? ?? false,
     );
 

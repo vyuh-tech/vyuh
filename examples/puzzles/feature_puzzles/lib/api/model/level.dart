@@ -13,12 +13,7 @@ class LevelEndReason {
   final String message;
   final bool won;
 
-  LevelEndReason(
-    this.message, {
-    this.killer,
-    this.victim,
-    this.won = false,
-  });
+  LevelEndReason(this.message, {this.killer, this.victim, this.won = false});
 
   bool get hasCharacters => killer != null && victim != null;
 }
@@ -35,12 +30,8 @@ class Character extends Equatable {
 
   bool get isNotEmpty => title.isNotEmpty;
 
-  Character({
-    String? id,
-    required this.title,
-    this.canSail = true,
-    this.image,
-  }) : id = id ?? const Uuid().v4();
+  Character({String? id, required this.title, this.canSail = true, this.image})
+    : id = id ?? const Uuid().v4();
 
   factory Character.empty() => Character(title: '');
 
@@ -50,20 +41,13 @@ class Character extends Equatable {
   Map<String, dynamic> toJson() => _$CharacterToJson(this);
 
   @override
-  List<Object?> get props => [
-        id,
-        title.toLowerCase(),
-      ];
+  List<Object?> get props => [id, title.toLowerCase()];
 
   @override
   String toString() => 'Character:${toJson()}';
 }
 
-enum KillType {
-  absent,
-  greater,
-  unknown,
-}
+enum KillType { absent, greater, unknown }
 
 @JsonSerializable()
 class KillCondition {
@@ -112,26 +96,21 @@ class Level {
   });
 
   factory Level.empty() => Level(
-        title: '',
-        duration: 99,
-        image: null,
-        instructions: PortableTextContent(
-          blocks: List.generate(
-            4,
-            (index) => TextBlockItem(
-              children: [
-                Span(
-                  text: 'empty ' * 10,
-                  marks: [],
-                ),
-              ],
-            ),
-          ),
+    title: '',
+    duration: 99,
+    image: null,
+    instructions: PortableTextContent(
+      blocks: List.generate(
+        4,
+        (index) => TextBlockItem(
+          children: [Span(text: 'empty ' * 10, marks: [])],
         ),
-        characters: [],
-        killConditions: [],
-        killWord: '',
-      );
+      ),
+    ),
+    characters: [],
+    killConditions: [],
+    killWord: '',
+  );
 
   factory Level.fromJson(Map<String, dynamic> json) => _$LevelFromJson(json);
 

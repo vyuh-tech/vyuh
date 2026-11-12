@@ -14,11 +14,7 @@ class ApiClient {
 
   Future<Map<String, dynamic>> fetchProductDetails(String productId) async {
     await Future.delayed(const Duration(milliseconds: 800));
-    return {
-      'id': productId,
-      'name': 'Product $productId',
-      'price': 99.99,
-    };
+    return {'id': productId, 'name': 'Product $productId', 'price': 99.99};
   }
 }
 
@@ -58,7 +54,8 @@ void main() async {
       generateValue: () => apiClient.fetchUserData(userId),
     );
     print(
-        'User data (${await userCache.has('user-$userId') ? 'from cache' : 'from API'}): $userData');
+      'User data (${await userCache.has('user-$userId') ? 'from cache' : 'from API'}): $userData',
+    );
   }
 
   // First request - will fetch from API
@@ -94,12 +91,14 @@ void main() async {
   // Remove specific entry
   await stringCache.remove('greeting');
   print(
-      'After removing greeting - exists: ${await stringCache.has('greeting')}');
+    'After removing greeting - exists: ${await stringCache.has('greeting')}',
+  );
 
   // Clear entire cache
   await stringCache.clear();
   print(
-      'After clearing - number of keys: ${(await stringCache.config.storage.keys()).length}');
+    'After clearing - number of keys: ${(await stringCache.config.storage.keys()).length}',
+  );
 
   // Example 5: Error Handling
   print('\n=== Error Handling Example ===');
@@ -126,5 +125,6 @@ void main() async {
 
   await Future.delayed(const Duration(seconds: 3));
   print(
-      'After TTL expired - value exists: ${await shortCache.has('quick-value')}');
+    'After TTL expired - value exists: ${await shortCache.has('quick-value')}',
+  );
 }

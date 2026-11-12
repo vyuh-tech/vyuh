@@ -139,9 +139,7 @@ void main() {
         );
       });
 
-      test(
-          'Killer should not kill victim if killers are more but witness is present',
-          () {
+      test('Killer should not kill victim if killers are more but witness is present', () {
         // Arrange
         final charactersOnTop = [
           Character(title: 'Wolf'),

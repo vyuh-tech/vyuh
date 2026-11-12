@@ -7,12 +7,13 @@ part of 'section.dart';
 // **************************************************************************
 
 WonderSectionConfiguration _$WonderSectionConfigurationFromJson(
-        Map<String, dynamic> json) =>
-    WonderSectionConfiguration(
-      title: json['title'] as String?,
-      type: $enumDecodeNullable(_$WonderSectionTypeEnumMap, json['type']) ??
-          WonderSectionType.hero,
-    );
+  Map<String, dynamic> json,
+) => WonderSectionConfiguration(
+  title: json['title'] as String?,
+  type:
+      $enumDecodeNullable(_$WonderSectionTypeEnumMap, json['type']) ??
+      WonderSectionType.hero,
+);
 
 const _$WonderSectionTypeEnumMap = {
   WonderSectionType.hero: 'hero',

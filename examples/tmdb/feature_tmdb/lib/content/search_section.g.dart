@@ -10,7 +10,8 @@ SearchSection _$SearchSectionFromJson(Map<String, dynamic> json) =>
     SearchSection(
       loaderMessage: json['loaderMessage'] as String? ?? 'Loading...',
       emptyMessage: json['emptyMessage'] as String? ?? 'No results found',
-      searchTypes: (json['searchTypes'] as List<dynamic>?)
+      searchTypes:
+          (json['searchTypes'] as List<dynamic>?)
               ?.map((e) => $enumDecode(_$SearchTypeEnumMap, e))
               .toList() ??
           const [SearchType.movies],

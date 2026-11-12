@@ -22,7 +22,8 @@ class CreateProjectCommand extends BaseCreateCommand {
     argParser
       ..addOption(
         'application-id',
-        help: 'The bundle identifier on iOS or application id on Android. '
+        help:
+            'The bundle identifier on iOS or application id on Android. '
             '(defaults to <org-name>.<project-name>)',
       )
       ..addOption(
@@ -37,10 +38,12 @@ class CreateProjectCommand extends BaseCreateCommand {
         defaultsTo: defaultCMS,
         allowed: ['none', 'sanity'],
       )
-      ..addMultiOption('platforms',
-          defaultsTo: ['ios', 'android', 'web'],
-          allowed: ['ios', 'android', 'web', 'macos', 'windows', 'linux'],
-          help: 'Flutter target platforms.')
+      ..addMultiOption(
+        'platforms',
+        defaultsTo: ['ios', 'android', 'web'],
+        allowed: ['ios', 'android', 'web', 'macos', 'windows', 'linux'],
+        help: 'Flutter target platforms.',
+      )
       ..addOption(
         'org-name',
         help: 'The organization for this new project.',
@@ -107,15 +110,17 @@ class CreateProjectCommand extends BaseCreateCommand {
         !RegExp(r'^[a-zA-Z][a-zA-Z0-9_]*(?:\.[a-zA-Z][a-zA-Z0-9_]*)+$')
             .hasMatch(id)) {
       usageException(
-          'Use a dotted application identifier, such as com.example.catalog.');
+        'Use a dotted application identifier, such as com.example.catalog.',
+      );
     }
   }
 
   @override
   Future<Directory> getTargetDirectory() async {
     // Use specified output directory or default to current directory
-    final directory =
-        outputDirectory != null ? Directory(outputDirectory!) : Directory('.');
+    final directory = outputDirectory != null
+        ? Directory(outputDirectory!)
+        : Directory('.');
 
     return directory;
   }
@@ -156,7 +161,7 @@ class CreateProjectCommand extends BaseCreateCommand {
       'cms': cms,
       'org_name': orgName,
       'platforms': (argResults['platforms'] as List<String>).join(','),
-      'application_id': ?applicationId
+      'application_id': ?applicationId,
     });
 
     return vars;

@@ -15,7 +15,7 @@ String puzzlesPathResolver(String path) {
   return switch (path) {
     (String x) when x.contains(RegExp(r'/puzzles/level/[a-zA-Z0-9]+')) =>
       '/puzzles/level',
-    _ => path
+    _ => path,
   };
 }
 

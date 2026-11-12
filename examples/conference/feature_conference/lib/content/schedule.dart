@@ -8,10 +8,7 @@ final class ScheduleDay {
   final DateTime startTime;
   final List<ScheduleItem>? items;
 
-  ScheduleDay({
-    required this.startTime,
-    this.items,
-  });
+  ScheduleDay({required this.startTime, this.items});
 
   factory ScheduleDay.fromJson(Map<String, dynamic> json) =>
       _$ScheduleDayFromJson(json);
@@ -22,10 +19,7 @@ final class ScheduleItem {
   final ObjectReference? session;
   final ScheduleBreak? breakPeriod;
 
-  ScheduleItem({
-    this.session,
-    this.breakPeriod,
-  });
+  ScheduleItem({this.session, this.breakPeriod});
 
   factory ScheduleItem.fromJson(Map<String, dynamic> json) =>
       _$ScheduleItemFromJson(json);
@@ -36,10 +30,7 @@ final class ScheduleBreak {
   final String title;
   final String? description;
 
-  ScheduleBreak({
-    required this.title,
-    this.description,
-  });
+  ScheduleBreak({required this.title, this.description});
 
   factory ScheduleBreak.fromJson(Map<String, dynamic> json) =>
       _$ScheduleBreakFromJson(json);

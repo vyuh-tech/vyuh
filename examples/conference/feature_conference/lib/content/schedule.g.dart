@@ -7,20 +7,20 @@ part of 'schedule.dart';
 // **************************************************************************
 
 ScheduleDay _$ScheduleDayFromJson(Map<String, dynamic> json) => ScheduleDay(
-      startTime: DateTime.parse(json['startTime'] as String),
-      items: (json['items'] as List<dynamic>?)
-          ?.map((e) => ScheduleItem.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+  startTime: DateTime.parse(json['startTime'] as String),
+  items: (json['items'] as List<dynamic>?)
+      ?.map((e) => ScheduleItem.fromJson(e as Map<String, dynamic>))
+      .toList(),
+);
 
 ScheduleItem _$ScheduleItemFromJson(Map<String, dynamic> json) => ScheduleItem(
-      session: json['session'] == null
-          ? null
-          : ObjectReference.fromJson(json['session'] as Map<String, dynamic>),
-      breakPeriod: json['breakPeriod'] == null
-          ? null
-          : ScheduleBreak.fromJson(json['breakPeriod'] as Map<String, dynamic>),
-    );
+  session: json['session'] == null
+      ? null
+      : ObjectReference.fromJson(json['session'] as Map<String, dynamic>),
+  breakPeriod: json['breakPeriod'] == null
+      ? null
+      : ScheduleBreak.fromJson(json['breakPeriod'] as Map<String, dynamic>),
+);
 
 ScheduleBreak _$ScheduleBreakFromJson(Map<String, dynamic> json) =>
     ScheduleBreak(

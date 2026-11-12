@@ -81,9 +81,7 @@ void main() {
     });
 
     test('logs a null level at info', () async {
-      await capturePrint(
-        () => provider.reportMessage('no level', level: null),
-      );
+      await capturePrint(() => provider.reportMessage('no level', level: null));
 
       expect(events.single.level, Level.info);
     });

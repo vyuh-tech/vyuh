@@ -7,8 +7,7 @@ final class HelloWorldExample extends ExampleWidget {
   const HelloWorldExample({super.key})
     : super(
         title: 'Hello World',
-        description:
-            'Renders a single document from CMS, using the default document layout',
+        description: 'Renders a single document from CMS, using the default document layout',
       );
 
   @override

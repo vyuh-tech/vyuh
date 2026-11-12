@@ -12,12 +12,7 @@ class SpeakerSocial {
   final String? linkedin;
   final String? website;
 
-  SpeakerSocial({
-    this.twitter,
-    this.github,
-    this.linkedin,
-    this.website,
-  });
+  SpeakerSocial({this.twitter, this.github, this.linkedin, this.website});
 
   factory SpeakerSocial.fromJson(Map<String, dynamic> json) =>
       _$SpeakerSocialFromJson(json);

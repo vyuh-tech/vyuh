@@ -7,6 +7,4 @@ part of 'add_to_watchlist.dart';
 // **************************************************************************
 
 AddToWatchlist _$AddToWatchlistFromJson(Map<String, dynamic> json) =>
-    AddToWatchlist(
-      isAwaited: json['isAwaited'] as bool? ?? false,
-    );
+    AddToWatchlist(isAwaited: json['isAwaited'] as bool? ?? false);

@@ -11,7 +11,7 @@ ShowBarcodeAction _$ShowBarcodeActionFromJson(Map<String, dynamic> json) =>
       isAwaited: json['isAwaited'] as bool? ?? false,
       barcodeType:
           $enumDecodeNullable(_$BarcodeTypeEnumMap, json['barcodeType']) ??
-              BarcodeType.Code128,
+          BarcodeType.Code128,
       data: json['data'] as String? ?? 'Vyuh Framework',
     );
 
