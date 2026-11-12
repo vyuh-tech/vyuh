@@ -24,7 +24,7 @@ flowchart TD
 
 ## Document {#document}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L10)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L9)
 
 A document is a content item that represents a structured document. It contains a set of fields like title, description, and content that are defined by the document's schema. The document is used to display structured content in the app.
 
@@ -101,12 +101,12 @@ factory Document.fromJson(Map<String, dynamic> json);
 A widget that renders a `Document` from the CMS.
 
 ```dart
-typedef DocumentBuilder<T extends ContentItem> = Widget Function(BuildContext, T);
+typedef DocumentBuilder<T extends ContentItem> = Widget Function( BuildContext, T, );
 ```
 
 ## DocumentDefaultLayout {#documentdefaultlayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L73)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L72)
 
 The default layout for documents. It shows a column view of title, description, and content.
 
@@ -154,17 +154,17 @@ Widget build(BuildContext context, Document content);
 
 ## DocumentListBuilder {#documentlistbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L20)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L22)
 
 A widget that renders a list of `Document`s from the CMS.
 
 ```dart
-typedef DocumentListBuilder<T extends ContentItem> = Widget Function(BuildContext, List<T>);
+typedef DocumentListBuilder<T extends ContentItem> = Widget Function( BuildContext, List<T>, );
 ```
 
 ## DocumentRenderMode {#documentrendermode}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L71)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/document.dart#L70)
 
 Public declaration in this package.
 
@@ -216,7 +216,7 @@ static Future<void> dispose();
 
 ## VyuhContentWidget {#vyuhcontentwidget}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L24)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_content_widget/lib/widget.dart#L28)
 
 A versatile content widget that handles both single and list content items. It interacts with the `ContentPlugin` (either directly or via `VyuhBinding`) to fetch content from the CMS.
 

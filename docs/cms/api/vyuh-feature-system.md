@@ -1023,7 +1023,7 @@ Future<void> dispose();
 
 ## ConditionalRouteDescriptor {#conditionalroutedescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/conditional_route/conditional_route.dart#L95)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/conditional_route/conditional_route.dart#L97)
 
 Public declaration in this package.
 
@@ -1125,7 +1125,7 @@ Widget build(BuildContext context);
 
 ## ContentItemsScrollView {#contentitemsscrollview}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/ui/content_items_scrollview.dart#L6)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/ui/content_items_scrollview.dart#L5)
 
 Public declaration in this package.
 
@@ -1407,7 +1407,7 @@ Widget build(BuildContext context, Divider content);
 
 ## DefaultDocumentViewLayout {#defaultdocumentviewlayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L60)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L61)
 
 Public declaration in this package.
 
@@ -1527,7 +1527,7 @@ Widget build(BuildContext context);
 
 ## DefaultPortableTextContentLayout {#defaultportabletextcontentlayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/portable_text/portable_text.dart#L302)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/portable_text/portable_text.dart#L306)
 
 Default layout for portable text content.
 
@@ -1873,7 +1873,7 @@ DividerDescriptor({super.layouts});
 
 ## DocumentItemConfiguration {#documentitemconfiguration}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart#L41)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart#L37)
 
 Public declaration in this package.
 
@@ -2005,7 +2005,7 @@ State<DocumentListViewBuilder> createState();
 
 ## DocumentListViewDescriptor {#documentlistviewdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart#L56)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart#L52)
 
 Public declaration in this package.
 
@@ -2099,7 +2099,7 @@ factory DocumentSectionView.fromJson(Map<String, dynamic> json);
 
 ## DocumentSectionViewDescriptor {#documentsectionviewdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_section.dart#L33)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_section.dart#L30)
 
 Public declaration in this package.
 
@@ -2123,7 +2123,7 @@ DocumentSectionViewDescriptor({this.configurations, super.layouts});
 
 ## DocumentView {#documentview}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L13)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L10)
 
 Public declaration in this package.
 
@@ -2267,7 +2267,7 @@ Widget build(BuildContext context);
 
 ## DocumentViewConditionalLayout {#documentviewconditionallayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L142)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L148)
 
 Public declaration in this package.
 
@@ -2303,7 +2303,7 @@ factory DocumentViewConditionalLayout.fromJson(Map<String, dynamic> json);
 
 ## DocumentViewDescriptor {#documentviewdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L98)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L100)
 
 Public declaration in this package.
 
@@ -2511,7 +2511,7 @@ Future<String?> execute(BuildContext context);
 
 ## FlagDataType {#flagdatatype}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/condition/feature_flag.dart#L98)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/condition/feature_flag.dart#L99)
 
 The data type of a feature flag value.
 
@@ -2647,7 +2647,7 @@ factory Group.fromJson(Map<String, dynamic> json);
 
 ## GroupConditionalLayout {#groupconditionallayout}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/group/group.dart#L114)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/group/group.dart#L116)
 
 A conditional layout for groups that adapts based on specified conditions.
 
@@ -2683,7 +2683,7 @@ factory GroupConditionalLayout.fromJson(Map<String, dynamic> json);
 
 ## GroupDescriptor {#groupdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/group/group.dart#L93)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/group/group.dart#L95)
 
 Descriptor for configuring group content type in the system.
 
@@ -3611,7 +3611,7 @@ State<PressEffect> createState();
 
 ## QueryConfiguration {#queryconfiguration}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L85)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart#L86)
 
 Public declaration in this package.
 

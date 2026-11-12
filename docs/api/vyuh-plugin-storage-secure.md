@@ -33,7 +33,7 @@ class FlutterSecureStoragePlugin extends SecureStoragePlugin with InitOncePlugin
 Directly declared public members:
 
 ```dart
-FlutterSecureStoragePlugin({AndroidOptions? androidOptions, IOSOptions? iOSOptions, WebOptions? webOptions, MacOsOptions? macOSOptions, LinuxOptions? linuxOptions, WindowsOptions? windowsOptions});
+FlutterSecureStoragePlugin({this._androidOptions, this._iOSOptions, this._webOptions, this._macOSOptions, this._linuxOptions, this._windowsOptions});
 ```
 
 Creates a new instance of `FlutterSecureStoragePlugin` with optional platform-specific options from `flutter_secure_storage`, which this package re-exports. Platforms without options use the package defaults.

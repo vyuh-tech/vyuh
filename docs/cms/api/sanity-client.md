@@ -23,7 +23,7 @@ flowchart LR
 
 ## BadRequestException {#badrequestexception}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L23)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L20)
 
 Exception when the request is invalid.
 
@@ -34,14 +34,14 @@ final class BadRequestException extends SanityException
 Directly declared public members:
 
 ```dart
-BadRequestException([final String? message]);
+BadRequestException([String? message]);
 ```
 
 Creates a new bad request exception.
 
 ## FetchDataException {#fetchdataexception}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L16)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L13)
 
 Exception thrown when a document is not found.
 
@@ -52,7 +52,7 @@ final class FetchDataException extends SanityException
 Directly declared public members:
 
 ```dart
-FetchDataException([final String? message]);
+FetchDataException([String? message]);
 ```
 
 Creates a new fetch data exception.
@@ -107,7 +107,7 @@ Creates a new image options object with the provided parameters. This handles wi
 
 ## InvalidReferenceException {#invalidreferenceexception}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L38)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L33)
 
 Exception when the request is forbidden.
 
@@ -118,7 +118,7 @@ final class InvalidReferenceException extends SanityException
 Directly declared public members:
 
 ```dart
-InvalidReferenceException([final String? message]);
+InvalidReferenceException([String? message]);
 ```
 
 Creates a new invalid reference exception.
@@ -155,7 +155,7 @@ Creates a new LiveConfig object with the includeDrafts parameter set to true.
 
 ## LiveConnect {#liveconnect}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/live.dart#L21)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/live.dart#L20)
 
 Public declaration in this package.
 
@@ -173,7 +173,7 @@ Fetches live query results. Requests are serialized and bursts coalesced. Errors
 
 ## LiveConnectException {#liveconnectexception}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L45)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L40)
 
 Exception when connecting to the live subscription.
 
@@ -184,7 +184,7 @@ final class LiveConnectException extends SanityException
 Directly declared public members:
 
 ```dart
-LiveConnectException([final String? message]);
+LiveConnectException([String? message]);
 ```
 
 Creates a new live connect exception.
@@ -239,7 +239,7 @@ Creates a new performance information object with the given query, server timing
 
 ## Perspective {#perspective}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/config.dart#L3)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/config.dart#L1)
 
 The various perspectives that can be used to fetch data from Sanity
 
@@ -278,7 +278,7 @@ final UrlBuilder urlBuilder;
 The URL builder to use. When not provided it uses the default Sanity URL builder
 
 ```dart
-SanityClient(this.config, {final http.Client? httpClient, final UrlBuilder? urlBuilder});
+SanityClient(this.config, {http.Client? httpClient, UrlBuilder? urlBuilder});
 ```
 
 Creates a new Sanity client with the provided configuration. Use the optional parameters to provide a custom HTTP client or URL builder.
@@ -296,13 +296,13 @@ Future<SanityQueryResponse> fetch(String query, {Map<String, String>? params});
 Fetches data from Sanity by running the GROQ Query with the passed in parameters
 
 ```dart
-Uri imageUrl(final String imageRefId, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format});
+Uri imageUrl(String imageRefId, {int? width, int? height, int? devicePixelRatio, int? quality, String? format});
 ```
 
 Return the associated image url
 
 ```dart
-Uri fileUrl(final String fileRefId);
+Uri fileUrl(String fileRefId);
 ```
 
 Return the associated object url
@@ -315,7 +315,7 @@ Fetches the associated datasets with this project
 
 ## SanityConfig {#sanityconfig}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/config.dart#L19)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/config.dart#L17)
 
 Configuration for the Sanity client
 
@@ -374,12 +374,6 @@ static final String defaultApiVersion;
 The default API version to use
 
 ```dart
-static EventFlux Function() createEventFlux;
-```
-
-
-
-```dart
 SanityConfig({required this.projectId, required this.dataset, this.token, String? apiVersion, bool? useCdn, Perspective? perspective, bool? explainQuery});
 ```
 
@@ -416,13 +410,13 @@ SanityDataset({required this.name, required this.aclMode});
 Creates a new Sanity dataset with the given name and ACL mode.
 
 ```dart
-factory SanityDataset.fromJson(final Map<String, dynamic> json);
+factory SanityDataset.fromJson(Map<String, dynamic> json);
 ```
 
 Creates a new Sanity dataset from a JSON map.
 
 ```dart
-bool ==(final Object other);
+bool ==(Object other);
 ```
 
 
@@ -657,7 +651,7 @@ Creates a new server response from a JSON map.
 
 ## UnauthorizedException {#unauthorizedexception}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L30)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/sanity_client/lib/exceptions.dart#L26)
 
 Exception when the request is unauthorized and does not include a valid token in the Authorization header.
 
@@ -668,7 +662,7 @@ final class UnauthorizedException extends SanityException
 Directly declared public members:
 
 ```dart
-UnauthorizedException([final String? message]);
+UnauthorizedException([String? message]);
 ```
 
 Creates a new unauthorized exception.

@@ -112,7 +112,7 @@ String get title;
 
 ## AuthFlow {#authflow}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L9)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L11)
 
 Public declaration in this package.
 
@@ -142,7 +142,7 @@ State<AuthFlow> createState();
 
 ## AuthFlowScope {#authflowscope}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L27)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L29)
 
 Public declaration in this package.
 
@@ -178,7 +178,7 @@ AuthFlowScope({required this.authState, required this.error, required this.runAu
 
 ## AuthFlowState {#authflowstate}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L40)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L42)
 
 Public declaration in this package.
 
@@ -298,7 +298,7 @@ Widget build(BuildContext context);
 
 ## AuthState {#authstate}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L17)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart#L19)
 
 Public declaration in this package.
 
@@ -1557,7 +1557,7 @@ ProfileFormDescriptor({super.layouts});
 Public declaration in this package.
 
 ```dart
-typedef ScopedWidgetBuilder = Widget Function(BuildContext context, AuthFlowScope scope);
+typedef ScopedWidgetBuilder = Widget Function( BuildContext context, AuthFlowScope scope, );
 ```
 
 ## UsernameField {#usernamefield}

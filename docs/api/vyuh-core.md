@@ -18,7 +18,7 @@ flowchart BT
 
 ## Choose a declaration
 
-[AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [InMemorySecureStoragePlugin](#inmemorysecurestorageplugin) · [InMemoryStoragePlugin](#inmemorystorageplugin) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [Loader](#loader) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpEnvPlugin](#noopenvplugin) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouterUrlStyle](#routerurlstyle) · [RoutingConfigNotifier](#routingconfignotifier) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [UnknownAuthPlugin](#unknownauthplugin) · [User](#user) · [UserChangedEvent](#userchangedevent) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhStrings](#vyuhstrings) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [reportFailure](#reportfailure) · [runApp](#runapp) · [vyuh](#vyuh)
+[AnalyticsPlugin](#analyticsplugin) · [AnalyticsProvider](#analyticsprovider) · [AppBuilder](#appbuilder) · [AppRunner](#apprunner) · [AsyncLazyDI](#asynclazydi) · [AuthException](#authexception) · [AuthPlugin](#authplugin) · [BuildFailureView](#buildfailureview) · [CreateUserFailure](#createuserfailure) · [DIPlugin](#diplugin) · [DefaultEnvPlugin](#defaultenvplugin) · [DefaultEventPlugin](#defaulteventplugin) · [DefaultNavigationPlugin](#defaultnavigationplugin) · [DeferredFeatureLoader](#deferredfeatureloader) · [DeleteAccountFailure](#deleteaccountfailure) · [DisposeFunction](#disposefunction) · [EnvPlugin](#envplugin) · [ErrorViewBuilder](#errorviewbuilder) · [EventHandler](#eventhandler) · [EventPlugin](#eventplugin) · [ExtensionBuilder](#extensionbuilder) · [ExtensionDescriptor](#extensiondescriptor) · [FailureActions](#failureactions) · [FailureCard](#failurecard) · [FailureKind](#failurekind) · [FailurePage](#failurepage) · [FeatureDescriptor](#featuredescriptor) · [FeatureFlagPlugin](#featureflagplugin) · [FeatureLoadFailedEvent](#featureloadfailedevent) · [FeatureLoadedEvent](#featureloadedevent) · [FeatureRedirect](#featureredirect) · [FeaturesBuilder](#featuresbuilder) · [GetItDIPlugin](#getitdiplugin) · [HttpNetworkConfig](#httpnetworkconfig) · [HttpNetworkPlugin](#httpnetworkplugin) · [ImagePlaceholderBuilder](#imageplaceholderbuilder) · [InMemorySecureStoragePlugin](#inmemorysecurestorageplugin) · [InMemoryStoragePlugin](#inmemorystorageplugin) · [InitOncePlugin](#initonceplugin) · [InitState](#initstate) · [LazyFeatureDescriptor](#lazyfeaturedescriptor) · [LazyFeaturesBuilder](#lazyfeaturesbuilder) · [Loader](#loader) · [LocaleConfiguration](#localeconfiguration) · [LocalePlugin](#localeplugin) · [LogLevel](#loglevel) · [Logger](#logger) · [LoggerInterface](#loggerinterface) · [LoginMethod](#loginmethod) · [LoginMethodCanceled](#loginmethodcanceled) · [LoginMethodFailure](#loginmethodfailure) · [LogoutFailure](#logoutfailure) · [NamedBindings](#namedbindings) · [NamedPlugins](#namedplugins) · [NavigationBranchContainer](#navigationbranchcontainer) · [NavigationPlugin](#navigationplugin) · [NetworkPlugin](#networkplugin) · [NoOpAnalyticsProvider](#noopanalyticsprovider) · [NoOpEnvPlugin](#noopenvplugin) · [NoOpTelemetryProvider](#nooptelemetryprovider) · [NoOpTrace](#nooptrace) · [OAuthType](#oauthtype) · [PlatformLoggerInterface](#platformloggerinterface) · [PlatformWidgetBuilder](#platformwidgetbuilder) · [Plugin](#plugin) · [PluginDescriptor](#plugindescriptor) · [PreloadedPlugin](#preloadedplugin) · [RedirectRegistry](#redirectregistry) · [Restartable](#restartable) · [RouteBuilderFunction](#routebuilderfunction) · [RouteErrorViewBuilder](#routeerrorviewbuilder) · [RouteFailureEvent](#routefailureevent) · [RouteFailureView](#routefailureview) · [RouteLoader](#routeloader) · [RouteObservers](#routeobservers) · [RouterUrlStyle](#routerurlstyle) · [RoutingConfigNotifier](#routingconfignotifier) · [SecureStoragePlugin](#securestorageplugin) · [SendEmailLinkFailure](#sendemaillinkfailure) · [SendPasswordResetEmailFailure](#sendpasswordresetemailfailure) · [StoragePlugin](#storageplugin) · [SystemEvent](#systemevent) · [SystemInitFailedEvent](#systeminitfailedevent) · [SystemInitStartedEvent](#systeminitstartedevent) · [SystemInitTracker](#systeminittracker) · [SystemReadyEvent](#systemreadyevent) · [TelemetryPlugin](#telemetryplugin) · [TelemetryProvider](#telemetryprovider) · [Trace](#trace) · [TranslationRegistration](#translationregistration) · [UnknownAuthPlugin](#unknownauthplugin) · [User](#user) · [UserChangedEvent](#userchangedevent) · [VoidFutureFunction](#voidfuturefunction) · [VyuhBinding](#vyuhbinding) · [VyuhBranding](#vyuhbranding) · [VyuhEvent](#vyuhevent) · [VyuhEventListener](#vyuheventlistener) · [VyuhFailure](#vyuhfailure) · [VyuhFailureScope](#vyuhfailurescope) · [VyuhPlatform](#vyuhplatform) · [VyuhStrings](#vyuhstrings) · [VyuhTheme](#vyuhtheme) · [VyuhThemeExtension](#vyuhthemeextension) · [debugAssertOneOfPathOrRouteId](#debugassertoneofpathorrouteid) · [defaultAppRunner](#defaultapprunner) · [reportFailure](#reportfailure) · [runApp](#runapp) · [vyuh](#vyuh)
 
 ## AnalyticsPlugin {#analyticsplugin}
 
@@ -159,7 +159,7 @@ Clears the current user identification and associated traits. This should be cal
 A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.
 
 ```dart
-typedef AppBuilder = Widget Function(BuildContext context, VyuhPlatform platform);
+typedef AppBuilder = Widget Function( BuildContext context, VyuhPlatform platform, );
 ```
 
 ## AppRunner {#apprunner}
@@ -540,7 +540,7 @@ String? maybeGet(String key, {String? fallback});
 
 ## DefaultEventPlugin {#defaulteventplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L108)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L105)
 
 Default implementation of `EventPlugin` using the event_bus package.
 
@@ -588,7 +588,7 @@ Future<void> init();
 
 ## DefaultNavigationPlugin {#defaultnavigationplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L17)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L19)
 
 Public declaration in this package.
 
@@ -605,7 +605,73 @@ final g.GoRouterRedirect? redirect;
 The global redirect for this router, run before every feature redirect.
 
 ```dart
-DefaultNavigationPlugin({final bool urlReflectsImperativeAPIs = false, this.redirect, RouterUrlStyle? urlStyle});
+final g.OnEnter? onEnter;
+```
+
+Intercepts transitions before redirect evaluation.
+
+```dart
+final int redirectLimit;
+```
+
+
+
+```dart
+final Listenable? refreshListenable;
+```
+
+
+
+```dart
+final g.GoExceptionHandler? onException;
+```
+
+
+
+```dart
+final g.GoRouterWidgetBuilder? errorBuilder;
+```
+
+
+
+```dart
+final g.GoRouterPageBuilder? errorPageBuilder;
+```
+
+
+
+```dart
+final Codec<Object?, Object?>? extraCodec;
+```
+
+
+
+```dart
+final String? restorationScopeId;
+```
+
+
+
+```dart
+final bool requestFocus;
+```
+
+
+
+```dart
+final bool routerNeglect;
+```
+
+
+
+```dart
+final bool overridePlatformDefaultLocation;
+```
+
+
+
+```dart
+DefaultNavigationPlugin({bool urlReflectsImperativeAPIs = false, this.redirect, super.maxRetainedBranches, this.onEnter, this.redirectLimit = 5, this.refreshListenable, this.onException, this.errorBuilder, this.errorPageBuilder, this.extraCodec, this.restorationScopeId, this.requestFocus = true, this.routerNeglect = false, this.overridePlatformDefaultLocation = false, RouterUrlStyle? urlStyle});
 ```
 
 Creates the GoRouter-based navigation plugin.
@@ -760,7 +826,7 @@ Create a new DeleteAccountFailure with the given error.
 
 ## DisposeFunction {#disposefunction}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L102)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L99)
 
 A function that can be called to dispose of (cancel) an event subscription.
 
@@ -812,7 +878,7 @@ Clears all the environment variables.
 
 ## ErrorViewBuilder {#errorviewbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L102)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L109)
 
 A builder for an error view widget.
 
@@ -1616,7 +1682,7 @@ static const dynamic standard;
 
 ## HttpNetworkPlugin {#httpnetworkplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart#L33)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart#L34)
 
 Public declaration in this package.
 
@@ -1706,12 +1772,12 @@ Future<StreamedResponse> send(BaseRequest request);
 
 ## ImagePlaceholderBuilder {#imageplaceholderbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L53)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L58)
 
 A builder for an image placeholder widget.
 
 ```dart
-typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,
+typedef ImagePlaceholderBuilder = Widget Function( BuildContext context,
 ```
 
 ## InMemorySecureStoragePlugin {#inmemorysecurestorageplugin}
@@ -1964,7 +2030,7 @@ typedef LazyFeaturesBuilder = List<LazyFeatureDescriptor> Function();
 
 ## Loader {#loader}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L24)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L26)
 
 A builder for a widget that is shown when the app is loading.
 
@@ -2462,6 +2528,48 @@ SecureStoragePlugin get secureStorage;
 
 The secure storage plugin, for secrets such as tokens.
 
+## NavigationBranchContainer {#navigationbranchcontainer}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/navigation_branch_container.dart#L3)
+
+A bounded alternative to an IndexedStack for stateful shell navigators.
+
+```dart
+class NavigationBranchContainer extends StatefulWidget
+```
+
+Directly declared public members:
+
+```dart
+const NavigationBranchContainer({super.key, required this.currentIndex, required this.children, required this.maxRetainedBranches});
+```
+
+
+
+```dart
+final int currentIndex;
+```
+
+
+
+```dart
+final List<Widget> children;
+```
+
+
+
+```dart
+final int maxRetainedBranches;
+```
+
+
+
+```dart
+State<NavigationBranchContainer> createState();
+```
+
+
+
 ## NavigationPlugin {#navigationplugin}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/navigation.dart#L6)
@@ -2487,10 +2595,28 @@ static const dynamic catchAllPath;
 The path of a catch-all route. A feature can contribute one `GoRoute` with this path to handle every location no other route matches; the router always places it last. Without one, unmatched locations show the not-found `RouteFailureView`.
 
 ```dart
-NavigationPlugin({required super.name, required super.title});
+static const dynamic defaultMaxRetainedBranches;
+```
+
+Default live navigator budget, including the active branch.
+
+```dart
+final int maxRetainedBranches;
+```
+
+Maximum mounted stateful-shell branches. Query caches are independent.
+
+```dart
+NavigationPlugin({required super.name, required super.title, this.maxRetainedBranches = defaultMaxRetainedBranches});
 ```
 
 
+
+```dart
+g.ShellNavigationContainerBuilder get branchContainerBuilder;
+```
+
+Plug directly into StatefulShellRoute.navigatorContainerBuilder. The application supplies the route tree; the plugin applies navigation policy.
 
 ```dart
 final RedirectRegistry featureRedirects;
@@ -2848,7 +2974,7 @@ Future<void> reportMessage(String message, {Map<String, dynamic>? params, LogLev
 
 ## NoOpTrace {#nooptrace}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart#L72)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart#L75)
 
 A no-op implementation of `Trace` that can be used for development or testing.
 
@@ -2896,7 +3022,7 @@ Future<Trace> startChild(String name, String operation, {LogLevel? level = LogLe
 
 ## OAuthType {#oauthtype}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L135)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L145)
 
 Public declaration in this package.
 
@@ -2932,7 +3058,7 @@ Logger get log;
 
 ## PlatformWidgetBuilder {#platformwidgetbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L137)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L143)
 
 A builder for platform-specific widgets used throughout the Vyuh application.
 
@@ -3075,7 +3201,7 @@ List<Plugin> get plugins;
 
 
 ```dart
-PluginDescriptor({final DIPlugin? di, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others});
+PluginDescriptor({DIPlugin? di, AnalyticsPlugin? analytics, TelemetryPlugin? telemetry, NetworkPlugin? network, AuthPlugin? auth, NavigationPlugin? navigation, EnvPlugin? env, EventPlugin? event, StoragePlugin? storage, SecureStoragePlugin? secureStorage, List<Plugin>? others});
 ```
 
 
@@ -3204,7 +3330,7 @@ typedef RouteBuilderFunction = FutureOr<List<g.RouteBase>?> Function();
 
 ## RouteErrorViewBuilder {#routeerrorviewbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L70)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L78)
 
 A builder for a route error view widget.
 
@@ -3280,12 +3406,12 @@ State<RouteFailureView> createState();
 
 ## RouteLoader {#routeloader}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L38)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart#L40)
 
 A builder for a widget that is shown when a route is loading.
 
 ```dart
-typedef RouteLoader = Widget Function(BuildContext context, [Uri? url, String? routeId]);
+typedef RouteLoader = Widget Function( BuildContext context, [ Uri? url, String? routeId, ]);
 ```
 
 ## RouteObservers {#routeobservers}
@@ -3308,7 +3434,7 @@ List<NavigatorObserver> get observers;
 
 ## RouterUrlStyle {#routerurlstyle}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L8)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L10)
 
 How URLs look on the web. Has no effect on other platforms.
 
@@ -3318,7 +3444,7 @@ enum RouterUrlStyle { hash, path }
 
 ## RoutingConfigNotifier {#routingconfignotifier}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L301)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart#L344)
 
 Public declaration in this package.
 
@@ -3335,7 +3461,19 @@ final g.GoRouterRedirect? redirect;
 
 
 ```dart
-RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect});
+final g.OnEnter? onEnter;
+```
+
+
+
+```dart
+final int redirectLimit;
+```
+
+
+
+```dart
+RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect, this.onEnter, this.redirectLimit = 5});
 ```
 
 
@@ -3924,7 +4062,7 @@ A constant unknown user.
 
 ## UserChangedEvent {#userchangedevent}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L125)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart#L134)
 
 Emitted whenever an `AuthPlugin` sets the current user: on sign-in, sign-out and profile changes. `data` is the new user, which is `User.unknown` after sign-out.
 
@@ -4084,7 +4222,7 @@ VyuhEvent({required this.name, this.data});
 
 ## VyuhEventListener {#vyuheventlistener}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L105)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_core/lib/plugin/event_plugin.dart#L102)
 
 A function that handles events of type `T`.
 

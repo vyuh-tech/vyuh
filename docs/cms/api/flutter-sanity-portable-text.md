@@ -19,11 +19,11 @@ flowchart LR
 
 ## Choose a declaration
 
-[BlockContainerBuilder](#blockcontainerbuilder) · [BlockListBuilder](#blocklistbuilder) · [BlockWidgetBuilder](#blockwidgetbuilder) · [BulletRenderer](#bulletrenderer) · [ErrorView](#errorview) · [ListItemType](#listitemtype) · [MarkDef](#markdef) · [MarkDefDescriptor](#markdefdescriptor) · [MarkDefFromJson](#markdeffromjson) · [MarkDefSpanBuilder](#markdefspanbuilder) · [MarkDefTextStyleBuilder](#markdeftextstylebuilder) · [PortableBlockItem](#portableblockitem) · [PortableText](#portabletext) · [PortableTextBlock](#portabletextblock) · [PortableTextConfig](#portabletextconfig) · [Span](#span) · [TextBlockItem](#textblockitem) · [TextStyleBuilder](#textstylebuilder) · [defaultListBuilder](#defaultlistbuilder)
+[BlockContainerBuilder](#blockcontainerbuilder) · [BlockListBuilder](#blocklistbuilder) · [BlockWidgetBuilder](#blockwidgetbuilder) · [BulletRenderer](#bulletrenderer) · [ErrorView](#errorview) · [ListItemType](#listitemtype) · [MarkDef](#markdef) · [MarkDefDescriptor](#markdefdescriptor) · [MarkDefFromJson](#markdeffromjson) · [MarkDefSpanBuilder](#markdefspanbuilder) · [MarkDefTextStyleBuilder](#markdeftextstylebuilder) · [PortableBlockIndex](#portableblockindex) · [PortableBlockItem](#portableblockitem) · [PortableText](#portabletext) · [PortableTextBlock](#portabletextblock) · [PortableTextConfig](#portabletextconfig) · [PortableTextStyleOverride](#portabletextstyleoverride) · [PortableTextTheme](#portabletexttheme) · [Span](#span) · [TextBlockItem](#textblockitem) · [TextStyleBuilder](#textstylebuilder) · [defaultListBuilder](#defaultlistbuilder)
 
 ## BlockContainerBuilder {#blockcontainerbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L9)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L11)
 
 A function that builds a widget for a Portable block container.
 
@@ -38,22 +38,22 @@ typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);
 Public declaration in this package.
 
 ```dart
-typedef BlockListBuilder = Widget Function(BuildContext, List<PortableBlockItem>);
+typedef BlockListBuilder = Widget Function( BuildContext, List<PortableBlockItem>, );
 ```
 
 ## BlockWidgetBuilder {#blockwidgetbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L12)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L14)
 
 A function that builds a widget for a Portable block item.
 
 ```dart
-typedef BlockWidgetBuilder = Widget Function(BuildContext context, PortableBlockItem item);
+typedef BlockWidgetBuilder = Widget Function( BuildContext context, PortableBlockItem item, );
 ```
 
 ## BulletRenderer {#bulletrenderer}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L16)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L20)
 
 A function that builds an InlineSpan for a single bullet mark. Using the `TextBlockItem`'s listItem, listItemIndex and level, the bullet can be customized as needed.
 
@@ -63,7 +63,7 @@ typedef BulletRenderer = InlineSpan Function(BuildContext, TextBlockItem);
 
 ## ErrorView {#errorview}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L291)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L314)
 
 Renders an error message when a block type is missing a builder or when a mark is misconfigured.
 
@@ -109,7 +109,7 @@ enum ListItemType { bullet, square, number }
 
 ## MarkDef {#markdef}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L47)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L49)
 
 A single mark definition.
 
@@ -138,14 +138,14 @@ MarkDef({required this.key, required this.type});
 
 
 ```dart
-factory MarkDef.fromJson(final Map<String, dynamic> json);
+factory MarkDef.fromJson(Map<String, dynamic> json);
 ```
 
 Converts a `MarkDef` to a JSON map. Should be implemented by subclasses.
 
 ## MarkDefDescriptor {#markdefdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L21)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L23)
 
 Describes a `MarkDef` and its associated builders.
 
@@ -187,7 +187,7 @@ MarkDefDescriptor({required this.schemaType, required this.fromJson, required th
 
 ## MarkDefFromJson {#markdeffromjson}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L9)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L12)
 
 Deserializes a `MarkDef` from a JSON map.
 
@@ -197,7 +197,7 @@ typedef MarkDefFromJson = MarkDef Function(Map<String, dynamic> json);
 
 ## MarkDefSpanBuilder {#markdefspanbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L12)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart#L15)
 
 Builds an `InlineSpan` for a given `MarkDef`.
 
@@ -212,8 +212,44 @@ typedef MarkDefSpanBuilder = InlineSpan Function( BuildContext context, MarkDef 
 Builds a `TextStyle` for a given `MarkDef`.
 
 ```dart
-typedef MarkDefTextStyleBuilder = TextStyle Function(BuildContext context, MarkDef mark, TextStyle base);
+typedef MarkDefTextStyleBuilder = TextStyle Function( BuildContext context, MarkDef mark, TextStyle base, );
 ```
+
+## PortableBlockIndex {#portableblockindex}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_block_index.dart#L5)
+
+Gives a block built by `PortableTextConfig.buildBlock` its position in the parent list (0-based), so block and container builders can vary by position, e.g. drop the leading space of the first block.
+
+```dart
+class PortableBlockIndex extends InheritedWidget
+```
+
+Directly declared public members:
+
+```dart
+final int index;
+```
+
+The position of the block in its parent list (0-based).
+
+```dart
+const PortableBlockIndex({super.key, required this.index, required super.child});
+```
+
+
+
+```dart
+static int? maybeOf(BuildContext context);
+```
+
+The index of the enclosing block, or `null` when the block was built without an index.
+
+```dart
+bool updateShouldNotify(PortableBlockIndex oldWidget);
+```
+
+
 
 ## PortableBlockItem {#portableblockitem}
 
@@ -235,7 +271,7 @@ A unique string-name for the block type.
 
 ## PortableText {#portabletext}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart#L8)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart#L10)
 
 A widget that renders a list of PortableBlockItems. This widget is the main entry point for rendering Portable Text content. It is responsible for rendering the entire content of a Portable Text document, including all blocks and marks. It relies on the `PortableTextConfig` to determine the visual representation of each block.
 
@@ -264,7 +300,7 @@ const PortableText({super.key, required this.blocks, BlockListBuilder? listBuild
 
 
 ```dart
-Widget build(final BuildContext context);
+Widget build(BuildContext context);
 ```
 
 
@@ -294,14 +330,14 @@ const PortableTextBlock({super.key, required this.model});
 
 
 ```dart
-Widget build(final BuildContext context);
+Widget build(BuildContext context);
 ```
 
 
 
 ## PortableTextConfig {#portabletextconfig}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L20)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart#L24)
 
 The configuration used for rendering Portable Text. This class is used to define the visual representation of the Portable Text blocks, spans, and marks. It is used by the `PortableText` widget to render the Portable Text content. The configuration can be customized to match the visual design of the app. The default configuration is based on the Material Design guidelines.
 
@@ -357,7 +393,7 @@ The base style used for rendering the Portable Text content. The default value i
 static final PortableTextConfig shared;
 ```
 
-The shared instance of the PortableTextConfig. This instance is used by all `PortableText` widgets in the application. You can customize the configuration by calling the `apply` method.
+The default/root configuration, used by `PortableText` widgets when no `PortableTextTheme` ancestor provides one (see `of`). It is also the context-free registry consulted at JSON-parse time for custom mark deserializers (see `_markDefsFromJson`). You can customize it by calling the `apply` method.
 
 ```dart
 BulletRenderer bulletRenderer;
@@ -366,13 +402,31 @@ BulletRenderer bulletRenderer;
 The bullet renderer used to render the bullet for list items. The default value is a simple bullet renderer that handles the default bullet types: number, square, and circle.
 
 ```dart
-void apply({final double listIndent = defaultListIndent, final EdgeInsets itemPadding = defaultItemPadding, final BulletRenderer? bulletRenderer, final Map<String, TextStyleBuilder>? styles, final Map<String, BlockContainerBuilder>? blockContainers, final Map<String, BlockWidgetBuilder>? blocks, final Map<String, MarkDefDescriptor>? markDefs, final TextStyle? Function(BuildContext)? baseStyle});
+PortableTextConfig();
+```
+
+
+
+```dart
+static PortableTextConfig of(BuildContext context);
+```
+
+Returns the nearest `PortableTextConfig` supplied by a `PortableTextTheme` ancestor, falling back to `shared` when none is present. Mirrors `Theme.of`.
+
+```dart
+PortableTextConfig copyWith({Map<String, TextStyleBuilder>? styles, Map<String, BlockWidgetBuilder>? blocks, Map<String, BlockContainerBuilder>? blockContainers, Map<String, MarkDefDescriptor>? markDefs, double? listIndent, EdgeInsets? itemPadding, TextStyle? Function(BuildContext)? baseStyle, BulletRenderer? bulletRenderer});
+```
+
+Returns a copy of this config with the given fields overridden.
+
+```dart
+void apply({double listIndent = defaultListIndent, EdgeInsets itemPadding = defaultItemPadding, BulletRenderer? bulletRenderer, Map<String, TextStyleBuilder>? styles, Map<String, BlockContainerBuilder>? blockContainers, Map<String, BlockWidgetBuilder>? blocks, Map<String, MarkDefDescriptor>? markDefs, TextStyle? Function(BuildContext)? baseStyle});
 ```
 
 Applies the custom configuration to the shared instance of the `PortableTextConfig`.
 
 ```dart
-Widget buildBlock(final BuildContext context, final PortableBlockItem item);
+Widget buildBlock(BuildContext context, PortableBlockItem item, [int? index]);
 ```
 
 Builds a block widget for the given Portable block item. The block widget is determined by the block type of the item. If the block type is not found in the block widgets, an error view is rendered with a message indicating the missing block type.
@@ -431,6 +485,78 @@ static final Map<String, BlockWidgetBuilder> defaultBlocks;
 
 The default block widgets used by the shared instance of `PortableTextConfig`. The default block is a single `PortableTextBlock`, named as "block".
 
+## PortableTextStyleOverride {#portabletextstyleoverride}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_theme.dart#L30)
+
+Restyles descendant Portable Text by transforming the *inherited* text style for each named style (e.g. `'normal'`, `'h2'`).
+
+```dart
+class PortableTextStyleOverride extends StatefulWidget
+```
+
+Directly declared public members:
+
+```dart
+final Map<String, TextStyle Function(TextStyle)> styles;
+```
+
+Per-style transforms applied on top of the inherited resolved style. Keys are style names (`'normal'`, `'h2'`, …); a key that the ambient config does not define is ignored.
+
+```dart
+final Widget child;
+```
+
+The subtree whose Portable Text should be restyled.
+
+```dart
+const PortableTextStyleOverride({super.key, required this.styles, required this.child});
+```
+
+
+
+```dart
+State<PortableTextStyleOverride> createState();
+```
+
+
+
+## PortableTextTheme {#portabletexttheme}
+
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_theme.dart#L5)
+
+An `InheritedWidget` that supplies a `PortableTextConfig` to its subtree.
+
+```dart
+class PortableTextTheme extends InheritedWidget
+```
+
+Directly declared public members:
+
+```dart
+final PortableTextConfig config;
+```
+
+The configuration applied to descendant Portable Text widgets.
+
+```dart
+const PortableTextTheme({super.key, required this.config, required super.child});
+```
+
+
+
+```dart
+static PortableTextConfig? maybeOf(BuildContext context);
+```
+
+The `PortableTextConfig` of the nearest `PortableTextTheme` ancestor, or `null` if none.
+
+```dart
+bool updateShouldNotify(PortableTextTheme oldWidget);
+```
+
+
+
 ## Span {#span}
 
 [Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/model/text_block.dart#L72)
@@ -474,7 +600,7 @@ Span({this.type = Span.schemaName, this.text = '', this.marks = const <String>[]
 
 
 ```dart
-factory Span.fromJson(final Map<String, dynamic> json);
+factory Span.fromJson(Map<String, dynamic> json);
 ```
 
 
@@ -552,7 +678,7 @@ TextBlockItem({String? key, this.children = const <Span>[], this.style = 'normal
 
 
 ```dart
-factory TextBlockItem.fromJson(final Map<String, dynamic> json);
+factory TextBlockItem.fromJson(Map<String, dynamic> json);
 ```
 
 
@@ -564,12 +690,12 @@ factory TextBlockItem.fromJson(final Map<String, dynamic> json);
 A function that builds a text style for a Portable Text block or span.
 
 ```dart
-typedef TextStyleBuilder = TextStyle Function(BuildContext context, TextStyle base);
+typedef TextStyleBuilder = TextStyle Function( BuildContext context, TextStyle base, );
 ```
 
 ## defaultListBuilder {#defaultlistbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart#L33)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart#L35)
 
 Default container-builder for PortableText blocks. It uses a ListView.builder to render the blocks.
 

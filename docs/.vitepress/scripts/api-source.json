@@ -138,7 +138,7 @@
       {
         "name": "AuthFlow",
         "file": "packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart",
-        "line": 9,
+        "line": 11,
         "doc": "",
         "signature": "final class AuthFlow extends StatefulWidget",
         "members": [
@@ -159,7 +159,7 @@
       {
         "name": "AuthFlowScope",
         "file": "packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart",
-        "line": 27,
+        "line": 29,
         "doc": "",
         "signature": "final class AuthFlowScope",
         "members": [
@@ -184,7 +184,7 @@
       {
         "name": "AuthFlowState",
         "file": "packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart",
-        "line": 40,
+        "line": 42,
         "doc": "",
         "signature": "class AuthFlowState extends State<AuthFlow>",
         "members": [
@@ -266,7 +266,7 @@
       {
         "name": "AuthState",
         "file": "packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart",
-        "line": 17,
+        "line": 19,
         "doc": "",
         "signature": "enum AuthState { signedOut, signedIn, passwordResetEmailSent, inProgress, error, cancelled, partial }",
         "members": []
@@ -1138,7 +1138,7 @@
         "file": "packages/system/vyuh_feature_auth/lib/ui/auth_state_widget.dart",
         "line": 6,
         "doc": "",
-        "signature": "typedef ScopedWidgetBuilder = Widget Function(BuildContext context, AuthFlowScope scope);",
+        "signature": "typedef ScopedWidgetBuilder = Widget Function( BuildContext context, AuthFlowScope scope, );",
         "members": []
       },
       {
@@ -1442,7 +1442,7 @@
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
         "line": 9,
         "doc": "A builder for root Widget of the application. Typically this would be a MaterialApp or CupertinoApp.\n\nThis builder is called once during app initialization to create the root widget.\nThe [platform] parameter provides access to the Vyuh platform instance.\n\nExample:\n```dart\nAppBuilder builder = (platform) => MaterialApp(\n  home: MyHomePage(),\n  theme: platform.theme,\n);\n```",
-        "signature": "typedef AppBuilder = Widget Function(BuildContext context, VyuhPlatform platform);",
+        "signature": "typedef AppBuilder = Widget Function( BuildContext context, VyuhPlatform platform, );",
         "members": []
       },
       {
@@ -1707,7 +1707,7 @@
       {
         "name": "DefaultEventPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 108,
+        "line": 105,
         "doc": "Default implementation of [EventPlugin] using the event_bus package.\n\nThis implementation provides a simple and efficient event bus that:\n- Supports multiple subscribers\n- Handles event type safety\n- Provides automatic cleanup\n\nExample:\n```dart\nfinal plugins = PluginDescriptor(\n  event: DefaultEventPlugin(),\n);\n```",
         "signature": "final class DefaultEventPlugin extends EventPlugin",
         "members": [
@@ -1740,7 +1740,7 @@
       {
         "name": "DefaultNavigationPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
-        "line": 17,
+        "line": 19,
         "doc": "",
         "signature": "final class DefaultNavigationPlugin extends NavigationPlugin",
         "members": [
@@ -1749,7 +1749,51 @@
             "doc": "The global redirect for this router, run before every feature redirect."
           },
           {
-            "signature": "DefaultNavigationPlugin({final bool urlReflectsImperativeAPIs = false, this.redirect, RouterUrlStyle? urlStyle})",
+            "signature": "final g.OnEnter? onEnter",
+            "doc": "Intercepts transitions before redirect evaluation."
+          },
+          {
+            "signature": "final int redirectLimit",
+            "doc": ""
+          },
+          {
+            "signature": "final Listenable? refreshListenable",
+            "doc": ""
+          },
+          {
+            "signature": "final g.GoExceptionHandler? onException",
+            "doc": ""
+          },
+          {
+            "signature": "final g.GoRouterWidgetBuilder? errorBuilder",
+            "doc": ""
+          },
+          {
+            "signature": "final g.GoRouterPageBuilder? errorPageBuilder",
+            "doc": ""
+          },
+          {
+            "signature": "final Codec<Object?, Object?>? extraCodec",
+            "doc": ""
+          },
+          {
+            "signature": "final String? restorationScopeId",
+            "doc": ""
+          },
+          {
+            "signature": "final bool requestFocus",
+            "doc": ""
+          },
+          {
+            "signature": "final bool routerNeglect",
+            "doc": ""
+          },
+          {
+            "signature": "final bool overridePlatformDefaultLocation",
+            "doc": ""
+          },
+          {
+            "signature": "DefaultNavigationPlugin({bool urlReflectsImperativeAPIs = false, this.redirect, super.maxRetainedBranches, this.onEnter, this.redirectLimit = 5, this.refreshListenable, this.onException, this.errorBuilder, this.errorPageBuilder, this.extraCodec, this.restorationScopeId, this.requestFocus = true, this.routerNeglect = false, this.overridePlatformDefaultLocation = false, RouterUrlStyle? urlStyle})",
             "doc": "Creates the GoRouter-based navigation plugin.\n\n* [redirect]: a global redirect, run before every feature redirect.\n* [urlStyle]: hash or path URLs on the web. Applied immediately, so\n  create the plugin before `runApp`.\n* [urlReflectsImperativeAPIs]: whether `push` and friends update the\n  browser URL."
           },
           {
@@ -1858,7 +1902,7 @@
       {
         "name": "DisposeFunction",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 102,
+        "line": 99,
         "doc": "A function that can be called to dispose of (cancel) an event subscription.",
         "signature": "typedef DisposeFunction = void Function();",
         "members": []
@@ -1895,7 +1939,7 @@
       {
         "name": "ErrorViewBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 102,
+        "line": 109,
         "doc": "A builder for an error view widget.\n\nThis builder is called when an error occurs in the application.\nIt provides detailed error information and optional retry/restart functionality.\n\nExample:\n```dart\nErrorViewBuilder builder = (\n  context, {\n  required title,\n  error,\n  stackTrace,\n  retryLabel,\n  onRetry,\n  subtitle,\n  showRestart,\n}) => ErrorView(\n  title: title,\n  subtitle: subtitle,\n  onRetry: onRetry,\n  showRestart: showRestart,\n);\n```",
         "signature": "typedef ErrorViewBuilder = Widget Function( BuildContext context,",
         "members": []
@@ -2449,7 +2493,7 @@
       {
         "name": "HttpNetworkPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/network/http_network_plugin.dart",
-        "line": 33,
+        "line": 34,
         "doc": "",
         "signature": "final class HttpNetworkPlugin extends NetworkPlugin",
         "members": [
@@ -2510,9 +2554,9 @@
       {
         "name": "ImagePlaceholderBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 53,
+        "line": 58,
         "doc": "A builder for an image placeholder widget.\n\nThis builder is called to create a placeholder widget while an image is loading.\nThe [width] and [height] parameters specify the desired dimensions of the\nplaceholder.\n\nExample:\n```dart\nImagePlaceholderBuilder builder = (context, {width, height}) => Container(\n  width: width,\n  height: height,\n  color: Colors.grey[300],\n);\n```",
-        "signature": "typedef ImagePlaceholderBuilder = Widget Function(BuildContext context,",
+        "signature": "typedef ImagePlaceholderBuilder = Widget Function( BuildContext context,",
         "members": []
       },
       {
@@ -2690,7 +2734,7 @@
       {
         "name": "Loader",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 24,
+        "line": 26,
         "doc": "A builder for a widget that is shown when the app is loading.\n\nThis builder is called to create a loading indicator during app initialization\nor while a part of a page loads. The [context] parameter provides access to the\ncurrent build context.\n\nExample:\n```dart\nLoader loader = (context) => const Center(\n  child: CircularProgressIndicator(),\n);\n```",
         "signature": "typedef Loader = Widget Function(BuildContext context);",
         "members": []
@@ -3034,6 +3078,35 @@
         ]
       },
       {
+        "name": "NavigationBranchContainer",
+        "file": "packages/system/vyuh_core/lib/plugin/navigation/navigation_branch_container.dart",
+        "line": 3,
+        "doc": "A bounded alternative to an IndexedStack for stateful shell navigators.\n\nSupply this from StatefulShellRoute.navigatorContainerBuilder. The app owns\nbranch identity and the retention limit; this widget owns only mount lifetime.\nThe active branch and most recently used branches stay mounted. Eviction\ndisposes widget state, focus and subscriptions; go_router retains its route\nmatch history and can reconstruct the navigator on the next visit.",
+        "signature": "class NavigationBranchContainer extends StatefulWidget",
+        "members": [
+          {
+            "signature": "const NavigationBranchContainer({super.key, required this.currentIndex, required this.children, required this.maxRetainedBranches})",
+            "doc": ""
+          },
+          {
+            "signature": "final int currentIndex",
+            "doc": ""
+          },
+          {
+            "signature": "final List<Widget> children",
+            "doc": ""
+          },
+          {
+            "signature": "final int maxRetainedBranches",
+            "doc": ""
+          },
+          {
+            "signature": "State<NavigationBranchContainer> createState()",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "NavigationPlugin",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/navigation.dart",
         "line": 6,
@@ -3049,8 +3122,20 @@
             "doc": "The path of a catch-all route. A feature can contribute one `GoRoute`\nwith this path to handle every location no other route matches; the\nrouter always places it last. Without one, unmatched locations show the\nnot-found [RouteFailureView]."
           },
           {
-            "signature": "NavigationPlugin({required super.name, required super.title})",
+            "signature": "static const dynamic defaultMaxRetainedBranches",
+            "doc": "Default live navigator budget, including the active branch."
+          },
+          {
+            "signature": "final int maxRetainedBranches",
+            "doc": "Maximum mounted stateful-shell branches. Query caches are independent."
+          },
+          {
+            "signature": "NavigationPlugin({required super.name, required super.title, this.maxRetainedBranches = defaultMaxRetainedBranches})",
             "doc": ""
+          },
+          {
+            "signature": "g.ShellNavigationContainerBuilder get branchContainerBuilder",
+            "doc": "Plug directly into StatefulShellRoute.navigatorContainerBuilder. The\napplication supplies the route tree; the plugin applies navigation policy."
           },
           {
             "signature": "final RedirectRegistry featureRedirects",
@@ -3297,7 +3382,7 @@
       {
         "name": "NoOpTrace",
         "file": "packages/system/vyuh_core/lib/plugin/telemetry/noop_telemetry_provider.dart",
-        "line": 72,
+        "line": 75,
         "doc": "A no-op implementation of [Trace] that can be used for development or testing.\n\nThis trace implementation does nothing when its methods are called. It is\nreturned by [NoOpTelemetryProvider] when starting a trace.\n\nAll operations are implemented as no-ops:\n- [getAttributes] returns an empty map\n- [getMetric] returns 0\n- [setAttributes] and [setMetric] do nothing\n- [stop] returns immediately\n- [startChild] returns a new [NoOpTrace]\n\nExample:\n```dart\nfinal trace = await telemetry.startTrace('MyOperation', 'Start');\nawait doSomething();\nawait trace.stop(); // Does nothing with NoOpTrace\n```",
         "signature": "final class NoOpTrace extends Trace",
         "members": [
@@ -3330,7 +3415,7 @@
       {
         "name": "OAuthType",
         "file": "packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart",
-        "line": 135,
+        "line": 145,
         "doc": "",
         "signature": "enum OAuthType { google, apple, meta, github, twitter, linkedin, microsoft, custom }",
         "members": [
@@ -3356,7 +3441,7 @@
       {
         "name": "PlatformWidgetBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 137,
+        "line": 143,
         "doc": "A builder for platform-specific widgets used throughout the Vyuh application.\n\nThis class provides a centralized way to customize the appearance and behavior\nof common UI components in a Vyuh application. It includes builders for:\n- App root widget ([appBuilder])\n- Loading indicators ([appLoader], [contentLoader], [routeLoader])\n- Error views ([errorView], [routeErrorView])\n- Image placeholders ([imagePlaceholder])\n\nUse [copyWith] to create a modified version of an existing builder:\n```dart\nfinal customBuilder = defaultPlatformWidgetBuilder.copyWith(\n  appLoader: (context) => MyCustomLoader(),\n  errorView: (context, {title, error}) => MyCustomErrorView(title: title),\n);\n```",
         "signature": "class PlatformWidgetBuilder",
         "members": [
@@ -3451,7 +3536,7 @@
             "doc": ""
           },
           {
-            "signature": "PluginDescriptor({final DIPlugin? di, final AnalyticsPlugin? analytics, final TelemetryPlugin? telemetry, final NetworkPlugin? network, final AuthPlugin? auth, final NavigationPlugin? navigation, final EnvPlugin? env, final EventPlugin? event, final StoragePlugin? storage, final SecureStoragePlugin? secureStorage, final List<Plugin>? others})",
+            "signature": "PluginDescriptor({DIPlugin? di, AnalyticsPlugin? analytics, TelemetryPlugin? telemetry, NetworkPlugin? network, AuthPlugin? auth, NavigationPlugin? navigation, EnvPlugin? env, EventPlugin? event, StoragePlugin? storage, SecureStoragePlugin? secureStorage, List<Plugin>? others})",
             "doc": ""
           },
           {
@@ -3545,7 +3630,7 @@
       {
         "name": "RouteErrorViewBuilder",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 70,
+        "line": 78,
         "doc": "A builder for a route error view widget.\n\nThis builder is called when an error occurs during route navigation.\nIt provides detailed error information and optional retry functionality.\n\nExample:\n```dart\nRouteErrorViewBuilder builder = (\n  context, {\n  required title,\n  retryLabel,\n  onRetry,\n  error,\n  stackTrace,\n  subtitle,\n}) => ErrorView(\n  title: title,\n  subtitle: subtitle,\n  onRetry: onRetry,\n);\n```",
         "signature": "typedef RouteErrorViewBuilder = Widget Function( BuildContext context,",
         "members": []
@@ -3599,9 +3684,9 @@
       {
         "name": "RouteLoader",
         "file": "packages/system/vyuh_core/lib/runtime/platform_widget_builder.dart",
-        "line": 38,
+        "line": 40,
         "doc": "A builder for a widget that is shown when a route is loading.\n\nThis builder is called when navigating between routes. The [url] parameter\ncontains the destination URL, and [routeId] contains the unique identifier\nfor the route.\n\nExample:\n```dart\nRouteLoader loader = (context, url, routeId) => Center(\n  child: Text('Loading $url...'),\n);\n```",
-        "signature": "typedef RouteLoader = Widget Function(BuildContext context, [Uri? url, String? routeId]);",
+        "signature": "typedef RouteLoader = Widget Function( BuildContext context, [ Uri? url, String? routeId, ]);",
         "members": []
       },
       {
@@ -3620,7 +3705,7 @@
       {
         "name": "RouterUrlStyle",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
-        "line": 8,
+        "line": 10,
         "doc": "How URLs look on the web. Has no effect on other platforms.",
         "signature": "enum RouterUrlStyle { hash, path }",
         "members": []
@@ -3628,7 +3713,7 @@
       {
         "name": "RoutingConfigNotifier",
         "file": "packages/system/vyuh_core/lib/plugin/navigation/default_navigation_plugin.dart",
-        "line": 301,
+        "line": 344,
         "doc": "",
         "signature": "final class RoutingConfigNotifier extends ValueNotifier<g.RoutingConfig>",
         "members": [
@@ -3637,7 +3722,15 @@
             "doc": ""
           },
           {
-            "signature": "RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect})",
+            "signature": "final g.OnEnter? onEnter",
+            "doc": ""
+          },
+          {
+            "signature": "final int redirectLimit",
+            "doc": ""
+          },
+          {
+            "signature": "RoutingConfigNotifier(List<g.RouteBase> routes, {this.redirect, this.onEnter, this.redirectLimit = 5})",
             "doc": ""
           },
           {
@@ -4048,7 +4141,7 @@
       {
         "name": "UserChangedEvent",
         "file": "packages/system/vyuh_core/lib/plugin/auth/auth_plugin.dart",
-        "line": 125,
+        "line": 134,
         "doc": "Emitted whenever an [AuthPlugin] sets the current user: on sign-in,\nsign-out and profile changes. [data] is the new user, which is\n[User.unknown] after sign-out.",
         "signature": "final class UserChangedEvent extends VyuhEvent<User>",
         "members": [
@@ -4160,7 +4253,7 @@
       {
         "name": "VyuhEventListener",
         "file": "packages/system/vyuh_core/lib/plugin/event_plugin.dart",
-        "line": 105,
+        "line": 102,
         "doc": "A function that handles events of type [T].",
         "signature": "typedef VyuhEventListener<T extends VyuhEvent> = void Function(T event);",
         "members": []
@@ -4882,7 +4975,7 @@
       {
         "name": "ContentDescriptor",
         "file": "packages/system/vyuh_extension_content/lib/content/content_descriptor.dart",
-        "line": 6,
+        "line": 8,
         "doc": "",
         "signature": "abstract class ContentDescriptor",
         "members": [
@@ -5154,7 +5247,7 @@
       {
         "name": "ContentPlugin",
         "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
-        "line": 21,
+        "line": 23,
         "doc": "The base class for a Content Plugin.\n\nRegister it with `PluginDescriptor(others: [...])` and reach it through\n`vyuh.content` (or `VyuhBinding.instance.content` in widget mode).",
         "signature": "abstract class ContentPlugin extends Plugin",
         "members": [
@@ -5244,11 +5337,11 @@
             "doc": ""
           },
           {
-            "signature": "ImageProvider? image(final ImageReference imageRef, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format})",
+            "signature": "ImageProvider? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
             "doc": ""
           },
           {
-            "signature": "Uri? fileUrl(final FileReference fileRef)",
+            "signature": "Uri? fileUrl(FileReference fileRef)",
             "doc": ""
           },
           {
@@ -5342,7 +5435,7 @@
       {
         "name": "DocumentBuilder",
         "file": "packages/system/vyuh_extension_content/lib/ui/document_builder.dart",
-        "line": 6,
+        "line": 5,
         "doc": "A widget that builds UI based on document data fetched from a content provider.\n\nThis widget is responsible for fetching document data from a content provider\nand building UI based on that data. It supports both static and live document\nloading, and can be configured to allow refreshing the document.\n\nExample usage:\n```dart\n// Using the factory method to fetch by query\nDocumentBuilder.fromQuery<BlogPost>(\n  query: '*[_type == \"blog.post\" && slug.current == $slug][0]',\n  fromJson: BlogPost.fromJson,\n  allowRefresh: true,\n  isLive: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n\n// Using the factory method to fetch by ID\nDocumentBuilder.fromId<BlogPost>(\n  id: 'blog-post-123',\n  fromJson: BlogPost.fromJson,\n  allowRefresh: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n\n// Using a custom future\nDocumentBuilder<BlogPost>(\n  fetchDocument: () => myCustomFuture,\n  allowRefresh: true,\n  buildContent: (context, post) => BlogPostView(post: post),\n)\n```",
         "signature": "final class DocumentBuilder<T> extends StatelessWidget",
         "members": [
@@ -5505,7 +5598,7 @@
       {
         "name": "FieldName",
         "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
-        "line": 73,
+        "line": 75,
         "doc": "",
         "signature": "enum FieldName { id, type, key, ref, updatedAt, createdAt }",
         "members": []
@@ -5513,7 +5606,7 @@
       {
         "name": "FileReference",
         "file": "packages/system/vyuh_extension_content/lib/contracts/reference.dart",
-        "line": 38,
+        "line": 34,
         "doc": "A reference to a file asset in the content management system.\n\nThis class represents a file reference that can be used in content models.\nIt supports file assets like PDFs, documents, or other binary files.\n\nExample:\n```dart\nfinal fileRef = FileReference(\n  type: 'file',\n  asset: ObjectReference(type: 'reference', ref: 'file-abc123'),\n);\n```",
         "signature": "class FileReference",
         "members": [
@@ -5530,7 +5623,7 @@
             "doc": ""
           },
           {
-            "signature": "factory FileReference.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory FileReference.fromJson(Map<String, dynamic> json)",
             "doc": ""
           }
         ]
@@ -5567,7 +5660,7 @@
             "doc": ""
           },
           {
-            "signature": "factory ImageReference.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory ImageReference.fromJson(Map<String, dynamic> json)",
             "doc": ""
           }
         ]
@@ -5879,7 +5972,7 @@
       {
         "name": "ObjectReference",
         "file": "packages/system/vyuh_extension_content/lib/contracts/reference.dart",
-        "line": 66,
+        "line": 59,
         "doc": "A reference to any content object in the content management system.\n\nThis class represents a generic reference to any content item. It is used\nto establish relationships between content items, such as references to\nimages, files, or other content types.\n\nThe [type] field indicates the type of reference (e.g., 'reference', 'image').\nThe [ref] field contains the unique identifier of the referenced content.\n\nExample:\n```dart\nfinal ref = ObjectReference(\n  type: 'reference',\n  ref: 'content-abc123',\n);\n```",
         "signature": "class ObjectReference",
         "members": [
@@ -6006,7 +6099,7 @@
       {
         "name": "RouteBuilder",
         "file": "packages/system/vyuh_extension_content/lib/ui/route_builder.dart",
-        "line": 6,
+        "line": 5,
         "doc": "",
         "signature": "final class RouteBuilder extends StatelessWidget",
         "members": [
@@ -6315,7 +6408,7 @@
         "file": "packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart",
         "line": 5,
         "doc": "Builds the widget shown for a [ContentFailure].\n\nExample:\n```dart\nUnknownContentBuilder builder = (context, failure) => switch (failure) {\n  ContentItemFailure() => ContentErrorWidget(failure: failure),\n  LayoutFailure() => LayoutErrorWidget(failure: failure),\n  _ => UnknownContentView(failure: failure),\n};\n```",
-        "signature": "typedef UnknownContentBuilder = Widget Function(BuildContext context, ContentFailure failure);",
+        "signature": "typedef UnknownContentBuilder = Widget Function( BuildContext context, ContentFailure failure, );",
         "members": []
       },
       {
@@ -6555,7 +6648,7 @@
       {
         "name": "listFromJson",
         "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
-        "line": 84,
+        "line": 87,
         "doc": "Converts a JSON list to a nullable-list of [SchemaItem] instances of type [T].\n\nThis helper is used when deserializing an array of items from JSON.\nEach item in the array is converted to type [T].\n\nExample:\n```dart\nfinal json = [\n  {'title': 'Post 1', '_type': 'blog.post'},\n  {'title': 'Post 2', '_type': 'blog.post'},\n];\nfinal posts = listFromJson<BlogPost>(json);\n```\n\nReturns null if the input is null.\nThrows [ArgumentError] if the input is not a List.",
         "signature": "List<T>? listFromJson<T extends SchemaItem>(dynamic json)",
         "members": []
@@ -6571,7 +6664,7 @@
       {
         "name": "readValue",
         "file": "packages/system/vyuh_extension_content/lib/contracts/serialization.dart",
-        "line": 150,
+        "line": 157,
         "doc": "Reads a value from a JSON object using the provided key.\n\nThis helper provides a consistent way to access values from JSON\nobjects across different content providers.\n\nExample:\n```dart\nfinal json = {'title': 'My Post'};\nfinal title = readValue(json, 'title');\n```\n\nReturns null if:\n- The input is null\n- The key does not exist\n- The value is null",
         "signature": "Object? readValue(dynamic json, String key)",
         "members": []
@@ -6798,7 +6891,7 @@
       {
         "name": "CacheEntry",
         "file": "packages/system/vyuh_cache/lib/vyuh_cache.dart",
-        "line": 209,
+        "line": 220,
         "doc": "A cache entry that encapsulates a value with time-based expiration.\n\nEach entry contains:\n* A value of type [V]\n* A time-to-live (TTL) duration\n* An internal creation timestamp\n\nAn entry is considered expired when the elapsed time since creation exceeds\nits TTL.\n",
         "signature": "final class CacheEntry<V>",
         "members": [
@@ -6938,7 +7031,7 @@
       {
         "name": "Document",
         "file": "packages/system/vyuh_content_widget/lib/document.dart",
-        "line": 10,
+        "line": 9,
         "doc": "A document is a content item that represents a structured document.\nIt contains a set of fields like title, description, and content that are defined by the document's schema.\nThe document is used to display structured content in the app.\n",
         "signature": "final class Document extends ContentItem",
         "members": [
@@ -6989,13 +7082,13 @@
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
         "line": 11,
         "doc": "A widget that renders a [Document] from the CMS.\n\nIt can display the document in a variety of ways, from a simple text\nrepresentation to a fully custom layout.\n\nIf the document is not found, the widget will display a \"Not Found\" message.",
-        "signature": "typedef DocumentBuilder<T extends ContentItem> = Widget Function(BuildContext, T);",
+        "signature": "typedef DocumentBuilder<T extends ContentItem> = Widget Function( BuildContext, T, );",
         "members": []
       },
       {
         "name": "DocumentDefaultLayout",
         "file": "packages/system/vyuh_content_widget/lib/document.dart",
-        "line": 73,
+        "line": 72,
         "doc": "The default layout for documents.\nIt shows a column view of title, description, and content.",
         "signature": "final class DocumentDefaultLayout extends LayoutConfiguration<Document>",
         "members": [
@@ -7028,15 +7121,15 @@
       {
         "name": "DocumentListBuilder",
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
-        "line": 20,
+        "line": 22,
         "doc": "A widget that renders a list of [Document]s from the CMS.",
-        "signature": "typedef DocumentListBuilder<T extends ContentItem> = Widget Function(BuildContext, List<T>);",
+        "signature": "typedef DocumentListBuilder<T extends ContentItem> = Widget Function( BuildContext, List<T>, );",
         "members": []
       },
       {
         "name": "DocumentRenderMode",
         "file": "packages/system/vyuh_content_widget/lib/document.dart",
-        "line": 71,
+        "line": 70,
         "doc": "",
         "signature": "enum DocumentRenderMode { single, list }",
         "members": []
@@ -7073,7 +7166,7 @@
       {
         "name": "VyuhContentWidget",
         "file": "packages/system/vyuh_content_widget/lib/widget.dart",
-        "line": 24,
+        "line": 28,
         "doc": "A versatile content widget that handles both single and list content items.\nIt interacts with the [ContentPlugin] (either directly or via [VyuhBinding]) to fetch content from the CMS.",
         "signature": "class VyuhContentWidget<T extends ContentItem> extends StatefulWidget",
         "members": [
@@ -7810,7 +7903,7 @@
       {
         "name": "ConditionalRouteDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/conditional_route/conditional_route.dart",
-        "line": 95,
+        "line": 97,
         "doc": "",
         "signature": "class ConditionalRouteDescriptor extends ContentDescriptor",
         "members": [
@@ -7880,7 +7973,7 @@
       {
         "name": "ContentItemsScrollView",
         "file": "packages/system/vyuh_feature_system/lib/ui/content_items_scrollview.dart",
-        "line": 6,
+        "line": 5,
         "doc": "",
         "signature": "class ContentItemsScrollView extends StatelessWidget",
         "members": [
@@ -8075,7 +8168,7 @@
       {
         "name": "DefaultDocumentViewLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 60,
+        "line": 61,
         "doc": "",
         "signature": "final class DefaultDocumentViewLayout extends LayoutConfiguration<DocumentView>",
         "members": [
@@ -8158,7 +8251,7 @@
       {
         "name": "DefaultPortableTextContentLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/portable_text/portable_text.dart",
-        "line": 302,
+        "line": 306,
         "doc": "Default layout for portable text content.\n\nFeatures:\n* Renders blocks in a vertical flow\n* Adds padding when used directly in a route\n* Supports all portable text block types\n\nExample:\n```dart\nfinal layout = DefaultPortableTextContentLayout();\n```",
         "signature": "class DefaultPortableTextContentLayout extends LayoutConfiguration<PortableTextContent>",
         "members": [
@@ -8397,7 +8490,7 @@
       {
         "name": "DocumentItemConfiguration",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart",
-        "line": 41,
+        "line": 37,
         "doc": "",
         "signature": "abstract class DocumentItemConfiguration<TDocument extends DocumentItem> implements SchemaItem",
         "members": [
@@ -8488,7 +8581,7 @@
       {
         "name": "DocumentListViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_list.dart",
-        "line": 56,
+        "line": 52,
         "doc": "",
         "signature": "class DocumentListViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8554,7 +8647,7 @@
       {
         "name": "DocumentSectionViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_section.dart",
-        "line": 33,
+        "line": 30,
         "doc": "",
         "signature": "class DocumentSectionViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8571,7 +8664,7 @@
       {
         "name": "DocumentView",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 13,
+        "line": 10,
         "doc": "",
         "signature": "final class DocumentView extends ContentItem",
         "members": [
@@ -8670,7 +8763,7 @@
       {
         "name": "DocumentViewConditionalLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 142,
+        "line": 148,
         "doc": "",
         "signature": "final class DocumentViewConditionalLayout extends ConditionalLayout<DocumentView>",
         "members": [
@@ -8695,7 +8788,7 @@
       {
         "name": "DocumentViewDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 98,
+        "line": 100,
         "doc": "",
         "signature": "class DocumentViewDescriptor extends ContentDescriptor",
         "members": [
@@ -8840,7 +8933,7 @@
       {
         "name": "FlagDataType",
         "file": "packages/system/vyuh_feature_system/lib/condition/feature_flag.dart",
-        "line": 98,
+        "line": 99,
         "doc": "The data type of a feature flag value.\n\n* [string] - String values (default)\n* [number] - Integer values\n* [boolean] - Boolean values\n* [json] - JSON object values",
         "signature": "enum FlagDataType { string, number, boolean, json }",
         "members": []
@@ -8934,7 +9027,7 @@
       {
         "name": "GroupConditionalLayout",
         "file": "packages/system/vyuh_feature_system/lib/content/group/group.dart",
-        "line": 114,
+        "line": 116,
         "doc": "A conditional layout for groups that adapts based on specified conditions.\n\nAllows defining different layouts for groups based on conditions like:\n* Screen size (single column vs multi-column)\n* Theme mode (different spacing/padding)\n* Content count (grid vs list)\n\nExample:\n```dart\nfinal layout = GroupConditionalLayout(\n  cases: [\n    LayoutCaseItem(\n      value: 'mobile',\n      item: ListGroupLayout(),\n    ),\n    LayoutCaseItem(\n      value: 'desktop',\n      item: GridGroupLayout(columns: 3),\n    ),\n  ],\n  defaultCase: 'desktop',\n  condition: ScreenSize(),\n);\n```",
         "signature": "final class GroupConditionalLayout extends ConditionalLayout<Group>",
         "members": [
@@ -8959,7 +9052,7 @@
       {
         "name": "GroupDescriptor",
         "file": "packages/system/vyuh_feature_system/lib/content/group/group.dart",
-        "line": 93,
+        "line": 95,
         "doc": "Descriptor for configuring group content type in the system.\n\nAllows configuring:\n* Available layouts for groups (default, grid, list, carousel)\n* Custom layouts for specific use cases\n\nExample:\n```dart\nfinal descriptor = GroupDescriptor(\n  layouts: [\n    DefaultGroupLayout.typeDescriptor,\n    GridGroupLayout.typeDescriptor,\n    CarouselGroupLayout.typeDescriptor,\n  ],\n);\n```",
         "signature": "class GroupDescriptor extends ContentDescriptor",
         "members": [
@@ -9602,7 +9695,7 @@
       {
         "name": "QueryConfiguration",
         "file": "packages/system/vyuh_feature_system/lib/content/document_view/document_view.dart",
-        "line": 85,
+        "line": 86,
         "doc": "",
         "signature": "abstract class QueryConfiguration implements SchemaItem",
         "members": [
@@ -10274,7 +10367,7 @@
       {
         "name": "BlockContainerBuilder",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
-        "line": 9,
+        "line": 11,
         "doc": "A function that builds a widget for a Portable block container.",
         "signature": "typedef BlockContainerBuilder = Widget Function(BuildContext, Widget);",
         "members": []
@@ -10284,21 +10377,21 @@
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart",
         "line": 5,
         "doc": "",
-        "signature": "typedef BlockListBuilder = Widget Function(BuildContext, List<PortableBlockItem>);",
+        "signature": "typedef BlockListBuilder = Widget Function( BuildContext, List<PortableBlockItem>, );",
         "members": []
       },
       {
         "name": "BlockWidgetBuilder",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
-        "line": 12,
+        "line": 14,
         "doc": "A function that builds a widget for a Portable block item.",
-        "signature": "typedef BlockWidgetBuilder = Widget Function(BuildContext context, PortableBlockItem item);",
+        "signature": "typedef BlockWidgetBuilder = Widget Function( BuildContext context, PortableBlockItem item, );",
         "members": []
       },
       {
         "name": "BulletRenderer",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
-        "line": 16,
+        "line": 20,
         "doc": "A function that builds an InlineSpan for a single bullet mark. Using the\n[TextBlockItem]'s listItem, listItemIndex and level, the bullet can be customized as needed.",
         "signature": "typedef BulletRenderer = InlineSpan Function(BuildContext, TextBlockItem);",
         "members": []
@@ -10306,7 +10399,7 @@
       {
         "name": "ErrorView",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
-        "line": 291,
+        "line": 314,
         "doc": "Renders an error message when a block type is missing a builder or when a mark is misconfigured.",
         "signature": "class ErrorView extends StatelessWidget",
         "members": [
@@ -10339,7 +10432,7 @@
       {
         "name": "MarkDef",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart",
-        "line": 47,
+        "line": 49,
         "doc": "A single mark definition.",
         "signature": "abstract class MarkDef",
         "members": [
@@ -10356,7 +10449,7 @@
             "doc": ""
           },
           {
-            "signature": "factory MarkDef.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory MarkDef.fromJson(Map<String, dynamic> json)",
             "doc": "Converts a [MarkDef] to a JSON map. Should be implemented by subclasses."
           }
         ]
@@ -10364,7 +10457,7 @@
       {
         "name": "MarkDefDescriptor",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart",
-        "line": 21,
+        "line": 23,
         "doc": "Describes a [MarkDef] and its associated builders.",
         "signature": "final class MarkDefDescriptor",
         "members": [
@@ -10393,7 +10486,7 @@
       {
         "name": "MarkDefFromJson",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart",
-        "line": 9,
+        "line": 12,
         "doc": "Deserializes a [MarkDef] from a JSON map.",
         "signature": "typedef MarkDefFromJson = MarkDef Function(Map<String, dynamic> json);",
         "members": []
@@ -10401,7 +10494,7 @@
       {
         "name": "MarkDefSpanBuilder",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart",
-        "line": 12,
+        "line": 15,
         "doc": "Builds an [InlineSpan] for a given [MarkDef].",
         "signature": "typedef MarkDefSpanBuilder = InlineSpan Function( BuildContext context, MarkDef mark, String text, TextStyle style, );",
         "members": []
@@ -10411,8 +10504,33 @@
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/markdef_descriptor.dart",
         "line": 5,
         "doc": "Builds a [TextStyle] for a given [MarkDef].",
-        "signature": "typedef MarkDefTextStyleBuilder = TextStyle Function(BuildContext context, MarkDef mark, TextStyle base);",
+        "signature": "typedef MarkDefTextStyleBuilder = TextStyle Function( BuildContext context, MarkDef mark, TextStyle base, );",
         "members": []
+      },
+      {
+        "name": "PortableBlockIndex",
+        "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_block_index.dart",
+        "line": 5,
+        "doc": "Gives a block built by [PortableTextConfig.buildBlock] its position in the\nparent list (0-based), so block and container builders can vary by\nposition, e.g. drop the leading space of the first block.",
+        "signature": "class PortableBlockIndex extends InheritedWidget",
+        "members": [
+          {
+            "signature": "final int index",
+            "doc": "The position of the block in its parent list (0-based)."
+          },
+          {
+            "signature": "const PortableBlockIndex({super.key, required this.index, required super.child})",
+            "doc": ""
+          },
+          {
+            "signature": "static int? maybeOf(BuildContext context)",
+            "doc": "The index of the enclosing block, or `null` when the block was built\nwithout an index."
+          },
+          {
+            "signature": "bool updateShouldNotify(PortableBlockIndex oldWidget)",
+            "doc": ""
+          }
+        ]
       },
       {
         "name": "PortableBlockItem",
@@ -10430,7 +10548,7 @@
       {
         "name": "PortableText",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart",
-        "line": 8,
+        "line": 10,
         "doc": "A widget that renders a list of PortableBlockItems. This widget is the main entry point for\nrendering Portable Text content. It is responsible for rendering the entire content of a Portable\nText document, including all blocks and marks. It relies on the [PortableTextConfig] to determine\nthe visual representation of each block.",
         "signature": "class PortableText extends StatelessWidget",
         "members": [
@@ -10447,7 +10565,7 @@
             "doc": ""
           },
           {
-            "signature": "Widget build(final BuildContext context)",
+            "signature": "Widget build(BuildContext context)",
             "doc": ""
           }
         ]
@@ -10468,7 +10586,7 @@
             "doc": ""
           },
           {
-            "signature": "Widget build(final BuildContext context)",
+            "signature": "Widget build(BuildContext context)",
             "doc": ""
           }
         ]
@@ -10476,8 +10594,8 @@
       {
         "name": "PortableTextConfig",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
-        "line": 20,
-        "doc": "The configuration used for rendering Portable Text. This class is used to\ndefine the visual representation of the Portable Text blocks, spans, and marks. It\nis used by the [PortableText] widget to render the Portable Text content. The\nconfiguration can be customized to match the visual design of the app. The default\nconfiguration is based on the Material Design guidelines.\n\nNote that the configuration is shared across all instances of the [PortableText] widget.",
+        "line": 24,
+        "doc": "The configuration used for rendering Portable Text. This class is used to\ndefine the visual representation of the Portable Text blocks, spans, and marks. It\nis used by the [PortableText] widget to render the Portable Text content. The\nconfiguration can be customized to match the visual design of the app. The default\nconfiguration is based on the Material Design guidelines.\n\nA single global default lives in [shared]; individual subtrees can override the rendering\nconfiguration by wrapping them in a [PortableTextTheme] (resolved via [of]).",
         "signature": "final class PortableTextConfig",
         "members": [
           {
@@ -10510,19 +10628,31 @@
           },
           {
             "signature": "static final PortableTextConfig shared",
-            "doc": "The shared instance of the PortableTextConfig. This instance is used by all [PortableText] widgets\nin the application. You can customize the configuration by calling the [apply] method."
+            "doc": "The default/root configuration, used by [PortableText] widgets when no [PortableTextTheme]\nancestor provides one (see [of]). It is also the context-free registry consulted at\nJSON-parse time for custom mark deserializers (see `_markDefsFromJson`). You can customize\nit by calling the [apply] method."
           },
           {
             "signature": "BulletRenderer bulletRenderer",
             "doc": "The bullet renderer used to render the bullet for list items. The default value is a simple bullet renderer\nthat handles the default bullet types: number, square, and circle."
           },
           {
-            "signature": "void apply({final double listIndent = defaultListIndent, final EdgeInsets itemPadding = defaultItemPadding, final BulletRenderer? bulletRenderer, final Map<String, TextStyleBuilder>? styles, final Map<String, BlockContainerBuilder>? blockContainers, final Map<String, BlockWidgetBuilder>? blocks, final Map<String, MarkDefDescriptor>? markDefs, final TextStyle? Function(BuildContext)? baseStyle})",
+            "signature": "PortableTextConfig()",
+            "doc": ""
+          },
+          {
+            "signature": "static PortableTextConfig of(BuildContext context)",
+            "doc": "Returns the nearest [PortableTextConfig] supplied by a [PortableTextTheme] ancestor,\nfalling back to [shared] when none is present. Mirrors `Theme.of`."
+          },
+          {
+            "signature": "PortableTextConfig copyWith({Map<String, TextStyleBuilder>? styles, Map<String, BlockWidgetBuilder>? blocks, Map<String, BlockContainerBuilder>? blockContainers, Map<String, MarkDefDescriptor>? markDefs, double? listIndent, EdgeInsets? itemPadding, TextStyle? Function(BuildContext)? baseStyle, BulletRenderer? bulletRenderer})",
+            "doc": "Returns a copy of this config with the given fields overridden.\n\nThe map fields ([styles], [blocks], [blockContainers], [markDefs]) are MERGED — provided\nkeys win, the rest are kept — and scalar fields are replaced when provided. This\nintentionally differs from `ThemeData.copyWith` (which replaces whole fields) because\nthese maps are additive registries, so the common case is overriding a single key while\nkeeping the others.\n\nNote: overriding [markDefs] here affects mark *rendering/styling* only. It does not change\nwhich custom deserializer runs at JSON-parse time — that always reads the context-free\n[shared] registry (see `_markDefsFromJson`)."
+          },
+          {
+            "signature": "void apply({double listIndent = defaultListIndent, EdgeInsets itemPadding = defaultItemPadding, BulletRenderer? bulletRenderer, Map<String, TextStyleBuilder>? styles, Map<String, BlockContainerBuilder>? blockContainers, Map<String, BlockWidgetBuilder>? blocks, Map<String, MarkDefDescriptor>? markDefs, TextStyle? Function(BuildContext)? baseStyle})",
             "doc": "Applies the custom configuration to the shared instance of the [PortableTextConfig]."
           },
           {
-            "signature": "Widget buildBlock(final BuildContext context, final PortableBlockItem item)",
-            "doc": "Builds a block widget for the given Portable block item.\nThe block widget is determined by the block type of the item. If the block type is not found in the\nblock widgets, an error view is rendered with a message indicating the missing block type."
+            "signature": "Widget buildBlock(BuildContext context, PortableBlockItem item, [int? index])",
+            "doc": "Builds a block widget for the given Portable block item.\nThe block widget is determined by the block type of the item. If the block type is not found in the\nblock widgets, an error view is rendered with a message indicating the missing block type.\n\nWhen [index] is given, the block is wrapped in a [PortableBlockIndex] so its builder and\nblock container can read their position with [PortableBlockIndex.maybeOf]."
           },
           {
             "signature": "void reset()",
@@ -10563,6 +10693,56 @@
         ]
       },
       {
+        "name": "PortableTextStyleOverride",
+        "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_theme.dart",
+        "line": 30,
+        "doc": "Restyles descendant Portable Text by transforming the *inherited* text style for each\nnamed style (e.g. `'normal'`, `'h2'`).\n\nEach entry receives the resolved style produced by the ambient config's builder and\nreturns the adjusted style, so callers express only the delta:\n\n```dart\nPortableTextStyleOverride(\n  styles: {'normal': (s) => s.copyWith(fontSize: (s.fontSize ?? 16) - 2)},\n  child: ...,\n)\n```\n\nThe inherited builder is captured internally, so referencing the same style name does\nnot recurse. Everything else (blocks, marks, spacing, parsing) is inherited unchanged.",
+        "signature": "class PortableTextStyleOverride extends StatefulWidget",
+        "members": [
+          {
+            "signature": "final Map<String, TextStyle Function(TextStyle)> styles",
+            "doc": "Per-style transforms applied on top of the inherited resolved style. Keys are style\nnames (`'normal'`, `'h2'`, …); a key that the ambient config does not define is ignored."
+          },
+          {
+            "signature": "final Widget child",
+            "doc": "The subtree whose Portable Text should be restyled."
+          },
+          {
+            "signature": "const PortableTextStyleOverride({super.key, required this.styles, required this.child})",
+            "doc": ""
+          },
+          {
+            "signature": "State<PortableTextStyleOverride> createState()",
+            "doc": ""
+          }
+        ]
+      },
+      {
+        "name": "PortableTextTheme",
+        "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_theme.dart",
+        "line": 5,
+        "doc": "An [InheritedWidget] that supplies a [PortableTextConfig] to its subtree.\n\nMirrors Flutter's `Theme` / `Theme.of`: descendant Portable Text widgets resolve their\nconfig via [PortableTextConfig.of], which returns the nearest [PortableTextTheme]'s\n[config] or falls back to [PortableTextConfig.shared]. Wrap a subtree to render it with a\ndifferent configuration without mutating the global [PortableTextConfig.shared].",
+        "signature": "class PortableTextTheme extends InheritedWidget",
+        "members": [
+          {
+            "signature": "final PortableTextConfig config",
+            "doc": "The configuration applied to descendant Portable Text widgets."
+          },
+          {
+            "signature": "const PortableTextTheme({super.key, required this.config, required super.child})",
+            "doc": ""
+          },
+          {
+            "signature": "static PortableTextConfig? maybeOf(BuildContext context)",
+            "doc": "The [PortableTextConfig] of the nearest [PortableTextTheme] ancestor, or `null` if none."
+          },
+          {
+            "signature": "bool updateShouldNotify(PortableTextTheme oldWidget)",
+            "doc": ""
+          }
+        ]
+      },
+      {
         "name": "Span",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/model/text_block.dart",
         "line": 72,
@@ -10590,7 +10770,7 @@
             "doc": ""
           },
           {
-            "signature": "factory Span.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory Span.fromJson(Map<String, dynamic> json)",
             "doc": ""
           }
         ]
@@ -10643,7 +10823,7 @@
             "doc": ""
           },
           {
-            "signature": "factory TextBlockItem.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory TextBlockItem.fromJson(Map<String, dynamic> json)",
             "doc": ""
           }
         ]
@@ -10653,13 +10833,13 @@
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_config.dart",
         "line": 5,
         "doc": "A function that builds a text style for a Portable Text block or span.",
-        "signature": "typedef TextStyleBuilder = TextStyle Function(BuildContext context, TextStyle base);",
+        "signature": "typedef TextStyleBuilder = TextStyle Function( BuildContext context, TextStyle base, );",
         "members": []
       },
       {
         "name": "defaultListBuilder",
         "file": "packages/sanity/flutter_sanity_portable_text/lib/ui/portable_text_widget.dart",
-        "line": 33,
+        "line": 35,
         "doc": "Default container-builder for PortableText blocks.\nIt uses a ListView.builder to render the blocks.",
         "signature": "Widget defaultListBuilder(BuildContext context, {required List<PortableBlockItem> blocks, bool isPrimary = false, bool shrinkwrap = true, ScrollPhysics scrollPhysics = const NeverScrollableScrollPhysics()})",
         "members": []
@@ -10673,12 +10853,12 @@
       {
         "name": "BadRequestException",
         "file": "packages/sanity/sanity_client/lib/exceptions.dart",
-        "line": 23,
+        "line": 20,
         "doc": "Exception when the request is invalid.",
         "signature": "final class BadRequestException extends SanityException",
         "members": [
           {
-            "signature": "BadRequestException([final String? message])",
+            "signature": "BadRequestException([String? message])",
             "doc": "Creates a new bad request exception."
           }
         ]
@@ -10686,12 +10866,12 @@
       {
         "name": "FetchDataException",
         "file": "packages/sanity/sanity_client/lib/exceptions.dart",
-        "line": 16,
+        "line": 13,
         "doc": "Exception thrown when a document is not found.",
         "signature": "final class FetchDataException extends SanityException",
         "members": [
           {
-            "signature": "FetchDataException([final String? message])",
+            "signature": "FetchDataException([String? message])",
             "doc": "Creates a new fetch data exception."
           }
         ]
@@ -10732,12 +10912,12 @@
       {
         "name": "InvalidReferenceException",
         "file": "packages/sanity/sanity_client/lib/exceptions.dart",
-        "line": 38,
+        "line": 33,
         "doc": "Exception when the request is forbidden.",
         "signature": "final class InvalidReferenceException extends SanityException",
         "members": [
           {
-            "signature": "InvalidReferenceException([final String? message])",
+            "signature": "InvalidReferenceException([String? message])",
             "doc": "Creates a new invalid reference exception."
           }
         ]
@@ -10766,7 +10946,7 @@
       {
         "name": "LiveConnect",
         "file": "packages/sanity/sanity_client/lib/live.dart",
-        "line": 21,
+        "line": 20,
         "doc": "",
         "signature": "extension LiveConnect on SanityClient",
         "members": [
@@ -10779,12 +10959,12 @@
       {
         "name": "LiveConnectException",
         "file": "packages/sanity/sanity_client/lib/exceptions.dart",
-        "line": 45,
+        "line": 40,
         "doc": "Exception when connecting to the live subscription.",
         "signature": "final class LiveConnectException extends SanityException",
         "members": [
           {
-            "signature": "LiveConnectException([final String? message])",
+            "signature": "LiveConnectException([String? message])",
             "doc": "Creates a new live connect exception."
           }
         ]
@@ -10825,7 +11005,7 @@
       {
         "name": "Perspective",
         "file": "packages/sanity/sanity_client/lib/config.dart",
-        "line": 3,
+        "line": 1,
         "doc": "The various perspectives that can be used to fetch data from Sanity",
         "signature": "enum Perspective { raw, drafts, published }",
         "members": []
@@ -10850,7 +11030,7 @@
             "doc": "The URL builder to use. When not provided it uses the default Sanity URL builder"
           },
           {
-            "signature": "SanityClient(this.config, {final http.Client? httpClient, final UrlBuilder? urlBuilder})",
+            "signature": "SanityClient(this.config, {http.Client? httpClient, UrlBuilder? urlBuilder})",
             "doc": "Creates a new Sanity client with the provided configuration. Use the optional\nparameters to provide a custom HTTP client or URL builder."
           },
           {
@@ -10862,11 +11042,11 @@
             "doc": "Fetches data from Sanity by running the GROQ Query with the passed in parameters"
           },
           {
-            "signature": "Uri imageUrl(final String imageRefId, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format})",
+            "signature": "Uri imageUrl(String imageRefId, {int? width, int? height, int? devicePixelRatio, int? quality, String? format})",
             "doc": "Return the associated image url"
           },
           {
-            "signature": "Uri fileUrl(final String fileRefId)",
+            "signature": "Uri fileUrl(String fileRefId)",
             "doc": "Return the associated object url"
           },
           {
@@ -10878,7 +11058,7 @@
       {
         "name": "SanityConfig",
         "file": "packages/sanity/sanity_client/lib/config.dart",
-        "line": 19,
+        "line": 17,
         "doc": "Configuration for the Sanity client",
         "signature": "final class SanityConfig",
         "members": [
@@ -10915,10 +11095,6 @@
             "doc": "The default API version to use"
           },
           {
-            "signature": "static EventFlux Function() createEventFlux",
-            "doc": ""
-          },
-          {
             "signature": "SanityConfig({required this.projectId, required this.dataset, this.token, String? apiVersion, bool? useCdn, Perspective? perspective, bool? explainQuery})",
             "doc": "Creates a new Sanity configuration for fetching documents from a project and dataset"
           }
@@ -10944,11 +11120,11 @@
             "doc": "Creates a new Sanity dataset with the given name and ACL mode."
           },
           {
-            "signature": "factory SanityDataset.fromJson(final Map<String, dynamic> json)",
+            "signature": "factory SanityDataset.fromJson(Map<String, dynamic> json)",
             "doc": "Creates a new Sanity dataset from a JSON map."
           },
           {
-            "signature": "bool ==(final Object other)",
+            "signature": "bool ==(Object other)",
             "doc": ""
           },
           {
@@ -11113,12 +11289,12 @@
       {
         "name": "UnauthorizedException",
         "file": "packages/sanity/sanity_client/lib/exceptions.dart",
-        "line": 30,
+        "line": 26,
         "doc": "Exception when the request is unauthorized and does not include a valid token\nin the Authorization header.",
         "signature": "final class UnauthorizedException extends SanityException",
         "members": [
           {
-            "signature": "UnauthorizedException([final String? message])",
+            "signature": "UnauthorizedException([String? message])",
             "doc": "Creates a new unauthorized exception."
           }
         ]
@@ -11209,7 +11385,7 @@
         "signature": "class FlutterSecureStoragePlugin extends SecureStoragePlugin with InitOncePlugin",
         "members": [
           {
-            "signature": "FlutterSecureStoragePlugin({AndroidOptions? androidOptions, IOSOptions? iOSOptions, WebOptions? webOptions, MacOsOptions? macOSOptions, LinuxOptions? linuxOptions, WindowsOptions? windowsOptions})",
+            "signature": "FlutterSecureStoragePlugin({this._androidOptions, this._iOSOptions, this._webOptions, this._macOSOptions, this._linuxOptions, this._windowsOptions})",
             "doc": "Creates a new instance of [FlutterSecureStoragePlugin] with optional\nplatform-specific options from `flutter_secure_storage`, which this\npackage re-exports. Platforms without options use the package defaults.\n\nExample:\n```dart\nfinal plugin = FlutterSecureStoragePlugin(\n  androidOptions: const AndroidOptions(storageNamespace: 'my_app'),\n  iOSOptions: const IOSOptions(\n    accessibility: KeychainAccessibility.first_unlock,\n  ),\n);\n```"
           },
           {

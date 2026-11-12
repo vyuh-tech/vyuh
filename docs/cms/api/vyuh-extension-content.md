@@ -457,7 +457,7 @@ Sets the default layout for this content builder.
 
 ## ContentDescriptor {#contentdescriptor}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/content/content_descriptor.dart#L6)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/content/content_descriptor.dart#L8)
 
 Public declaration in this package.
 
@@ -851,7 +851,7 @@ The content plugin, or a `NoOpContentPlugin` when none is registered.
 
 ## ContentPlugin {#contentplugin}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart#L21)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart#L23)
 
 The base class for a Content Plugin.
 
@@ -988,13 +988,13 @@ Future<void> dispose();
 
 
 ```dart
-ImageProvider? image(final ImageReference imageRef, {final int? width, final int? height, final int? devicePixelRatio, final int? quality, final String? format});
+ImageProvider? image(ImageReference imageRef, {int? width, int? height, int? devicePixelRatio, int? quality, String? format});
 ```
 
 
 
 ```dart
-Uri? fileUrl(final FileReference fileRef);
+Uri? fileUrl(FileReference fileRef);
 ```
 
 
@@ -1127,7 +1127,7 @@ void attach(ExtensionBuilder extBuilder);
 
 ## DocumentBuilder {#documentbuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/ui/document_builder.dart#L6)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/ui/document_builder.dart#L5)
 
 A widget that builds UI based on document data fetched from a content provider.
 
@@ -1365,7 +1365,7 @@ State<DocumentStreamBuilder<T>> createState();
 
 ## FieldName {#fieldname}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart#L73)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/content_plugin.dart#L75)
 
 Public declaration in this package.
 
@@ -1375,7 +1375,7 @@ enum FieldName { id, type, key, ref, updatedAt, createdAt }
 
 ## FileReference {#filereference}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/reference.dart#L38)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/reference.dart#L34)
 
 A reference to a file asset in the content management system.
 
@@ -1404,7 +1404,7 @@ FileReference({required this.type, required this.asset});
 
 
 ```dart
-factory FileReference.fromJson(final Map<String, dynamic> json);
+factory FileReference.fromJson(Map<String, dynamic> json);
 ```
 
 
@@ -1456,7 +1456,7 @@ ImageReference({required this.type, required this.asset, this.sanityAsset});
 
 
 ```dart
-factory ImageReference.fromJson(final Map<String, dynamic> json);
+factory ImageReference.fromJson(Map<String, dynamic> json);
 ```
 
 
@@ -1907,7 +1907,7 @@ Future<void> init();
 
 ## ObjectReference {#objectreference}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/reference.dart#L66)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/reference.dart#L59)
 
 A reference to any content object in the content management system.
 
@@ -2091,7 +2091,7 @@ List<ContentModifierConfiguration>? getModifiers();
 
 ## RouteBuilder {#routebuilder}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/ui/route_builder.dart#L6)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/ui/route_builder.dart#L5)
 
 Public declaration in this package.
 
@@ -2540,7 +2540,7 @@ Future<String?> execute(BuildContext context);
 Builds the widget shown for a `ContentFailure`.
 
 ```dart
-typedef UnknownContentBuilder = Widget Function(BuildContext context, ContentFailure failure);
+typedef UnknownContentBuilder = Widget Function( BuildContext context, ContentFailure failure, );
 ```
 
 ## UnknownContentDetector {#unknowncontentdetector}
@@ -2873,7 +2873,7 @@ void initializeUnknownPlaceholderFactory()
 
 ## listFromJson {#listfromjson}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/serialization.dart#L84)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/serialization.dart#L87)
 
 Converts a JSON list to a nullable-list of `SchemaItem` instances of type `T`.
 
@@ -2893,7 +2893,7 @@ final messages =
 
 ## readValue {#readvalue}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/serialization.dart#L150)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_extension_content/lib/contracts/serialization.dart#L157)
 
 Reads a value from a JSON object using the provided key.
 

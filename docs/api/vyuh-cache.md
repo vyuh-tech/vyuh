@@ -113,7 +113,7 @@ The cache config.
 
 ## CacheEntry {#cacheentry}
 
-[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_cache/lib/vyuh_cache.dart#L209)
+[Source](https://github.com/vyuh-tech/vyuh/blob/main/packages/system/vyuh_cache/lib/vyuh_cache.dart#L220)
 
 A cache entry that encapsulates a value with time-based expiration.
 

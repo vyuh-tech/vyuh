@@ -12,7 +12,7 @@ For release-specific inherited documentation, use each package’s linked pub.de
 
 | Package | What it owns | Public declarations |
 | --- | --- | --- |
-| [vyuh_core](vyuh-core) | Compose features with FeatureDescriptor, choose shared capabilities with PluginDescriptor, and launch through runApp. | 108 |
+| [vyuh_core](vyuh-core) | Compose features with FeatureDescriptor, choose shared capabilities with PluginDescriptor, and launch through runApp. | 109 |
 | [vyuh_cache](vyuh-cache) | Cache&lt;V&gt; wraps CacheStorage&lt;V&gt; with a configured TTL. | 6 |
 | [vyuh_plugin_storage_hive](vyuh-plugin-storage-hive) | HiveStoragePlugin persists general values in a Hive box. | 1 |
 | [vyuh_plugin_storage_secure](vyuh-plugin-storage-secure) | FlutterSecureStoragePlugin implements string persistence through flutter_secure_storage. | 1 |
