@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:eventflux/eventflux.dart';
 import 'package:http/http.dart' as http;
 
 import 'sanity_client.dart';
 import 'sanity_request.dart';
+import 'src/live_event_source.dart';
 
 part 'live.dart';
 

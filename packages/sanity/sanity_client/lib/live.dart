@@ -7,7 +7,7 @@ enum _LiveEventType {
   keepAlive,
   message;
 
-  static _LiveEventType fromEvent(EventFluxData event) => switch (event.event) {
+  static _LiveEventType fromEvent(LiveEvent event) => switch (event.event) {
     'welcome' => _LiveEventType.welcome,
     'restart' => _LiveEventType.restart,
     'error' => _LiveEventType.error,
@@ -39,9 +39,9 @@ extension LiveConnect on SanityClient {
     ).getUri;
     final headers = Map<String, String>.from(_requestHeaders)
       ..['Accept'] = 'text/event-stream';
-    final flux = SanityConfig.createEventFlux();
     late final StreamController<SanityQueryResponse> controller;
-    StreamSubscription<EventFluxData>? subscription;
+    late final LiveEventSource source;
+    StreamSubscription<LiveEvent>? subscription;
     var cancelled = false;
     var generation = 0;
     var fetching = false;
@@ -81,7 +81,7 @@ extension LiveConnect on SanityClient {
       }
     }
 
-    void listener(EventFluxData event) {
+    void listener(LiveEvent event) {
       if (cancelled) return;
       try {
         switch (_LiveEventType.fromEvent(event)) {
@@ -105,74 +105,42 @@ extension LiveConnect on SanityClient {
       }
     }
 
-    controller = StreamController<SanityQueryResponse>(
-      onListen: () {
-        try {
-          flux.connect(
-            EventFluxConnectionType.get,
-            uri.toString(),
-            autoReconnect: true,
-            reconnectConfig: ReconnectConfig(
-              mode: ReconnectMode.linear,
-              maxAttempts: 5,
-            ),
-            header: headers,
-            httpClient: _EventFluxHttpClientAdapter(httpClient: httpClient),
-            tag: query,
-            onSuccessCallback: (response) {
-              if (cancelled) {
-                flux.disconnect();
-                return;
-              }
-              final stream = response?.stream;
-              if (stream == null) {
-                report(
-                  LiveConnectException('No live stream for query: $query'),
-                );
-                return;
-              }
-              generation++;
-              syncTags = null;
-              final connectionGeneration = generation;
-              unawaited(subscription?.cancel());
-              subscription = stream.listen(
-                (event) {
-                  if (connectionGeneration == generation) listener(event);
-                },
-                onError: (Object error, StackTrace stack) {
-                  if (connectionGeneration == generation) report(error, stack);
-                },
-              );
-              if (fetching) pending = true;
-            },
-            onError: (error) =>
-                report(LiveConnectException('Live connection failed: $error')),
-          );
-        } catch (error, stack) {
-          report(error, stack);
+    source = LiveEventSource(
+      httpClient: httpClient,
+      uri: uri,
+      headers: headers,
+      onConnected: (events) {
+        if (cancelled) {
+          unawaited(source.close());
+          return;
         }
+        generation++;
+        syncTags = null;
+        final connectionGeneration = generation;
+        unawaited(subscription?.cancel());
+        subscription = events.listen((event) {
+          if (connectionGeneration == generation) listener(event);
+        });
+        if (fetching) pending = true;
       },
+      onError: (error) =>
+          report(LiveConnectException('Live connection failed: $error')),
+    );
+    controller = StreamController<SanityQueryResponse>(
+      onListen: source.connect,
       onCancel: () async {
         cancelled = true;
         generation++;
         pending = false;
+        // Closing first stops the connection and any reconnect at once.
+        final closed = source.close();
         try {
           await subscription?.cancel();
         } finally {
-          await flux.disconnect();
+          await closed;
         }
       },
     );
     return controller.stream;
   }
-}
-
-final class _EventFluxHttpClientAdapter implements HttpClientAdapter {
-  final http.Client httpClient;
-
-  _EventFluxHttpClientAdapter({required this.httpClient});
-
-  @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) =>
-      httpClient.send(request);
 }

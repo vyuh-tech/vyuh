@@ -33,7 +33,7 @@ Sanity.io is a headless CMS that stores structured content as JSON documents. Th
 - **CDN support** -- Option to use the Sanity CDN for faster reads
 - **Perspective modes** -- Support for published, drafts, and preview perspectives
 - **Authentication** -- Token-based authentication for private datasets
-- **Real-time updates** -- Server-Sent Events (SSE) support via `eventflux` for live content updates
+- **Real-time updates** -- Server-Sent Events (SSE) over `package:http` for live content updates, on every platform including web
 
 ## Configuration
 

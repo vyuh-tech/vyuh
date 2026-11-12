@@ -1,5 +1,3 @@
-import 'package:eventflux/client.dart';
-
 /// The various perspectives that can be used to fetch data from Sanity
 enum Perspective {
   /// Fetch all documents including drafts
@@ -50,8 +48,6 @@ final class SanityConfig {
 
     return 'v$parts';
   })();
-
-  static EventFlux Function() createEventFlux = () => EventFlux.spawn();
 
   /// Creates a new Sanity configuration for fetching documents from a project and dataset
   SanityConfig({
