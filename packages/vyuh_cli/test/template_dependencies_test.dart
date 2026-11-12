@@ -5,14 +5,25 @@ import 'package:mason/mason.dart';
 import 'package:test/test.dart';
 
 import 'package:vyuh_cli/commands/create/feature/vyuh_feature_bundle.dart';
+import 'package:vyuh_cli/commands/create/item/vyuh_item_bundle.dart';
+import 'package:vyuh_cli/commands/create/plugin/vyuh_plugin_bundle.dart';
 import 'package:vyuh_cli/commands/create/project/vyuh_project_bundle.dart';
+import 'package:vyuh_cli/commands/create/schema/vyuh_feature_sanity_schema_bundle.dart';
 
 void main() {
-  for (final bundle in [vyuhFeatureBundle, vyuhProjectBundle]) {
+  for (final bundle in [
+    vyuhFeatureBundle,
+    vyuhFeatureSanitySchemaBundle,
+    vyuhItemBundle,
+    vyuhPluginBundle,
+    vyuhProjectBundle,
+  ]) {
     test('${bundle.name} embeds the current authoritative brick', () {
       final source = createBundle(Directory('bricks/${bundle.name}'));
       expect(bundle.toJson(), source.toJson());
     });
+  }
+  for (final bundle in [vyuhFeatureBundle, vyuhProjectBundle]) {
     test('${bundle.name} generates a Material UI feature without CMS imports', () async {
       final directory = Directory.systemTemp.createTempSync('vyuh-template-');
       try {

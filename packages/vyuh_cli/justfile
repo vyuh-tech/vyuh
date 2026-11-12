@@ -8,27 +8,6 @@ watch:
     watchexec  --watch ./bricks just bundle-all
 
 # Bundle all templates
-bundle-all: bundle-project bundle-feature bundle-item bundle-feature-sanity-schema
-    @echo "All templates have been bundled successfully!"
-
-# Bundle vyuh_project template
-bundle-project:
-    mason bundle bricks/vyuh_project -t dart -o lib/commands/create/project
-    dart format lib/commands/create/project/vyuh_project_bundle.dart
-
-# Bundle vyuh_feature template
-bundle-feature:
-    mason bundle bricks/vyuh_feature -t dart -o lib/commands/create/feature
-    dart format lib/commands/create/feature/vyuh_feature_bundle.dart
-
-# Bundle vyuh_feature_sanity_schema template
-bundle-feature-sanity-schema:
-    mason bundle bricks/vyuh_feature_sanity_schema -t dart -o lib/commands/create/schema
-    dart format lib/commands/create/schema/vyuh_feature_sanity_schema_bundle.dart
-
-# Bundle vyuh_item template
-bundle-item:
-    mason bundle bricks/vyuh_item -t dart -o lib/commands/create/item
-    dart format lib/commands/create/item/vyuh_item_bundle.dart
-
-
+bundle-all:
+    cd ../.. && dart run packages/vyuh_cli/tool/regenerate_bundles.dart
+    dart format lib/commands/create
