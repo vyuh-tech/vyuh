@@ -1,3 +1,7 @@
+## 1.7.0
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+
 ## 1.6.0
 
  - **FEAT**(framework): harden feature lifecycle and shared capabilities.

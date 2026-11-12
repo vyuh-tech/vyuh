@@ -14,9 +14,9 @@ dependencies:
     sdk: flutter
 
   # vyuh packages
-  vyuh_core: ^3.2.0
-  vyuh_extension_content: ^3.0.3
-  vyuh_feature_system: ^3.0.3
+  vyuh_core: ^3.5.0
+  vyuh_extension_content: ^3.1.0
+  vyuh_feature_system: ^3.1.0
   youtube_player_iframe: ^6.0.2
   html: ^0.15.4
   visibility_detector: ^0.4.0+2

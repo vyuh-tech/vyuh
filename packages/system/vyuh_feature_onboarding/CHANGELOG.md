@@ -1,3 +1,9 @@
+## 3.1.0
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+ - **FEAT**(portable_text): per-subtree configuration via PortableTextTheme ([#57](https://github.com/vyuh-tech/vyuh/issues/57)).
+ - **FEAT**(portable_text): expose block index to BlockContainerBuilder ([#58](https://github.com/vyuh-tech/vyuh/issues/58)).
+
 ## 3.0.3
 
  - Update a dependency to the latest release.

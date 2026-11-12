@@ -1,3 +1,8 @@
+## 0.3.2
+
+ - **FIX**(vyuh_cli): one generator and one test for all five brick bundles.
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+
 ## 0.3.1
 
  - **FIX**(vyuh_cli): generated features start with a passing test.

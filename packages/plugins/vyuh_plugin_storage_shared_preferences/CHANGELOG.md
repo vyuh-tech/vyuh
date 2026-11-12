@@ -1,3 +1,7 @@
+## 1.2.0
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+
 ## 1.1.0
 
  - **FEAT**(vyuh_core): plugins that fail safely and reset cleanly.

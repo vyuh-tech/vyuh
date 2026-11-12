@@ -1,3 +1,7 @@
+## 3.5.0
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+
 ## 3.4.0
 
  - **FIX**(core): keep startup loader out of browser history.

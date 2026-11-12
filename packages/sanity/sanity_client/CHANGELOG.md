@@ -1,3 +1,10 @@
+## 2.0.0
+
+> Note: This release has breaking changes.
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+ - **BREAKING** **FIX**(sanity_client): live events over package:http, without eventflux.
+
 ## 1.9.3
 
 ## 1.9.2

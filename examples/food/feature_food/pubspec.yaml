@@ -15,10 +15,10 @@ dependencies:
   json_annotation: ^4.9.0
   mobx: ^2.3.0+1
   flutter_mobx: ^2.2.0+2
-  flutter_sanity_portable_text: ^2.2.0
-  vyuh_core: ^3.2.0
-  vyuh_feature_system: ^3.0.3
-  vyuh_extension_content: ^3.0.3
+  flutter_sanity_portable_text: ^2.3.0
+  vyuh_core: ^3.5.0
+  vyuh_feature_system: ^3.1.0
+  vyuh_extension_content: ^3.1.0
   design_system: ^1.0.0
 
   material_ui: ^1.1.0

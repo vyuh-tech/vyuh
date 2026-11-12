@@ -1,3 +1,7 @@
+## 4.1.0
+
+ - **FEAT**: require Dart 3.14 and Flutter 3.50, with dependencies at latest.
+
 ## 4.0.3
 
  - Update a dependency to the latest release.
